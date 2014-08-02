@@ -118,6 +118,7 @@
 \newcommand{\tf}{b}
 
 \newcommand{\tcr}[1]{\textcolor{red}{#1}}
+\newcommand{\tcb}[1]{\textcolor{blue}{#1}}
 \newcommand{\mt}[1]{\marginpar{ {\tiny #1}}}
 
 \bibliographystyle{elsarticle-num}
@@ -152,7 +153,8 @@
 %% \fntext[label3]{}
 %-------------------------
 %-------------------------
-\title{Extension of the entropy viscosity method to the low Mach regime for the multi-D Euler equations (with variable area).}
+\title{Extension of the entropy viscosity method to the multi-D 7-equation two-phase flow model.\\
+\tcb{I do not know if we should have 'multi-D' in the title since we will only present $1$-D results}}
 %-------------------------
 %-------------------------
 \author{Marc O. Delchini\fnref{label1}}
@@ -178,17 +180,58 @@ blabla
 %-------------------------
 %-------------------------
 \begin{keyword}
-  Euler equations with variable area \sep entropy viscosity method \sep stabilization method \sep low Mach regime \sep shocks.
+  two-phase flow model \sep with variable area \sep entropy viscosity method \sep stabilization method \sep low Mach regime \sep shocks.
 \end{keyword}
 %-------------------------
 \end{frontmatter}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \linenumbers
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction} \label{sec:intro}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}\label{sec:intro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+\item a few lines about the need for accurately resolving two-phase flows
+\item background on the different two-phase flow models: 5, 6 and 7-equation two-phase flow models
+\item then, focus on the different types of 7-equation two-phase flow models: they mostly differ because of the closure relaxations used
+\item discuss the different numerical solvers developed for the 7-equation two-phase flow model: HLL, HLLC, and approximated Riemann solvers accounting for the source terms
+\item emphasize the fact that the above numerical solvers only works on discontinuous schemes
+\item then, introduce the entropy viscosity method and details the organization of the paper 
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The multi-D 7-equation two-phase flow model}\label{sec:7-equ-model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+\item give the equations and detail the different terms
+\item include the relaxation terms, the mass and heat exchange terms
+\item eigenvalues
+\item entropy equation WITHOUT the dissipative terms and five the details of the derivation in the appendix
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A viscous regularization for the multi-D 7-equation two-phase flow model}\label{sec:visc-regu}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+\item explain why we work with the phase entropy equation instead of considering the total entropy residual by summing over the two phases
+\item viscous regularization must be consistent with single-phase flow equation
+\item recall the notion of entropy condition and entropy inequality $\to$ require dissipative terms in order to get a sign
+\item give the system of equations with the dissipative terms
+\item guide the reader through the derivation of the dissipative terms
+\item give the entropy residual with all terms in the right hand-side
+\item make the link with the single-phase flow equations
+\item explain how to derive the dissipative term for the volume fraction equation
+\item emphasizes the fact that the regularization is valid for any EOS with convex entropy
+\item a few words about the parabolic regularization
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A definition of the viscosity coefficients for all Mach flows}\label{sec:low-Mach}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+\item non-dimensionalize the equations but use $P_\infty$ for the pressure instead of $(\rho c^2)_\infty$
+\item introduce a new Pechlet number for $\beta$: its behavior should be the same as the Pechlet number for $\kappa$
+\item two cases: zero and infinite relaxation coefficients
+\item derive the normalization parameters for the isentropic and non-isentropic flows
+\item discussion about the 
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{$1$-D numerical results}\label{sec:results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
