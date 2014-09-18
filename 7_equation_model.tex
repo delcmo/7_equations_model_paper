@@ -112,6 +112,12 @@
 \newcommand{\Pe}{\textrm{P\'e}}
 \renewcommand{\Pr}{\textrm{Pr}}
 %
+\newcommand{\resi}{R}
+%\newcommand{\resinew}{\tilde{D}_e}
+\newcommand{\resinew}{\widetilde{\resi}}
+\newcommand{\resisource}{\widetilde{\resi}^{source}}
+\newcommand{\matder}[1]{\frac{\textrm{D} #1}{\textrm{D} t}}
+%
 % extra space
 \newcommand{\qq}{\quad\quad}
 % common reference commands
@@ -681,6 +687,166 @@ A rotation invariant viscous regularization for the multi-D seven-equation model
 \item derive the normalization parameters for the isentropic and non-isentropic flows
 \item discussion about the 
 \end{itemize}
+%
+This section aims at deriving a definition of the viscosity coefficients involved in the viscous regularization for the multi-D seven-equation model. We propose to follow the same methodology as in SECTION for the multi-D Euler equations: after obtaining the non-dimensional equations, a definition for the viscosity coefficients is derived based on the entropy residual and consistent with the low-Mach asymptotic limit. Particular attention is paid to the definition of the viscosity coefficient $\beta_k$ used in the volume fraction equation.
+
+Using the EVM to define the viscosity coefficients is not the unique option here. Other numerical methods initially developed for single-phase flows, such as pressure-based and Lapidus viscosity methods, could be used as a starting point and adapted to the seven-equation model. Such a reasoning is motivated by one of the initial assumptions of the seven-equation model that assumes each phase verifies the Euler equations.
+%------------------------------------------------------------------------------------------------------
+\subsection{Definition of the viscosity coefficients}\label{sec:visc-coeff-sem}
+%------------------------------------------------------------------------------------------------------
+The viscous regularization derived in SECTION for the multi-D SEM requires three viscosity coefficients for each phase $k$ denoted by $\beta_k$, $\mu_k$ and $\kappa_k$. Following the methodology detailed in SECTION, for each viscosity coefficient an upper bound, denoted by the subscript $max$, is defined and referred to as the first-order viscosity coefficient, along with a entropy viscosity coefficient that is set proportional to an entropy residual and denoted by the subscript $e$:
+%
+\begin{align}\label{eq:def-visc-sem-sct4}
+\beta_k( \mbold r, t) = \min \left( \beta_{e,k}( \mbold r, t), \beta_{max,k} ( \mbold r, t) \right), \nonumber \\
+\mu_k( \mbold r, t) = \min \left( \mu_{e,k}( \mbold r, t), \mu_{max,k} ( \mbold r, t) \right), \nonumber \\
+\kappa_k( \mbold r, t) = \min \left( \kappa_{e,k}( \mbold r, t), \kappa_{max,k} ( \mbold r, t) \right) \,. \nonumber
+\end{align}
+% 
+where all of the variables are locally defined. As for the multi-D single-phase Euler equations and for the same reasons, the entropy residual for each phase $k$ is recast as a function of the pressure, the velocity, the density and the speed of sound as follows:
+%
+\begin{equation}\label{eq:ent_res-sem-sct4}
+\resi_k(\mbold r,t) := \partial_t s_k + \mbold u_k \cdot \grad s_k = \matder{s_k} = \frac{(s_e)_k}{(P_e)_k} \left( \underbrace{\matder{P_k} - c_k^2 \matder{\rho_k} }_{\resinew_k(\mbold r,t)} \right) ,
+\end{equation} 
+%
+where $\resinew_k(\mbold r,t)$ is the new entropy residual of phase $k$ and will experience the same variations as $\resi_k(\mbold r,t)$. 
+
+We first choose to investigate the definitions of the high and first-order viscosity coefficients for $\mu_k$ and $\kappa_k$. It is noted that the dissipative terms function of $\mu_k$ and $\kappa_k$ are the same as the ones for the single-phase Euler equation when considering $\tilde{A} = \alpha_k A$ as a pseudo cross section. Furthermore, we need to ensure consistency with the single-phase Euler equation in the limits $\alpha_k \to 1$. Thus, based on the work done in SECTION, the first order viscosity coefficients are set proportional to the local maximum eigenvalue $\lambda_k$,
+%
+\begin{equation}\label{eq:def-visc-max-sem-sct4}
+\kappa_{max,k}( \mbold r, t) = \mu_{max,k}( \mbold r, t) = \frac{h}{2} \left( || \mbold u_k|| + c_k \right)
+\end{equation}
+%
+and the entropy viscosity viscosity coefficients are defined as
+%
+\begin{subequations}
+\label{eq:visc_definition-sct4}
+\begin{equation}
+\mu_{e,k}(\mbold r,t)    = h^2 \frac{\max\left( | \resinew_k(\mbold r_q,t) |\,, || \mbold u_k(\mbold r_q,t) || J[P_k](t) \,, || \mbold u_k(\mbold r_q,t) || c_k^2(\mbold r_q,t) J[\rho_k](t) \right)}{\norm_{P,k}^\mu}    \, ,
+\end{equation} 
+\text{and} 
+\begin{equation}
+\kappa_{e,k}(\mbold r,t) = h^2 \frac{\max\left( | \resinew_k(\mbold r_q,t) |\,, || \mbold u_k(\mbold r_q,t) || J[P_k](t) \,, || \mbold u_k(\mbold r_q,t) || c_k^2(\mbold r_q,t) J[\rho_k](t) \right)}{\norm_{P,k}^\kappa} \, .
+\end{equation}
+\end{subequations}
+%
+where $h$ is the grid size and $J[x](t)$ denotes the jump of the quantity $x$ and was defined in SECTION. The normalization parameters $\norm_{P,k}^\mu$ and $\norm_{P,k}^\kappa$ will be determined later in this section by inspecting the non-dimensional version of the seven-equation model.
+
+It remains to specify the viscosity coefficients $\beta_e$ and $\beta_{max}$. For the purpose of this paragraph, let us consider the scalar volume fraction equation and assume that the interface velocity $\mbold u_{int}$ is given. Because it is a scalar hyperbolic equation, it is proposed to define the high and first-order viscosity coefficients on the same model as Burger's equation. Thus, $\beta_{max}$ is set proportional to the eigenvalue that is the interface velocity $\mbold u_{int}$,
+%
+\begin{equation}\label{eq:def-beta-max-sen-sect4}
+\beta_{max,k}( \mbold r, t) = \frac{h}{2} || \mbold u_{int} ||,
+\end{equation}
+%
+whereas the entropy viscosity viscosity coefficient $\beta_e$ is function of an entropy residual, $R_{\alpha,k}$, derived from the volume fraction equation for phase $k$ as follows:
+%
+\begin{align}\label{eq:def-beta-sen-sect4}
+\beta_{e,k}( \mbold r, t) = h^2 \frac{\max\left( | R_{\alpha,k}(\mbold r_q,t) |\,, || \mbold u_{int}(\mbold r_q,t) || J[\alpha_k](t) \right)}{\norm_{k}^\beta} \,
+\end{align}
+%
+where $\norm_{k}^\beta$ denotes a normalization parameters whom definition will be further investigated. To derive the entropy residual $R_{\alpha,k}$, we consider the volume fraction equation for phase $k$ with its viscous regularization and assume the existence of a mathematical entropy denoted by $\eta(\alpha_k)$:
+%
+\begin{equation}\label{eq:vf-sem-sct4}
+\partial_t \left(A \alpha_k \right) + A \mbold u_{int} \cdot \grad \alpha_k = \div \left( \beta_k A \grad \alpha_k \right)
+\end{equation}
+% 
+After multiplying by $\frac{\text{d} \eta (\alpha_k)}{\text{d} \alpha_k}$ and using the chain rule, an expression for the entropy residual $R_{\alpha,k}$ is obtained:
+%
+\begin{equation}\label{eq:vf-sem2-sct4}
+R_{\alpha,k} = \partial_t \left(A \eta(\alpha_k) \right) + A \mbold u_{int} \cdot \grad \eta(\alpha_k) = \frac{\text{d} \eta (\alpha_k)}{\text{d} \alpha_k} \div \left( \beta_k A \grad \alpha_k \right)
+\end{equation}
+% 
+Because \eqt{eq:vf-sem2-sct4} is identical to \eqt{eq:weak_sol8_sct1b}, it is concluded that $R_{\alpha,k} \geq 0$ when assuming $\eta$ convex with respect to $\alpha_k$, which justifies the definition of the entropy viscosity viscosity coefficient $\beta_{e,k}$ given in \eqt{eq:def-beta-sen-sect4} based on \eqt{sec:evm_hyp_sc_sct1b}. The entropy function is taken equal to $\eta(\alpha_k) = \frac{\alpha_k^2}{2}$ which is convex.
+%
+%------------------------------------------------------------------------------------------------------
+\subsection{Low-Mach asymptotic limit of the seven-equation model}\label{sec:low-Mach-sem}
+%------------------------------------------------------------------------------------------------------
+%
+In order to have a complete definition for the viscosity coefficients $\beta_k$, $\mu_k$ and $\kappa_k$, the normalization parameters introduced in the definition of the entropy viscosity coefficients $\beta_{e,k}$, $\mu_{e,k}$ and $\kappa_{e,k}$ have to be determined. In SECTION, the normalization parameters were derived from the non-dimensionalized multi-D Euler equations in order to obtain well-scaled dissipative terms. Thus, it is proposed to follow the same method to derive the three normalization parameters $\norm_{P,k}^\mu$, $\norm_{P,k}^\kappa$ and $\norm_{k}^\beta$ used in the definition of the viscosity coefficients involved in the viscous regularization of the seven-equation model. For simplicity, the Ideal Gas equation of state is considered through the derivations.
+
+For now, the definition of the viscosity coefficients is simply derived by analogy to SECTION. First, we define the far-field or stagnation coefficients for each phase as it is done in \eqt{eq:norm_param} by adding the subscript $k$ to $\infty$. Then, the scaled equations are derived for each phase which leads to the definition of a phasic P\'eclet and Reynolds numbers referred to as $\Pe_k$ and $\Re_k$, respectively, that are tied to the far-field or stagnation quantities of the viscosity coefficients $\mu_{k,\infty}$ and $\kappa_{k,\infty}$ as shown in \eqt{eq:ref_numb_7eq}:
+%  
+\begin{equation}
+\label{eq:ref_numb_7eq}
+\Re_{k,\infty} = \frac{u_{k,\infty} L_\infty}{\mu_{k,\infty}} \text{ and }
+\Pe_{k,\infty} = \frac{u_{k,\infty} L_\infty}{\kappa_{k,\infty}} \, .
+\end{equation}
+%
+Because the viscous regularization derived previously in SECTION requires an extra viscosity coefficient $\beta_k$ for the volume fraction equation, a new P\'eclet number, $\Pe_{k,\infty}^\beta$ is also defined as follows,
+%
+\begin{equation}
+\label{eq:ref_numb_7eq_beta}
+\Pe_{k,\infty}^\beta = \frac{u_{int,\infty} L_\infty}{\beta_{k,\infty}} \,
+\end{equation}
+%
+that will allow us to derive the proper scaling for $\beta_{k,\infty}$. Once the scaled equations are obtained, the scaling of the numerical numbers can be chosen in order to meet the different criteria already listed in SECTION. The scaling of the new P\'eclet number we defined, $\Pe_{k,\infty}^\beta$, is derived from the scaled volume fraction equation that does not contain any term weighted by the reference Mach number $M_\infty$, which yields $\Pe_{k,\infty}^\beta=1$ to have a well-scaled dissipative term. This scaling is the same as for $\Pe_{k,\infty}$ from the continuity equation: the volume fraction and continuity equations have similar behavior since they are both advection-type equations. Thus, based on the reasoning used in SECTION, the following definitions for the viscosity coefficients is proposed in \eqt{eq:final_def_visc_coeff-sem}: 
+%
+\begin{subequations}
+\label{eq:final_def_visc_coeff-sem}
+%
+\begin{equation}
+\mu_k(\mbold r,t)    = \min \Big (\mu_{\max,k}(\mbold r,t), \mu_{e,k} (\mbold r,t)    \Big) \text{  and  }
+\kappa_k(\mbold r,t) = \min \Big (\mu_{\max,k}(\mbold r,t), \kappa_{e,k} (\mbold r,t) \Big ) 
+\end{equation}
+%
+where the first-order viscosity is given by
+\begin{equation}\label{eq:first-order-visc-sct4-sem}
+  \kappa_{\max,k}(\mbold r,t)  = \mu_{\max,k} (\mbold r,t) = \frac{h}{2} \Big ( ||\mbold u_k|| + c_k \Big ) 
+\end{equation}
+%
+and the entropy viscosity coefficients by 
+%
+\begin{equation}
+\kappa_{e,k}(\mbold r,t) = \frac{h^2 \max(\resinew_k, J_k)}{ \rho_k c_k^2 }  \text{  and  }
+\mu_{e,k}(\mbold r,t)    = \frac{h^2 \max(\resinew_k, J_k)}{ \norm_{P,k}^\mu} 
+\end{equation}
+% 
+with the jumps given by
+%
+\begin{equation}
+J_k =  \max \Big ( || \mbold u_k || [[ \grad P_k \cdot \mbold n ]], || \mbold u_k || c_k^2 [[\grad \rho_k \cdot \mbold n]] \Big) 
+\end{equation}
+\end{subequations}
+%
+where $\norm_{P,k}^\kappa$ is computed from \eqt{eq:norm_ent3-7eq}.
+%
+\begin{equation}
+\label{eq:norm_ent3-7eq}
+\norm_P^\mu = (1-\sigma(M)) \rho c^2  + \sigma(M)  \rho ||\mbold{u} ||^2  
+\end{equation}
+%
+%\begin{equation}
+%\label{eq:norm_ent2-sem}
+%\norm_{P,k}^\mu =  \left\{
+%\begin{array}{ll}
+% \rho_k ||\mbold u_k ||^2       & \text{ if } \left| \resinew_k^* \right| \geq M_k \text{ (i.e., non-isentropic flow)} \\
+% \rho_k c_k^2 = \norm_{P,k}^\kappa & \text{ otherwise}
+%\end{array}
+%\right. \,.
+%\end{equation}
+%
+where $M_k$ is the local Mach number for phase $k$. The function $\sigma(M)$ is taken from \eqt{eq:sigma_fct} with the same parameters as for the single-phase flow equations: $a=3$ and $M^{thres} = 0.05$. The jump $J_k$ is a function of the jump of pressure and density gradients across the face with respect to its normal vector $\mbold n$. Then, the largest value over all faces is determined and used in the definition of the viscosity coefficients. Lastly, the viscosity coefficient for the volume fraction equation is given by:
+%
+\begin{equation}\label{eq:first-order-beta-sct4-sem}
+\beta_k(\mbold r,t) = \min \Big (\beta_{\max,k}(\mbold r,t), \beta_{e,k} (\mbold r,t) \Big ) 
+\end{equation}
+%
+where the first-order viscosity is given by
+\begin{equation}\label{eq:first-order-beta-max-sct4-sem}
+\beta_{\max,k} (\mbold r,t) = \frac{h}{2} ||\mbold u_{int}||
+\end{equation}
+%
+and the corresponding entropy viscosity coefficient, $\beta_{e,k}$, by 
+%
+\begin{equation}
+\beta_{e,k}(\mbold r,t) = \frac{h^2 \max(R_{\alpha,k}, J_{\alpha,k})}{|| \alpha_k - \bar{\alpha}_k ||_\infty},
+\end{equation}
+where $\bar{\alpha}_k$ is the average value of the volume fraction over the entire computational domain, and $|| \cdot ||_\infty$ denotes the infinite norm. The definition of the $\beta_{e,k}$ is consistent with the scaling of $\Pe^\beta_{k,\infty} = 1$. The jump is given by:
+%
+\begin{equation}
+J_{\alpha,k} = || \mbold u_{int} || \cdot [[ \grad \alpha_k \cdot \mbold n ]]. 
+\end{equation}
+With the definition of the viscosity coefficients $\mu_k$ and $\kappa_k$ proposed in \eqt{eq:final_def_visc_coeff}, the low-Mach asymptotic limit is ensured for isentropic flow, and transonic flows with shocks will be correctly resolved for each phase $k$. Furthermore, the definition of the viscosity coefficient $\beta_k$ is consistent with the EVM used for the scalar hyperbolic equations and thus should efficiently stabilize shocks forming the in the volume fraction profile. Plus, it is noted that the viscous regularization and the definition of the viscosity coefficients proposed for the seven-equation two-phase flow model degenerates into the EVM used for the single-phase Euler equations. In order to validate the proposed definition of the viscosity coefficients, 1-D numerical simulations are performed in SECTION.
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{$1$-D numerical results}\label{sec:results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
