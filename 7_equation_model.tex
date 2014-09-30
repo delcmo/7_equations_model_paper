@@ -408,7 +408,7 @@ is noted, however, that relaxation of pressure only by making $\mu_P$
 large without relaxing velocity will indeed give ill-posed and
 unstable numerical solutions, just as the classical six-equation
 two-phase model does, with sufficiently fine spatial resolution, as
-confirmed in~\cite{SEM,Herrard_2005}. For each phase $k$, an entropy equation can be derived when accounting only for the pressure and velocity relaxation terms (all of the terms proportional to the net mass transfer term $\Gamma$ are removed). The entropy function for a phase $k$ is denoted by $s_k$ and function of the density $\rho_k$ and the internal energy $e_k$. The derivation is detailed in APPENDIX and only the final result is recalled here:
+confirmed in~\cite{SEM,Herrard_2005}. For each phase $k$, an entropy equation can be derived when accounting only for the pressure and velocity relaxation terms (all of the terms proportional to the net mass transfer term $\Gamma$ are removed). The entropy function for a phase $k$ is denoted by $s_k$ and function of the density $\rho_k$ and the internal energy $e_k$. The derivation is detailed in \app{app:sev-equ-model-entropy} and only the final result is recalled here:
 %
 \begin{align}\label{eq:ent-eqn-7-eqn-model}
 (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} &= \mu_P \frac{Z_k}{Z_k+Z_j} (P_j - P_k)^2 + \lambda_u \frac{Z_j}{Z_k+Z_j} (\mbold u_j -\mbold  u_k)^2 \nonumber
@@ -425,18 +425,18 @@ Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates into 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A viscous regularization for the multi-D seven-equation two-phase flow model}\label{sec:visc-regu}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{itemize}
-\item explain why we work with the phase entropy equation instead of considering the total entropy residual by summing over the two phases
-\item viscous regularization must be consistent with single-phase flow equation
-\item recall the notion of entropy condition and entropy inequality $\to$ require dissipative terms in order to get a sign
-\item give the system of equations with the dissipative terms
-\item guide the reader through the derivation of the dissipative terms
-\item give the entropy residual with all terms in the right hand-side
-\item make the link with the single-phase flow equations
-\item explain how to derive the dissipative term for the volume fraction equation
-\item emphasizes the fact that the regularization is valid for any EOS with convex entropy
-\item a few words about the parabolic regularization
-\end{itemize}
+%\begin{itemize}
+%\item explain why we work with the phase entropy equation instead of considering the total entropy residual by summing over the two phases
+%\item viscous regularization must be consistent with single-phase flow equation
+%\item recall the notion of entropy condition and entropy inequality $\to$ require dissipative terms in order to get a sign
+%\item give the system of equations with the dissipative terms
+%\item guide the reader through the derivation of the dissipative terms
+%\item give the entropy residual with all terms in the right hand-side
+%\item make the link with the single-phase flow equations
+%\item explain how to derive the dissipative term for the volume fraction equation
+%\item emphasizes the fact that the regularization is valid for any EOS with convex entropy
+%\item a few words about the parabolic regularization
+%\end{itemize}
 %
 We now propose to derive a viscous regularization for the seven-equation model given in \eqt{eq:liq-7-eqn-sect5} by using the same methodology as for the multi-D Euler equations with/without variable area \cite{jlg, Marco_paper_low_mach}. The method consists in adding perturbation terms to the system of equation under consideration, and re-derive the entropy equation whose sign is known to be positive to ensure uniqueness of the numerical solution \cite{Leveque}. Because of the addition of perturbation terms, the entropy equation is modified and contains extra terms of unknown sign. By carefully choosing a definition for each of the perturbation term, the sign of the entropy equation can be determined and proved positive. For the seven-equation model, derivation of a viscous regularization can be achieved by considering either the phasic entropy equation (\eqt{eq:ent-eqn-7-eqn-model}) or the total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the later case, the entropy minimum principle is verified for the whole system which may not ensure positivity of the entropy equation for each phase. However, positivity of the total entropy equation can be also achieved by assuming that the entropy minimum principle holds for each phase. This stronger requirement will also ensure consistency with the single phase Euler equations when one of the phase disappears in the limits $\alpha_k \to 0$ and $\alpha_k \to 1$. Thus, it is chosen to work with the phasic entropy equations.
 
@@ -482,7 +482,7 @@ A \lambda_u \bar{\mbold u}_{int} \cdot \left( \mbold u_j - \mbold u_k \right) \n
 \end{align}
 \end{subequations}
 %
-where $\mbold f_k$, $\mbold g_k$, $\mbold h_k$ and $\mbold l_k$ are the phasic perturbation terms. The next step consists in deriving the entropy equation for the phase $k$, on the same model as what is done in \app{app:sev-equ-model-entropy}: 
+where $\mbold f_k$, $\mbold g_k$, $\mbold h_k$ and $\mbold l_k$ are the phasic perturbation terms. The next step consists in deriving the entropy equation for the phase $k$, on the same model as what is done in \app{app:sev-equ-model-entropy} for the system of equations (\eqt{eq:sev_equ}) that does not contain the perturbation terms.
 %
 \begin{enumerate}
 \item derive the density and internal energy equations from \eqt{eq:sev_equ-with-diss-terms}.
@@ -660,14 +660,14 @@ At this point, some remarks are in order:
     flux of the dissipative term in the continuity equation through the phasic area, $\alpha_k A$, seen
     by the phase $k$. When one of the phases disappears, the dissipative terms
     must go to zero for consistency. On the other hand, when $\alpha_k$ goes to one,
-    the single-phase Euler equations with proper viscous regularization must be recovered. }
+    the single-phase Euler equations with proper viscous regularization must be recovered. }    
     
 \item{Compatibility of the viscous regularization proposed in \eqt{eq:visc-reg-7-equ-sect4} with the generalized entropies identified in Harten et al. \cite{Harten} has not been investigated yet. However, it is believed that the entropy inequalities still holds because of the similarities of the entropy residual for the multi-D seven-equation model with the entropy residual derived in the single phase flow case \cite{jlg}.} 
 %A rigorous proof is ongoing work and will be included in the final version.
 %\tcr{don't you want to include this in the final version?} \tcb{I do}}
 \end{enumerate}
 %
-At this point in the paper, we have derived a viscous regularization for the multi-D seven-equation two-phase flow model that ensures positivity of the entropy residual and also uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$. The viscous regularization involves a set of three viscosity coefficients for each phase, $\mu_k$, $\kappa_k$ and $\beta_k$, that are assumed positive. Definition of the viscosity coefficients is now required to complete the numerical stabilization method. Since the focus of this paper is the entropy viscosity method, the viscosity coefficients are defined function of the entropy residual as it will be shown in \sct{sec:low-Mach}. However, one can also devise a definition for the viscosity coefficients $\mu_k$ and $\kappa_k$ by analogy to Lapidus \cite{Lapidus_paper, Lapidus_book} or some pressure-based methods \cite{PBV_book} used for the single-phase Euler equations. The viscosity coefficient, $\beta_k$, for the volume fraction equation should rely on artificial dissipation stabilization method used for scaler hyperbolic equations.
+At this point in the paper, we have derived a viscous regularization for the multi-D seven-equation two-phase flow model that ensures positivity of the entropy residual, uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$, and is consistent with the viscous regularization derived for the multi-D Euler equations \cite{jlg, Marco_paper_low_mach} in the limit $\alpha_k \to 1$. The viscous regularization involves a set of three viscosity coefficients for each phase, $\mu_k$, $\kappa_k$ and $\beta_k$, that are assumed positive. Definition of the viscosity coefficients is now required to complete the numerical stabilization method. Since the focus of this paper is the entropy viscosity method, the viscosity coefficients will be defined function of the entropy residual in \sct{sec:low-Mach}. However, one can also devise a definition for the viscosity coefficients $\mu_k$ and $\kappa_k$ by analogy to Lapidus \cite{Lapidus_paper, Lapidus_book} or some pressure-based methods \cite{PBV_book} used for the single-phase Euler equations. On the other hand, the viscosity coefficient, $\beta_k$, for the volume fraction equation should rely on artificial dissipation stabilization methods used for scalar hyperbolic equations. 
 %
 \begin{remark}
 Through the derivations of the viscous regularization, it was noted that another set of dissipative terms $\mbold f_k$ and $\mbold l_k$ would also ensures positivity of the entropy residual:
@@ -681,7 +681,7 @@ Through the derivations of the viscous regularization, it was noted that another
 \end{align}
 \end{subequations}
 %
-However, the definition of $\mbold l_k$ proposed in \eqt{eq:def-l-k-wrong-sect4} was not considered as valid for the following reasons: positivity of the volume fraction cannot be achieved and the parabolic regularization is not retrieved.
+However, the definition of $\mbold l_k$ proposed in \eqt{eq:def-l-k-wrong-sect4} was not considered as valid for the following reasons: positivity of the volume fraction cannot be achieved and the parabolic regularization is not retrieved when assuming equal viscosity coefficients.
 \end{remark}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -695,18 +695,16 @@ However, the definition of $\mbold l_k$ proposed in \eqt{eq:def-l-k-wrong-sect4}
 \item discussion about the 
 \end{itemize}
 %
-This section aims at deriving a definition of the viscosity coefficients involved in the viscous regularization for the multi-D seven-equation model. We propose to follow the same methodology as in SECTION for the multi-D Euler equations: after obtaining the non-dimensional equations, a definition for the viscosity coefficients is derived based on the entropy residual and consistent with the low-Mach asymptotic limit. Particular attention is paid to the definition of the viscosity coefficient $\beta_k$ used in the volume fraction equation.
-
-Using the EVM to define the viscosity coefficients is not the unique option here. Other numerical methods initially developed for single-phase flows, such as pressure-based and Lapidus viscosity methods, could be used as a starting point and adapted to the seven-equation model. Such a reasoning is motivated by one of the initial assumptions of the seven-equation model that assumes each phase verifies the Euler equations.
+When working with artificial dissipative numerical stabilization methods, great care needs to be carried to the definition of the viscosity coefficients that will determine the accuracy of the method. Generally speaking, sufficient artificial viscosity should be added into the shock and discontinuity regions to prevent spurious oscillations from forming, while little dissipation is added when the numerical solution is smooth. Such requirements can be achieved by tracking shocks and discontinuities in the numerical solutions. When dealing with fluid equations, the low-mach asymptotic limit also has to be accounted for in the definition of the viscosity coefficients in order to ensure well-scaled dissipative terms \cite{LowMach1, LowMach2, LowMach3}. The purpose of this section is to derive a definition for the phasic viscosity coefficients, $\mu_k$, $\kappa_k$ and $\beta_k$, that ensures the correct numerical solution in the low-mach limit, and can accurately resolves shocks in transonic and supersonic flows.
 %------------------------------------------------------------------------------------------------------
 \subsection{Definition of the viscosity coefficients}\label{sec:visc-coeff-sem}
 %------------------------------------------------------------------------------------------------------
-The viscous regularization derived in SECTION for the multi-D SEM requires three viscosity coefficients for each phase $k$ denoted by $\beta_k$, $\mu_k$ and $\kappa_k$. Following the methodology detailed in SECTION, for each viscosity coefficient an upper bound, denoted by the subscript $max$, is defined and referred to as the first-order viscosity coefficient, along with a entropy viscosity coefficient that is set proportional to an entropy residual and denoted by the subscript $e$:
+In the entropy viscosity method, each viscosity coefficient is function of an upper and a lower bound that are referred to as first-order viscosity coefficient and entropy viscosity coefficient (high-order coefficient), respectively, as shown in \eqt{eq:def-visc-sem-sct4}. The first-order viscosity coefficient is denoted by the subscript $max$ and is defined proportional to the largest local eigenvalue. The entropy viscosity coefficient is set proportional to an entropy residual and jumps of quantities to determine, and denoted by the subscript $e$. 
 %
 \begin{align}\label{eq:def-visc-sem-sct4}
 \beta_k( \mbold r, t) = \min \left( \beta_{e,k}( \mbold r, t), \beta_{max,k} ( \mbold r, t) \right), \nonumber \\
-\mu_k( \mbold r, t) = \min \left( \mu_{e,k}( \mbold r, t), \mu_{max,k} ( \mbold r, t) \right), \nonumber \\
-\kappa_k( \mbold r, t) = \min \left( \kappa_{e,k}( \mbold r, t), \kappa_{max,k} ( \mbold r, t) \right) \,. \nonumber
+\mu_k( \mbold r, t) = \min \left( \mu_{e,k}( \mbold r, t), \mu_{max,k} ( \mbold r, t) \right),  \\
+\kappa_k( \mbold r, t) = \min \left( \kappa_{e,k}( \mbold r, t), \kappa_{max,k} ( \mbold r, t) \right) \,.\nonumber 
 \end{align}
 % 
 where all of the variables are locally defined. As for the multi-D single-phase Euler equations and for the same reasons, the entropy residual for each phase $k$ is recast as a function of the pressure, the velocity, the density and the speed of sound as follows:
