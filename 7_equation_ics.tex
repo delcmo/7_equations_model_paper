@@ -1,0 +1,278 @@
+%%
+%% This is file `elsarticle-template-num.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% elsarticle.dtx  (with options: `numtemplate')
+%% 
+%% Copyright 2007, 2008 Elsevier Ltd.
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% -------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+
+%\documentclass[preprint,12pt]{elsarticle}
+\documentclass[preprint,10pt]{elsarticle}
+%\documentclass[final,3p,times]{elsarticle} 
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% if you use PostScript figures in your article
+%% use the graphics package for simple commands
+\usepackage{float}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{appendix}
+%% or use the graphicx package for more complicated commands
+\usepackage{graphicx}
+%% or use the epsfig package if you prefer to use the old commands
+%% \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols 
+%% The amsthm package provides extended theorem environments
+\usepackage{amssymb}
+\usepackage{amsmath}
+% more math
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{amsbsy}
+\usepackage{mathbbol} 
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+\usepackage{lineno}
+
+\journal{Journal of Comp. Phys.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% operators
+\renewcommand{\div}{\vec{\nabla}\! \cdot \!}
+\newcommand{\grad}{\vec{\nabla}}
+\newcommand{\divv}[1]{\boldsymbol{\nabla}^{#1}\! \cdot \!}
+\newcommand{\gradd}[1]{\vec{\nabla}^{#1}}
+\newcommand{\mbold}[1]{\boldsymbol#1}
+% latex shortcuts
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bal}{\begin{align}}
+\newcommand{\eali}{\end{align}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+% DGFEM commands
+\newcommand{\jmp}[1]{[\![#1]\!]}                     % jump
+\newcommand{\mvl}[1]{\{\!\!\{#1\}\!\!\}}             % mean value
+\newcommand{\keff}{\ensuremath{k_{\textit{eff}}}\xspace}
+% shortcut for domain notation
+\newcommand{\D}{\mathcal{D}}
+% vector shortcuts
+\newcommand{\vo}{\vec{\Omega}}
+\newcommand{\vr}{\vec{r}}
+\newcommand{\vn}{\vec{n}}
+\newcommand{\vnk}{\vec{\mathbf{n}}}
+\newcommand{\vj}{\vec{J}}
+\newcommand{\eig}[1]{\| #1 \|_2}
+%
+\newcommand{\EI}{\mathcal{E}_h^i}
+\newcommand{\ED}{\mathcal{E}_h^{\partial \D^d}}
+\newcommand{\EN}{\mathcal{E}_h^{\partial \D^n}}
+\newcommand{\ER}{\mathcal{E}_h^{\partial \D^r}}
+\newcommand{\reg}{\textit{reg}}
+%
+\newcommand{\norm}{\textrm{norm}}
+\renewcommand{\Re}{\textrm{Re}}
+\newcommand{\Pe}{\textrm{P\'e}}
+\renewcommand{\Pr}{\textrm{Pr}}
+%
+\newcommand{\resi}{R}
+%\newcommand{\resinew}{\tilde{D}_e}
+\newcommand{\resinew}{\widetilde{\resi}}
+\newcommand{\resisource}{\widetilde{\resi}^{source}}
+\newcommand{\matder}[1]{\frac{\textrm{D} #1}{\textrm{D} t}}
+%
+% extra space
+\newcommand{\qq}{\quad\quad}
+% common reference commands
+\newcommand{\eqt}[1]{Eq.~(\ref{#1})}                     % equation
+\newcommand{\fig}[1]{Fig.~\ref{#1}}                      % figure
+\newcommand{\tbl}[1]{Table~\ref{#1}}                     % table
+\newcommand{\sct}[1]{Section~\ref{#1}}                   % section
+\newcommand{\app}[1]{Appendix~\ref{#1}}                   % appendix
+%
+\newcommand{\ie}{i.e.,\@\xspace}
+\newcommand{\eg}{e.g.,\@\xspace}
+\newcommand{\psc}[1]{{\sc {#1}}}
+\newcommand{\rs}{\psc{R7}\xspace}
+%
+\newcommand\br{\mathbf{r}}
+%\newcommand{\tf}{\varphi}
+\newcommand{\tf}{b}
+%
+\newcommand{\tcr}[1]{\textcolor{red}{#1}}
+\newcommand{\tcb}[1]{\textcolor{blue}{#1}}
+\newcommand{\mt}[1]{\marginpar{ {\tiny #1}}}
+%
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   BEGIN DOCUMENT
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\linenumbers
+The liquid phase obeys the following mass, momentum and energy balance equations, supplemented by a non-conservative volume-fraction equation:
+%
+\begin{subequations}\label{eq:liq-7-eqn-sect5}
+\begin{align}
+  % liquid mass conservation
+  \label{multi-d-7-equ-liq}
+  \frac{\partial \left( \alpha \rho \right)_{liq} A}{\partial t}
+  + \div \left( \alpha \rho \mbold u A\right)_{liq}
+  &= 0
+\end{align}
+\begin{align}
+  % liquid momentum
+  &\frac{\partial \left( \alpha \rho \mbold u \right)_{liq} A}{\partial t}
+  + \div \left[ \alpha_{liq} A \left( \rho \mbold u \otimes \mbold u + P \mathbb{I} \right)_{liq} \right]
+      \nonumber
+  \\
+  &= P_{int} A \grad \alpha_{liq} + P_{liq} \alpha_{liq} \grad A
+  + A \lambda_u (\mbold u_{vap} - \mbold u_{liq})
+\end{align}
+\begin{align}
+  % liquid total energy
+  &\frac{\partial \left( \alpha \rho E \right)_{liq} A}{\partial t}
+  + \div \left[ \alpha_{liq} \mbold u_{liq} A \left( \rho E + P \right)_{liq} \right]
+  = P_{int} \mbold u_{int} A \grad \alpha_{liq} 
+            \nonumber
+  \\
+  &- \bar{P}_{int} A \mu_P (P_{liq} - P_{vap})
+  + \bar{\mbold u}_{int} A \lambda_u (\mbold u_{vap} - \mbold u_{liq})
+\nonumber 
+\end{align}
+\begin{align}
+  % liquid volume fraction
+  \label{eqn:multi-d-7-eqn-liq-vol}
+  \frac{\partial \alpha_{liq} A}{\partial t} + A\mbold u_{int} \cdot \grad \alpha_{liq}
+  &= A \mu_P (P_{liq} - P_{vap})
+\end{align}
+\end{subequations}
+%
+On the same model, the equations for the vapor phase are:
+%
+\begin{subequations}\label{eq:vap-7-eqn-sect5}
+\begin{align}
+  \label{multi-d-7-equ-vap}
+  % vapor mass conservation
+  \frac{\partial \left( \alpha \rho A\right)_{vap}}{\partial t}
+  + \div \left( \alpha \rho \mbold u \right)_{vap} A
+  =  0
+\end{align}
+\begin{align}
+  % vapor momentum
+  &\frac{\partial \left( \alpha \rho u \right)_{vap} A}{\partial t}
+  + \div \left[ \alpha_{vap} A \left( \rho \mbold u \otimes \mbold u + P\mathbb{I} \right)_{vap} \right]
+    \\
+  \nonumber
+  &= P_{int} A \grad \alpha_{vap} + P_{vap} \alpha_{vap} \grad A
+  + A \lambda_u (\mbold u_{liq} - \mbold u_{vap})
+\end{align}
+\begin{align}
+  % vapor total energy
+ & \frac{\partial \left( \alpha \rho E \right)_{vap} A}{\partial t}
+  + \div \left[ \alpha_{vap} \mbold u_{vap} A \left( \rho E + P \right)_{vap} \right]
+  = P_{int} \mbold u_{int} A \grad \alpha_{vap}
+    \nonumber
+  \\ 
+  &- \bar{P}_{int} A \mu_P (P_{vap} - P_{liq})
+  + \bar{\mbold u}_{int} A \lambda_u (\mbold u_{liq} - \mbold u_{vap})
+\nonumber 
+\end{align}
+\begin{align}
+  % vapor phase volume fraction
+  \label{eqn:multi-d-7-eqn-vap-vol}
+  \frac{\partial \alpha_{vap} A}{\partial t} + A \mbold u_{int} \cdot \grad \alpha_{vap}
+  &= A \mu_P (P_{vap} - P_{liq})
+\end{align}
+\end{subequations}
+%
+Interfacial variables:
+%
+\begin{subequations}
+\label{eq:int_variables_def}
+\begin{align}
+  \label{E-R:83}
+  P_{int} &= \bar{P}_{int} + \frac{Z_{liq}Z_{vap}}{Z_{liq}+Z_{vap}} \frac{\grad \alpha_{liq}}{|| \grad \alpha_{liq} ||} \cdot (\mbold u_{vap}-\mbold u_{liq})
+  \\
+  \bar{P}_{int} &= \frac{Z_{vap}P_{liq}+Z_{liq}P_{vap}}{Z_{liq}+Z_{vap}}
+\end{align}
+%
+\begin{align}
+  \label{E-R:84}
+  \mbold u_{int} &= \bar{\mbold u}_{int} +  \frac{\grad \alpha_{liq}}{|| \grad \alpha_{liq} ||} \frac{P_{vap}-P_{liq}}{Z_{liq}+Z_{vap}}
+  \\
+  \bar{\mbold u}_{int} &= \frac{Z_{liq} \mbold u_{liq}+Z_{vap}\mbold u_{vap}}{Z_{liq}+Z_{vap}}.
+\end{align}
+\end{subequations}
+%
+The pressure, $\mu_P$, and velocity, $\lambda_u$, relaxation coefficients are proportional to each other and function of the interfacial area $A_{int}$:
+%
+\begin{align}
+  \label{E-R:85}
+  \lambda_u &= \frac{1}{2} \mu_P Z_{liq} Z_{vap}
+  \\
+  \label{E-R:86}
+  \mu_P &= \frac{A_{int}}{Z_{liq}+Z_{vap}}
+\end{align}
+%
+The specific interfacial area (i.e., the interfacial surface area per unit
+volume of two-phase mixture), $A_{int}$, must be specified from some type of
+flow regime map or function under the form of a correlation:
+%
+\begin{equation}\label{eq:Aint-sect4}
+A_{int} = A_{int}^{max} \left[ 6.75 \left(1-\alpha_{liq} \right)^2 \alpha_{liq} \right],
+\end{equation}
+% 
+where $A_{int}^{max} = 5100$ $m^2 / m^3$. With such definition, the interfacial area is zero in the limits $\alpha_{liq} = 0$ and $\alpha_{liq} = 1$. \\
+%
+\textbf{Initial conditions} \\
+%
+Uniform pressure for both phases: $P_{vap} = P_{liq} = 10^6$ $Pa$. \\
+The two phases are at rest: $u_{vap} = u_{liq} = 0$ $m \cdot s^{-1}$ \\
+Uniform temperature for both phases:  $T_{vap} = T_{liq} = 300$ $K$ \\
+Volume fraction linearly varies from $0.9$ to $0.4$. \\
+%
+\textbf{Boundary conditions} \\
+%
+Static pressure: $\alpha = 0.9$, $P = 10^6$ and $T=300$. \\
+Solid wall.
+\end{document}

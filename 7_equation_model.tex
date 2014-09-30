@@ -71,8 +71,8 @@
 \journal{Journal of Comp. Phys.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % operators
-\renewcommand{\div}{\vec{\nabla}\! \cdot \!}
-\newcommand{\grad}{\vec{\nabla}}
+\renewcommand{\div}{\mbold{\nabla}\! \cdot \!}
+\newcommand{\grad}{\mbold{\nabla}}
 \newcommand{\divv}[1]{\boldsymbol{\nabla}^{#1}\! \cdot \!}
 \newcommand{\gradd}[1]{\vec{\nabla}^{#1}}
 \newcommand{\mbold}[1]{\boldsymbol#1}
@@ -220,144 +220,171 @@ Compressible two-phase flows are found in numerous industrial applications and a
 
 This methodology was applied to the seven-equation model (SEM) introduced by Berry et al. in \cite{SEM}. This model is known to be unconditionally hyperbolic which is highly desirable when working with approximate Riemann solvers and can treat a wide range of applications. Its particularity comes from the pressure and velocity relaxation terms in the volume fraction, momentum and energy equations that can bring the two phases in equilibrium when using large values of the relaxation parameters. In other words, the seven-equation model can degenerate into the six- and five-equation models. Alike for the other two-phase flow models, solving for the seven-equation model requires a numerical solver and significant effort was dedicated to this task for spatially discontinuous schemes. Because each phase is assumed to obey the Euler equations, most of the numerical solvers are adapted from the single-phase approximate Riemann solvers. For example, Saurel et al. \cite{Saurel_2001a, Saurel_2001b} employed a HLL-type scheme to solve for the SEM but noted that excessive dissipation was added to the contact discontinuity. A more advanced HLLC-type scheme was developed in \cite{Li_2004} but only for the subsonic case and then extended to supersonic flows in \cite{Zein_2010}. More recently, Ambroso et al. \cite{Ambroso_2012} proposed an approximate Riemann solver accounting for source terms such as gravity and drag forces, but with no interphase mass transfer.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The multi-D 7-equation two-phase flow model}\label{sec:7-equ-model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{itemize}
-\item give the equations and detail the different terms
-\item include the relaxation terms, the mass and heat exchange terms
-\item eigenvalues
-\item entropy equation WITHOUT the dissipative terms and five the details of the derivation in the appendix
-\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{itemize}
+%\item give the equations and detail the different terms
+%\item include the relaxation terms, the mass and heat exchange terms
+%\item eigenvalues
+%\item entropy equation WITHOUT the dissipative terms and five the details of the derivation in the appendix
+%\end{itemize}
 %
-The multi-D seven-equation two-phase model is obtained by assuming that each phase obeys the single-phase Euler equations (with phase-exchange terms) and by integrating over a control volume after multiplying by a characteristic function. The detailed derivation can be found in \cite{SEM}. In this section, the governing equations are recalled for each phase (liquid and vapor) and the source terms are described. 
-
-The liquid phase obeys the following mass, momentum and energy balance equations, supplemented by a non-conservative volume-fraction equation:
+The multi-D seven-equation two-phase model presented in this paper is obtained by assuming that each phase obeys the single-phase Euler equations (with phase-exchange terms) and by integrating over a control volume after multiplying by a characteristic function. The detailed derivation can be found in \cite{SEM}. In this section, the governing multi-dimensional equations are recalled for a phase $k$ in interaction with a phase $j$. Each phase obeys the following mass, momentum and energy balance equations, supplemented by a non-conservative volume-fraction equation:
 %
 \begin{subequations}\label{eq:liq-7-eqn-sect5}
 \begin{align}
   % liquid mass conservation
   \label{multi-d-7-equ-liq}
-  \frac{\partial \left( \alpha \rho \right)_{liq} A}{\partial t}
-  + \div \left( \alpha \rho \mbold u A\right)_{liq}
+  \frac{\partial \left( \alpha \rho \right)_{k} A}{\partial t}
+  + \div \left( \alpha \rho \mbold u A\right)_{k}
   &= - \Gamma A_{int} A
 \end{align}
 \begin{align}
   % liquid momentum
-  \frac{\partial \left( \alpha \rho \mbold u \right)_{liq} A}{\partial t}
-  + \div \left[ \alpha_{liq} A \left( \rho \mbold u \otimes \mbold u + P \mathbb{I} \right)_{liq} \right]
-  &= P_{int} A \grad \alpha_{liq} + P_{liq} \alpha_{liq} \grad A
+  \frac{\partial \left( \alpha \rho \mbold u \right)_{k} A}{\partial t}
+  + \div \left[ \alpha_{k} A \left( \rho \mbold u \otimes \mbold u + P \mathbb{I} \right)_{k} \right]
+  &= P_{int} A \grad \alpha_{k} + P_{k} \alpha_{k} \grad A
     \nonumber
   \\
-  &+ A \lambda_u (\mbold u_{vap} - \mbold u_{liq})
+  &+ A \lambda_u (\mbold u_{j} - \mbold u_{k})
   - \Gamma A_{int} \mbold u_{int} A
 \end{align}
 \begin{align}
   % liquid total energy
-  \frac{\partial \left( \alpha \rho E \right)_{liq} A}{\partial t}
-  + \div \left[ \alpha_{liq} \mbold u_{liq} A \left( \rho E + P \right)_{liq} \right]
-  &= P_{int} \mbold u_{int} A \grad \alpha_{liq} - \bar{P}_{int} A \mu_P (P_{liq} - P_{vap})
+  \frac{\partial \left( \alpha \rho E \right)_{k} A}{\partial t}
+  + \div \left[ \alpha_{k} \mbold u_{k} A \left( \rho E + P \right)_{k} \right]
+  &= P_{int} \mbold u_{int} A \grad \alpha_{k} - \bar{P}_{int} A \mu_P (P_{k} - P_{j})
         \nonumber
   \\
-  + \bar{\mbold u}_{int} A \lambda_u (\mbold u_{vap} - \mbold u_{liq})
-&  + \Gamma A_{int} \left( \frac{P_{int}}{\rho_{int}} - H_{liq, int} \right) A
-\nonumber 
-\\
-& + Q_{wall,liq} + Q_{int,liq}
+  + \bar{\mbold u}_{int} A \lambda_u (\mbold u_{j} - \mbold u_{k})
+&  + \Gamma A_{int} \left( \frac{P_{int}}{\rho_{int}} - H_{k, int} \right) A
+%\nonumber 
+%\\
+%& + Q_{wall,k} + Q_{int,k}
 \end{align}
 \begin{align}
   % liquid volume fraction
   \label{eqn:multi-d-7-eqn-liq-vol}
-  \frac{\partial \alpha_{liq} A}{\partial t} + A\mbold u_{int} \cdot \grad \alpha_{liq}
-  &= A \mu_P (P_{liq} - P_{vap}) - \frac{\Gamma A_{int} A}{\rho_{int}}
+  \frac{\partial \alpha_{k} A}{\partial t} + A\mbold u_{int} \cdot \grad \alpha_{k}
+  &= A \mu_P (P_{k} - P_{j}) - \frac{\Gamma A_{int} A}{\rho_{int}}
 \end{align}
 \end{subequations}
 %
-On the same model, the equations for the vapor phase are:
+%On the same model, the equations for the vapor phase are:
+%%
+%\begin{subequations}\label{eq:vap-7-eqn-sect5}
+%\begin{align}
+%  \label{multi-d-7-equ-vap}
+%  % vapor mass conservation
+%  \frac{\partial \left( \alpha \rho A\right)_{vap}}{\partial t}
+%  + \div \left( \alpha \rho \mbold u \right)_{vap} A
+%  =  \Gamma A_{int} A
+%\end{align}
+%\begin{align}
+%  % vapor momentum
+%  \frac{\partial \left( \alpha \rho u \right)_{vap} A}{\partial t}
+%  + \div \left[ \alpha_{vap} A \left( \rho \mbold u \otimes \mbold u + P\mathbb{I} \right)_{vap} \right]
+%  &= P_{int} A \grad \alpha_{vap} + P_{vap} \alpha_{vap} \grad A
+%  \\
+%  \nonumber
+%  &+ A \lambda_u (\mbold u_{liq} - \mbold u_{vap})
+%  + \Gamma A_{int} u_{int} A
+%\end{align}
+%\begin{align}
+%  % vapor total energy
+%  \frac{\partial \left( \alpha \rho E \right)_{vap} A}{\partial t}
+%  + \div \left[ \alpha_{vap} \mbold u_{vap} A \left( \rho E + P \right)_{vap} \right]
+%  &= P_{int} \mbold u_{int} A \grad \alpha_{vap} - \bar{P}_{int} A \mu_P (P_{vap} - P_{liq})
+%    \nonumber
+%  \\
+%  + \bar{\mbold u}_{int} A \lambda_u (\mbold u_{liq} - \mbold u_{vap})
+%&- \Gamma A_{int} \left( \frac{P_{int}}{\rho_{int}} - H_{vap, int} \right) A
+%\nonumber 
+%\\
+%& + Q_{wall,vap} + Q_{int,vap}
+%\end{align}
+%\begin{align}
+%  % vapor phase volume fraction
+%  \label{eqn:multi-d-7-eqn-vap-vol}
+%  \frac{\partial \alpha_{vap} A}{\partial t} + A \mbold u_{int} \cdot \grad \alpha_{vap}
+%  &= A \mu_P (P_{vap} - P_{liq}) + \frac{\Gamma A_{int} A}{\rho_{int}}
+%\end{align}
+%\end{subequations}
 %
-\begin{subequations}\label{eq:vap-7-eqn-sect5}
-\begin{align}
-  \label{multi-d-7-equ-vap}
-  % vapor mass conservation
-  \frac{\partial \left( \alpha \rho A\right)_{vap}}{\partial t}
-  + \div \left( \alpha \rho \mbold u \right)_{vap} A
-  =  \Gamma A_{int} A
-\end{align}
-\begin{align}
-  % vapor momentum
-  \frac{\partial \left( \alpha \rho u \right)_{vap} A}{\partial t}
-  + \div \left[ \alpha_{vap} A \left( \rho \mbold u \otimes \mbold u + P\mathbb{I} \right)_{vap} \right]
-  &= P_{int} A \grad \alpha_{vap} + P_{vap} \alpha_{vap} \grad A
-  \\
-  \nonumber
-  &+ A \lambda_u (\mbold u_{liq} - \mbold u_{vap})
-  + \Gamma A_{int} u_{int} A
-\end{align}
-\begin{align}
-  % vapor total energy
-  \frac{\partial \left( \alpha \rho E \right)_{vap} A}{\partial t}
-  + \div \left[ \alpha_{vap} \mbold u_{vap} A \left( \rho E + P \right)_{vap} \right]
-  &= P_{int} \mbold u_{int} A \grad \alpha_{vap} - \bar{P}_{int} A \mu_P (P_{vap} - P_{liq})
-    \nonumber
-  \\
-  + \bar{\mbold u}_{int} A \lambda_u (\mbold u_{liq} - \mbold u_{vap})
-&- \Gamma A_{int} \left( \frac{P_{int}}{\rho_{int}} - H_{vap, int} \right) A
-\nonumber 
-\\
-& + Q_{wall,vap} + Q_{int,vap}
-\end{align}
-\begin{align}
-  % vapor phase volume fraction
-  \label{eqn:multi-d-7-eqn-vap-vol}
-  \frac{\partial \alpha_{vap} A}{\partial t} + A \mbold u_{int} \cdot \grad \alpha_{vap}
-  &= A \mu_P (P_{vap} - P_{liq}) + \frac{\Gamma A_{int} A}{\rho_{int}}
-\end{align}
-\end{subequations}
-%
-where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the volume fraction, the density, the velocity vector and the total specific energy of phase $k=\left\{ liq, vap \right\}$, respectively. The phase pressure $P_k$ is computed from an equation of state. The interfacial variables are denoted by the subscript $int$ and their definition will be given in \eqt{eq:int_variables_def}. The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively. $\Gamma$ is the net mass transfer rate per unit interfacial area from the liquid to the vapor phase and $A_{int}$ is the interfacial area per unit volume of mixture.  Also, $H_{liq, int}$ and $H_{vap, int}$ are the liquid and gas total specific enthalpies at the interface, respectively, with the following definition: $H_k = h_k + 0.5 || \mbold u ||^2$. $\mu_P$ is the pressure relaxation coefficient and $\lambda_u$ denotes the velocity relaxation coefficient. The wall and interfacial heat sources are denoted by $Q_{wall,k}$ and $Q_{int,k}$, respectively, and are detailed in \sct{sec:source-terms-7-eqt-sect5}. Lastly, the cross section $A$ is assumed spatially dependent. In the case of two-phase flows, the equation for the vapor volume fraction, \eqt{eqn:multi-d-7-eqn-vap-vol}, is simply replaced by the algebraic relation
-%
-\begin{align}
- \alpha_{vap}= 1 - \alpha_{liq}
-\end{align}
+where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the volume fraction, the density, the velocity vector and the total specific energy of phase $k$, respectively. The phase pressure $P_k$ is computed from an equation of state. The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively, and are defined in \eqt{eq:int_variables_def}. 
 %
 \begin{subequations}
 \label{eq:int_variables_def}
 \begin{align}
   \label{E-R:83}
-  P_{int} &= \bar{P}_{int} + \frac{Z_{liq}Z_{vap}}{Z_{liq}+Z_{vap}} \frac{\grad \alpha_{liq}}{|| \grad \alpha_{liq} ||} \cdot (\mbold u_{vap}-\mbold u_{liq})
+  P_{int} &= \bar{P}_{int} + \frac{Z_{k}Z_{j}}{Z_{k}+Z_{j}} \frac{\grad \alpha_{k}}{|| \grad \alpha_{k} ||} \cdot (\mbold u_{j}-\mbold u_{k})
   \\
-  \bar{P}_{int} &= \frac{Z_{vap}P_{liq}+Z_{liq}P_{vap}}{Z_{liq}+Z_{vap}}
-\end{align}
-%
-\begin{align}
+  \bar{P}_{int} &= \frac{Z_{j}P_{k}+Z_{k}P_{j}}{Z_{k}+Z_{j}}
+ \\
   \label{E-R:84}
-  \mbold u_{int} &= \bar{\mbold u}_{int} +  \frac{\grad \alpha_{liq}}{|| \grad \alpha_{liq} ||} \frac{P_{vap}-P_{liq}}{Z_{liq}+Z_{vap}}
+  \mbold u_{int} &= \bar{\mbold u}_{int} +  \frac{\grad \alpha_{k}}{|| \grad \alpha_{k} ||} \frac{P_{j}-P_{k}}{Z_{k}+Z_{j}}
   \\
-  \bar{\mbold u}_{int} &= \frac{Z_{liq} \mbold u_{liq}+Z_{vap}\mbold u_{vap}}{Z_{liq}+Z_{vap}}.
+  \bar{\mbold u}_{int} &= \frac{Z_{k} \mbold u_{k}+Z_{j}\mbold u_{j}}{Z_{k}+Z_{j}}.
 \end{align}
 \end{subequations}
 %
-The interfacial velocities $\mbold u_{int}$ and its average value $\bar{\mbold u}_{int}$ are computed from:
+The interfacial specific total enthalpy of phase $k$, $H_{k}$, is defined as follows: $H_k = h_k + 0.5 || \mbold u ||^2$. Following \cite{SEM}, the pressure and velocity relaxation coefficients, $\mu_P$  and $\lambda_u$ respectively, are function of the acoustic impedance $Z_k = \rho_k c_k$ and the specific interfacial area $A_{int}$ as shown in \eqt{eq:relaxation_coeff}.
 %
-The pressure, $\mu_P$, and velocity, $\lambda_u$, relaxation coefficients are proportional to each other and function of the interfacial area $A_{int}$:
-%
+\begin{subequations}
+\label{eq:relaxation_coeff}
 \begin{align}
   \label{E-R:85}
-  \lambda_u &= \frac{1}{2} \mu_P Z_{liq} Z_{vap}
+  \lambda_u &= \frac{1}{2} \mu_P Z_{k} Z_{j}
   \\
   \label{E-R:86}
-  \mu_P &= \frac{A_{int}}{Z_{liq}+Z_{vap}}
+  \mu_P &= \frac{A_{int}}{Z_{k}+Z_{j}}
 \end{align}
+\end{subequations}
 %
 The specific interfacial area (i.e., the interfacial surface area per unit
 volume of two-phase mixture), $A_{int}$, must be specified from some type of
 flow regime map or function under the form of a correlation. In \cite{SEM}, $A_{int}$ is chosen to be a function of the liquid volume fraction:
 %
 \begin{equation}\label{eq:Aint-sect4}
-A_{int} = A_{int}^{max} \left[ 6.75 \left(1-\alpha_{liq} \right)^2 \alpha_{liq} \right],
+A_{int} = A_{int}^{max} \left[ 6.75 \left(1-\alpha_{k} \right)^2 \alpha_{k} \right],
 \end{equation}
 % 
-where $A_{int}^{max} = 5100$ $m^2 / m^3$. With such definition, the interfacial area is zero in the limits $\alpha_{liq} = 0$ and $\alpha_{liq} = 1$.
-To relax the seven-equation model to
+where $A_{int}^{max} = 5100$ $m^2 / m^3$. With such definition, the interfacial area is zero in the limits $\alpha_{k} = 0$ and $\alpha_{k} = 1$. Lastly, $\Gamma$ is the net mass transfer rate per unit interfacial area from phase $j$ to phase $k$. Its expression, given in \eqt{eq:mass_transfer}, is obtained by considering a vaporization/condensation process that is dominated by heat diffusion at the interface \cite{SEM, BerryMarco_2014}:
+%
+\begin{align} \label{eq:mass_transfer}
+  \nonumber
+  \Gamma = \Gamma_{j}
+  &= \frac{h_{T,  k} \left( T_{k} - T_{int} \right) + h_{T,  j} \left( T_{j} - T_{int} \right)}{h_{j,  int} - h_{k,  int}}
+  \\
+  &= \frac{h_{T,  k} \left( T_{k} - T_{int} \right) + h_{T,  j} \left( T_{j} - T_{int} \right)}{L_v \left( T_{int} \right)} ,
+\end{align}
+%
+where $L_v \left( T_{int} \right) = h_{j,  int} - h_{k,  int}$
+represents the latent heat of vaporization.  The interface
+temperature is determined by the saturation constraint
+$T_{int}=T_{sat}(P)$ with the appropriate pressure $P=\bar{P}_{int}$
+determined above. The interfacial heat transfer coefficients for phases $k$ and $j$ are denoted by $h_{T,  k}$ and $h_{T,  j}$, respectively, and computed from correlations \cite{SEM}. 
+
+The set of equations obeyed by phase $j$ are simply obtained by substituting $k$ by $j$ and $j$ by $k$ in \eqt{eq:liq-7-eqn-sect5}, keeping the same definition of the interfacial variables and remembering that $\Gamma_j = - \Gamma_k$. In the case of two-phase flows, the equation for the volume fraction of phase $j$ is simply replaced by the algebraic relation
+%
+\begin{align}
+ \alpha_{j}= 1 - \alpha_{k}, \nonumber
+\end{align}
+%
+which reduces the number of equations from eight to seven and yields the seven-equation two-phase flow model. 
+
+The seven-equation model has interesting properties that are discussed next. A set of seven waves is present in such a model: two acoustic waves and a contact wave for each phase supplanted by a volume fraction wave propagating at the interfacial velocity $\mbold u_{int}$. Considering a domain of dimension $\mathbb{D}$, the corresponding eigenvalues are the following for each phase $k$:
+% 
+\begin{align}\label{eq:eigenvalues}
+&\lambda_1 = \mbold u_{int} \cdot \bar{\mbold n} \nonumber\\
+&\lambda_{2,k} = \mbold u_k \cdot \bar{\mbold n} - c_k \nonumber\\
+&\lambda_{3,k} = \mbold u_k \cdot \bar{\mbold n} + c_k \\
+&\lambda_{d+3,k} = \mbold u_k \cdot \bar{\mbold n} \text{ for } d = 1 \dots \mathbb{D},\nonumber
+\end{align}
+%
+where $\bar{\mbold n}$ is an unit vector pointing to a given direction. The eigenvalues given in \eqt{eq:eigenvalues} are unconditionally real which presents an interesting property for the development of numerical methods since the system is hyperbolic and well-posed. To relax the seven-equation model to
 the ill-posed classical six-equation model, only the pressures should be
 relaxed toward a single pressure for both phases.  This is
 accomplished by specifying the pressure relaxation coefficient to be
@@ -372,59 +399,24 @@ multi-dimensional interface resolving methods which dynamically
 captures evolving and spontaneously generated
 interfaces~\cite{Saurel_2009}. Thus the seven-equation model
 can be relaxed locally to couple seamlessly with such a
-multi-dimensional, interface resolving code.
-
-Numerically, the mechanical relaxation coefficients $\mu_P$
+multi-dimensional, interface resolving code. Numerically, the mechanical relaxation coefficients $\mu_P$
 (pressure) and $\lambda_u$ (velocity) can be relaxed independently to
-yield solutions to useful, reduced models (as explained previously).  It
+yield solutions to useful, reduced models.  It
 is noted, however, that relaxation of pressure only by making $\mu_P$
 large without relaxing velocity will indeed give ill-posed and
 unstable numerical solutions, just as the classical six-equation
 two-phase model does, with sufficiently fine spatial resolution, as
-confirmed in~\cite{SEM,Herrard_2005}.
-
-Even though the implementation of the seven-equation two-phase
-model does not use
-the generalized approach of DEM \cite{SEM}, the interfacial pressure and velocity
-closures as well as the pressure and velocity relaxation coefficients
-of Equations~\eqref{E-R:83} to~\eqref{E-R:86} are utilized. \\
-
-A simple expression for the interphase
-mass flow rate is obtained from \cite{SEM}:
-\begin{align}
-  \nonumber
-  \Gamma = \Gamma_{vap}
-  &= \frac{h_{T,  liq} \left( T_{liq} - T_{int} \right) + h_{T,  vap} \left( T_{vap} - T_{int} \right)}{h_{vap,  int} - h_{liq,  int}}
-  \\
-  &= \frac{h_{T,  liq} \left( T_{liq} - T_{int} \right) + h_{T,  vap} \left( T_{vap} - T_{int} \right)}{L_v \left( T_{int} \right)}
-\end{align}
-where $L_v \left( T_{int} \right) = h_{vap,  int} - h_{liq,  int}$
-represents the latent heat of vaporization.  The interface
-temperature is determined by the saturation constraint
-$T_{int}=T_{sat}(P)$ with the appropriate pressure $P=\bar{P}_{int}$
-determined above, the interphase mass flow rate is thus determined.\\
-
-The set of eight equations given in \eqt{eq:liq-7-eqn-sect5} and in \eqt{eq:vap-7-eqn-sect5} is now reduced to seven which yields the multi-D seven-equation model. A set of seven waves is present in such a model: two acoustic waves and a contact wave for each phase supplanted by a volume fraction wave propagating at the interfacial velocity $\mbold u_{int}$. Considering a domain of dimension $\mathbb{D}$, the corresponding eigenvalues are the following for each phase $k$:
-% 
-\begin{align}
-&\lambda_1 = \mbold u_{int} \cdot \bar{\mbold n} \nonumber\\
-&\lambda_{2,k} = \mbold u_k \cdot \bar{\mbold n} - c_k \nonumber\\
-&\lambda_{3,k} = \mbold u_k \cdot \bar{\mbold n} + c_k \nonumber\\
-&\lambda_{d+3,k} = \mbold u_k \cdot \bar{\mbold n} \text{ for } d = 1 \dots \mathbb{D},\nonumber
-\end{align}
-%
-where $\bar{\mbold n}$ is a unit vector pointing to a given direction.
-For each phase $k$, an entropy equation can be derived when accounting only for the pressure and velocity relaxation terms (all of the terms proportional to the net mass transfer term $\Gamma$ and the interfacial heat transfer $Q_{int,k}$ are removed). The entropy function for a phase $k$ is denoted by $s_k$ and function of the density $\rho_k$ and the internal energy $e_k$. The derivation is detailed in APPENDIX and only the final result is recalled here when assuming that the phase $k$ is in interaction with a phase $j$:
+confirmed in~\cite{SEM,Herrard_2005}. For each phase $k$, an entropy equation can be derived when accounting only for the pressure and velocity relaxation terms (all of the terms proportional to the net mass transfer term $\Gamma$ are removed). The entropy function for a phase $k$ is denoted by $s_k$ and function of the density $\rho_k$ and the internal energy $e_k$. The derivation is detailed in APPENDIX and only the final result is recalled here:
 %
 \begin{align}\label{eq:ent-eqn-7-eqn-model}
 (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} &= \mu_P \frac{Z_k}{Z_k+Z_j} (P_j - P_k)^2 + \lambda_u \frac{Z_j}{Z_k+Z_j} (\mbold u_j -\mbold  u_k)^2 \nonumber
 \\
 & \frac{Z_k}{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k)+\frac{\grad \alpha_k}{|| \grad \alpha_k ||}(P_k-P_j)\right]^2,
 \end{align}
-where $Z_{k}$ denotes the phasic acoustic impedance and is defined as the product of the density and the speed of sound: $Z_k = \rho_k c_k$. The partial derivative of the entropy function $s_k$ with respect to the internal energy $e_k$, $(s_e)_k$, is defined proportional to the inverse of the temperature of phase $k$ as for the single phase Euler equations. The right hand-side of \eqt{eq:ent-eqn-7-eqn-model} is unconditionally positive since all terms are squared. Furthermore, \eqt{eq:ent-eqn-7-eqn-model} is valid for each phase $k=\left\{liq, vap \right\}$ and ensures positivity of the total entropy equation that is obtained by summing over the phases:
+The partial derivative of the entropy function $s_k$ with respect to the internal energy $e_k$, $(s_e)_k$, is defined proportional to the inverse of the temperature of phase $k$ as for the single phase Euler equations \cite{jlg}. The right hand-side of \eqt{eq:ent-eqn-7-eqn-model} is unconditionally positive since all terms are squared and thus, can be used to demonstrate the entropy minimum principle and derive the dissipative terms. Furthermore, \eqt{eq:ent-eqn-7-eqn-model} is valid for each both phases $\left\{k, j\right\}$ and ensures positivity of the total entropy equation that is obtained by summing over the phases:
 %
 \begin{equation}\label{eq:tot-ent-res-sct4}
-\sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} = \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \left( \partial_t s_k + \mbold u_k \cdot \grad s_k \right) \geq 0.
+\sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} = \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \left( \partial_t s_k + \mbold u_k \cdot \grad s_k \right) \geq 0 \nonumber .
 \end{equation}
 %
 Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates into the single phase entropy equation.
@@ -443,6 +435,8 @@ Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates into 
 \item emphasizes the fact that the regularization is valid for any EOS with convex entropy
 \item a few words about the parabolic regularization
 \end{itemize}
+%
+We now propose to derive a viscous regularization for the seven-equation model given in \eqt{eq:liq-7-eqn-sect5} by using the same method as for the multi-D Euler equation with/without variable area \cite{jlg, Marco_dissertation}. The method consists in adding perturbation terms to the system of equation under consideration, and re-derive the entropy equation whose sign is known to be positive to ensure uniqueness of the numerical solution \cite{Leveque}. Because of the addition of perturbation terms, the entropy equation is modified and contains extra terms of unknown sign. By carefully choosing a definition for each of the perturbation term, the sign of the entropy equation can be determined and proved positive. 
 %
 In this section, the dissipative terms for the multi-D seven-equation model \emph{with pressure and velocity relaxation source terms} are derived (the mass and energy transfer terms are omitted). The methodology proposed in  SECTION is followed. For clarity purpose, the seven-equation model with pressure and velocity relaxation terms is recalled when considering a phase $k$ in interaction with a second phase $j$:
 %
