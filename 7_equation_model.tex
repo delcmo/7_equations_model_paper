@@ -765,10 +765,11 @@ After multiplying by $\frac{\text{d} \eta (\alpha_k)}{\text{d} \alpha_k}$ and us
 The entropy residual, $R_{k}^\alpha$, is defined as the left hand side of \eqt{eq:vf-sem2-sct4} and is known to be peaked in the shock region and positive when assuming convexity of the entropy $\eta_k$ with respect to $\alpha_k$ \cite{Leveque}. Such a behavior is identical to the entropy residual $\resinew_k$ defined in \eqt{eq:ent_res-sem-sct4}, and will allow detection of the shock wave when used in the definition of the entropy viscosity coefficient $\beta_{e,k}$.
 %Because \eqt{eq:vf-sem2-sct4} is identical to \eqt{eq:weak_sol8_sct1b}, it is concluded that $R_{\alpha,k} \geq 0$ when assuming $\eta$ convex with respect to $\alpha_k$, which justifies the definition of the entropy viscosity viscosity coefficient $\beta_{e,k}$ given in \eqt{eq:def-beta-sen-sect4} based on \eqt{sec:evm_hyp_sc_sct1b}. The entropy function is taken equal to $\eta(\alpha_k) = \frac{\alpha_k^2}{2}$ which is convex.
 %
-At this point of the paper, the jumps and normalization parameters still have to be defined. More information about the jumps is provided in \sct{sec:solution_tech}. The normalization parameters are derived from a low-Mach asymptotic limit analysis which is the purpose of the next section.
+At this point of the paper, the definition of the viscosity coefficients are not finalized: the jumps and normalization parameters still have to be defined. Details regarding the definition of the jump will be given in \sct{sec:solution_tech}. The normalization parameters are derived from a low-Mach asymptotic limit analysis which is the purpose of the next section.
 %------------------------------------------------------------------------------------------------------
 \subsection{Low-Mach asymptotic limit of the seven-equation model}\label{sec:low-Mach-sem}
 %------------------------------------------------------------------------------------------------------
+Developing a numerical method for fluid equations require to investigate the low-Mach asymptotic limit. In this particular limit, numerical methods developed for transonic and supersonic flows usually fail due to ill-scaled dissipative terms. Then, a fix can be found by performing a low-Mach asymptotic limit to ensure well-scaled dissipative terms for a wide range of Mach numbers. Then, it is proposed to perform a low-Mach asymptotic limit to derive an expression for the phasic normalization parameters introduced in \sct{sec:visc-coeff-sem}. 
 %
 %In order to have a complete definition for the viscosity coefficients $\beta_k$, $\mu_k$ and $\kappa_k$, the normalization parameters introduced in the definition of the entropy viscosity coefficients $\beta_{e,k}$, $\mu_{e,k}$ and $\kappa_{e,k}$ have to be determined. In SECTION, the normalization parameters were derived from the non-dimensionalized multi-D Euler equations in order to obtain well-scaled dissipative terms. Thus, it is proposed to follow the same method to derive the three normalization parameters $\norm_{P,k}^\mu$, $\norm_{P,k}^\kappa$ and $\norm_{k}^\beta$ used in the definition of the viscosity coefficients involved in the viscous regularization of the seven-equation model. For simplicity, the Ideal Gas equation of state is considered through the derivations.
 %
@@ -938,15 +939,15 @@ where $\Delta t^{n} = t^n-t^{n-1}$ and $\Delta t^{n+1} = t^{n+1}-t^{n}$.
 \subsection{Boundary conditions} \label{sec:bc}
 %---------------------------------------------------------------------------------------------------
 Boundary conditions are implemented by performing a characteristic decomposition to compute the 
-appropriate flux at the boundaries.
+appropriate flux at the boundaries. The numerical results presented in \sct{sec:results} were all obtained by using stagnation and static pressure boundary conditions for the inlet and outlet, respectively.
 Our implementation of the subsonic boundary conditions is inspired by the method described in \cite{SEM} 
-and was adapted for a time implicit solver. Neumann boundary conditions are used for all of the 
-boundary types, except for the inlet supersonic boundary that are strongly imposed with Dirichlet boundary conditions.
+and was adapted for a time implicit solver \cite{Marco_dissertation}. 
+\tcb{I will give more details in the future}
 %\tcr{say a bit more, give 1-2 sentences to describe how to impose subsonic/supersonic inlet/outlet BCs}. \tcb{Is it enough?}
 
-For each numerical solution presented in \sct{sec:results}, the type of boundary conditions used 
-will be specified and taken among the following: supersonic inlet, subsonic inlet (stagnation pressure boundary), 
-subsonic outlet, and supersonic outlet. 
+%For each numerical solution presented in \sct{sec:results}, the type of boundary conditions used 
+%will be specified and taken among the following: supersonic inlet, subsonic inlet (stagnation pressure boundary), 
+%subsonic outlet, and supersonic outlet. 
 %and subsonic inlet \tcr{???} (static pressure boundary). \\
 The artificial diffusion coefficient $D(\mathbf  U)$ is set to zero at the boundary of the computational 
 domain so that the boundary term 
