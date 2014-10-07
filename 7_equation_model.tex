@@ -413,12 +413,12 @@ confirmed in~\cite{SEM,Herrard_2005}. For each phase $k$, an entropy equation ca
 \begin{align}\label{eq:ent-eqn-7-eqn-model}
 (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} &= \mu_P \frac{Z_k}{Z_k+Z_j} (P_j - P_k)^2 + \lambda_u \frac{Z_j}{Z_k+Z_j} (\mbold u_j -\mbold  u_k)^2 \nonumber
 \\
-& \frac{Z_k}{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k)+\frac{\grad \alpha_k}{|| \grad \alpha_k ||}(P_k-P_j)\right]^2,
+& \frac{Z_k}{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k)+\frac{\grad \alpha_k}{|| \grad \alpha_k ||}(P_k-P_j)\right]^2.
 \end{align}
 The partial derivative of the entropy function $s_k$ with respect to the internal energy $e_k$, $(s_e)_k$, is shown to be proportional to the inverse of the temperature of phase $k$, alike for the single phase Euler equations \cite{jlg, Marco_dissertation}. The right hand-side of \eqt{eq:ent-eqn-7-eqn-model} is unconditionally positive since all terms are squared and thus, is used to demonstrate the entropy minimum principle and derive the dissipative terms. Furthermore, \eqt{eq:ent-eqn-7-eqn-model} is valid for both phases $\left\{k, j\right\}$ and ensures positivity of the total entropy equation that is obtained by summing over the phases:
 %
 \begin{equation}\label{eq:tot-ent-res-sct4}
-\sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} = \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \left( \partial_t s_k + \mbold u_k \cdot \grad s_k \right) \geq 0 \nonumber .
+\sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} = \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \left( \partial_t s_k + \mbold u_k \cdot \grad s_k \right) \geq 0  .
 \end{equation}
 %
 Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates into the single phase entropy equation \cite{SEM, Marco_dissertation}.
@@ -505,7 +505,7 @@ In order to derive the internal energy equation, the velocity equation is obtain
 %
 \begin{align}\label{eq:vel-7-eqn-model-sect4}
 \alpha_k \rho_k  A \left[ \partial_t \mbold u_k + \mbold u_k \cdot \div \mbold u_k \right]  + \div \left( \alpha_k \rho_k A P_k \mathbb{I} \right) &=\nonumber\\
-\underline{\underline{\alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda \left( \mbold u_j - \mbold u_k \right)}} &+ \div \mbold g_k - \mbold u_k \otimes \mbold f_k
+\alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda \left( \mbold u_j - \mbold u_k \right) &+ \div \mbold g_k - \mbold u_k \otimes \mbold f_k
 \end{align}
 %
 After multiplying \eqt{eq:vel-7-eqn-model-sect4} by the velocity vector $\mbold u_k$, the resulting kinetic energy equation is subtracted from the total energy equation to obtain the internal energy equation for phase $k$:
@@ -532,6 +532,8 @@ where it was assumed that the entropy of phase $k$ satisfies the second thermody
 & (s_e)_k = T_k^{-1} \text{ and } (s_\rho)_k = - (s_e)_k P_k \frac{\text{d}\rho_k}{\rho_k^2}. \nonumber
 \end{align}
 % 
+\eqt{eq:2nd-therm-laws-sect4} is also used to compute the partial derivative of the entropy with respect to the density, $(s_\rho)_k$, and the internal energy, $(s_e)_k$, if needed.
+
 Following the methodology applied in \cite{jlg, Marco_paper_low_mach}, the right-hand side of \eqt{eq:ent-res-7-eqn-diss-terms} can be further simplified by using the following expression
 for the dissipative terms $\mbold f_k$,  $\mbold g_k$ and $\mbold h_k$:
 %
@@ -655,7 +657,7 @@ At this point, some remarks are in order:
     definition provided in \eqt{eq:2nd-therm-laws-sect4} and are functions of the thermodynamic
     variables: pressure, temperature and density.}
 
-\item {All of the dissipative terms are chosen to be proportional to the the void
+\item {All of the dissipative terms are chosen to be proportional to the void
     fraction $\alpha_k$ and the cross-sectional area $A$, but the one in the volume fraction equation that is only proportional to $A$. For instance, $\alpha_k A \grad \rho_k$ is the
     flux of the dissipative term in the continuity equation through the phasic area, $\alpha_k A$, seen
     by the phase $k$. When one of the phases disappears, the dissipative terms
@@ -747,10 +749,10 @@ Using the new expression of the entropy residual $\resinew_k$, we now propose a 
 It remains to define the entropy viscosity coefficient $\beta_e$. For the purpose of this paragraph, let us consider the scalar volume fraction equation and assume that the interface velocity $\mbold u_{int}$ is given. Because it is a scalar hyperbolic equation, it is proposed to define the entropy viscosity coefficients on the same model as what is done for Burger's equation \cite{jlg1, jlg2}. Thus, the entropy viscosity viscosity coefficient $\beta_e$ is defined as a function of an entropy residual, $R_{k}^\alpha$, derived from the volume fraction equation for phase $k$, and the jump of a function of the volume fraction, $J_k^\alpha$, as shown in \eqt{eq:def-beta-sen-sect4}.
 %
 \begin{align}\label{eq:def-beta-sen-sect4}
-\beta_{e,k}( \mbold r, t) = h^2 \frac{\max\left( | R_{k}^\alpha(\mbold r_q,t) |\,, || J_k^\alpha|| \right)}{\norm_{k}^\beta} \,
+\beta_{e,k}( \mbold r, t) = h^2 \frac{\max\left( | R_{k}^\alpha(\mbold r_q,t) |\,, || J_k^\alpha|| \right)}{\norm_{\alpha, k}^\beta} \,
 \end{align}
 %
-We also introduced a normalization parameter, $\norm_{k}^\beta$, whom definition will be further investigated. To derive the entropy residual, $R_{\alpha,k}$, we consider the volume fraction equation for phase $k$ with its viscous regularization and assume the existence of an entropy denoted by $\eta_k(\alpha_k)$ \cite{Leveque}:
+We also introduced a normalization parameter, $\norm_{\alpha,k}^\beta$, whom definition will be further investigated. To derive the entropy residual, $R_{\alpha,k}$, we consider the volume fraction equation for phase $k$ with its viscous regularization and assume the existence of an entropy denoted by $\eta_k(\alpha_k)$ \cite{Leveque}:
 %
 \begin{equation}\label{eq:vf-sem-sct4}
 \partial_t \left(A \alpha_k \right) + A \mbold u_{int} \cdot \grad \alpha_k = \div \left( \beta_k A \grad \alpha_k \right)
@@ -769,7 +771,81 @@ At this point of the paper, the definition of the viscosity coefficients are not
 %------------------------------------------------------------------------------------------------------
 \subsection{Low-Mach asymptotic limit of the seven-equation model}\label{sec:low-Mach-sem}
 %------------------------------------------------------------------------------------------------------
-Developing a numerical method for fluid equations require to investigate the low-Mach asymptotic limit. In this particular limit, numerical methods developed for transonic and supersonic flows usually fail due to ill-scaled dissipative terms. Then, a fix can be found by performing a low-Mach asymptotic limit to ensure well-scaled dissipative terms for a wide range of Mach numbers. Then, it is proposed to perform a low-Mach asymptotic limit to derive an expression for the phasic normalization parameters introduced in \sct{sec:visc-coeff-sem}. 
+Developing a numerical method for fluid equations require to investigate the low-Mach asymptotic limit. In this particular limit, numerical methods developed for transonic and supersonic flows usually fail due to ill-scaled dissipative terms. A fix is found by performing a low-Mach asymptotic limit to ensure well-scaled dissipative terms \cite{LowMach1, LowMach2, LowMach3}. Then, it is proposed to perform a low-Mach asymptotic limit to derive an expression for the phasic normalization parameters introduced in \sct{sec:visc-coeff-sem}. Two limit $1$-D cases are considered: the relaxation coefficients are set to (i) zero and (ii) to very large values. In the former case, the two phases do not interact and each phase simply flows through a given geometry of pseudo cross-section $\alpha_k A$. In the later case, the infinite relaxation coefficients make the seven-equation two-phase model degenerates into the five-equation model of Kapila by ensuring pressure and velocity equilibrium. For each case (i) and (ii), two limit cases (a) and (b) will be considered to determine appropriate scaling for the entropy 
+viscosity coefficients so that the dissipative terms remain well-scaled for two limit cases: 
+(a) the isentropic low-Mach limit where the seven-equation model degenerate to an incompressible system of 
+equations in the low-Mach limit and 
+(b) the non-isentropic limit with formation of shocks. 
+In the low-Mach limit, the isentropic limit of the seven-equation model with viscous regularization should yield incompressible 
+fluid flow solutions, namely, that the phasic pressure fluctuations are of the 
+order $M^2_k$ and that the velocity satisfies the divergence constraint $\div ( \vec{u}_0 )_k = 0$ 
+\cite{LowMach1, LowMach2, LowMach3}. For non-isentropic situations, shocks may form for any 
+value of Mach number and the minimum entropy principle should still be satisfied so that numerical 
+oscillations, if any, be controlled by the entropy viscosity method independently of the value of the Mach number. A total of four different cases will be studied and for each case the scaling of the numerical adimensional numbers will be given along with the definition of the normalization parameters defined in \sct{sec:visc-coeff-sem} for each viscosity coefficients.
+
+The first step in the study of the limit cases (i) and (ii) is to re-write each system of equations in a non-dimensional manner. To do so, the following variables are introduced for each phase $k$:
+%
+\begin{multline}
+\label{eq:norm_param}
+\rho_k^*   = \frac{\rho_k}{\rho_{k,\infty}}           ,\
+u_k^*      = \frac{u_k}{u_{k,\infty}}                 ,\
+P_k^*      = \frac{P_k}{\rho_{k,\infty} c^2_{k,\infty}}   ,\
+E_k^*      = \frac{E_k}{c^2_{k,\infty} }              ,\
+x^* = \frac{x}{L_\infty}                      ,\\
+t_k^* = \frac{t_k}{L_\infty / u_{k,\infty}}           ,\
+\mu_k^*    = \frac{\mu_k}{\mu_{k,\infty}}             ,\
+\kappa_k^* = \frac{\kappa_k}{\kappa_{k,\infty}}       ,\
+P_{int}^*    = \frac{P_{int}}{P_{int,\infty}}             ,\\
+u_{int}^* = \frac{u_{int}}{u_{int,\infty}}       ,\
+\bar{P}_{int}^*    = \frac{\bar{P}_{int}}{\bar{P}_{int,\infty}}             ,\
+\bar{u}_{int}^* = \frac{\bar{u}_{int}}{\bar{u}_{int,\infty}}       ,\
+\end{multline}
+%
+where  the subscript $\infty$ denote the far-field or stagnation quantities and the superscript $*$ stands for the non-dimensional variables. The far-field reference quantities are chosen such that the dimensionless flow quantities are of order 1. The stagnation quantities for the pressure and velocity interfacial variables will be specified for each case. The reference Mach number is given by
+%
+\begin{equation}
+M_{k,\infty} = \frac{u_{k,\infty}}{c_{k,\infty}}.
+\end{equation}
+%
+We start the low-Mach analysis with case (i) and give the system of equations with viscous regularization that is used when assuming zero relaxation coefficients:
+% 
+\begin{subequations}\label{eq:sev_equ_case_one}
+\begin{align}\label{eq:sev_equ-with-diss-terms-cont_one}
+\partial_t \left( \alpha_k \rho_k A \right) + \div \left( \alpha_k \rho_k \mbold u_k A \right) = \div \left( \kappa_k \grad \rho_k \right)
+\end{align}
+\begin{align}\label{eq:sev_equ-with-diss-terms-mom_one}
+\partial_t \left( \alpha_k \rho_k \mbold u_k A \right) + \div \left[ \alpha_k A \left( \rho_k \mbold u_k \otimes \mbold u_k + P_k \mathbb{I} \right) \right] &=\nonumber\\
+\alpha_k P_k \grad A + P_{int} A \grad \alpha_k + \div \left[ \mu_k \rho_k \grad^s \vec{u} \right. &+ \left.\kappa_k \vec{u}_k \otimes \grad \rho_k \right]
+\end{align}
+\begin{align}\label{eq:sev_equ-with-diss-terms-ener_one}
+\partial_t \left( \alpha_k \rho_k E_k A \right) + \div \left[ \alpha_k A \mbold u_k \left( \rho_k E_k + P_k \right) \right] &= \nonumber \\
+P_{int} A \mbold u_{int} \cdot \grad \alpha_k -
+&+ \div \left( \mbold h_k + \mbold u \cdot \mbold g_k \right)
+\end{align}
+\begin{align}\label{eq:sev_equ-with-diss-terms-vf_one}
+\partial_t \left( \alpha_k  A\right) + \mbold u_{int} A \grad \alpha_k =  \div \mbold l_k
+\end{align}
+\end{subequations}
+%
+Then, the scaled equations for the phase $k$ with viscous regularization are:
+% 
+\begin{subequations}\label{eq:sev_equ_case_one_scaled}
+\begin{align}\label{eq:sev_equ-with-diss-terms-cont_case_one_scaled}
+\partial_t \left( \alpha_k \rho_k A \right) + \div \left( \alpha_k \rho_k \mbold u_k A \right) = \frac{1}{\Pe_{k,\infty}}\div \left( \kappa_k \grad \rho_k \right)
+\end{align}
+\begin{align}\label{eq:sev_equ-with-diss-terms-mom_case_one_scaled}
+\partial_t \left( \alpha_k \rho_k \mbold u_k A \right) + \div \left[ \alpha_k A \left( \rho_k \mbold u_k \otimes \mbold u_k + P_k \mathbb{I} \right) \right] &=\nonumber\\
+\alpha_k P_k \grad A + P_{int} A \grad \alpha_k &+ \div \mbold g_k
+\end{align}
+\begin{align}\label{eq:sev_equ-with-diss-terms-ener_case_one_scaled}
+\partial_t \left( \alpha_k \rho_k E_k A \right) + \div \left[ \alpha_k A \mbold u_k \left( \rho_k E_k + P_k \right) \right] &= \nonumber \\
+P_{int} A \mbold u_{int} \cdot \grad \alpha_k -
+&+ \div \left( \mbold h_k + \mbold u \cdot \mbold g_k \right)
+\end{align}
+\begin{align}\label{eq:sev_equ-with-diss-terms-vf_case_one_scaled}
+\partial_t \left( \alpha_k  A\right) + \mbold u_{int} A \grad \alpha_k =  \div \mbold l_k
+\end{align}
+\end{subequations}
 %
 %In order to have a complete definition for the viscosity coefficients $\beta_k$, $\mu_k$ and $\kappa_k$, the normalization parameters introduced in the definition of the entropy viscosity coefficients $\beta_{e,k}$, $\mu_{e,k}$ and $\kappa_{e,k}$ have to be determined. In SECTION, the normalization parameters were derived from the non-dimensionalized multi-D Euler equations in order to obtain well-scaled dissipative terms. Thus, it is proposed to follow the same method to derive the three normalization parameters $\norm_{P,k}^\mu$, $\norm_{P,k}^\kappa$ and $\norm_{k}^\beta$ used in the definition of the viscosity coefficients involved in the viscous regularization of the seven-equation model. For simplicity, the Ideal Gas equation of state is considered through the derivations.
 %
