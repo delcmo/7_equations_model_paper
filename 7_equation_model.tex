@@ -58,6 +58,7 @@
 %% The amsthm package provides extended theorem environments
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{mathrsfs}
 % more math
 \usepackage{amsfonts}
 \usepackage{amstext}
@@ -550,9 +551,9 @@ for the dissipative terms $\mbold f_k$,  $\mbold g_k$ and $\mbold h_k$:
 where $\mu_k$ is a positive viscosity coefficient for phase $k$. Note the area function $A$ in the definition of $\mbold g_k$. Substituting the expression of the dissipative term given in \eqt{eq:def-diss-terms-sect4} into \eqt{eq:ent-res-7-eqn-diss-terms}, it yields:
 %
 \begin{align}\label{eq:ent-res-7-eqn-diss-terms2}
-&\alpha_k \rho_k A \frac{Ds_k}{Dt} = \nonumber \\
-&\underbrace{\left(s_e\right)_k \alpha_k \rho_k A \mu_k \mathbb{F}(\mbold u_k) : \grad \mbold u_k}_{\mathcal{R}_1} +
-\underbrace{\left[ \div \tilde{\mbold h}_k  - e_k \div \tilde{\mbold f}_k  \right] + (\rho s_\rho)_k \div \tilde{\mbold f}_k}_{\mathcal{R}_2} + \nonumber \\
+&\alpha_k \rho_k A \frac{Ds_k}{Dt} = \underbrace{\div \left[ (s_e)_k\tilde{\mbold h}_k + \Big( e_k( s_e)_k - \rho_k (s_\rho)_k \Big) \tilde{\mbold f}_k \right]}_{{\mathcal{R}_0}} \nonumber \\
+&\underbrace{ \left(s_e\right)_k \alpha_k \rho_k A \mu_k \mathbb{F}(\mbold u_k) : \grad \mbold u_k}_{\mathcal{R}_1} 
+\underbrace{-\tilde{\mbold h}_k \cdot \grad (s_e)_k  - \tilde{\mbold f}_k \cdot \grad \left[ \right( e s_e \left)_k - (\rho s_\rho)_k \right]}_{\mathcal{R}_2} + \nonumber \\
 &\underbrace{(s_e)_k \div \left( \rho_k e_k \mbold l_k \right) -  (s_e)_k e_k \div \left( \rho_k \mbold l_k \right) + \rho_k (s_\rho)_k \div \left( \rho_k \mbold l_k \right) 
   - \rho_k^2 (s_\rho)_k \div \mbold l_k}_{\mathcal{R}_3}.
 \end{align}
@@ -563,7 +564,7 @@ We now split the right-hand-side of \eqt{eq:ent-res-7-eqn-diss-terms2} into thre
 After a few lines of algebra, the third term ${\mathcal{R}_3}$ can be recast as a function of the gradient of the entropy as follows:
 \begin{align}
  \label{eq:ent-R3-sct4}
-  \mathcal{R}_2  =  \rho_k A \mbold l_k \cdot \grad s_k.
+  \mathcal{R}_3  =  \rho_k A \mbold l_k \cdot \grad s_k.
 \end{align} 
 One of the assumptions made in the entropy minimum principle is to that the entropy 
 is at a minimum which implies that its gradient is null. Because of this, it follows that
@@ -574,17 +575,23 @@ equation \eqt{eq:sev_equ-with-diss-terms-vf}. It will be explained later in this
 We now focus on the term denoted by $\mathcal{R}_2$, that is found identical to the right-hand-side of the single phase entropy equation obtained from the multi-D Euler equations (see \cite{jlg, Marco_paper_low_mach}. Thus, the term $\mathcal{R}_2$ is known to be positive when (i) assuming concavity of the entropy function $s_k$ with respect to the internal energy $e_k$ and the specific volume $1 / \rho_k$ (or convexity of $-s_k$) and (ii) choosing the following definitions for the dissipative terms $\tilde{h}_k$ and $\tilde{f}_k$:
 %
 \begin{subequations}
-\begin{align}
+\begin{align}\label{eq:def_visc}
 &\tilde{\mbold f}_k = \alpha_k A \kappa_k \grad \rho_k \\
 &\tilde{\mbold h}_k = \alpha_k A \kappa_k \grad \left( \rho e \right)_k,
 \end{align}
 \end{subequations}
 %  
-where $\kappa_k$ is another positive viscosity coefficient. The entropy equation can now be written in its final form:
+where $\kappa_k$ is another positive viscosity coefficient. In addition, using \eqt{eq:def_visc}, the term $\mathcal{R}_0$ can be recast as a function of the phasic entropy as follows: 
+%
+\begin{equation}
+\mathcal{R}_0 = \div \left( \alpha_k A \kappa_k \rho_k \grad s_k \right)
+\end{equation}
+%
+The entropy equation can now be written in its final form:
 %
 \begin{align}\label{eq:ent-res-7-eqn-diss-terms3}
-&\alpha_k \rho_k A \frac{Ds_k}{Dt} =  \mbold f_k \cdot \grad s_k + \div \left( \alpha_k \rho_k A \grad s_k \right)  \nonumber\\
-&- \alpha_k A \kappa_k \mathbf{Q}_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k,
+&\alpha_k \rho_k A \frac{Ds_k}{Dt} =  \mbold f_k \cdot \grad s_k + \div \left( \alpha_k A \rho_k \kappa_k  \grad s_k \right)  \nonumber\\
+&- \alpha_k \rho_k A \kappa_k \mathbf{Q}_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k,
 \end{align}
 %
 where $\mathbf{Q}_k$ is a negative semi-definite quadratic form under the assumption of $s_k$ being concave with respect to $e_k$ and $1/ \rho_k$, and defined as:
@@ -596,7 +603,7 @@ where $\mathbf{Q}_k$ is a negative semi-definite quadratic form under the assump
 \grad e_k 
 \end{bmatrix}
 \text{and } \Sigma_k = \begin{bmatrix}
-       \partial_{\rho_k} (\rho^2_k \partial_{\rho_k} s_k) & \partial_{\rho_k,e_k} s_k  \\[0.3em]
+       \rho_k^{-2} \partial_{\rho_k} (\rho^2_k \partial_{\rho_k} s_k) & \partial_{\rho_k,e_k} s_k  \\[0.3em]
        \partial_{\rho_k,e_k} s_k & \partial_{e_k,e_k} s_k           \\[0.3em]
      \end{bmatrix}. \nonumber 
 \end{eqnarray}
@@ -689,13 +696,13 @@ However, the definition of $\mbold l_k$ proposed in \eqt{eq:def-l-k-wrong-sect4}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A all-speed formulation of the Entropy Viscosity Method}\label{sec:low-Mach}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{itemize}
-\item non-dimensionalize the equations but use $P_\infty$ for the pressure instead of $(\rho c^2)_\infty$
-\item introduce a new Pechlet number for $\beta$: its behavior should be the same as the Pechlet number for $\kappa$
-\item two cases: zero and infinite relaxation coefficients
-\item derive the normalization parameters for the isentropic and non-isentropic flows
-\item discussion about the 
-\end{itemize}
+%\begin{itemize}
+%\item non-dimensionalize the equations but use $P_\infty$ for the pressure instead of $(\rho c^2)_\infty$
+%\item introduce a new Pechlet number for $\beta$: its behavior should be the same as the Pechlet number for $\kappa$
+%\item two cases: zero and infinite relaxation coefficients
+%\item derive the normalization parameters for the isentropic and non-isentropic flows
+%\item discussion about the 
+%\end{itemize}
 %
 When working with artificial dissipative numerical stabilization methods, great care needs to be carried to the definition of the viscosity coefficients that will determine the accuracy of the method. Generally speaking, sufficient artificial viscosity should be added into the shock and discontinuity regions to prevent spurious oscillations from forming, while little dissipation is added when the numerical solution is smooth. Such requirements can be achieved by tracking shocks and discontinuities in the numerical solutions. When dealing with fluid equations, the low-mach asymptotic limit also has to be accounted for in the definition of the viscosity coefficients in order to ensure well-scaled dissipative terms \cite{LowMach1, LowMach2, LowMach3}. Also, because each phase can experience different flow regime (the gas phase is supersonic whereas the liquid phase remains subsonic), it is chosen to work with three distinct viscosity coefficients for each phase. The purpose of this section is to derive a definition for the phasic viscosity coefficients, $\mu_k$, $\kappa_k$ and $\beta_k$, that ensures the correct numerical solution in the low-mach limit, can accurately resolves shocks in transonic and supersonic flows and is also consistent with the definition of the viscosity coefficients devised for the single-phase Euler equations in the limit $\alpha_k \to 1$. As a result, the approach used in \cite{Marco_paper_low_mach} will be applied here in this section. 
 %------------------------------------------------------------------------------------------------------
@@ -1320,7 +1327,54 @@ Thus, using results from \eqt{eq:ent3}, \eqt{eq:ent4}, \eqt{eq:ent5} and \eqt{eq
 & \frac{Z_k}{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k)+\frac{\grad \alpha_k}{|| \grad \alpha_k ||}(P_k-P_j)\right]^2. \nonumber
 \end{align}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Compatibility of the viscous regularization with the generalized Harten entropies}\label{app:harden}
+\section{Compatibility of the viscous regularization for the seven-equation two-phase model with the generalized Harten entropies}\label{app:harden}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+We investigate in this appendix whether the viscous regularization of the seven-equation two-phase model derived in \sct{sec:visc-regu} is compatible with some or all generalized entropy identified in Harten et al. \cite{Harten}. Considering the single-phase Euler equations, Harten et al. \cite{Harten} demonstrated that a function $\rho \mathscr{H}(s)$ is called a generalized entropy and strictly concave if $f$ is twice differential and
+%
+\begin{equation}\label{eq:generalized_ent}
+\mathscr{H}' (s)  \geq 0, \ \ \ \ \mathscr{H}'(s)c_p^{-1} - \mathscr{H}'' \geq 0, \ \forall \left( \rho, e \right) \in \mathbb{R}_+^2 \ ,
+\end{equation}
+%
+where $c_p \left( \rho, e \right) = T \partial_T s \left( \rho, T \right)$ is the specific heat at constant pressure. Because the seven-equation two-phase model was initially derived by assuming that each phase obeys the single-phase Euler equation, we want to investigate whether the above property still holds when considering the seven-equation model with viscous regularization. To do so, we consider a phasic generalized entropy, $f_k(s_k)$ and a phasic specific heat at constant pressure, $c_{p,k} \left( \rho_k, e_k \right) = T_k \partial_{T_k} s_k \left( \rho_k, T_k \right)$ characterized by \eqt{eq:generalized_ent}. The objective is to find an entropy inequality verified by $\rho_k \mathscr{H}_k(s_k)$.
+
+We start from the entropy inequality verified by $s_k$,
+%
+\begin{align}\label{eq:ent-res-7-eqn-diss-terms-app}
+&\alpha_k \rho_k A \frac{Ds_k}{Dt} =  \mbold f_k \cdot \grad s_k + \div \left( \alpha_k A \rho_k \kappa_k  \grad s_k \right)  \nonumber\\
+&- \alpha_k \rho_k A \kappa_k \mathbf{Q}_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k.
+\end{align}
+%
+%Recalling the definition of $f_k = \alpha_k A \kappa_k \grad \rho_k + A \rho_k \beta_k \grad \alpha_k $, 
+\eqt{eq:ent-res-7-eqn-diss-terms-app} is multiplied by $\mathscr{H}'(s)$ to yield:
+%
+\begin{align}\label{eq:ent-res-7-eqn-diss-terms-app2}
+\alpha_k \rho_k A \frac{D\mathscr{H}_k(s_k)}{Dt} &= \div \left( \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) \right) - \mathscr{H}_k''(s_k) \alpha_k A \kappa_k \rho_k | \grad s_k |^2 + \nonumber\\
+&\mathscr{H}_k'(s_k) \mbold f_k \cdot \grad s_k - \mathscr{H}_k'(s_k)\alpha_k \rho_k A \kappa_k \mathbf{Q}_k + \nonumber \\
+& \mathscr{H}_k'(s_k)(s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k.
+\end{align}
+%
+Let us now multiply the continuity equation of phase $k$ by $\mathscr{H}_k (s_k)$ and add the result to the above equation to obtain:
+%
+\begin{align}\label{eq:ent-res-7-eqn-diss-terms-app3}
+\partial_t \left( \alpha_k \rho_k A \mathscr{H}_k(s_k)\right) + \div \left( \alpha_k \rho_k \mbold u_k A \mathscr{H}_k(s_k) \right)  &- \nonumber\\
+\div \left[ \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) + \alpha_k A \kappa_k \mathscr{H}_k (s_k) \grad \rho_k  \right. & \left. + A \kappa_k \rho_k \mathscr{H}_k (s_k) \grad \alpha_k\right] = \nonumber \\
+ \underbrace{-\mathscr{H}_k''(s_k) \alpha_k A \kappa_k \rho_k | \grad s_k |^2  - \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k  \mathbf{Q}_k}_{\mathbb{T}_0} &+\nonumber \\
+\underbrace{ \mathscr{H}_k'(s_k)(s_e)_k  \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k}_{\mathbb{T}_1} & .
+\end{align}
+%
+Alike in \sct{sec:visc-regu}, the left-hand side of \eqt{eq:ent-res-7-eqn-diss-terms-app3} is split into two residuals denoted by $\mathbb{T}_0$ and $\mathbb{T}_1$ in order to study the sign of each of them. We start by studying the sign of $\mathbb{T}_1$ that is positive since it is assumed that $ \mathscr{H}_k'(s_k) \geq 0$. We now investigate the sign of $\mathbb{T}_0$. Using \eqt{eq:generalized_ent}, it is obtained:
+%
+\begin{equation}\label{eq:new_quad_form}
+- \mathbb{T}_0 \leq \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k \left( c_{p,k}^{-1} |\grad s_k|^2 +  \mathbf{Q}_k\right) \ .
+\end{equation}
+%
+The right-hand side of \eqt{eq:new_quad_form} is a quadratic form that was already defined in Appendix 5 of \cite{jlg} and recast under the matricial form $X^t_k \mathbb{S} X_k$ where $\mathbb{S}$ is a $2 \times 2$ matrix and the vector $X_k$ is defined in \sct{sec:visc-regu}. In \cite{jlg}, the matrix $\mathbb{S}$ is proved to be negative semi-definite which allows us to conclude that $-\mathbb{T}_0$ is of the same sign using \eqt{eq:new_quad_form}. Then, knowing the sign of the two residuals $\mathbb{T}_0$ and $\mathbb{T}_1$, it is concluded that:
+%
+\begin{align}\label{eq:ent-res-7-eqn-diss-terms-app4}
+\partial_t \left( \alpha_k \rho_k A \mathscr{H}_k(s_k)\right) + \div \left( \alpha_k \rho_k \mbold u_k A \mathscr{H}_k(s_k) \right)  &- \nonumber\\
+\div \left[ \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) + \alpha_k A \kappa_k \mathscr{H}_k (s_k) \grad \rho_k  \right. & \left. + A \kappa_k \rho_k \mathscr{H}_k (s_k) \grad \alpha_k\right] \geq 0 \ ,\nonumber 
+\end{align}
+%
+which allows us to conclude that an entropy inequality is satisfied for all generalized entropies $\rho_k \mathscr{H}_k (s_k)$ when using the viscous regularization derived in \sct{sec:visc-regu} for the seven-equation two-phase model. Note that the above inequality holds for the total entropy of the system when summing over the phases.
 \end{appendices}
 \end{document}
