@@ -264,10 +264,10 @@ The multi-D seven-equation two-phase model presented in this paper is obtained b
   % liquid total energy
   \frac{\partial \left( \alpha \rho E \right)_{k} A}{\partial t}
   + \div \left[ \alpha_{k} \mbold u_{k} A \left( \rho E + P \right)_{k} \right]
-  &= P_{int} \mbold u_{int} A \grad \alpha_{k} - \bar{P}_{int} A \mu_P (P_{k} - P_{j})
+  &= P_{int} A \mbold u_{int} \cdot \grad \alpha_{k} - \bar{P}_{int} A \mu_P (P_{k} - P_{j})
         \nonumber
   \\
-  + \bar{\mbold u}_{int} A \lambda_u (\mbold u_{j} - \mbold u_{k})
+  + A \lambda_u \bar{\mbold u}_{int} \cdot (\mbold u_{j} - \mbold u_{k})
 &  + \Gamma A_{int} \left( \frac{P_{int}}{\rho_{int}} - H_{k, int} \right) A
 %\nonumber 
 %\\
@@ -465,7 +465,7 @@ In order to apply the entropy viscosity method, perturbation terms are added to 
 %
 \begin{subequations}\label{eq:sev_equ-with-diss-terms}
 \begin{align}\label{eq:sev_equ-with-diss-terms-vf}
-\partial_t \left( \alpha_k  A\right) + \mbold u_{int} A \grad \alpha_k = A \mu_P \left( P_k - P_j \right) + \div \mbold l_k
+\partial_t \left( \alpha_k  A\right) + A \mbold u_{int} \cdot \grad \alpha_k = A \mu_P \left( P_k - P_j \right) + \div \mbold l_k
 \end{align}
 \begin{align}\label{eq:sev_equ-with-diss-terms-cont}
 \partial_t \left( \alpha_k \rho_k A \right) + \div \left( \alpha_k \rho_k \mbold u_k A \right) = \div \mbold f_k
@@ -492,7 +492,7 @@ where $\mbold f_k$, $\mbold g_k$, $\mbold h_k$ and $\mbold l_k$ are the phasic p
 \label{eq:chain_rule-sct4}
 \frac{Ds_k}{Dt} = \left( s_{\rho} \right)_k \frac{D \rho_k}{Dt} + \left( s_{e} \right)_k \frac{D e_k}{Dt} 
 \end{equation}
-where $\frac{D \cdot}{Dt} = \partial_t (\cdot) + \mbold u \cdot \grad (\cdot)$ is the material derivative. The terms $(s_e)_k$ and $(s_{\rho})_k$ denote the partial derivative of the entropy $s_k$ with respect to $e_k$ and $\rho_k$, respectively.
+where $\frac{D(\cdot) }{Dt} = \partial_t (\cdot) + \mbold u \cdot \grad (\cdot)$ is the material derivative. The terms $(s_e)_k$ and $(s_{\rho})_k$ denote the partial derivative of the entropy $s_k$ with respect to $e_k$ and $\rho_k$, respectively.
 \item isolate the terms of interest and choose an appropriate expression for each of the perturbation terms in order to ensure positivity of the new term in the right-hand side.
 \end{enumerate}
 %
@@ -513,7 +513,7 @@ After multiplying \eqt{eq:vel-7-eqn-model-sect4} by the phasic velocity vector $
 %
 \begin{align}\label{eq:int-ener-7-eqn-model-sect4}
 \alpha_k \rho_k  A \left[ \partial_t \mbold e_k + \mbold u_k \cdot \div \mbold e_k \right]  &+ \alpha_k \rho_k A P_k \grad \mbold u_k =\nonumber\\
-&\underline{\underline{P_{int} A \left(\mbold u_{int}-\mbold u_k \right) \cdot \grad \alpha_k}} -  \underline{\underline{\alpha_k P_k \mbold u_k \grad A}} \nonumber \\ 
+&\underline{\underline{P_{int} A \left(\mbold u_{int}-\mbold u_k \right) \cdot \grad \alpha_k}} -  \underline{\underline{\alpha_k P_k \mbold u_k \cdot \grad A}} \nonumber \\ 
 &\underline{\underline{-\bar{P}_{int} A \mu_P \left(P_k-P_j \right)}} + \underline{\underline{A \lambda_u \left(\mbold u_j-\mbold u_k  \right) \cdot \left(\bar{\mbold u}_{int}- \mbold u_k \right)}}\nonumber \\
 &+ \div \mbold h_k + \mbold g_k : \grad \mbold u_k + || \mbold u ||^2_k \mbold f_k
 \end{align}
@@ -970,7 +970,7 @@ and, at steady state, we have
 That is, the leading-order of the product of velocity and cross section is divergence-free which corresponds to what is obtained when dealing with the multi-D Euler equations with variable area. Note that when assuming a constant cross section $A$, the usual divergence constraint, $\div \mbold u_{k,0}$ is recovered. Also, \eqt{eq:div_free_energy} is slightly modified due to the use of the Stiffened Gas Equation of State in the asymptotic limit. However, the Ideal Gas Equation of State degenerates from the Stiffened Gas Equation of State by simply assuming $P_{k,\infty}$ which yields the usual leading-order single-phase energy equation with constant cross section:
 %
 \begin{equation}
-\frac{1}{\gamma P_{k,0}} \frac{d P_0}{dt} = - \div\mbold u_k{,0} 
+\frac{1}{\gamma P_{k,0}} \frac{d P_0}{dt} = - \div\mbold u_{k,0} 
 \end{equation}
 %
 The same reasoning can be applied to the leading-order 
@@ -1348,7 +1348,7 @@ We start from the entropy inequality verified by $s_k$,
 \eqt{eq:ent-res-7-eqn-diss-terms-app} is multiplied by $\mathscr{H}'(s)$ to yield:
 %
 \begin{align}\label{eq:ent-res-7-eqn-diss-terms-app2}
-\alpha_k \rho_k A \frac{D\mathscr{H}_k(s_k)}{Dt} &= \div \left( \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) \right) - \mathscr{H}_k''(s_k) \alpha_k A \kappa_k \rho_k | \grad s_k |^2 + \nonumber\\
+\alpha_k \rho_k A \frac{D\mathscr{H}_k(s_k)}{Dt} &= \div \left( \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) \right) - \mathscr{H}_k''(s_k) \alpha_k A \kappa_k \rho_k || \grad s_k ||^2 + \nonumber\\
 &\mathscr{H}_k'(s_k) \mbold f_k \cdot \grad s_k - \mathscr{H}_k'(s_k)\alpha_k \rho_k A \kappa_k \mathbf{Q}_k + \nonumber \\
 & \mathscr{H}_k'(s_k)(s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k.
 \end{align}
@@ -1358,14 +1358,14 @@ Let us now multiply the continuity equation of phase $k$ by $\mathscr{H}_k (s_k)
 \begin{align}\label{eq:ent-res-7-eqn-diss-terms-app3}
 \partial_t \left( \alpha_k \rho_k A \mathscr{H}_k(s_k)\right) + \div \left( \alpha_k \rho_k \mbold u_k A \mathscr{H}_k(s_k) \right)  &- \nonumber\\
 \div \left[ \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) + \alpha_k A \kappa_k \mathscr{H}_k (s_k) \grad \rho_k  \right. & \left. + A \kappa_k \rho_k \mathscr{H}_k (s_k) \grad \alpha_k\right] = \nonumber \\
- \underbrace{-\mathscr{H}_k''(s_k) \alpha_k A \kappa_k \rho_k | \grad s_k |^2  - \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k  \mathbf{Q}_k}_{\mathbb{T}_0} &+\nonumber \\
+ \underbrace{-\mathscr{H}_k''(s_k) \alpha_k A \kappa_k \rho_k || \grad s_k ||^2  - \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k  \mathbf{Q}_k}_{\mathbb{T}_0} &+\nonumber \\
 \underbrace{ \mathscr{H}_k'(s_k)(s_e)_k  \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k}_{\mathbb{T}_1} & .
 \end{align}
 %
 Alike in \sct{sec:visc-regu}, the left-hand side of \eqt{eq:ent-res-7-eqn-diss-terms-app3} is split into two residuals denoted by $\mathbb{T}_0$ and $\mathbb{T}_1$ in order to study the sign of each of them. We start by studying the sign of $\mathbb{T}_1$ that is positive since it is assumed that $ \mathscr{H}_k'(s_k) \geq 0$. We now investigate the sign of $\mathbb{T}_0$. Using \eqt{eq:generalized_ent}, it is obtained:
 %
 \begin{equation}\label{eq:new_quad_form}
-- \mathbb{T}_0 \leq \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k \left( c_{p,k}^{-1} |\grad s_k|^2 +  \mathbf{Q}_k\right) \ .
+- \mathbb{T}_0 \leq \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k \left( c_{p,k}^{-1} ||\grad s_k||^2 +  \mathbf{Q}_k\right) \ .
 \end{equation}
 %
 The right-hand side of \eqt{eq:new_quad_form} is a quadratic form that was already defined in Appendix 5 of \cite{jlg} and recast under the matricial form $X^t_k \mathbb{S} X_k$ where $\mathbb{S}$ is a $2 \times 2$ matrix and the vector $X_k$ is defined in \sct{sec:visc-regu}. In \cite{jlg}, the matrix $\mathbb{S}$ is proved to be negative semi-definite which allows us to conclude that $-\mathbb{T}_0$ is of the same sign using \eqt{eq:new_quad_form}. Then, knowing the sign of the two residuals $\mathbb{T}_0$ and $\mathbb{T}_1$, it is concluded that:
