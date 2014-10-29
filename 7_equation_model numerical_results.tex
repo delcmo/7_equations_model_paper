@@ -1,0 +1,367 @@
+%%
+%% This is file `elsarticle-template-num.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% elsarticle.dtx  (with options: `numtemplate')
+%% 
+%% Copyright 2007, 2008 Elsevier Ltd.
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% -------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+
+%\documentclass[preprint,12pt]{elsarticle}
+\documentclass[preprint,10pt]{elsarticle}
+%\documentclass[final,3p,times]{elsarticle} 
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% if you use PostScript figures in your article
+%% use the graphics package for simple commands
+\usepackage{float}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[titletoc,title]{appendix}
+%% or use the graphicx package for more complicated commands
+\usepackage{graphicx}
+%% or use the epsfig package if you prefer to use the old commands
+%% \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols 
+%% The amsthm package provides extended theorem environments
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+% more math
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{amsbsy}
+\usepackage{mathbbol} 
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+\usepackage{lineno}
+
+\journal{Journal of Comp. Phys.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% operators
+\renewcommand{\div}{\mbold{\nabla}\! \cdot \!}
+\newcommand{\grad}{\mbold{\nabla}}
+\newcommand{\divv}[1]{\boldsymbol{\nabla}^{#1}\! \cdot \!}
+\newcommand{\gradd}[1]{\mbold{\nabla}^{#1}}
+\newcommand{\mbold}[1]{\boldsymbol#1}
+% latex shortcuts
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bal}{\begin{align}}
+\newcommand{\eali}{\end{align}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+\usepackage{amsthm}
+\newtheorem*{remark}{Remark}
+% DGFEM commands
+\newcommand{\jmp}[1]{[\![#1]\!]}                     % jump
+\newcommand{\mvl}[1]{\{\!\!\{#1\}\!\!\}}             % mean value
+\newcommand{\keff}{\ensuremath{k_{\textit{eff}}}\xspace}
+% shortcut for domain notation
+\newcommand{\D}{\mathcal{D}}
+% vector shortcuts
+\newcommand{\vo}{\mbold{\Omega}}
+\newcommand{\vr}{\mbold{r}}
+\newcommand{\vn}{\mbold{n}}
+\newcommand{\vnk}{\mbold{\mathbf{n}}}
+\newcommand{\vj}{\mbold{J}}
+\newcommand{\eig}[1]{\| #1 \|_2}
+%
+\newcommand{\EI}{\mathcal{E}_h^i}
+\newcommand{\ED}{\mathcal{E}_h^{\partial \D^d}}
+\newcommand{\EN}{\mathcal{E}_h^{\partial \D^n}}
+\newcommand{\ER}{\mathcal{E}_h^{\partial \D^r}}
+\newcommand{\reg}{\textit{reg}}
+%
+\newcommand{\norm}{\textrm{norm}}
+\renewcommand{\Re}{\textrm{Re}}
+\newcommand{\Pe}{\textrm{P\'e}}
+\renewcommand{\Pr}{\textrm{Pr}}
+%
+\newcommand{\resi}{R}
+%\newcommand{\resinew}{\tilde{D}_e}
+\newcommand{\resinew}{\widetilde{\resi}}
+\newcommand{\resisource}{\widetilde{\resi}^{source}}
+\newcommand{\matder}[1]{\frac{\textrm{D} #1}{\textrm{D} t}}
+%
+% extra space
+\newcommand{\qq}{\quad\quad}
+% common reference commands
+\newcommand{\eqt}[1]{Eq.~(\ref{#1})}                     % equation
+\newcommand{\fig}[1]{Fig.~\ref{#1}}                      % figure
+\newcommand{\tbl}[1]{Table~\ref{#1}}                     % table
+\newcommand{\sct}[1]{Section~\ref{#1}}                   % section
+\newcommand{\app}[1]{Appendix~\ref{#1}}                   % appendix
+%
+\newcommand{\ie}{i.e.,\@\xspace}
+\newcommand{\eg}{e.g.,\@\xspace}
+\newcommand{\psc}[1]{{\sc {#1}}}
+\newcommand{\rs}{\psc{R7}\xspace}
+%
+\newcommand\br{\mathbf{r}}
+%\newcommand{\tf}{\varphi}
+\newcommand{\tf}{b}
+%
+\newcommand{\tcr}[1]{\textcolor{red}{#1}}
+\newcommand{\tcb}[1]{\textcolor{blue}{#1}}
+\newcommand{\mt}[1]{\marginpar{ {\tiny #1}}}
+%
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   BEGIN DOCUMENT
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%\title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \address{Address\fnref{label3}}
+%% \fntext[label3]{}
+%-------------------------
+%-------------------------
+\title{$1$-D numerical results of the seven-equation two-phase flow model with the entropy viscosity method.}
+%-------------------------
+%-------------------------
+\author{Marc O. Delchini\fnref{label1}}
+\ead{delchmo@tamu.edu}
+
+\author{Jean C. Ragusa\corref{cor1}\fnref{label1}}
+\ead{jean.ragusa@tamu.edu}
+
+\author{Ray A. Berry\fnref{label2}}
+\ead{ray.berry@inl.gov}
+
+\address[label1]{Department of Nuclear Engineering, Texas A\&M University, College Station, TX 77843, USA \fnref{label1}}
+
+\address[label2]{Idaho National Laboratory, Idaho Falls, ID 83415, USA \fnref{label2}}
+
+\cortext[cor1]{Corresponding author}
+%-------------------------
+%-------------------------
+%-------------------------
+\begin{abstract}
+blabla
+\end{abstract}
+%-------------------------
+%-------------------------
+\begin{keyword}
+  two-phase flow model \sep with variable area \sep entropy viscosity method \sep stabilization method \sep low Mach regime \sep shocks.
+\end{keyword}
+%-------------------------
+\end{frontmatter}
+\linenumbers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}\label{sec:intro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+\item a few lines about the need for accurately resolving two-phase flows
+\item background on the different two-phase flow models: 5, 6 and 7-equation two-phase flow models
+\item then, focus on the different types of 7-equation two-phase flow models: they mostly differ because of the closure relaxations used
+\item discuss the different numerical solvers developed for the 7-equation two-phase flow model: HLL, HLLC, and approximated Riemann solvers accounting for the source terms
+\item emphasize the fact that the above numerical solvers only works on discontinuous schemes
+\item then, introduce the entropy viscosity method and details the organization of the paper 
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The seven-equation two-phase flow model with an all-Mach flow viscous regularization}\label{sec:7-equ-model}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+\item give the equations and detail the different terms with viscous regularization.
+\item include the relaxation terms, the mass and heat exchange terms.
+\item eigenvalues.
+\item entropy equation with the dissipative terms and five the details of the derivation in the appendix.
+\item recall the definition of the viscosity coefficients for all-Mach flows.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Spatial and Temporal Discretizations} \label{sec:disc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this section, we briefly describe the spatial and temporal discretizations and the solution techniques 
+used to solve the system of equations EQUATION. For conciseness, we re-write the system of 
+equations in the following form:
+\begin{equation}
+\label{eq:form}
+\partial_t \mathbf{U}_k + \div \mathbf{F}_k \left( \mathbf{U}_k \right) = \mathbf{R}_k \left( \mathbf{U}_k \right) + \mathbf{N}_k \left( \mathbf{U}_k \right) + \div \mathbf{D}_k(\mathbf{U}_k) \grad \mathbf{U}_k
+\end{equation}
+where $\mathbf{U}_k=[(\alpha A )_k, \, (\alpha \rho A)_k,\, (\alpha \rho \mbold{u} A)_k,\, (\alpha \rho E A)_k]^T$ is the solution vector, $\mathbf{F}_k \left( \mathbf{U}_k \right)$ denotes the inviscid flux, $\div D_k (\mathbf{U}_k) \grad \mathbf{U}_k$ is the dissipative flux and $\mathbf{N}_k \left( \mathbf{U}_k \right)$ and $\mathbf{R}_k \left( \mathbf{U}_k \right)$ contain the non-conservative and relaxation terms, respectively. 
+\begin{equation}
+  \mathbf{F} \equiv
+  \begin{bmatrix}
+      0     \\
+    ( \alpha \rho u A )_k     \\
+    \left[ \alpha \left(\rho u^2 + P \right) A \right ]_k  \\
+    \left[ \alpha u (\rho E + P) A \right]_k
+  \end{bmatrix},
+%\end{equation}
+%\begin{equation}
+  \mathbf{N} \equiv
+  \begin{bmatrix}
+      - A \mbold{u}_{int} \cdot \grad \alpha_k     \\
+    0     \\
+    \alpha_k P_k \grad A + P_{int} A \grad \alpha_k  \\
+    P_{int} A \mbold{u}_{int} \cdot \grad \alpha_k
+  \end{bmatrix} \nonumber
+\end{equation}
+\begin{equation}
+\text{and }
+  \mathbf{R} \equiv
+  \begin{bmatrix}
+      A \mu_P \left( P_k - P_j \right)     \\
+    0     \\
+    A \lambda_u \left( \mbold u_j - \mbold u_k \right) \\
+    - \bar{P}_{int} A \mu_P \left( P_k - P_j \right) + \bar{u}_{int} A \lambda_u \left( \mbold u_j - \mbold u_k \right)
+  \end{bmatrix}. \nonumber
+\end{equation}
+%
+%===================================================================================================
+\subsection{Spatial and Temporal Discretizations} \label{sec:spatial-disc}
+%===================================================================================================
+The system of equations given in \eqt{eq:form} is discretized using a continuous Galerkin finite element 
+method and temporal integrators available through the MOOSE multiphysics framework \cite{Moose}.
+%---------------------------------------------------------------------------------------------------
+\subsubsection{Continuous Finite Elements} 
+%---------------------------------------------------------------------------------------------------
+In order to apply the continuous finite element method, \eqt{eq:form} is multiplied by a test function 
+$\mathbf W(\mbold{r})$, integrated by parts and each integral is decomposed into a sum of integrals over 
+each element $K$ of the discrete mesh $\Omega$. The following weak form is obtained:
+\begin{multline}\label{eq:cfem}
+\sum_K \int_{K} \partial_t \mathbf U \, \mathbf W - \sum_K \int_{K} \mathbf F (\mathbf U) \cdot \grad \mathbf W + \int_{\partial \Omega} \mathbf F (\mathbf U) \cdot \mbold{n} \mathbf W - \sum_K \int_{K} \left( \mathbf N (\mathbf U) + \mathbf R (\mathbf U) \right) \mathbf W  \\
++ \sum_K \int_{K} D(\mathbf U) \grad \mathbf U \cdot \grad \mathbf W 
+- \int_{\partial \Omega} D(\mathbf U) \grad \mathbf U \cdot \mbold{n} \, \mathbf W = 0 \,.
+\end{multline}
+The integrals over the elements $K$ are evaluated using a numerical quadrature. The MOOSE framework 
+provides a wide range of test functions and quadrature rules. Linear Lagrange polynomials are employed 
+as test functions in the results section. Second-order spatial convergence will be demonstrated for smooth solutions. 
+%
+%---------------------------------------------------------------------------------------------------
+\subsubsection{Temporal integration} 
+%---------------------------------------------------------------------------------------------------
+The MOOSE framework offers both first- and second-order explicit and implicit temporal integrators. 
+In all of the numerical examples presented in \sct{sec:results}, the temporal derivative  will be 
+evaluated using the second-order, backward difference temporal integrator BDF2 \cite{bdf2}. By considering three 
+consecutive solutions, $\mathbf U^{n-1}$, $\mathbf U^n$ and $\mathbf U^{n+1}$, at times $t^{n-1}$, $t^n$ and $t^{n+1}$, respectively, BDF2 can be expressed as:
+\begin{equation}
+\label{eq:BDF2}
+\int_{K} \partial_t \mathbf U \, \mathbf  W = \int_{K} \left( \omega_0 \mathbf U^{n+1}  + \omega_1 \mathbf U^n + \omega_2 \mathbf U^{n-1} \right) \mathbf W \,,
+\end{equation}
+%
+with
+\begin{multline}
+\omega_0 =\frac{2\Delta t^{n+1}+\Delta t^n}{\Delta t^{n+1} \left( \Delta t^{n+1}+\Delta t^n \right)} \, , \ 
+\omega_1 = -\frac{\Delta t^{n+1}+\Delta t^n}{\Delta t^{n+1} \Delta t^n}  \, , \\
+\text{ and } \omega_2 = \frac{\Delta t^{n+1}}{\Delta t^n \left( \Delta t^{n+1} + \Delta t^n \right)} \nonumber
+\end{multline}
+where $\Delta t^{n} = t^n-t^{n-1}$ and $\Delta t^{n+1} = t^{n+1}-t^{n}$.
+%---------------------------------------------------------------------------------------------------
+\subsection{Boundary conditions} \label{sec:bc}
+%---------------------------------------------------------------------------------------------------
+Boundary conditions for the seven-equation model are challenging because of the wave-dominated nature of the equations but also because of the non-conservative form of the void fraction equation. 
+%Unlike the continuity, momentum and energy equations of each phase, the flux of the void fraction equation cannot be integrated by part because it is not written in a conservative form. 
+The boundary condition for the void fraction equation (EQUATION) is treated independently of the other equations (continuity, momentum and energy for each phase) for two reasons: (i) it is a simple advection equation with the real eigenvalue $\mbold u_{int}$, and (ii), the hyperbolic flux, $\mbold u_{int} \cdot \grad \alpha_k$, is not integrated by part since not under a conservative form. The sign of the dot product between the eigenvalue and the outward normal to the boundary, $\mbold u_{int} \cdot \mbold n$, determines the nature of the boundary: negative for an inlet and positive for an outlet. For the later case, the physical information exits the computational domain and does not require any particular treatment. In the former case, the physical information enters the computational domain which requires to specify a value for the void fraction. Since there is no flux at the boundary coming from the integration by part of the hyperbolic flux, the boundary value is imposed by using a Dirichlet boundary condition in the void fraction equation.   
+Our implementation of the boundary conditions for the continuity, momentum and energy equations, is inspired by the method described in \cite{SEM} and was adapted for a time implicit solver \cite{Marco_dissertation}. The boundary type is identified from the study of the sign of the eigenvalues that depends on the Mach number. The numerical results presented in \sct{sec:results} were all obtained by using subsonic stagnation and static pressure boundary conditions for the inlet and outlet, respectively. The boundary flux is computed from the supplied variables at the boundary and also by iterating on a given number of variables (depending on the sign of the eigenvalues) though the implicit solver to transmit information from inside the computational domain toward the boundary. 
+%After recasting the system of equation using the primitive variables, a characteristic decomposition is performed to compute the appropriate values of the pressure, density and velocity of each phase, used in the flux at the boundaries. 
+%\tcb{I will give more details in the future}
+%\tcr{say a bit more, give 1-2 sentences to describe how to impose subsonic/supersonic inlet/outlet BCs}. \tcb{Is it enough?}
+
+%For each numerical solution presented in \sct{sec:results}, the type of boundary conditions used 
+%will be specified and taken among the following: supersonic inlet, subsonic inlet (stagnation pressure boundary), 
+%subsonic outlet, and supersonic outlet. 
+%and subsonic inlet \tcr{???} (static pressure boundary). \\
+The artificial diffusion coefficient $\mbold D(\mathbf  U)$ is set to zero at the boundary of the computational 
+domain so that the boundary term 
+$\int_{\partial \Omega} \mbold D(\mathbf  U) \grad \mathbf  U \cdot \mbold{n} \, \mathbf W$ stemming from the 
+integration by parts of the artificial dissipative terms in \eqt{eq:cfem} is ignored.
+%---------------------------------------------------------------------------------------------------
+\subsection{Solver} \label{sec:solver}
+%---------------------------------------------------------------------------------------------------
+A Jacobian-free-Newton-Krylov (JFNK) method is used to solve for the solution at the end of each time step. 
+An approximate Jacobian matrix of the discretized equations was derived and implemented. Obtaining the 
+matrix entries requires that the partial derivatives of pressure with respect to the conservative variables 
+be known (this is relatively simple for the stiffened and ideal gas equations of state but may be more 
+complex for general equations of state). The contributions of the artificial dissipative terms to the 
+Jacobian matrix are approximated by lagging the viscosity coefficients (computing them with the previous solution). 
+For instance, this is shown in \eqt{eq:jac_diss_term} for the dissipative terms present in the continuity equation:
+\begin{equation}
+\label{eq:jac_diss_term}
+\frac{\partial}{\partial \mathbf U} \left( \kappa \grad \rho \cdot \grad W \right) \simeq \kappa \div \frac{\partial \rho}{\partial \mathbf U} \grad W ,
+\end{equation}  
+where $\mathbf  U$ denotes any of the conservative variables and $W$ denotes the component of $\mathbf  W$ associated with the 
+continuity equation. In the above, we have neglected $\frac{\partial \kappa}{\partial \mathbf U}$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{$1$-D numerical results}\label{sec:results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{itemize}
+\item simple advection problem
+\item shock tube with two independent fluids: exact solution and could do convergence test for this particular test
+\item shock tube with infinite relaxation coefficients
+\item $1$-D nozzle with two independent fluids
+\item $1$-D nozzle with infinite relaxation coefficients
+\item $1$-D nozzle with infinite relaxation coefficients,  mass and heat transfer
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions and future work}\label{sec:conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliography{mybibfile}
+\end{document}
