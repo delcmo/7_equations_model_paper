@@ -175,7 +175,7 @@
 %% \fntext[label3]{}
 %-------------------------
 %-------------------------
-\title{Extension of the entropy viscosity method to the multi-D 7-equation two-phase flow model.\\
+\title{Extension of the entropy viscosity method to the multi-D seven-equation two-phase flow model.\\
 \tcb{I do not know if we should have 'multi-D' in the title since we will only present $1$-D results}}
 %-------------------------
 %-------------------------
@@ -681,7 +681,7 @@ At this point, some remarks are in order:
 %\tcr{don't you want to include this in the final version?} \tcb{I do}}
 \end{enumerate}
 %
-At this point in the paper, we have derived a viscous regularization for the multi-D seven-equation two-phase flow model that ensures positivity of the entropy residual, uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$, and is consistent with the viscous regularization derived for the multi-D Euler equations \cite{jlg, Marco_paper_low_mach} in the limit $\alpha_k \to 1$. The viscous regularization involves a set of three viscosity coefficients for each phase, $\mu_k$, $\kappa_k$ and $\beta_k$, that are assumed positive. Definition of the viscosity coefficients is now required to complete the numerical stabilization method. Since the focus of this paper is the entropy viscosity method, the viscosity coefficients will be defined function of entropy residuals in \sct{sec:low-Mach}. However, one can also devise a definition for the viscosity coefficients $\mu_k$ and $\kappa_k$ by analogy to Lapidus \cite{Lapidus_paper, Lapidus_book} or some pressure-based methods \cite{PBV_book} used for the single-phase Euler equations. On the other hand, the viscosity coefficient, $\beta_k$, for the void fraction equation should rely on artificial dissipation stabilization methods used for scalar hyperbolic equations. These aspects are also investigated in \sct{sec:low-Mach}.
+At this point in the paper, we have derived a viscous regularization for the multi-D seven-equation two-phase flow model that ensures positivity of the entropy residual, uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$, and is consistent with the viscous regularization derived for the multi-D Euler equations \cite{jlg, Marco_paper_low_mach} in the limit $\alpha_k \to 1$. The viscous regularization involves a set of three viscosity coefficients for each phase, $\mu_k$, $\kappa_k$ and $\beta_k$, that are assumed positive. Definition of the viscosity coefficients is now required to complete the numerical stabilization method. 
 %
 \begin{remark}
 Through the derivations of the viscous regularization, it was noted that another set of dissipative terms $\mbold f_k$ and $\mbold l_k$ would also ensures positivity of the entropy residual:
@@ -699,7 +699,8 @@ However, the definition of $\mbold l_k$ proposed in \eqt{eq:def-l-k-wrong-sect4}
 \end{remark}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{An all-speed formulation of the Entropy Viscosity Method}\label{sec:low-Mach}
+%\section{An all-speed formulation of the Entropy Viscosity Method}\label{sec:low-Mach}
+\section{Tracks for the definition of the phasic viscosity coefficients}\label{sec:low-Mach}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{itemize}
 %\item non-dimensionalize the equations but use $P_\infty$ for the pressure instead of $(\rho c^2)_\infty$
@@ -709,7 +710,11 @@ However, the definition of $\mbold l_k$ proposed in \eqt{eq:def-l-k-wrong-sect4}
 %\item discussion about the 
 %\end{itemize}
 %
-When working with artificial dissipative numerical stabilization methods, great care needs to be carried to the definition of the viscosity coefficients that will determine the accuracy of the method. Generally speaking, sufficient artificial viscosity should be added into the shock and discontinuity regions to prevent spurious oscillations from forming, while little dissipation is added when the numerical solution is smooth. Such requirements can be achieved by tracking shocks and discontinuities in the numerical solutions. When dealing with fluid equations, the low-Mach asymptotic limit also has to be accounted for in the definition of the viscosity coefficients in order to ensure well-scaled dissipative terms \cite{LowMach1, LowMach2, LowMach3}. Also, because each phase can experience different flow regime e.g., supersonic gas and subsonic liquid, it is chosen to work with three distinct viscosity coefficients for each phase. The purpose of this section is to derive a definition for the phasic viscosity coefficients, $\mu_k$, $\kappa_k$ and $\beta_k$, that ensures the correct numerical solution in the low-Mach limit, can accurately resolves shocks in transonic and supersonic flows and is also consistent with the definition of the viscosity coefficients devised for the single-phase Euler equations in the limit $\alpha_k \to 1$. As a result, the approach used in \cite{Marco_paper_low_mach} will be applied here in this section. 
+When working with artificial dissipative numerical stabilization methods, great care needs to be carried to the definition of the viscosity coefficients that will determine the accuracy of the method. Generally speaking, sufficient artificial viscosity should be added into the shock and discontinuity regions to prevent spurious oscillations from forming, while little dissipation is added when the numerical solution is smooth to ensure high-order accuracy. Such requirements can be achieved by tracking shocks and discontinuities in the numerical solutions. When dealing with fluid equations, the low-Mach asymptotic limit also has to be accounted for in the definition of the viscosity coefficients in order to ensure well-scaled dissipative terms \cite{LowMach1, LowMach2, LowMach3}. Also, because each phase can experience different flow regime e.g., supersonic gas and subsonic liquid, it is chosen to work with three distinct viscosity coefficients for each phase. The purpose of this section is to give tracks on how to define the phasic viscosity coefficients, $\mu_k$ and $\kappa_k$ by analogy to some numerical methods used for the single-phase Euler equations i.e. Lapidus \cite{Lapidus_paper, Lapidus_book} or pressure-based method \cite{PBV_book}. On the other hand, the viscosity coefficient, $\beta_k$, for the void fraction equation should rely on artificial dissipation stabilization methods used for scalar hyperbolic equations. We also apply the approach used in \cite{Marco_paper_low_mach} to devise a definition of the viscosity coefficients that ensures the correct numerical solution in the low-Mach limit, can accurately resolves shocks in transonic and supersonic flows and is also consistent with the definition of the viscosity coefficients devised for the single-phase Euler equations in the limit $\alpha_k \to 1$. 
+%As a result, the approach used in \cite{Marco_paper_low_mach} will be applied here in this section. 
+%
+%Since the focus of this paper is the entropy viscosity method, the viscosity coefficients will be defined function of entropy residuals in \sct{sec:low-Mach}. However, one can also devise a definition for the viscosity coefficients $\mu_k$ and $\kappa_k$ by analogy to Lapidus \cite{Lapidus_paper, Lapidus_book} or some pressure-based methods \cite{PBV_book} used for the single-phase Euler equations. On the other hand, the viscosity coefficient, $\beta_k$, for the void fraction equation should rely on artificial dissipation stabilization methods used for scalar hyperbolic equations. These aspects are also investigated in \sct{sec:low-Mach}.
+%
 %------------------------------------------------------------------------------------------------------
 \subsection{Definition of the viscosity coefficients}\label{sec:visc-coeff-sem}
 %------------------------------------------------------------------------------------------------------
