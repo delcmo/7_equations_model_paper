@@ -175,8 +175,7 @@
 %% \fntext[label3]{}
 %-------------------------
 %-------------------------
-\title{Extension of the entropy viscosity method to the multi-D seven-equation two-phase flow model.\\
-\tcb{I do not know if we should have 'multi-D' in the title since we will only present $1$-D results}}
+\title{A Viscous Regularization for the Seven-Equation Two-Phase Flow Model.}
 %-------------------------
 %-------------------------
 \author{Marc O. Delchini\fnref{label1}}
@@ -269,52 +268,8 @@ The seven-equation two-phase flow model presented in this paper is obtained by a
   \\
   + A \lambda_u \bar{\mbold u}_{int} \cdot (\mbold u_{j} - \mbold u_{k})
 &  + \Gamma A_{int} \left( \frac{P_{int}}{\rho_{int}} - H_{k, int} \right) A
-%\nonumber 
-%\\
-%& + Q_{wall,k} + Q_{int,k}
 \end{align}
 \end{subequations}
-%
-%On the same model, the equations for the vapor phase are:
-%%
-%\begin{subequations}\label{eq:vap-7-eqn-sect5}
-%\begin{align}
-%  \label{multi-d-7-equ-vap}
-%  % vapor mass conservation
-%  \frac{\partial \left( \alpha \rho A\right)_{vap}}{\partial t}
-%  + \div \left( \alpha \rho \mbold u \right)_{vap} A
-%  =  \Gamma A_{int} A
-%\end{align}
-%\begin{align}
-%  % vapor momentum
-%  \frac{\partial \left( \alpha \rho u \right)_{vap} A}{\partial t}
-%  + \div \left[ \alpha_{vap} A \left( \rho \mbold u \otimes \mbold u + P\mathbb{I} \right)_{vap} \right]
-%  &= P_{int} A \grad \alpha_{vap} + P_{vap} \alpha_{vap} \grad A
-%  \\
-%  \nonumber
-%  &+ A \lambda_u (\mbold u_{liq} - \mbold u_{vap})
-%  + \Gamma A_{int} u_{int} A
-%\end{align}
-%\begin{align}
-%  % vapor total energy
-%  \frac{\partial \left( \alpha \rho E \right)_{vap} A}{\partial t}
-%  + \div \left[ \alpha_{vap} \mbold u_{vap} A \left( \rho E + P \right)_{vap} \right]
-%  &= P_{int} \mbold u_{int} A \grad \alpha_{vap} - \bar{P}_{int} A \mu_P (P_{vap} - P_{liq})
-%    \nonumber
-%  \\
-%  + \bar{\mbold u}_{int} A \lambda_u (\mbold u_{liq} - \mbold u_{vap})
-%&- \Gamma A_{int} \left( \frac{P_{int}}{\rho_{int}} - H_{vap, int} \right) A
-%\nonumber 
-%\\
-%& + Q_{wall,vap} + Q_{int,vap}
-%\end{align}
-%\begin{align}
-%  % vapor phase void fraction
-%  \label{eqn:multi-d-7-eqn-vap-vol}
-%  \frac{\partial \alpha_{vap} A}{\partial t} + A \mbold u_{int} \cdot \grad \alpha_{vap}
-%  &= A \mu_P (P_{vap} - P_{liq}) + \frac{\Gamma A_{int} A}{\rho_{int}}
-%\end{align}
-%\end{subequations}
 %
 where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the density, the velocity vector and the total specific energy of phase $k$, respectively. The phasic pressure $P_k$ is computed from an equation of state. The cross section of the geometry is denoted by $A$ and is only spatially dependent. The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively; they are defined in \eqt{eq:int_variables_def} 
 %
@@ -422,7 +377,7 @@ The partial derivative of the entropy function $s_k$ with respect to the interna
 \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} = \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \left( \partial_t s_k + \mbold u_k \cdot \grad s_k \right) \geq 0  .
 \end{equation}
 %
-Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates into the single phase entropy equation obtained from the multi-D Euler equations \cite{SEM, Marco_dissertation}.
+Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates into the single phase entropy equation obtained from the multi-dimensional Euler equations \cite{SEM, Marco_dissertation}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A viscous regularization for the seven-equation two-phase flow model}\label{sec:visc-regu}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -439,7 +394,7 @@ Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates into 
 %\item a few words about the parabolic regularization
 %\end{itemize}
 %
-We now propose to derive a viscous regularization for the seven-equation model given in \eqt{eq:liq-7-eqn-sect5} by using the same methodology as for the multi-D Euler equations with/without variable area \cite{jlg, Marco_paper_low_mach}. The method consists in adding dissipative terms to the system of equation under consideration, and re-derive the entropy equation whose sign is known to be positive to ensure uniqueness of the numerical solution \cite{Leveque}. Because of the addition of dissipation terms, the entropy equation is modified and contains extra terms of yet unknown sign. By carefully choosing a definition for each of the dissipation term, the sign of the entropy equation can be determined and proved positive. For the seven-equation model, derivation of a viscous regularization can be achieved by considering either the phasic entropy equation (\eqt{eq:ent-eqn-7-eqn-model}) or the total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the later case, the entropy minimum principle is verified for the whole system which may not ensure positivity of the entropy equation for each phase. However, positivity of the total entropy equation can be also achieved by assuming that the entropy minimum principle holds for each phase. This stronger requirement will also ensure consistency with the single phase Euler equations when one of the phase disappears in the limit $\alpha_k \to 0$. Thus, it is chosen to work with the phasic entropy equations given in \eqt{eq:ent-eqn-7-eqn-model}.
+We now propose to derive a viscous regularization for the seven-equation model given in \eqt{eq:liq-7-eqn-sect5} by using the same methodology as for the multi-dimensional Euler equations with/without variable area \cite{jlg, Marco_paper_low_mach}. The method consists in adding dissipative terms to the system of equation under consideration, and re-derive the entropy equation whose sign is known to be positive to ensure uniqueness of the numerical solution \cite{Leveque}. Because of the addition of dissipation terms, the entropy equation is modified and contains extra terms of yet unknown sign. By carefully choosing a definition for each of the dissipation term, the sign of the entropy equation can be determined and proved positive. For the seven-equation model, derivation of a viscous regularization can be achieved by considering either the phasic entropy equation (\eqt{eq:ent-eqn-7-eqn-model}) or the total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the later case, the entropy minimum principle is verified for the whole system which may not ensure positivity of the entropy equation for each phase. However, positivity of the total entropy equation can be also achieved by assuming that the entropy minimum principle holds for each phase. This stronger requirement will also ensure consistency with the single phase Euler equations when one of the phase disappears in the limit $\alpha_k \to 0$. Thus, it is chosen to work with the phasic entropy equations given in \eqt{eq:ent-eqn-7-eqn-model}.
 
 For the purpose of this section, the system of equations given in \eqt{eq:sev_equ} is considered, which is obtained by simply omitting the mass source terms (terms proportional to $\Gamma$) in \eqt{eq:liq-7-eqn-sect5} (source terms will be dealt with later, in SECTION).
 %
@@ -650,7 +605,7 @@ All of the dissipative terms are now defined and recalled here:
 %
 At this point, some remarks are in order:
 \begin{enumerate}
-\item {The viscous regularization given in \eqt{eq:visc-reg-7-equ-sect4} for the multi-D seven-equation model, is equivalent to the parabolic regularization \cite{Parabolic} when assuming $\beta_k = \kappa_k = \mu_k$ and $\mathbb{F}(\mbold u_k) = \alpha_k \rho_k \kappa_k \grad \mbold u_k$, but is no longer rotation invariant. However, decoupling between the regularization on the velocity and on the density in the momentum equation is important to make the regularization rotation invariant but also to ensure well-scaled dissipative terms for a wide range of Mach number as was shown in \cite{Marco_paper_low_mach} for the multi-D Euler equations.}
+\item {The viscous regularization given in \eqt{eq:visc-reg-7-equ-sect4} for the multi-dimensional seven-equation model, is equivalent to the parabolic regularization \cite{Parabolic} when assuming $\beta_k = \kappa_k = \mu_k$ and $\mathbb{F}(\mbold u_k) = \alpha_k \rho_k \kappa_k \grad \mbold u_k$, but is no longer rotation invariant. However, decoupling between the regularization on the velocity and on the density in the momentum equation is important to make the regularization rotation invariant but also to ensure well-scaled dissipative terms for a wide range of Mach number as was shown in \cite{Marco_paper_low_mach} for the multi-dimensional Euler equations.}
 \item {The dissipative term $\mbold l_k$ requires the definition of a new viscosity
     coefficient $\beta_k$. It was shown that this viscosity coefficient is independent of
     the other viscosity coefficients $\mu_k$ and $\kappa_k$. Its definition should
@@ -681,7 +636,7 @@ At this point, some remarks are in order:
 %\tcr{don't you want to include this in the final version?} \tcb{I do}}
 \end{enumerate}
 %
-At this point in the paper, we have derived a viscous regularization for the multi-D seven-equation two-phase flow model that ensures positivity of the entropy residual, uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$, and is consistent with the viscous regularization derived for the multi-D Euler equations \cite{jlg, Marco_paper_low_mach} in the limit $\alpha_k \to 1$. The viscous regularization involves a set of three viscosity coefficients for each phase, $\mu_k$, $\kappa_k$ and $\beta_k$, that are assumed positive. Definition of the viscosity coefficients is now required to complete the numerical stabilization method. 
+At this point in the paper, we have derived a viscous regularization for the multi-dimensional seven-equation two-phase flow model that ensures positivity of the entropy residual, uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$, and is consistent with the viscous regularization derived for the multi-dimensional Euler equations \cite{jlg, Marco_paper_low_mach} in the limit $\alpha_k \to 1$. The viscous regularization involves a set of three viscosity coefficients for each phase, $\mu_k$, $\kappa_k$ and $\beta_k$, that are assumed positive. Definition of the viscosity coefficients should be devised from the scaled SEM in order to ensure well-scaled dissipative terms for a wide range of Mach numbers (subsonic, transonic and supersonic flows).
 %
 \begin{remark}
 Through the derivations of the viscous regularization, it was noted that another set of dissipative terms $\mbold f_k$ and $\mbold l_k$ would also ensures positivity of the entropy residual:
@@ -700,7 +655,7 @@ However, the definition of $\mbold l_k$ proposed in \eqt{eq:def-l-k-wrong-sect4}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\section{An all-speed formulation of the Entropy Viscosity Method}\label{sec:low-Mach}
-\section{Tracks for the definition of the phasic viscosity coefficients}\label{sec:low-Mach}
+\section{The scaled Seven-Equation two-phase flow Model with viscous regularization}\label{sec:low-Mach}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{itemize}
 %\item non-dimensionalize the equations but use $P_\infty$ for the pressure instead of $(\rho c^2)_\infty$
@@ -710,103 +665,42 @@ However, the definition of $\mbold l_k$ proposed in \eqt{eq:def-l-k-wrong-sect4}
 %\item discussion about the 
 %\end{itemize}
 %
-When working with artificial dissipative numerical stabilization methods, great care needs to be carried to the definition of the viscosity coefficients that will determine the accuracy of the method. Generally speaking, sufficient artificial viscosity should be added into the shock and discontinuity regions to prevent spurious oscillations from forming, while little dissipation is added when the numerical solution is smooth to ensure high-order accuracy. Such requirements can be achieved by tracking shocks and discontinuities in the numerical solutions. When dealing with fluid equations, the low-Mach asymptotic limit also has to be accounted for in the definition of the viscosity coefficients in order to ensure well-scaled dissipative terms \cite{LowMach1, LowMach2, LowMach3}. Also, because each phase can experience different flow regime e.g., supersonic gas and subsonic liquid, it is chosen to work with three distinct viscosity coefficients for each phase. The purpose of this section is to give tracks on how to define the phasic viscosity coefficients, $\mu_k$ and $\kappa_k$ by analogy to some numerical methods used for the single-phase Euler equations i.e. Lapidus \cite{Lapidus_paper, Lapidus_book} or pressure-based method \cite{PBV_book}. On the other hand, the viscosity coefficient, $\beta_k$, for the void fraction equation should rely on artificial dissipation stabilization methods used for scalar hyperbolic equations. We also apply the approach used in \cite{Marco_paper_low_mach} to devise a definition of the viscosity coefficients that ensures the correct numerical solution in the low-Mach limit, can accurately resolves shocks in transonic and supersonic flows and is also consistent with the definition of the viscosity coefficients devised for the single-phase Euler equations in the limit $\alpha_k \to 1$. 
+When working with artificial dissipative numerical stabilization methods, great care needs to be carried to the definition of the viscosity coefficients that will determine the accuracy of the method. Generally speaking, sufficient artificial viscosity should be added into the shock and discontinuity regions to prevent spurious oscillations from forming, while little dissipation is added when the numerical solution is smooth to ensure high-order accuracy. Such requirements can be achieved by tracking shocks and discontinuities in the numerical solutions. When dealing with fluid equations, the low-Mach asymptotic limit also has to be accounted for in the definition of the viscosity coefficients in order to ensure well-scaled dissipative terms \cite{LowMach1, LowMach2, LowMach3}. Also, because each phase can experience different flow regime e.g., supersonic gas and subsonic liquid, it is chosen to work with three distinct viscosity coefficients for each phase. The purpose of this section is to derive the scaled SEM investigate the scaling of the dissipative terms to ensure well-scaled dissipative terms for all-Mach flows (subsonic, transonic and supersonic flows). First, the scaled SEM are derived and then, two limit cases (a) and (b) will be considered to determine appropriate scaling for the entropy 
+viscosity coefficients so that the dissipative terms remain well-scaled for: 
+(a) the isentropic low-Mach limit where the seven-equation model degenerate to an incompressible system of 
+equations in the low-Mach limit and (b) the non-isentropic limit with formation of shocks. Finally, for each case the scaling of the numerical adimensional numbers will be given. The study is performed on the multi-dimensional version of the seven-equation model with the Stiffened Gas Equation of State (SGEOS) given in \eqt{eq:SGEOS_bis}.
+%
+\begin{equation}\label{eq:SGEOS_bis}
+P_k = \left( \gamma_k-1 \right) \rho_k e_k - \gamma_k P_{k,\infty}
+\end{equation}
+%
+%how to define the phasic viscosity coefficients, $\mu_k$ and $\kappa_k$ by analogy to some numerical methods used for the single-phase Euler equations i.e. Lapidus \cite{Lapidus_paper, Lapidus_book} or pressure-based method \cite{PBV_book}. On the other hand, the viscosity coefficient, $\beta_k$, for the void fraction equation should rely on artificial dissipation stabilization methods used for scalar hyperbolic equations. We also apply the approach used in \cite{Marco_paper_low_mach} to devise a definition of the viscosity coefficients that ensures the correct numerical solution in the low-Mach limit, can accurately resolves shocks in transonic and supersonic flows and is also consistent with the definition of the viscosity coefficients devised for the single-phase Euler equations in the limit $\alpha_k \to 1$. 
 %As a result, the approach used in \cite{Marco_paper_low_mach} will be applied here in this section. 
 %
 %Since the focus of this paper is the entropy viscosity method, the viscosity coefficients will be defined function of entropy residuals in \sct{sec:low-Mach}. However, one can also devise a definition for the viscosity coefficients $\mu_k$ and $\kappa_k$ by analogy to Lapidus \cite{Lapidus_paper, Lapidus_book} or some pressure-based methods \cite{PBV_book} used for the single-phase Euler equations. On the other hand, the viscosity coefficient, $\beta_k$, for the void fraction equation should rely on artificial dissipation stabilization methods used for scalar hyperbolic equations. These aspects are also investigated in \sct{sec:low-Mach}.
 %
 %------------------------------------------------------------------------------------------------------
-\subsection{Definition of the viscosity coefficients}\label{sec:visc-coeff-sem}
+\subsection{Derivation of the scaled Seven-Equation Model}\label{sec:scaled-SEM}
 %------------------------------------------------------------------------------------------------------
-In the entropy viscosity method, each viscosity coefficient is function of an upper and a lower bound that are referred to as first-order viscosity coefficient and entropy viscosity coefficient (high-order coefficient), respectively, as shown in \eqt{eq:def-visc-sem-sct4}. The first-order viscosity coefficient is denoted by the subscript $max$ and is defined proportional to the largest local eigenvalue so that the stabilization scheme becomes over-dissipative and smooth out all discontinuities when the entropy residual is large. The entropy viscosity coefficient is set proportional to an entropy residual and jumps of quantities to determine, and denoted by the subscript $e$. 
-%
-\begin{align}\label{eq:def-visc-sem-sct4}
-\beta_k( \mbold r, t) = \min \left( \beta_{e,k}( \mbold r, t), \beta_{max,k} ( \mbold r, t) \right), \nonumber \\
-\mu_k( \mbold r, t) = \min \left( \mu_{e,k}( \mbold r, t), \mu_{max,k} ( \mbold r, t) \right),  \\
-\kappa_k( \mbold r, t) = \min \left( \kappa_{e,k}( \mbold r, t), \kappa_{max,k} ( \mbold r, t) \right) ,\nonumber 
-\end{align}
-% 
-where all of the variables are locally defined. We now define the first-order viscosity coefficients and will focus first on the phasic viscosity coefficients $\kappa_k$ and $\mu_k$ that are intimately linked to the mass, momentum and energy equations. These two viscosity coefficients are involved in dissipative terms that identical to the ones obtained for the single-phase Euler equations \cite{jlg, Marco_paper_low_mach} when seeing the term $\alpha_k A$ as a pseudo cross-section and assuming an uniform void fraction profile. Thus, it is chosen to define the corresponding first-order viscosity coefficients proportional to the local largest eigenvalue $|| \mbold u_k || + c_k$ as follows:
-%
-\begin{equation}\label{eq:def-visc-max-sem-sct4}
-\kappa_{max,k}( \mbold r, t) = \mu_{max,k}( \mbold r, t) = \frac{h}{2} \left( || \mbold u_k||( \mbold r, t) + c_k( \mbold r, t) \right),
-\end{equation}
-%
-where $h$ is the grid size (each phase is solved on the same mesh). It remains to define the first-order viscosity coefficient, $\beta_{max,k}$, used in the void fraction equation. Because the void fraction equation can be treated as a hyperbolic scalar equation with an unique eigenvalue $\mbold u_{int}$, the first-order viscosity coefficient is defined by analogy with Burger's equation \cite{jlg1, jlg2} as follows:
-%
-%
-\begin{equation}\label{eq:def-beta-max-sen-sect4}
-\beta_{max,k}( \mbold r, t) = \frac{h}{2} || \mbold u_{int}( \mbold r, t) ||.
-\end{equation}
-%
-After defining the first-order viscosity coefficients for each phase, we focus our attention to the entropy viscosity coefficients denoted by the subscript $e$ in \eqt{eq:def-visc-sem-sct4}. We first choose to investigate the definitions of $\mu_{e,k}$ and $\kappa_{e,k}$. The entropy viscosity coefficients are set proportional to the entropy residual given in \eqt{eq:ent_res}, that is known to be positive and peaked in the shock region. 
-%
-\begin{equation}\label{eq:ent_res}
-\resi_k(\mbold r,t) := \matder{s_k} =  \partial_t s_k + \mbold u_k \cdot \grad s_k
-\end{equation}
-%
-It is also accounted for the jumps of quantities that will be determined further. The objective is to be able to track spatially and temporally any shock and discontinuity forming in the computational domain. In \cite{Marco_paper_low_mach}, it was demonstrated the usefulness of recasting the entropy residual as a function of pressure, velocity, density and speed of sound as shown in \eqt{eq:ent_res-sem-sct4}. The alternative expression of the entropy residual denoted by $\resinew_k(\mbold r,t)$, no longer requires an analytical expression of the entropy $s_k$ and experiences the same variations (in absolute value) as the original definition of the entropy residual (\eqt{eq:ent_res}).
-%
-\begin{equation}\label{eq:ent_res-sem-sct4}
-\resi_k(\mbold r,t)  = \matder{s_k} = \frac{(s_e)_k}{(P_e)_k} \left( \underbrace{\matder{P_k} - c_k^2 \matder{\rho_k} }_{\resinew_k(\mbold r,t)} \right) ,
-\end{equation} 
-%
-Using the new expression of the entropy residual $\resinew_k$, we now propose a definition, given in \eqt{eq:visc_definition-sct4}, for the phasic entropy viscosity coefficients $\mu_{e,k}$ and $\kappa_{e,k}$ that also accounts for jumps, $J_k$, of some function of the pressure and density for generality purpose. The jump helps at tracking contact waves or discontinuities other than shock that are not seen by the entropy residual. Its definition will be detailed in \sct{sec:low-Mach}. A distinct normalization parameter is also introduced for each viscosity coefficient that is used for dimensionality purpose: a quick dimensional study of the dissipative terms shows that the viscosity coefficients are kinematic viscosity ($m^2 \cdot s^{-1}$). Thus, the normalization parameters has units in pressure and its final definition will be determined by a low-Mach asymptotic limit of \eqt{eq:sev_equ-with-diss-terms} in order to ensure well-scaled dissipative terms for all-Mach flows. We see here the advantage of using the new expression for the entropy residual $\resinew_k$ that offers more diversity in the choice of the normalization parameters: the pressure itself and combination of the density, the sound speed and the norm of the velocity.
-%
-\begin{subequations}\label{eq:visc_definition-sct4}
-\begin{equation}
-\mu_{e,k}(\mbold r,t)    = h^2 \frac{\max\left( | \resinew_k(\mbold r_q,t) |\,, || J_k^\mu || \right)}{\norm_{P,k}^\mu},
-\end{equation} 
-\text{and} 
-\begin{equation}
-\kappa_{e,k}(\mbold r,t) = h^2 \frac{\max\left( | \resinew_k(\mbold r_q,t) |\,, || J_k^\kappa || \right)}{\norm_{P,k}^\kappa} \, .
-\end{equation}
-\end{subequations}
-%
-It remains to define the entropy viscosity coefficient $\beta_{e,k}$. For the purpose of this paragraph, let us consider the scalar void fraction equation and assume that the interface velocity $\mbold u_{int}$ is given. Because it is a scalar hyperbolic equation, it is proposed to define the entropy viscosity coefficients on the same model as what is done for Burger's equation \cite{jlg1, jlg2}. Thus, the entropy viscosity viscosity coefficient $\beta_e$ is defined as a function of an entropy residual, $R_{k}^\alpha$, derived from the void fraction equation for phase $k$, and the jump of a function of the void fraction, $J_k^\alpha$, as shown in \eqt{eq:def-beta-sen-sect4}.
-%
-\begin{align}\label{eq:def-beta-sen-sect4}
-\beta_{e,k}( \mbold r, t) = h^2 \frac{\max\left( | R_{k}^\alpha(\mbold r_q,t) |\,, || J_k^\alpha|| \right)}{\norm_{\alpha, k}^\beta} \,
-\end{align}
-%
-We also introduce a normalization parameter, $\norm_{\alpha,k}^\beta$, whose expression will be further investigated in \sct{sec:low-Mach-sem}. To derive the entropy residual, $R_{\alpha,k}$, we consider the void fraction equation for phase $k$ with its viscous regularization and assume the existence of an entropy denoted by $\eta_k(\alpha_k)$ \cite{Leveque}:
-%
-\begin{equation}\label{eq:vf-sem-sct4}
-\partial_t \left(A \alpha_k \right) + A \mbold u_{int} \cdot \grad \alpha_k = \div \left( \beta_k A \grad \alpha_k \right)
-\end{equation}
-% 
-After multiplying by $\frac{\text{d} \eta (\alpha_k)}{\text{d} \alpha_k}$ and using the chain rule, an expression for the entropy equation is obtained:
-%
-\begin{equation}\label{eq:vf-sem2-sct4}
-\underbrace{\partial_t \left(A \eta(\alpha_k) \right) + A \mbold u_{int} \cdot \grad \eta(\alpha_k)}_{R_{k}^\alpha} = \frac{\text{d} \eta (\alpha_k)}{\text{d} \alpha_k} \div \left( \beta_k A \grad \alpha_k \right)
-\end{equation}
-% 
-The entropy residual, $R_{k}^\alpha$, is defined as the left hand side of \eqt{eq:vf-sem2-sct4} and is known to be peaked in the shock region and positive when assuming convexity of the entropy $\eta_k$ with respect to $\alpha_k$ \cite{Leveque}. Such a behavior is identical to the entropy residual $\resinew_k$ defined in \eqt{eq:ent_res-sem-sct4}, and will allow detection of the shock wave in the void fraction profile when used in the definition of the entropy viscosity coefficient $\beta_{e,k}$.
-%Because \eqt{eq:vf-sem2-sct4} is identical to \eqt{eq:weak_sol8_sct1b}, it is concluded that $R_{\alpha,k} \geq 0$ when assuming $\eta$ convex with respect to $\alpha_k$, which justifies the definition of the entropy viscosity viscosity coefficient $\beta_{e,k}$ given in \eqt{eq:def-beta-sen-sect4} based on \eqt{sec:evm_hyp_sc_sct1b}. The entropy function is taken equal to $\eta(\alpha_k) = \frac{\alpha_k^2}{2}$ which is convex.
-%
-
-At this point of the paper, the definition of the viscosity coefficients are not finalized: the jumps and normalization parameters still have to be defined. The normalization parameters are derived from a low-Mach asymptotic limit analysis which is the purpose of the next section.
-%------------------------------------------------------------------------------------------------------
-\subsection{Asymptotic study in the low-Mach regime}\label{sec:low-Mach-sem}
-%------------------------------------------------------------------------------------------------------
-Developing a numerical method for fluid equations require to investigate the low-Mach asymptotic limit. In this particular limit, numerical methods developed for transonic and supersonic flows usually fail due to ill-scaled dissipative terms. A fix can be found by performing a low-Mach asymptotic limit to ensure well-scaled dissipative terms \cite{LowMach1, LowMach2, LowMach3}. Then, it is proposed to perform a low-Mach asymptotic limit to derive a definition for the phasic normalization parameters introduced in \sct{sec:visc-coeff-sem}. We consider the case where the relaxation coefficients are set to zero:  
+%Developing a numerical method for fluid equations require to investigate the low-Mach asymptotic limit. In this particular limit, numerical methods developed for transonic and supersonic flows usually fail due to ill-scaled dissipative terms. A fix can be found by performing a low-Mach asymptotic limit to ensure well-scaled dissipative terms \cite{LowMach1, LowMach2, LowMach3}. Then, it is proposed to perform a low-Mach asymptotic limit to derive a definition for the phasic normalization parameters introduced in \sct{sec:visc-coeff-sem}. 
+We consider the case where the relaxation coefficients are set to zero:  
 %Two limit $1$-D cases are considered: the relaxation coefficients are set (i) to very large values and (ii) to zero. In the later case, 
 the two phases do not interact and the seven-equation model degenerates into two sets of Euler equations with a pseudo cross-section $\alpha_k A$. 
 %In the former case, the infinite relaxation coefficients make the seven-equation two-phase model degenerates into the five-equation model of Kapila by ensuring pressure and velocity equilibrium. 
-Two limit cases (a) and (b) will be considered to determine appropriate scaling for the entropy 
-viscosity coefficients so that the dissipative terms remain well-scaled for: 
-(a) the isentropic low-Mach limit where the seven-equation model degenerate to an incompressible system of 
-equations in the low-Mach limit and (b) the non-isentropic limit with formation of shocks. 
-In the low-Mach limit, the isentropic limit of the seven-equation model with viscous regularization should yield incompressible 
-fluid flow solutions (the seven-equation model was derived by assuming that each phase obeys the multi-D Euler equations), namely, that the phasic pressure fluctuations are of the 
-order $M^2_k$ and that the velocity satisfies the divergence constraint $\div ( \vec{u} A)_k = 0$ 
-\cite{LowMach1, LowMach2, LowMach3}. For non-isentropic situations, shocks may form for any 
-value of Mach number (a step initial pressure will always yield a shock wave) and the minimum entropy principle should still be satisfied so that numerical 
-oscillations, if any, be controlled by the entropy viscosity method independently of the value of the Mach number. For each case the scaling of the numerical adimensional numbers will be given along with the definition of the normalization parameters defined in \sct{sec:visc-coeff-sem} for each viscosity coefficients. The asymptotic study is performed on the multi-D version of the seven-equation model with the Stiffened Gas Equation of State (SGEOS) given in \eqt{eq:SGEOS_bis}.
-%
-\begin{equation}\label{eq:SGEOS_bis}
-P_k = \left( \gamma_k-1 \right) \rho_k e_k - \gamma_k P_{k,\infty}
-\end{equation}
+%Two limit cases (a) and (b) will be considered to determine appropriate scaling for the entropy 
+%viscosity coefficients so that the dissipative terms remain well-scaled for: 
+%(a) the isentropic low-Mach limit where the seven-equation model degenerate to an incompressible system of 
+%equations in the low-Mach limit and (b) the non-isentropic limit with formation of shocks. 
+%In the low-Mach limit, the isentropic limit of the seven-equation model with viscous regularization should yield incompressible 
+%fluid flow solutions (the seven-equation model was derived by assuming that each phase obeys the multi-dimensional Euler equations), namely, that the phasic pressure fluctuations are of the 
+%order $M^2_k$ and that the velocity satisfies the divergence constraint $\div ( \vec{u} A)_k = 0$ 
+%\cite{LowMach1, LowMach2, LowMach3}. For non-isentropic situations, shocks may form for any 
+%value of Mach number (a step initial pressure will always yield a shock wave) and the minimum entropy principle should still be satisfied so that numerical 
+%oscillations, if any, be controlled by the entropy viscosity method independently of the value of the Mach number.
+%%
+%\begin{equation}\label{eq:SGEOS_bis}
+%P_k = \left( \gamma_k-1 \right) \rho_k e_k - \gamma_k P_{k,\infty}
+%\end{equation}
 %
 The first step in the study of the two limit cases (a) and (b) is to re-write each system of equations in a non-dimensional manner. To do so, the following variables are introduced for each phase $k$:
 %
@@ -887,12 +781,13 @@ where the phasic numerical Reynolds ($\Re_{k,\infty})$ and P\'eclet ($\Pe_{k,\in
 \Pe_{k,\infty}^\beta = \frac{u_{k,\infty} L_\infty}{\beta_{k,\infty}} \ .
 \end{equation}
 %
-Note that the phasic energy equation was recast under a non-conservative form by using the void fraction (\eqt{eq:sev_equ-with-diss-terms-vf_case_one_scaled}) to facilitate the derivations when trying to recover the divergence constraint onto the velocity.
+Note that the phasic energy equation was recast under a non-conservative form by using the void fraction (\eqt{eq:sev_equ-with-diss-terms-vf_case_one_scaled}) to facilitate the derivations when trying to recover the divergence constraint onto the velocity in the low-Mach asymptotic regime.
 The numerical Reynolds and P\'eclet numbers defined in \eqt{eq:ref_numb} are related to the phasic entropy 
 viscosity coefficients $\mu_{k,\infty}$, $\kappa_{k,\infty}$ and $\beta_{k,\infty}$. Thus, once a scaling (in powers of $M_{k,\infty}$) 
-is obtained for $\Re_{k,\infty}$, $\Pe_{k,\infty}^\kappa$ and $\Pe_{k,\infty}^\beta$, the corresponding normalization parameters $\norm_{P,k}^\mu$ 
-, $\norm_{P,k}^\kappa$ and $\norm_{\alpha,k}^\beta$ will automatically be set. For brevity, the superscripts $^*$ are omitted in the remainder of this section.  
-
+is obtained for $\Re_{k,\infty}$, $\Pe_{k,\infty}^\kappa$ and $\Pe_{k,\infty}^\beta$ in the two limit cases (a) and (b), it will impose a condition onto the definition of the phasic viscosity coefficients $\mu_k$, $\kappa_k$ and $\beta_k$. For brevity, the superscripts $^*$ are omitted in the remainder of this section.  
+%------------------------------------------------------------------------------------------------------
+\subsection{Scaling of $\Re_{k,\infty}$, $\Pe_{k,\infty}^\kappa$ and $\Pe_{k,\infty}^\beta$ in the low-Mach asymptotic regime}\label{sec:low-Mach-sem}
+%------------------------------------------------------------------------------------------------------
 In the low-Mach isentropic limit, the seven-equation model 
 converges to an incompressible system of equations when the Mach number tends to zero, that is characterized with pressure fluctuations of order $M^2_{k,\infty}$ and the divergent constraint on the velocity: $\div \left(A \mbold u_k \right) = 0$. When adding dissipative 
 terms, as is the case with the entropy viscosity method, the main properties of the low-Mach asymptotic limit must be preserved.
@@ -949,7 +844,7 @@ Using the scaling $\Re_{k,\infty} = \Pe_{k,\infty}^\kappa = \Pe_{k,\infty}^\beta
 %
 \end{subequations}
 %
-where the notation $(fg)_0$ means that we only keep the 0$^{\text{th}}$-order terms in the product $fg$. The set of equations given in \eqt{eq:asympt_equ2} are similar to the multi-D single-phase Euler equations with variable area when seeing $A \alpha_k$ as a pseudo-area \cite{Marco_paper_low_mach}. The leading-order of the Stiffened Gas Equation of State (\eqt{eq:SGEOS_bis}) is given by 
+where the notation $(fg)_0$ means that we only keep the 0$^{\text{th}}$-order terms in the product $fg$. The set of equations given in \eqt{eq:asympt_equ2} are similar to the multi-dimensional single-phase Euler equations with variable area when seeing $A \alpha_k$ as a pseudo-area \cite{Marco_paper_low_mach}. The leading-order of the Stiffened Gas Equation of State (\eqt{eq:SGEOS_bis}) is given by 
 %
 \begin{equation}
 \label{eq:leading_order_sgeos}
@@ -977,7 +872,7 @@ and, at steady state, we have
 \div \left( \mbold u_k A \right)_0  = 0 \, .
 \end{equation}
 %
-That is, the leading-order of the product of velocity and cross section is divergence-free which corresponds to what is obtained when dealing with the multi-D Euler equations with variable area. Note that when assuming a constant cross section $A$, the usual divergence constraint, $\div \mbold u_{k,0}$ is recovered. Also, \eqt{eq:div_free_energy} is slightly modified due to the use of the Stiffened Gas Equation of State in the asymptotic limit. However, the Ideal Gas Equation of State degenerates from the Stiffened Gas Equation of State by simply assuming $P_{k,\infty}$ which yields the usual leading-order single-phase energy equation with constant cross section:
+That is, the leading-order of the product of velocity and cross section is divergence-free which corresponds to what is obtained when dealing with the multi-dimensional Euler equations with variable area. Note that when assuming a constant cross section $A$, the usual divergence constraint, $\div \mbold u_{k,0}$ is recovered. Also, \eqt{eq:div_free_energy} is slightly modified due to the use of the Stiffened Gas Equation of State in the asymptotic limit. However, the Ideal Gas Equation of State degenerates from the Stiffened Gas Equation of State by simply assuming $P_{k,\infty}$ which yields the usual leading-order single-phase energy equation with constant cross section:
 %
 \begin{equation}
 \frac{1}{\gamma P_{k,0}} \frac{d P_0}{dt} = - \div\mbold u_{k,0} 
@@ -1020,205 +915,79 @@ for the energy equation (\eqt{eq:sev_equ-with-diss-terms-ener_case_one_scaled}) 
 choice, option (c), has the proper scaling: in this case, only the dissipation terms involving 
 $\gradd{s,*} \mbold u_k^*$ scale as $1/M_{k,\infty}^2$ since $\Re_{k,\infty} = M_{k,\infty}^2$, leaving the 
 regularization of the void fraction and continuity equations unaffected because $\Pe_{k,\infty}^\beta = \Pe_{k,\infty}^\kappa =1$.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{An all-speed formulation of the viscosity coefficients}\label{eq:visc-formulation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-The study of the above limit cases yields two different possible scalings for the phasic Reynolds number: 
-$\Re_{k,\infty} = 1$ in the low-Mach limit and $\Re_{k,\infty}  = M_{k,\infty}^2$ for non-isentropic flows, 
-whereas the phasic numerical P\'eclet numbers ($\Pe_{k,\infty}^\kappa$ and $\Pe_{k,\infty}^\beta$) always scales as one. In order to have a stabilization method 
-valid for a wide range of Mach numbers, from very low-Mach to supersonic flows, these two scalings should 
-be combined in a unique definition. 
-
-We begin with the  normalization parameter $\norm_{P,k}^\kappa$. Using the 
-definition of the viscosity coefficients given in \eqt{eq:visc_definition-sct4} and the scaling of 
-\eqt{eq:norm_param}, it can be shown that:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{An all-speed formulation of the viscosity coefficients}\label{eq:visc-formulation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%The study of the above limit cases yields two different possible scalings for the phasic Reynolds number: 
+%$\Re_{k,\infty} = 1$ in the low-Mach limit and $\Re_{k,\infty}  = M_{k,\infty}^2$ for non-isentropic flows, 
+%whereas the phasic numerical P\'eclet numbers ($\Pe_{k,\infty}^\kappa$ and $\Pe_{k,\infty}^\beta$) always scales as one. In order to have a stabilization method 
+%valid for a wide range of Mach numbers, from very low-Mach to supersonic flows, these two scalings should 
+%be combined in a unique definition. 
 %
-\begin{equation}
-\label{eq:norm_relation}
-\kappa_{k,\infty} = \frac{ \rho_{k,\infty} c_{k,\infty}^2 u_{k,\infty} L_{k,\infty} }{ \norm_{k,P,\infty}^{\kappa} } \, ,
-\end{equation}
-%
-where $\norm_{k,P,\infty}$ is the reference far-field quantity for the normalization parameter $\norm_{k,P}$. 
-Substituting \eqt{eq:norm_relation} into \eqt{eq:ref_numb} and recalling that the phasic numerical P\'eclet 
-number scales as unity, we obtain:
-%
-\begin{equation}
-\label{eq:norm_relation_bis}
-\norm_{k,P,\infty}^{\kappa} = \Pe_{k,\infty} \rho_{k,\infty} c_{k,\infty}^2 = \rho_{k,\infty} c_{k,\infty}^2 \, .
-\end{equation}
-%
-\eqt{eq:norm_relation_bis} provides a proper normalization factor to define the $\kappa_k$ viscosity coefficient.
-%
-The derivation for $\norm_{k,P}^\mu$ is similar and yields
-\begin{align}
-\label{eq:norm_ent2}
-&\norm_{k,P,\infty}^\mu = \Re_{k,\infty} \rho_{k,\infty} c_{k,\infty}^2 =  \nonumber \\ 
-& \ \ \ \ \ \ \ \ \ \left\{
-\begin{array}{ll}
- \rho_{k,\infty} ||u_{k,\infty} ||^2       & \text{ for non-isentropic flows} \\
- \rho_{k,\infty} c_{k,\infty}^2 & \text{ for low-Mach flows}
-\end{array}
-\right. \,.
-\end{align}
-A smooth function to transition between these two states is as follows: % the shifted sigmoid function
-\begin{equation}
-% \sigma(M) = \frac{1}{1+\exp\big(-(M-M^\text{thresh})\big)} \,,
- \sigma(M_k) = \frac{\tanh\big(a_k(M_k-M_k^\text{thresh})\big) + | \tanh\big(a_k(M_k-M_k^\text{thresh})\big) | }{2} \,,
-\end{equation}
-where $M_k^\text{thresh}$ is a phasic threshold Mach number value beyond which the flow is no longer 
-considered  to be low-Mach (we use $M_k^\text{thresh}=0.05$), $M_k$ is the local Mach number, 
-and the scalar $a_k$ determines how rapidly the transition from  
-$\norm_{k,P,\infty}^\mu= \rho_k c_k^2$ to $\norm_{k,P}^\mu=\rho_k \| \mbold u_k \|^2$ occurs in the vicinity of $M_k^\text{thresh}$ (we use $a_k = 3$). 
-It is easy to verify that
-\begin{equation}
-\label{eq:norm_ent3}
-\norm_{k,P}^\mu = (1-\sigma(M_k)) \rho_k c_k^2  + \sigma(M_k)  \rho_k ||\mbold u_k ||^2  
-\end{equation}
-satisfies \eqt{eq:norm_ent2}.
-
-It remains to determine the normalization parameter, $\norm_{\alpha,k}^\beta$, for the viscosity coefficient $\beta_k$, by using the scaling of the P\'eclet number $\Pe_{k,\infty}^\beta$ derived from the low-Mach asymptotic limit. Following the same reasoning as above, it yields:
-%
-\begin{equation}
-\label{eq:norm_relation_beta}
-\norm_{k,\alpha,\infty}^\beta = 1 \ ,
-\end{equation}
-%
-where $\norm_{k,\alpha,\infty}$ is the reference far-field quantity for the normalization parameter $\norm_{\alpha,k}$ used in the definition of the viscosity coefficient $\beta_k$ (\eqt{eq:def-beta-sen-sect4}). The normalization parameter scales as one. Then, it is chosen to use the same scaling as for Burger's equation \cite{jlg2} e.g.
-%
-\begin{equation}
-\label{eq:norm_relation_beta2}
-\norm_{k,\alpha}^\beta =  || \eta (\alpha_k) - \bar{\eta}(\alpha_k) ||_\infty\ ,
-\end{equation}
-%
-where $\bar{\eta}$ is the average value of the entropy $\eta$ over the entire computational domain.
-
-At this point of the paper, we have derived a viscous regularization for the seven-equation model consistent with the entropy minimum principle, and defined viscosity coefficients for all-Mach flows. 
-%After describing the discretization scheme used (\sct{sec:solution_tech}), $1$-D numerical tests are performed in order to demonstrate the accuracy of our numerical method in \sct{sec:results}.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section{Discretizations and Solution Techniques} \label{sec:solution_tech}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%In this section, we briefly describe the spatial and temporal discretizations and the solution techniques 
-%used to solve the system of equations \eqt{eq:sev_equ-with-diss-terms}. For conciseness, we re-write the system of 
-%equations in the following form:
+%We begin with the  normalization parameter $\norm_{P,k}^\kappa$. Using the 
+%definition of the viscosity coefficients given in \eqt{eq:visc_definition-sct4} and the scaling of 
+%\eqt{eq:norm_param}, it can be shown that:
+%%
 %\begin{equation}
-%\label{eq:form}
-%\partial_t \mathbf{U}_k + \div \mathbf{F}_k \left( \mathbf{U}_k \right) = \mathbf{R}_k \left( \mathbf{U}_k \right) + \mathbf{N}_k \left( \mathbf{U}_k \right) + \div \mathbf{D}_k(\mathbf{U}_k) \grad \mathbf{U}_k
-%\end{equation}
-%where $\mathbf{U}_k=[(\alpha A )_k, \, (\alpha \rho A)_k,\, (\alpha \rho \mbold{u} A)_k,\, (\alpha \rho E A)_k]^T$ is the solution vector, $\mathbf{F}_k \left( \mathbf{U}_k \right)$ denotes the inviscid flux, $\div D_k (\mathbf{U}_k) \grad \mathbf{U}_k$ is the dissipative flux and $\mathbf{N}_k \left( \mathbf{U}_k \right)$ and $\mathbf{R}_k \left( \mathbf{U}_k \right)$ contain the non-conservative and relaxation terms, respectively. 
-%\begin{equation}
-%  \mathbf{F} \equiv
-%  \begin{bmatrix}
-%      0     \\
-%    ( \alpha \rho u A )_k     \\
-%    \left[ \alpha \left(\rho u^2 + P \right) A \right ]_k  \\
-%    \left[ \alpha u (\rho E + P) A \right]_k
-%  \end{bmatrix},
-%%\end{equation}
-%%\begin{equation}
-%  \mathbf{N} \equiv
-%  \begin{bmatrix}
-%      - A \mbold{u}_{int} \cdot \grad \alpha_k     \\
-%    0     \\
-%    \alpha_k P_k \grad A + P_{int} A \grad \alpha_k  \\
-%    P_{int} A \mbold{u}_{int} \cdot \grad \alpha_k
-%  \end{bmatrix} \nonumber
-%\end{equation}
-%\begin{equation}
-%\text{and }
-%  \mathbf{R} \equiv
-%  \begin{bmatrix}
-%      A \mu_P \left( P_k - P_j \right)     \\
-%    0     \\
-%    A \lambda_u \left( \mbold u_j - \mbold u_k \right) \\
-%    - \bar{P}_{int} A \mu_P \left( P_k - P_j \right) + \bar{u}_{int} A \lambda_u \left( \mbold u_j - \mbold u_k \right)
-%  \end{bmatrix}. \nonumber
+%\label{eq:norm_relation}
+%\kappa_{k,\infty} = \frac{ \rho_{k,\infty} c_{k,\infty}^2 u_{k,\infty} L_{k,\infty} }{ \norm_{k,P,\infty}^{\kappa} } \, ,
 %\end{equation}
 %%
-%%===================================================================================================
-%\subsection{Spatial and Temporal Discretizations} \label{sec:disc}
-%%===================================================================================================
-%The system of equations given in \eqt{eq:form} is discretized using a continuous Galerkin finite element 
-%method and temporal integrators available through the MOOSE multiphysics framework \cite{MOOSE}.
-%%---------------------------------------------------------------------------------------------------
-%\subsubsection{Continuous Finite Elements} 
-%%---------------------------------------------------------------------------------------------------
-%In order to apply the continuous finite element method, \eqt{eq:form} is multiplied by a test function 
-%$\mathbf W(\mbold{r})$, integrated by parts and each integral is decomposed into a sum of integrals over 
-%each element $K$ of the discrete mesh $\Omega$. The following weak form is obtained:
-%\begin{multline}\label{eq:cfem}
-%\sum_K \int_{K} \partial_t \mathbf U \, \mathbf W - \sum_K \int_{K} \mathbf F (\mathbf U) \cdot \grad \mathbf W + \int_{\partial \Omega} \mathbf F (\mathbf U) \cdot \mbold{n} \mathbf W - \sum_K \int_{K} \left( \mathbf N (\mathbf U) + \mathbf R (\mathbf U) \right) \mathbf W  \\
-%+ \sum_K \int_{K} D(\mathbf U) \grad \mathbf U \cdot \grad \mathbf W 
-%- \int_{\partial \Omega} D(\mathbf U) \grad \mathbf U \cdot \mbold{n} \, \mathbf W = 0 \,.
-%\end{multline}
-%The integrals over the elements $K$ are evaluated using a numerical quadrature. The MOOSE framework 
-%provides a wide range of test functions and quadrature rules. Linear Lagrange polynomials are employed 
-%as test functions in the results section. Second-order spatial convergence will be demonstrated for smooth solutions. 
+%where $\norm_{k,P,\infty}$ is the reference far-field quantity for the normalization parameter $\norm_{k,P}$. 
+%Substituting \eqt{eq:norm_relation} into \eqt{eq:ref_numb} and recalling that the phasic numerical P\'eclet 
+%number scales as unity, we obtain:
 %%
-%%---------------------------------------------------------------------------------------------------
-%\subsubsection{Temporal integration} 
-%%---------------------------------------------------------------------------------------------------
-%The MOOSE framework offers both first- and second-order explicit and implicit temporal integrators. 
-%In all of the numerical examples presented in \sct{sec:results}, the temporal derivative  will be 
-%evaluated using the second-order, backward difference temporal integrator BDF2 \cite{bdf2}. By considering three 
-%consecutive solutions, $\mathbf U^{n-1}$, $\mathbf U^n$ and $\mathbf U^{n+1}$, at times $t^{n-1}$, $t^n$ and $t^{n+1}$, respectively, BDF2 can be expressed as:
 %\begin{equation}
-%\label{eq:BDF2}
-%\int_{K} \partial_t \mathbf U \, \mathbf  W = \int_{K} \left( \omega_0 \mathbf U^{n+1}  + \omega_1 \mathbf U^n + \omega_2 \mathbf U^{n-1} \right) \mathbf W \,,
+%\label{eq:norm_relation_bis}
+%\norm_{k,P,\infty}^{\kappa} = \Pe_{k,\infty} \rho_{k,\infty} c_{k,\infty}^2 = \rho_{k,\infty} c_{k,\infty}^2 \, .
 %\end{equation}
 %%
-%with
-%\begin{multline}
-%\omega_0 =\frac{2\Delta t^{n+1}+\Delta t^n}{\Delta t^{n+1} \left( \Delta t^{n+1}+\Delta t^n \right)} \, , \ 
-%\omega_1 = -\frac{\Delta t^{n+1}+\Delta t^n}{\Delta t^{n+1} \Delta t^n}  \, , \\
-%\text{ and } \omega_2 = \frac{\Delta t^{n+1}}{\Delta t^n \left( \Delta t^{n+1} + \Delta t^n \right)} \nonumber
-%\end{multline}
-%where $\Delta t^{n} = t^n-t^{n-1}$ and $\Delta t^{n+1} = t^{n+1}-t^{n}$.
-%%---------------------------------------------------------------------------------------------------
-%\subsection{Boundary conditions} \label{sec:bc}
-%%---------------------------------------------------------------------------------------------------
-%Boundary conditions for the seven-equation model are challenging because of the wave-dominated nature of the equations but also because of the non-conservative form of the void fraction equation. 
-%%Unlike the continuity, momentum and energy equations of each phase, the flux of the void fraction equation cannot be integrated by part because it is not written in a conservative form. 
-%The boundary condition for the void fraction equation (\eqt{eqn:multi-d-7-eqn-liq-vol}) is treated independently of the other equations (continuity, momentum and energy for each phase) for two reasons: (i) it is a simple advection equation with the real eigenvalue $\mbold u_{int}$, and (ii), the hyperbolic flux, $\mbold u_{int} \cdot \grad \alpha_k$, is not integrated by part since not under a conservative form. The sign of the dot product between the eigenvalue and the outward normal to the boundary, $\mbold u_{int} \cdot \mbold n$, determines the nature of the boundary: negative for an inlet and positive for an outlet. For the later case, the physical information exits the computational domain and does not require any particular treatment. In the former case, the physical information enters the computational domain which requires to specify a value for the void fraction. Since there is no flux at the boundary coming from the integration by part of the hyperbolic flux, the boundary value is imposed by using a Dirichlet boundary condition in the void fraction equation.   
-%Our implementation of the boundary conditions for the continuity, momentum and energy equations, is inspired by the method described in \cite{SEM} and was adapted for a time implicit solver \cite{Marco_dissertation}. The boundary type is identified from the study of the sign of the eigenvalues that depends on the Mach number. The numerical results presented in \sct{sec:results} were all obtained by using subsonic stagnation and static pressure boundary conditions for the inlet and outlet, respectively. The boundary flux is computed from the supplied variables at the boundary and also by iterating on a given number of variables (depending on the sign of the eigenvalues) though the implicit solver to transmit information from inside the computational domain toward the boundary. 
-%%After recasting the system of equation using the primitive variables, a characteristic decomposition is performed to compute the appropriate values of the pressure, density and velocity of each phase, used in the flux at the boundaries. 
-%%\tcb{I will give more details in the future}
-%%\tcr{say a bit more, give 1-2 sentences to describe how to impose subsonic/supersonic inlet/outlet BCs}. \tcb{Is it enough?}
-%
-%%For each numerical solution presented in \sct{sec:results}, the type of boundary conditions used 
-%%will be specified and taken among the following: supersonic inlet, subsonic inlet (stagnation pressure boundary), 
-%%subsonic outlet, and supersonic outlet. 
-%%and subsonic inlet \tcr{???} (static pressure boundary). \\
-%The artificial diffusion coefficient $\mbold D(\mathbf  U)$ is set to zero at the boundary of the computational 
-%domain so that the boundary term 
-%$\int_{\partial \Omega} \mbold D(\mathbf  U) \grad \mathbf  U \cdot \mbold{n} \, \mathbf W$ stemming from the 
-%integration by parts of the artificial dissipative terms in \eqt{eq:cfem} is ignored.
-%%---------------------------------------------------------------------------------------------------
-%\subsection{Solver} \label{sec:solver}
-%%---------------------------------------------------------------------------------------------------
-%A Jacobian-free-Newton-Krylov (JFNK) method is used to solve for the solution at the end of each time step. 
-%An approximate Jacobian matrix of the discretized equations was derived and implemented. Obtaining the 
-%matrix entries requires that the partial derivatives of pressure with respect to the conservative variables 
-%be known (this is relatively simple for the stiffened and ideal gas equations of state but may be more 
-%complex for general equations of state). The contributions of the artificial dissipative terms to the 
-%Jacobian matrix are approximated by lagging the viscosity coefficients (computing them with the previous solution). 
-%For instance, this is shown in \eqt{eq:jac_diss_term} for the dissipative terms present in the continuity equation:
+%\eqt{eq:norm_relation_bis} provides a proper normalization factor to define the $\kappa_k$ viscosity coefficient.
+%%
+%The derivation for $\norm_{k,P}^\mu$ is similar and yields
+%\begin{align}
+%\label{eq:norm_ent2}
+%&\norm_{k,P,\infty}^\mu = \Re_{k,\infty} \rho_{k,\infty} c_{k,\infty}^2 =  \nonumber \\ 
+%& \ \ \ \ \ \ \ \ \ \left\{
+%\begin{array}{ll}
+% \rho_{k,\infty} ||u_{k,\infty} ||^2       & \text{ for non-isentropic flows} \\
+% \rho_{k,\infty} c_{k,\infty}^2 & \text{ for low-Mach flows}
+%\end{array}
+%\right. \,.
+%\end{align}
+%A smooth function to transition between these two states is as follows: % the shifted sigmoid function
 %\begin{equation}
-%\label{eq:jac_diss_term}
-%\frac{\partial}{\partial \mathbf U} \left( \kappa \grad \rho \cdot \grad W \right) \simeq \kappa \div \frac{\partial \rho}{\partial \mathbf U} \grad W ,
-%\end{equation}  
-%where $\mathbf  U$ denotes any of the conservative variables and $W$ denotes the component of $\mathbf  W$ associated with the 
-%continuity equation. In the above, we have neglected $\frac{\partial \kappa}{\partial \mathbf U}$.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\section{$1$-D numerical results}\label{sec:results}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{itemize}
-%\item simple advection problem
-%\item shock tube with two independent fluids: exact solution and could do convergence test for this particular test
-%\item shock tube with infinite relaxation coefficients
-%\item $1$-D nozzle with two independent fluids
-%\item $1$-D nozzle with infinite relaxation coefficients
-%\item $1$-D nozzle with infinite relaxation coefficients,  mass and heat transfer
-%\end{itemize}
+%% \sigma(M) = \frac{1}{1+\exp\big(-(M-M^\text{thresh})\big)} \,,
+% \sigma(M_k) = \frac{\tanh\big(a_k(M_k-M_k^\text{thresh})\big) + | \tanh\big(a_k(M_k-M_k^\text{thresh})\big) | }{2} \,,
+%\end{equation}
+%where $M_k^\text{thresh}$ is a phasic threshold Mach number value beyond which the flow is no longer 
+%considered  to be low-Mach (we use $M_k^\text{thresh}=0.05$), $M_k$ is the local Mach number, 
+%and the scalar $a_k$ determines how rapidly the transition from  
+%$\norm_{k,P,\infty}^\mu= \rho_k c_k^2$ to $\norm_{k,P}^\mu=\rho_k \| \mbold u_k \|^2$ occurs in the vicinity of $M_k^\text{thresh}$ (we use $a_k = 3$). 
+%It is easy to verify that
+%\begin{equation}
+%\label{eq:norm_ent3}
+%\norm_{k,P}^\mu = (1-\sigma(M_k)) \rho_k c_k^2  + \sigma(M_k)  \rho_k ||\mbold u_k ||^2  
+%\end{equation}
+%satisfies \eqt{eq:norm_ent2}.
+%
+%It remains to determine the normalization parameter, $\norm_{\alpha,k}^\beta$, for the viscosity coefficient $\beta_k$, by using the scaling of the P\'eclet number $\Pe_{k,\infty}^\beta$ derived from the low-Mach asymptotic limit. Following the same reasoning as above, it yields:
+%%
+%\begin{equation}
+%\label{eq:norm_relation_beta}
+%\norm_{k,\alpha,\infty}^\beta = 1 \ ,
+%\end{equation}
+%%
+%where $\norm_{k,\alpha,\infty}$ is the reference far-field quantity for the normalization parameter $\norm_{\alpha,k}$ used in the definition of the viscosity coefficient $\beta_k$ (\eqt{eq:def-beta-sen-sect4}). The normalization parameter scales as one. Then, it is chosen to use the same scaling as for Burger's equation \cite{jlg2} e.g.
+%%
+%\begin{equation}
+%\label{eq:norm_relation_beta2}
+%\norm_{k,\alpha}^\beta =  || \eta (\alpha_k) - \bar{\eta}(\alpha_k) ||_\infty\ ,
+%\end{equation}
+%%
+%where $\bar{\eta}$ is the average value of the entropy $\eta$ over the entire computational domain.
+%
+%At this point of the paper, we have derived a viscous regularization for the seven-equation model consistent with the entropy minimum principle, and defined viscosity coefficients for all-Mach flows. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{mybibfile}
@@ -1228,7 +997,7 @@ At this point of the paper, we have derived a viscous regularization for the sev
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{appendices}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Entropy equation for the multi-D seven equation model without viscous regularization}\label{app:sev-equ-model-entropy}
+\section{Entropy equation for the multi-dimensional seven equation model without viscous regularization}\label{app:sev-equ-model-entropy}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 This appendix provides the steps that lead to the derivation of the phasic entropy equation of the seven-equation model \cite{SEM}. For the purpose of this appendix, two phases are considered and denoted by the indexes $j$ and $k$. In the seven-equation model, each phase obeys to the following set of equations $(\eqt{eq:sev_equ-app})$:
 \begin{subequations}
