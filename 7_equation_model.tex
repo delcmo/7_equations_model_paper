@@ -271,8 +271,7 @@ The Seven-Equation two-phase flow Model employed in this paper is obtained by as
   % liquid momentum
   \frac{\partial \left( \alpha \rho \mbold u \right)_{k} A}{\partial t}
   + \div \left[ \alpha_{k} A \left( \rho \mbold u \otimes \mbold u + P \mathbb{I} \right)_{k} \right]
-  &= P_{int} A \grad \alpha_{k} + P_{k} \alpha_{k} \grad A
-    \nonumber
+  = P_{int} A \grad \alpha_{k} + P_{k} \alpha_{k} \grad A
   \\
   &+ A \lambda_u (\mbold u_{j} - \mbold u_{k})
   - \Gammakj A_{int} \mbold u_{int} A \,,
@@ -281,8 +280,7 @@ The Seven-Equation two-phase flow Model employed in this paper is obtained by as
   % liquid total energy
   \frac{\partial \left( \alpha \rho E \right)_{k} A}{\partial t}
   + \div \left[ \alpha_{k} \mbold u_{k} A \left( \rho E + P \right)_{k} \right]
-  &= P_{int} A \mbold u_{int} \cdot \grad \alpha_{k} - \bar{P}_{int} A \mu_P (P_{k} - P_{j})
-        \nonumber
+  = P_{int} A \mbold u_{int} \cdot \grad \alpha_{k} - \bar{P}_{int} A \mu_P (P_{k} - P_{j})
   \\
   + A \lambda_u \bar{\mbold u}_{int} \cdot (\mbold u_{j} - \mbold u_{k})
 &  + \Gammakj A_{int} \left( \frac{P_{int}}{\rho_{int}} - H_{k, int} \right) A  \,,
@@ -462,7 +460,7 @@ For the purpose of this section, the system of equations given in \eqt{eq:sev_eq
 \end{align}
 \begin{align}
 \partial_t \left( \alpha_k \rho_k E_k A \right) + \div \left[ \alpha_k A \mbold u_k \left( \rho_k E_k + P_k \right) \right] &=\nonumber\\
-A P_{int} \mbold u_{int} \cdot \grad \alpha_k - \mu_P \bar{P}_{int} \left( P_k-P_j \right) &+ A \lambda_u \bar{\mbold u}_{int} \cdot \left( \mbold u_j - \mbold u_k \right)
+A P_{int} \mbold u_{int} \cdot \grad \alpha_k - \mu_P \bar{P}_{int} A \left( P_k-P_j \right) &+ A \lambda_u \bar{\mbold u}_{int} \cdot \left( \mbold u_j - \mbold u_k \right)
 \end{align}
 \end{subequations}
 %
@@ -471,22 +469,22 @@ In order to apply the entropy viscosity method, dissipation terms are added to e
 %
 \begin{subequations}\label{eq:sev_equ-with-diss-terms}
 \begin{align}\label{eq:sev_equ-with-diss-terms-vf}
-\partial_t \left( \alpha_k  A\right) + A \mbold u_{int} \cdot \grad \alpha_k = A \mu_P \left( P_k - P_j \right) + \div \mbold l_k
+\partial_t \left( \alpha_k  A\right) + A \mbold u_{int} \cdot \grad \alpha_k = A_{int} A \mu_P \left( P_k - P_j \right) + \div \mbold l_k
 \end{align}
 \begin{align}\label{eq:sev_equ-with-diss-terms-cont}
 \partial_t \left( \alpha_k \rho_k A \right) + \div \left( \alpha_k \rho_k \mbold u_k A \right) = \div \mbold f_k
 \end{align}
-\begin{align}\label{eq:sev_equ-with-diss-terms-mom}
-\partial_t \left( \alpha_k \rho_k \mbold u_k A \right) + \div \left[ \alpha_k A \left( \rho_k \mbold u_k \otimes \mbold u_k + P_k \mathbb{I} \right) \right] &=\nonumber\\
-\alpha_k P_k \grad A + P_{int} A \grad \alpha_k &+ A \lambda_u \left( \mbold u_j - \mbold u_k \right) + \div \mathbb{g}_k
-\end{align}
-\begin{align}\label{eq:sev_equ-with-diss-terms-ener}
-\partial_t \left( \alpha_k \rho_k E_k A \right) + \div \left[ \alpha_k A \mbold u_k \left( \rho_k E_k + P_k \right) \right] &= \nonumber \\
+\begin{multline}\label{eq:sev_equ-with-diss-terms-mom}
+\partial_t \left( \alpha_k \rho_k \mbold u_k A \right) + \div \left[ \alpha_k A \left( \rho_k \mbold u_k \otimes \mbold u_k + P_k \mathbb{I} \right) \right] =\\
+\alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j - \mbold u_k \right) + \div \mathbb{g}_k
+\end{multline}
+\begin{multline}\label{eq:sev_equ-with-diss-terms-ener}
+\partial_t \left( \alpha_k \rho_k E_k A \right) + \div \left[ \alpha_k A \mbold u_k \left( \rho_k E_k + P_k \right) \right] = \\
 P_{int} A \mbold u_{int} \cdot \grad \alpha_k -
-\mu_P \bar{P}_{int} \left( P_k-P_j \right) &+ 
-A \lambda_u \bar{\mbold u}_{int} \cdot \left( \mbold u_j - \mbold u_k \right) \nonumber \\
-&+ \div \left( \mbold h_k + \mbold u \cdot \mathbb{g}_k \right)
-\end{align}
+\mu_P A  \bar{P}_{int} \left( P_k-P_j \right) + \\
+A \lambda_u \bar{\mbold u}_{int} \cdot \left( \mbold u_j - \mbold u_k \right)
++ \div \left( \mbold h_k + \mbold u \cdot \mathbb{g}_k \right)
+\end{multline}
 \end{subequations}
 %
 where $\mbold f_k$, $\mathbb{g}_k$, $\mbold h_k$ and $\mbold l_k$ are phasic viscous terms to be determined. The next step consists in deriving the entropy equation for the phase $k$, on the same model as what was done in \app{app:sev-equ-model-entropy} but with dissipative terms now present. The steps are as follows:
