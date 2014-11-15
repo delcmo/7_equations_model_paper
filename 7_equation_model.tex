@@ -267,24 +267,24 @@ The Seven-Equation two-phase flow Model employed in this paper is obtained by as
   + \div \left( \alpha \rho \mbold u A\right)_{k}
   &= - \Gammakj A_{int} A \,,
 \end{align}
-\begin{align}
+\begin{multline}
   % liquid momentum
   \frac{\partial \left( \alpha \rho \mbold u \right)_{k} A}{\partial t}
   + \div \left[ \alpha_{k} A \left( \rho \mbold u \otimes \mbold u + P \mathbb{I} \right)_{k} \right]
   = P_{int} A \grad \alpha_{k} + P_{k} \alpha_{k} \grad A
   \\
-  &+ A \lambda_u (\mbold u_{j} - \mbold u_{k})
+  + A \lambda_u (\mbold u_{j} - \mbold u_{k})
   - \Gammakj A_{int} \mbold u_{int} A \,,
-\end{align}
-\begin{align}
+\end{multline}
+\begin{multline}
   % liquid total energy
   \frac{\partial \left( \alpha \rho E \right)_{k} A}{\partial t}
   + \div \left[ \alpha_{k} \mbold u_{k} A \left( \rho E + P \right)_{k} \right]
   = P_{int} A \mbold u_{int} \cdot \grad \alpha_{k} - \bar{P}_{int} A \mu_P (P_{k} - P_{j})
   \\
   + A \lambda_u \bar{\mbold u}_{int} \cdot (\mbold u_{j} - \mbold u_{k})
-&  + \Gammakj A_{int} \left( \frac{P_{int}}{\rho_{int}} - H_{k, int} \right) A  \,,
-\end{align}
+  + \Gammakj A_{int} \left( \frac{P_{int}}{\rho_{int}} - H_{k, int} \right) A  \,,
+\end{multline}
 \end{subequations}
 %
 where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the density, the velocity vector and the total specific energy of phase $k$, respectively. The phasic pressure $P_k$ is computed from an equation of state. The cross section of the geometry is denoted by $A$ and is only spatially dependent. $A$ is present for completeness of the presentation and is set to 1 for most applications; however, nozzle flow problems can be solved using the one-dimensional version of the equation and setting $A$ to the cross-sectional area of the nozzle. The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively; they are defined in \eqt{eq:int_variables_def}.
@@ -325,7 +325,7 @@ volume of a two-phase mixture), $A_{int}$, is typically dependent upon flow regi
 A_{int} = A_{int}^{max} \left[ 6.75 \left(1-\alpha_{liq} \right)^2 \alpha_{liq} \right],
 \end{equation}
 % 
-with $A_{int}^{max} = 5100$ $m^2 / m^3$. With this definition, the interfacial area is zero in the limits $\alpha_{k} = 0$ and $\alpha_{k} = 1$. Lastly, $\Gammakj$ is the net mass transfer rate per unit interfacial area from phase $j$ to phase $k$ \tcr{not the opposite?}. Its expression, given in \eqt{eq:mass_transfer}, is obtained by considering a vaporization/condensation process that is dominated by heat diffusion at the interface \cite{SEM, BerryMarco_2014}:
+with $A_{int}^{max} = 5100$ $m^2 / m^3$. With this definition, the interfacial area is zero in the limits $\alpha_{k} = 0$ and $\alpha_{k} = 1$. Lastly, $\Gammakj$ is the net mass transfer rate per unit interfacial area from phase $k$ to phase $j$ \tcr{not the opposite?} \tcb{done}. Its expression, given in \eqt{eq:mass_transfer}, is obtained by considering a vaporization/condensation process that is dominated by heat diffusion at the interface \cite{SEM, BerryMarco_2014}:
 %
 \begin{align} \label{eq:mass_transfer}
   \Gammakj = \frac{h_{T,  k} \left( T_{k} - T_{int} \right) + h_{T,  j} \left( T_{j} - T_{int} \right)}{L_v \left( T_{int} \right)} ,
