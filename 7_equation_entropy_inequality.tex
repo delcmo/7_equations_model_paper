@@ -1,0 +1,259 @@
+%%
+%% This is file `elsarticle-template-num.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% elsarticle.dtx  (with options: `numtemplate')
+%% 
+%% Copyright 2007, 2008 Elsevier Ltd.
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% -------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+
+%\documentclass[preprint,12pt]{elsarticle}
+\documentclass[preprint,10pt]{elsarticle}
+%\documentclass[final,3p,times]{elsarticle} 
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% if you use PostScript figures in your article
+%% use the graphics package for simple commands
+\usepackage{float}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{appendix}
+%% or use the graphicx package for more complicated commands
+\usepackage{graphicx}
+%% or use the epsfig package if you prefer to use the old commands
+%% \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols 
+%% The amsthm package provides extended theorem environments
+\usepackage{amssymb}
+\usepackage{amsmath}
+% more math
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{amsbsy}
+\usepackage{mathbbol} 
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+\usepackage{lineno}
+
+\journal{Journal of Comp. Phys.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% operators
+\renewcommand{\div}{\mbold{\nabla}\! \cdot \!}
+\newcommand{\grad}{\mbold{\nabla}}
+\newcommand{\divv}[1]{\boldsymbol{\nabla}^{#1}\! \cdot \!}
+\newcommand{\gradd}[1]{\vec{\nabla}^{#1}}
+\newcommand{\mbold}[1]{\boldsymbol#1}
+% latex shortcuts
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bal}{\begin{align}}
+\newcommand{\eali}{\end{align}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+% DGFEM commands
+\newcommand{\jmp}[1]{[\![#1]\!]}                     % jump
+\newcommand{\mvl}[1]{\{\!\!\{#1\}\!\!\}}             % mean value
+\newcommand{\keff}{\ensuremath{k_{\textit{eff}}}\xspace}
+% shortcut for domain notation
+\newcommand{\D}{\mathcal{D}}
+% vector shortcuts
+\newcommand{\vo}{\vec{\Omega}}
+\newcommand{\vr}{\vec{r}}
+\newcommand{\vn}{\vec{n}}
+\newcommand{\vnk}{\vec{\mathbf{n}}}
+\newcommand{\vj}{\vec{J}}
+\newcommand{\eig}[1]{\| #1 \|_2}
+%
+\newcommand{\EI}{\mathcal{E}_h^i}
+\newcommand{\ED}{\mathcal{E}_h^{\partial \D^d}}
+\newcommand{\EN}{\mathcal{E}_h^{\partial \D^n}}
+\newcommand{\ER}{\mathcal{E}_h^{\partial \D^r}}
+\newcommand{\reg}{\textit{reg}}
+%
+\newcommand{\norm}{\textrm{norm}}
+\renewcommand{\Re}{\textrm{Re}}
+\newcommand{\Pe}{\textrm{P\'e}}
+\renewcommand{\Pr}{\textrm{Pr}}
+%
+\newcommand{\resi}{R}
+%\newcommand{\resinew}{\tilde{D}_e}
+\newcommand{\resinew}{\widetilde{\resi}}
+\newcommand{\resisource}{\widetilde{\resi}^{source}}
+\newcommand{\matder}[1]{\frac{\textrm{D} #1}{\textrm{D} t}}
+%
+% extra space
+\newcommand{\qq}{\quad\quad}
+% common reference commands
+\newcommand{\eqt}[1]{Eq.~(\ref{#1})}                     % equation
+\newcommand{\fig}[1]{Fig.~\ref{#1}}                      % figure
+\newcommand{\tbl}[1]{Table~\ref{#1}}                     % table
+\newcommand{\sct}[1]{Section~\ref{#1}}                   % section
+\newcommand{\app}[1]{Appendix~\ref{#1}}                   % appendix
+%
+\newcommand{\ie}{i.e.,\@\xspace}
+\newcommand{\eg}{e.g.,\@\xspace}
+\newcommand{\psc}[1]{{\sc {#1}}}
+\newcommand{\rs}{\psc{R7}\xspace}
+%
+\newcommand\br{\mathbf{r}}
+%\newcommand{\tf}{\varphi}
+\newcommand{\tf}{b}
+%
+\newcommand{\tcr}[1]{\textcolor{red}{#1}}
+\newcommand{\tcb}[1]{\textcolor{blue}{#1}}
+\newcommand{\tcg}[1]{\textcolor{green}{#1}}
+\newcommand{\mt}[1]{\marginpar{ {\tiny #1}}}
+%
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   BEGIN DOCUMENT
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\linenumbers
+A phase $k$ in interaction with a phase $j$ obeys the following mass, momentum and energy balance equations, supplemented by a non-conservative volume-fraction equation:
+%
+\begin{subequations}\label{eq:liq-7-eqn-sect5}
+\begin{align}
+  % liquid volume fraction
+  \label{eqn:multi-d-7-eqn-liq-vol}
+  \frac{\partial \alpha_{k} }{\partial t} + \mbold u_{int} \cdot \grad \alpha_k 
+  &= \tcb{\mu_P (P_k - P_j)} + \tcr{\mathbb{S}_k}
+\end{align}
+\begin{align}
+  % liquid mass conservation
+  \label{multi-d-7-equ-liq}
+  \frac{\partial \left( \alpha \rho \right)_k }{\partial t}
+  + \div \left( \alpha \rho \mbold u \right)_k
+  &= \tcr{\mathbb{\Gamma}_k}
+\end{align}
+\begin{multline}
+  % liquid momentum
+  \frac{\partial \left( \alpha \rho \mbold u \right)_k }{\partial t}
+  + \div \left[ \alpha_k  \left( \rho \mbold u \otimes \mbold u + P \mathbb{I} \right)_k \right] =
+  \\
+   \tcg{P_{int} \grad \alpha_k}
+  + \tcb{\lambda_u (\mbold u_j - \mbold u_k)} + \tcr{\mathbb{\mbold M}_k}
+\end{multline}
+\begin{multline}
+  % liquid total energy
+  \frac{\partial \left( \alpha \rho E \right)_k }{\partial t}
+  + \div \left[ \alpha_k \mbold u_k  \left( \rho E + P \right)_k \right]
+  = \tcg{P_{int} \mbold u_{int} \cdot  \grad \alpha_k }
+  \\
+  - \tcb{\bar{P}_{int} \mu_P (P_k - P_j)}
+  + \tcb{\lambda_u \bar{\mbold u}_{int} \cdot (\mbold u_j - \mbold u_k)} + \tcr{\mathbb{E}_k }
+\end{multline}
+\end{subequations}
+%
+where $\mathbb{S}_k$, $\mathbb{\Gamma}_k$, $\mathbb{M}_k$ and $\mathbb{E}_k$ are exchange terms and a function of the variables of the $k^{th}$ and $j^{th}$ phases. From now on, we omit the blue and green terms that are known to yield positive terms in the entropy residual.
+
+The phasic internal energy equation is derived from the momentum and energy equations to yield:
+%
+\begin{multline}\label{eq:int-energy}
+\alpha_k \rho_k \frac{D e_k}{Dt} + \alpha_k P_k \div \mbold u_k = \mathbb{E}_k - \left( e_k \mathbb{\Gamma}_k - \frac{|| \mbold u ||^2}{2} \mathbb{\Gamma}_k + \mbold u_k \cdot \mathbb{\mbold M}_k  \right) = \mathbb{\hat{E}}_k
+\end{multline}
+%
+The total entropy inequality is the following (by summing over the phases):
+%
+\begin{align}\label{eq:tot-ent-inq}
+\sum_k \left[ \alpha_k \rho_k \frac{D s_k}{Dt} + \mathbb{\Gamma}_k s_k \right] \geq 0
+\end{align}
+%
+where $s_k$ is the phasic entropy function (I took the entropy inequality from Baer and Nunziato and assumed that there is neither radiation nor conduction terms in the energy equation). We now assume that the entropy function is a function of the phasic internal energy, density, velocity and void fraction: $s_k = s_k(e_k, \rho_k, \alpha_k u_k)$ and recast \eqt{eq:tot-ent-inq} using the chain rule to express the material derivative $\frac{D s_k}{Dt}$:
+%
+\begin{multline}\label{eq:tot-ent-inq2}
+\sum_k \left[ \alpha_k \rho_k \left( (s_e)_k \frac{D e_k}{Dt} + (s_\rho)_k \frac{D \rho_k}{Dt} + (s_\alpha)_k \frac{D \alpha_k}{Dt} + (s_u)_k \frac{D u_k}{Dt} \right) \right] + \\\mathbb{\Gamma}_k s_k \geq 0
+\end{multline}
+%
+REMARK: in the NED paper (DEM), the entropy is assumed to be a function of the phasic internal energy and the density only. This choice seems to be valid when only accounting for the pressure and velocity relaxation terms. When including exchange terms between phases, the entropy could depend on other variables and this is something we should investigate.
+
+An expression for the material derivative of the phasic internal energy and density can be derived from \eqt{eq:int-energy} and \eqt{multi-d-7-equ-liq}, respectively. The continuity equation is recast as follows:
+%
+\begin{align}\label{eq:cont-equ}
+\rho_k \frac{D \alpha_k}{Dt} + \alpha_k \frac{D \rho_k}{Dt} + \alpha_k \rho_k \div \mbold u_k = \mathbb{\Gamma}_k
+\end{align}
+% 
+Then, using \eqt{eq:int-energy} and \eqt{eq:cont-equ}, \eqt{eq:tot-ent-inq2} becomes:
+%
+\begin{multline}
+\sum_k \left[ (s_e)_k \left( -\alpha_k P_k \div \mbold u_k + \mathbb{\hat{E}}_k \right) + \rho_k (s_\rho)_k \left( \mathbb{\Gamma}_k - \rho_k \frac{D \alpha_k}{Dt} - \alpha_k \rho_k \div \mbold u_k  \right) \right.+ \\ 
+\left. \alpha_k \rho_k \left( (s_\alpha)_k \frac{D \alpha_k}{Dt} + (s_u)_k \frac{D u_k}{Dt} \right) \right] + \mathbb{\Gamma}_k s_k \geq 0 \nonumber
+\end{multline}
+%
+\begin{multline}\label{eq:tot-ent-inq3}
+\sum_k -\left[ \tcb{\Big ( P_k(s_e)_k + \rho_k^2 (s_\rho)_k \Big ) \div \mbold u_k} + \rho_k \Big ( \alpha_k (s_\alpha)_k - \rho_k (s_\rho)_k \Big ) \frac{D \alpha_k}{Dt} +\right. \\
+\left. \alpha_k \rho_k (s_u)_k \frac{Du_k}{Dt} + \Big ( (s_e)_k \mathbb{\hat{E}}_k + \rho_k (s_\rho)_k \mathbb{\Gamma}_k + s_k \mathbb{\Gamma}_k \Big ) \right] \geq 0 
+\end{multline}
+%
+The first term in blue zeroes out by choosing $P_k(s_e)_k + \rho_k^2 (s_\rho)_k = 0$ which corresponds to what was assumed in the derivation of the viscous regularization for the Seven-Equation Model. Such a choice also implies $(s_e)_k = T_k^{-1}$ and $\rho^2_k (s_\rho)_k = - P_k T_k^{-1}$. We now assume that $(s_u)_k = 0$ since $\frac{D u_k}{Dt}$ can take arbitrary large values that could violate the second thermodynamic law. \eqt{eq:tot-ent-inq3} yields:
+%
+\begin{multline}\label{eq:tot-ent-inq4}
+\sum_k \left[  \Big ( \rho_k\alpha_k (s_\alpha)_k + \frac{P_k}{T_k} \Big ) \frac{D \alpha_k}{Dt}  + \Big ( \frac{1}{T_k} \mathbb{\hat{E}}_k -\frac{P_k}{\rho_kT_k} \mathbb{\Gamma}_k + s_k \mathbb{\Gamma}_k \Big ) \right] \geq 0
+\end{multline}
+%
+The material derivative of the void fraction can be recast using \eqt{eqn:multi-d-7-eqn-liq-vol}:
+%
+\begin{align}\label{eq:mat-derv-vf}
+\frac{D \alpha_k}{Dt} = \partial_t \alpha_k + \mbold u_k \cdot \grad \alpha_k = \mathbb{S}_k + \left( \mbold u_k - \mbold u_{int} \right) c\dot \grad \alpha_k 
+\end{align}
+%
+Owing \eqt{eq:mat-derv-vf}, \eqt{eq:tot-ent-inq4} yields:
+%
+\begin{multline}\label{eq:tot-ent-inq5}
+\sum_k \left[  \Big ( \rho_k\alpha_k (s_\alpha)_k + \frac{P_k}{T_k} \Big ) \Big ( \mathbb{S}_k + (\mbold u_k - \mbold u_{int} ) \cdot \grad \alpha_k \Big)  + \right. \\ \left. \Big  ( \frac{1}{T_k} \mathbb{\hat{E}}_k -\frac{P_k}{\rho_kT_k} \mathbb{\Gamma}_k + s_k \mathbb{\Gamma}_k \Big ) \right] \geq 0
+\end{multline}
+%
+The term $\frac{P_k}{T_k} (\mbold u_k - \mbold u_{int} ) \cdot \grad \alpha_k$ in the above equation combines with the pressure and velocity relaxation terms, that were initially omitted, to yield positive terms. Then, we are left with:
+%
+\begin{multline}\label{eq:tot-ent-inq6}
+\sum_k \left[  \rho_k\alpha_k (s_\alpha)_k \Big ( \mathbb{S}_k + (\mbold u_k - \mbold u_{int} ) \cdot \grad \alpha_k \Big)  + \right. \\ \left. \Big  ( \frac{P_k}{T_k}\mathbb{S}_k + \frac{1}{T_k} \mathbb{\hat{E}}_k -\frac{P_k}{\rho_kT_k} \mathbb{\Gamma}_k + s_k \mathbb{\Gamma}_k \Big ) \right] \geq 0
+\end{multline}
+%
+I do not know what to do of the first term proportional to $s_\alpha$. I do not see how we could have $s_\alpha \neq  0$ whereas we assumed earlier in this paper that $P_k (s_e)_k + \rho_k^2 (s_\rho)_k = 0$. I would go with $s_\alpha = 0$. The second term in the above equation is a function of the source terms and the entropy itself. The term $s_k \mathbb{\Gamma}_k$ comes from the initial expression of the entropy inequality (\eqt{eq:tot-ent-inq}), and I am not sure how to treat it yet. If this is correct, it will mean that the source terms are function of the phasic entropy which could be an issue when dealing with complex equation of states. In order to derive an expression for each of the source terms, we now have to properly group the different terms. This is a step I am comfortable with yet. It is up to you.
+%
+\begin{align}\label{eq:tot-ent-inq7}
+\sum_k \left[ \frac{P_k}{T_k}\mathbb{S}_k + \frac{1}{T_k} \mathbb{\hat{E}}_k -\frac{P_k}{\rho_kT_k} \mathbb{\Gamma}_k + s_k \mathbb{\Gamma}_k \right] \geq 0
+\end{align}
+%
+where $\mathbb{\hat{E}} = e_k \mathbb{\Gamma}_k - \frac{|| \mbold u ||^2}{2} \mathbb{\Gamma}_k + \mbold u_k \cdot \mathbb{\mbold M}_k$
+\end{document}
