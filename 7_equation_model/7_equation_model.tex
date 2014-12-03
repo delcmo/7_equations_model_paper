@@ -45,6 +45,7 @@
 %% if you use PostScript figures in your article
 %% use the graphics package for simple commands
 \usepackage{float}
+%\usepackage{xspace}
 \usepackage{color}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -140,6 +141,8 @@
 \newcommand\br{\mathbf{r}}
 %\newcommand{\tf}{\varphi}
 \newcommand{\tf}{b}
+%
+%\renewcommand{\dim}{\ensuremath{\texttt{dim}}\xspace}
 %
 \newcommand{\tcr}[1]{\textcolor{red}{#1}}
 \newcommand{\tcb}[1]{\textcolor{blue}{#1}}
@@ -287,7 +290,9 @@ The Seven-Equation two-phase flow Model employed in this paper is obtained by as
 \end{multline}
 \end{subequations}
 %
-where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the density, the velocity vector and the total specific energy of phase $k$, respectively. The phasic pressure $P_k$ is computed from an equation of state. The cross section of the geometry is denoted by $A$ and is only spatially dependent. $A$ is present for completeness of the presentation and is set to 1 for most applications; however, nozzle flow problems can be solved using the one-dimensional version of the equation and setting $A$ to the cross-sectional area of the nozzle. The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively; they are defined in \eqt{eq:int_variables_def}.
+where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the density, the velocity vector and the total specific energy of phase $k$, respectively. We adopt the standard convention for vectors: consider vector $\mbold{a}$ with entries $(a_i)_{i=1,\ldots,\texttt{dim}}$; $(\mbold{a} \otimes \mbold{b})_{ij}=a_i b_j$;
+$\div \mbold{a}= \partial_{x_j} a_j$; $(\grad \mbold{a})_{ij} = \partial_{x_i} a_j$; for order-2 tensors $\mathbb{g}$, we have $(\div \mathbb{g})_j = \partial_{x_i} g_{ij}$, $(\mathbb{g}\cdot \mbold{a})_i = g_{ij}a_j$, $\mathbb{g}:\mathbb{h} = g_{ij} h_{ij}$; summation is implied whenever an index is repeated. 
+The phasic pressure $P_k$ is computed from an equation of state. The cross section of the geometry is denoted by $A$ and is only spatially dependent. $A$ is included for completeness of the presentation and is set to 1 in most applications; however, nozzle flow problems can be solved using the one-dimensional version of the equations and by setting $A$ to the cross-sectional area of the nozzle. The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively; they are defined in \eqt{eq:int_variables_def}.
 \tcb{I do not know if we should keep the mass, momentum and energy exchange terms in the equations since they are not included in the derivations of the viscous regularization.} 
 %
 \begin{subequations}
@@ -305,7 +310,7 @@ where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the
 \end{align}
 \end{subequations}
 %
-The interfacial specific total enthalpy of phase $k$, $H_{k,int}$, is defined as $H_{k,int} = h_{k,int} + 0.5 || \mbold u_{int} ||^2$, where $h_{k,int}$ is the phasic specific enthalpy evaluated at the interface conditions $(P_{int} \text{ and } T_{int} = T_{sat}(\bar{P}_{int}))$. Following \cite{SEM}, the pressure and velocity relaxation coefficients, $\mu_P$  and $\lambda_u$ respectively, are function of the acoustic impedance $Z_k = \rho_k c_k$ and the specific interfacial area $A_{int}$ as shown in \eqt{eq:relaxation_coeff}.
+The interfacial specific total enthalpy of phase $k$, $H_{k,int}$, is defined as $H_{k,int} = h_{k,int} + 0.5 || \mbold u_{int} ||^2$, where $h_{k,int}$ is the phasic specific enthalpy evaluated at the interface conditions $(P_{int} \text{ and } T_{int} := T_{sat}(\bar{P}_{int}))$. Following \cite{SEM}, the pressure and velocity relaxation coefficients, $\mu_P$  and $\lambda_u$ respectively, are function of the acoustic impedance $Z_k = \rho_k c_k$ and the specific interfacial area $A_{int}$ as shown in \eqt{eq:relaxation_coeff}.
 %
 \begin{subequations}
 \label{eq:relaxation_coeff}
@@ -345,13 +350,13 @@ The set of equations satisfied by phase $j$ are simply obtained by substituting 
 %
 which reduces the number of partial differential equations from eight to seven and yields the Seven-Equation two-phase flow Model (SEM). 
 
-Some properties of the Seven-Equation two-phase flow Model are discussed next. A set of $5+2\mathbb{D}$ (with $\mathbb{D}$ the geometry's dimension) waves is present in the model: two acoustic waves per phase, one contact wave per phase per domain dimension, and one void fraction wave propagating at the interfacial velocity $\mbold u_{int}$. These waves (eigenvalues of the Jacobian for the inviscid flux terms) and as follows for each phase $k$:
+Some properties of the Seven-Equation two-phase flow Model are discussed next. A set of $5+2\texttt{dim}$ (with \texttt{dim} the geometry's dimension) waves is present in the model: two acoustic waves per phase, one contact wave per phase per domain dimension, and one void fraction wave propagating at the interfacial velocity $\mbold u_{int}$. These waves (eigenvalues of the Jacobian for the inviscid flux terms) and as follows for each phase $k$:
 % 
 \begin{align}\label{eq:eigenvalues}
 &\lambda_{1,k} = \mbold u_k \cdot \bar{\mbold n} - c_k \nonumber\\
 &\lambda_{2,k} = \mbold u_k \cdot \bar{\mbold n} + c_k \nonumber\\
-&\lambda_{2+d,k} = \mbold u_k \cdot \bar{\mbold n} \text{ for } d = 1 \dots \mathbb{D} \\
-&\lambda_{3+\mathbb{D}} = \mbold u_{int} \cdot \bar{\mbold n} \nonumber \,,
+&\lambda_{2+d,k} = \mbold u_k \cdot \bar{\mbold n} \text{ for } d = 1 \dots \texttt{dim} \\
+&\lambda_{3+\texttt{dim}} = \mbold u_{int} \cdot \bar{\mbold n} \nonumber \,,
 \end{align}
 %
 where $\bar{\mbold n}$ is an unit vector pointing to a given direction. The eigenvalues given in \eqt{eq:eigenvalues} are unconditionally real (as long as the equation of state yields a real-valued sound speed). Having real eigenvalues is an extremely valuable property for the development of numerical methods since it ensures that the system of equations is hyperbolic and well-posed. 
@@ -361,7 +366,7 @@ the ill-posed classical six-equation model, where a single pressure
 is used for both phases; this is
 accomplished by letting the pressure relaxation coefficient $\mu_P$ become
 very large, i.e., by letting it approach infinity.  Note that as the pressure
-relaxation coefficient increases, so does the velocity
+relaxation coefficient increases, so should the velocity
 relaxation coefficient $\lambda_u$; see \eqt{eq:relaxation_coeff}. 
 However, the six-equation model only relaxes the pressure parameter of the SEM and results
 in an ill-posed system of equations that can present unstable numerical solutions
@@ -1086,29 +1091,30 @@ Deriving a definition for the phasic viscosity coefficients should rely on exist
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Entropy equation for the multi-dimensional seven equation model without viscous regularization}\label{app:sev-equ-model-entropy}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-This appendix provides the steps that lead to the derivation of the phasic entropy equation of the Seven-Equation two-phase flow Model \cite{SEM}. For the purpose of this appendix, two phases are considered and denoted by the indexes $j$ and $k$. In the Seven-Equation two-phase flow Model, each phase obeys to the following set of equations $(\eqt{eq:sev_equ-app})$:
+This appendix provides the steps that lead to the derivation of the phasic entropy equation of the Seven-Equation two-phase flow Model \cite{SEM}. For the purpose of this appendix, two phases are considered and denoted by the indexes $j$ and $k$. In the Seven-Equation two-phase flow Model, each phase obeys to the following set of equations (\eqt{eq:sev_equ-app}):
 \begin{subequations}
 \label{eq:sev_equ-app}
-%\left\{
-%\begin{array}{llllll}
+%
 \begin{align}
 \partial_t \left( \alpha_k  A\right) + A \mbold u_{int} \cdot \grad \alpha_k = A \mu_P \left( P_k - P_j \right) 
 \end{align}
+%
 \begin{align}
 \partial_t \left( \alpha_k \rho_k A \right) + \div \left( \alpha_k \rho_k \mbold u_k A \right) = 0 
 \end{align}
+%
 \begin{align}
 \partial_t \left( \alpha_k \rho_k \mbold u_k A \right) + \div \left[ \alpha_k A \left( \rho_k \mbold u_k \otimes \mbold u_k + P_k \mathbb{I} \right) \right] &= \nonumber \\
 \alpha_k P_k \grad A &+ P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j - \mbold u_k \right) 
 \end{align}
+%
 \begin{align}
 \partial_t \left( \alpha_k \rho_k E_k A \right) + \div \left[ \alpha_k A \mbold u_k \left( \rho_k E_k + P_k \right) \right] &= \nonumber \\
-P_{int} A \mbold u_{int} \cdot \grad \alpha_k &- \mu_P \bar{P}_{int} \left( P_k-P_j \right) + \bar{\mbold u}_{int} A \lambda_u \left( \mbold u_j - \mbold u_k \right)
+P_{int} A \mbold u_{int} \cdot \grad \alpha_k &- \tcr{A}\mu_P \bar{P}_{int} \left( P_k-P_j \right) + \bar{\mbold u}_{int} A \lambda_u \left( \mbold u_j - \mbold u_k \right)
 \end{align}
-%    \end{array}
-%    \right.
 \end{subequations}
-where $\rho_k$, $\mbold u_k$, $E_k$ and $P_k$ are the density, the velocity, the specific total energy and the pressure of  phase $k$, respectively. The pressure and velocity relaxation parameters are denoted by $\mu_P$ and $\lambda_u$, respectively. The variables with subscript $_{int}$ correspond to the interfacial variables and a definition is given in \eqt{eq:sev_equ2-app}. The cross section $A$ is only function of space: $\partial_t A = 0$. 
+where $\rho_k$, $\mbold u_k$, $E_k$ and $P_k$ denote the density, velocity, specific total energy, and pressure of  phase $k$, respectively. $\mu_P$ and $\lambda_u$ and the pressure and velocity relaxation parameters, respectively. We recall that we assume that the cross section $A$ is only function of space: $\partial_t A = 0$ (a value of $A \neq 1$ is mostly of practical important for 1D nozzle problems). 
+Variables with subscript ${int}$ correspond to the interfacial variables; their definitions are given in \eqt{eq:sev_equ2-app}. 
 \begin{equation}
 \label{eq:sev_equ2-app}
 \left\{
@@ -1120,70 +1126,85 @@ P_{int} = \bar{P}_{int} - \frac{\grad \alpha_k}{|| \grad \alpha_k ||} \frac{Z_k 
 \end{array}
 \right.
 \end{equation}
-where $Z_k = \rho_k c_k$ and $Z_j = \rho_j c_j$ are the impedance of phases $k$ and $j$, respectively. The speed of sound is denoted by the symbol $c$. The function $sgn(x)$ returns the sign of the variable $x$.\\
-The first step consists of rearranging the equations given in \eqt{eq:sev_equ2-app} using the primitive variables $(\alpha_k, \rho_k, \mbold u_k, e_k)$, where $e_k$ is the specific internal energy of phase $k$. We introduce the material derivative $\frac{D (\cdot)}{Dt} = \partial_t (\cdot) + \mbold u_k \cdot \grad (\cdot)$ for simplicity. \\
-The continuity equation is modified as follows:
+where $Z_k = \rho_k c_k$ and $Z_j = \rho_j c_j$ are the impedances of phases $k$ and $j$, respectively. The speed of sound is denoted by the symbol $c$. The sign function $sgn(x)$ returns $\pm 1$ according to the sign of variable $x$.
+
+The first step in proving the entropy minimum principle for \eqt{eq:sev_equ-app} 
+consists of recasting these equations using the primitive variables $(\alpha_k, \rho_k, \mbold u_k, e_k)$, where $e_k$ is the specific internal energy of phase $k$. We introduce the material derivative $\frac{D (\cdot)}{Dt} = \partial_t (\cdot) + \mbold u_k \cdot \grad (\cdot)$ for simplicity. 
+
+The continuity equation can be expressed as follows:
 \begin{equation}
 \label{eq:cont1-app}
-\alpha_k A \frac{D \rho_k}{Dt} + \rho_k A \mu_P \left( P_k-P_j \right) + \rho_k A \left( \mbold u_k-\mbold u_{int} \right) \cdot \grad \alpha_k + \rho_k \alpha_k \div \left( A \mbold u_k \right) = 0
+\alpha_k A \frac{D \rho_k}{Dt} + \rho_k A \mu_P \left( P_k-P_j \right) + \rho_k A \left( \mbold u_k-\mbold u_{int} \right) \cdot \grad \alpha_k + \rho_k \alpha_k \div \left( A \mbold u_k \right) = 0 \,.
 \end{equation}
-The momentum and continuity equations are combined to yield the velocity equation:
+The momentum and continuity equations are combined to yield an equation for the velocity:
 \begin{equation}
 \label{eq:vel1-app}
-\alpha_k \rho_k A \frac{D\mbold u_k}{Dt} + \grad \left( \alpha_k A P_k \right) = \alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j-\mbold u_k \right)
+\alpha_k \rho_k A \frac{D\mbold u_k}{Dt} + \grad \left( \alpha_k A P_k \right) = \alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j-\mbold u_k \right) \,.
 \end{equation}
-The internal energy is obtained by subtracting the total energy from the kinetic equation defined as $\mbold u_k \cdot $\eqt{eq:vel1-app}:
-\begin{align}\label{eq:internal1}
-\alpha_k \rho_k A \frac{D e_k}{Dt} + \div\left( \alpha_k \mbold u_k A P_k \right) - \mbold u_k \cdot \grad \left( \alpha_k A P_k \right) &= P_{int} A \left(\mbold u_{int}-\mbold u_k \right) \cdot \grad \alpha_k \nonumber \\
-- \alpha_k P_k \mbold u_k \cdot \grad A 
- - \bar{P}_{int} A \mu_P \left(P_k-P_j \right) &+ A \lambda_u \left(\mbold u_j-\mbold u_k  \right) \cdot \left(\bar{\mbold u}_{int}-\mbold u_k \right)
-\end{align}
-In the next step, we assume the existence of a phase wise entropy $s_k$ function of density $\rho_k$ and internal energy $e_k$. Using the chain rule,
+A kinetic equation is obtained by multiplying the previous result by $\mbold u_k$ to yield:
+\begin{equation}
+\label{eq:kin1-app}
+\alpha_k \rho_k A \frac{D\left(\mbold u_k^2/2\right)}{Dt} + \mbold u_k \grad \left( \alpha_k A P_k \right) = \mbold u_k  \Big( \alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j-\mbold u_k \right) \Big) \,.
+\end{equation}
+%
+The internal energy equation is obtained by subtracting the above kinetic equation from the total energy equation:
+\begin{multline}\label{eq:internal1}
+\alpha_k \rho_k A \frac{D e_k}{Dt} + \alpha_k P_k \div \left(A \mbold u_k \right) = 
+ P_{int} A \left(\mbold u_{int}-\mbold u_k \right) \cdot \grad \alpha_k \\
+ - \bar{P}_{int} A \mu_P \left(P_k-P_j \right) + A \lambda_u \left(\mbold u_j-\mbold u_k  \right) \cdot \left(\bar{\mbold u}_{int}-\mbold u_k \right) \,.
+\end{multline}
+
+
+In the next step, we assume the existence of a phasic entropy $s_k$ that is function of the density $\rho_k$ and the  internal energy $e_k$. Using the chain rule, 
 \begin{equation}
 \frac{Ds_k}{Dt} = (s_\rho)_k \frac{D \rho_k}{Dt} + (s_e)_k \frac{De_k}{Dt},
 \end{equation}
-along with the internal energy (\eqt{eq:internal1}) and the continuity equations (\eqt{eq:cont1-app}), the following entropy equation is obtained:
-\begin{eqnarray}
+we combine the density and internal energy equations ($\rho_k (s_\rho)_k \times \eqt{eq:cont1-app}  + (s_e)_k \times \eqt{eq:internal1}$) to obtain  the following entropy equation :
+\begin{multline}
 \label{eq:ent1}
-\alpha_k \rho_k A \frac{Ds_k}{Dt} + \underbrace{A \left( P_k (s_e)_k + \rho_k^2 (s_\rho)_k \right)\mbold u_k \cdot \grad \alpha_k + \alpha_k \left( P_k (s_e)_k + \rho_k^2 (s_\rho)_k \right) \mbold u_k \cdot \grad A}_\textrm{(a)} &= \nonumber\\
-(s_e)_k P_{int}A \left[ (\mbold u_{int}-\mbold u_k)\cdot \grad \alpha_k - \bar{P}_{int} A \mu_P (P_k-P_j) + A \lambda_u (\bar{\mbold u}_{int}-\mbold u_k) \cdot (\mbold u_j-\mbold u_k)\right] &- \nonumber\\
-\rho^2 (s_\rho)_k \left[ \mu_P A (P_k-P_j) + A(\mbold u_k-\mbold u_{int}) \cdot \grad \alpha_k\right] & 
-\end{eqnarray}
-where $(s_e)_k$ and $(s_\rho)_k$ denote the partial derivatives of the entropy $s_k$ with respect to the internal energy $e_k$ and the density $\rho_k$, respectively.
-The second term, (a), in the left hand side of \eqt{eq:ent1} can be set to zero by assuming the following relation between the partial derivatives of the entropy $s_k$:
+\alpha_k \rho_k A \frac{Ds_k}{Dt} + 
+\underbrace{\alpha_k \left( P_k (s_e)_k + \rho_k^2 (s_\rho)_k \right)  \div \left( A \mbold u_k \right) }_\textrm{(a)} = \\
+(s_e)_k A \left[ P_{int}(\mbold u_{int}-\mbold u_k)\cdot \grad \alpha_k - \bar{P}_{int} A \mu_P (P_k-P_j) + A \lambda_u (\bar{\mbold u}_{int}-\mbold u_k) \cdot (\mbold u_j-\mbold u_k)\right] \\
+- \rho_k^2 (s_\rho)_k \left[ \mu_P A (P_k-P_j) + A(\mbold u_k-\mbold u_{int}) \cdot \grad \alpha_k\right] 
+\end{multline}
+where $(s_e)_k$ and $(s_\rho)_k$ denote the partial derivatives of entropy $s_k$ with respect to the internal energy $e_k$ and the density $\rho_k$, respectively.
+The term denoted by (a) on the left-hand side of \eqt{eq:ent1} can be set to zero by invoking the second law of thermodynamics:
+\begin{equation}
+T_k ds_k = de_k - \frac{P_k}{\rho_k^2} d \rho_k \text{ with } (s_e)_k = \frac{1}{T_k} \text{ and } (s_\rho)_k = - \frac{P_k}{\rho_k^2} (s_e)_k
+\end{equation}
+which yields
 \begin{equation}
 \label{eq:ent2}
  P_k (s_e)_k + \rho_k^2 (s_\rho)_k = 0 .
 \end{equation} 
-The above equation is equivalent to the application of the second thermodynamic law when assuming reversibility:
-\begin{equation}
-T_k ds_k = de_k - \frac{P_k}{\rho_k^2} d \rho_k \text{ with } (s_e)_k = \frac{1}{T_k} \text{ and } (s_\rho)_k = - \frac{P_k}{\rho_k^2} (s_e)_k
-\end{equation}
-Thus, equation \eqt{eq:ent1} can be rearranged using the relation $(s_\rho)_k = - \frac{P_k}{\rho_k^2} (s_e)_k$:
+% The above equation is equivalent to the application of the second law of thermodynamic law when assuming reversibility:
+
+Finally,\eqt{eq:ent1} is as follows:
 \begin{eqnarray}
 \label{eq:ent3}
 ((s_e)_k)^{-1} \alpha_k \rho_k \frac{Ds}{Dt} = \underbrace{\left[ P_{int} (\mbold u_{int}-\mbold u_k) + P_k (\mbold u_k-\mbold u_{int}) \right] \cdot \grad \alpha_k}_\textrm{(b)} + \nonumber\\ 
 \underbrace{\mu_P (P_k-P_j)(P_k-\bar{P}_{int})}_\textrm{(c)} + \underbrace{\lambda_u(\mbold u_j-\mbold u_k)\cdot(\bar{\mbold u}_{int}-\mbold u_k)}_\textrm{(d)}
 \end{eqnarray}
-The right hand side of equation \eqt{eq:ent3} is split into three terms (b), (c) and (d) that will be dealt with separately. The terms (c) and (d) can be easily recast by using the definitions of $\bar{\mbold u}_{int}$ and $\bar{P}_{int}$ given in equation \eqt{eq:sev_equ2-app}:
+The right-hand side of \eqt{eq:ent3} has been split into three terms, (b), (c), and (d); next we analyze each of these terms separately. The terms (c) and (d) can be easily recast by using the definitions of $\bar{\mbold u}_{int}$ and $\bar{P}_{int}$ given in \eqt{eq:sev_equ2-app}:
 \begin{eqnarray}
 \label{eq:ent4}
 \mu_P (P_k-P_j)(P_k-\bar{P}_{int}) = \mu_P \frac{Z_k}{Z_k+Z_j} (P_j - P_k)^2\nonumber\\
 \lambda_u(\mbold u_j-\mbold u_k)\cdot(\bar{\mbold u}_{int}-\mbold u_k) = \lambda_u \frac{Z_j}{Z_k+Z_j} (\mbold u_j - \mbold u_k)^2 
 \end{eqnarray}
-By definition, $\mu_P$, $\lambda_u$ and $Z_k$ are all positive. Thus, the above terms (c) and (d) are unconditionally positive. \\
-It remains to look at the last term (b). Once again, by using the definition of $P_{int}$ and $\mbold u_{int}$, and the following relations:
+By definition, $\mu_P$, $\lambda_u$ and $Z_k$ are all positive. Thus, the above terms (c) and (d) are unconditionally positive. 
+
+We now inspect term (b). Once again, we use the definitions of $P_{int}$ and $\mbold u_{int}$ and the following relations:
 \begin{eqnarray}
 \label{eq:ent4bis}
 \mbold u_{int}-\mbold u_k &=& \frac{Z_j}{Z_k+Z_j}(\mbold u_j-\mbold u_k) -  \frac{\grad \alpha_k}{|| \grad \alpha_k ||} \frac{Pk-P_j}{Z_k+Z_j} \nonumber\\
 P_{int}-P_k &=& \frac{Z_k}{Z_k+Z_j} (P_j-P_k) - \frac{\grad \alpha_k}{|| \grad \alpha_k ||} \frac{Z_k Z_j}{Z_k+Z_j} (\mbold u_k-\mbold u_j), \nonumber 
 \end{eqnarray}
-term (b) becomes:
+Then, term (b) becomes:
 \begin{eqnarray}
 \label{eq:ent5}
 \left[ P_{int} (\mbold u_{int}-\mbold u_k) + P_k (\mbold u_k-\mbold u_{int}) \right] \cdot \grad \alpha_k = (P_{int}-P_k)(\mbold u_{int}-\mbold u_k)\cdot \grad \alpha_k=  \nonumber\\ \frac{Z_k}{\left( Z_k+Z_j \right)^2} \grad \alpha_k \cdot \left[ Z_j (\mbold u_j-\mbold u_k)(P_j-P_k)+\frac{\grad \alpha_k}{|| \grad \alpha_k ||} Z_j^2 (\mbold u_j-\mbold u_k)^2 \right. + \nonumber \\ \left. \frac{\grad \alpha_k}{|| \grad \alpha_k ||}(P_k-P_j)^2 +  \frac{\grad \alpha_k \cdot \grad \alpha_k}{|| \grad \alpha_k ||^2}(P_k-P_j)Z_j (\mbold u_k-\mbold u_j) \right] 
 \end{eqnarray}
-The above equation is factorized by $|| \grad \alpha_k ||$ and then recast under a quadratic form using $\frac{\grad \alpha_k \cdot \grad \alpha_k}{|| \grad \alpha_k ||^2} = 1$. This yields:
+The above equation is factorized by $\| || \grad \alpha_k ||$ and then recast under a quadratic form using $\frac{\grad \alpha_k \cdot \grad \alpha_k}{|| \grad \alpha_k ||^2} = 1$. This yields:
 \begin{align}
 \label{eq:ent6}
 \left[ (\mbold u_{int}-\mbold u_k)P_{int} + (\mbold u_k-\mbold u_{int})P_k \right] \grad \alpha_k &=  \nonumber \\
