@@ -128,6 +128,7 @@
 \newcommand{\qq}{\quad\quad}
 % common reference commands
 \newcommand{\eqt}[1]{Eq.~(\ref{#1})}                     % equation
+\newcommand{\eqts}[1]{Eqs.~(\ref{#1})}                     % equations
 \newcommand{\fig}[1]{Fig.~\ref{#1}}                      % figure
 \newcommand{\tbl}[1]{Table~\ref{#1}}                     % table
 \newcommand{\sct}[1]{Section~\ref{#1}}                   % section
@@ -429,22 +430,23 @@ and the sign of the entropy material derivative can be proved positive. The entr
 \begin{align}\label{eq:ent-eqn-7-eqn-model}
 (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} &= \mu_P \frac{Z_k}{Z_k+Z_j} (P_j - P_k)^2 + \lambda_u \frac{Z_j}{Z_k+Z_j} (\mbold u_j -\mbold  u_k)^2 \nonumber
 \\
-& \frac{Z_k}{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k)+\frac{\grad \alpha_k}{|| \grad \alpha_k ||}(P_k-P_j)\right]^2 \ ,
+& \tcr{\| \grad \alpha_k \|} \frac{Z_k}{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k)+\frac{\grad \alpha_k}{\| \grad \alpha_k \|}(P_k-P_j)\right]^2 \ ,
 \end{align}
 where $\frac{D(\cdot) }{Dt} = \partial_t (\cdot) + \mbold u \cdot \grad (\cdot)$ is the material derivative.
-The partial derivative of the entropy function $s_k$ with respect to the internal energy $e_k$, $(s_e)_k$, is shown \tcr{equal?} \tcb{done} to be equal to the inverse of the temperature of phase $k$, as in the case of the single phase Euler equations \cite{jlg, Marco_dissertation}. The right-hand side of \eqt{eq:ent-eqn-7-eqn-model} is unconditionally positive since all terms are squared; this property is invoked to demonstrate the entropy minimum principle. Furthermore, \eqt{eq:ent-eqn-7-eqn-model} is valid for both phases $\left\{k, j\right\}$, ensuring positivity of the total entropy equation obtained by summation over the phases:
+The partial derivative of the entropy function $s_k$ with respect to the internal energy $e_k$, $(s_e)_k$, is shown to be equal to the inverse of the temperature of phase $k$, as in the case of the single phase Euler equations \cite{jlg, Marco_dissertation}. The right-hand side of \eqt{eq:ent-eqn-7-eqn-model} is unconditionally positive since all terms are squared; this property is invoked to demonstrate the entropy minimum principle. Furthermore, \eqt{eq:ent-eqn-7-eqn-model} is valid for both phases $\left\{k, j\right\}$, ensuring positivity of the total entropy equation obtained by summation over the phases:
 %
 \begin{equation}\label{eq:tot-ent-res-sct4}
 \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} = \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \left( \partial_t s_k + \mbold u_k \cdot \grad s_k \right) \geq 0  .
 \end{equation}
 %
-Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates to the single-phase entropy equation obtained from the signle-phase Euler equations \cite{SEM, Marco_dissertation}.
+Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates to the single-phase entropy equation obtained for the single-phase Euler equations \cite{SEM, Marco_dissertation}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A viscous regularization for the Seven-Equation two-phase flow Model}\label{sec:visc-regu}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-Next, we derive a viscous regularization for the Seven-Equation two-phase flow Model given in \eqt{eq:liq-7-eqn-sect5} using the same methodology as for the multi-dimensional Euler equations with/without variable area \cite{jlg, Marco_paper_low_mach}. The method consists in adding dissipative terms to the system of equations under consideration, and in deriving an entropy equation for the regularized system. By adequatly choosing the artificial viscous fluxes, one can show that the sign of the entropy production remains positive, ensuring uniqueness of the numerical solution \cite{Leveque}. Because of the addition of dissipation terms, the entropy equation is modified and contains additional terms of yet unknown sign. By carefully choosing a definition for each of the dissipation term, the sign of the entropy equation can be determined and proved positive. For the Seven-Equation two-phase flow Model, derivation of a viscous regularization can be achieved by considering either the phasic entropy equation (\eqt{eq:ent-eqn-7-eqn-model}) or the total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the later case, the entropy minimum principle can be verified for the whole two-phase system but may not ensure positivity of the entropy equation for each phase. However, positivity of the total entropy equation can be also achieved by requiring \tcr{requiring?} \tcb{done} that the entropy minimum principle holds for each phase. This stronger requirement will also ensure consistency with the single phase Euler equations when one of the phase disappears in the limit $\alpha_k \to 0$. Thus, we have opted to work with the phasic entropy equations given in \eqt{eq:ent-eqn-7-eqn-model}.
+Next, we derive a viscous regularization for the Seven-Equation two-phase flow Model given in \eqt{eq:liq-7-eqn-sect5} using the same methodology as for the multi-dimensional Euler equations with/without variable area \cite{jlg, Marco_paper_low_mach}. The method consists in adding dissipative terms to the system of equations under consideration, and in deriving an entropy equation for the regularized system. By adequatly choosing the artificial viscous fluxes, one can show that the sign of the entropy production remains positive, ensuring uniqueness of the numerical solution \cite{Leveque}. Because of the addition of dissipation terms, the entropy equation is modified and contains additional terms of yet unknown sign. By carefully choosing a definition for each of the dissipation terms, the sign of the entropy equation can be determined and rendered positive. For the Seven-Equation two-phase flow Model, derivation of the viscous regularization can be achieved by considering either the phasic entropy equation (\eqt{eq:ent-eqn-7-eqn-model}) or the total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the later case, the entropy minimum principle can be verified for the whole two-phase system but may not ensure positivity of the entropy equation for each phase. However, positivity of the total entropy equation can also be achieved by requiring that the entropy minimum principle holds for each phase. This stronger requirement will also ensure consistency with the single-phase Euler equations when one of the phases disappears in the limit $\alpha_k \to 0$. 
+% Thus, we have opted to work with the phasic entropy equations given in \eqt{eq:ent-eqn-7-eqn-model}.
 
 For the purpose of this section, the system of equations given in \eqt{eq:sev_equ} is considered, which is obtained by simply omitting the mass source terms (terms proportional to $\Gammakj$) in \eqt{eq:liq-7-eqn-sect5}:
 %
@@ -496,58 +498,57 @@ A \lambda_u \bar{\mbold u}_{int} \cdot \left( \mbold u_j - \mbold u_k \right)
 \end{subequations}
 %
 where $\mbold f_k$, $\mathbb{g}_k$, $\mbold h_k$ and $\mbold l_k$ are phasic viscous terms, yet to be determined. 
-\tcr{we should explain here or before the notations for clarity.}
 The next step consists in deriving the entropy equation for the phase $k$, on the same model as what was done in \app{app:sev-equ-model-entropy} but with dissipative terms now present. The steps are as follows:
 %
 \begin{enumerate}
-\item derive the phasic density and internal energy equations from \eqt{eq:sev_equ-with-diss-terms}.
+\item derive the density and internal energy equations from \eqts{eq:sev_equ-with-diss-terms}.
 \item assuming that the phasic entropy $s_k$ is a function of density $\rho_k$ and internal energy $e_k$, derive the entropy equation using the chain rule:
 \begin{equation}
 \label{eq:chain_rule-sct4}
 \frac{Ds_k}{Dt} = \left( s_{\rho} \right)_k \frac{D \rho_k}{Dt} + \left( s_{e} \right)_k \frac{D e_k}{Dt} 
 \end{equation}
-The terms $(s_e)_k$ and $(s_{\rho})_k$ denote the partial derivatives of the entropy $s_k$ with respect to $e_k$ and $\rho_k$, respectively.
+The terms $(s_e)_k$ and $(s_{\rho})_k$ denote the partial derivatives of $s_k$ with respect to $e_k$ and $\rho_k$, respectively.
 \item isolate the terms of interest and choose an appropriate expression for each of the viscous fluxes in order to ensure positivity of the entropy residual.
 \end{enumerate}
 %
-We first derive the phasic density equation for the primitive variable $\rho_k$ by combining \eqt{eq:sev_equ-with-diss-terms-vf} and \eqt{eq:sev_equ-with-diss-terms-cont} to obtain:
-\tcr{\\sign of delta P? should remain of same sign as $\div \mbold l_k$. mistake somewhere}\\
-\tcr{i cannot get $\mbold u_{int}  \cdot \grad \rho_k$. the void equation has $\mbold u_{int} \cdot \grad \alpha_k$, how do you go from $\grad \alpha_k$ to $\grad \rho_k$?? } \tcb{done}
+We first derive the phasic density equation expressed in terms of the primitive variable $\rho_k$ by combining \eqt{eq:sev_equ-with-diss-terms-vf} and \eqt{eq:sev_equ-with-diss-terms-cont} to obtain:
 %
 \begin{multline}\label{eq:rho-7-eqn-model-sect4}
 \alpha_k A \left[ \partial_t \rho_k + \mbold u_k  \cdot \grad \rho_k \right] +  \underline{\underline{ A \rho_k \left( \mbold u_k - \mbold u_{int} \right) \cdot \grad \alpha_k}} = \\-\underline{\underline{A \rho_k \mu_P \left( P_k - P_j \right)}} + \div \mbold f_k - \rho_k \div \mbold l_k
 \end{multline}
 %
-In order to derive the phasic internal energy equation, the phasic velocity equation is obtained by subtracting the phasic density equation from the phasic momentum equation:
+In order to derive an equation for the phasic internal energy, the phasic velocity equation is obtained by subtracting the phasic density equation (multiplied by $\mbold u_k$) from the phasic momentum equation:
 %
+\tcr{too many dots in the second term. It should really be $(\mbold u \cdot \grad) \mbold u$}
 \begin{align}\label{eq:vel-7-eqn-model-sect4}
 \alpha_k \rho_k  A \left[ \partial_t \mbold u_k + \mbold u_k \cdot \div \mbold u_k \right]  + \div \left( \alpha_k \rho_k A P_k \mathbb{I} \right) &=\nonumber\\
-\alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda \left( \mbold u_j - \mbold u_k \right) &+ \div \mathbb{g}_k - \mbold u_k \otimes \mbold f_k
+\alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j - \mbold u_k \right) &+ \div \mathbb{g}_k - \mbold u_k \otimes \mbold f_k
 \end{align}
 %
-After multiplying \eqt{eq:vel-7-eqn-model-sect4} by the phasic velocity vector $\mbold u_k$, the resulting phasic kinetic energy equation is subtracted from the phasic total energy equation to obtain the internal energy equation for phase $k$:
+After multiplying \eqt{eq:vel-7-eqn-model-sect4} by velocity $\mbold u_k$, the resulting phasic kinetic energy equation is subtracted from the phasic total energy equation to obtain the internal energy equation for phase $k$:
 %
 \begin{multline}\label{eq:int-ener-7-eqn-model-sect4}
-\alpha_k \rho_k  A \left[ \partial_t \mbold e_k + \mbold u_k \cdot \div \mbold e_k \right]  + \alpha_k \rho_k A P_k \grad \mbold u_k = \\
+\alpha_k \rho_k  A \left[ \partial_t \mbold e_k + \mbold u_k \cdot \grad \mbold e_k \right]  + \alpha_k A P_k \div \mbold u_k = \\
 \underline{\underline{P_{int} A \left(\mbold u_{int}-\mbold u_k \right) \cdot \grad \alpha_k}} -  \underline{\underline{\alpha_k P_k \mbold u_k \cdot \grad A}} \\ 
 \underline{\underline{-\bar{P}_{int} A \mu_P \left(P_k-P_j \right)}} + \underline{\underline{A \lambda_u \left(\mbold u_j-\mbold u_k  \right) \cdot \left(\bar{\mbold u}_{int}- \mbold u_k \right)}}\\
 + \div \mbold h_k + \mathbb{g}_k : \grad \mbold u_k + || \mbold u ||^2_k \mbold f_k
 \end{multline}
 %
-The underline terms in \eqt{eq:rho-7-eqn-model-sect4} and \eqt{eq:int-ener-7-eqn-model-sect4} yield the positive terms in the right-hand-side of \eqt{eq:ent-eqn-7-eqn-model} and thus are ignored in the remainder of this derivation for brevity. The phasic entropy equation is now obtained by combining the phasic density equation (\eqt{eq:rho-7-eqn-model-sect4}) and the phasic internal energy equation (\eqt{eq:int-ener-7-eqn-model-sect4}) through the chain rule given in \eqt{eq:chain_rule-sct4} to yield:
+The underlined terms in \eqt{eq:rho-7-eqn-model-sect4} and \eqt{eq:int-ener-7-eqn-model-sect4} yield the positive terms on the right-hand side of \eqt{eq:ent-eqn-7-eqn-model} (see \app{app:sev-equ-model-entropy})
+and thus are ignored in the remainder of this derivation for brevity. The phasic entropy equation is now obtained by combining the phasic density equation (\eqt{eq:rho-7-eqn-model-sect4}) and the phasic internal energy equation (\eqt{eq:int-ener-7-eqn-model-sect4}) through the chain rule given in \eqt{eq:chain_rule-sct4} to yield:
 %
 \begin{multline}\label{eq:ent-res-7-eqn-diss-terms}
 \alpha_k \rho_k A \frac{Ds_k}{Dt} =  (\rho s_\rho)_k \left[ \div \mbold f_k - \rho_k \div \mbold l_k \right] + \\
-\left(s_e\right)_k \left[ \div \mbold h_k + \mathbb{g}_k : \grad \mbold u_k +  \left( || \mbold u ||^2_k - e_k\right) \div \mbold f_k  \right],
+\left(s_e\right)_k \left[ \div \mbold h_k + \mathbb{g}_k : \grad \mbold u_k +  \left( \| \frac{\mbold u \|^2_k}{2} - e_k\right) \div \mbold f_k  \right],
 \end{multline}
 %
-where it was assumed that the entropy of phase $k$ satisfies the second thermodynamic law: 
+where it was assumed that the entropy of phase $k$ satisfies the second law of thermodynamics: 
 %
 \begin{subequations}
 \begin{align}\label{eq:2nd-therm-laws-sect4}
-T_k \text{d} s_k = \text{d}e_k - P_k\frac{\text{d}\rho_k}{\rho_k^2} \ ,
+T_k \text{d} s_k = \text{d}e_k - P_k\frac{\text{d}\rho_k}{\rho_k^2} \,.
 \end{align}
-\text{which implies } 
+The above relationship \text{which implies } 
 \begin{align}
 &P_k (s_e)_k + \rho_k^2 (s_\rho)_k = 0, \\
 &(s_e)_k = T_k^{-1} \text{ and } (s_\rho)_k = - (s_e)_k P_k \frac{\text{d}\rho_k}{\rho_k^2}. \nonumber
@@ -1196,26 +1197,29 @@ By definition, $\mu_P$, $\lambda_u$ and $Z_k$ are all positive. Thus, the above 
 We now inspect term (b). Once again, we use the definitions of $P_{int}$ and $\mbold u_{int}$ and the following relations:
 \begin{eqnarray}
 \label{eq:ent4bis}
-\mbold u_{int}-\mbold u_k &=& \frac{Z_j}{Z_k+Z_j}(\mbold u_j-\mbold u_k) -  \frac{\grad \alpha_k}{|| \grad \alpha_k ||} \frac{Pk-P_j}{Z_k+Z_j} \nonumber\\
-P_{int}-P_k &=& \frac{Z_k}{Z_k+Z_j} (P_j-P_k) - \frac{\grad \alpha_k}{|| \grad \alpha_k ||} \frac{Z_k Z_j}{Z_k+Z_j} (\mbold u_k-\mbold u_j), \nonumber 
+\mbold u_{int}-\mbold u_k &=& \frac{Z_j}{Z_k+Z_j}(\mbold u_j-\mbold u_k) -  \frac{\grad \alpha_k}{\| \grad \alpha_k \|} \frac{Pk-P_j}{Z_k+Z_j} \nonumber\\
+P_{int}-P_k &=& \frac{Z_k}{Z_k+Z_j} (P_j-P_k) - \frac{\grad \alpha_k}{\| \grad \alpha_k \|} \frac{Z_k Z_j}{Z_k+Z_j} (\mbold u_k-\mbold u_j), \nonumber 
 \end{eqnarray}
 Then, term (b) becomes:
 \begin{eqnarray}
 \label{eq:ent5}
-\left[ P_{int} (\mbold u_{int}-\mbold u_k) + P_k (\mbold u_k-\mbold u_{int}) \right] \cdot \grad \alpha_k = (P_{int}-P_k)(\mbold u_{int}-\mbold u_k)\cdot \grad \alpha_k=  \nonumber\\ \frac{Z_k}{\left( Z_k+Z_j \right)^2} \grad \alpha_k \cdot \left[ Z_j (\mbold u_j-\mbold u_k)(P_j-P_k)+\frac{\grad \alpha_k}{|| \grad \alpha_k ||} Z_j^2 (\mbold u_j-\mbold u_k)^2 \right. + \nonumber \\ \left. \frac{\grad \alpha_k}{|| \grad \alpha_k ||}(P_k-P_j)^2 +  \frac{\grad \alpha_k \cdot \grad \alpha_k}{|| \grad \alpha_k ||^2}(P_k-P_j)Z_j (\mbold u_k-\mbold u_j) \right] 
+\left[ P_{int} (\mbold u_{int}-\mbold u_k) + P_k (\mbold u_k-\mbold u_{int}) \right] \cdot \grad \alpha_k = (P_{int}-P_k)(\mbold u_{int}-\mbold u_k)\cdot \grad \alpha_k=  \nonumber\\ 
+\frac{Z_k}{\left( Z_k+Z_j \right)^2} \grad \alpha_k \cdot \left[ Z_j (\mbold u_j-\mbold u_k)(P_j-P_k)+\frac{\grad \alpha_k}{\| \grad \alpha_k \|} Z_j^2 (\mbold u_j-\mbold u_k)^2 \right. + \nonumber \\ 
+\left. \frac{\grad \alpha_k}{\| \grad \alpha_k \|}(P_k-P_j)^2 +  \frac{\grad \alpha_k \cdot \grad \alpha_k}{\| \grad \alpha_k \|^2}(P_k-P_j)Z_j (\mbold u_k-\mbold u_j) \right] 
 \end{eqnarray}
-The above equation is factorized by $\| || \grad \alpha_k ||$ and then recast under a quadratic form using $\frac{\grad \alpha_k \cdot \grad \alpha_k}{|| \grad \alpha_k ||^2} = 1$. This yields:
+The above equation is factorized by $\|  \grad \alpha_k \|$ and then recast under a quadratic form using $\frac{\grad \alpha_k \cdot \grad \alpha_k}{\| \grad \alpha_k \|^2} = 1$. This yields:
 \begin{align}
 \label{eq:ent6}
 \left[ (\mbold u_{int}-\mbold u_k)P_{int} + (\mbold u_k-\mbold u_{int})P_k \right] \grad \alpha_k &=  \nonumber \\
-|| \grad \alpha_k || \frac{Z_k }{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k)\right.&+\left.\frac{\grad \alpha_k}{|| \grad \alpha_k ||}(P_k-P_j)\right]^2
+\| \grad \alpha_k \| \frac{Z_k }{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k) + \frac{\grad \alpha_k}{\| \grad \alpha_k \|}(P_k-P_j)\right]^2
 \end{align}
 Thus, using \eqt{eq:ent3}, \eqt{eq:ent4}, \eqt{eq:ent5} and \eqt{eq:ent6}, the entropy equation obtained in \cite{SEM} holds and is recalled here for convenience:
 \begin{align}
 (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} &= \mu_P \frac{Z_k}{Z_k+Z_j} (P_j - P_k)^2 + \lambda_u \frac{Z_j}{Z_k+Z_j} (\mbold u_j -\mbold  u_k)^2 \nonumber
 \\
-& \frac{Z_k}{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k)+\frac{\grad \alpha_k}{|| \grad \alpha_k ||}(P_k-P_j)\right]^2. \nonumber
+& \tcr{\| \grad \alpha_k \|} \frac{Z_k}{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k)+\frac{\grad \alpha_k}{\| \grad \alpha_k \|}(P_k-P_j)\right]^2. \nonumber
 \end{align}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Compatibility of the viscous regularization for the seven-equation two-phase model with the generalized Harten entropies}\label{app:harden}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1238,7 +1242,7 @@ We start from the entropy inequality verified by $s_k$,
 \eqt{eq:ent-res-7-eqn-diss-terms-app} is multiplied by $\mathscr{H}_k'(s_k)$ to yield:
 %
 \begin{align}\label{eq:ent-res-7-eqn-diss-terms-app2}
-\alpha_k \rho_k A \frac{D\mathscr{H}_k(s_k)}{Dt} &= \div \left( \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) \right) - \mathscr{H}_k''(s_k) \alpha_k A \kappa_k \rho_k || \grad s_k ||^2 + \nonumber\\
+\alpha_k \rho_k A \frac{D\mathscr{H}_k(s_k)}{Dt} &= \div \left( \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) \right) - \mathscr{H}_k''(s_k) \alpha_k A \kappa_k \rho_k \| \grad s_k \|^2 + \nonumber\\
 &\mathscr{H}_k'(s_k) \mbold f_k \cdot \grad s_k - \mathscr{H}_k'(s_k)\alpha_k \rho_k A \kappa_k \mathbf{Q}_k + \nonumber \\
 & \mathscr{H}_k'(s_k)(s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k.
 \end{align}
@@ -1248,14 +1252,14 @@ Let us now multiply the continuity equation of phase $k$ by $\mathscr{H}_k (s_k)
 \begin{align}\label{eq:ent-res-7-eqn-diss-terms-app3}
 \partial_t \left( \alpha_k \rho_k A \mathscr{H}_k(s_k)\right) + \div \left( \alpha_k \rho_k \mbold u_k A \mathscr{H}_k(s_k) \right)  &- \nonumber\\
 \div \left[ \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) + \alpha_k A \kappa_k \mathscr{H}_k (s_k) \grad \rho_k  \right. & \left. + A \kappa_k \rho_k \mathscr{H}_k (s_k) \grad \alpha_k\right] = \nonumber \\
- \underbrace{-\mathscr{H}_k''(s_k) \alpha_k A \kappa_k \rho_k || \grad s_k ||^2  - \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k  \mathbf{Q}_k}_{\mathbb{T}_0} &+\nonumber \\
+ \underbrace{-\mathscr{H}_k''(s_k) \alpha_k A \kappa_k \rho_k \| \grad s_k \|^2  - \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k  \mathbf{Q}_k}_{\mathbb{T}_0} &+\nonumber \\
 \underbrace{ \mathscr{H}_k'(s_k)(s_e)_k  \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k}_{\mathbb{T}_1} & .
 \end{align}
 %
 As in \sct{sec:visc-regu}, the left-hand side of \eqt{eq:ent-res-7-eqn-diss-terms-app3} is split into two residuals denoted by $\mathbb{T}_0$ and $\mathbb{T}_1$ in order to study the sign of each of them. We start by studying the sign of $\mathbb{T}_1$ that is positive since it is assumed that $ \mathscr{H}_k'(s_k) \geq 0$. We now investigate the sign of $\mathbb{T}_0$. Using \eqt{eq:generalized_ent}, it is obtained:
 %
 \begin{equation}\label{eq:new_quad_form}
-- \mathbb{T}_0 \leq \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k \left( c_{p,k}^{-1} ||\grad s_k||^2 +  \mathbf{Q}_k\right) \ .
+- \mathbb{T}_0 \leq \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k \left( c_{p,k}^{-1} \|\grad s_k\|^2 +  \mathbf{Q}_k\right) \ .
 \end{equation}
 %
 The right-hand side of \eqt{eq:new_quad_form} is a quadratic form that was already defined in Appendix 5 of \cite{jlg} and recast under the matricial form $X^t_k \mathbb{S} X_k$ where $\mathbb{S}$ is a $2 \times 2$ matrix and the vector $X_k$ is defined in \sct{sec:visc-regu}. In \cite{jlg}, the matrix $\mathbb{S}$ is proved to be negative semi-definite which allows us to conclude that $-\mathbb{T}_0$ is of the same sign using \eqt{eq:new_quad_form}. Then, knowing the sign of the two residuals $\mathbb{T}_0$ and $\mathbb{T}_1$, we conclude that:
