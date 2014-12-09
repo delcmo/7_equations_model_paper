@@ -514,90 +514,126 @@ The terms $(s_e)_k$ and $(s_{\rho})_k$ denote the partial derivatives of $s_k$ w
 We first derive the phasic density equation expressed in terms of the primitive variable $\rho_k$ by combining \eqt{eq:sev_equ-with-diss-terms-vf} and \eqt{eq:sev_equ-with-diss-terms-cont} to obtain:
 %
 \begin{multline}\label{eq:rho-7-eqn-model-sect4}
-\alpha_k A \left[ \partial_t \rho_k + \mbold u_k  \cdot \grad \rho_k \right] +  \underline{\underline{ A \rho_k \left( \mbold u_k - \mbold u_{int} \right) \cdot \grad \alpha_k}} = \\-\underline{\underline{A \rho_k \mu_P \left( P_k - P_j \right)}} + \div \mbold f_k - \rho_k \div \mbold l_k
+\alpha_k A \left[ \partial_t \rho_k + \mbold u_k  \cdot \grad \rho_k \right] 
++ \rho_k \alpha_k \div (A \mbold u_k ) 
++  \underline{\underline{ A \rho_k \left( \mbold u_k - \mbold u_{int} \right) \cdot \grad \alpha_k}} = \\-\underline{\underline{A \rho_k \mu_P \left( P_k - P_j \right)}} + \div \mbold f_k - \rho_k \div \mbold l_k
 \end{multline}
 %
 In order to derive an equation for the phasic internal energy, the phasic velocity equation is obtained by subtracting the phasic density equation (multiplied by $\mbold u_k$) from the phasic momentum equation:
 %
-\tcr{too many dots in the second term. It should really be $(\mbold u \cdot \grad) \mbold u$}
+\tcr{too many dots in the second term. It should really be $(\mbold u \cdot \grad) \mbold u$\\
+last term in $\mbold f$ was changed. I think it is correct now.}
 \begin{align}\label{eq:vel-7-eqn-model-sect4}
 \alpha_k \rho_k  A \left[ \partial_t \mbold u_k + \mbold u_k \cdot \div \mbold u_k \right]  + \div \left( \alpha_k \rho_k A P_k \mathbb{I} \right) &=\nonumber\\
-\alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j - \mbold u_k \right) &+ \div \mathbb{g}_k - \mbold u_k \otimes \mbold f_k
+\alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j - \mbold u_k \right) &+ \div \mathbb{g}_k - \mbold u_k \div \mbold f_k
 \end{align}
 %
 After multiplying \eqt{eq:vel-7-eqn-model-sect4} by velocity $\mbold u_k$, the resulting phasic kinetic energy equation is subtracted from the phasic total energy equation to obtain the internal energy equation for phase $k$:
 %
 \begin{multline}\label{eq:int-ener-7-eqn-model-sect4}
-\alpha_k \rho_k  A \left[ \partial_t \mbold e_k + \mbold u_k \cdot \grad \mbold e_k \right]  + \alpha_k A P_k \div \mbold u_k = \\
-\underline{\underline{P_{int} A \left(\mbold u_{int}-\mbold u_k \right) \cdot \grad \alpha_k}} -  \underline{\underline{\alpha_k P_k \mbold u_k \cdot \grad A}} \\ 
-\underline{\underline{-\bar{P}_{int} A \mu_P \left(P_k-P_j \right)}} + \underline{\underline{A \lambda_u \left(\mbold u_j-\mbold u_k  \right) \cdot \left(\bar{\mbold u}_{int}- \mbold u_k \right)}}\\
-+ \div \mbold h_k + \mathbb{g}_k : \grad \mbold u_k + || \mbold u ||^2_k \mbold f_k
+\alpha_k \rho_k  A \left[ \partial_t  e_k + \mbold u_k \cdot \grad  e_k \right]  
++ \alpha_k P_k \div (A \mbold u_k ) =
+  \underline{\underline{P_{int} A \left(\mbold u_{int}-\mbold u_k \right) \cdot \grad \alpha_k}}  \\
+- \underline{\underline{\bar{P}_{int} A \mu_P \left(P_k-P_j \right)}} 
++ \underline{\underline{A \lambda_u \left(\mbold u_j-\mbold u_k  \right) \cdot \left(\bar{\mbold u}_{int}- \mbold u_k \right)}}\\
+-\left( e -  \tfrac{1}{2} \| \mbold u_k \|^2 \right) \div \mbold f_k 
++ \div \mbold h_k + \mathbb{g}_k : \grad \mbold u_k \,.
 \end{multline}
 %
-The underlined terms in \eqt{eq:rho-7-eqn-model-sect4} and \eqt{eq:int-ener-7-eqn-model-sect4} yield the positive terms on the right-hand side of \eqt{eq:ent-eqn-7-eqn-model} (see \app{app:sev-equ-model-entropy})
-and thus are ignored in the remainder of this derivation for brevity. The phasic entropy equation is now obtained by combining the phasic density equation (\eqt{eq:rho-7-eqn-model-sect4}) and the phasic internal energy equation (\eqt{eq:int-ener-7-eqn-model-sect4}) through the chain rule given in \eqt{eq:chain_rule-sct4} to yield:
+% --keep for now-- The underlined terms in \eqt{eq:rho-7-eqn-model-sect4} and \eqt{eq:int-ener-7-eqn-model-sect4} yield the 
+% positive terms on the right-hand side of \eqt{eq:ent-eqn-7-eqn-model} (see \app{app:sev-equ-model-entropy})
+% and thus are ignored in the remainder of this derivation for brevity. 
+The underlined terms in \eqt{eq:rho-7-eqn-model-sect4} and \eqt{eq:int-ener-7-eqn-model-sect4}, also present in the derivation of the entropy equation for the SEM \emph{without} regularization, yield the positive terms on the right-hand side of the entropy equation, \eqt{eq:ent-eqn-7-eqn-model}. We refer the reader to \app{app:sev-equ-model-entropy} for a detailed derivation of the entropy equation  without viscous regularization; here, we deal with the \emph{regularized} system of equations and the above underlined terms are ignored in the remainder of this derivation for brevity. 
+The phasic entropy equation is now obtained by combining the phasic density equation (\eqt{eq:rho-7-eqn-model-sect4}) and the phasic internal energy equation (\eqt{eq:int-ener-7-eqn-model-sect4}) through the chain rule given in \eqt{eq:chain_rule-sct4} to yield:
+The phasic entropy equation is now obtained by combining the phasic density equation (\eqt{eq:rho-7-eqn-model-sect4}) and the phasic internal energy equation (\eqt{eq:int-ener-7-eqn-model-sect4}) through the chain rule given in \eqt{eq:chain_rule-sct4} to yield:
 %
 \begin{multline}\label{eq:ent-res-7-eqn-diss-terms}
-\alpha_k \rho_k A \frac{Ds_k}{Dt} =  (\rho s_\rho)_k \left[ \div \mbold f_k - \rho_k \div \mbold l_k \right] + \\
-\left(s_e\right)_k \left[ \div \mbold h_k + \mathbb{g}_k : \grad \mbold u_k +  \left( \| \frac{\mbold u \|^2_k}{2} - e_k\right) \div \mbold f_k  \right],
+\alpha_k \rho_k A \frac{Ds_k}{Dt} 
++ \alpha_k \left(  \rho^2_k  (s_\rho)_k + P_k (s_e)_k  \right) \div (A \mbold u_k )  \\
+=  \left( (\rho s_\rho)_k - (e s_e)_k \right) \div \mbold f_k 
+- \rho^2_k (s_\rho)_k \div \mbold l_k  \\
++ \left(s_e\right)_k \left[ \div \mbold h_k + \mathbb{g}_k : \grad \mbold u_k +  \tfrac{1}{2} \| \mbold u_k \|^2 \div \mbold f_k \right]
+\,.
 \end{multline}
 %
-where it was assumed that the entropy of phase $k$ satisfies the second law of thermodynamics: 
+The second law of thermodynamics for phase $k$ is 
 %
 \begin{subequations}
-\begin{align}\label{eq:2nd-therm-laws-sect4}
-T_k \text{d} s_k = \text{d}e_k - P_k\frac{\text{d}\rho_k}{\rho_k^2} \,.
-\end{align}
-The above relationship implies 
-\begin{align}
-&P_k (s_e)_k + \rho_k^2 (s_\rho)_k = 0, \\
-&(s_e)_k = T_k^{-1} \text{ and } (s_\rho)_k = - (s_e)_k \frac{P_k }{\rho_k^2} \,. \nonumber
-\end{align}
+\begin{equation}\label{eq:2nd-therm-laws-sect4}
+T_k \text{d} s_k = \text{d}e_k - P_k\frac{\text{d}\rho_k}{\rho_k^2} \,,
+\end{equation}
+which implies 
+\begin{equation}
+(s_e)_k = T_k^{-1} \text{ and } (s_\rho)_k = - (s_e)_k \frac{P_k }{\rho_k^2} ,
+\end{equation}
+that is, 
+\begin{equation}
+\rho_k^2 (s_\rho)_k + P_k (s_e)_k  = 0 \,.
+\end{equation}
 \end{subequations}
 % 
 %\eqt{eq:2nd-therm-laws-sect4} is also used to compute the partial derivative of the entropy with respect to the density, $(s_\rho)_k$, and the internal energy, $(s_e)_k$, if needed.
+Then, \eqt{eq:ent-res-7-eqn-diss-terms} can be rearranged as 
+\begin{multline}\label{eq:ent-res-7-eqn-diss-terms_rearranged}
+\alpha_k \rho_k A \frac{Ds_k}{Dt} 
+=  \left( (\rho s_\rho)_k - (e s_e)_k \right) \div \mbold f_k 
+- \rho^2_k (s_\rho)_k \div \mbold l_k  \\
++ \left(s_e\right)_k \div \left( \mbold h_k + \tfrac{1}{2} \| \mbold u_k \|^2  \mbold f_k \right)
++ \left(s_e\right)_k \left( \mathbb{g}_k - \mbold u_k \otimes \mbold f_k \right) : \grad \mbold u_k 
+\,.
+\end{multline}
 
-Following the methodology applied in \cite{jlg, Marco_paper_low_mach}, the right-hand side of \eqt{eq:ent-res-7-eqn-diss-terms} can be further simplified by using the following expression
+
+Following the methodology applied in \cite{jlg, Marco_paper_low_mach}, the right-hand side of \eqt{eq:ent-res-7-eqn-diss-terms} can be further simplified by using the following expressions
 for the dissipative terms $\mbold f_k$,  $\mathbb{g}_k$ and $\mbold h_k$:
 %
+\tcr{order of operations with $\otimes$}
 \begin{subequations}\label{eq:def-diss-terms-sect4}
 \begin{align}
-  \mbold f_k &= \tilde{\mbold f}_k + \rho_k \mbold  l_k 
+  \mbold f_k   &= \tilde{\mbold f}_k +\rho_k \mbold  l_k
   \\
-  \mathbb{g}_k &= \alpha_k \rho_k A \mu_k \mathbb{F}(\mbold u_k) + \mbold f_k \otimes \mbold u_k
+  \mathbb{g}_k -  \mbold u_k \otimes \mbold f_k &= \alpha_k \rho_k A \mu_k \mathbb{F}(\mbold u_k) 
   \\
-  \mbold h_k &= \tilde{\mbold h}_k - \frac{|| \mbold u_k||^2 }{2} \mbold f_k + (\rho e)_k \mbold l_k,
+  \mbold h_k + \tfrac{1}{2}\| \mbold u_k\|^2  \mbold f_k &= \tilde{\mbold h}_k + (\rho e)_k \mbold l_k,
 \end{align}
 \end{subequations}
 %
-where $\mu_k$ is a positive viscosity coefficient for phase $k$. Note the area function $A$ in the definition of $\mathbb{g}_k$. Substituting the expression of the dissipative terms given in \eqt{eq:def-diss-terms-sect4} into \eqt{eq:ent-res-7-eqn-diss-terms} yields:
+where $\mu_k$ is a positive viscosity coefficient for phase $k$. %Note the area function $A$ in the definition of $\mathbb{g}_k$.
+Substituting the expressions of \eqt{eq:def-diss-terms-sect4} into \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} yields:
 %
-\begin{multline}\label{eq:ent-res-7-eqn-diss-terms2}
-\alpha_k \rho_k A \frac{Ds_k}{Dt} = \underbrace{\div \left[ (s_e)_k\tilde{\mbold h}_k + \Big( e_k( s_e)_k - \rho_k (s_\rho)_k \Big) \tilde{\mbold f}_k \right]}_{{\mathcal{R}_0}} \\
-\underbrace{ \left(s_e\right)_k \alpha_k \rho_k A \mu_k \mathbb{F}(\mbold u_k) : \grad \mbold u_k}_{\mathcal{R}_1} 
-\underbrace{-\tilde{\mbold h}_k \cdot \grad (s_e)_k  - \tilde{\mbold f}_k \cdot \grad \left[ \right( e s_e \left)_k - (\rho s_\rho)_k \right]}_{\mathcal{R}_2} + \\
-\underbrace{(s_e)_k \div \left( \rho_k e_k \mbold l_k \right) -  (s_e)_k e_k \div \left( \rho_k \mbold l_k \right) + \rho_k (s_\rho)_k \div \left( \rho_k \mbold l_k \right) 
-  - \rho_k^2 (s_\rho)_k \div \mbold l_k}_{\mathcal{R}_3}.
+\begin{multline}\label{eq:ent-res-7-eqn-diss-terms_rearranged2}
+\alpha_k \rho_k A \frac{Ds_k}{Dt} 
+=  \left( (\rho s_\rho)_k - (e s_e)_k \right) \div \tilde{\mbold f}_k 
++ \left(s_e\right)_k \div \tilde{ \mbold h} _k \\
++ \alpha_k \rho_k A \mu_k  \left(s_e\right)_k \mathbb{F}(\mbold u_k) : \grad \mbold u_k 
++ \rho \mbold l _k \cdot \grad s \,,
 \end{multline}
 %
-We now split the right-hand-side of \eqt{eq:ent-res-7-eqn-diss-terms2} into three residuals denoted by $\mathcal{R}_1$, $\mathcal{R}_2$ and $\mathcal{R}_3$ and we study the sign of each of them. Since $(s_e)_k$ is defined as the inverse of the temperature and thus is positive, the sign of the first term, $\mathcal{R}_1$, is conditioned by the choice of the function $\mathbb{F}(\mbold u_k)$ so that the product with the tensor $\grad \mbold u_k$ is positive. As in \cite{jlg, Marco_paper_low_mach}, $\mathbb{F}(\mbold u_k)$ is chosen proportional to the symmetric gradient of the velocity vector $\grad^s \mbold u_k$, whom entries are given by $\left( (\grad^s \mbold u)_{i,j} \right)_k = \frac{1}{2} \left( \partial_{x_i} u_i + \partial_{x_j} u_j \right)_k$. With such a choice, the viscous regularization is also rotationally invariant.
+or
+%
+\tcr{check sign}
+\begin{multline}\label{eq:ent-res-7-eqn-diss-terms2}
+\alpha_k \rho_k A \frac{Ds_k}{Dt} = 
+\underbrace{\div \left[ (s_e)_k\tilde{\mbold h}_k \tcr{-} \Big( e_k( s_e)_k - \rho_k (s_\rho)_k \Big) \tilde{\mbold f}_k \right]}_{{\mathcal{R}_0}} \\
+-\underbrace{\tilde{\mbold h}_k \cdot \grad (s_e)_k  \tcr{+} \tilde{\mbold f}_k \cdot \grad \left[ \right( e s_e \left)_k - (\rho s_\rho)_k \right]}_{\mathcal{R}_2} 
++ \underbrace{ \left(s_e\right)_k \alpha_k \rho_k A \mu_k \mathbb{F}(\mbold u_k) : \grad \mbold u_k}_{\mathcal{R}_1} \\
++ \underbrace{\rho \mbold l _k \cdot \grad s}_{\mathcal{R}_3}.
+\end{multline}
+%
+We now split the right-hand-side of \eqt{eq:ent-res-7-eqn-diss-terms2} into several residuals denoted by $\mathcal{R}_1$, $\mathcal{R}_2$ and $\mathcal{R}_3$ and we study the sign of each of them. Since $(s_e)_k$ is defined as the inverse of the temperature and is thus positive, the sign of the $\mathcal{R}_1$ is conditioned by the choice of the function $\mathbb{F}(\mbold u_k)$ so that the product with the tensor $\grad \mbold u_k$ is positive. As in \cite{jlg, Marco_paper_low_mach}, $\mathbb{F}(\mbold u_k)$ is chosen proportional to the symmetric gradient of the velocity vector $\grad^s \mbold u_k$, whoSE entries are given by $\left( (\grad^s \mbold u)_{i,j} \right)_k = \frac{1}{2} \left( \partial_{x_i} u_i + \partial_{x_j} u_j \right)_k$. With such a choice, the viscous regularization is also rotationally invariant.
 %Such a choice ensures the associated dissipative terms to be rotationally invariant and also positivity of $\mathcal{R}_1$. An other option would be to simply set $\mathbb{F}(\mbold u_k)$ proportional to $\grad \mbold u_k$ which allows to recover the parabolic regularization \cite{Parabolic} but does not ensure rotational invariance. 
 %
-After a few lines of algebra, the third term ${\mathcal{R}_3}$ can be recast as a function of the gradient of the entropy as follows:
-\begin{align}
- \label{eq:ent-R3-sct4}
-  \mathcal{R}_3  =  \rho_k A \mbold l_k \cdot \grad s_k.
-\end{align} 
-One of the assumptions made in the entropy minimum principle is to that the entropy 
-is at a minimum which implies that its gradient is null. Because of this, it follows that
-the term $\mathcal{R}_3$ is zero at the minimum and thus, the entropy minimum principle is verified
-independently of the definition of the dissipation term $\mbold l_k$ used in the void fraction
-equation \eqt{eq:sev_equ-with-diss-terms-vf}. It will be explained later in this section how to obtain a definition for $\mbold l_k$.
 
-We now focus on the term denoted by $\mathcal{R}_2$, which is identical to the right-hand-side of the single phase entropy equation for Euler equations (see \cite{jlg, Marco_paper_low_mach}). Thus, the term $\mathcal{R}_2$ is known to be positive when (i) assumes concavity of the entropy function $s_k$ with respect to the internal energy $e_k$ and the specific volume $1 / \rho_k$ (or convexity of $-s_k$) and (ii) chooses the following definitions for the dissipative terms $\tilde{h}_k$ and $\tilde{f}_k$:
+The term ${\mathcal{R}_3}$ is  function of the gradient of the entropy.  
+At the location of the entropy  minimum principle, the entropy gradient is zero and thus the term $\mathcal{R}_3$ 
+is zero at that minimum. Note that we will therefore be able to verify the entropy minimum principle 
+independently of the definition of the dissipation term $\mbold l_k$ used in the void fraction
+equation \eqt{eq:sev_equ-with-diss-terms-vf}. We will later determine how to obtain a definition for $\mbold l_k$.
+
+We now focus on the term denoted by $\mathcal{R}_2$, which is identical to the right-hand side of the single phase entropy equation for Euler equations (see \cite{jlg, Marco_paper_low_mach}). Thus, the term $\mathcal{R}_2$ is known to be positive when (i) assumes concavity of the entropy function $s_k$ with respect to the internal energy $e_k$ and the specific volume $1 / \rho_k$ (or convexity of $-s_k$) and (ii) chooses the following definitions for the dissipative terms $\tilde{h}_k$ and $\tilde{f}_k$:
 %
-\begin{subequations}
-\begin{align}\label{eq:def_visc}
+\begin{subequations} \label{eq:def_visc}
+\begin{align}
 &\tilde{\mbold f}_k = \alpha_k A \kappa_k \grad \rho_k \\
 &\tilde{\mbold h}_k = \alpha_k A \kappa_k \grad \left( \rho e \right)_k,
 \end{align}
@@ -611,10 +647,10 @@ where $\kappa_k$ is another positive viscosity coefficient. In addition, using \
 %
 The entropy equation can now be written in its final form:
 %
-\begin{align}\label{eq:ent-res-7-eqn-diss-terms3}
-&\alpha_k \rho_k A \frac{Ds_k}{Dt} =  \mbold f_k \cdot \grad s_k + \div \left( \alpha_k A \rho_k \kappa_k  \grad s_k \right)  \nonumber\\
-&- \alpha_k \rho_k A \kappa_k \mathbf{Q}_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k,
-\end{align}
+\begin{multline}\label{eq:ent-res-7-eqn-diss-terms3}
+\alpha_k \rho_k A \frac{Ds_k}{Dt} =  \mbold f_k \cdot \grad s_k + \div \left( \alpha_k A \rho_k \kappa_k  \grad s_k \right)  \\
+\tcr{+} \alpha_k \rho_k A \kappa_k \mathbf{Q}_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k,
+\end{multline}
 %
 where $\mathbf{Q}_k$ is a negative semi-definite quadratic form under the assumption of $s_k$ being concave with respect to $e_k$ and $1/ \rho_k$, and defined as:
 %
@@ -661,7 +697,7 @@ All of the dissipative terms are now defined and recalled here:
 \mathbb{g}_k &= \alpha_k A \mu_k \rho \grad^s \mbold u_k 
 \end{align}
 \begin{align}
-  \mbold h_k &=  \alpha_k A \kappa_k \grad \left( \rho e \right)_k + \mbold u_k : \mathbb{g}_k - \frac{|| \mbold u_k||^2}{2} \mbold f_k + (\rho e)_k \mbold l_k 
+  \mbold h_k &=  \alpha_k A \kappa_k \grad \left( \rho e \right)_k  - \frac{|| \mbold u_k||^2}{2} \mbold f_k + (\rho e)_k \mbold l_k 
 \end{align}
 \end{subequations}
 %
