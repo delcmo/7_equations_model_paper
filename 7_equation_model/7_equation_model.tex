@@ -432,8 +432,14 @@ and the sign of the entropy material derivative can be proved positive. The entr
 \\
 & \tcr{\| \grad \alpha_k \|} \frac{Z_k}{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k)+\frac{\grad \alpha_k}{\| \grad \alpha_k \|}(P_k-P_j)\right]^2 \ ,
 \end{align}
-where $\frac{D(\cdot) }{Dt} = \partial_t (\cdot) + \mbold u \cdot \grad (\cdot)$ is the material derivative.
-The partial derivative of the entropy function $s_k$ with respect to the internal energy $e_k$, $(s_e)_k$, is shown to be equal to the inverse of the temperature of phase $k$, as in the case of the single phase Euler equations \cite{jlg, Marco_dissertation}. The right-hand side of \eqt{eq:ent-eqn-7-eqn-model} is unconditionally positive since all terms are squared; this property is invoked to demonstrate the entropy minimum principle. Furthermore, \eqt{eq:ent-eqn-7-eqn-model} is valid for both phases $\left\{k, j\right\}$, ensuring positivity of the total entropy equation obtained by summation over the phases:
+where $\frac{D(\cdot) }{Dt} = \partial_t (\cdot) + \mbold u_k \cdot \grad (\cdot)$ is the material derivative.
+The right-hand side of \eqt{eq:ent-eqn-7-eqn-model} is unconditionally positive since all terms are squared. Furthermore, 
+the partial derivative of $s_k$ with respect to the internal energy $e_k$, denoted by $(s_e)_k$, is shown to be equal to the inverse of the temperature of phase $k$, as in the case of the single phase Euler equations \cite{jlg, Marco_dissertation}. At the location of entropy minimum, $\grad s_k =0$ by definition. Therefore, we conclude  that the minimum entropy principle stated below, holds:
+\begin{equation}
+\inf_{\mbold x \in \mathbb{R}^{\texttt{dim}}} s_k(\mbold x ,t) \ge \inf_{\mbold x \in \mathbb{R}^{\texttt{dim}}} s_k(\mbold x ,t=0) 
+\end{equation}
+%T; this property is invoked to demonstrate the entropy minimum principle. Furthermore
+(with $\texttt{dim}$ the problem's dimension). \eqt{eq:ent-eqn-7-eqn-model} is valid for both phases $\left\{k, j\right\}$, ensuring positivity of the total entropy equation obtained by summation over the phases:
 %
 \begin{equation}\label{eq:tot-ent-res-sct4}
 \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} = \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \left( \partial_t s_k + \mbold u_k \cdot \grad s_k \right) \geq 0  .
@@ -524,7 +530,7 @@ In order to derive an equation for the phasic internal energy, the phasic veloci
 \tcr{too many dots in the second term. It should really be $(\mbold u \cdot \grad) \mbold u$\\
 last term in $\mbold f$ was changed. I think it is correct now.}
 \begin{align}\label{eq:vel-7-eqn-model-sect4}
-\alpha_k \rho_k  A \left[ \partial_t \mbold u_k + \mbold u_k \cdot \div \mbold u_k \right]  + \div \left( \alpha_k \rho_k A P_k \mathbb{I} \right) &=\nonumber\\
+\alpha_k \rho_k  A \left[ \partial_t \mbold u_k + (\mbold u_k \cdot \grad) \mbold u_k \right]  + \div \left( \alpha_k \rho_k A P_k \mathbb{I} \right) &=\nonumber\\
 \alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j - \mbold u_k \right) &+ \div \mathbb{g}_k - \mbold u_k \div \mbold f_k
 \end{align}
 %
@@ -536,7 +542,7 @@ After multiplying \eqt{eq:vel-7-eqn-model-sect4} by velocity $\mbold u_k$, the r
   \underline{\underline{P_{int} A \left(\mbold u_{int}-\mbold u_k \right) \cdot \grad \alpha_k}}  \\
 - \underline{\underline{\bar{P}_{int} A \mu_P \left(P_k-P_j \right)}} 
 + \underline{\underline{A \lambda_u \left(\mbold u_j-\mbold u_k  \right) \cdot \left(\bar{\mbold u}_{int}- \mbold u_k \right)}}\\
--\left( e -  \tfrac{1}{2} \| \mbold u_k \|^2 \right) \div \mbold f_k 
+-\left( e_k -  \tfrac{1}{2} \| \mbold u_k \|^2 \right) \div \mbold f_k 
 + \div \mbold h_k + \mathbb{g}_k : \grad \mbold u_k \,.
 \end{multline}
 %
@@ -547,6 +553,7 @@ The underlined terms in \eqt{eq:rho-7-eqn-model-sect4} and \eqt{eq:int-ener-7-eq
 The phasic entropy equation is now obtained by combining the phasic density equation (\eqt{eq:rho-7-eqn-model-sect4}) and the phasic internal energy equation (\eqt{eq:int-ener-7-eqn-model-sect4}) through the chain rule given in \eqt{eq:chain_rule-sct4} to yield:
 The phasic entropy equation is now obtained by combining the phasic density equation (\eqt{eq:rho-7-eqn-model-sect4}) and the phasic internal energy equation (\eqt{eq:int-ener-7-eqn-model-sect4}) through the chain rule given in \eqt{eq:chain_rule-sct4} to yield:
 %
+\tcr{order of operations with $\otimes$}
 \begin{multline}\label{eq:ent-res-7-eqn-diss-terms}
 \alpha_k \rho_k A \frac{Ds_k}{Dt} 
 + \alpha_k \left(  \rho^2_k  (s_\rho)_k + P_k (s_e)_k  \right) \div (A \mbold u_k )  \\
@@ -605,32 +612,41 @@ Substituting the expressions of \eqt{eq:def-diss-terms-sect4} into \eqt{eq:ent-r
 \alpha_k \rho_k A \frac{Ds_k}{Dt} 
 =  \left( (\rho s_\rho)_k - (e s_e)_k \right) \div \tilde{\mbold f}_k 
 + \left(s_e\right)_k \div \tilde{ \mbold h} _k \\
-+ \alpha_k \rho_k A \mu_k  \left(s_e\right)_k \mathbb{F}(\mbold u_k) : \grad \mbold u_k 
-+ \rho \mbold l _k \cdot \grad s \,,
++ (s_e)_k \alpha_k \rho_k A \mu_k  \left(s_e\right)_k \mathbb{F}(\mbold u_k) : \grad \mbold u_k 
++ \rho_k \mbold l _k \cdot \grad s_k \,,
 \end{multline}
 %
-or
+or, after integration by parts,
 %
 \tcr{check sign}
 \begin{multline}\label{eq:ent-res-7-eqn-diss-terms2}
 \alpha_k \rho_k A \frac{Ds_k}{Dt} = 
-\underbrace{\div \left[ (s_e)_k\tilde{\mbold h}_k \tcr{-} \Big( e_k( s_e)_k - \rho_k (s_\rho)_k \Big) \tilde{\mbold f}_k \right]}_{{\mathcal{R}_0}} \\
--\underbrace{\tilde{\mbold h}_k \cdot \grad (s_e)_k  \tcr{+} \tilde{\mbold f}_k \cdot \grad \left[ \right( e s_e \left)_k - (\rho s_\rho)_k \right]}_{\mathcal{R}_2} 
-+ \underbrace{ \left(s_e\right)_k \alpha_k \rho_k A \mu_k \mathbb{F}(\mbold u_k) : \grad \mbold u_k}_{\mathcal{R}_1} \\
-+ \underbrace{\rho \mbold l _k \cdot \grad s}_{\mathcal{R}_3}.
+\underbrace{\div \left[ (s_e)_k\tilde{\mbold h}_k +\Big( (\rho s_\rho)_k - (e s_e)_k \Big) \tilde{\mbold f}_k \right]}_{{\mathcal{R}_0}} \\
+-\Big(
+\underbrace{\tilde{\mbold h}_k \cdot \grad (s_e)_k + \tilde{\mbold f}_k \cdot \grad \left[  (\rho s_\rho)_k - (e s_e)_k \right]}_{\mathcal{R}_1} 
+\Big)
++ \underbrace{ \left(s_e\right)_k \alpha_k \rho_k A \mu_k \mathbb{F}(\mbold u_k) : \grad \mbold u_k}_{\mathcal{R}_2} \\
++ \underbrace{\rho_k \mbold l _k \cdot \grad s_k}_{\mathcal{R}_3}.
 \end{multline}
 %
-We now split the right-hand-side of \eqt{eq:ent-res-7-eqn-diss-terms2} into several residuals denoted by $\mathcal{R}_1$, $\mathcal{R}_2$ and $\mathcal{R}_3$ and we study the sign of each of them. Since $(s_e)_k$ is defined as the inverse of the temperature and is thus positive, the sign of the $\mathcal{R}_1$ is conditioned by the choice of the function $\mathbb{F}(\mbold u_k)$ so that the product with the tensor $\grad \mbold u_k$ is positive. As in \cite{jlg, Marco_paper_low_mach}, $\mathbb{F}(\mbold u_k)$ is chosen proportional to the symmetric gradient of the velocity vector $\grad^s \mbold u_k$, whoSE entries are given by $\left( (\grad^s \mbold u)_{i,j} \right)_k = \frac{1}{2} \left( \partial_{x_i} u_i + \partial_{x_j} u_j \right)_k$. With such a choice, the viscous regularization is also rotationally invariant.
+We now split the right-hand-side of \eqt{eq:ent-res-7-eqn-diss-terms2} into several residuals denoted by $\mathcal{R}_0$ through $\mathcal{R}_3$ and we analyze the sign of each of them. 
+
+The term ${\mathcal{R}_3}$ is  function of the gradient of the entropy.  
+At the location of the entropy minimum, this gradient is zero; therefore, $\mathcal{R}_3$ 
+has no effect on the entropy minimum principle. It is important to note that the entropy minimum principle will be verified
+independently of the definition of the dissipation term $\mbold l_k$ used in the void fraction
+equation \eqt{eq:sev_equ-with-diss-terms-vf}. We will later provide a possible definition for $\mbold l_k$.
+
+Since $(s_e)_k$ is defined as the inverse of the temperature and is thus positive, the sign of $\mathcal{R}_2$ is conditioned by the choice of the function $\mathbb{F}(\mbold u_k)$ so that its product with the tensor $\grad \mbold u_k$ is positive. As in \cite{jlg, Marco_paper_low_mach}, $\mathbb{F}(\mbold u_k)$ is chosen to be proportional to the symmetric gradient of the velocity vector $\mbold u_k$, %whose entries are given by $\left( (\grad^s \mbold u)_{i,j} \right)_k = \frac{1}{2} \left( \partial_{x_i} u_i + \partial_{x_j} u_j \right)_k$. 
+\begin{equation}
+\mathbb{F}(\mbold u_k) = \grad^s \mbold u_k \,.
+\end{equation}
+With such a choice, the viscous regularization is also rotationally invariant.
 %Such a choice ensures the associated dissipative terms to be rotationally invariant and also positivity of $\mathcal{R}_1$. An other option would be to simply set $\mathbb{F}(\mbold u_k)$ proportional to $\grad \mbold u_k$ which allows to recover the parabolic regularization \cite{Parabolic} but does not ensure rotational invariance. 
 %
 
-The term ${\mathcal{R}_3}$ is  function of the gradient of the entropy.  
-At the location of the entropy  minimum principle, the entropy gradient is zero and thus the term $\mathcal{R}_3$ 
-is zero at that minimum. Note that we will therefore be able to verify the entropy minimum principle 
-independently of the definition of the dissipation term $\mbold l_k$ used in the void fraction
-equation \eqt{eq:sev_equ-with-diss-terms-vf}. We will later determine how to obtain a definition for $\mbold l_k$.
 
-We now focus on the term denoted by $\mathcal{R}_2$, which is identical to the right-hand side of the single phase entropy equation for Euler equations (see \cite{jlg, Marco_paper_low_mach}). Thus, the term $\mathcal{R}_2$ is known to be positive when (i) assumes concavity of the entropy function $s_k$ with respect to the internal energy $e_k$ and the specific volume $1 / \rho_k$ (or convexity of $-s_k$) and (ii) chooses the following definitions for the dissipative terms $\tilde{h}_k$ and $\tilde{f}_k$:
+We now focus on the term denoted by $\mathcal{R}_1$, which is identical to the right-hand side of the single phase entropy equation for Euler equations (see \cite{jlg, Marco_paper_low_mach}). $\mathcal{R}_1$ is known to be positive when (i) assuming concavity of the entropy function $s_k$ with respect to the internal energy $e_k$ and the specific volume $1 / \rho_k$ and (ii) when using the following definitions for the dissipative fluxes $\tilde{h}_k$ and $\tilde{f}_k$:
 %
 \begin{subequations} \label{eq:def_visc}
 \begin{align}
@@ -639,48 +655,56 @@ We now focus on the term denoted by $\mathcal{R}_2$, which is identical to the r
 \end{align}
 \end{subequations}
 %  
-where $\kappa_k$ is another positive viscosity coefficient. In addition, using \eqt{eq:def_visc}, the term $\mathcal{R}_0$ can be recast as a function of the phasic entropy as follows: 
+where $\kappa_k$ is another positive viscosity coefficient. 
+
+Finally, using \eqts{eq:def_visc}, the term $\mathcal{R}_0$ can be recast as a function of the phasic entropy as follows: 
 %
 \begin{equation}
-\mathcal{R}_0 = \div \left( \alpha_k A \kappa_k \rho_k \grad s_k \right)
+\mathcal{R}_0 = \div \left( \alpha_k A \kappa_k \rho_k \grad s_k \right) \,.
 \end{equation}
 %
-The entropy equation can now be written in its final form:
+The entropy residual equation can now be written in its final form:
 %
 \begin{multline}\label{eq:ent-res-7-eqn-diss-terms3}
 \alpha_k \rho_k A \frac{Ds_k}{Dt} =  \mbold f_k \cdot \grad s_k + \div \left( \alpha_k A \rho_k \kappa_k  \grad s_k \right)  \\
-\tcr{+} \alpha_k \rho_k A \kappa_k \mathbf{Q}_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k,
+\tcr{-} \alpha_k \rho_k A \kappa_k Q_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k,
 \end{multline}
 %
-where $\mathbf{Q}_k$ is a negative semi-definite quadratic form under the assumption of $s_k$ being concave with respect to $e_k$ and $1/ \rho_k$, and defined as:
+where $\Q_k$ is 
 %
 \begin{eqnarray}
-\mathbf{Q}_k &=& X^t_k \Sigma_k X_k \nonumber \\
-\text{with } X_k &=& \begin{bmatrix}
+Q_k &=& \mathbf{X}^T_k \mathbb{\Sigma}_k \mathbf{X}_k \nonumber \\
+\text{with } \mathbf{X}_k &=& \begin{bmatrix}
 \grad \rho_k \\
 \grad e_k 
 \end{bmatrix}
-\text{and } \Sigma_k = \begin{bmatrix}
+\text{ and } \mathbb{\Sigma}_k = \begin{bmatrix}
        \rho_k^{-2} \partial_{\rho_k} (\rho^2_k \partial_{\rho_k} s_k) & \partial_{\rho_k,e_k} s_k  \\[0.3em]
        \partial_{\rho_k,e_k} s_k & \partial_{e_k,e_k} s_k           \\[0.3em]
      \end{bmatrix}. \nonumber 
 \end{eqnarray}
 %
-\eqt{eq:ent-res-7-eqn-diss-terms3} is used to prove the entropy minimum principle: assuming that $s_k$ reaches its minimum value in $\mbold r_{min}(t)$ at each time $t$, the gradient, $\grad s_k$, and Laplacian, $\Delta s_k$,  of the entropy are null and positive at this particular point, respectively. Furthermore, it is recalled that the viscosity coefficients $\mu_k$ and $\kappa_k$ are positive by definition. Then, because the terms in the right-hand-side of \eqt{eq:ent-res-7-eqn-diss-terms3} are proven either positive or null when the entropy reaches a minimum value, the entropy minimum principle holds for each phase $k$, \textbf{independently of the definition of the dissipative term} $\mbold l_k$, such as:
+As with the single-phase Euler equations, one can demonstrate that $\mathbb{\Sigma}_k$ is a symmetry negative definite quadratic form 
+when $s_k$ is concave with respect to $e_k$ and $\rho_k^{-1}$  \cite{jlg, Marco_paper_low_mach}.
+
+\eqt{eq:ent-res-7-eqn-diss-terms3} is used to prove the entropy minimum principle for the SEM \emph{with} viscous regularization. At a location $\mbold x_{min}(t)$ where $s_k$ reaches its minimum value at time $t$, the gradient, $\grad s_k$, and Laplacian, $\Delta s_k$,  of the entropy are zero and positive at this particular location, respectively. %Furthermore, it is recalled that the viscosity coefficients $\mu_k$ and $\kappa_k$ are positive by definition. 
+Because the terms on the right-hand-side of \eqt{eq:ent-res-7-eqn-diss-terms3} have been shown to be either positive or null when the entropy reaches minimum, the entropy minimum principle holds for each phase $k$
 %
 \begin{equation}\label{eq:ent-res-7-eqn-diss-terms4}
-\alpha_k \rho_k A \partial_t s_k(\mbold r_{min},t)) \geq 0 \Rightarrow \partial_t s_k(\mbold r_{min},t)) \geq 0 \nonumber
+\alpha_k \rho_k A \partial_t s_k(\mbold x_{min},t)) \geq 0 \Rightarrow \partial_t s_k(\mbold x_{min},t)) \geq 0 \nonumber
 \end{equation}
 %
 \tcb{Do we need to make the above statement a theorem or property?}
 
-It remains to obtain a definition for the
-dissipative term $\mbold l_k$ used in the void fraction equation \eqt{eq:sev_equ-with-diss-terms-vf}. A way to achieve this is to
-consider the void fraction equation, by itself and notice that it is an hyperbolic equation
-with eigenvalue $\mbold u_{int}$. An entropy equation can be derived and used to prove the
-entropy minimum principle by properly choosing the dissipative term. The objective is to
-ensure positivity of the void fraction and also uniqueness of the weak solution. Following
-the work of Guermond et al. in \cite{jlg1, jlg2}, it can be shown that a dissipative term ensuring positivity and
+recall that the above entropy minimum principle holds {\it independently} of the definition of the dissipative term} $\mbold l_k$
+in the void fraction equation. We know provide a possible manner to define  $\mbold l_k$.
+
+Consider the void fraction equation \eqt{eq:sev_equ-with-diss-terms-vf}. It is an hyperbolic equation
+whose eigenvalue (speed) is $\mbold u_{int}$. An entropy equation can be derived \tcr{for the equation alone} 
+and used to prove the entropy minimum principle by properly choosing the dissipative term.
+\tcr{I remove positivity because I do not think we prove that by adding any viscosity; it can only be proven for 1st order viscosity}% , the goal being to ensure positivity of the void fraction and also uniqueness of the weak solution. 
+Following
+the work of Guermond et al. in \cite{jlg1, jlg2}, it can be shown that a dissipative term ensuring \tcr{?positivity?} and
 uniqueness of the weak solution for the void fraction equation, is of the form $\mbold l_k = \beta_k A \grad \alpha_k $, where $\beta_k$
 is a positive viscosity coefficient. The dissipative term is proportional to the area $A$ for consistency with the other terms of the void fraction equation \eqt{eq:sev_equ-with-diss-terms-vf}.
 
@@ -694,18 +718,18 @@ All of the dissipative terms are now defined and recalled here:
   \mbold f_k &= \alpha_k A \kappa_k \grad \rho_k + \rho_k A \mbold l_k 
 \end{align}
 \begin{align}
-\mathbb{g}_k &= \alpha_k A \mu_k \rho \grad^s \mbold u_k 
+\mathbb{g}_k &= \alpha_k A \mu_k \rho_k \grad^s \mbold u_k 
 \end{align}
 \begin{align}
-  \mbold h_k &=  \alpha_k A \kappa_k \grad \left( \rho e \right)_k  - \frac{|| \mbold u_k||^2}{2} \mbold f_k + (\rho e)_k \mbold l_k 
+  \mbold h_k &=  \alpha_k A \kappa_k \grad \left( \rho e \right)_k  - \frac{\| \mbold u_k \|^2}{2} \mbold f_k + (\rho e)_k \mbold l_k 
 \end{align}
 \end{subequations}
 %
 At this point, some remarks are in order:
 \begin{enumerate}
 %\item {The viscous regularization given in \eqt{eq:visc-reg-7-equ-sect4} for the multi-dimensional Seven-Equation two-phase flow Model, is equivalent to the parabolic regularization \cite{Parabolic} when assuming $\beta_k = \kappa_k = \mu_k$ and $\mathbb{F}(\mbold u_k) = \alpha_k \rho_k \kappa_k \grad \mbold u_k$, but is no longer rotation invariant. However, decoupling between the regularization on the velocity and on the density in the momentum equation is important to make the regularization rotation invariant but also to ensure well-scaled dissipative terms for a wide range of Mach number as was shown in \cite{Marco_paper_low_mach} for the multi-dimensional Euler equations.}
-\item {The dissipative term $\mbold l_k$ requires the definition of a new viscosity
-    coefficient $\beta_k$. It was shown that this viscosity coefficient is independent of
+\item {The definition of the dissipative term $\mbold l_k$ contains a new viscosity
+    coefficient $\beta_k$ that is independent of
     the other viscosity coefficients $\mu_k$ and $\kappa_k$. Its definition should
     account for the eigenvalue $\mbold u_{int}$ and  the entropy equation associated with the void fraction equation.}
 %    In addition, an entropy residual can be determined by analogy to Burger's
@@ -724,7 +748,7 @@ At this point, some remarks are in order:
 
 \item {All of the dissipative terms are chosen to be proportional to the void
     fraction $\alpha_k$ and the cross-sectional area $A$, except the one in the void fraction equation that is only proportional to $A$. For instance, $\alpha_k A \grad \rho_k$ is the
-    flux of the dissipative term in the continuity equation through the pseudo-area, $\alpha_k A$, seen
+    flux of the dissipative term in the continuity equation through the pseudo-area $\alpha_k A$ seen
     by the phase $k$. When one of the phases disappears, the dissipative terms
     must go to zero for consistency. On the other hand, when $\alpha_k$ goes to one,
     the \emph{regularized} single-phase Euler equations with variable area must be recovered. }    
@@ -749,7 +773,7 @@ A \lambda_u \bar{\mbold u}_{int} \cdot \left( \mbold u_j - \mbold u_k \right)  \
 + \div \left[A \kappa_k \grad \left( \alpha \rho E \right)_k \right] \ ,
 \end{multline}
 \end{subequations}
-to yield a viscous regularization that is analogous to the parabolic regularization for Euler equations \cite{Parabolic}. Note that by choosing $\mathbb{F}(\mbold u_k) = \grad \mbold u_k$, the above viscous regularization is no longer rotationally invariant.
+to yield a viscous regularization that is analogous to the parabolic regularization for Euler equations \cite{Parabolic}. Note that by choosing $\mathbb{F}(\mbold u_k) = \grad \mbold u_k$, the viscous regularization is no longer rotationally invariant.
 }
     
 \item{Compatibility of the viscous regularization proposed in \eqt{eq:visc-reg-7-equ-sect4} with the generalized entropies identified in Harten et al. \cite{Harten} is demonstrated in \app{app:harden}. } 
@@ -759,6 +783,7 @@ to yield a viscous regularization that is analogous to the parabolic regularizat
 %
 At this point in the paper, we have derived a viscous regularization for the Seven-Equation two-phase flow Model that ensures positivity of the entropy residual, uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$, and is consistent with the viscous regularization derived for Euler equations \cite{jlg, Marco_paper_low_mach} in the limit $\alpha_k \to 1$. The viscous regularization involves a set of three viscosity coefficients for each phase, $\mu_k$, $\kappa_k$ and $\beta_k$, that are assumed positive. Definition of the viscosity coefficients should be devised from the scaled SEM in order to ensure well-scaled dissipative terms for a wide range of Mach numbers (subsonic, transonic and supersonic flows).
 %
+\tcr{is the following remark useful in the paper? Can it be removed completely?}
 \begin{remark}
 Through the derivations of the viscous regularization, it was noted that another set of dissipative terms $\mbold f_k$ and $\mbold l_k$ would also ensures positivity of the entropy residual:
 %
