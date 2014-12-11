@@ -451,10 +451,11 @@ Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates to th
 \section{A viscous regularization for the Seven-Equation two-phase flow Model}\label{sec:visc-regu}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-Next, we derive a viscous regularization for the Seven-Equation two-phase flow Model given in \eqt{eq:liq-7-eqn-sect5} using the same methodology as for the multi-dimensional Euler equations with/without variable area \cite{jlg, Marco_paper_low_mach}. The method consists in adding dissipative terms to the system of equations under consideration, and in deriving an entropy equation for the regularized system. By adequatly choosing the artificial viscous fluxes, one can show that the sign of the entropy production remains positive, ensuring uniqueness of the numerical solution \cite{Leveque}. Because of the addition of dissipation terms, the entropy equation is modified and contains additional terms of yet unknown sign. By carefully choosing a definition for each of the dissipation terms, the sign of the entropy equation can be determined and rendered positive. For the Seven-Equation two-phase flow Model, derivation of the viscous regularization can be achieved by considering either the phasic entropy equation (\eqt{eq:ent-eqn-7-eqn-model}) or the total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the later case, the entropy minimum principle can be verified for the whole two-phase system but may not ensure positivity of the entropy equation for each phase. However, positivity of the total entropy equation can also be achieved by requiring that the entropy minimum principle holds for each phase. This stronger requirement will also ensure consistency with the single-phase Euler equations when one of the phases disappears in the limit $\alpha_k \to 0$. 
+Next, we derive a viscous regularization for the Seven-Equation two-phase flow Model given in \eqt{eq:liq-7-eqn-sect5} using the same methodology as for the multi-dimensional Euler equations with/without variable area \cite{jlg, Marco_paper_low_mach}. The method consists in adding dissipative terms to the system of equations under consideration, and in deriving an entropy equation for the regularized system. By adequately choosing the artificial viscous fluxes, one can show that the sign of the entropy production remains positive, ensuring uniqueness of the numerical solution \cite{Leveque}. Because of the addition of dissipation terms, the entropy equation is modified and contains additional terms of yet unknown sign. By carefully choosing a definition for each of the dissipation terms, the sign of the entropy equation can be determined and rendered positive. For the Seven-Equation two-phase flow Model, derivation of the viscous regularization can be achieved by considering either the phasic entropy equation (\eqt{eq:ent-eqn-7-eqn-model}) or the total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the later case, the entropy minimum principle can be verified for the whole two-phase system but may not ensure positivity of the entropy equation for each phase. However, positivity of the total entropy equation can also be achieved by requiring that the entropy minimum principle holds for each phase. This stronger requirement will also ensure consistency with the single-phase Euler equations when one of the phases disappears in the limit $\alpha_k \to 0$. 
 % Thus, we have opted to work with the phasic entropy equations given in \eqt{eq:ent-eqn-7-eqn-model}.
 
 For the purpose of this section, the system of equations given in \eqt{eq:sev_equ} is considered, which is obtained by simply omitting the mass source terms (terms proportional to $\Gammakj$) in \eqt{eq:liq-7-eqn-sect5}:
+\tcr{we need a section on source term later to fully explain how we treat them because they are omitted for most of the paper}
 %
 \begin{subequations}\label{eq:sev_equ}
 \begin{equation}
@@ -670,7 +671,7 @@ The entropy residual equation can now be written in its final form:
 \tcr{-} \alpha_k \rho_k A \kappa_k Q_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k,
 \end{multline}
 %
-where $\Q_k$ is 
+where $Q_k$ is 
 %
 \begin{eqnarray}
 Q_k &=& \mathbf{X}^T_k \mathbb{\Sigma}_k \mathbf{X}_k \nonumber \\
@@ -696,7 +697,7 @@ Because the terms on the right-hand-side of \eqt{eq:ent-res-7-eqn-diss-terms3} h
 %
 \tcb{Do we need to make the above statement a theorem or property?}
 
-recall that the above entropy minimum principle holds {\it independently} of the definition of the dissipative term} $\mbold l_k$
+Recall that the above entropy minimum principle holds {\it independently} of the definition of the dissipative term $\mbold l_k$
 in the void fraction equation. We know provide a possible manner to define  $\mbold l_k$.
 
 Consider the void fraction equation \eqt{eq:sev_equ-with-diss-terms-vf}. It is an hyperbolic equation
@@ -811,10 +812,14 @@ However, the definition of $\mbold l_k$ proposed in \eqt{eq:def-l-k-wrong-sect4}
 %\item discussion about the 
 %\end{itemize}
 %
+In the previous section, we have presented a viscous regularization for the seven-equation fluid model.  However,
+two-phase fluids may be found in various flow regimes, from extremely low-Mach subsonic situations to supersonic cases.
+In this section, we present a low-Mach asymptotic analysis \tcr{bla bla finish}
+
 When working with artificial dissipative numerical stabilization methods, great care needs to be carried to the definition of the viscosity coefficients that will determine the accuracy of the method. Generally speaking, sufficient artificial viscosity should be added into the shock and discontinuity regions to prevent spurious oscillations from forming, while little dissipation is added when the numerical solution is smooth to ensure high-order accuracy. In addition, the low-Mach asymptotic limit also has to be accounted for in the definition of the viscosity coefficients in order to recover the incompressible asymptotic equations \cite{LowMach1, LowMach2, LowMach3}. The purpose of this section is to derive the scaled SEM and investigate the scaling of the dissipative terms to ensure well-scaled dissipative terms for all-Mach flows (subsonic, transonic and supersonic flows). First, the scaled SEM are derived and then, two limit cases (a) and (b) will be considered to determine appropriate scaling for the entropy 
 viscosity coefficients so that the dissipative terms remain well-scaled for: 
 (a) the isentropic low-Mach limit where the Seven-Equation two-phase flow Model degenerate to an incompressible system of 
-equations in the low-Mach limit and (b) the non-isentropic limit with formation of shocks. Finally, for each case the scaling of the numerical adimensional numbers will be given. Also, because each phase can experience different flow regime e.g., supersonic gas and subsonic liquid, it is chosen to work with three distinct viscosity coefficients for each phase. The study is performed on the multi-dimensional version of the Seven-Equation two-phase flow Model with the Stiffened Gas Equation of State (SGEOS) given in \eqt{eq:SGEOS_bis}.
+equations in the low-Mach limit and (b) the non-isentropic limit with formation of shocks. Finally, for each case the scaling of the numerical non-dimensionalized numbers will be given. Also, because each phase can experience different flow regime e.g., supersonic gas and subsonic liquid, it is chosen to work with three distinct viscosity coefficients for each phase. The study is performed on the multi-dimensional version of the Seven-Equation two-phase flow Model with the Stiffened Gas Equation of State (SGEOS) given in \eqt{eq:SGEOS_bis}.
 %
 \begin{equation}\label{eq:SGEOS_bis}
 P_k = \left( \gamma_k-1 \right) \rho_k e_k - \gamma_k P_{k,\infty}
@@ -872,31 +877,32 @@ where  the subscript $\infty$ denote the far-field or stagnation quantities and 
 M_{k,\infty} = \frac{u_{k,\infty}}{c_{k,\infty}}.
 \end{equation}
 %
-Because we consider that phases do not interact with each other, it is assumed that the interfacial pressure and velocity scale as the phasic pressure and velocity, respectively: $P_{int,\infty} = \rho_{k,\infty} c^2_{k,\infty}$ and $u_{int,\infty} = u_{k,\infty}$. Under these assumptions, the interfacial pressure and velocity are simply replaced by $P_k$ and $\mbold u_k$ in the equations. Then, the system of equations with viscous regularization becomes:
+Because we consider that phases do not interact with each other, it is assumed that the interfacial pressure and velocity scale as the phasic pressure and velocity, respectively: $P_{int,\infty} = \rho_{k,\infty} c^2_{k,\infty}$ and $u_{int,\infty} = u_{k,\infty}$. Under these assumptions, the interfacial pressure and velocity are simply replaced by $P_k$ and $\mbold u_k$ in the seven-equation fluid model. %Then, the system of equations with viscous regularization becomes:
 % 
-\begin{subequations}\label{eq:sev_equ_case_one}
-\begin{align}\label{eq:sev_equ-with-diss-terms-vf_one}
-\partial_t \left( \alpha_k  A\right) + A \mbold u_k \cdot \div \alpha_k =  \div \left( A \beta_k \grad \alpha_k \right)
-\end{align}
-\begin{align}\label{eq:sev_equ-with-diss-terms-cont_one}
-\partial_t \left( \alpha_k \rho_k A \right) + \div \left( \alpha_k \rho_k \mbold u_k A \right) = \div \left( A \alpha_k \kappa_k \grad \rho_k \right)  + \div \left( A \beta_k \rho_k \grad \alpha_k \right)
-\end{align}
-\begin{multline}\label{eq:sev_equ-with-diss-terms-mom_one}
-\partial_t \left( \alpha_k \rho_k u_k A \right) + \div \left[ \alpha_k A \left( \rho_k  \mbold u_k \otimes \mbold u_k + P_k \right) \right] =\\
-\alpha_k P_k \grad A + P_k A \grad \alpha_k + \div \left(A \mu_k \alpha_k  \rho_k \grad^s \mbold u_k \right) + \\
-\div \left(A \kappa_k \alpha_k \mbold u_k \otimes \grad \rho_k \right) + \div \left( A \beta_k \rho_k \mbold u_k \otimes \grad \alpha_k \right)
-\end{multline}
-\begin{multline}\label{eq:sev_equ-with-diss-terms-ener_one}
-\partial_t \left( \alpha_k \rho_k E_k A \right) + \div \left[ \alpha_k A \mbold u_k \left( \rho_k E_k + P_k \right) \right] = \\
-P_k A \mbold u_k\cdot \grad \alpha_k + \div \left( A \kappa_k \alpha_k \grad \left( \rho_k e_k \right) \right) +
-\div \left( A \kappa_k \alpha_k \frac{||\mbold u_k||^2}{2} \grad \rho_k \right) + \\ \div \left( A \mu_k \alpha_k \rho_k \mbold u_k : \grad^s \mbold u_k\right) +
-\div \left(A \beta_k \rho_k e_k \grad \alpha_k\right)
-\end{multline}
-\end{subequations}
-%
-Then using the scaling introduced in \eqt{eq:norm_param}, the scaled equations for the phase $k$ with viscous regularization are:
+%\begin{subequations}\label{eq:sev_equ_case_one}
+%\begin{align}\label{eq:sev_equ-with-diss-terms-vf_one}
+%\partial_t \left( \alpha_k  A\right) + A \mbold u_k \cdot \div \alpha_k =  \div \left( A \beta_k \grad \alpha_k \right)
+%\end{align}
+%\begin{align}\label{eq:sev_equ-with-diss-terms-cont_one}
+%\partial_t \left( \alpha_k \rho_k A \right) + \div \left( \alpha_k \rho_k \mbold u_k A \right) = \div \left( A \alpha_k \kappa_k \grad \rho_k \right)  + \div \left( A \beta_k \rho_k \grad \alpha_k \right)
+%\end{align}
+%\begin{multline}\label{eq:sev_equ-with-diss-terms-mom_one}
+%\partial_t \left( \alpha_k \rho_k u_k A \right) + \div \left[ \alpha_k A \left( \rho_k  \mbold u_k \otimes \mbold u_k + P_k \right) \right] =\\
+%\alpha_k P_k \grad A + P_k A \grad \alpha_k + \div \left(A \mu_k \alpha_k  \rho_k \grad^s \mbold u_k \right) + \\
+%\div \left(A \kappa_k \alpha_k \mbold u_k \otimes \grad \rho_k \right) + \div \left( A \beta_k \rho_k \mbold u_k \otimes \grad \alpha_k \right)
+%\end{multline}
+%\begin{multline}\label{eq:sev_equ-with-diss-terms-ener_one}
+%\partial_t \left( \alpha_k \rho_k E_k A \right) + \div \left[ \alpha_k A \mbold u_k \left( \rho_k E_k + P_k \right) \right] = \\
+%P_k A \mbold u_k\cdot \grad \alpha_k + \div \left( A \kappa_k \alpha_k \grad \left( \rho_k e_k \right) \right) +
+%\div \left( A \kappa_k \alpha_k \frac{||\mbold u_k||^2}{2} \grad \rho_k \right) + \\ \div \left( A \mu_k \alpha_k \rho_k \mbold u_k : \grad^s \mbold u_k\right) +
+%\div \left(A \beta_k \rho_k e_k \grad \alpha_k\right)
+%\end{multline}
+%\end{subequations}
+%%
+With this assumption and the scaling introduced in \eqt{eq:norm_param}, the scaled equations for phase $k$ with viscous regularization are as follows:
 %\tcb{The following set of equations is very painful to read. I guess we can improve the format but I cannot think of a better way of presenting the scaled equations, unless we include all of this in an appendix (I am not for it)}
 % 
+\tcr{you cannot have $\div^*$, it should be $\nabla^* \cdot$. Please change where nedded.}
 \begin{subequations}\label{eq:sev_equ_case_one_scaled}
 \begin{align}\label{eq:sev_equ-with-diss-terms-vf_case_one_scaled}
 \partial_{t^*} \left( \alpha_k  A\right)^* + A^* \mbold u_k^* \cdot \grad^* \alpha_k^* =  \frac{1}{\Pe_{k,\infty}^\beta} \div^* \left( A \beta_k \grad^* \alpha_k \right)^*
@@ -921,6 +927,10 @@ Then using the scaling introduced in \eqt{eq:norm_param}, the scaled equations f
 %
 where the phasic numerical Reynolds ($\Re_{k,\infty})$ and P\'eclet ($\Pe_{k,\infty}^\kappa$ and $\Pe_{k,\infty}^\beta$) numbers are defined as:
 %
+\tcr{P\'eclet is the ratio of advection rate to diffusion rate. The second P\'eclet number is likly also a Peclet number;
+it would be good to recall what each number represents physically: Reynolds: ratio of fluid inertial forces to viscous forces; P\'eclet
+ratio of advection rate to diffusion rate}
+ 
 \begin{equation}
 \label{eq:ref_numb}
 \Re_{k,\infty} = \frac{u_{k,\infty} L_\infty}{\mu_{k,\infty}} \ ,
@@ -1062,7 +1072,7 @@ for the energy equation (\eqt{eq:sev_equ-with-diss-terms-ener_case_one_scaled}) 
 choice, option (iii), has the proper scaling: in this case, only the dissipation terms involving 
 $\gradd{s,*} \mbold u_k^*$ scale as $1/M_{k,\infty}^2$ since $\Re_{k,\infty} = M_{k,\infty}^2$, leaving the 
 regularization of the void fraction and continuity equations unaffected because $\Pe_{k,\infty}^\beta = \Pe_{k,\infty}^\kappa =1$.
-\tcb{I feel we need another short section to explain how the two above limit cases ca be merge into one}
+\tcb{I feel we need another short section to explain how the two above limit cases ca be merge into one} \tcr{yes, as well as how to deal to exchange terms}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\subsection{An all-speed formulation of the viscosity coefficients}\label{eq:visc-formulation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
