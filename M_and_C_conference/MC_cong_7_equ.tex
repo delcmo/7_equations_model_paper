@@ -175,7 +175,7 @@
 %% \fntext[label3]{}
 %-------------------------
 %-------------------------
-\title{$1$-D numerical results of the seven-equation two-phase flow model with the entropy viscosity method.}
+\title{Simulation of single and two-phase flow water-hammers with the system code Relap-7}
 %-------------------------
 %-------------------------
 \author{Marc O. Delchini\fnref{label1}}
@@ -209,6 +209,7 @@ blabla
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}\label{sec:intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 \begin{itemize}
 \item a few lines about the need for accurately resolving two-phase flows
 \item background on the different two-phase flow models: 5, 6 and 7-equation two-phase flow models
@@ -217,18 +218,163 @@ blabla
 \item emphasize the fact that the above numerical solvers only works on discontinuous schemes
 \item then, introduce the entropy viscosity method and details the organization of the paper 
 \end{itemize}
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The seven-equation two-phase flow model with an all-Mach flow viscous regularization}\label{sec:7-equ-model}
+\section{Single phase and two-phase flow models}\label{act:model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{itemize}
-\item give the equations and detail the different terms with viscous regularization.
-\item include the relaxation terms, the mass and heat exchange terms.
-\item eigenvalues.
-\item entropy equation with the dissipative terms and five the details of the derivation in the appendix.
-\item recall the definition of the viscosity coefficients for all-Mach flows.
-\end{itemize}
+%
+In this section, the single and two-phase flow models implemented in Relap-7 are recalled along with the viscous regularization and the definition of the viscosity coefficients used in the application of the Entropy Viscosity Method (EVM). 
+%
+%------------------------------------------------------------------------------------------------------------------
+\subsection{1-D Euler equations with viscous regularization}\label{sec:single-model}
+%------------------------------------------------------------------------------------------------------------------
+The conservative form of the 1-D Euler equations \cite{Toro} is implemented in Relap-7 (REF) and used to simulate single-phase flows in 1-D components. An equation of state function of the density, $\rho$ and the specific internal energy $e$, serves as a closure relation to compute the pressure, $P = eos(\rho, e)$. Stabilization of the scheme is ensured by the Entropy Viscosity Method \cite{jlg1, jlg2} that is now designed to be an all-Mach flow numerical method (REFS). The 1-D Euler equations with the viscous regularization and the definition of the viscosity coefficients used in the application of the EVM and implemented in Relap-7, are recalled in \eqt{eq:euler-eq}. The viscous regularization terms are denoted by the dissipative flux $\mbold D$.
+%
+\begin{subequations}\label{eq:euler-eq}
+\begin{equation}
+\partial_t \mbold U + \partial_x \mbold F \left( \mbold U \right) = \partial_x \mbold D \left( \mbold U \right) \, ,
+\end{equation}
+\text{where}
+\begin{equation}
+\mbold U = \left[ 
+\begin{array}{lll}
+&\rho \\
+&\rho u \\
+&\rho E  \\
+\end{array}
+\right], \,
+%
+\mbold F \left( \mbold U \right) = \left[ 
+\begin{array}{lll}
+&\rho u \\
+&\rho u^2 + P \\
+&u \left( \rho E + P \right)  \\
+\end{array}
+\right]
+\end{equation}
+\text{and}
+\begin{equation}
+\mbold D \left( \mbold U \right) = \left[ 
+\begin{array}{lll}
+& f \\
+& g + uf \\
+& h + ug - 0.5 u^2 f \\
+\end{array}
+\right]\, , 
+\end{equation}
+\end{subequations}
+%
+where $E$ and $u$ are the specific total energy and the velocity fluid, respectively. The partial derivatives with respect to time and space are denoted by $\partial_t$ and $\partial_x$, respectively. The dissipative terms $f$, $g$ and $h$ were derived from the entropy residual and the entropy minimum principle \cite{jlg}, and have the following definition,
+%
+\begin{equation}
+f = \kappa \partial_x \rho , \, g = \mu \rho \partial_x u \text{ and } h = \kappa \partial_x \left( \rho e \right) \, , \nonumber
+\end{equation}
+%
+Definitions of the viscosity coefficients $\mu$ and $\kappa$, given in \eqt{eq:visc-def},  were investigated in REF from the non-dimensionalized Euler equations in order to have well-scaled dissipative terms in the case of supersonic and low-Mach flows. Each viscosity coefficient is computed from an upper bound denoted by the subscript $max$, and a second-order viscosity coefficient denoted by the subscript $e$. The upper bound viscosity coefficient is defined proportional to the maximum eigenvalue and is designed to be over-dissipative (\eqt{eq:visc-def-max}). The high-order viscosity coefficient is set proportional to the entropy residual, $R_e(x,t)$ and a jump denoted by $J$. Because the entropy residual is known to be peaked in the shock region \cite{Leveque}, it used to track shocks. As proposed in (REF) and recalled in \eqt{eq:ent-res}, the entropy residual is locally computed from the pressure, the density and the sound speed, $c$.
+%
+\begin{equation}\label{eq:ent-res}
+R_e(x,t) = \frac{DP}{Dt} - \rho^2\frac{D\rho}{Dt} \, ,
+\end{equation}
+%
+where $\frac{D (\cdot)}{Dt}$ is the material derivative. The jump $J$ is function of the the jump of pressure and density gradients across the face shared by two cells of the mesh and its definition is given in \eqt{eq:jump}:
+%
+\begin{equation}\label{eq:jump}
+J = \max \left( |u| [[ \partial_x P ]], \, |u| c^2 [[ \partial_x \rho ]] \right) \, ,
+\end{equation}
+%
+where $[[ x ]]$ denotes the jump of the quantity $x$ across a face. The definition of the viscosity coefficients $\mu$ and $\kappa$ proposed in (REF) is now recalled:
+%
+\begin{subequations}\label{eq:visc-def}
+\begin{align}
+\mu(x,t) = \min \left( \mu_{max}(x,t), \, \mu_e(x,t) \right) \text{ and } \kappa(x,t) = \min \left( \kappa_{max}(x,t), \, \kappa_e(x,t) \right) \nonumber
+\end{align}
+\text{where}
+\begin{align}\label{eq:visc-def-max}
+\mu_{max}(x,t) = \kappa_{max}(x,t) = 0.5 h \left( |u| + c \right)\, ,
+\end{align}
+\begin{align}\label{eq:visc-def-ent}
+\mu_e(x,t) = \frac{h^2}{\norm_\mu} \max \left( R_e(x,t), J \right)\, ,
+\kappa_e(x,t) = \frac{h^2}{\rho c^2} \max \left( R_e(x,t), J \right)
+\end{align}
+\text{and}
+\begin{equation}
+\norm_\mu = a(M) \rho u^2 + (1-a(M) ) \rho c^2\, 
+\end{equation}
+\end{subequations}
+%
+where $h$ is the grid size. The normalization parameter $\norm_\mu$ in the definition of the high-order viscosity coefficient $\mu_e$ is function of the Mach number $M$ through the function $a(M)$. In Eq.  28 of (REF), an expression for $a(M)$ is proposed and used in this paper as well.
+%
+%------------------------------------------------------------------------------------------------------------------
+\subsection{1-D Seven-Equation two-phase flow model with viscous regularization}\label{sec:two-phase-model}
+%------------------------------------------------------------------------------------------------------------------
+%
+The system code Relap-7 employs the 1-D Seven-equation two-phase flow model \cite{SEM} to simulate the behavior of two-phase flows in Light Water Reactors. In this model, each phase is treated as being compressible and exhibits independent thermodynamic and mechanical properties. This system of equations is hyperbolic and has seven real eigenvalues. The 1-D Seven-equation model is given in\eqt{eq:sem-eq} for a liquid phase in interaction with a gas phase denoted by the subscript $liq$ and $gas$, respectively.
+%
+%
+\begin{subequations}\label{eq:sem-eq}
+\begin{equation}
+\partial_t \mbold U_{liq} + \partial_x \mbold F \left( \mbold U_{liq} \right) = \mbold N \left( \mbold U_{liq}, \, \mbold U_{gas} \right) + \mbold R \left( \mbold U_{liq}, \, \mbold U_{gas} \right) +  \partial_x \mbold D \left( \mbold U_{liq} \right) \, ,
+\end{equation}
+\text{where}
+%
+\begin{equation}
+\mbold U_{liq} = \left[ 
+\begin{array}{lll}
+& \alpha \\
+&\alpha \rho \\
+&\alpha \rho u \\
+&\alpha \rho E  \\
+\end{array}
+\right]_{liq}, \,
+%
+\mbold F \left( \mbold U_{liq} \right) = \left[ 
+\begin{array}{lll}
+& 0 \\
+&\alpha \rho u \\
+&\alpha \rho u^2 + \alpha P \\
+&\alpha u \left( \rho E + P \right)  \\
+\end{array}
+\right]_{liq}, \,
+\end{equation}
+%
+\begin{equation}
+\mbold N \left( \mbold U_{liq}, \, \mbold U_{gas} \right) = \left[ 
+\begin{array}{lll}
+& - u_{int} \partial_x \alpha_{liq} \\
+& 0 \\
+&P_{int} \partial_x \alpha_{liq} \\
+&P_{int} u_{int} \partial_x \alpha_{liq}  \\
+\end{array}
+\right], \,
+\end{equation}
+%
+\begin{equation}
+\mbold R \left( \mbold U_{liq}, \, \mbold U_{gas} \right) = \left[ 
+\begin{array}{lll}
+& \mu_P \left( P_{gas} - P_{liq} \right) \\
+& 0 \\
+& \mu_P \left( P_{gas} - P_{liq} \right) \\
+& \mu_P \left( P_{gas} - P_{liq} \right) + \lambda_u \left( u_{liq} - u_{gas} \right) \\
+\end{array}
+\right], \,
+\end{equation}
+%
+\text{and}
+\begin{equation}
+\mbold D\left( \mbold U_{liq} \right) = \left[ 
+\begin{array}{lll}
+& l \\
+& f \\
+& g + uf \\
+& h + ug - 0.5 u^2 f \\
+\end{array}
+\right]_{liq}\, , 
+\end{equation}
+\end{subequations}
+%
+%
 %%------------------------------------------------------------------------------------------------------
 %\subsection{Definition of the viscosity coefficients}\label{sec:visc-coeff-sem}
 %%------------------------------------------------------------------------------------------------------
@@ -300,48 +446,6 @@ blabla
 %%
 %
 %At this point of the paper, the definition of the viscosity coefficients are not finalized: the jumps and normalization parameters still have to be defined. The normalization parameters are derived from a low-Mach asymptotic limit analysis which is the purpose of the next section.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Spatial and Temporal Discretizations} \label{sec:disc}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this section, we briefly describe the spatial and temporal discretizations and the solution techniques 
-used to solve the system of equations EQUATION. For conciseness, we re-write the system of 
-equations in the following form:
-\begin{equation}
-\label{eq:form}
-\partial_t \mathbf{U}_k + \div \mathbf{F}_k \left( \mathbf{U}_k \right) = \mathbf{R}_k \left( \mathbf{U}_k \right) + \mathbf{N}_k \left( \mathbf{U}_k \right) + \div \mathbf{D}_k(\mathbf{U}_k) \grad \mathbf{U}_k
-\end{equation}
-where $\mathbf{U}_k=[(\alpha A )_k, \, (\alpha \rho A)_k,\, (\alpha \rho \mbold{u} A)_k,\, (\alpha \rho E A)_k]^T$ is the solution vector, $\mathbf{F}_k \left( \mathbf{U}_k \right)$ denotes the inviscid flux, $\div D_k (\mathbf{U}_k) \grad \mathbf{U}_k$ is the dissipative flux and $\mathbf{N}_k \left( \mathbf{U}_k \right)$ and $\mathbf{R}_k \left( \mathbf{U}_k \right)$ contain the non-conservative and relaxation terms, respectively. 
-\begin{equation}
-  \mathbf{F} \equiv
-  \begin{bmatrix}
-      0     \\
-    ( \alpha \rho u A )_k     \\
-    \left[ \alpha \left(\rho u^2 + P \right) A \right ]_k  \\
-    \left[ \alpha u (\rho E + P) A \right]_k
-  \end{bmatrix},
-%\end{equation}
-%\begin{equation}
-  \mathbf{N} \equiv
-  \begin{bmatrix}
-      - A \mbold{u}_{int} \cdot \grad \alpha_k     \\
-    0     \\
-    \alpha_k P_k \grad A + P_{int} A \grad \alpha_k  \\
-    P_{int} A \mbold{u}_{int} \cdot \grad \alpha_k
-  \end{bmatrix} \nonumber
-\end{equation}
-\begin{equation}
-\text{and }
-  \mathbf{R} \equiv
-  \begin{bmatrix}
-      A \mu_P \left( P_k - P_j \right)     \\
-    0     \\
-    A \lambda_u \left( \mbold u_j - \mbold u_k \right) \\
-    - \bar{P}_{int} A \mu_P \left( P_k - P_j \right) + \bar{u}_{int} A \lambda_u \left( \mbold u_j - \mbold u_k \right)
-  \end{bmatrix}. \nonumber
-\end{equation}
-%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\subsection{An all-speed formulation of the viscosity coefficients}\label{eq:visc-formulation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -415,38 +519,56 @@ where $\mathbf{U}_k=[(\alpha A )_k, \, (\alpha \rho A)_k,\, (\alpha \rho \mbold{
 %where $\bar{\eta}$ is the average value of the entropy $\eta$ over the entire computational domain.
 %
 %At this point of the paper, we have derived a viscous regularization for the seven-equation model consistent with the entropy minimum principle, and defined viscosity coefficients for all-Mach flows. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Spatial and Temporal Discretizations} \label{sec:disc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+In this section, we briefly describe the spatial and temporal discretizations and the solution techniques 
+used to solve the system of equations presented in \sct{sec:single-model} and \sct{sec:two-phase-model}. The two system of 
+equations can be recast under the following form for conciseness:
+\begin{equation}
+\label{eq:form}
+\partial_t \mathbf{U} + \div \mathbf{F} \left( \mathbf{U} \right) = \mathbf{R} \left( \mathbf{U} \right) + \mathbf{N} \left( \mathbf{U} \right) + \div \mathbf{D} (\mathbf{U}) \grad \mathbf{U}
+\end{equation}
+where $\mathbf{U}$ is the solution vector, $\mathbf{F}$ denotes the inviscid flux, $\div D (\mathbf{U}) \grad \mathbf{U}$ is the dissipative flux and $\mathbf{N} \left( \mathbf{U} \right)$ and $\mathbf{R} \left( \mathbf{U} \right)$ contain the non-conservative and relaxation terms. The terms $\mathbf{N} \left( \mathbf{U} \right)$ and $\mathbf{R} \left( \mathbf{U} \right)$ only appear in the two-phase flow model described in \sct{sec:two-phase-model}. 
+%
 %===================================================================================================
 \subsection{Spatial and Temporal Discretizations} \label{sec:spatial-disc}
 %===================================================================================================
+%
 The system of equations given in \eqt{eq:form} is discretized using a continuous Galerkin finite element 
-method and temporal integrators available through the MOOSE multiphysics framework \cite{Moose}.
+method and temporal integrators available through the MOOSE multiphysics framework \cite{MOOSE}.
+%
 %---------------------------------------------------------------------------------------------------
 \subsubsection{Continuous Finite Elements} 
 %---------------------------------------------------------------------------------------------------
+%
 In order to apply the continuous finite element method, \eqt{eq:form} is multiplied by a test function 
-$\mathbf W(\mbold{r})$, integrated by parts and each integral is decomposed into a sum of integrals over 
+$\mathbf W(\vec{r})$, integrated by parts and each integral is decomposed into a sum of integrals over 
 each element $K$ of the discrete mesh $\Omega$. The following weak form is obtained:
 \begin{multline}\label{eq:cfem}
-\sum_K \int_{K} \partial_t \mathbf U \, \mathbf W - \sum_K \int_{K} \mathbf F (\mathbf U) \cdot \grad \mathbf W + \int_{\partial \Omega} \mathbf F (\mathbf U) \cdot \mbold{n} \mathbf W - \sum_K \int_{K} \left( \mathbf N (\mathbf U) + \mathbf R (\mathbf U) \right) \mathbf W  \\
+\sum_K \int_{K} \partial_t \mathbf U \, \mathbf W - \sum_K \int_{K} \vec{\mathbf F}(\mathbf U) \cdot \grad \mathbf W + \int_{\partial \Omega} \vec{\mathbf F}(\mathbf U) \cdot \vec{n} \, \mathbf W - \sum_K \int_{K} \mathbf S \, \mathbf W  \\
 + \sum_K \int_{K} D(\mathbf U) \grad \mathbf U \cdot \grad \mathbf W 
-- \int_{\partial \Omega} D(\mathbf U) \grad \mathbf U \cdot \mbold{n} \, \mathbf W = 0 \,.
+- \int_{\partial \Omega} D(\mathbf U) \grad \mathbf U \cdot \vec{n} \, \mathbf W = 0 \,.
 \end{multline}
-The integrals over the elements $K$ are evaluated using a numerical quadrature. The MOOSE framework 
+The integrals over the elements $K$ are evaluated using a numerical quadrature rule. The MOOSE framework 
 provides a wide range of test functions and quadrature rules. Linear Lagrange polynomials are employed 
-as test functions in the results section. Second-order spatial convergence will be demonstrated for smooth solutions. 
+as test functions in the results section.
 %
 %---------------------------------------------------------------------------------------------------
 \subsubsection{Temporal integration} 
 %---------------------------------------------------------------------------------------------------
+%
 The MOOSE framework offers both first- and second-order explicit and implicit temporal integrators. 
 In all of the numerical examples presented in \sct{sec:results}, the temporal derivative  will be 
-evaluated using the second-order, backward difference temporal integrator BDF2 \cite{bdf2}. By considering three 
+evaluated using the second-order, backward difference temporal integrator BDF2. By considering three 
 consecutive solutions, $\mathbf U^{n-1}$, $\mathbf U^n$ and $\mathbf U^{n+1}$, at times $t^{n-1}$, $t^n$ and $t^{n+1}$, respectively, BDF2 can be expressed as:
 \begin{equation}
 \label{eq:BDF2}
 \int_{K} \partial_t \mathbf U \, \mathbf  W = \int_{K} \left( \omega_0 \mathbf U^{n+1}  + \omega_1 \mathbf U^n + \omega_2 \mathbf U^{n-1} \right) \mathbf W \,,
 \end{equation}
-%
 with
 \begin{multline}
 \omega_0 =\frac{2\Delta t^{n+1}+\Delta t^n}{\Delta t^{n+1} \left( \Delta t^{n+1}+\Delta t^n \right)} \, , \ 
@@ -454,28 +576,25 @@ with
 \text{ and } \omega_2 = \frac{\Delta t^{n+1}}{\Delta t^n \left( \Delta t^{n+1} + \Delta t^n \right)} \nonumber
 \end{multline}
 where $\Delta t^{n} = t^n-t^{n-1}$ and $\Delta t^{n+1} = t^{n+1}-t^{n}$.
+%
 %---------------------------------------------------------------------------------------------------
 \subsection{Boundary conditions} \label{sec:bc}
 %---------------------------------------------------------------------------------------------------
-Boundary conditions for the seven-equation model are challenging because of the wave-dominated nature of the equations but also because of the non-conservative form of the void fraction equation. 
-%Unlike the continuity, momentum and energy equations of each phase, the flux of the void fraction equation cannot be integrated by part because it is not written in a conservative form. 
-The boundary condition for the void fraction equation (EQUATION) is treated independently of the other equations (continuity, momentum and energy for each phase) for two reasons: (i) it is a simple advection equation with the real eigenvalue $\mbold u_{int}$, and (ii), the hyperbolic flux, $\mbold u_{int} \cdot \grad \alpha_k$, is not integrated by part since not under a conservative form. The sign of the dot product between the eigenvalue and the outward normal to the boundary, $\mbold u_{int} \cdot \mbold n$, determines the nature of the boundary: negative for an inlet and positive for an outlet. For the later case, the physical information exits the computational domain and does not require any particular treatment. In the former case, the physical information enters the computational domain which requires to specify a value for the void fraction. Since there is no flux at the boundary coming from the integration by part of the hyperbolic flux, the boundary value is imposed by using a Dirichlet boundary condition in the void fraction equation.   
-Our implementation of the boundary conditions for the continuity, momentum and energy equations, is inspired by the method described in \cite{SEM} and was adapted for a time implicit solver \cite{Marco_dissertation}. The boundary type is identified from the study of the sign of the eigenvalues that depends on the Mach number. The numerical results presented in \sct{sec:results} were all obtained by using subsonic stagnation and static pressure boundary conditions for the inlet and outlet, respectively. The boundary flux is computed from the supplied variables at the boundary and also by iterating on a given number of variables (depending on the sign of the eigenvalues) though the implicit solver to transmit information from inside the computational domain toward the boundary. 
-%After recasting the system of equation using the primitive variables, a characteristic decomposition is performed to compute the appropriate values of the pressure, density and velocity of each phase, used in the flux at the boundaries. 
-%\tcb{I will give more details in the future}
-%\tcr{say a bit more, give 1-2 sentences to describe how to impose subsonic/supersonic inlet/outlet BCs}. \tcb{Is it enough?}
+%
+Boundary conditions are implemented by performing a characteristic decomposition to compute the 
+appropriate flux at the boundaries in Relap-7 and was inspired by the method described in \cite{SEM}. 
+Neumann boundary conditions are used for all of the boundary types.
 
-%For each numerical solution presented in \sct{sec:results}, the type of boundary conditions used 
-%will be specified and taken among the following: supersonic inlet, subsonic inlet (stagnation pressure boundary), 
-%subsonic outlet, and supersonic outlet. 
-%and subsonic inlet \tcr{???} (static pressure boundary). \\
-The artificial diffusion coefficient $\mbold D(\mathbf  U)$ is set to zero at the boundary of the computational 
+For each numerical solution presented in \sct{sec:results}, the type of boundary conditions used 
+will be specified. The artificial diffusion coefficient $D(\mathbf  U)$ is set to zero at the boundary of the computational 
 domain so that the boundary term 
-$\int_{\partial \Omega} \mbold D(\mathbf  U) \grad \mathbf  U \cdot \mbold{n} \, \mathbf W$ stemming from the 
+$\int_{\partial \Omega} D(\mathbf  U) \grad \mathbf  U \cdot \vec{n} \, \mathbf W$ stemming from the 
 integration by parts of the artificial dissipative terms in \eqt{eq:cfem} is ignored.
+%
 %---------------------------------------------------------------------------------------------------
 \subsection{Solver} \label{sec:solver}
 %---------------------------------------------------------------------------------------------------
+%
 A Jacobian-free-Newton-Krylov (JFNK) method is used to solve for the solution at the end of each time step. 
 An approximate Jacobian matrix of the discretized equations was derived and implemented. Obtaining the 
 matrix entries requires that the partial derivatives of pressure with respect to the conservative variables 
@@ -485,10 +604,11 @@ Jacobian matrix are approximated by lagging the viscosity coefficients (computin
 For instance, this is shown in \eqt{eq:jac_diss_term} for the dissipative terms present in the continuity equation:
 \begin{equation}
 \label{eq:jac_diss_term}
-\frac{\partial}{\partial \mathbf U} \left( \kappa \grad \rho \cdot \grad W \right) \simeq \kappa \div \frac{\partial \rho}{\partial \mathbf U} \grad W ,
+\frac{\partial}{\partial \mathbf U} \left( \kappa \div \rho \grad W \right) \simeq \kappa \frac{\partial}{\partial \mathbf U} \left( \div \rho \grad W \right),
 \end{equation}  
 where $\mathbf  U$ denotes any of the conservative variables and $W$ denotes the component of $\mathbf  W$ associated with the 
 continuity equation. In the above, we have neglected $\frac{\partial \kappa}{\partial \mathbf U}$.
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{$1$-D numerical results}\label{sec:results}
