@@ -236,7 +236,7 @@ In this paper, we derive a viscous regularization for the Seven-Equation two-pha
 
 One of the key aspects of the viscous regularization derived here is that it is agnostic of the spatial discretization scheme, unlike approximate Riemann solvers. Therefore, this viscous regularization can be employed to stabilized numerical scheme both continuous and discontinuous discretizations. For examples of prior applications to the single-phase Euler equations, we refer the reader to \cite{jlg, valentin}. 
 
-The remainder of the paper is as follows. In \sct{sec:7-equ-model}, the Seven-equation two-phase flow Model is recalled along with its main properties. The viscous regularization is derived in \sct{sec:visc-regu} and a study of the scaled regularized equations is performed in \sct{sec:low-Mach} with a focus on the low-Mach asymptotic limit. 
+The remainder of the paper is as follows. In \sct{sec:7-equ-model}, the Seven-equation two-phase flow Model is recalled along with its main physical and mathematical properties. The viscous regularization is derived in \sct{sec:visc-regu} and a study of the scaled regularized equations is performed in \sct{sec:low-Mach} with a focus on the low-Mach asymptotic limit. 
 Finally, we conclude in \sct{sec:conclusion} where we outline possible leads on the definition of the viscosity coefficients involved in the viscous regularization derived in \sct{sec:visc-regu} and consistent with \sct{sec:low-Mach} \tcr{finish} \tcb{done}.
 
 %. Lastly, the scaled Seven-Equation two-phase flow Model with viscous regularization are derived to give insights on what the scaling of the dissipative terms should be to ensure well-scaled dissipative terms for a wide range of Mach flows.
@@ -245,16 +245,12 @@ Finally, we conclude in \sct{sec:conclusion} where we outline possible leads on 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The Seven-Equation two-phase flow Model}\label{sec:7-equ-model}
+\section{The Seven-Equation two-phase flow Model: physical and mathematical properties}\label{sec:7-equ-model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{itemize}
-%\item give the equations and detail the different terms
-%\item include the relaxation terms, the mass and heat exchange terms
-%\item eigenvalues
-%\item entropy equation WITHOUT the dissipative terms and five the details of the derivation in the appendix
-%\end{itemize}
-%
+%---------------------------------------------------------------------------------
+\subsection{The system of equations}
+%---------------------------------------------------------------------------------
 The Seven-Equation two-phase flow Model employed in this paper is obtained by assuming that each phase satisfies the single-phase Euler equations (with phase-exchange terms) and by integrating the latter over a control volume after multiplication by a phasic characteristic function. The detailed derivation can be found in \cite{SEM} and we recall the SEM governing equations for phase $k$ in interaction with phase $j$. In the SEM, each phase obeys the following mass, momentum and energy balance equations, supplemented by a non-conservative equation for the void fraction:
 %
 \begin{subequations}\label{eq:liq-7-eqn-sect5}
@@ -350,7 +346,9 @@ The set of equations satisfied by phase $j$ are simply obtained by substituting 
 \end{align}
 %
 which reduces the number of partial differential equations from eight to seven and yields the Seven-Equation two-phase flow Model (SEM). 
-
+%---------------------------------------------------------------------------------
+\subsection{Entropy equation of the SEM without viscous regularization}
+%---------------------------------------------------------------------------------
 Some properties of the Seven-Equation two-phase flow Model are discussed next. A set of $5+2\texttt{dim}$ (with \texttt{dim} the geometry's dimension) waves is present in the model: two acoustic waves per phase, one contact wave per phase per domain dimension, and one void fraction wave propagating at the interfacial velocity $\mbold u_{int}$. These waves (eigenvalues of the Jacobian for the inviscid flux terms) and as follows for each phase $k$:
 % 
 \begin{align}\label{eq:eigenvalues}
@@ -451,8 +449,11 @@ Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates to th
 \section{A viscous regularization for the Seven-Equation two-phase flow Model}\label{sec:visc-regu}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+%---------------------------------------------------------------------------------
+\subsection{Methodology}
+%---------------------------------------------------------------------------------
+%
 Next, we derive a viscous regularization for the Seven-Equation two-phase flow Model given in \eqt{eq:liq-7-eqn-sect5} using the same methodology as for the multi-dimensional Euler equations with/without variable area \cite{jlg, Marco_paper_low_mach}. The method consists in adding dissipative terms to the system of equations under consideration, and in deriving an entropy equation for the regularized system. By adequately choosing the artificial viscous fluxes, one can show that the sign of the entropy production remains positive, ensuring uniqueness of the numerical solution \cite{Leveque}. Because of the addition of dissipation terms, the entropy equation is modified and contains additional terms of yet unknown sign. By carefully choosing a definition for each of the dissipation terms, the sign of the entropy equation can be determined and rendered positive. For the Seven-Equation two-phase flow Model, derivation of the viscous regularization can be achieved by considering either the phasic entropy equation (\eqt{eq:ent-eqn-7-eqn-model}) or the total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the later case, the entropy minimum principle can be verified for the whole two-phase system but may not ensure positivity of the entropy equation for each phase. However, positivity of the total entropy equation can also be achieved by requiring that the entropy minimum principle holds for each phase. This stronger requirement will also ensure consistency with the single-phase Euler equations when one of the phases disappears in the limit $\alpha_k \to 0$. 
-% Thus, we have opted to work with the phasic entropy equations given in \eqt{eq:ent-eqn-7-eqn-model}.
 
 For the purpose of this section, the system of equations given in \eqt{eq:sev_equ} is considered, which is obtained by simply omitting the mass source terms (terms proportional to $\Gammakj$) in \eqt{eq:liq-7-eqn-sect5}:
 \tcr{we need a section on source term later to fully explain how we treat them because they are omitted for most of the paper}
@@ -478,6 +479,11 @@ A P_{int} \mbold u_{int} \cdot \grad \alpha_k - \mu_P \bar{P}_{int} A \left( P_k
 \end{subequations}
 %
 %where $\rho_k$, $u_k$, $E_k$ and $P_k$ are the density, the velocity, the specific total energy and the pressure of $k^{th}$ phase, respectively. The pressure and velocity relaxation parameters are denoted by $\mu$ and $\lambda$, respectively. The variables with index $_I$ correspond to the interfacial variables and a definition for those can be found in \cite{SEM}. The cross-section $A$ is only function of space: $\partial_t A = 0$.
+%
+%---------------------------------------------------------------------------------
+\subsection{Entropy equation of the SEM with viscous regularization}
+%---------------------------------------------------------------------------------
+%
 We regularize this system of equations by adding dissipation terms (viscous fluxes) to each equation, yielding:
 %
 \begin{subequations}\label{eq:sev_equ-with-diss-terms}
@@ -590,8 +596,11 @@ Then, \eqt{eq:ent-res-7-eqn-diss-terms} can be rearranged as
 + \left(s_e\right)_k \left( \mathbb{g}_k - \mbold u_k \otimes \mbold f_k \right) : \grad \mbold u_k 
 \,.
 \end{multline}
-
-
+%
+%---------------------------------------------------------------------------------
+\subsection{Entropy minimum principle}
+%---------------------------------------------------------------------------------
+%
 Following the methodology applied in \cite{jlg, Marco_paper_low_mach}, the right-hand side of \eqt{eq:ent-res-7-eqn-diss-terms} can be further simplified by using the following expressions
 for the dissipative terms $\mbold f_k$,  $\mathbb{g}_k$ and $\mbold h_k$:
 %
@@ -785,20 +794,20 @@ to yield a viscous regularization that is analogous to the parabolic regularizat
 At this point in the paper, we have derived a viscous regularization for the Seven-Equation two-phase flow Model that ensures positivity of the entropy residual, uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$, and is consistent with the viscous regularization derived for Euler equations \cite{jlg, Marco_paper_low_mach} in the limit $\alpha_k \to 1$. The viscous regularization involves a set of three viscosity coefficients for each phase, $\mu_k$, $\kappa_k$ and $\beta_k$, that are assumed positive. Definition of the viscosity coefficients should be devised from the scaled SEM in order to ensure well-scaled dissipative terms for a wide range of Mach numbers (subsonic, transonic and supersonic flows).
 %
 \tcr{is the following remark useful in the paper? Can it be removed completely?}
-\begin{remark}
-Through the derivations of the viscous regularization, it was noted that another set of dissipative terms $\mbold f_k$ and $\mbold l_k$ would also ensures positivity of the entropy residual:
-%
-\begin{subequations}
-\begin{align}\label{eq:def-l-k-wrong-sect4}
-\mbold l_k =\beta_k T_k \left[ \frac{\rho_k}{P_k+\rho_k e_k} \grad \left( \frac{P_k}{\rho_k e_k} \right) - \frac{1}{P_k} \grad \rho_k \right]
-\end{align}
-\begin{align}
-\mbold f_k = \kappa_k \grad \rho_k +  \frac{\rho^2_k (s_{\rho})_k}{\left( \rho s_{\rho} - e s_e \right)_k} \mbold l_k
-\end{align}
-\end{subequations}
-%
-However, the definition of $\mbold l_k$ proposed in \eqt{eq:def-l-k-wrong-sect4} was not considered as valid for the following reasons: positivity of the void fraction cannot be achieved \tcr{can you give ME some details as of why in my office one day?} and the parabolic regularization is not recovered when all viscosity coefficients are set equal. \tcb{I probably told you that the with the above definition of $l_k$, the sign of the entropy residual associated to the void fraction equation cannot be determined. }
-\end{remark}
+%\begin{remark}
+%Through the derivations of the viscous regularization, it was noted that another set of dissipative terms $\mbold f_k$ and $\mbold l_k$ would also ensures positivity of the entropy residual:
+%%
+%\begin{subequations}
+%\begin{align}\label{eq:def-l-k-wrong-sect4}
+%\mbold l_k =\beta_k T_k \left[ \frac{\rho_k}{P_k+\rho_k e_k} \grad \left( \frac{P_k}{\rho_k e_k} \right) - \frac{1}{P_k} \grad \rho_k \right]
+%\end{align}
+%\begin{align}
+%\mbold f_k = \kappa_k \grad \rho_k +  \frac{\rho^2_k (s_{\rho})_k}{\left( \rho s_{\rho} - e s_e \right)_k} \mbold l_k
+%\end{align}
+%\end{subequations}
+%%
+%However, the definition of $\mbold l_k$ proposed in \eqt{eq:def-l-k-wrong-sect4} was not considered as valid for the following reasons: positivity of the void fraction cannot be achieved \tcr{can you give ME some details as of why in my office one day?} and the parabolic regularization is not recovered when all viscosity coefficients are set equal. \tcb{I probably told you that the with the above definition of $l_k$, the sign of the entropy residual associated to the void fraction equation cannot be determined. }
+%\end{remark}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\section{An all-speed formulation of the Entropy Viscosity Method}\label{sec:low-Mach}

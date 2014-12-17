@@ -59,7 +59,7 @@
 \begin{frontmatter}
 %-------------------------
 %-------------------------
-\title{Simulation of single and two-phase flow water-hammers with the system code Relap-7}
+\title{Numerical results for a single and a two-phase flow water-hammers with the system code Relap-7}
 %-------------------------
 %-------------------------
 \author{Marc O. Delchini\fnref{label1}}
@@ -264,7 +264,7 @@ The system code Relap-7 employs the 1-D Seven-equation two-phase flow model \cit
 \end{equation}
 \end{subequations}
 %
-The liquid void fraction is denoted by  $\alpha_{liq}$ and the vapor void fraction is computed from the algebraic relation $\alpha_{vap} = 1 - \alpha_{liq}$. Following \cite{SEM}, the interfacial variables are function of the liquid and vapor thermodynamic, the mechanical properties and the acoustic impedance denoted by $Z_k = \rho_k c_k$ with $k = \{ liq, \ vap \}$, and computed with the following expressions:
+The liquid void fraction is denoted by  $\alpha_{liq}$ and the vapor void fraction is computed from the algebraic relation $\alpha_{vap} = 1 - \alpha_{liq}$. Following \cite{SEM}, the pressure ($P_{int}$) and velocity ($u_{int}$)interfacial variables, and the relaxation coefficients, $\mu_P$ and $\lambda_u$, are function of the liquid and vapor thermodynamic, the mechanical properties and the acoustic impedance denoted by $Z_k = \rho_k c_k$ with $k = \{ liq, \ vap \}$, and computed with the following expressions:
 %
 \begin{subequations}
 \label{eq:int_variables_def}
@@ -278,10 +278,14 @@ The liquid void fraction is denoted by  $\alpha_{liq}$ and the vapor void fracti
   \mbold u_{int} &= \bar{\mbold u}_{int} +  sgn \left( \partial_x \alpha_{liq}\right) \frac{P_{vap}-P_{liq}}{Z_{liq}+Z_{vap}} \,,
   \\
   \bar{\mbold u}_{int} &= \frac{Z_{liq} \mbold u_{liq}+Z_{vap}\mbold u_{vap}}{Z_{liq}+Z_{vap}} \, ,
+  \\
+  \mu_P = \frac{A_{int}}{Z_{liq}+Z_{vap}} \, ,
+  \\
+  \lambda_u = \frac{1}{2} \mu_P Z_{liq} Z_{vap} \, ,
 \end{align}
 \end{subequations}
 %
-where the function $sgn(x)$ returns the sign of the variable $x$. All other variables were previously defined. Alike for Euler equations (\sct{sec:single-model}), the dissipative terms given in the vector $\mbold D\left( \mbold U_{liq} \right)$ were derived from the entropy minimum principle and have the following definitions:
+where the function $sgn(x)$ returns the sign of the variable $x$ and $A_{int}$ is the interfacial area that can be computed from a correlation \cite{SEM}. All other variables were previously defined. Alike for Euler equations (\sct{sec:single-model}), the dissipative terms given in the vector $\mbold D\left( \mbold U_{liq} \right)$ were derived from the entropy minimum principle and have the following definitions:
 %
 \begin{multline}
 l_{liq} = \beta_{liq} \partial_x \alpha_{liq} , \, f_{liq}= ( \alpha \kappa )_{liq} \partial_x \rho_{liq} , \\ g_{liq} = ( \alpha \mu \rho )_{liq} \partial_x u_{liq} \, \text{ and } h_{liq} = ( \alpha \kappa )_{liq} \partial_x \left( \rho e \right)_{liq} \, , \nonumber
@@ -419,12 +423,13 @@ For each test case, the velocity, density and pressure profiles are provided at 
 \subsection{Single-phase water-hammer} \label{sec:single-num-res}
 %---------------------------------------------------------------------------------------------------
 %
-A single-phase water-hammer consists of a liquid phase with initial uniform pressure ($P = 7$ MPa), velocity ($u = -12$ $m/s$ and temperature ($T = 453$ K). At $t=0$ s, the two extremities of the 1-D pipe are closed by solid walls which causes the pressure to increase and decrease at the left and right extremities, respectively. Numerical results of the pressure, density and velocity profiles are given in ...
+A single-phase water-hammer consists of a liquid phase with initial uniform pressure ($P = 7$ MPa), velocity ($u = -12$) $m/s$ and temperature ($T = 453$ K). At $t=0$ s, the two extremities of the 1-D pipe are closed by solid walls which causes the pressure to increase and decrease at the left and right extremities, respectively. Numerical results of the pressure, density and velocity profiles are given in ...
 %
 %---------------------------------------------------------------------------------------------------
 \subsection{Two-phase flow water-hammer} \label{sec:two-num-res}
 %---------------------------------------------------------------------------------------------------
 %
+The two-phase water-hammer is identical to the single-phase water-hammer described in \sct{sec:two-num-res}: the liquid and vapor phases have the same initial conditions and the liquid void fraction is initially set to $0.5$. The two phases are in interaction through the pressure and velocity relaxation terms (see \eqt{eq:sem-eq}) that are function of the relaxation coefficients, $\mu_P$ and $\lambda_u$, computed with $A_{int} = 180$ $m^{-1}$.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
