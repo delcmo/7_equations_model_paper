@@ -80,7 +80,10 @@
 %-------------------------
 %-------------------------
 \begin{abstract}
-%The RELAP-7 (Reactor Excursion and Leak Analysis Program) code is the next generation%nuclear reactor system safety analysis code being developed at Idaho National Laboratory%(INL). The code is based on the INLÕs modern scientific software development framework%MOOSE (Multi-Physics Object Oriented Simulation Environment) that uses a \emph{Continuous Galerkin Finite Element Method}.
+%The RELAP-7 (Reactor Excursion and Leak Analysis Program) code is the next generation
+%nuclear reactor system safety analysis code being developed at Idaho National Laboratory
+%(INL). The code is based on the INLÕs modern scientific software development framework
+%MOOSE (Multi-Physics Object Oriented Simulation Environment) that uses a \emph{Continuous Galerkin Finite Element Method}.
 The primary basis of the RELAP-7 governing theory includes the single-phase Euler equations and the 7-equation two-phase flow models. It is well established that these hyperbolic conservation laws can develop shocks and discontinuities and thus, require a stabilization numerical method. The all-Mach flow Entropy Viscosity Method is now employed in RELAP-7 as a stabilization numerical method for both above flow models. The entropy viscosity technique is a viscous regularization technique that satisfies the entropy minimum principle; adequate dissipation terms (viscous fluxes) are added to the governing laws while ensuring the entropy minimum principle still holds. Viscosity coefficients modulates the magnitude of the added dissipation such that it is large in shock regions and vanishingly small elsewhere. We are presenting numerical results of 1-D single and two-phase water-hammers obtained with RELAP-7.
 \end{abstract}
 %-------------------------
@@ -95,17 +98,20 @@ The primary basis of the RELAP-7 governing theory includes the single-phase Eule
 \section{Introduction}\label{sec:intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-The RELAP-7 (Reactor Excursion and Leak Analysis Program) code is the next generationnuclear reactor system safety analysis code being developed at Idaho National Laboratory(INL). The code is based on the INLÕs modern scientific software development frameworkMOOSE (Multi-Physics Object Oriented Simulation Environment) \cite{MOOSE} that uses a \emph{Continuous Galerkin Finite Element Method}.
+The RELAP-7 (Reactor Excursion and Leak Analysis Program) code is the next generation
+nuclear reactor system safety analysis code being developed at Idaho National Laboratory
+(INL). The code is based on the INLÕs modern scientific software development framework
+MOOSE (Multi-Physics Object Oriented Simulation Environment) \cite{MOOSE} that uses a \emph{Continuous Galerkin Finite Element Method}.
 
 The primary basis of the RELAP-7 governing theory includes the single-phase Euler equations \cite{Toro} and the 7-equation two-phase flow models \cite{SEM}. It is well established that these hyperbolic conservation laws can develop shocks and discontinuities and thus, require a stabilization numerical method. In the case of the single-phase Euler equations, numerous numerical methods are available both for discontinuous and continuous schemes \cite{Toro, Lapidus_paper, LMP, Lapidus_book, Roe}. The 7-equation model is currently discretized in space using discontinuous schemes with approximate Riemann solvers derived from the well-established approaches for single-phase flows, while using an upwind-type flux for the non-conservative terms \cite{Saurel_2001a, Saurel_2001b, Li_2004, Zein_2010, Ambroso_2012}. In RELAP-7, stabilization of the above conservation laws is ensured by the Entropy Viscosity Method \cite{jlg1, jlg2} that is independent of the type of spatial discretization (finite volume, continuous or discontinuous finite elements, ...) and thus may be applied ubiquitously.
  
 The entropy viscosity technique \cite{jlg1, jlg2} is a viscous regularization technique that satisfies the entropy minimum principle; adequate dissipation terms (viscous fluxes) are added to the governing laws while ensuring the entropy minimum principle still holds. Viscosity coefficients modulates the magnitude of the added dissipation such that it is large in shock regions and vanishingly small elsewhere. The entropy viscosity coefficients are taken proportional to the entropy production while, at the same time, being bounded from above by a first-order viscosity coefficient that reduces the spatial discretization to be similar to a first-order Godunov scheme (the latter being known to be overly dissipative but monotone [12]). Hence, entropy production in shocks will result in large viscosity coefficients and thus will avoid spurious oscillations. In order to solve for low-Mach flows \cite{LowMach1, LowMach2, LowMach3}, the initial version of the Entropy Viscosity Method was modified and new definitions of the viscosity coefficients were proposed to ensure well-scaled dissipative terms in the low-Mach asymptotic limit while preserving the capabilities of the method to resolve shocks and discontinuities \cite{Marco_dissertation, Marco_paper_low_mach}. The same approach was used when extending the method to the 7-equation two-phase flow model \cite{}. 
 
-In this paper, the regularized single and two-phase flow models are recalled along with the all-Mach flow definitions of the viscosity coefficients in \sct{act:model}. After detailing the spatial and temporal discretization method in \sct{sec:disc}, numerical results of a single and two-phase water-hammers are presented in \sct{sec:results}. 
+In this paper, the regularized single and two-phase flow models are recalled along with the all-Mach flow definitions of the viscosity coefficients in \sct{sct:model}. After detailing the spatial and temporal discretization method in \sct{sec:disc}, numerical results of a single and two-phase water-hammers are presented in \sct{sec:results}. 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Single phase and two-phase flow models}\label{act:model}
+\section{Single phase and two-phase flow models}\label{sct:model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -403,18 +409,30 @@ continuity equation. In the above, we have neglected $\frac{\partial \kappa}{\pa
 \section{$1$-D numerical results}\label{sec:results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{itemize}
-\item simple advection problem
-\item shock tube with two independent fluids: exact solution and could do convergence test for this particular test
-\item shock tube with infinite relaxation coefficients
-\item $1$-D nozzle with two independent fluids
-\item $1$-D nozzle with infinite relaxation coefficients
-\item $1$-D nozzle with infinite relaxation coefficients,  mass and heat transfer
-\end{itemize}
+%
+We now present two sample results of a single and a two-phase flow water-hammers in \sct{sec:single-num-res} and \sct{sec:two-num-res}, respectively, with the objective of testing adequacy of the Entropy Viscosity Method. The numerical results were obtained with the system code RELAP-7 that implements the single and two-phase flow models described in \sct{sct:model} using the \emph{Continuous Galerkin Finite Element Method} detailed in \sct{sec:spatial-disc} (BDF2 and linear test functions).
+
+The water-hammer test case consists of a fluid or mixture flowing in a 1-D pipe of length $L=1$ m closed by two walls at $t=0$ s. A fluid is described by the Stiffened Gas equation of state \cite{SGEOS} with parameters taken from \cite{SEM} for the liquid and gas phases. The computational domain is discretized with an uniform mesh of $500$ cells and the numerical solution is run until $t = 0.5$ s with a CFL number of $0.5$ for both tests. Information regarding the initial conditions will be given later in this section. 
+For each test case, the velocity, density and pressure profiles are provided at different times of the simulation. Since the Entropy Viscosity Method is used, we also give plots of the viscosity coefficients.
+%
+%---------------------------------------------------------------------------------------------------
+\subsection{Single-phase water-hammer} \label{sec:single-num-res}
+%---------------------------------------------------------------------------------------------------
+%
+A single-phase water-hammer consists of a liquid phase with initial uniform pressure ($P = 7$ MPa), velocity ($u = -12$ $m/s$ and temperature ($T = 453$ K). At $t=0$ s, the two extremities of the 1-D pipe are closed by solid walls which causes the pressure to increase and decrease at the left and right extremities, respectively. Numerical results of the pressure, density and velocity profiles are given in ...
+%
+%---------------------------------------------------------------------------------------------------
+\subsection{Two-phase flow water-hammer} \label{sec:two-num-res}
+%---------------------------------------------------------------------------------------------------
+%
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions and future work}\label{sec:conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+We have presented an extension of the entropy viscosity method to the 1-D 7-equation two-phase model and applied it to a shock tube problem with large relaxation coefficients. The numerical results show that the stabilization method is capable of stabilizing the schemes and that the viscosity coefficients are well-scaled. This work will further contribute to the assessment of the stabilization technique for reactor flow problems in RELAP-7.
+%
 \bibliography{mybibfile}
 \end{document}
