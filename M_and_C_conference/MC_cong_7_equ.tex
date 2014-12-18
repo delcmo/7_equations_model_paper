@@ -171,10 +171,10 @@ R_e(x,t) = \frac{DP}{Dt} - c^2\frac{D\rho}{Dt} \, ,
 where $\frac{D (\cdot)}{Dt}$ is the material derivative. The jump $J$ is function of the the jump of pressure and density gradients across the face shared by two cells of the mesh and its definition is given in \eqt{eq:jump}:
 %
 \begin{equation}\label{eq:jump}
-J = \max \left( |u| [[ \partial_x P ]], \, |u| c^2 [[ \partial_x \rho ]] \right) \, ,
+J = \max \left( |u| [[ \partial_x P ]], \, |u| (Mc)^2 [[ \partial_x \rho ]] \right) \, ,
 \end{equation}
 %
-where $[[ x ]]$ denotes the jump of the quantity $x$ across a face. The all-Mach flow definition of the viscosity coefficients $\mu$ and $\kappa$ proposed in \cite{Marco_paper_low_mach} is now recalled:
+where $[[ x ]]$ denotes the jump of the quantity $x$ across a face and $M = |u| / c$ is the Mach number. The all-Mach flow definition of the viscosity coefficients $\mu$ and $\kappa$ proposed in \cite{Marco_paper_low_mach} is now recalled:
 %
 \begin{subequations}\label{eq:single-visc-def}
 \begin{align}
@@ -186,15 +186,19 @@ where $[[ x ]]$ denotes the jump of the quantity $x$ across a face. The all-Mach
 \end{align}
 \begin{align}\label{eq:visc-def-ent}
 \mu_e(x,t) = \frac{h^2}{\norm_\mu} \max \left( R_e(x,t), J \right)\, ,
-\kappa_e(x,t) = \frac{h^2}{\rho c^2} \max \left( R_e(x,t), J \right)
+\kappa_e(x,t) = \frac{h^2}{\norm_\kappa} \max \left( R_e(x,t), J \right)
 \end{align}
+\text{with}
+\begin{equation}
+\norm_\mu = a(M) \rho u^2 + (1-a(M) ) \rho c^2 \, 
+\end{equation}
 \text{and}
 \begin{equation}
-\norm_\mu = a(M) \rho u^2 + (1-a(M) ) \rho c^2\, 
+\norm_\kappa = b(M) \rho u^2 + (1-b(M) ) \rho c^2 
 \end{equation}
 \end{subequations}
 %
-where $h$ is the grid size. The normalization parameter $\norm_\mu$ in the definition of the high-order viscosity coefficient $\mu_e$ is function of the Mach number $M$ through the function $a(M)$. In Eq.  28 of \cite{Marco_paper_low_mach}, an expression for $a(M)$ is proposed and used in this paper as well.
+where $h$ is the grid size. The normalization parameters $\norm_\mu$ and $\norm_\kappa$ in the definition of the high-order viscosity coefficient $\mu_e$ and $\kappa_e$, respectively, are function of the Mach number $M$ through the functions $a(M)$ and $b(M)$, respectively. In Eq.  28 of \cite{Marco_paper_low_mach}, an expression for $a(M)$ is proposed and used for both functions in this paper as well.
 %
 %------------------------------------------------------------------------------------------------------------------
 \subsection{1-D Seven-Equation two-phase flow model with viscous regularization}\label{sec:two-phase-model}
