@@ -138,13 +138,16 @@ Finally, we conclude in \sct{sec:conclusion} where we outline possible leads on 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The Seven-Equation two-phase flow Model: physical and mathematical properties}\label{sec:7-equ-model}
+\section{The Seven-Equation two-phase flow Model (SEM): physical and mathematical properties}\label{sec:7-equ-model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+In this section, we recall the Seven-Equation two-phase flow model and its main mathematical and physical properties.
+%
 %---------------------------------------------------------------------------------
 \subsection{The system of equations}
 %---------------------------------------------------------------------------------
-The Seven-Equation two-phase flow Model employed in this paper is obtained by assuming that each phase satisfies the single-phase Euler equations (with phase-exchange terms) and by integrating the latter over a control volume after multiplication by a phasic characteristic function. The detailed derivation can be found in \cite{SEM} and we recall the SEM governing equations for phase $k$ in interaction with phase $j$. In the SEM, each phase obeys the following mass, momentum and energy balance equations, supplemented by a non-conservative equation for the void fraction:
+The Seven-Equation two-phase flow Model employed in this paper is obtained by assuming that each phase satisfies the single-phase Euler equations (with phase-exchange terms) and by integrating the latter over a control volume after multiplication by a phasic characteristic function. The detailed derivation of the governing equations for a phase $k$ in interaction with a phase $j$ can be found in \cite{SEM}. In the SEM, each phase obeys a mass, a momentum and an energy balance equations, supplemented by a non-conservative equation for the void fraction as shown in \eqt{eq:liq-7-eqn-sect5}.
 %
 \begin{subequations}\label{eq:liq-7-eqn-sect5}
 \begin{align}
@@ -180,9 +183,30 @@ The Seven-Equation two-phase flow Model employed in this paper is obtained by as
 \end{multline}
 \end{subequations}
 %
-where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the density, the velocity vector and the total specific energy of phase $k$, respectively. The void fraction, mass, momentum and energy exchange terms from phase $k$ to phase $j$ are denoted by the symbols $\mathbb{S}_{k \to j}$, $\Gammakj$, $\mathbb{M}_{k \to j}$ and $\mathbb{E}_{k \to j}$, respectively. We adopt the standard convention for vectors: consider vector $\mbold{a}$ with entries $(a_i)_{i=1,\ldots,\texttt{dim}}$; $(\mbold{a} \otimes \mbold{b})_{ij}=a_i b_j$;
+where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the density, the velocity vector and the total specific energy of phase $k$, respectively. The void fraction, mass, momentum and energy exchange terms from phase $k$ to phase $j$ are denoted by the symbols $\mathbb{S}_{k \to j}$, $\Gammakj$, $\mathbb{M}_{k \to j}$ and $\mathbb{E}_{k \to j}$, respectively, are determined by the method of rational thermodynamic \cite{Truesdell} and obey to the following relations: 
+%
+\begin{subequations}\label{eq:exch-terms}
+\begin{equation}
+\mathbb{S}_{1 \to 2} + \mathbb{S}_{2 \to 1} = 0 \, ,
+\end{equation}
+%
+\begin{equation}
+\mathbb{\Gamma}_{1 \to 2} + \mathbb{\Gamma}_{2 \to 1} = 0 \, ,
+\end{equation}
+%
+\begin{equation}
+\mathbb{M}_{1 \to 2} + \mathbb{M}_{2 \to 1} = 0 \, ,
+\end{equation}
+%
+\begin{equation}
+\mathbb{E}_{1 \to 2} + \mathbb{E}_{2 \to 1} = 0 \, .
+\end{equation}
+%
+\end{subequations}
+%
+We adopt the standard convention for vectors: consider vector $\mbold{a}$ with entries $(a_i)_{i=1,\ldots,\texttt{dim}}$; $(\mbold{a} \otimes \mbold{b})_{ij}=a_i b_j$;
 $\div \mbold{a}= \partial_{x_j} a_j$; $(\grad \mbold{a})_{ij} = \partial_{x_i} a_j$; for order-2 tensors $\mathbb{g}$, we have $(\div \mathbb{g})_j = \partial_{x_i} g_{ij}$, $(\mathbb{g}\cdot \mbold{a})_i = g_{ij}a_j$, $\mathbb{g}:\mathbb{h} = g_{ij} h_{ij}$; summation is implied whenever an index is repeated. 
-The phasic pressure $P_k$ is computed from an equation of state. The cross section of the geometry is denoted by $A$ and is only spatially dependent. $A$ is included for completeness of the presentation and is set to 1 in most applications; however, nozzle flow problems can be solved using the one-dimensional version of the equations and by setting $A$ to the cross-sectional area of the nozzle. The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively; they are defined in \eqt{eq:int_variables_def}.
+The phasic pressure $P_k$ is computed from an equation of state that is assumed given as a function of the phasic density $\rho_k$ and the phasic internal energy $e_k = E_k - 0.5 u^2_k$. The cross section of the geometry is denoted by $A$ and is only spatially dependent. $A$ is included for completeness of the presentation and is set to 1 in most applications; however, nozzle flow problems can be solved using the one-dimensional version of the equations and by setting $A$ to the cross-sectional area of the nozzle. The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively; they are defined in \eqt{eq:int_variables_def}.
 \tcb{I do not know if we should keep the mass, momentum and energy exchange terms in the equations since they are not included in the derivations of the viscous regularization.} 
 %
 \begin{subequations}
@@ -200,7 +224,8 @@ The phasic pressure $P_k$ is computed from an equation of state. The cross secti
 \end{align}
 \end{subequations}
 %
-The interfacial specific total enthalpy of phase $k$, $H_{k,int}$, is defined as $H_{k,int} = h_{k,int} + 0.5 || \mbold u_{int} ||^2$, where $h_{k,int}$ is the phasic specific enthalpy evaluated at the interface conditions $(P_{int} \text{ and } T_{int} := T_{sat}(\bar{P}_{int}))$. Following \cite{SEM}, the pressure and velocity relaxation coefficients, $\mu_P$  and $\lambda_u$ respectively, are function of the acoustic impedance $Z_k = \rho_k c_k$ and the specific interfacial area $A_{int}$ as shown in \eqt{eq:relaxation_coeff}.
+%The interfacial specific total enthalpy of phase $k$, $H_{k,int}$, is defined as $H_{k,int} = h_{k,int} + 0.5 || \mbold u_{int} ||^2$, where $h_{k,int}$ is the phasic specific enthalpy evaluated at the interface conditions $(P_{int} \text{ and } T_{int} := T_{sat}(\bar{P}_{int}))$. 
+Following \cite{SEM}, the pressure and velocity relaxation coefficients, $\mu_P$  and $\lambda_u$ respectively, are function of the acoustic impedance $Z_k = \rho_k c_k$ and the specific interfacial area $A_{int}$ as shown in \eqt{eq:relaxation_coeff}.
 %
 \begin{subequations}
 \label{eq:relaxation_coeff}
@@ -220,29 +245,30 @@ volume of a two-phase mixture), $A_{int}$, is typically dependent upon flow regi
 A_{int} = A_{int}^{max} \left[ 6.75 \left(1-\alpha_{liq} \right)^2 \alpha_{liq} \right],
 \end{equation}
 % 
-with $A_{int}^{max} = 5100$ $m^2 / m^3$. With this definition, the interfacial area is zero in the limits $\alpha_{k} = 0$ and $\alpha_{k} = 1$. Lastly, $\Gammakj$ is the net mass transfer rate per unit interfacial area from phase $k$ to phase $j$ \tcr{not the opposite?} \tcb{done}. Its expression, given in \eqt{eq:mass_transfer}, is obtained by considering a vaporization/condensation process that is dominated by heat diffusion at the interface \cite{SEM, BerryMarco_2014}:
-%
-\begin{align} \label{eq:mass_transfer}
-  \Gammakj = \frac{h_{T,  k} \left( T_{k} - T_{int} \right) + h_{T,  j} \left( T_{j} - T_{int} \right)}{L_v \left( T_{int} \right)} ,
-\end{align}
-%
-where $L_v \left( T_{int} \right) = h_{j,  int} - h_{k,  int}$
-represents the latent heat of vaporization.  The interface
-temperature is determined by the saturation constraint
-$T_{int}=T_{sat}(P)$ with the appropriate pressure $P=\bar{P}_{int}$
-defined previously. The interfacial heat transfer coefficients for phases $k$ and $j$ are denoted by $h_{T,  k}$ and $h_{T,  j}$, respectively, and are computed from correlations \cite{SEM}. 
+with $A_{int}^{max} = 5100$ $m^2 / m^3$. With this definition, the interfacial area is zero in the limits $\alpha_{k} = 0$ and $\alpha_{k} = 1$. 
+%Lastly, $\Gammakj$ is the net mass transfer rate per unit interfacial area from phase $k$ to phase $j$ \tcr{not the opposite?} \tcb{done}. Its expression, given in \eqt{eq:mass_transfer}, is obtained by considering a vaporization/condensation process that is dominated by heat diffusion at the interface \cite{SEM, BerryMarco_2014}:
+%%
+%\begin{align} \label{eq:mass_transfer}
+%  \Gammakj = \frac{h_{T,  k} \left( T_{k} - T_{int} \right) + h_{T,  j} \left( T_{j} - T_{int} \right)}{L_v \left( T_{int} \right)} ,
+%\end{align}
+%%
+%where $L_v \left( T_{int} \right) = h_{j,  int} - h_{k,  int}$
+%represents the latent heat of vaporization.  The interface
+%temperature is determined by the saturation constraint
+%$T_{int}=T_{sat}(P)$ with the appropriate pressure $P=\bar{P}_{int}$
+%defined previously. The interfacial heat transfer coefficients for phases $k$ and $j$ are denoted by $h_{T,  k}$ and $h_{T,  j}$, respectively, and are computed from correlations \cite{SEM}. 
 
-The set of equations satisfied by phase $j$ are simply obtained by substituting $k$ by $j$ and $j$ by $k$ in \eqt{eq:liq-7-eqn-sect5}, keeping the same definition of the interfacial variables and noting that $\Gammakj = - \Gamma_{j\to k}$. The equation for the void fraction of phase $j$ is simply replaced by the algebraic relation
+The set of equations satisfied by phase $j$ are simply obtained by substituting $k$ by $j$ and $j$ by $k$ in \eqt{eq:liq-7-eqn-sect5}, keeping the same definition of the interfacial variables and using \eqt{eq:exch-terms}. The equation for the void fraction of phase $j$ is simply replaced by the algebraic relation
 %
 \begin{align}
  \alpha_{j}= 1 - \alpha_{k}, \nonumber
 \end{align}
 %
-which reduces the number of partial differential equations from eight to seven and yields the Seven-Equation two-phase flow Model (SEM). 
+which reduces the number of partial differential equations from eight to seven and yields the Seven-Equation two-phase flow Model. 
 %---------------------------------------------------------------------------------
-\subsection{Entropy equation of the SEM without viscous regularization}
+\subsection{Entropy equation of the SEM without viscous regularization and mathematical properties}\label{eq:sem-ent-wv}
 %---------------------------------------------------------------------------------
-Some properties of the Seven-Equation two-phase flow Model are discussed next. A set of $5+2\texttt{dim}$ (with \texttt{dim} the geometry's dimension) waves is present in the model: two acoustic waves per phase, one contact wave per phase per domain dimension, and one void fraction wave propagating at the interfacial velocity $\mbold u_{int}$. These waves (eigenvalues of the Jacobian for the inviscid flux terms) and as follows for each phase $k$:
+Some properties of the Seven-Equation two-phase flow Model are discussed next. A set of $5+2\texttt{dim}$ (with \texttt{dim} the geometry's dimension) waves is present in the model: two acoustic waves per phase, one contact wave per phase per domain dimension, and one void fraction wave propagating at the interfacial velocity $\mbold u_{int}$. These waves (eigenvalues of the Jacobian for the inviscid flux terms) are as follows for each phase $k$:
 % 
 \begin{align}\label{eq:eigenvalues}
 &\lambda_{1,k} = \mbold u_k \cdot \bar{\mbold n} - c_k \nonumber\\
@@ -283,7 +309,7 @@ mechanical equilibrium five-equation model of Kapila \cite{Kapila_2001}.
 %two-phase model does, with sufficiently fine spatial resolution, as
 %confirmed in~\cite{SEM,Herrard_2005}. 
 
-Next, we consider the SEM model with pressure and velocity relaxation but omit phase exchange terms (i.e., $\Gammakj=0$):
+Next, we investigate the sign of the phasic and total entropy equations \emph{without viscous regularization}; the total entropy equation being obtained by summing over the phasic entropy equations. Since the exchange source terms are derived from the rational thermodynamic method \cite{Truesdell}, it is assumed that they will only yield positive terms in the right-hand side of the total entropy equation and thus, can be omitted. Based on the previous assumption, we now consider the SEM model with only pressure and velocity relaxation terms:
 \begin{subequations}\label{eq:liq-7-eqn-sect5_no_exchange}
 \begin{align}
   % liquid void fraction
@@ -321,34 +347,40 @@ and the sign of the entropy material derivative can be proved positive. The entr
 \begin{align}\label{eq:ent-eqn-7-eqn-model}
 (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} &= \mu_P \frac{Z_k}{Z_k+Z_j} (P_j - P_k)^2 + \lambda_u \frac{Z_j}{Z_k+Z_j} (\mbold u_j -\mbold  u_k)^2 \nonumber
 \\
-& \tcr{\| \grad \alpha_k \|} \frac{Z_k}{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k)+\frac{\grad \alpha_k}{\| \grad \alpha_k \|}(P_k-P_j)\right]^2 \ ,
+& \| \grad \alpha_k \| \frac{Z_k}{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k)+\frac{\grad \alpha_k}{\| \grad \alpha_k \|}(P_k-P_j)\right]^2 \ ,
 \end{align}
+%
 where $\frac{D(\cdot) }{Dt} = \partial_t (\cdot) + \mbold u_k \cdot \grad (\cdot)$ is the material derivative.
 The right-hand side of \eqt{eq:ent-eqn-7-eqn-model} is unconditionally positive since all terms are squared. Furthermore, 
 the partial derivative of $s_k$ with respect to the internal energy $e_k$, denoted by $(s_e)_k$, is shown to be equal to the inverse of the temperature of phase $k$, as in the case of the single phase Euler equations \cite{jlg, Marco_dissertation}. At the location of entropy minimum, $\grad s_k =0$ by definition. Therefore, we conclude  that the minimum entropy principle stated below, holds:
+%
 \begin{equation}
 \inf_{\mbold x \in \mathbb{R}^{\texttt{dim}}} s_k(\mbold x ,t) \ge \inf_{\mbold x \in \mathbb{R}^{\texttt{dim}}} s_k(\mbold x ,t=0) 
 \end{equation}
-%T; this property is invoked to demonstrate the entropy minimum principle. Furthermore
+%
 (with $\texttt{dim}$ the problem's dimension). \eqt{eq:ent-eqn-7-eqn-model} is valid for both phases $\left\{k, j\right\}$, ensuring positivity of the total entropy equation obtained by summation over the phases:
 %
 \begin{equation}\label{eq:tot-ent-res-sct4}
 \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} = \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \left( \partial_t s_k + \mbold u_k \cdot \grad s_k \right) \geq 0  .
 \end{equation}
 %
+From a physical prospective, \eqt{eq:tot-ent-res-sct4} tells us that the total entropy of the system increases as a function of time. From a numerical prospective, the pressure and velocity relaxation terms add dissipation to the system of equations.
+
 Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates to the single-phase entropy equation obtained for the single-phase Euler equations \cite{SEM, Marco_dissertation}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A viscous regularization for the Seven-Equation two-phase flow Model}\label{sec:visc-regu}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+The objective of this section is to explain the approach used in the derivation of a viscous regularization for the SEM presented in \sct{sec:7-equ-model}. First, we detail the methodology used, then derive the phasic entropy equation when accounting for the dissipative terms and use it to prove the entropy minimum principle.
+%
 %---------------------------------------------------------------------------------
 \subsection{Methodology}
 %---------------------------------------------------------------------------------
 %
-Next, we derive a viscous regularization for the Seven-Equation two-phase flow Model given in \eqt{eq:liq-7-eqn-sect5} using the same methodology as for the multi-dimensional Euler equations with/without variable area \cite{jlg, Marco_paper_low_mach}. The method consists in adding dissipative terms to the system of equations under consideration, and in deriving an entropy equation for the regularized system. By adequately choosing the artificial viscous fluxes, one can show that the sign of the entropy production remains positive, ensuring uniqueness of the numerical solution \cite{Leveque}. Because of the addition of dissipation terms, the entropy equation is modified and contains additional terms of yet unknown sign. By carefully choosing a definition for each of the dissipation terms, the sign of the entropy equation can be determined and rendered positive. For the Seven-Equation two-phase flow Model, derivation of the viscous regularization can be achieved by considering either the phasic entropy equation (\eqt{eq:ent-eqn-7-eqn-model}) or the total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the later case, the entropy minimum principle can be verified for the whole two-phase system but may not ensure positivity of the entropy equation for each phase. However, positivity of the total entropy equation can also be achieved by requiring that the entropy minimum principle holds for each phase. This stronger requirement will also ensure consistency with the single-phase Euler equations when one of the phases disappears in the limit $\alpha_k \to 0$. 
+We want to derive a viscous regularization for the Seven-Equation two-phase flow Model given in \eqt{eq:liq-7-eqn-sect5} using the same methodology as for the multi-dimensional Euler equations with/without variable area \cite{jlg, Marco_paper_low_mach}. The method consists in adding dissipative terms to the system of equations under consideration, and in deriving an entropy equation for the regularized system. By adequately choosing the artificial viscous fluxes, one can show that the sign of the entropy production remains positive, ensuring uniqueness of the numerical solution \cite{Leveque}. Because of the addition of dissipation terms, the entropy equation is modified and contains additional terms of yet unknown sign. By carefully choosing a definition for each of the dissipation terms, the sign of the entropy equation can be determined and rendered positive. For the Seven-Equation two-phase flow Model, derivation of the viscous regularization can be achieved by considering either the phasic entropy equation (\eqt{eq:ent-eqn-7-eqn-model}) or the total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the later case, the entropy minimum principle can be verified for the whole two-phase system but may not ensure positivity of the entropy equation for each phase. However, positivity of the total entropy equation can also be achieved by requiring that the entropy minimum principle holds for each phase. This stronger requirement will also ensure consistency with the single-phase Euler equations when one of the phases disappears in the limit $\alpha_k \to 0$. 
 
-For the purpose of this section, the system of equations given in \eqt{eq:sev_equ} is considered, which is obtained by simply omitting the mass source terms (terms proportional to $\Gammakj$) in \eqt{eq:liq-7-eqn-sect5}:
+For the purpose of this section, the system of equations given in \eqt{eq:sev_equ} is considered, which is obtained by simply omitting the exchange source terms in \eqt{eq:liq-7-eqn-sect5} for the same reason as explained in \sct{eq:sem-ent-wv}:
 \tcr{we need a section on source term later to fully explain how we treat them because they are omitted for most of the paper}
 %
 \begin{subequations}\label{eq:sev_equ}
@@ -548,7 +580,6 @@ With such a choice, the viscous regularization is also rotationally invariant.
 %Such a choice ensures the associated dissipative terms to be rotationally invariant and also positivity of $\mathcal{R}_1$. An other option would be to simply set $\mathbb{F}(\mbold u_k)$ proportional to $\grad \mbold u_k$ which allows to recover the parabolic regularization \cite{Parabolic} but does not ensure rotational invariance. 
 %
 
-
 We now focus on the term denoted by $\mathcal{R}_1$, which is identical to the right-hand side of the single phase entropy equation for Euler equations (see \cite{jlg, Marco_paper_low_mach}). $\mathcal{R}_1$ is known to be positive when (i) assuming concavity of the entropy function $s_k$ with respect to the internal energy $e_k$ and the specific volume $1 / \rho_k$ and (ii) when using the following definitions for the dissipative fluxes $\tilde{h}_k$ and $\tilde{f}_k$:
 %
 \begin{subequations} \label{eq:def_visc}
@@ -716,7 +747,7 @@ At this point in the paper, we have derived a viscous regularization for the Sev
 %
 In the previous section, we have presented a viscous regularization for the seven-equation fluid model.  However,
 two-phase fluids may be found in various flow regimes, from extremely low-Mach subsonic situations to supersonic cases.
-In this section, we present a low-Mach asymptotic analysis \tcr{bla bla finish}
+In this section, we derive the non-dimensionalized SEM to outline possible leads on the definition of the viscosity coefficients to ensure the correct scaling of the dissipative terms for all-Mach flows.
 
 When working with artificial dissipative numerical stabilization methods, great care needs to be carried to the definition of the viscosity coefficients that will determine the accuracy of the method. Generally speaking, sufficient artificial viscosity should be added into the shock and discontinuity regions to prevent spurious oscillations from forming, while little dissipation is added when the numerical solution is smooth to ensure high-order accuracy. In addition, the low-Mach asymptotic limit also has to be accounted for in the definition of the viscosity coefficients in order to recover the incompressible asymptotic equations \cite{LowMach1, LowMach2, LowMach3}. The purpose of this section is to derive the scaled SEM and investigate the scaling of the dissipative terms to ensure well-scaled dissipative terms for all-Mach flows (subsonic, transonic and supersonic flows). First, the scaled SEM are derived and then, two limit cases (a) and (b) will be considered to determine appropriate scaling for the entropy 
 viscosity coefficients so that the dissipative terms remain well-scaled for: 
@@ -804,35 +835,34 @@ Because we consider that phases do not interact with each other, it is assumed t
 With this assumption and the scaling introduced in \eqt{eq:norm_param}, the scaled equations for phase $k$ with viscous regularization are as follows:
 %\tcb{The following set of equations is very painful to read. I guess we can improve the format but I cannot think of a better way of presenting the scaled equations, unless we include all of this in an appendix (I am not for it)}
 % 
-\tcr{you cannot have $\div^*$, it should be $\nabla^* \cdot$. Please change where nedded.}
+\tcr{you cannot have $\grad^* \cdot$, it should be $\nabla^* \cdot$. Please change where nedded.} \tcb{done}
 \begin{subequations}\label{eq:sev_equ_case_one_scaled}
 \begin{align}\label{eq:sev_equ-with-diss-terms-vf_case_one_scaled}
-\partial_{t^*} \left( \alpha_k  A\right)^* + A^* \mbold u_k^* \cdot \grad^* \alpha_k^* =  \frac{1}{\Pe_{k,\infty}^\beta} \div^* \left( A \beta_k \grad^* \alpha_k \right)^*
+\partial_{t^*} \left( \alpha_k  A\right)^* + A^* \mbold u_k^* \cdot \grad^* \alpha_k^* =  \frac{1}{\Pe_{k,\infty}^\beta} \grad^* \cdot \left( A \beta_k \grad^* \alpha_k \right)^*
 \end{align}
 \begin{multline}\label{eq:sev_equ-with-diss-terms-cont_case_one_scaled}
-\partial_{t^*} \left( \alpha_k \rho_k A \right)^* + \div^* \left( \alpha_k \rho_k \mbold u_k A \right)^* = \\ \frac{1}{\Pe^\kappa_{k,\infty}}\div^* \left(A \kappa_k \grad^* \rho_k \right)^* +
-\frac{1}{\Pe_{k,\infty}^\beta} \div^* \left( A \beta_k \rho_k \grad^* \alpha_k \right)^*
+\partial_{t^*} \left( \alpha_k \rho_k A \right)^* + \grad^* \cdot \left( \alpha_k \rho_k \mbold u_k A \right)^* = \\ \frac{1}{\Pe^\kappa_{k,\infty}}\grad^* \cdot \left(A \kappa_k \grad^* \rho_k \right)^* +
+\frac{1}{\Pe_{k,\infty}^\beta} \grad^* \cdot \left( A \beta_k \rho_k \grad^* \alpha_k \right)^*
 \end{multline}
 \begin{multline}\label{eq:sev_equ-with-diss-terms-mom_case_one_scaled}
-\partial_{t^*} \left( \alpha_k \rho_k u_k A \right)^* + \div^* \left[ \alpha_k A \left( \rho_k \mbold u_k \otimes \mbold u_k\right)\right]^* + \frac{A \alpha_k^*}{M^2_{k,\infty}}\grad^* P_k^* = \\
+\partial_{t^*} \left( \alpha_k \rho_k u_k A \right)^* + \grad^* \cdot \left[ \alpha_k A \left( \rho_k \mbold u_k \otimes \mbold u_k\right)\right]^* + \frac{A \alpha_k^*}{M^2_{k,\infty}}\grad^* P_k^* = \\
 \frac{1}{M^2_{k,\infty}} \alpha_k^* P^*_k \grad^* A^* + \frac{1}{M^2_{k,\infty}} P_k^* A^* \grad^* \alpha_k^* +
-\frac{1}{\Re_{k,\infty}}\div^* \left( A \alpha_k \mu_k \rho_k \grad^s \mbold u_k \right)^* \\ + \frac{1}{\Pe_{k,\infty}^\kappa} \div^*\left( A \alpha_k \kappa_k  \mbold u_k \otimes \grad^* \rho_k \right)^* + 
-\frac{1}{\Pe_{k,\infty}^\beta} \div^* \left( A \beta_k \rho_k \mbold u_k \otimes \grad \alpha_k \right)^*
+\frac{1}{\Re_{k,\infty}}\grad^* \cdot \left( A \alpha_k \mu_k \rho_k \grad^s \mbold u_k \right)^* \\ + \frac{1}{\Pe_{k,\infty}^\kappa} \grad^* \cdot\left( A \alpha_k \kappa_k  \mbold u_k \otimes \grad^* \rho_k \right)^* + 
+\frac{1}{\Pe_{k,\infty}^\beta} \grad^* \cdot \left( A \beta_k \rho_k \mbold u_k \otimes \grad \alpha_k \right)^*
 \end{multline}
 \begin{multline}\label{eq:sev_equ-with-diss-terms-ener_case_one_scaled}
-\alpha_k^* A^* \left[ \partial_t \left(  \rho_k E_k \right) + \mbold u_k \cdot \grad^* \left( \rho_k E_k \right) \right]^*+  \alpha_k \div^* \left(A \mbold u_k P_k \right) + \rho_k^* E_k^* \alpha_k^* \div^* \left( \mbold u A \right)_k^* = \\
-\frac{1}{\Pe_{k,\infty}^\kappa} \div^* \left( A \alpha_k \kappa_k \grad \left( \rho_k e_k \right) \right)^* + \frac{M^2_{k,\infty}}{\Pe_{k,\infty}^\kappa} \div^* \left( A\alpha_k \kappa_k \frac{||\mbold u_k||^2}{2} \grad \rho \right)^* + \\
-\frac{M^2_{k,\infty}}{\Re_{k,\infty}} \div^* \left( A \alpha_k \mu_k \rho_k \mbold u_k : \grad^s \mbold u_k\right)^* + 
+\alpha_k^* A^* \left[ \partial_t \left(  \rho_k E_k \right) + \mbold u_k \cdot \grad^* \left( \rho_k E_k \right) \right]^*+  \alpha_k \grad^* \cdot \left(A \mbold u_k P_k \right) + \rho_k^* E_k^* \alpha_k^* \grad^* \cdot \left( \mbold u A \right)_k^* = \\
+\frac{1}{\Pe_{k,\infty}^\kappa} \grad^* \cdot \left( A \alpha_k \kappa_k \grad \left( \rho_k e_k \right) \right)^* + \frac{M^2_{k,\infty}}{\Pe_{k,\infty}^\kappa} \grad^* \cdot \left( A\alpha_k \kappa_k \frac{||\mbold u_k||^2}{2} \grad \rho \right)^* + \\
+\frac{M^2_{k,\infty}}{\Re_{k,\infty}} \grad^* \cdot \left( A \alpha_k \mu_k \rho_k \mbold u_k : \grad^s \mbold u_k\right)^* + 
 \frac{1}{\Pe_{k,\infty}^\beta } \grad \left( \rho_k e_k \right)^* \cdot \left(A \beta_k \grad \alpha_k \right)^* \\ - \frac{M_{k,\infty}^2}{\Pe_{k,\infty}^\beta} \rho_k \frac{|| \mbold u_k^2 ||}{2} \div \left( \beta_k A \grad \alpha_k \right)
 \end{multline}
 \end{subequations}
 %
-where the phasic numerical Reynolds ($\Re_{k,\infty})$ and P\'eclet ($\Pe_{k,\infty}^\kappa$ and $\Pe_{k,\infty}^\beta$) numbers are defined as:
-%
+where the phasic numerical Reynolds ($\Re_{k,\infty})$ represents the ratio of fluid inertia force to viscous forces, and P\'eclet ($\Pe_{k,\infty}^\kappa$ and $\Pe_{k,\infty}^\beta$) represents the ratio of advection rate to diffusion rate. These numerical numbers are defined as:
 \tcr{P\'eclet is the ratio of advection rate to diffusion rate. The second P\'eclet number is likly also a Peclet number;
 it would be good to recall what each number represents physically: Reynolds: ratio of fluid inertial forces to viscous forces; P\'eclet
-ratio of advection rate to diffusion rate}
- 
+ratio of advection rate to diffusion rate} \tcb{done}
+%
 \begin{equation}
 \label{eq:ref_numb}
 \Re_{k,\infty} = \frac{u_{k,\infty} L_\infty}{\mu_{k,\infty}} \ ,
