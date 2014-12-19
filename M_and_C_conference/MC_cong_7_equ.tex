@@ -283,19 +283,19 @@ The liquid void fraction is denoted by  $\alpha_{liq}$ and the vapor void fracti
   \\
   \bar{\mbold u}_{int} &= \frac{Z_{liq} \mbold u_{liq}+Z_{vap}\mbold u_{vap}}{Z_{liq}+Z_{vap}} \, ,
   \\
-  \mu_P = \frac{A_{int}}{Z_{liq}+Z_{vap}} \, ,
+  \mu_P &= \frac{A_{int}}{Z_{liq}+Z_{vap}} \, ,
   \\
-  \lambda_u = \frac{1}{2} \mu_P Z_{liq} Z_{vap} \, ,
+  \lambda_u &= \frac{1}{2} \mu_P Z_{liq} Z_{vap} \, ,
 \end{align}
 \end{subequations}
 %
 where the function $sgn(x)$ returns the sign of the variable $x$ and $A_{int}$ is the interfacial area that can be computed from a correlation \cite{SEM}. All other variables were previously defined. Alike for Euler equations (\sct{sec:single-model}), the dissipative terms given in the vector $\mbold D\left( \mbold U_{liq} \right)$ were derived from the entropy minimum principle and have the following definitions:
 %
 \begin{multline}
-l_{liq} = \beta_{liq} \partial_x \alpha_{liq} , \, f_{liq}= ( \alpha \kappa )_{liq} \partial_x \rho_{liq} , \\ g_{liq} = ( \alpha \mu \rho )_{liq} \partial_x u_{liq} \, \text{ and } h_{liq} = ( \alpha \kappa )_{liq} \partial_x \left( \rho e \right)_{liq} \, , \nonumber
+l_{liq} = \beta_{liq} \partial_x \alpha_{liq} , \, f_{liq}= ( \alpha \kappa )_{liq} \partial_x \rho_{liq} , \\ g_{liq} = ( \alpha \mu \rho )_{liq} \partial_x u_{liq} \, \text{ and } h_{liq} = ( \alpha \kappa )_{liq} \partial_x \left( \rho e \right)_{liq} \, . \nonumber
 \end{multline}
 %
-where $\beta_{liq}$, $\mu_{liq}$ an $\kappa_{liq}$ are positive viscosity coefficients for the liquid phase and were defined by investigating the non-dimensionalized 7-equation two-phase flow model and performing a low-Mach asymptotic limit \cite{Marco_paper_7_equ}. The viscosity coefficients $\mu_{liq}$ and $\kappa_{liq}$ were found identical to the one given in \eqt{eq:single-visc-def} for the single-phase Euler equation (this is expected since the 7-equation model degenerates to Euler equations when one phase disappears). The approach to define the viscosity coefficient $\beta_{liq}$ is similar to the logic followed for hyperbolic scalar equations \cite{jlg1, jlg2}: an entropy equation can be derived from the volume fraction equation and used in the definition of the viscosity coefficient $\beta_{liq}$ . Following the work by Guermond et al. \cite{jlg1, jlg2}, one obtains:
+The positive viscosity coefficients for the liquid phase $\beta_{liq}$, $\mu_{liq}$ an $\kappa_{liq}$ are defined by investigating the non-dimensionalized 7-equation two-phase flow model and performing a low-Mach asymptotic limit \cite{Marco_paper_7_equ}. The viscosity coefficients $\mu_{liq}$ and $\kappa_{liq}$ are found identical to the one given in \eqt{eq:single-visc-def} for the single-phase Euler equation (this is expected since the 7-equation model degenerates to Euler equations when one phase disappears). The approach to define the viscosity coefficient $\beta_{liq}$ is similar to the logic followed for hyperbolic scalar equations \cite{jlg1, jlg2}: an entropy equation can be derived from the volume fraction equation and used in the definition of the viscosity coefficient $\beta_{liq}$ . Following the work by Guermond et al. \cite{jlg1, jlg2}, one obtains:
 %
 \begin{subequations}
 \begin{equation}
@@ -441,7 +441,7 @@ The two-phase water-hammer is identical to the single-phase water-hammer describ
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-We have presented an extension of the entropy viscosity method to the 1-D 7-equation two-phase model and applied it to a shock tube problem with large relaxation coefficients. The numerical results show that the stabilization method is capable of stabilizing the schemes and that the viscosity coefficients are well-scaled. This work will further contribute to the assessment of the stabilization technique for reactor flow problems in RELAP-7.
+We have presented numerical results of single and two-phase flows obtained with the system code RELAP-7. The numerical results show that the Entropy Viscosity Method is capable of stabilizing the schemes and that the viscosity coefficients are well-scaled. This work will further contribute to the assessment of the stabilization technique for reactor flow problems in RELAP-7.
 %
 \bibliography{mybibfile}
 \end{document}
