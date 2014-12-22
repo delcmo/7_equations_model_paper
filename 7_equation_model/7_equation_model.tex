@@ -103,7 +103,7 @@
 %-------------------------
 %-------------------------
 \begin{abstract}
-In this paper, a viscous regularization is derived for the seven-equation two-phase flow model. The regularization ensures positivity of the entropy residual, uniqueness of the weak solution % when assuming concavity of the phasic entropy $s_k$, 
+In this paper, a viscous regularization is derived for the seven-equation two-phase flow model. The regularization ensures positivity of the entropy residual, uniqueness of the weak solution, % when assuming concavity of the phasic entropy $s_k$, 
 is consistent with the viscous regularization for Euler equations when one phase disappears, and does not depend on the spatial discretization scheme chosen. We also show that the viscous regularization is compatible with the generalized Harten entropies.
 \end{abstract}
 %-------------------------
@@ -183,7 +183,7 @@ The Seven-Equation two-phase flow Model employed in this paper is obtained by as
 \end{multline}
 \end{subequations}
 %
-where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the density, the velocity vector and the total specific energy of phase $k$, respectively. The void fraction, mass, momentum and energy exchange terms from phase $k$ to phase $j$ are denoted by the symbols $\mathbb{S}_{k \to j}$, $\Gammakj$, $\mathbb{M}_{k \to j}$ and $\mathbb{E}_{k \to j}$, respectively, are determined by the method of rational thermodynamic \cite{Truesdell} and obey to the following relations: 
+where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the density, the velocity vector and the total specific energy of phase $k$, respectively. The void fraction, mass, momentum and energy exchange terms from phase $k$ to phase $j$ are denoted by the symbols $\mathbb{S}_{k \to j}$, $\Gammakj$, $\mathbb{M}_{k \to j}$ and $\mathbb{E}_{k \to j}$, respectively, are assumed to be determined by the method of rational thermodynamic \cite{Truesdell} and thus will only yield positive terms in the right-hand side of the entropy equation. They also obey to the following closure relations:
 %
 \begin{subequations}\label{eq:exch-terms}
 \begin{equation}
@@ -206,8 +206,8 @@ where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the
 %
 We adopt the standard convention for vectors: consider vector $\mbold{a}$ with entries $(a_i)_{i=1,\ldots,\texttt{dim}}$; $(\mbold{a} \otimes \mbold{b})_{ij}=a_i b_j$;
 $\div \mbold{a}= \partial_{x_j} a_j$; $(\grad \mbold{a})_{ij} = \partial_{x_i} a_j$; for order-2 tensors $\mathbb{g}$, we have $(\div \mathbb{g})_j = \partial_{x_i} g_{ij}$, $(\mathbb{g}\cdot \mbold{a})_i = g_{ij}a_j$, $\mathbb{g}:\mathbb{h} = g_{ij} h_{ij}$; summation is implied whenever an index is repeated. 
-The phasic pressure $P_k$ is computed from an equation of state that is assumed given as a function of the phasic density $\rho_k$ and the phasic internal energy $e_k = E_k - 0.5 u^2_k$. The cross section of the geometry is denoted by $A$ and is only spatially dependent. $A$ is included for completeness of the presentation and is set to 1 in most applications; however, nozzle flow problems can be solved using the one-dimensional version of the equations and by setting $A$ to the cross-sectional area of the nozzle. The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively; they are defined in \eqt{eq:int_variables_def}.
-\tcb{I do not know if we should keep the mass, momentum and energy exchange terms in the equations since they are not included in the derivations of the viscous regularization.} 
+The phasic pressure $P_k$ is computed from an equation of state that is assumed given as a function of the density $\rho_k$ and the phasic internal energy $e_k = E_k - 0.5 u^2_k$. The cross section of the geometry is denoted by $A$ and is only spatially dependent. $A$ is included for completeness of the presentation and is set to 1 in most applications; however, nozzle flow problems can be solved using the one-dimensional version of the equations and by setting $A$ to the cross-sectional area of the nozzle. The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively; they are defined in \eqt{eq:int_variables_def}.
+\tcb{I changed the exchange terms in each of the equations above.} 
 %
 \begin{subequations}
 \label{eq:int_variables_def}
@@ -266,7 +266,7 @@ The set of equations satisfied by phase $j$ are simply obtained by substituting 
 %
 which reduces the number of partial differential equations from eight to seven and yields the Seven-Equation two-phase flow Model. 
 %---------------------------------------------------------------------------------
-\subsection{Entropy equation of the SEM without viscous regularization and mathematical properties}\label{eq:sem-ent-wv}
+\subsection{Some mathematical properties and entropy equation of the SEM without viscous regularization}\label{eq:sem-ent-wv}
 %---------------------------------------------------------------------------------
 Some properties of the Seven-Equation two-phase flow Model are discussed next. A set of $5+2\texttt{dim}$ (with \texttt{dim} the geometry's dimension) waves is present in the model: two acoustic waves per phase, one contact wave per phase per domain dimension, and one void fraction wave propagating at the interfacial velocity $\mbold u_{int}$. These waves (eigenvalues of the Jacobian for the inviscid flux terms) are as follows for each phase $k$:
 % 
@@ -381,7 +381,7 @@ The objective of this section is to explain the approach used in the derivation 
 We want to derive a viscous regularization for the Seven-Equation two-phase flow Model given in \eqt{eq:liq-7-eqn-sect5} using the same methodology as for the multi-dimensional Euler equations with/without variable area \cite{jlg, Marco_paper_low_mach}. The method consists in adding dissipative terms to the system of equations under consideration, and in deriving an entropy equation for the regularized system. By adequately choosing the artificial viscous fluxes, one can show that the sign of the entropy production remains positive, ensuring uniqueness of the numerical solution \cite{Leveque}. Because of the addition of dissipation terms, the entropy equation is modified and contains additional terms of yet unknown sign. By carefully choosing a definition for each of the dissipation terms, the sign of the entropy equation can be determined and rendered positive. For the Seven-Equation two-phase flow Model, derivation of the viscous regularization can be achieved by considering either the phasic entropy equation (\eqt{eq:ent-eqn-7-eqn-model}) or the total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the later case, the entropy minimum principle can be verified for the whole two-phase system but may not ensure positivity of the entropy equation for each phase. However, positivity of the total entropy equation can also be achieved by requiring that the entropy minimum principle holds for each phase. This stronger requirement will also ensure consistency with the single-phase Euler equations when one of the phases disappears in the limit $\alpha_k \to 0$. 
 
 For the purpose of this section, the system of equations given in \eqt{eq:sev_equ} is considered, which is obtained by simply omitting the exchange source terms in \eqt{eq:liq-7-eqn-sect5} for the same reason as explained in \sct{eq:sem-ent-wv}:
-\tcr{we need a section on source term later to fully explain how we treat them because they are omitted for most of the paper}
+\tcr{we need a section on source term later to fully explain how we treat them because they are omitted for most of the paper} \tcb{I took care of this by changing the exchange terms in the equations and added a few lines about rational thermodynamic}
 %
 \begin{subequations}\label{eq:sev_equ}
 \begin{equation}
@@ -449,7 +449,7 @@ The terms $(s_e)_k$ and $(s_{\rho})_k$ denote the partial derivatives of $s_k$ w
 \item isolate the terms of interest and choose an appropriate expression for each of the viscous fluxes in order to ensure positivity of the entropy residual.
 \end{enumerate}
 %
-We first derive the phasic density equation expressed in terms of the primitive variable $\rho_k$ by combining \eqt{eq:sev_equ-with-diss-terms-vf} and \eqt{eq:sev_equ-with-diss-terms-cont} to obtain:
+We first derive the density equation expressed in terms of the primitive variable $\rho_k$ by combining \eqt{eq:sev_equ-with-diss-terms-vf} and \eqt{eq:sev_equ-with-diss-terms-cont} to obtain:
 %
 \begin{multline}\label{eq:rho-7-eqn-model-sect4}
 \alpha_k A \left[ \partial_t \rho_k + \mbold u_k  \cdot \grad \rho_k \right] 
@@ -457,10 +457,10 @@ We first derive the phasic density equation expressed in terms of the primitive 
 +  \underline{\underline{ A \rho_k \left( \mbold u_k - \mbold u_{int} \right) \cdot \grad \alpha_k}} = \\-\underline{\underline{A \rho_k \mu_P \left( P_k - P_j \right)}} + \div \mbold f_k - \rho_k \div \mbold l_k
 \end{multline}
 %
-In order to derive an equation for the phasic internal energy, the phasic velocity equation is obtained by subtracting the phasic density equation (multiplied by $\mbold u_k$) from the phasic momentum equation:
+In order to derive an equation for the phasic internal energy, the phasic velocity equation is obtained by subtracting the density equation (multiplied by $\mbold u_k$) from the phasic momentum equation:
 %
 \tcr{too many dots in the second term. It should really be $(\mbold u \cdot \grad) \mbold u$\\
-last term in $\mbold f$ was changed. I think it is correct now.}
+last term in $\mbold f$ was changed. I think it is correct now.} \tcb{Agreed}
 \begin{align}\label{eq:vel-7-eqn-model-sect4}
 \alpha_k \rho_k  A \left[ \partial_t \mbold u_k + (\mbold u_k \cdot \grad) \mbold u_k \right]  + \div \left( \alpha_k \rho_k A P_k \mathbb{I} \right) &=\nonumber\\
 \alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j - \mbold u_k \right) &+ \div \mathbb{g}_k - \mbold u_k \div \mbold f_k
@@ -482,8 +482,7 @@ After multiplying \eqt{eq:vel-7-eqn-model-sect4} by velocity $\mbold u_k$, the r
 % positive terms on the right-hand side of \eqt{eq:ent-eqn-7-eqn-model} (see \app{app:sev-equ-model-entropy})
 % and thus are ignored in the remainder of this derivation for brevity. 
 The underlined terms in \eqt{eq:rho-7-eqn-model-sect4} and \eqt{eq:int-ener-7-eqn-model-sect4}, also present in the derivation of the entropy equation for the SEM \emph{without} regularization, yield the positive terms on the right-hand side of the entropy equation, \eqt{eq:ent-eqn-7-eqn-model}. We refer the reader to \app{app:sev-equ-model-entropy} for a detailed derivation of the entropy equation  without viscous regularization; here, we deal with the \emph{regularized} system of equations and the above underlined terms are ignored in the remainder of this derivation for brevity. 
-The phasic entropy equation is now obtained by combining the phasic density equation (\eqt{eq:rho-7-eqn-model-sect4}) and the phasic internal energy equation (\eqt{eq:int-ener-7-eqn-model-sect4}) through the chain rule given in \eqt{eq:chain_rule-sct4} to yield:
-The phasic entropy equation is now obtained by combining the phasic density equation (\eqt{eq:rho-7-eqn-model-sect4}) and the phasic internal energy equation (\eqt{eq:int-ener-7-eqn-model-sect4}) through the chain rule given in \eqt{eq:chain_rule-sct4} to yield:
+The phasic entropy equation is now obtained by combining the density equation (\eqt{eq:rho-7-eqn-model-sect4}) and the phasic internal energy equation (\eqt{eq:int-ener-7-eqn-model-sect4}) through the chain rule given in \eqt{eq:chain_rule-sct4} to yield:
 %
 \tcr{order of operations with $\otimes$}
 \begin{multline}\label{eq:ent-res-7-eqn-diss-terms}
@@ -553,7 +552,7 @@ Substituting the expressions of \eqt{eq:def-diss-terms-sect4} into \eqt{eq:ent-r
 %
 or, after integration by parts,
 %
-\tcr{check sign}
+\tcr{check sign} \tcb{I do not see anything wrong}
 \begin{multline}\label{eq:ent-res-7-eqn-diss-terms2}
 \alpha_k \rho_k A \frac{Ds_k}{Dt} = 
 \underbrace{\div \left[ (s_e)_k\tilde{\mbold h}_k +\Big( (\rho s_\rho)_k - (e s_e)_k \Big) \tilde{\mbold f}_k \right]}_{{\mathcal{R}_0}} \\
@@ -717,7 +716,7 @@ to yield a viscous regularization that is analogous to the parabolic regularizat
 %
 At this point in the paper, we have derived a viscous regularization for the Seven-Equation two-phase flow Model that ensures positivity of the entropy residual, uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$, and is consistent with the viscous regularization derived for Euler equations \cite{jlg, Marco_paper_low_mach} in the limit $\alpha_k \to 1$. The viscous regularization involves a set of three viscosity coefficients for each phase, $\mu_k$, $\kappa_k$ and $\beta_k$, that are assumed positive. Definition of the viscosity coefficients should be devised from the scaled SEM in order to ensure well-scaled dissipative terms for a wide range of Mach numbers (subsonic, transonic and supersonic flows).
 %
-\tcr{is the following remark useful in the paper? Can it be removed completely?}
+\tcr{is the following remark useful in the paper? Can it be removed completely?} \tcb{done}
 %\begin{remark}
 %Through the derivations of the viscous regularization, it was noted that another set of dissipative terms $\mbold f_k$ and $\mbold l_k$ would also ensures positivity of the entropy residual:
 %%
@@ -978,7 +977,7 @@ Therefore, we conclude that by setting the Reynolds and P\'eclet numbers to one,
 results are retrieved in the low-Mach limit when employing the compressible Seven-Equation two-phase flow Model with viscous regularization and without relaxation terms.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Scaling of $\Re_{k,\infty}$, $\Pe_{k,\infty}^\kappa$ and $\Pe_{k,\infty}^\beta$ for non-isentropic flows (case (b))}\label{eq:non_isent_flows}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Next, we consider the non-isentropic case. Recall that even subsonic flows can present shocks (for instance, 
 a step initial condition in the pressure will trigger shock formation, independently of the Mach number). 
 The non-dimensional form of the Seven-Equation two-phase flow Model given in \eqt{eq:sev_equ_case_one_scaled} provides some insight on the 
@@ -1004,7 +1003,7 @@ for the energy equation (\eqt{eq:sev_equ-with-diss-terms-ener_case_one_scaled}) 
 choice, option (iii), has the proper scaling: in this case, only the dissipation terms involving 
 $\gradd{s,*} \mbold u_k^*$ scale as $1/M_{k,\infty}^2$ since $\Re_{k,\infty} = M_{k,\infty}^2$, leaving the 
 regularization of the void fraction and continuity equations unaffected because $\Pe_{k,\infty}^\beta = \Pe_{k,\infty}^\kappa =1$.
-\tcb{I feel we need another short section to explain how the two above limit cases ca be merge into one} \tcr{yes, as well as how to deal to exchange terms}
+\tcb{I feel we need another short section to explain how the two above limit cases ca be merge into one} \tcr{yes, as well as how to deal to exchange terms} \tcb{we no longer need it since we assumed that the exchange terms are derived from rational thermodynamic which is automatically consistent with the entropy minimum principle}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\subsection{An all-speed formulation of the viscosity coefficients}\label{eq:visc-formulation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1114,7 +1113,7 @@ This appendix provides the steps that lead to the derivation of the phasic entro
 %
 \begin{align}
 \partial_t \left( \alpha_k \rho_k E_k A \right) + \div \left[ \alpha_k A \mbold u_k \left( \rho_k E_k + P_k \right) \right] &= \nonumber \\
-P_{int} A \mbold u_{int} \cdot \grad \alpha_k &- \tcr{A}\mu_P \bar{P}_{int} \left( P_k-P_j \right) + \bar{\mbold u}_{int} A \lambda_u \left( \mbold u_j - \mbold u_k \right)
+P_{int} A \mbold u_{int} \cdot \grad \alpha_k &- A\mu_P \bar{P}_{int} \left( P_k-P_j \right) + \bar{\mbold u}_{int} A \lambda_u \left( \mbold u_j - \mbold u_k \right)
 \end{align}
 \end{subequations}
 where $\rho_k$, $\mbold u_k$, $E_k$ and $P_k$ denote the density, velocity, specific total energy, and pressure of  phase $k$, respectively. $\mu_P$ and $\lambda_u$ and the pressure and velocity relaxation parameters, respectively. We recall that we assume that the cross section $A$ is only function of space: $\partial_t A = 0$ (a value of $A \neq 1$ is mostly of practical important for 1D nozzle problems). 
@@ -1220,7 +1219,7 @@ Thus, using \eqt{eq:ent3}, \eqt{eq:ent4}, \eqt{eq:ent5} and \eqt{eq:ent6}, the e
 \begin{align}
 (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} &= \mu_P \frac{Z_k}{Z_k+Z_j} (P_j - P_k)^2 + \lambda_u \frac{Z_j}{Z_k+Z_j} (\mbold u_j -\mbold  u_k)^2 \nonumber
 \\
-& \tcr{\| \grad \alpha_k \|} \frac{Z_k}{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k)+\frac{\grad \alpha_k}{\| \grad \alpha_k \|}(P_k-P_j)\right]^2. \nonumber
+& \| \grad \alpha_k \| \frac{Z_k}{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k)+\frac{\grad \alpha_k}{\| \grad \alpha_k \|}(P_k-P_j)\right]^2. \nonumber
 \end{align}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
