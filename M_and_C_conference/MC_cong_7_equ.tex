@@ -59,7 +59,7 @@
 \begin{frontmatter}
 %-------------------------
 %-------------------------
-\title{Numerical results for a single and a two-phase flow water-hammers with the system code Relap-7}
+\title{Application of the reactor system code RELAP-7 to single- and two-phase flow water-hammer problems}
 %-------------------------
 %-------------------------
 \author{Marc O. Delchini\fnref{label1}}
@@ -70,6 +70,9 @@
 
 \author{Ray A. Berry\fnref{label2}}
 \ead{ray.berry@inl.gov}
+
+\author{Richard Martineau \fnref{label2}}
+\ead{richard.martineau@inl.gov}
 
 \address[label1]{Department of Nuclear Engineering, Texas A\&M University, College Station, TX 77843, USA \fnref{label1}}
 
@@ -84,7 +87,13 @@
 %nuclear reactor system safety analysis code being developed at Idaho National Laboratory
 %(INL). The code is based on the INLÕs modern scientific software development framework
 %MOOSE (Multi-Physics Object Oriented Simulation Environment) that uses a \emph{Continuous Galerkin Finite Element Method}.
-The primary basis of the RELAP-7 governing theory includes the single-phase Euler equations and the 7-equation two-phase flow models. It is well established that these hyperbolic conservation laws can develop shocks and discontinuities and thus, require a stabilization numerical method. The all-Mach flow Entropy Viscosity Method is now employed in RELAP-7 as a stabilization numerical method for both above flow models. The entropy viscosity technique is a viscous regularization technique: adequate dissipation terms (viscous fluxes) are added to the governing laws while ensuring the entropy minimum principle still holds. Viscosity coefficients modulates the magnitude of the added dissipation such that it is large in shock regions and vanishingly small elsewhere. The stabilization capabilities of the Entropy Viscosity Method are demonstrated in the system code RELAP-7 by simulating a 1-D single and two-phase water-hammers. 
+The primary basis of the RELAP-7 governing theory includes the single-phase Euler equations and the 7-equation two-phase flow models. 
+It is well established that these hyperbolic conservation laws can develop shocks and discontinuities and thus, require a stabilization 
+numerical method. The all-Mach flow Entropy Viscosity Method is now employed in RELAP-7 as a stabilization numerical method for both 
+above flow models. The entropy viscosity technique is a viscous regularization technique: adequate dissipation terms (viscous fluxes) are 
+added to the governing laws while ensuring the entropy minimum principle still holds. Viscosity coefficients modulates the magnitude of the 
+added dissipation such that it is large in shock regions and vanishingly small elsewhere. The stabilization capabilities of the Entropy Viscosity 
+Method are demonstrated in the system code RELAP-7 by simulating a 1-D single and two-phase water-hammers. 
 \end{abstract}
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 %--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -98,15 +107,46 @@ The primary basis of the RELAP-7 governing theory includes the single-phase Eule
 \section{Introduction}\label{sec:intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-The RELAP-7 (Reactor Excursion and Leak Analysis Program) code is the next generation
-nuclear reactor system safety analysis code being developed at Idaho National Laboratory
-(INL). The code is based on the INLÕs modern scientific software development framework
-MOOSE (Multi-Physics Object Oriented Simulation Environment) \cite{MOOSE} that uses a \emph{Continuous Galerkin Finite Element Method}.
-The primary basis of the RELAP-7 governing theory includes the single-phase Euler equations \cite{Toro} and the 7-equation two-phase flow models \cite{SEM}. It is well established that these hyperbolic conservation laws can develop shocks and discontinuities \cite{Leveque} and thus, require a stabilization numerical method. In the case of the single-phase Euler equations, numerous numerical methods are available both for discontinuous and continuous schemes \cite{Toro, Lapidus_paper, LMP, Lapidus_book, Roe}. The 7-equation model is currently discretized in space using discontinuous schemes with approximate Riemann solvers derived from the well-established approaches for single-phase flows, while using an upwind-type flux for the non-conservative terms \cite{Saurel_2001a, Saurel_2001b, Li_2004, Zein_2010, Ambroso_2012}. In RELAP-7, stabilization of the above conservation laws is ensured by the Entropy Viscosity Method \cite{jlg1, jlg2} that is independent of the type of spatial discretization (finite volume, continuous or discontinuous finite elements, ...) and thus may be applied ubiquitously.
- 
-The entropy viscosity technique \cite{jlg1, jlg2} is a viscous regularization technique: adequate dissipation terms (viscous fluxes) are added to the governing laws while ensuring the entropy minimum principle still holds. Viscosity coefficients modulates the magnitude of the added dissipation such that it is large in shock regions and vanishingly small elsewhere. The entropy viscosity coefficients are taken proportional to the entropy production while, at the same time, being bounded from above by a first-order viscosity coefficient that reduces the spatial discretization to be similar to a first-order Godunov scheme (the latter being known to be overly dissipative but monotone [12]). Hence, entropy production in shocks will result in large viscosity coefficients and thus will avoid spurious oscillations. In order to solve for low-Mach flows \cite{LowMach1, LowMach2, LowMach3}, the initial version of the Entropy Viscosity Method was modified and new definitions of the viscosity coefficients were proposed to ensure well-scaled dissipative terms in the low-Mach asymptotic limit while preserving the capabilities of the method to resolve shocks and discontinuities \cite{Marco_dissertation, Marco_paper_low_mach}. The same approach was used when extending the method to the 7-equation two-phase flow model \cite{Marco_paper_7_equ, Marco_dissertation}. 
+Single- and tow-phase flow water hammer problems are simulated using RELAP-7 (Reactor Excursion and Leak Analysis Program),
+the next-generation nuclear reactor system analysis code under development at Idaho National Laboratory (INL). 
+%
+Water hammer, or hydraulic shock, is a pressure surge or wave caused when a fluid in motion is forced to stop or change direction abruptly. 
+In nuclear power plants, water hammers commonly occur 
+in case of an inflow of sub-cooled water into pipes or other parts of the equipment, which are filled with steam or steam-water mixture; they also
+happen as the consequence of valve closing or opening actions or of breaks in pipes, with single phase or two-phase flow. 
+% when a valve closes suddenly at an end of a pipe system, and a pressure wave propagates in the pipe. 
 
-In this paper, the regularized single and two-phase flow models are recalled along with the all-Mach flow definitions of the viscosity coefficients in \sct{sct:model}. After detailing the spatial and temporal discretization method in \sct{sec:disc}, numerical results of a single and a two-phase water-hammers are presented in \sct{sec:results}. 
+The RELAP-7 code is built using modern scientific software libraries (the Multi-Physics Object Oriented Simulation Environment MOOSE \cite{MOOSE}, 
+itself built upon PETSc and LibMesh, among others).  
+%
+The primary basis for RELAP-7's governing theory includes Euler single-phase equations \cite{Toro} and the 7-equation two-phase flow model of \cite{SEM}. 
+This two-phase flow model is strictly hyperbolic, as opposed to the 6-equation model RELAP-5.  
+It is well established that hyperbolic conservation laws can develop shocks and discontinuities \cite{Leveque} and, therefore, require stabilization 
+of the discretized equations. Fot single-phase Euler equations, numerous numerical methods are available both for discontinuous and continuous discretization schemes 
+\cite{Toro, Lapidus_paper, LMP, Lapidus_book, Roe, SUPG}. Until recently, the 7-equation model was only discretized in space using discontinuous schemes with approximate 
+Riemann solvers derived using well-established approaches for single-phase flows, while using an upwind-type flux for the non-conservative terms 
+\cite{Saurel_2001a, Saurel_2001b, Li_2004, Zein_2010, Ambroso_2012}. 
+%
+In RELAP-7, the conservation laws are discretized using a \emph{Continuous Galerkin Finite Element Method} and the resulting discrete equations are stabilized using 
+the Entropy Viscosity Method \cite{jlg1, jlg2}.
+%  that is independent of the type of spatial discretization (finite volume, continuous or discontinuous finite elements, ...) and thus may be applied ubiquitously.
+ 
+
+
+The entropy viscosity technique is a viscous regularization technique where adequate dissipation terms (viscous fluxes) are added to the governing laws while ensuring 
+that the entropy minimum principle holds. Viscosity coefficients modulates the magnitude of the added dissipation such that it is large in shock regions and vanishingly 
+small elsewhere. The entropy viscosity coefficients are taken proportional to the entropy production while, at the same time, being bounded from above by a first-order 
+viscosity coefficient that reduces the spatial discretization to be similar to a first-order Godunov scheme (the latter being known to be overly dissipative but monotone 
+\cite{you had [12]). Hence, entropy production in shocks will result in large viscosity coefficients and thus will avoid spurious oscillations. In order to solve for 
+low-Mach flows \cite{LowMach1, LowMach2, LowMach3}, the original version of the Entropy Viscosity Method was modified and new definitions of the viscosity coefficients 
+were proposed to ensure well-scaled dissipative terms in the low-Mach asymptotic limit while preserving the capabilities of the method to resolve shocks and discontinuities 
+\cite{Marco_dissertation, Marco_paper_low_mach}. The same approach was used to extend the method to the 7-equation two-phase flow model 
+\cite{Marco_paper_7_equ, Marco_dissertation}. 
+
+In this paper, the single and two-phase flow models, regularized with the entropy viscosity method, are recalled along with the all-Mach flow definitions of the viscosity coefficients 
+in \sct{sct:model}. After providing the spatial and temporal discretization method in \sct{sec:disc}, numerical results of single and a two-phase water-hammer problems are 
+presented in \sct{sec:results}. 
+
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -114,12 +154,14 @@ In this paper, the regularized single and two-phase flow models are recalled alo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-In this section, the single and the two-phase flow models implemented in Relap-7 are recalled along with the viscous regularization and the all-Mach flows definition of the viscosity coefficients used in the application of the numerical method called the Entropy Viscosity Method (EVM). 
+In this section, the single- and the two-phase flow models implemented in RELAP-7 are recalled, along with their viscous regularization via the entropy viscosity method 
+and the definition of the viscosity coefficients that are appropriate for all-Mach flows. % definition of used in the application of the numerical method called the Method (EVM). 
 %
 %------------------------------------------------------------------------------------------------------------------
 \subsection{1-D Euler equations with viscous regularization}\label{sec:single-model}
 %------------------------------------------------------------------------------------------------------------------
-The conservative form of the 1-D Euler equations \cite{Toro} is implemented in Relap-7 \cite{Relap-7} and used to simulate single-phase flows in Light Water Reactors. An equation of state function of the density, $\rho$ and the specific internal energy $e$, serves as a closure relation to compute the pressure, $P = eos(\rho, e)$. Stabilization of the scheme is ensured by the Entropy Viscosity Method \cite{jlg1, jlg2} that is now designed to be an all-Mach flow numerical method \cite{Marco_paper_low_mach, Marco_dissertation}. The 1-D Euler equations with the viscous regularization and the definition of the viscosity coefficients used in the application of the EVM and implemented in Relap-7, are recalled in \eqt{eq:euler-eq} through (\ref{eq:single-visc-def}). The viscous regularization terms are denoted by the dissipative flux $\mbold D$ in the right hanside.
+The conservative form of the 1-D Euler equations \cite{Toro} is implemented in RELAP-7 \cite{Relap-7} and used to simulate single-phase flows in Light Water Reactors. An equation of state that depends upon density $\rho$ and 
+specific internal energy $e$ serves as a closure relation to compute the pressure, $P = eos(\rho, e)$. Stabilization of the scheme is ensured by the Entropy Viscosity Method (EVM), with its extension to be an all-Mach flow numerical method \cite{Marco_paper_low_mach, Marco_dissertation}. The 1-D Euler equations with the viscous regularization and the definition of the viscosity coefficients used in the application of the EVM and implemented in RELAP-7 are recalled in \eqt{eq:euler-eq} through (\ref{eq:single-visc-def}). The viscous regularization terms are denoted by the dissipative flux $\mbold D$ in the right-hand side.
 %
 \begin{subequations}\label{eq:euler-eq}
 \begin{equation}
@@ -155,25 +197,29 @@ The conservative form of the 1-D Euler equations \cite{Toro} is implemented in R
 \end{equation}
 \end{subequations}
 %
-where $E$ and $u$ are the specific total energy and the velocity fluid, respectively. The partial derivatives with respect to time and space are denoted by $\partial_t$ and $\partial_x$, respectively. Expression of the dissipative terms $f$, $g$ and $h$ was obtained from deriving the entropy residual and applying the entropy minimum principle \cite{jlg}:
+where $E$ and $u$ are the specific total energy and the velocity of the fluid, respectively. The partial derivatives with respect to time and space are denoted by $\partial_t$ and $\partial_x$. The expressions for the dissipative terms, $f$, $g$, and $h$, were obtained by deriving the entropy residual and applying the entropy minimum principle \cite{jlg}:
 %
 \begin{equation}
-f = \kappa \partial_x \rho , \, g = \mu \rho \partial_x u \text{ and } h = \kappa \partial_x \left( \rho e \right) \, , \nonumber
+f = \kappa \partial_x \rho , \ g = \mu \rho \partial_x u, \text{  and  } h = \kappa \partial_x \left( \rho e \right) \, . 
 \end{equation}
 %
-Definitions of the viscosity coefficients $\mu$ and $\kappa$, given later in \eqt{eq:single-visc-def}, were investigated in \cite{Marco_paper_low_mach} from the non-dimensionalized Euler equations in order to have well-scaled dissipative terms in the case of supersonic and low-Mach flows. Each viscosity coefficient is computed from an upper bound denoted by the subscript $max$, and a second-order viscosity coefficient denoted by the subscript $e$. The upper bound viscosity coefficient is defined proportional to the maximum eigenvalue and is designed to be over-dissipative (\eqt{eq:visc-def-max}). The high-order viscosity coefficient is set proportional to the entropy residual, $R_e(x,t)$ and a jump denoted by $J$. The entropy residual is known to be peaked in the shock region \cite{Leveque} and thus can be used to track shocks. As proposed in \cite{Marco_paper_low_mach} and recalled in \eqt{eq:ent-res}, the entropy residual is locally computed from the pressure, the density and the sound speed, $c$, as follows:
+Definitions of the viscosity coefficients $\mu$ and $\kappa$, given later in \eqt{eq:single-visc-def}, were investigated in \cite{Marco_paper_low_mach} using a non-dimensionalization of Euler equations in order to retrieve well-scaled dissipative terms for any Mach number (so that adequate stabilization be provided in both supersonic and low-Mach flows). Each viscosity coefficient is computed from an upper bound denoted by the subscript $max$, and an entropy viscosity coefficient denoted by the subscript $e$. The upper-bound viscosity coefficient is defined proportional to the maximum eigenvalue of the hyperbolic system and is designed to be over-dissipative (\eqt{eq:visc-def-max}). The high-order viscosity coefficient is set proportional to the entropy residual, $R_e(x,t)$.
+%, and a jump denoted by $J$. 
+The entropy residual is known to be peaked in the shock region \cite{Leveque} and thus can be used to detect and track shocks. As proposed in \cite{Marco_paper_low_mach} and recalled in \eqt{eq:ent-res}, the entropy residual is locally computed from the pressure, the density and the sound speed, $c$, as follows:
 %
 \begin{equation}\label{eq:ent-res}
 R_e(x,t) = \frac{DP}{Dt} - c^2\frac{D\rho}{Dt} \, ,
 \end{equation}
 %
-where $\frac{D (\cdot)}{Dt}$ is the material derivative. The jump $J$ is function of the the jump of pressure and density gradients across the face shared by two cells of the mesh and its definition is given in \eqt{eq:jump}:
-%
-\begin{equation}\label{eq:jump}
-J = \max \left( |u| [[ \partial_x P ]], \, |u| (Mc)^2 [[ \partial_x \rho ]] \right) \, .
-\end{equation}
-%
-$[[ x ]]$ denotes the jump of the quantity $x$ across a face and $M = |u| / c$ is the Mach number. The all-Mach flow definition of the viscosity coefficients $\mu$ and $\kappa$ proposed in \cite{Marco_paper_low_mach} is now recalled:
+where $\frac{D (\cdot)}{Dt} := \partial_t(\cdot) + u  \partial_x(\cdot)$ is the material derivative. 
+%The jump $J$ is function of the the jump of pressure and density gradients across the face shared by two cells of the mesh and its definition is given in \eqt{eq:jump}:
+%%
+%\begin{equation}\label{eq:jump}
+%J = \max \left( |u| [[ \partial_x P ]], \, |u| (Mc)^2 [[ \partial_x \rho ]] \right) \, .
+%\end{equation}
+%%
+%$[[ x ]]$ denotes the jump of the quantity $x$ across a face and $M = |u| / c$ is the Mach number. 
+The all-Mach flow definition of the viscosity coefficients $\mu$ and $\kappa$ proposed in \cite{Marco_paper_low_mach} is now recalled:
 %
 \begin{subequations}\label{eq:single-visc-def}
 \begin{align}
@@ -184,8 +230,10 @@ $[[ x ]]$ denotes the jump of the quantity $x$ across a face and $M = |u| / c$ i
 \mu_{max}(x,t) = \kappa_{max}(x,t) = 0.5 h \left( |u| + c \right)\, ,
 \end{align}
 \begin{align}\label{eq:visc-def-ent}
-\mu_e(x,t) = \frac{h^2}{\norm_\mu} \max \left( R_e(x,t), J \right)\, ,
-\kappa_e(x,t) = \frac{h^2}{\norm_\kappa} \max \left( R_e(x,t), J \right)
+%\mu_e(x,t) = \frac{h^2}{\norm_\mu} \max \left( R_e(x,t), J \right)\, ,
+\mu_e(x,t) = \frac{h^2 R_e(x,t)}{\norm_\mu}\, , \quad 
+%\kappa_e(x,t) = \frac{h^2}{\norm_\kappa} \max \left( R_e(x,t), J \right)
+\kappa_e(x,t) = \frac{h^2 R_e(x,t)}{\norm_\kappa} 
 \end{align}
 \text{with}
 \begin{equation}
@@ -203,7 +251,7 @@ where $h$ is the grid size. The normalization parameters $\norm_\mu$ and $\norm_
 \subsection{1-D Seven-Equation two-phase flow model with viscous regularization}\label{sec:two-phase-model}
 %------------------------------------------------------------------------------------------------------------------
 %
-The system code Relap-7 employs the 1-D Seven-equation two-phase flow model \cite{SEM} to simulate the behavior of two-phase flows in Light Water Reactors. In this model, each phase is treated as being compressible, exhibits independent thermodynamic and mechanical properties, and is described by its own equation of state, $P_k = eos_k(\rho_k,e_k)$, $k$ being the phase index. This system of equations is hyperbolic and has seven real eigenvalues. The 1-D Seven-equation model is recalled in \eqt{eq:sem-eq} for a liquid phase in interaction with a gas phase denoted by the subscript $liq$ and $gas$, respectively. Equations for the vapor phase can be devised from \eqt{eq:sem-eq} by simply substituting the subscript $_{liq}$ to $_{gas}$ and $_{gas}$ to $_{liq}$.
+RELAP-7 uses the seven-equation two-phase flow model \cite{SEM} to simulate the behavior of two-phase flows in Light Water Reactors. In this model, each phase is treated as being compressible, exhibits independent thermodynamical and mechanical properties, and is described by its own equation of state, $P_k = eos_k(\rho_k,e_k)$, $k$ being the phase index. This system of equations is hyperbolic and has seven real eigenvalues. The 1-D Seven-equation model is recalled in \eqt{eq:sem-eq} for a liquid phase in interaction with a gas phase denoted by the subscript $liq$ and $gas$, respectively. Equations for the vapor phase can be devised from \eqt{eq:sem-eq} by simply substituting the subscript $_{liq}$ to $_{gas}$ and $_{gas}$ to $_{liq}$.
 %
 %
 \begin{subequations}\label{eq:sem-eq}
@@ -229,7 +277,7 @@ The system code Relap-7 employs the 1-D Seven-equation two-phase flow model \cit
 &( \alpha \rho u^2 + \alpha P )_{liq} \\
 &( \alpha u )_{liq} \left( \rho E + P \right)_{liq}  \\
 \end{array}
-\right]_{liq}, \,
+\right], \,
 \end{equation}
 %
 \begin{equation}
@@ -267,34 +315,34 @@ The system code Relap-7 employs the 1-D Seven-equation two-phase flow model \cit
 \end{equation}
 \end{subequations}
 %
-The liquid void fraction is denoted by  $\alpha_{liq}$ and the vapor void fraction is computed from the algebraic relation $\alpha_{vap} = 1 - \alpha_{liq}$. Following \cite{SEM}, the pressure ($P_{int}$) and velocity ($u_{int}$) interfacial variables, and the relaxation coefficients, $\mu_P$ and $\lambda_u$, are function of the liquid and vapor thermodynamic, the mechanical properties and the acoustic impedance denoted by $Z_k = \rho_k c_k$ with $k = \{ liq, \ vap \}$, and computed with the following expressions:
+The liquid void fraction is denoted by  $\alpha_{liq}$ and the vapor void fraction is computed from the algebraic relation $\alpha_{gas} = 1 - \alpha_{liq}$. Following \cite{SEM}, the pressure ($P_{int}$) and velocity ($u_{int}$) interfacial variables, and the relaxation coefficients, $\mu_P$ and $\lambda_u$, are function of the liquid and vapor thermodynamic, the mechanical properties and the acoustic impedance denoted by $Z_k = \rho_k c_k$ with $k = \{ liq, \ vap \}$, and computed with the following expressions:
 %
 \begin{subequations}
 \label{eq:int_variables_def}
 \begin{align}
   \label{E-R:83}
-  P_{int} &= \bar{P}_{int} + \frac{Z_{liq}Z_{vap}}{Z_{liq}+Z_{vap}} sgn \left( \partial_x \alpha_{liq} \right) \cdot (u_{vap}-u_{liq}) \,,
+  P_{int} &= \bar{P}_{int} + \frac{Z_{liq}Z_{gas}}{Z_{liq}+Z_{gas}} sgn \left( \partial_x \alpha_{liq} \right) \cdot (u_{gas}-u_{liq}) \,,
   \\
-  \bar{P}_{int} &= \frac{Z_{vap} P_{liq}+Z_{liq}P_{vap}}{Z_{liq}+Z_{vap}} \,,
+  \bar{P}_{int} &= \frac{Z_{gas} P_{liq}+Z_{liq}P_{gas}}{Z_{liq}+Z_{gas}} \,,
  \\
   \label{E-R:84}
-  u_{int} &= \bar{u}_{int} +  sgn \left( \partial_x \alpha_{liq}\right) \frac{P_{vap}-P_{liq}}{Z_{liq}+Z_{vap}} \,,
+  u_{int} &= \bar{u}_{int} +  sgn \left( \partial_x \alpha_{liq}\right) \frac{P_{gas}-P_{liq}}{Z_{liq}+Z_{gas}} \,,
   \\
-  \bar{u}_{int} &= \frac{Z_{liq} u_{liq}+Z_{vap} u_{vap}}{Z_{liq}+Z_{vap}} \, ,
+  \bar{u}_{int} &= \frac{Z_{liq} u_{liq}+Z_{gas} u_{gas}}{Z_{liq}+Z_{gas}} \, ,
   \\
-  \mu_P &= \frac{A_{int}}{Z_{liq}+Z_{vap}} \, 
+  \mu_P &= \frac{A_{int}}{Z_{liq}+Z_{gas}} \, 
   \text{and }
-  \lambda_u = \frac{1}{2} \mu_P Z_{liq} Z_{vap} \, ,
+  \lambda_u = \frac{1}{2} \mu_P Z_{liq} Z_{gas} \, ,
 \end{align}
 \end{subequations}
 %
-where the function $sgn(x)$ returns the sign of the variable $x$ and $A_{int}$ is the interfacial area that can be computed from a correlation \cite{SEM}. All other variables were previously defined. Alike for Euler equations (\sct{sec:single-model}), the dissipative terms given in the vector $\mbold D\left( \mbold U_{liq} \right)$ were derived from the entropy minimum principle and have the following definitions:
+where the function $sgn(x)$ returns the sign of the variable $x$ and $A_{int}$ is the interfacial area that can be computed from a correlation \cite{SEM}. All other variables were previously defined. As for for the single-phase Euler equations (\sct{sec:single-model}), the dissipative terms given in the vector $\mbold D\left( \mbold U_{liq} \right)$ were derived from the entropy minimum principle and have the following definitions:
 %
 \begin{multline}
 l_{liq} = \beta_{liq} \partial_x \alpha_{liq} , \, f_{liq}= ( \alpha \kappa )_{liq} \partial_x \rho_{liq} , \\ g_{liq} = ( \alpha \mu \rho )_{liq} \partial_x u_{liq} \, \text{ and } h_{liq} = ( \alpha \kappa )_{liq} \partial_x \left( \rho e \right)_{liq} \, . \nonumber
 \end{multline}
 %
-The positive viscosity coefficients for the liquid phase $\beta_{liq}$, $\mu_{liq}$ an $\kappa_{liq}$ are defined by investigating the non-dimensionalized 7-equation two-phase flow model and performing a low-Mach asymptotic limit \cite{Marco_paper_7_equ}. The viscosity coefficients $\mu_{liq}$ and $\kappa_{liq}$ are found identical to the one given in \eqt{eq:single-visc-def} for the single-phase Euler equation (this is expected since the 7-equation model degenerates to Euler equations when one phase disappears). The approach to define the viscosity coefficient $\beta_{liq}$ is similar to the logic followed for hyperbolic scalar equations \cite{jlg1, jlg2}: an entropy equation can be derived from the volume fraction equation and used in the definition of the viscosity coefficient $\beta_{liq}$ . Following the work by Guermond et al. \cite{jlg1, jlg2}, one obtains:
+The positive viscosity coefficients for the liquid phase $\beta_{liq}$, $\mu_{liq}$ an $\kappa_{liq}$ are defined by investigating the non-dimensionalized 7-equation two-phase flow model and performing a low-Mach asymptotic limit \cite{Marco_paper_7_equ}. The viscosity coefficients $\mu_{liq}$ and $\kappa_{liq}$ are found identical to the one given in \eqt{eq:single-visc-def} for the single-phase Euler equation (this is expected since the 7-equation model degenerates to Euler equations when one phase disappears). The approach employed to define the viscosity coefficient $\beta_{liq}$ is similar to the logic followed for hyperbolic scalar equations \cite{jlg1, jlg2}: an entropy equation can be derived from the volume fraction equation and used in the definition of the viscosity coefficient $\beta_{liq}$ . Following the work by Guermond et al. \cite{jlg1, jlg2}, one obtains:
 %
 \begin{subequations}
 \begin{equation}
@@ -309,8 +357,10 @@ The positive viscosity coefficients for the liquid phase $\beta_{liq}$, $\mu_{li
 %
 \text{and}
 %
+\tcr{shouldn't it be $\alpha^2$ in the denominator, that is, the entropy function associated with $\alpha$?}
 \begin{equation}
-\beta_{e,liq}(x,t) =  h^2 \frac{\max \left( | R_{\alpha,liq}(x,t) |, J_{\alpha_{liq}} \right)}{|| \alpha_{liq} - \bar{\alpha}_{liq}||_\infty},
+%\beta_{e,liq}(x,t) =  h^2 \frac{\max \left( | R_{\alpha,liq}(x,t) |, J_{\alpha_{liq}} \right)}{|| \alpha_{liq} - \bar{\alpha}_{liq}||_\infty},
+\beta_{e,liq}(x,t) =  \frac{h ^2 | R_{\alpha,liq}(x,t) |}{|| \alpha^2_{liq} - \bar{\alpha^2_{liq}}||_\infty},
 \end{equation}
 where the entropy residual associated to the volume fraction equation is:
 \begin{equation}
@@ -319,7 +369,8 @@ R_{\alpha,liq}(x,t) =   \frac{1}{2} \left( \frac{\partial \alpha_{liq}^2}{\parti
 \end{equation} 
 \end{subequations}
 % 
-and $J_{\alpha_{liq}}$ denotes the inter element jump of the gradient of the volume fraction. $\bar{\alpha}_{liq}$ is the average value of the liquid void fraction over the entire computational domain.
+%and $J_{\alpha_{liq}}$ denotes the inter element jump of the gradient of the volume fraction. 
+$\bar{\cdot}$ denotes the domain-averaged value of any given quantity. %the liquid void fraction over the entire computational domain.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -328,7 +379,7 @@ and $J_{\alpha_{liq}}$ denotes the inter element jump of the gradient of the vol
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 In this section, we briefly describe the spatial and temporal discretizations and the solution techniques 
-used to solve the system of equations presented in \sct{sec:single-model} and \sct{sec:two-phase-model}. The two system of 
+used to solve the system of equations presented in \sct{sec:single-model} and \sct{sec:two-phase-model}. The two systems of 
 equations can be recast under the following form for conciseness:
 \begin{equation}
 \label{eq:form}
@@ -384,8 +435,8 @@ where $\Delta t^{n} = t^n-t^{n-1}$ and $\Delta t^{n+1} = t^{n+1}-t^{n}$.
 %---------------------------------------------------------------------------------------------------
 %
 Boundary conditions are implemented by performing a characteristic decomposition to compute the 
-appropriate flux at the boundaries in Relap-7 and was inspired by the method described in \cite{SEM}. 
-Neumann boundary conditions are used for all of the boundary types.
+appropriate flux at the boundaries in RELAP-7 and was inspired by the method described in \cite{SEM}. 
+Weakly enforced boundary conditions are used for all of the boundary types.
 
 For each numerical solution presented in \sct{sec:results}, the type of boundary conditions used 
 will be specified. The artificial diffusion coefficient $D(\mathbf  U)$ is set to zero at the boundary of the computational 
@@ -417,7 +468,7 @@ continuity equation. In the above, we have neglected $\frac{\partial \kappa}{\pa
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-We now present two sample results of a single and a two-phase flow water-hammers in \sct{sec:single-num-res} and \sct{sec:two-num-res}, respectively, with the objective of testing adequacy of the Entropy Viscosity Method when simulating typical reactor flows. The numerical results were obtained with the system code RELAP-7 that implements the single and two-phase flow models described in \sct{sct:model} using the spatial and temporal discretization techniques \sct{sec:spatial-disc} (BDF2 and linear test functions).
+We now present two sample results of a single- and a two-phase flow water-hammers in \sct{sec:single-num-res} and \sct{sec:two-num-res}, respectively, with the objective of testing adequacy of the Entropy Viscosity Method when computing typical reactor flows. The numerical results were obtained with the system code RELAP-7 that implements the single- and two-phase flow models described in \sct{sct:model} using the spatial and temporal discretization techniques \sct{sec:spatial-disc} (BDF2 and linear test functions).
 
 A water-hammer situation is encountered in Light Water Reactors whenever a valve closes and obstructs the flow in a pipe. In the numerical results presented in this section, each fluid is described by the Stiffened Gas equation of state \cite{SGEOS} with parameters taken from \cite{SEM} for the liquid and gas phases. The computational domain is discretized with an uniform mesh of $500$ cells and the numerical solution is run until $t = 0.5$ s with a CFL number of $1.$ for both tests. Information regarding the initial conditions will be given later in this section. 
 For each test case, the velocity, density and pressure profiles are provided at different times of the simulation. Since the Entropy Viscosity Method is used, we also plot the viscosity coefficients, $\kappa$, $\mu$ and $\kappa_{max}$.
@@ -426,7 +477,7 @@ For each test case, the velocity, density and pressure profiles are provided at 
 \subsection{Single-phase water-hammer} \label{sec:single-num-res}
 %---------------------------------------------------------------------------------------------------
 %
-A single-phase water-hammer consists of a liquid phase flowing in a straight 1-D pipe with initial uniform pressure ($P = 7$ MPa), velocity ($u = -12$ $m/s$) and temperature ($T = 453$ K). At $t=0$ s, the two extremities of the 1-D pipe are closed by solid walls which causes two shock waves to appear at the left and right extremities. The two shock waves initially propagate towards the middle of the pipe and are reflected on the opposite wall after crossing each other near the middle of the pipe. Numerical results of the velocity, density and pressure profiles are given in \fig{fig:single-phase-vel}, ~\ref{fig:single-phase-density} and ~\ref{fig:single-phase-press}, respectively.\, for three different times $t=8.7 \times 10^{-4}, \, 6.8 \times 10^{-3} \text{ and } 10^{-3}$ s. The viscosity coefficients are plotted in \fig{fig:single-phase-visc} at time $t = 8.7 \times 10^{-4}$ s only.
+A single-phase water hammer consists of a liquid phase flowing in a straight 1-D pipe with initial uniform pressure ($P = 7$ MPa), velocity ($u = -12$ $m/s$) and temperature ($T = 453$ K). At $t=0$ s, the two extremities of the 1-D pipe are closed by solid walls which causes two shock waves to appear at the left and right extremities. The two shock waves initially propagate towards the middle of the pipe and are reflected on the opposite wall after crossing each other near the middle of the pipe. Numerical results of the velocity, density and pressure profiles are given in \fig{fig:single-phase-vel}, ~\ref{fig:single-phase-density} and ~\ref{fig:single-phase-press}, respectively.\, for three different times $t=8.7 \times 10^{-4}, \, 6.8 \times 10^{-3} \text{ and } 10^{-3}$ s. The viscosity coefficients are plotted in \fig{fig:single-phase-visc} at time $t = 8.7 \times 10^{-4}$ s only.
 %
 \begin{figure}[H]
         \centering
@@ -455,16 +506,16 @@ A single-phase water-hammer consists of a liquid phase flowing in a straight 1-D
                 \caption{Viscosity coefficients}
                 \label{fig:single-phase-visc}
         \end{subfigure}
-        \caption{Numerical solutions of a water-hammer at times $t=8.7 \times 10^{-4}, \, 6.8 \times 10^{-3} \text{ and } 10^{-3}$ s (the viscosity coefficients are only shown at time $t=8.7 \times 10^{-4}$ s).}\label{fig:single-phase}
+        \caption{Numerical solutions of a water hammer at times $t=8.7 \times 10^{-4}, \, 6.8 \times 10^{-3} \text{ and } 10^{-3}$ s (the viscosity coefficients are only shown at time $t=8.7 \times 10^{-4}$ s).}\label{fig:single-phase}
 \end{figure}
 %
-In \fig{fig:single-phase}, the numerical solution does not display any oscillations or any instabilities for all of the times showed. The viscosity coefficients $\kappa$ and $\mu$ are only saturate to the first-order viscosity coefficients, $\kappa_{max}$, around $x=0.1$ m and $x=0.9$ m which match the positions of the shocks wave at $t=8.7 \times 10^{-4}$. It is also noted that the accuracy of the shock wave decreases over time: the numerical dissipation comes from the temporal integrator and the large number of time steps ($1500$ time steps to reach $t=6.8 \times 10^{-3}$). The accuracy of the numerical solution could be improved over time by using a higher-order temporal integrator other than BDF2.
+In \fig{fig:single-phase}, the numerical solution does not display any oscillations or any spurious instabilities due to the numerics. The viscosity coefficients $\kappa$ and $\mu$ only saturate to the first-order viscosity coefficients, $\kappa_{max}$, around $x=0.1$ m and $x=0.9$ m which match the positions of the shocks waves at $t=8.7 \times 10^{-4}$. It is also noted that the accuracy of the shock wave decreases over time: the numerical dissipation comes from the temporal integrator and the large number of time steps ($1500$ time steps are used to reach $t=6.8 \times 10^{-3}$). The accuracy of the numerical solution could be improved over time by using a higher-order temporal integrator.% other than BDF2.
 %
 %---------------------------------------------------------------------------------------------------
 \subsection{Two-phase flow water-hammer} \label{sec:two-num-res}
 %---------------------------------------------------------------------------------------------------
 %
-The two-phase water-hammer is identical to the single-phase water-hammer described in \sct{sec:two-num-res}: the liquid and vapor phases have the same initial conditions and the liquid void fraction is initially set to $0.5$. The two phases are in interaction through the pressure and velocity relaxation terms (see \eqt{eq:sem-eq}) that are function of the relaxation coefficients, $\mu_P$ and $\lambda_u$, computed with $A_{int} = 10^3$ $m^{-1}$ so that the two phases achieve pressure and velocity equilibrium at all time. Plots of the velocity, the density, the pressure and the viscosity coefficients are given in \fig{fig:liquid-phase} and \ref{fig:vapor-phase} for the liquid and gas phases, respectively.
+The two-phase water hammer is identical to the single-phase water hammer described in \sct{sec:two-num-res}: the liquid and vapor phases have the same initial conditions and the liquid void fraction is initially set to $0.5$. The two phases are in interaction through the pressure and velocity relaxation terms (see \eqt{eq:sem-eq}) that are functions of the relaxation coefficients, $\mu_P$ and $\lambda_u$, computed with $A_{int} = 10^3$ $m^{-1}$ so that the two phases achieve pressure and velocity equilibrium at all times. Plots of the velocity, the density, the pressure and the viscosity coefficients are given in \fig{fig:liquid-phase} and \ref{fig:vapor-phase} for the liquid and gas phases, respectively.
 %
 \begin{figure}[H]
         \centering
@@ -493,7 +544,7 @@ The two-phase water-hammer is identical to the single-phase water-hammer describ
                 \caption{Liquid viscosity coefficients}
                 \label{ffig:liq-phase-visc}
         \end{subfigure}
-        \caption{Numerical solutions for the liquid phase of a two-phase water-hammer at times $t=8.7 \times 10^{-4}, \, 6.8 \times 10^{-3} \text{ and } 10^{-3}$ s (the viscosity coefficients are only shown at time $t=8.7 \times 10^{-4}$ s).}\label{fig:liquid-phase}
+        \caption{Numerical solutions for the liquid phase of a two-phase water hammer at times $t=8.7 \times 10^{-4}, \, 6.8 \times 10^{-3} \text{ and } 10^{-3}$ s (the viscosity coefficients are only shown at time $t=8.7 \times 10^{-4}$ s).}\label{fig:liquid-phase}
 \end{figure}
 %
 %
@@ -524,11 +575,11 @@ The two-phase water-hammer is identical to the single-phase water-hammer describ
                 \caption{Gas viscosity coefficients}
                 \label{fig:vap-phase-visc}
         \end{subfigure}
-        \caption{Numerical solutions for the vapor phase of a two-phase water-hammer at times $t=8.7 \times 10^{-4}, \, 6.8 \times 10^{-3} \text{ and } 10^{-3}$ s (the viscosity coefficients are only shown at time $t=8.7 \times 10^{-4}$ s).}\label{fig:vapor-phase}
+        \caption{Numerical solutions for the vapor phase of a two-phase water hammer at times $t=8.7 \times 10^{-4}, \, 6.8 \times 10^{-3} \text{ and } 10^{-3}$ s (the viscosity coefficients are only shown at time $t=8.7 \times 10^{-4}$ s).}\label{fig:vapor-phase}
 \end{figure}
 %
 \fig{fig:liquid-phase} and ~\ref{fig:vapor-phase} show that the numerical solution of the liquid and gas phases do not display any oscillations or instabilities. 
-As expected, the two fluids have the same pressure and velocity profiles as shown in \fig{fig:vap-phase-press}, ~\ref{fig:liq-phase-press} and \fig{fig:vap-phase-vel}, ~\ref{fig:liq-phase-press}, respectively. The shocks coming from the left and right walls are initially well resolved and does not display any instability but lose stiffness over time for the same reason as detailed in \sct{sec:single-num-res}. The density of the liquid and gas phases have different values but experience similar variations. The viscosity coefficients are plotted at time $t = 8.7 \times 10^{-3}$ s only and display two peaks that match the shock positions.
+As expected, the two fluids have the same pressure and velocity profiles as shown in \fig{fig:vap-phase-press}, ~\ref{fig:liq-phase-press} and \fig{fig:vap-phase-vel}, ~\ref{fig:liq-phase-press}, respectively. The shocks coming from the left and right walls are initially well resolved and do not display any instability but lose stiffness over time for the same reason as detailed in \sct{sec:single-num-res}. The density of the liquid and gas phases have different values but experience similar variations. The viscosity coefficients are plotted at time $t = 8.7 \times 10^{-3}$ s and display two peaks that match the shock positions.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -536,7 +587,7 @@ As expected, the two fluids have the same pressure and velocity profiles as show
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-We have presented numerical results of a single and a two-phase water-hammers obtained with the system code RELAP-7. The numerical results show that the Entropy Viscosity Method is capable of stabilizing the schemes and that the viscosity coefficients are well-scaled. This work contributes to the assessment of the stabilization technique for reactor flow problems in RELAP-7.
+We have presented numerical results of single- and a two-phase water hammers obtained with the system code RELAP-7. The numerical results show that the Entropy Viscosity Method is capable of stabilizing the schemes and that the viscosity coefficients are well-scaled. This work contributes to the assessment of the stabilization techniques for reactor flow problems computed with RELAP-7.
 %
 \bibliography{mybibfile}
 \end{document}
