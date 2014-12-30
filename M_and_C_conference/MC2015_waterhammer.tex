@@ -49,7 +49,7 @@
   Texas A\&M University \\
   401 Joe Routt Boulevard, \\
   College Station, TX 77843 \\
-  joshhansel@tamu.edu; jean.ragusa@tamu.edu}
+  delchinm@tamu.edu; jean.ragusa@tamu.edu}
 
 \author{Ray A. Berry}
 \author{Richard Martineau}
@@ -107,7 +107,7 @@ The entropy viscosity technique is a viscous regularization technique where adeq
 that the entropy minimum principle holds. Viscosity coefficients modulates the magnitude of the added dissipation such that it is large in shock regions and vanishingly 
 small elsewhere. The entropy viscosity coefficients are taken proportional to the entropy production while, at the same time, being bounded from above by a first-order 
 viscosity coefficient that reduces the spatial discretization to be similar to a first-order Godunov scheme (the latter being known to be overly dissipative but monotone 
-\cite{you had [12]). Hence, entropy production in shocks will result in large viscosity coefficients and thus will avoid spurious oscillations. In order to solve for 
+\cite{Toro}. Hence, entropy production in shocks will result in large viscosity coefficients and thus will avoid spurious oscillations. In order to solve for 
 low-Mach flows \cite{LowMach1, LowMach2, LowMach3}, the original version of the Entropy Viscosity Method was modified and new definitions of the viscosity coefficients 
 were proposed to ensure well-scaled dissipative terms in the low-Mach asymptotic limit while preserving the capabilities of the method to resolve shocks and discontinuities 
 \cite{Marco_dissertation, Marco_paper_low_mach}. The same approach was used to extend the method to the 7-equation two-phase flow model 
@@ -327,10 +327,10 @@ The positive viscosity coefficients for the liquid phase $\beta_{liq}$, $\mu_{li
 %
 \text{and}
 %
-\tcr{shouldn't it be $\alpha^2$ in the denominator, that is, the entropy function associated with $\alpha$?}
+\tcr{shouldn't it be $\alpha^2$ in the denominator, that is, the entropy function associated with $\alpha$?} \tcb{You are right}
 \begin{equation}
 %\beta_{e,liq}(x,t) =  h^2 \frac{\max \left( | R_{\alpha,liq}(x,t) |, J_{\alpha_{liq}} \right)}{|| \alpha_{liq} - \bar{\alpha}_{liq}||_\infty},
-\beta_{e,liq}(x,t) =  \frac{h ^2 | R_{\alpha,liq}(x,t) |}{|| \alpha^2_{liq} - \bar{\alpha^2_{liq}}||_\infty},
+\beta_{e,liq}(x,t) =  \frac{h ^2 | R_{\alpha,liq}(x,t) |}{|| \alpha^2_{liq}/2 - \bar{\alpha^2_{liq}/2}||_\infty},
 \end{equation}
 where the entropy residual associated to the volume fraction equation is:
 \begin{equation}
