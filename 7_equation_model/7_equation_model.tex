@@ -143,11 +143,12 @@ Finally, we conclude in \sct{sec:conclusion} where we outline possible definitio
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-In this section, we recall the Seven-Equation two-phase flow model and its main mathematical and physical properties.
+In this section, we recall the seven-equation two-phase flow model and discuss some of its main mathematical and physical properties.
 %
 %---------------------------------------------------------------------------------
 \subsection{The system of equations}
 %---------------------------------------------------------------------------------
+
 The Seven-Equation two-phase flow Model employed in this paper is obtained by assuming that each phase satisfies the single-phase Euler equations (with phase-exchange terms) and by integrating the latter over a control volume after multiplication by a phasic characteristic function. The detailed derivation of the governing equations for a phase $k$ in interaction with a phase $j$ can be found in \cite{SEM}. In the SEM, each phase obeys a mass, a momentum and an energy balance equations, supplemented by a non-conservative equation for the void fraction as shown in \eqt{eq:liq-7-eqn-sect5}.
 %
 \begin{subequations}\label{eq:liq-7-eqn-sect5}
@@ -184,6 +185,7 @@ The Seven-Equation two-phase flow Model employed in this paper is obtained by as
 \end{multline}
 \end{subequations}
 %
+\tcr{the $\mathbb{aaa}$ symbol is reserved for rank-2 tensors. Please change to scalar, vector (math mbold), and tensor (mathbb) as appropriate to avoid confusion\\}
 where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the density, the velocity vector and the total specific energy of phase $k$, respectively. The void fraction, mass, momentum and energy exchange terms from phase $k$ to phase $j$ are denoted by the symbols $\mathbb{S}_{k \to j}$, $\Gammakj$, $\mathbb{M}_{k \to j}$ and $\mathbb{E}_{k \to j}$, respectively, are assumed to be determined by the method of rational thermodynamic \cite{Truesdell} and thus will only yield positive terms in the right-hand side of the entropy equation. They also obey to the following closure relations:
 %
 \begin{subequations}\label{eq:exch-terms}
@@ -205,10 +207,10 @@ where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the
 %
 \end{subequations}
 %
+\tcr{indeed, since we give a convention for scalar, vector, tensor here, we should respect it above\\}
 We adopt the standard convention for vectors: consider vector $\mbold{a}$ with entries $(a_i)_{i=1,\ldots,\texttt{dim}}$; $(\mbold{a} \otimes \mbold{b})_{ij}=a_i b_j$;
 $\div \mbold{a}= \partial_{x_j} a_j$; $(\grad \mbold{a})_{ij} = \partial_{x_i} a_j$; for order-2 tensors $\mathbb{g}$, we have $(\div \mathbb{g})_j = \partial_{x_i} g_{ij}$, $(\mathbb{g}\cdot \mbold{a})_i = g_{ij}a_j$, $\mathbb{g}:\mathbb{h} = g_{ij} h_{ij}$; summation is implied whenever an index is repeated. 
 The phasic pressure $P_k$ is computed from an equation of state that is assumed given as a function of the density $\rho_k$ and the phasic internal energy $e_k = E_k - 0.5 u^2_k$. The cross section of the geometry is denoted by $A$ and is only spatially dependent. $A$ is included for completeness of the presentation and is set to 1 in most applications; however, nozzle flow problems can be solved using the one-dimensional version of the equations and by setting $A$ to the cross-sectional area of the nozzle. The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively; they are defined in \eqt{eq:int_variables_def}.
-\tcb{I changed the exchange terms in each of the equations above.} 
 %
 \begin{subequations}
 \label{eq:int_variables_def}
@@ -267,9 +269,9 @@ The set of equations satisfied by phase $j$ are simply obtained by substituting 
 %
 which reduces the number of partial differential equations from eight to seven and yields the Seven-Equation two-phase flow Model. 
 %---------------------------------------------------------------------------------
-\subsection{Some mathematical properties and entropy equation of the SEM without viscous regularization}\label{eq:sem-ent-wv}
+\subsection{Mathematical properties and entropy equation of the SEM without viscous regularization}\label{eq:sem-ent-wv}
 %---------------------------------------------------------------------------------
-Some properties of the Seven-Equation two-phase flow Model are discussed next. A set of $5+2\texttt{dim}$ (with \texttt{dim} the geometry's dimension) waves is present in the model: two acoustic waves per phase, one contact wave per phase per domain dimension, and one void fraction wave propagating at the interfacial velocity $\mbold u_{int}$. These waves (eigenvalues of the Jacobian for the inviscid flux terms) are as follows for each phase $k$:
+Some properties of the seven-equation model are discussed next. A set of $5+2\texttt{dim}$ (with \texttt{dim} the geometry's dimension) waves is present in the model: two acoustic waves per phase, one contact wave per phase per domain dimension, and one void fraction wave propagating at the interfacial velocity $\mbold u_{int}$. These waves (eigenvalues of the Jacobian for the inviscid flux terms) are as follows for each phase $k$:
 % 
 \begin{align}\label{eq:eigenvalues}
 &\lambda_{1,k} = \mbold u_k \cdot \bar{\mbold n} - c_k \nonumber\\
@@ -310,7 +312,7 @@ mechanical equilibrium five-equation model of Kapila \cite{Kapila_2001}.
 %two-phase model does, with sufficiently fine spatial resolution, as
 %confirmed in~\cite{SEM,Herrard_2005}. 
 
-Next, we investigate the sign of the phasic and total entropy equations \emph{without viscous regularization}; the total entropy equation being obtained by summing over the phasic entropy equations. Since the exchange source terms are derived from the rational thermodynamic method \cite{Truesdell}, it is assumed that they will only yield positive terms in the right-hand side of the total entropy equation and thus, can be omitted. Based on the previous assumption, we now consider the SEM model with only pressure and velocity relaxation terms:
+Next, we investigate the sign of the phasic and total entropy equations \emph{without viscous regularization}. The total entropy equation is simply obtained by summing over the phasic entropy equations. Since the exchange source terms are derived from the rational thermodynamic method \cite{Truesdell}, it is assumed that they will only yield positive terms in the right-hand side of the total entropy equation and thus, can be omitted. Thus, we consider hereafter the SEM model with only pressure and velocity relaxation terms:
 \begin{subequations}\label{eq:liq-7-eqn-sect5_no_exchange}
 \begin{align}
   % liquid void fraction
@@ -345,7 +347,7 @@ An entropy equation can be derived for each phase $k$ of system \eqt{eq:liq-7-eq
 %
 and the sign of the entropy material derivative can be proved positive. The entropy function for a phase $k$ is denoted by $s_k$ and is a function of density $\rho_k$ and internal energy $e_k$. The full derivation is given in \app{app:sev-equ-model-entropy} and only the final result is recalled here. The entropy of phase $k$ satisfies the following equation
 %
-\begin{align}\label{eq:ent-eqn-7-eqn-model}
+\begin{align} \label{eq:ent-eqn-7-eqn-model}
 (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} &= \mu_P \frac{Z_k}{Z_k+Z_j} (P_j - P_k)^2 + \lambda_u \frac{Z_j}{Z_k+Z_j} (\mbold u_j -\mbold  u_k)^2 \nonumber
 \\
 & \| \grad \alpha_k \| \frac{Z_k}{\left( Z_k+Z_j \right)^2} \left[ Z_j (\mbold u_j-\mbold u_k)+\frac{\grad \alpha_k}{\| \grad \alpha_k \|}(P_k-P_j)\right]^2 \ ,
@@ -353,19 +355,20 @@ and the sign of the entropy material derivative can be proved positive. The entr
 %
 where $\frac{D(\cdot) }{Dt} = \partial_t (\cdot) + \mbold u_k \cdot \grad (\cdot)$ is the material derivative.
 The right-hand side of \eqt{eq:ent-eqn-7-eqn-model} is unconditionally positive since all terms are squared. Furthermore, 
-the partial derivative of $s_k$ with respect to the internal energy $e_k$, denoted by $(s_e)_k$, is shown to be equal to the inverse of the temperature of phase $k$, as in the case of the single phase Euler equations \cite{jlg, Marco_dissertation}. At the location of entropy minimum, $\grad s_k =0$ by definition. Therefore, we conclude  that the minimum entropy principle stated below, holds:
+the partial derivative of $s_k$ with respect to the internal energy $e_k$, denoted by $(s_e)_k$, is shown to be equal to the inverse of the temperature of phase $k$, as in the case of the single phase Euler equations \cite{jlg, Marco_dissertation}. At the location of entropy minimum, $\grad s_k =0$ by definition. Therefore, we conclude  that the minimum entropy principle stated below holds:
 %
-\begin{equation}
+\begin{equation} \label{eq:entro-min-def}
 \inf_{\mbold x \in \mathbb{R}^{\texttt{dim}}} s_k(\mbold x ,t) \ge \inf_{\mbold x \in \mathbb{R}^{\texttt{dim}}} s_k(\mbold x ,t=0) 
 \end{equation}
 %
-(with $\texttt{dim}$ the problem's dimension). \eqt{eq:ent-eqn-7-eqn-model} is valid for both phases $\left\{k, j\right\}$, ensuring positivity of the total entropy equation obtained by summation over the phases:
+% (with $\texttt{dim}$ the problem's dimension). 
+\eqt{eq:ent-eqn-7-eqn-model} is valid for both phases $\left\{k, j\right\}$, ensuring positivity of the total entropy equation obtained by summation over the phases:
 %
 \begin{equation}\label{eq:tot-ent-res-sct4}
 \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} = \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \left( \partial_t s_k + \mbold u_k \cdot \grad s_k \right) \geq 0  .
 \end{equation}
 %
-From a physical prospective, \eqt{eq:tot-ent-res-sct4} tells us that the total entropy of the system increases as a function of time. From a numerical prospective, the pressure and velocity relaxation terms add dissipation to the system of equations.
+From a physical point of view, \eqt{{eq:entro-min-def}} and \eqt{eq:tot-ent-res-sct4} state that the total entropy of the system increases as a function of time. From a numerical perspective, the pressure and velocity relaxation terms add dissipation to the system of equations (see \eqt{eq:ent-eqn-7-eqn-model}).
 
 Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates to the single-phase entropy equation obtained for the single-phase Euler equations \cite{SEM, Marco_dissertation}.
 
