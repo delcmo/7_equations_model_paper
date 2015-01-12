@@ -601,6 +601,7 @@ Finally, using \eqts{eq:def_visc}, the term $\mathcal{R}_0$ can be recast as a f
 %
 The entropy residual equation can now be written in its final form:
 %
+\tcr{check sign. If Q is def negative, then I think we need $-$\\}
 \begin{multline}\label{eq:ent-res-7-eqn-diss-terms3}
 \alpha_k \rho_k A \frac{Ds_k}{Dt} =  \mbold f_k \cdot \grad s_k + \div \left( \alpha_k A \rho_k \kappa_k  \grad s_k \right)  \\
 \tcr{-} \alpha_k \rho_k A \kappa_k Q_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k,
@@ -635,12 +636,12 @@ Because the terms on the right-hand-side of \eqt{eq:ent-res-7-eqn-diss-terms3} h
 Recall that the above entropy minimum principle holds {\it independently} of the definition of the dissipative term $\mbold l_k$
 in the void fraction equation. We now provide a possible expression for $\mbold l_k$.
 %
-Consider the void fraction equation \eqt{eq:sev_equ-with-diss-terms-vf}. It is an hyperbolic equation
-whose eigenvalue (speed) is $\mbold u_{int}$. An entropy equation can be derived \tcr{for the equation alone} 
+Consider only the void fraction equation, \eqt{eq:sev_equ-with-diss-terms-vf}. It is an hyperbolic equation
+whose eigenvalue (speed) is $\mbold u_{int}$. An entropy relation can be derived \tcr{for that equation alone} (by multiplying it by $\alpha_k$)
 and used to prove the entropy minimum principle by properly choosing the dissipative term.
-\tcr{I remove positivity because I do not think we prove that by adding any viscosity; it can only be proven for 1st order viscosity}% , the goal being to ensure positivity of the void fraction and also uniqueness of the weak solution. 
+%\tcr{I remove positivity because I do not think we prove that by adding any viscosity; it can only be proven for 1st order viscosity}% , the goal being to ensure positivity of the void fraction and also uniqueness of the weak solution. 
 Following
-the work of Guermond et al. in \cite{jlg1, jlg2}, it can be shown that a dissipative term ensuring \tcr{?positivity?} and
+the work of Guermond et al. for linear advection and Burgers' equations \cite{jlg1, jlg2}, it can be shown that a dissipative term ensuring 
 uniqueness of the weak solution for the void fraction equation, is of the form $\mbold l_k = \beta_k A \grad \alpha_k $, where $\beta_k$
 is a positive viscosity coefficient. The dissipative term is proportional to the area $A$ for consistency with the other terms of the void fraction equation \eqt{eq:sev_equ-with-diss-terms-vf}.
 
