@@ -156,7 +156,7 @@ The Seven-Equation two-phase flow Model employed in this paper is obtained by as
   % liquid void fraction
   \label{eqn:multi-d-7-eqn-liq-vol}
   \frac{\partial \alpha_{k} A}{\partial t} + A\mbold u_{int} \cdot \grad \alpha_{k}
-  &= A \mu_P (P_{k} - P_{j}) - \mathbb{S}_{k\to j} \,,
+  &= A \mu_P (P_{k} - P_{j}) - S_{k\to j} \,,
 \end{align}
 \begin{align}
   % liquid mass conservation
@@ -172,7 +172,7 @@ The Seven-Equation two-phase flow Model employed in this paper is obtained by as
   = P_{int} A \grad \alpha_{k} + P_{k} \alpha_{k} \grad A
   \\
   + A \lambda_u (\mbold u_{j} - \mbold u_{k})
-  - \mathbb{M}_{k \to j} \,,
+  - M_{k \to j} \,,
 \end{multline}
 \begin{multline}
   % liquid total energy
@@ -181,16 +181,16 @@ The Seven-Equation two-phase flow Model employed in this paper is obtained by as
   = P_{int} A \mbold u_{int} \cdot \grad \alpha_{k} - \bar{P}_{int} A \mu_P (P_{k} - P_{j})
   \\
   + A \lambda_u \bar{\mbold u}_{int} \cdot (\mbold u_{j} - \mbold u_{k})
-  - \mathbb{E}_{k \to j}  \,,
+  - E_{k \to j}  \,,
 \end{multline}
 \end{subequations}
 %
-\tcr{the $\mathbb{aaa}$ symbol is reserved for rank-2 tensors. Please change to scalar, vector (math mbold), and tensor (mathbb) as appropriate to avoid confusion\\}
-where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the density, the velocity vector and the total specific energy of phase $k$, respectively. The void fraction, mass, momentum and energy exchange terms from phase $k$ to phase $j$ are denoted by the symbols $\mathbb{S}_{k \to j}$, $\Gammakj$, $\mathbb{M}_{k \to j}$ and $\mathbb{E}_{k \to j}$, respectively, are assumed to be determined by the method of rational thermodynamic \cite{Truesdell} and thus will only yield positive terms in the right-hand side of the entropy equation. They also obey to the following closure relations:
+\tcr{the $\mathbb{aaa}$ symbol is reserved for rank-2 tensors. Please change to scalar, vector (math mbold), and tensor (mathbb) as appropriate to avoid confusion\\} \tcb{done}
+where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the density, the velocity vector and the total specific energy of phase $k$, respectively. The void fraction, mass, momentum and energy exchange terms from phase $k$ to phase $j$ are denoted by the symbols $\mathbb{S}_{k \to j}$, $\Gammakj$, $M_{k \to j}$ and $E_{k \to j}$, respectively, are assumed to be determined by the method of rational thermodynamic \cite{Truesdell} and thus will only yield positive terms in the right-hand side of the entropy equation. They also obey to the following closure relations:
 %
 \begin{subequations}\label{eq:exch-terms}
 \begin{equation}
-\mathbb{S}_{1 \to 2} + \mathbb{S}_{2 \to 1} = 0 \, ,
+S_{1 \to 2} + S_{2 \to 1} = 0 \, ,
 \end{equation}
 %
 \begin{equation}
@@ -198,16 +198,16 @@ where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the
 \end{equation}
 %
 \begin{equation}
-\mathbb{M}_{1 \to 2} + \mathbb{M}_{2 \to 1} = 0 \, ,
+M_{1 \to 2} + M_{2 \to 1} = 0 \, ,
 \end{equation}
 %
 \begin{equation}
-\mathbb{E}_{1 \to 2} + \mathbb{E}_{2 \to 1} = 0 \, .
+E_{1 \to 2} + E_{2 \to 1} = 0 \, .
 \end{equation}
 %
 \end{subequations}
 %
-\tcr{indeed, since we give a convention for scalar, vector, tensor here, we should respect it above\\}
+\tcr{indeed, since we give a convention for scalar, vector, tensor here, we should respect it above\\} \tcb{ok}
 We adopt the standard convention for vectors: consider vector $\mbold{a}$ with entries $(a_i)_{i=1,\ldots,\texttt{dim}}$; $(\mbold{a} \otimes \mbold{b})_{ij}=a_i b_j$;
 $\div \mbold{a}= \partial_{x_j} a_j$; $(\grad \mbold{a})_{ij} = \partial_{x_i} a_j$; for order-2 tensors $\mathbb{g}$, we have $(\div \mathbb{g})_j = \partial_{x_i} g_{ij}$, $(\mathbb{g}\cdot \mbold{a})_i = g_{ij}a_j$, $\mathbb{g}:\mathbb{h} = g_{ij} h_{ij}$; summation is implied whenever an index is repeated. 
 The phasic pressure $P_k$ is computed from an equation of state that is assumed given as a function of the density $\rho_k$ and the phasic internal energy $e_k = E_k - 0.5 u^2_k$. The cross section of the geometry is denoted by $A$ and is only spatially dependent. $A$ is included for completeness of the presentation and is set to 1 in most applications; however, nozzle flow problems can be solved using the one-dimensional version of the equations and by setting $A$ to the cross-sectional area of the nozzle. The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively; they are defined in \eqt{eq:int_variables_def}.
@@ -601,10 +601,10 @@ Finally, using \eqts{eq:def_visc}, the term $\mathcal{R}_0$ can be recast as a f
 %
 The entropy residual equation can now be written in its final form:
 %
-\tcr{check sign. If Q is def negative, then I think we need $-$\\}
+\tcr{check sign. If Q is def negative, then I think we need $-$\\} \tcb{you are right}
 \begin{multline}\label{eq:ent-res-7-eqn-diss-terms3}
 \alpha_k \rho_k A \frac{Ds_k}{Dt} =  \mbold f_k \cdot \grad s_k + \div \left( \alpha_k A \rho_k \kappa_k  \grad s_k \right)  \\
-\tcr{-} \alpha_k \rho_k A \kappa_k Q_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k,
+- \alpha_k \rho_k A \kappa_k Q_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k,
 \end{multline}
 %
 where $Q_k$ is 
