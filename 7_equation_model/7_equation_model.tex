@@ -122,7 +122,7 @@ is consistent with the viscous regularization for Euler equations when one phase
 %
 Compressible two-phase fluid flows are found in numerous industrial applications. Their numerical solution is an ongoing area of research in modeling and simulation. A variety of two-phase models, with different levels of complexity, has been developed; for instance, the five-equation model of Kapila \cite{Kapila_2001}, the six-equation model \cite{Toumi_1996}, and more recently the Seven-Equation Model  (SEM)\cite{SEM}. These models are all obtained by integrating the one-phase flow balance equations weighed by a characteristic or indicator function for each phase. The resulting system of equations contains non-conservative terms and relaxation terms that describe the interaction between phases, supplemented by an equation for the void fraction. 
 %Once a system of equations describing the physics is derived, the next challenging step is to develop a robust and accurate discretization to obtain a numerical solution. 
-The systems of two-phase flow equations are usually solved using discontinuous discretization schemes (finite volume and discontinuous Galerkin approaches). By assuming that the system of equations is hyperbolic, an \tcr{exact} Riemann solver could be used but is often ruled out because of its complexity due to the number of equations involved. Instead, approximate Riemann solvers, a well-established approach for single-phase flows, are employed \cite{Saurel_2001a, Saurel_2001b, Li_2004, Zein_2010, Ambroso_2012},  while ensuring the correct low-Mach asymptotic limit and deriving a consistent discretization scheme for the non-conservative terms \cite{Li_2004, Abgrall_2002}.
+The systems of two-phase flow equations are usually solved using discontinuous discretization schemes (finite volume and discontinuous Galerkin approaches). By assuming that the system of equations is hyperbolic, an exact Riemann solver could be used but is often ruled out because of its complexity due to the number of equations involved. Instead, approximate Riemann solvers, a well-established approach for single-phase flows, are employed \cite{Saurel_2001a, Saurel_2001b, Li_2004, Zein_2010, Ambroso_2012},  while ensuring the correct low-Mach asymptotic limit and deriving a consistent discretization scheme for the non-conservative terms \cite{Li_2004, Abgrall_2002}.
 %
 %For example, Saurel et al. \cite{Saurel_2001a, Saurel_2001b} employed a HLL-type scheme to solve for the SEM but noted that excessive dissipation was added to the contact discontinuity. A more advanced HLLC-type scheme was developed in \cite{Li_2004} but only for the subsonic case and then extended to supersonic flows in \cite{Zein_2010}. More recently, Ambroso et al. \cite{Ambroso_2012} proposed an approximate Riemann solver accounting for source terms such as gravity and drag forces, but with no interphase mass transfer. Furthermore, careless approximation for the treatment of the non-conservative terms can lead to failure in computing the numerical solution \cite{Abgrall_2002}. 
 
@@ -172,7 +172,7 @@ The Seven-Equation two-phase flow Model employed in this paper is obtained by as
   = P_{int} A \grad \alpha_{k} + P_{k} \alpha_{k} \grad A
   \\
   + A \lambda_u (\mbold u_{j} - \mbold u_{k})
-  - M_{k \to j} \,,
+  - \mbold M_{k \to j} \,,
 \end{multline}
 \begin{multline}
   % liquid total energy
@@ -185,7 +185,7 @@ The Seven-Equation two-phase flow Model employed in this paper is obtained by as
 \end{multline}
 \end{subequations}
 %
-\tcr{the $\mathbb{aaa}$ symbol is reserved for rank-2 tensors. Please change to scalar, vector (math mbold), and tensor (mathbb) as appropriate to avoid confusion\\} \tcb{done} \\ \tcr{you still had Gamma in bold. I changed the definition of the Gammakj command\\ Finally, the M exchange term should be a vector (bold) I believe\\}
+\tcr{the $\mathbb{aaa}$ symbol is reserved for rank-2 tensors. Please change to scalar, vector (math mbold), and tensor (mathbb) as appropriate to avoid confusion\\} \tcb{done} \\ \tcr{you still had Gamma in bold. I changed the definition of the Gammakj command\\ Finally, the M exchange term should be a vector (bold) I believe\\} \tcb{done}
 where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the density, the velocity vector and the total specific energy of phase $k$, respectively. The void fraction, mass, momentum and energy exchange terms from phase $k$ to phase $j$ are denoted by the symbols $\mathbb{S}_{k \to j}$, $\Gammakj$, $M_{k \to j}$ and $E_{k \to j}$, respectively, are assumed to be determined by the method of rational thermodynamic \cite{Truesdell} and thus will only yield positive terms in the right-hand side of the entropy equation. They also obey to the following closure relations:
 %
 \begin{subequations}\label{eq:exch-terms}
@@ -194,11 +194,11 @@ S_{1 \to 2} + S_{2 \to 1} = 0 \, ,
 \end{equation}
 %
 \begin{equation}
-\mathbb{\Gamma}_{1 \to 2} + \mathbb{\Gamma}_{2 \to 1} = 0 \, ,
+\Gamma_{1 \to 2} + \Gamma_{2 \to 1} = 0 \, ,
 \end{equation}
 %
 \begin{equation}
-M_{1 \to 2} + M_{2 \to 1} = 0 \, ,
+\mbold M_{1 \to 2} + \mbold M_{2 \to 1} = 0 \, ,
 \end{equation}
 %
 \begin{equation}
@@ -636,7 +636,7 @@ Recall that the above entropy minimum principle holds {\it independently} of the
 in the void fraction equation. We now provide a possible expression for $\mbold l_k$.
 %
 Consider only the void fraction equation, \eqt{eq:sev_equ-with-diss-terms-vf}. It is an hyperbolic equation
-whose eigenvalue (speed) is $\mbold u_{int}$. An entropy relation can be derived \tcr{for that equation alone} (by multiplying it by $\alpha_k$)
+whose eigenvalue (speed) is $\mbold u_{int}$. An entropy relation can be derived for that equation alone (by multiplying it by $\alpha_k$)
 and used to prove the entropy minimum principle by properly choosing the dissipative term.
 %\tcr{I remove positivity because I do not think we prove that by adding any viscosity; it can only be proven for 1st order viscosity}% , the goal being to ensure positivity of the void fraction and also uniqueness of the weak solution. 
 Following
@@ -646,7 +646,7 @@ is a positive viscosity coefficient. The dissipative term is proportional to the
 
 All of the dissipative terms are now defined and recalled here:
 %
-\tcr{in the definition of f, A should not be there in front of l because A is already in l}
+\tcr{in the definition of f, A should not be there in front of l because A is already in l} \tcb{you are right}
 \begin{subequations}\label{eq:visc-reg-7-equ-sect4}
 \begin{align}
   \mbold l_k &= \beta_k A \grad \alpha_k 
@@ -654,9 +654,9 @@ All of the dissipative terms are now defined and recalled here:
 \begin{align}
   \mbold f_k &= \alpha_k A \kappa_k \grad \rho_k + \rho_k  \mbold l_k 
 \end{align}
-\tcr{this is not complete for g. I think it is missing u cross f on the RHS, or should it be f cross u? Please check}
+\tcr{this is not complete for g. I think it is missing u cross f on the RHS, or should it be f cross u? Please check} \tcb{you are right. It is f cross u}
 \begin{align}
-\mathbb{g}_k &= \alpha_k A \mu_k \rho_k \grad^s \mbold u_k + \mbold u_k \otimes \mbold f_k 
+\mathbb{g}_k &= \alpha_k A \mu_k \rho_k \grad^s \mbold u_k + \mbold f_k \otimes \mbold u_k 
 \end{align}
 \begin{align}
   \mbold h_k &=  \alpha_k A \kappa_k \grad \left( \rho e \right)_k  - \frac{\| \mbold u_k \|^2}{2} \mbold f_k + (\rho e)_k \mbold l_k 
@@ -776,7 +776,7 @@ Note that the Ideal Gas equations of state can be recovered by letting $P_{k,\in
 \subsection{Derivation of the non-dimensionalized  seven-equation two-phase flow model}\label{sec:scaled-SEM}
 %------------------------------------------------------------------------------------------------------
 %Developing a numerical method for fluid equations require to investigate the low-Mach asymptotic limit. In this particular limit, numerical methods developed for transonic and supersonic flows usually fail due to ill-scaled dissipative terms. A fix can be found by performing a low-Mach asymptotic limit to ensure well-scaled dissipative terms \cite{LowMach1, LowMach2, LowMach3}. Then, it is proposed to perform a low-Mach asymptotic limit to derive a definition for the phasic normalization parameters introduced in \sct{sec:visc-coeff-sem}. 
-We consider the case where the relaxation coefficients are set to zero, that is, \tcr{any justification for doing this?}
+We consider the case where the relaxation coefficients are set to zero, that is, \tcr{any justification for doing this?} \tcb{you cannot do it with the relaxation terms and this is how it is done in the other papers}
 %Two limit $1$-D cases are considered: the relaxation coefficients are set (i) to very large values and (ii) to zero. In the later case, 
 the two phases do not interact. Thus, the seven-equation model degenerates to two sets of Euler equations with a pseudo cross-sectional area $\alpha_k A$. 
 %In the former case, the infinite relaxation coefficients make the seven-equation two-phase model degenerates into the five-equation model of Kapila by ensuring pressure and velocity equilibrium. 
@@ -802,18 +802,19 @@ The first step in the study of the two limit cases (a) and (b) is to re-write ea
 \rho_k^*   = \frac{\rho_k}{\rho_{k,\infty}}           ,\
 u_k^*      = \frac{\mbold u_k}{u_{k,\infty}}                 ,\
 P_k^*      = \frac{P_k}{\rho_{k,\infty} c^2_{k,\infty}}   ,\
-E_k^*      = \frac{E_k}{c^2_{k,\infty} }              ,\
-x^* = \frac{x}{L_\infty}                      ,\\
+E_k^*      = \frac{E_k}{c^2_{k,\infty} }              , \\
+\alpha_k^*      = \frac{\alpha_k}{\alpha^2_{k,\infty} }              , \
+x^* = \frac{x}{L_\infty}                      ,\
 t_k^* = \frac{t_k}{L_\infty / u_{k,\infty}}           ,\
 \mu_k^*    = \frac{\mu_k}{\mu_{k,\infty}}             ,\
-\kappa_k^* = \frac{\kappa_k}{\kappa_{k,\infty}}       ,\
-P_{int}^*    = \frac{P_{int}}{P_{int,\infty}}             ,\\
+\kappa_k^* = \frac{\kappa_k}{\kappa_{k,\infty}}       ,\\
+P_{int}^*    = \frac{P_{int}}{P_{int,\infty}}             ,\
 u_{int}^* = \frac{\mbold u_{int}}{u_{int,\infty}}       ,\
 \bar{P}_{int}^*    = \frac{\bar{P}_{int}}{\bar{P}_{int,\infty}}             ,\
 \bar{u}_{int}^* = \frac{\bar{u}_{int}}{\bar{u}_{int,\infty}}       ,\
 \end{multline}
 %
-\tcr{later I see $\alpha^*$ but it is not defined here. There is no $\alpha_\infty$\\}
+\tcr{later I see $\alpha^*$ but it is not defined here. There is no $\alpha_\infty$\\} \tcb{done}
 where  the subscript $\infty$ denote the far-field or stagnation quantities and the superscript $*$ stands for the non-dimensional variables. The far-field reference quantities are chosen such that the dimensionless flow quantities are of order 1. The stagnation quantities for the pressure and velocity interfacial variables will be specified for each case. The reference phasic Mach number is given by
 %
 \begin{equation}
@@ -848,25 +849,25 @@ With this assumption and the scaling introduced in \eqt{eq:norm_param}, the scal
 \begin{subequations}\label{eq:sev_equ_case_one_scaled}
 %
 \begin{align}\label{eq:sev_equ-with-diss-terms-vf_case_one_scaled}
-\partial_{t^*} \left( \alpha_k  A\right)^* + A^* \mbold u_k^* \cdot \grad^* \alpha_k^* =  \frac{1}{\Pe_{k,\infty}^\beta} \grad^* \cdot \left( A \beta_k \grad^* \alpha_k \right)^*
+\partial_{t^*} \left( \alpha_k  A\right)^* + A^* \mbold u_k^* \cdot \grad^* \alpha_k^* =  \frac{1}{\Pe_{k,\infty}^\beta} \grad^* \cdot \left( A \beta_k \grad \alpha_k \right)^*
 \end{align}
 %
-\tcr{alpha is missing in the first term on the RHS of the continuity eq. below. Please, review all equations carefully}
+\tcr{alpha is missing in the first term on the RHS of the continuity eq. below. Please, review all equations carefully}\tcb{ok}
 \begin{multline}\label{eq:sev_equ-with-diss-terms-cont_case_one_scaled}
-\partial_{t^*} \left( \alpha_k \rho_k A \right)^* + \grad^* \cdot \left( \alpha_k \rho_k \mbold u_k A \right)^* = \\ \frac{1}{\Pe^\kappa_{k,\infty}}\grad^* \cdot \left(A \kappa_k \alpha_k \grad^* \rho_k \right)^* +
-\frac{1}{\Pe_{k,\infty}^\beta} \grad^* \cdot \left( A \beta_k \rho_k \grad^* \alpha_k \right)^*
+\partial_{t^*} \left( \alpha_k \rho_k A \right)^* + \grad^* \cdot \left( \alpha_k \rho_k \mbold u_k A \right)^* = \\ \frac{1}{\Pe^\kappa_{k,\infty}}\grad^* \cdot \left(A \kappa_k \alpha_k \grad \rho_k \right)^* +
+\frac{1}{\Pe_{k,\infty}^\beta} \grad^* \cdot \left( A \beta_k \rho_k \grad \alpha_k \right)^*
 \end{multline}
-\tcr{also, how about not writing $\grad^* \cdot \left( a \grad^* b \right)^*$, the $^*$ is doubled for the inner gradient, but replacing as $\grad^*\cdot \left( a^* \grad^* b^*\right)$}
+\tcr{also, how about not writing $\grad^* \cdot \left( a \grad^* b \right)^*$, the $^*$ is doubled for the inner gradient, but replacing as $\grad^*\cdot \left( a^* \grad^* b^*\right)$} \tcb{What about $\grad^*\cdot \left( a \grad b\right)^*$}
 %
 \begin{multline}\label{eq:sev_equ-with-diss-terms-mom_case_one_scaled}
 \partial_{t^*} \left( \alpha_k \rho_k u_k A \right)^* + \grad^* \cdot \left[ \alpha_k A \left( \rho_k \mbold u_k \otimes \mbold u_k\right)\right]^* + \frac{A \alpha_k^*}{M^2_{k,\infty}}\grad^* P_k^* = \\
   \frac{1}{M^2_{k,\infty}} \alpha_k^* P^*_k \grad^* A^* 
 + \frac{1}{M^2_{k,\infty}} P_k^* A^* \grad^* \alpha_k^* 
 + \frac{1}{\Re_{k,\infty}}\grad^* \cdot \left( A \alpha_k \mu_k \rho_k \grad^s \mbold u_k \right)^* \\ 
-+ \frac{1}{\Pe_{k,\infty}^\kappa} \grad^* \cdot\left( A \alpha_k \kappa_k  \mbold u_k \tcr{\otimes} \grad^* \rho_k \right)^* 
-+ \frac{1}{\Pe_{k,\infty}^\beta} \grad^* \cdot \left( A \beta_k \rho_k \mbold u_k \tcr{\otimes} \grad \alpha_k \right)^*
++ \frac{1}{\Pe_{k,\infty}^\kappa} \grad^* \cdot\left( A \alpha_k \kappa_k \grad \rho_k \otimes \mbold u_k \right)^* 
++ \frac{1}{\Pe_{k,\infty}^\beta} \grad \cdot \left( A \beta_k \rho_k \grad \alpha_k \otimes \mbold u_k \right)^*
 \end{multline}
-\tcr{order of $\otimes$ in the above?}
+\tcr{order of $\otimes$ in the above?}\tcb{I checked it}
 %
 \begin{multline}\label{eq:sev_equ-with-diss-terms-ener_case_one_scaled}
 \alpha_k^* A^* \left[ \partial_t \left(  \rho_k E_k \right) + \mbold u_k \cdot \grad^* \left( \rho_k E_k \right) \right]^*+  \alpha_k \grad^* \cdot \left(A \mbold u_k P_k \right) + \rho_k^* E_k^* \alpha_k^* \grad^* \cdot \left( \mbold u A \right)_k^* = \\
@@ -874,11 +875,11 @@ With this assumption and the scaling introduced in \eqt{eq:norm_param}, the scal
 + \frac{M^2_{k,\infty}}{\Pe_{k,\infty}^\kappa} \grad^* \cdot \left( A\alpha_k \kappa_k \frac{||\mbold u_k||^2}{2} \grad \rho \right)^*  \\
 + \frac{M^2_{k,\infty}}{\Re_{k,\infty}} \grad^* \cdot \left( A \alpha_k \mu_k \rho_k \mbold u_k : \grad^s \mbold u_k\right)^* 
 + \frac{1}{\Pe_{k,\infty}^\beta } \grad \left( \rho_k e_k \right)^* \cdot \left(A \beta_k \grad \alpha_k \right)^* \\ 
-\tcr{+} \frac{M_{k,\infty}^2}{\Pe_{k,\infty}^\beta} \rho_k \frac{|| \mbold u_k^2 ||}{2} \div \left( \beta_k A \grad \alpha_k \right)
+\tcb{+} \frac{M_{k,\infty}^2}{\Pe_{k,\infty}^\beta} \rho_k \frac{|| \mbold u_k^2 ||}{2} \div \left( \beta_k A \grad \alpha_k \right)
 \end{multline}
-\tcr{shouldn't the $-$ be a $+$? $h = \alpha A k \grad (\rho e) -u^2/2 f$ and $g=A\mu \alpha \rho \grad u + uf$\\
-Thus, $h+ug =  \alpha A k \grad (\rho e) \textcolor{green}{+}u^2/2 f + A\mu \alpha \rho \grad u$\\ \vspace{1mm} \\
-Furthermore, why is $\rho u^2/2$ outside of the divergence i the very last term?\\}
+\tcr{shouldn't the $-$ be a $+$? $h = \alpha A k \grad (\rho e) -u^2/2 f +  \tcb{\rho e l}$ and $g=A\mu \alpha \rho \grad u + uf$\\
+Thus, $h+ug =  \alpha A k \grad (\rho e) \textcolor{green}{+}u^2/2 f + A\mu \alpha \rho \grad u + \tcb{\rho e l}$\\ \vspace{1mm} \\
+Furthermore, why is $\rho u^2/2$ outside of the divergence i the very last term?\\} \tcb{it is a + and $\rho u^2$ is outside the divergence because we are using the non-conservative form of the energy equation}
 %
 \end{subequations}
 %
@@ -894,7 +895,7 @@ where the phasic numerical Reynolds ($\Re_{k,\infty})$ represents the ratio of f
 Note that the phasic energy equation was recast in a non-conservative form by using the void fraction equation (\eqt{eq:sev_equ-with-diss-terms-vf_case_one_scaled}) to facilitate subsequent derivations of the divergence-free nature of the velocity field in the low-Mach asymptotic regime.
 The numerical Reynolds and P\'eclet numbers defined in \eqt{eq:ref_numb} are related to the phasic entropy 
 viscosity coefficients $\mu_{k,\infty}$, $\kappa_{k,\infty}$ and $\beta_{k,\infty}$. Thus, once a scaling (in terms of powers of $M_{k,\infty}$) 
-is obtained for $\Re_{k,\infty}$, $\Pe_{k,\infty}^\kappa$, and $\Pe_{k,\infty}^\beta$ in the two limit cases (a) and (b), it will impose a condition onto the definition of the phasic viscosity coefficients $\mu_k$, $\kappa_k$ and $\beta_k$. For brevity, the superscripts $^*$ are omitted in the remainder of this section.  \tcr{to be clearer, should it be "`remainder of section 4"'?}
+is obtained for $\Re_{k,\infty}$, $\Pe_{k,\infty}^\kappa$, and $\Pe_{k,\infty}^\beta$ in the two limit cases (a) and (b), it will impose a condition onto the definition of the phasic viscosity coefficients $\mu_k$, $\kappa_k$ and $\beta_k$. For brevity, the superscripts $^*$ are omitted in the remainder of this section.  \tcr{to be clearer, should it be "`remainder of section 4"'?} \tcb{I am not sure what you mean}
 
 %------------------------------------------------------------------------------------------------------
 \subsection{Scaling of $\Re_{k,\infty}$, $\Pe_{k,\infty}^\kappa$ and $\Pe_{k,\infty}^\beta$ in the low-Mach asymptotic regime (case (a))}\label{sec:low-Mach-sem}
@@ -965,17 +966,17 @@ where the notation $(fg)_0$ means that we only keep the 0$^{\text{th}}$-order te
 % 
 Using \eqt{eq:leading_order_sgeos}, the energy equation can be recast as a function of the leading-order pressure, $P_0$, as follows:
 %
-\tcr{I cannot go from 35d to 37. The $\gamma$ and the $\gamma-1$ do not make sense. Something must be wrong}
+\tcr{I cannot go from 35d to 37. The $\gamma$ and the $\gamma-1$ do not make sense. Something must be wrong} \tcb{I fixed it}
 \begin{multline}\label{eq:asympt_equ3_ener}
-A \alpha_{k,0} \left[ \partial_t  P_k  + (\gamma_k-1)\mbold u_k \cdot \grad  P_k \right]_0 + \\ (\gamma_k-1) \alpha_{k,0} \div \left[ A \mbold u_k P_k \right]_0 +
-\alpha_{k,0} \left( P_{k,0} + \gamma_k P_{k\infty} \right) \div \left( \mbold u_k A\right)_0 = \\
+A \alpha_{k,0} \left[ \partial_t  P_k  + \mbold u_k \cdot \grad  P_k \right]_0 + \\  \alpha_{k,0} \div \left[ A \mbold u_k P_k \right]_0 +
+\alpha_{k,0} \gamma_k \left( P_{k,0} +alpha is  P_{k\infty} \right) \div \left( \mbold u_k A\right)_0 = \\
 \left[ \div(A \alpha_k \kappa_k \grad P_k)_0 + A \beta_{k,0} \grad P_{k,0} \cdot \grad \alpha_{k,0} \right]  \,.
 \end{multline}
 %
 From \eqt{eq:asympt_equ1_cont}, we infer that $P_0$ is spatially constant. Thus, \eqt{eq:asympt_equ3_ener} becomes
 %
 \begin{equation}\label{eq:div_free_energy}
-\frac{A}{\gamma\left( P_{k,0} + P_{k,\infty} \right)} \frac{d P_0}{dt} = - \div \left( \mbold u_k A \right)_0 
+\frac{ A}{\gamma_k\left( P_{k,0} + P_{k,\infty} \right)} \frac{d P_{k,0}}{dt} = - \div \left( \mbold u_k A \right)_0 
 \end{equation}
 %
 and, at steady state, we have the divergence-free constraint on velocity
@@ -988,7 +989,7 @@ and, at steady state, we have the divergence-free constraint on velocity
 That is, the leading-order of the product of velocity and cross section is divergence-free, which reduces to the standard divergence-free velocity field for a constant area $A$, $\div \mbold u_{k,0}=0$. Finally, recall that \eqt{eq:div_free_energy} was written for the stiffened gas law; to retrieve standard result for the ideal gas law, simply set $P_{k,\infty}=0$. For the ideal gas law with a constant cross section, the previous result can be expressed as
 %
 \begin{equation}
-\frac{1}{\gamma P_{k,0}} \frac{d P_0}{dt} = - \div\mbold u_{k,0} 
+\frac{1}{\gamma P_{k,0}} \frac{d P_{k,0}}{dt} = - \div\mbold u_{k,0} 
 \end{equation}
 %
 The same reasoning can be applied to the leading-order 
