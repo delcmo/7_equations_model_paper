@@ -710,7 +710,7 @@ This particular choice of viscous regularization is analogous to the parabolic r
     
 \item{Compatibility of the viscous regularization proposed in \eqt{eq:visc-reg-7-equ-sect4} with the generalized entropies identified in Harten et al. \cite{Harten} is demonstrated in \app{app:harden}. } 
 
-\tcb{ \item{We could add a paragraph explaining that the above viscous regularization can also be used for the five-equation model of Kapila with some very light modifications.} \tcr{yes}}
+\tcb{ \item{We could add a paragraph explaining that the above viscous regularization can also be used for the five-equation model of Kapila with some very light modifications.}} \tcr{yes}
 \end{enumerate}
 %
 At this point in the paper, we have derived a viscous regularization for the Seven-Equation two-phase flow Model that ensures positivity of the entropy residual, uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$, and is consistent with the viscous regularization derived for Euler equations \cite{jlg, Marco_paper_low_mach} in the limit $\alpha_k \to 1$. The viscous regularization involves a set of three viscosity coefficients for each phase, $\mu_k$, $\kappa_k$ and $\beta_k$, that are assumed positive. Definition of the viscosity coefficients should be devised from the scaled SEM in order to ensure well-scaled dissipative terms for a wide range of Mach numbers (subsonic, transonic and supersonic flows) and is the topic of the next section.
@@ -797,7 +797,7 @@ The first step in the study of the two limit cases (a) and (b) is to re-write ea
 u_k^*      = \frac{\mbold u_k}{u_{k,\infty}}                 ,\
 P_k^*      = \frac{P_k}{\rho_{k,\infty} c^2_{k,\infty}}   ,\
 E_k^*      = \frac{E_k}{c^2_{k,\infty} }              , \\
-\alpha_k^*      = \frac{\alpha_k}{\alpha^2_{k,\infty} }              , \
+\alpha_k^*      = \frac{\alpha_k}{\alpha_{k,\infty} }              , \
 x^* = \frac{x}{L_\infty}                      ,\
 t_k^* = \frac{t_k}{L_\infty / u_{k,\infty}}           ,\
 \mu_k^*    = \frac{\mu_k}{\mu_{k,\infty}}             ,\
@@ -808,7 +808,7 @@ u_{int}^* = \frac{\mbold u_{int}}{u_{int,\infty}}       ,\
 \bar{u}_{int}^* = \frac{\bar{u}_{int}}{\bar{u}_{int,\infty}}       ,\
 \end{multline}
 %
-\tcr{why a square in alpha inf? Also, if there is now an alpha inf, why isn't it appearing elsewhere? 
+\tcr{why a square in alpha inf? Also, if there is now an alpha inf, why isn't it appearing elsewhere?} \tcb{there is no square. $\alpha_\infty$ cancels out}
 where  the subscript $\infty$ denote the far-field or stagnation quantities and the superscript $*$ stands for the non-dimensional variables. The far-field reference quantities are chosen such that the dimensionless flow quantities are of order 1. The stagnation quantities for the pressure and velocity interfacial variables will be specified for each case. The reference phasic Mach number is given by
 %
 \begin{equation}
@@ -1025,79 +1025,11 @@ choice, option (iii), has the proper scaling: in this case, only the dissipation
 $\gradd{s,*} \mbold u_k^*$ scale as $1/M_{k,\infty}^2$ since $\Re_{k,\infty} = M_{k,\infty}^2$, leaving the 
 regularization of the void fraction and continuity equations unaffected because $\Pe_{k,\infty}^\beta = \Pe_{k,\infty}^\kappa =1$.
 \tcb{I feel we need another short section to explain how the two above limit cases can be merged into one} \tcr{yes, as well as how to deal to exchange terms} \tcb{we no longer need it since we assumed that the exchange terms are derived from rational thermodynamic which is automatically consistent with the entropy minimum principle}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\subsection{An all-speed formulation of the viscosity coefficients}\label{eq:visc-formulation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%The study of the above limit cases yields two different possible scalings for the phasic Reynolds number: 
-%$\Re_{k,\infty} = 1$ in the low-Mach limit and $\Re_{k,\infty}  = M_{k,\infty}^2$ for non-isentropic flows, 
-%whereas the phasic numerical P\'eclet numbers ($\Pe_{k,\infty}^\kappa$ and $\Pe_{k,\infty}^\beta$) always scales as one. In order to have a stabilization method 
-%valid for a wide range of Mach numbers, from very low-Mach to supersonic flows, these two scalings should 
-%be combined in a unique definition. 
 %
-%We begin with the  normalization parameter $\norm_{P,k}^\kappa$. Using the 
-%definition of the viscosity coefficients given in \eqt{eq:visc_definition-sct4} and the scaling of 
-%\eqt{eq:norm_param}, it can be shown that:
-%%
-%\begin{equation}
-%\label{eq:norm_relation}
-%\kappa_{k,\infty} = \frac{ \rho_{k,\infty} c_{k,\infty}^2 u_{k,\infty} L_{k,\infty} }{ \norm_{k,P,\infty}^{\kappa} } \, ,
-%\end{equation}
-%%
-%where $\norm_{k,P,\infty}$ is the reference far-field quantity for the normalization parameter $\norm_{k,P}$. 
-%Substituting \eqt{eq:norm_relation} into \eqt{eq:ref_numb} and recalling that the phasic numerical P\'eclet 
-%number scales as unity, we obtain:
-%%
-%\begin{equation}
-%\label{eq:norm_relation_bis}
-%\norm_{k,P,\infty}^{\kappa} = \Pe_{k,\infty} \rho_{k,\infty} c_{k,\infty}^2 = \rho_{k,\infty} c_{k,\infty}^2 \, .
-%\end{equation}
-%%
-%\eqt{eq:norm_relation_bis} provides a proper normalization factor to define the $\kappa_k$ viscosity coefficient.
-%%
-%The derivation for $\norm_{k,P}^\mu$ is similar and yields
-%\begin{align}
-%\label{eq:norm_ent2}
-%&\norm_{k,P,\infty}^\mu = \Re_{k,\infty} \rho_{k,\infty} c_{k,\infty}^2 =  \nonumber \\ 
-%& \ \ \ \ \ \ \ \ \ \left\{
-%\begin{array}{ll}
-% \rho_{k,\infty} ||u_{k,\infty} ||^2       & \text{ for non-isentropic flows} \\
-% \rho_{k,\infty} c_{k,\infty}^2 & \text{ for low-Mach flows}
-%\end{array}
-%\right. \,.
-%\end{align}
-%A smooth function to transition between these two states is as follows: % the shifted sigmoid function
-%\begin{equation}
-%% \sigma(M) = \frac{1}{1+\exp\big(-(M-M^\text{thresh})\big)} \,,
-% \sigma(M_k) = \frac{\tanh\big(a_k(M_k-M_k^\text{thresh})\big) + | \tanh\big(a_k(M_k-M_k^\text{thresh})\big) | }{2} \,,
-%\end{equation}
-%where $M_k^\text{thresh}$ is a phasic threshold Mach number value beyond which the flow is no longer 
-%considered  to be low-Mach (we use $M_k^\text{thresh}=0.05$), $M_k$ is the local Mach number, 
-%and the scalar $a_k$ determines how rapidly the transition from  
-%$\norm_{k,P,\infty}^\mu= \rho_k c_k^2$ to $\norm_{k,P}^\mu=\rho_k \| \mbold u_k \|^2$ occurs in the vicinity of $M_k^\text{thresh}$ (we use $a_k = 3$). 
-%It is easy to verify that
-%\begin{equation}
-%\label{eq:norm_ent3}
-%\norm_{k,P}^\mu = (1-\sigma(M_k)) \rho_k c_k^2  + \sigma(M_k)  \rho_k ||\mbold u_k ||^2  
-%\end{equation}
-%satisfies \eqt{eq:norm_ent2}.
+\begin{remark}
+In the above, the P\'eclet number $\Pe_{k,\infty}^\kappa$ is set to one to avoid adding excessive amount of dissipation in the contact. Assuming that we can distinguish a contact wave from a shock/rarefaction wave when computing the viscosity coefficients, the P\'eclet number $\Pe_{k,\infty}^\kappa$ can be locally set to one and $M^2_{k,\infty}$ in the contact and shock waves, respectively. This second option would be very dissipative in the shock region ($\Pe_{k,\infty}^\kappa$ scales as $M^2_{k,\infty}$) and would not be over-dissipative in the contact region ($\Pe_{k,\infty}^\kappa$ scales as $M^2_{k,\infty}$). Also the scaling of the dissipative terms would be similar to what is obtained for the single-phase all-Mach flow upwind-scheme \cite{LowMach1}.
+\end{remark}
 %
-%It remains to determine the normalization parameter, $\norm_{\alpha,k}^\beta$, for the viscosity coefficient $\beta_k$, by using the scaling of the P\'eclet number $\Pe_{k,\infty}^\beta$ derived from the low-Mach asymptotic limit. Following the same reasoning as above, it yields:
-%%
-%\begin{equation}
-%\label{eq:norm_relation_beta}
-%\norm_{k,\alpha,\infty}^\beta = 1 \ ,
-%\end{equation}
-%%
-%where $\norm_{k,\alpha,\infty}$ is the reference far-field quantity for the normalization parameter $\norm_{\alpha,k}$ used in the definition of the viscosity coefficient $\beta_k$ (\eqt{eq:def-beta-sen-sect4}). The normalization parameter scales as one. Then, it is chosen to use the same scaling as for Burger's equation \cite{jlg2} e.g.
-%%
-%\begin{equation}
-%\label{eq:norm_relation_beta2}
-%\norm_{k,\alpha}^\beta =  || \eta (\alpha_k) - \bar{\eta}(\alpha_k) ||_\infty\ ,
-%\end{equation}
-%%
-%where $\bar{\eta}$ is the average value of the entropy $\eta$ over the entire computational domain.
-%
-%At this point of the paper, we have derived a viscous regularization for the Seven-Equation two-phase flow Model consistent with the entropy minimum principle, and defined viscosity coefficients for all-Mach flows. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}\label{sec:conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
