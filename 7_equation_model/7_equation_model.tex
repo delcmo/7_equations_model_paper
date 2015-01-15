@@ -185,7 +185,6 @@ The Seven-Equation two-phase flow Model employed in this paper is obtained by as
 \end{multline}
 \end{subequations}
 %
-\tcr{the $\mathbb{aaa}$ symbol is reserved for rank-2 tensors. Please change to scalar, vector (math mbold), and tensor (mathbb) as appropriate to avoid confusion\\} \tcb{done} \\ \tcr{you still had Gamma in bold. I changed the definition of the Gammakj command\\ Finally, the M exchange term should be a vector (bold) I believe\\} \tcb{done}
 where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the void fraction, the density, the velocity vector and the total specific energy of phase $k$, respectively. The void fraction, mass, momentum and energy exchange terms from phase $k$ to phase $j$ are denoted by the symbols $\mathbb{S}_{k \to j}$, $\Gammakj$, $M_{k \to j}$ and $E_{k \to j}$, respectively, are assumed to be determined by the method of rational thermodynamic \cite{Truesdell} and thus will only yield positive terms in the right-hand side of the entropy equation. They also obey to the following closure relations:
 %
 \begin{subequations}\label{eq:exch-terms}
@@ -207,7 +206,6 @@ E_{1 \to 2} + E_{2 \to 1} = 0 \, .
 %
 \end{subequations}
 %
-\tcr{indeed, since we give a convention for scalar, vector, tensor here, we should respect it above\\} \tcb{ok}
 We adopt the standard convention for vectors: consider vector $\mbold{a}$ with entries $(a_i)_{i=1,\ldots,\texttt{dim}}$; $(\mbold{a} \otimes \mbold{b})_{ij}=a_i b_j$;
 $\div \mbold{a}= \partial_{x_j} a_j$; $(\grad \mbold{a})_{ij} = \partial_{x_i} a_j$; for order-2 tensors $\mathbb{g}$, we have $(\div \mathbb{g})_j = \partial_{x_i} g_{ij}$, $(\mathbb{g}\cdot \mbold{a})_i = g_{ij}a_j$, $\mathbb{g}:\mathbb{h} = g_{ij} h_{ij}$; summation is implied whenever an index is repeated. 
 The phasic pressure $P_k$ is computed from an equation of state that is assumed given as a function of the density $\rho_k$ and the phasic internal energy $e_k = E_k - 0.5 u^2_k$. The cross section of the geometry is denoted by $A$ and is only spatially dependent. $A$ is included for completeness of the presentation and is set to 1 in most applications; however, nozzle flow problems can be solved using the one-dimensional version of the equations and by setting $A$ to the cross-sectional area of the nozzle. The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively; they are defined in \eqt{eq:int_variables_def}.
@@ -269,7 +267,7 @@ The set of equations satisfied by phase $j$ are simply obtained by substituting 
 %
 which reduces the number of partial differential equations from eight to seven and yields the Seven-Equation two-phase flow Model. 
 %---------------------------------------------------------------------------------
-\subsection{Mathematical properties and entropy equation of the SEM without viscous regularization}\label{eq:sem-ent-wv}
+\subsection{Mathematical properties and entropy equation for the SEM without viscous regularization}\label{eq:sem-ent-wv}
 %---------------------------------------------------------------------------------
 Some properties of the seven-equation model are discussed next. A set of $5+2\texttt{dim}$ (with \texttt{dim} the geometry's dimension) waves is present in the model: two acoustic waves per phase, one contact wave per phase per domain dimension, and one void fraction wave propagating at the interfacial velocity $\mbold u_{int}$. These waves (eigenvalues of the Jacobian for the inviscid flux terms) are as follows for each phase $k$:
 % 
@@ -486,7 +484,6 @@ After multiplying \eqt{eq:vel-7-eqn-model-sect4} by velocity $\mbold u_k$, the r
 The underlined terms in \eqt{eq:rho-7-eqn-model-sect4} and \eqt{eq:int-ener-7-eqn-model-sect4}, also present in the derivation of the entropy equation for the SEM \emph{without} regularization, yield the positive terms on the right-hand side of the entropy equation, \eqt{eq:ent-eqn-7-eqn-model}. We refer the reader to \app{app:sev-equ-model-entropy} for a detailed derivation of the entropy equation  without viscous regularization. Here, we deal with the \emph{regularized} system of equations and the above underlined terms are ignored in the remainder of this derivation for brevity. 
 The phasic entropy equation is now obtained by combining the density equation (\eqt{eq:rho-7-eqn-model-sect4}) and the phasic internal energy equation (\eqt{eq:int-ener-7-eqn-model-sect4}) through the chain rule given in \eqt{eq:chain_rule-sct4} to yield:
 %
-\tcr{order of operations with $\otimes$}
 \begin{multline}\label{eq:ent-res-7-eqn-diss-terms}
 \alpha_k \rho_k A \frac{Ds_k}{Dt} 
 + \alpha_k \left(  \rho^2_k  (s_\rho)_k + P_k (s_e)_k  \right) \div (A \mbold u_k )  \\
@@ -532,7 +529,6 @@ Following the methodology applied in \cite{jlg, Marco_paper_low_mach}, the right
 \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} can be further simplified by using the following expressions
 for the dissipative terms $\mbold f_k$,  $\mathbb{g}_k$ and $\mbold h_k$:
 %
-\tcr{order of operations with $\otimes$}
 \begin{subequations}\label{eq:def-diss-terms-sect4}
 \begin{align}
   \mbold f_k   &= \tilde{\mbold f}_k +\rho_k \mbold  l_k
@@ -646,7 +642,6 @@ is a positive viscosity coefficient. The dissipative term is proportional to the
 
 All of the dissipative terms are now defined and recalled here:
 %
-\tcr{in the definition of f, A should not be there in front of l because A is already in l} \tcb{you are right}
 \begin{subequations}\label{eq:visc-reg-7-equ-sect4}
 \begin{align}
   \mbold l_k &= \beta_k A \grad \alpha_k 
@@ -654,7 +649,6 @@ All of the dissipative terms are now defined and recalled here:
 \begin{align}
   \mbold f_k &= \alpha_k A \kappa_k \grad \rho_k + \rho_k  \mbold l_k 
 \end{align}
-\tcr{this is not complete for g. I think it is missing u cross f on the RHS, or should it be f cross u? Please check} \tcb{you are right. It is f cross u}
 \begin{align}
 \mathbb{g}_k &= \alpha_k A \mu_k \rho_k \grad^s \mbold u_k + \mbold f_k \otimes \mbold u_k 
 \end{align}
@@ -814,7 +808,7 @@ u_{int}^* = \frac{\mbold u_{int}}{u_{int,\infty}}       ,\
 \bar{u}_{int}^* = \frac{\bar{u}_{int}}{\bar{u}_{int,\infty}}       ,\
 \end{multline}
 %
-\tcr{later I see $\alpha^*$ but it is not defined here. There is no $\alpha_\infty$\\} \tcb{done}
+\tcr{why a square in alpha inf? Also, if there is now an alpha inf, why isn't it appearing elsewhere? 
 where  the subscript $\infty$ denote the far-field or stagnation quantities and the superscript $*$ stands for the non-dimensional variables. The far-field reference quantities are chosen such that the dimensionless flow quantities are of order 1. The stagnation quantities for the pressure and velocity interfacial variables will be specified for each case. The reference phasic Mach number is given by
 %
 \begin{equation}
@@ -852,12 +846,10 @@ With this assumption and the scaling introduced in \eqt{eq:norm_param}, the scal
 \partial_{t^*} \left( \alpha_k  A\right)^* + A^* \mbold u_k^* \cdot \grad^* \alpha_k^* =  \frac{1}{\Pe_{k,\infty}^\beta} \grad^* \cdot \left( A \beta_k \grad \alpha_k \right)^*
 \end{align}
 %
-\tcr{alpha is missing in the first term on the RHS of the continuity eq. below. Please, review all equations carefully}\tcb{ok}
 \begin{multline}\label{eq:sev_equ-with-diss-terms-cont_case_one_scaled}
 \partial_{t^*} \left( \alpha_k \rho_k A \right)^* + \grad^* \cdot \left( \alpha_k \rho_k \mbold u_k A \right)^* = \\ \frac{1}{\Pe^\kappa_{k,\infty}}\grad^* \cdot \left(A \kappa_k \alpha_k \grad \rho_k \right)^* +
 \frac{1}{\Pe_{k,\infty}^\beta} \grad^* \cdot \left( A \beta_k \rho_k \grad \alpha_k \right)^*
 \end{multline}
-\tcr{also, how about not writing $\grad^* \cdot \left( a \grad^* b \right)^*$, the $^*$ is doubled for the inner gradient, but replacing as $\grad^*\cdot \left( a^* \grad^* b^*\right)$} \tcb{What about $\grad^*\cdot \left( a \grad b\right)^*$}
 %
 \begin{multline}\label{eq:sev_equ-with-diss-terms-mom_case_one_scaled}
 \partial_{t^*} \left( \alpha_k \rho_k u_k A \right)^* + \grad^* \cdot \left[ \alpha_k A \left( \rho_k \mbold u_k \otimes \mbold u_k\right)\right]^* + \frac{A \alpha_k^*}{M^2_{k,\infty}}\grad^* P_k^* = \\
@@ -867,7 +859,6 @@ With this assumption and the scaling introduced in \eqt{eq:norm_param}, the scal
 + \frac{1}{\Pe_{k,\infty}^\kappa} \grad^* \cdot\left( A \alpha_k \kappa_k \grad \rho_k \otimes \mbold u_k \right)^* 
 + \frac{1}{\Pe_{k,\infty}^\beta} \grad \cdot \left( A \beta_k \rho_k \grad \alpha_k \otimes \mbold u_k \right)^*
 \end{multline}
-\tcr{order of $\otimes$ in the above?}\tcb{I checked it}
 %
 \begin{multline}\label{eq:sev_equ-with-diss-terms-ener_case_one_scaled}
 \alpha_k^* A^* \left[ \partial_t \left(  \rho_k E_k \right) + \mbold u_k \cdot \grad^* \left( \rho_k E_k \right) \right]^*+  \alpha_k \grad^* \cdot \left(A \mbold u_k P_k \right) + \rho_k^* E_k^* \alpha_k^* \grad^* \cdot \left( \mbold u A \right)_k^* = \\
