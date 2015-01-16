@@ -1031,7 +1031,7 @@ regularization of the void fraction and continuity equations unaffected because 
 In the above, the P\'eclet number $\Pe_{k,\infty}^\kappa$ was set to one to avoid adding an excessive amount of dissipation in contact waves
 (presence of a $1/\Pe_{k,\infty}^\kappa$ term in \eqt{eq:sev_equ-with-diss-terms-cont_case_one_scaled}). 
 However, if one can distinguish between contact waves from shock/rarefaction waves (in a numerical scheme, for instance), then there is the possibility of having the local P\'eclet number $\Pe_{k,\infty}^\kappa$ set to one in contact waves and to $M^2_{k,\infty}$ in shock waves. 
-As such, this option would allow stabilizing shock waves ($\Pe_{k,\infty}^\kappa$ scales as $M^2_{k,\infty}$) and would not be over-dissipative in the contact region ($\Pe_{k,\infty}^\kappa$ scales as 1 \tcr{ you had: $M^2_{k,\infty}$, but I think it is a copy/paste typo}):
+As such, this option would allow stabilizing shock waves ($\Pe_{k,\infty}^\kappa$ scales as $M^2_{k,\infty}$) and would not be over-dissipative in the contact region ($\Pe_{k,\infty}^\kappa$ scales as 1):
 %
 \begin{align}
 &\Re_{k,\infty} = M_{k,\infty}^2 \,, \nonumber \\ 
@@ -1043,7 +1043,6 @@ M^2_{k,\infty} & \mbox{ in the shock region }
 &\Pe_{k,\infty}^\beta = 1 \ . \nonumber
 \end{align}
 %
-\tcr{in the equations just above, you had twice peclet kappa set to 1.} \tcb{you are right}
 \end{remark}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1051,10 +1050,14 @@ M^2_{k,\infty} & \mbox{ in the shock region }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\tcr{not yet read}\\
-We derived a viscous regularization for the well-posed Seven-Equation two-phase flow Model that ensures positivity of the entropy residual, uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$, is consistent with the viscous regularization derived for the multi-dimensional Euler equations in the limit $\alpha_k \to 1$ and does not depend on the scheme discretization. It was also shown that the viscous regularization is compatible with the generalized Harten entropies that were initially derived for Euler equations. The viscous regularization involves a set of three positive viscosity coefficients for each phase, $\beta_k$, $\mu_k$ and $\kappa_k$ that are defined from the scaled SEM to ensure well-scaled dissipative terms. We introduced three numerical non-dimensionalized numbers for each phase, $\Re_k$, $\Pe_k^\mu$ and $\Pe_k^\kappa$ and devised their scaling in two cases: the low-Mach asymptotic limit and for non-isentropic flows. In the later case, it was demonstrated that the incompressible system of equations is recovered when assuming that all of the non-dimensionalized numbers scale as one. The study of the former case showed that the scaling of the P\'eclet numbers remain the same whereas the scaling of the Reynolds number $\Re_k$ has to be modified and set to $M_k^2$ to ensure well-scaled dissipative terms in the phasic momentum equations. Because the numerical non-dimensionalized numbers are related to the scaling of the phasic viscosity coefficients, the above scaling should be used either to assess the accuracy of the viscosity coefficient definitions or derive definition for the viscosity coefficients. 
+We have derived a viscous regularization for the hyperbolic Seven-Equation two-phase flow Model. The regularization ensures positivity of the entropy residual, uniqueness of the numerical solution when for concave physical phasic entropy functions $s_k$, and is consistent with the viscous regularization derived for Euler equations when one of the phases disappears. 
+We have also demonstrated that the proposed viscous regularization is compatible with the generalized Harten entropies that were initially derived for Euler equations. The viscous regularization involves a set of three positive viscosity coefficients for each phase, $\beta_k$, $\mu_k$ and $\kappa_k$ that are defined from the non-dimensioanlized seven-equation model to ensure that the dissipative terms remain well scaled in
+low-Mach regimes. In the low-Mach asymptotic limit carried out, three non-dimensional numbers for each phase have been introduced: a Reynolds number$\Re_k$, and two P\'eclet numbers, $\Pe_k^\mu$ and $\Pe_k^\kappa$. Adequate scaling of these numbers has been devised for two important cases: the low-Mach asymptotic limit and for non-isentropic flows. In the former case, we show that the incompressible equations are recovered when assuming that all of the non-dimensional numbers scale as one. The study of the non-isentropic case case shows that the scaling of the P\'eclet numbers can remain unchanged while the scaling of the Reynolds number has to behave as $M_k^2$ to ensure that dissipative terms will be well scaled for shcoks situations in the phasic momentum equations. Because the non-dimensional numbers are closely related to the scaling of the viscosity coefficients, the above scaling is recommended for use in numerical discretization techniques based on artificial viscosity. 
 
-Deriving a definition for the phasic viscosity coefficients should rely on existing numerical methods for scalar and system of hyperbolic equations. For instance, it is known that artificial dissipative methods are used to solve for Euler equations: Lapidus \cite{Lapidus_paper, Lapidus_book}, pressure-based \cite{PBV_book} and entropy-based \cite{jlg1, valentin} numerical methods. Once a definition for the viscosity coefficients is derived and found consistent with the scaling of the numerical non-dimensionalized numbers, the numerical methods can be tested by solving two-phase shock tubes using various discretization methods. Note that the viscous regularization proposed in this paper is discretization agnostic. 
+In \cite{Marco_paper_low_mach}, numerical solutions for transonic single-phase flows demonstrated the applicability of such a entropy-minimum satisfying regularization with artificial viscosity scalings based on the Mach number. As future work, we recommend similar numerical tests for the seven-equation two-phase flow model in various Mach regimes. For instance, various regularization techniques have been used for two-phase flows: Lapidus schmes \cite{Lapidus_paper, Lapidus_book}, pressure-based schemes \cite{PBV_book}, etc.  We plan on testing the viscous regularization proposed here and on comparing it with existing methods. 
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{mybibfile}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1202,9 +1205,9 @@ We investigate in this appendix whether the viscous regularization of the seven-
 \mathscr{H}' (s)  \geq 0, \ \ \ \ \mathscr{H}'(s)c_p^{-1} - \mathscr{H}'' \geq 0, \ \forall \left( \rho, e \right) \in \mathbb{R}_+^2 \ ,
 \end{multline}
 %
-where $c_p \left( \rho, e \right) = T \partial_T s \left( \rho, e \right)$ is the specific heat at constant pressure ($T$ is a function of $e$ and $\rho$ through the equation of state). Because the seven-equation two-phase model was initially derived by assuming that each phase obeys the single-phase Euler equation, we want to investigate whether the above property still holds when considering the seven-equation model with viscous regularization included. To do so, we consider a phasic generalized entropy, $\mathscr{H}_k(s_k)$ and a phasic specific heat at constant pressure, $c_{p,k} \left( \rho_k, e_k \right) = T_k \partial_{T_k} s_k \left( \rho_k, \tcr{T_k} \right)$ \tcr{just before you had $e$ after Eq. 56, now it's $T$} \tcb{It is because we take the derivative of $s_k$ with respect to $T_k$. I can change it by replacing $T_k$ with $e_k$ and say that $e_k$ is function of $T_k$ and $\rho_k$ through the EOS} characterized by \eqt{eq:generalized_ent}. The objective is to find an entropy inequality verified by $\rho_k \mathscr{H}_k(s_k)$.
+where $c_p \left( \rho, e \right) = T \partial_T s \left( \rho, e \right)$ is the specific heat at constant pressure ($T$ is a function of $e$ and $\rho$ through the equation of state). Because the seven-equation two-phase model was initially derived by assuming that each phase obeys the single-phase Euler equation, we want to investigate whether the above property still holds when considering the seven-equation model with viscous regularization included. To do so, we consider a phasic generalized entropy, $\mathscr{H}_k(s_k)$ and a phasic specific heat at constant pressure, $c_{p,k} \left( \rho_k, e_k \right) = T_k \partial_{T_k} s_k \left( \rho_k, T_k \right)$ characterized by \eqt{eq:generalized_ent}. The objective is to find an entropy inequality verified by $\rho_k \mathscr{H}_k(s_k)$.
 
-We start from the entropy inequality verified by $s_k$, \tcr{remove the bold for Q. It's a number} \tcb{done}
+We start from the entropy inequality verified by $s_k$, 
 %
 \begin{equation}\label{eq:ent-res-7-eqn-diss-terms-app}
 \alpha_k \rho_k A \frac{Ds_k}{Dt} =  \mbold f_k \cdot \grad s_k + \div \left( \alpha_k A \rho_k \kappa_k  \grad s_k \right)  
@@ -1242,6 +1245,6 @@ The right-hand side of \eqt{eq:new_quad_form} is a quadratic form that was alrea
 \div \left[ \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) + \alpha_k A \kappa_k \mathscr{H}_k (s_k) \grad \rho_k  \right. & \left. + A \kappa_k \rho_k \mathscr{H}_k (s_k) \grad \alpha_k\right] \geq 0 \ .\nonumber 
 \end{align}
 %
-For there, we conclude that an entropy inequality is satisfied for all generalized entropies $\rho_k \mathscr{H}_k (s_k)$ when using the viscous regularization derived in \sct{sec:visc-regu} for the seven-equation two-phase model. Note that the above inequality holds for the total entropy of the system when summing over the phases. \tcr{what is the purpose of that last sentence?} \tcb{I wanted to add something about the exchange terms. The source terms are determined from rational thermodynamic equations that requires to sum over the phases.}
+For there, we conclude that an entropy inequality is satisfied for all generalized entropies $\rho_k \mathscr{H}_k (s_k)$ when using the viscous regularization derived in \sct{sec:visc-regu} for the seven-equation two-phase model. Note that the above inequality holds for the total entropy of the system as well, i.e., when summing over the phases (the source terms are determined from rational thermodynamics that requires summations over the phases).
 \end{appendices}
 \end{document}
