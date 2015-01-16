@@ -525,6 +525,10 @@ which is the phasic entropy equation obtained when the viscous regularization te
 \subsection{Entropy minimum principle}
 %---------------------------------------------------------------------------------
 %
+\begin{theorem}
+
+\end{theorem}
+%
 Following the methodology applied in \cite{jlg, Marco_paper_low_mach}, the right-hand side of 
 \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} can be further simplified by using the following expressions
 for the dissipative terms $\mbold f_k$,  $\mathbb{g}_k$ and $\mbold h_k$:
@@ -1023,7 +1027,13 @@ regularization of the void fraction and continuity equations unaffected because 
 \tcb{I feel we need another short section to explain how the two above limit cases can be merged into one} \tcr{yes, as well as how to deal to exchange terms} \tcb{we no longer need it since we assumed that the exchange terms are derived from rational thermodynamic which is automatically consistent with the entropy minimum principle}
 %
 \begin{remark}
-In the above, the P\'eclet number $\Pe_{k,\infty}^\kappa$ is set to one to avoid adding excessive amount of dissipation in the contact. Assuming that we can distinguish a contact wave from a shock/rarefaction wave when computing the viscosity coefficients, the P\'eclet number $\Pe_{k,\infty}^\kappa$ can be locally set to one and $M^2_{k,\infty}$ in the contact and shock waves, respectively. This second option would be very dissipative in the shock region ($\Pe_{k,\infty}^\kappa$ scales as $M^2_{k,\infty}$) and would not be over-dissipative in the contact region ($\Pe_{k,\infty}^\kappa$ scales as $M^2_{k,\infty}$). Also the scaling of the dissipative terms would be similar to what is obtained for the single-phase all-Mach flow upwind-scheme \cite{LowMach1}.
+In the above, the P\'eclet number $\Pe_{k,\infty}^\kappa$ is set to one to avoid adding excessive amount of dissipation in the contact. Assuming that we can distinguish a contact wave from a shock/rarefaction wave when computing the viscosity coefficients, the P\'eclet number $\Pe_{k,\infty}^\kappa$ can be locally set to one and $M^2_{k,\infty}$ in the contact and shock waves, respectively. This option would stabilize the shock wave ($\Pe_{k,\infty}^\kappa$ scales as $M^2_{k,\infty}$) and would not be over-dissipative in the contact region ($\Pe_{k,\infty}^\kappa$ scales as $M^2_{k,\infty}$):
+%
+\begin{align}
+&\Re_{k,\infty} = M_{k,\infty}^2 , \ \Pe_{k,\infty}^\kappa = 1 \text{ (in the contact region)}, \nonumber \\ 
+&\Pe_{k,\infty}^\kappa = 1 \text{ (in the shock region) } \text{ and } \Pe_{k,\infty}^\beta = 1 \ . \nonumber
+\end{align}
+%
 \end{remark}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
