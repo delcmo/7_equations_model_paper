@@ -525,9 +525,46 @@ which is the phasic entropy equation obtained when the viscous regularization te
 \subsection{Entropy minimum principle}
 %---------------------------------------------------------------------------------
 %
-%\begin{theorem}{(Entropy Minimum Principle)}
+%We now investigate under which conditions on the dissipative fluxes $\mbold f_k$, $\mathbb{g}_k$ and $\mbold h_k$, the entropy minimum principle holds for the system of equations given in \eqt{eq:sev_equ-with-diss-terms}. First, the right-hand side of \eqt{eq:sev_equ-with-diss-terms} is recast as a sum of a quadratic term and other positive terms in \lem{lem:evm}. Then, the entropy minimum principle is shown to hold in \theo{the:evm}.
+%%
+%\begin{lemma}\label{lem:evm}
+%Setting
+%%
+%\begin{subequations}
+%\begin{align}
+%  \mbold f_k   &= \kappa_k \grad( \rho)_k +\rho_k \mbold  l_k
+%  \\
+%  \mathbb{g}_k -  \mbold f_k \otimes \mbold u_k &= \alpha_k \rho_k A \mu_k \mathbb{F}(\mbold u_k) 
+%  \\
+%  \mbold h_k + \tfrac{1}{2}\| \mbold u_k\|^2  \mbold f_k &= \kappa_k \grad(\rho e)_k + (\rho e)_k \mbold l_k,
+%\end{align}
+%\end{subequations}
+%%
+%the right-hand side of \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} can be recast as a function of a quadratic form $Q_k = \mathbf{X}^T_k \mathbb{\Sigma}_k \mathbf{X}_k$ and other terms as follows:
+%%
+%\begin{multline}
+%\alpha_k \rho_k A \frac{Ds_k}{Dt} =  \mbold f_k \cdot \grad s_k + \div \left( \alpha_k A \rho_k \kappa_k  \grad s_k \right)  \\
+%- \alpha_k \rho_k A \kappa_k Q_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mathbb{F}(\mbold u_k)  : \grad \mbold u_k
+%\end{multline}
+%%
+%\end{lemma}
+%%
+%\begin{proof}
 %
+%\end{proof}
+%%
+%\begin{theorem}{(Entropy Minimum Principle)}\label{the:evm}
+%Assume that the solution to the system of equations given in \eqt{eq:sev_equ-with-diss-terms} is smooth and that the initial conditions of the internal energy and the density are constant outside some compact set. Lastly, assume that \eqt{eq:ent-res-7-eqn-diss-terms3} holds, then the minimum entropy principle holds for the SEM,
+%%
+%\begin{equation}
+%\alpha_k \rho_k A \partial_t s_k(\mbold x_{min},t)) \geq 0 \Rightarrow \partial_t s_k(\mbold x_{min},t)) \geq 0 \nonumber
+%\end{equation}
+%%
 %\end{theorem}
+%%
+%\begin{proof}
+%
+%\end{proof}
 %
 Following the methodology applied in \cite{jlg, Marco_paper_low_mach}, the right-hand side of 
 \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} can be further simplified by using the following expressions
