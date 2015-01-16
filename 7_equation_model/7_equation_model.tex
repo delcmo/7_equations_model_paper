@@ -525,9 +525,9 @@ which is the phasic entropy equation obtained when the viscous regularization te
 \subsection{Entropy minimum principle}
 %---------------------------------------------------------------------------------
 %
-\begin{theorem}
-
-\end{theorem}
+%\begin{theorem}{(Entropy Minimum Principle)}
+%
+%\end{theorem}
 %
 Following the methodology applied in \cite{jlg, Marco_paper_low_mach}, the right-hand side of 
 \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} can be further simplified by using the following expressions
@@ -630,7 +630,7 @@ Because the terms on the right-hand-side of \eqt{eq:ent-res-7-eqn-diss-terms3} h
 \alpha_k \rho_k A \partial_t s_k(\mbold x_{min},t)) \geq 0 \Rightarrow \partial_t s_k(\mbold x_{min},t)) \geq 0 \nonumber
 \end{equation}
 %
-\tcb{Do we need to make the above statement a theorem or property?}\tcr{LEt's ask Ray}
+\tcb{Do we need to make the above statement a theorem or property?}\tcr{as you wish} \tcb{I am working on the format. I think we need a lemma and then the theorem like in J-L paper. We can still give the pdf to Ray without the modification. The text will be mostly the same}
 
 Recall that the above entropy minimum principle holds {\it independently} of the definition of the dissipative term $\mbold l_k$
 in the void fraction equation. We now provide a possible expression for $\mbold l_k$.
@@ -1202,13 +1202,13 @@ We investigate in this appendix whether the viscous regularization of the seven-
 \mathscr{H}' (s)  \geq 0, \ \ \ \ \mathscr{H}'(s)c_p^{-1} - \mathscr{H}'' \geq 0, \ \forall \left( \rho, e \right) \in \mathbb{R}_+^2 \ ,
 \end{multline}
 %
-where $c_p \left( \rho, e \right) = T \partial_T s \left( \rho, e \right)$ is the specific heat at constant pressure ($T$ is a function of $e$ and $\rho$ through the equation of state). Because the seven-equation two-phase model was initially derived by assuming that each phase obeys the single-phase Euler equation, we want to investigate whether the above property still holds when considering the seven-equation model with viscous regularization included. To do so, we consider a phasic generalized entropy, $\mathscr{H}_k(s_k)$ and a phasic specific heat at constant pressure, $c_{p,k} \left( \rho_k, e_k \right) = T_k \partial_{T_k} s_k \left( \rho_k, \tcr{T_k} \right)$ \tcr{just before you had $e$ after Eq. 56, now it's $T$} characterized by \eqt{eq:generalized_ent}. The objective is to find an entropy inequality verified by $\rho_k \mathscr{H}_k(s_k)$.
+where $c_p \left( \rho, e \right) = T \partial_T s \left( \rho, e \right)$ is the specific heat at constant pressure ($T$ is a function of $e$ and $\rho$ through the equation of state). Because the seven-equation two-phase model was initially derived by assuming that each phase obeys the single-phase Euler equation, we want to investigate whether the above property still holds when considering the seven-equation model with viscous regularization included. To do so, we consider a phasic generalized entropy, $\mathscr{H}_k(s_k)$ and a phasic specific heat at constant pressure, $c_{p,k} \left( \rho_k, e_k \right) = T_k \partial_{T_k} s_k \left( \rho_k, \tcr{T_k} \right)$ \tcr{just before you had $e$ after Eq. 56, now it's $T$} \tcb{It is because we take the derivative of $s_k$ with respect to $T_k$. I can change it by replacing $T_k$ with $e_k$ and say that $e_k$ is function of $T_k$ and $\rho_k$ through the EOS} characterized by \eqt{eq:generalized_ent}. The objective is to find an entropy inequality verified by $\rho_k \mathscr{H}_k(s_k)$.
 
-We start from the entropy inequality verified by $s_k$, \tcr{remove the bold for Q. It's a number}
+We start from the entropy inequality verified by $s_k$, \tcr{remove the bold for Q. It's a number} \tcb{done}
 %
 \begin{equation}\label{eq:ent-res-7-eqn-diss-terms-app}
 \alpha_k \rho_k A \frac{Ds_k}{Dt} =  \mbold f_k \cdot \grad s_k + \div \left( \alpha_k A \rho_k \kappa_k  \grad s_k \right)  
-- \alpha_k \rho_k A \kappa_k \mathbf{Q}_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k.
+- \alpha_k \rho_k A \kappa_k Q_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k.
 \end{equation}
 %
 %Recalling the definition of $f_k = \alpha_k A \kappa_k \grad \rho_k + A \rho_k \beta_k \grad \alpha_k $, 
@@ -1216,7 +1216,7 @@ We start from the entropy inequality verified by $s_k$, \tcr{remove the bold for
 %
 \begin{align}\label{eq:ent-res-7-eqn-diss-terms-app2}
 \alpha_k \rho_k A \frac{D\mathscr{H}_k(s_k)}{Dt} &= \div \left( \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) \right) - \mathscr{H}_k''(s_k) \alpha_k A \kappa_k \rho_k \| \grad s_k \|^2 + \nonumber\\
-&\mathscr{H}_k'(s_k) \mbold f_k \cdot \grad s_k - \mathscr{H}_k'(s_k)\alpha_k \rho_k A \kappa_k \mathbf{Q}_k + \nonumber \\
+&\mathscr{H}_k'(s_k) \mbold f_k \cdot \grad s_k - \mathscr{H}_k'(s_k)\alpha_k \rho_k A \kappa_k Q_k + \nonumber \\
 & \mathscr{H}_k'(s_k)(s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k.
 \end{align}
 %
@@ -1225,14 +1225,14 @@ Let us now multiply the continuity equation of phase $k$ by $\mathscr{H}_k (s_k)
 \begin{align}\label{eq:ent-res-7-eqn-diss-terms-app3}
 \partial_t \left( \alpha_k \rho_k A \mathscr{H}_k(s_k)\right) + \div \left( \alpha_k \rho_k \mbold u_k A \mathscr{H}_k(s_k) \right)  &- \nonumber\\
 \div \left[ \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) + \alpha_k A \kappa_k \mathscr{H}_k (s_k) \grad \rho_k  \right. & \left. + A \kappa_k \rho_k \mathscr{H}_k (s_k) \grad \alpha_k\right] = \nonumber \\
- \underbrace{-\mathscr{H}_k''(s_k) \alpha_k A \kappa_k \rho_k \| \grad s_k \|^2  - \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k  \mathbf{Q}_k}_{\mathbb{T}_0} &+\nonumber \\
+ \underbrace{-\mathscr{H}_k''(s_k) \alpha_k A \kappa_k \rho_k \| \grad s_k \|^2  - \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k  Q_k}_{\mathbb{T}_0} &+\nonumber \\
 \underbrace{ \mathscr{H}_k'(s_k)(s_e)_k  \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k}_{\mathbb{T}_1} & .
 \end{align}
 %
 As in \sct{sec:visc-regu}, the left-hand side of \eqt{eq:ent-res-7-eqn-diss-terms-app3} is split into two residuals denoted by $\mathbb{T}_0$ and $\mathbb{T}_1$ in order to study the sign of each of them. We start by studying the sign of $\mathbb{T}_1$ that is positive since it is assumed that $ \mathscr{H}_k'(s_k) \geq 0$. We now investigate the sign of $\mathbb{T}_0$. Using \eqt{eq:generalized_ent}, we have:
 %
 \begin{equation}\label{eq:new_quad_form}
-- \mathbb{T}_0 \leq \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k \left( c_{p,k}^{-1} \|\grad s_k\|^2 +  \mathbf{Q}_k\right) \ .
+- \mathbb{T}_0 \leq \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k \left( c_{p,k}^{-1} \|\grad s_k\|^2 +  Q_k\right) \ .
 \end{equation}
 %
 The right-hand side of \eqt{eq:new_quad_form} is a quadratic form that was already defined in Appendix 5 of \cite{jlg} and can be recast in the matrix form $X^t_k \mathbb{S} X_k$ where $\mathbb{S}$ is a $2 \times 2$ matrix and the vector $X_k$ was previously defined in \sct{sec:visc-regu}. In \cite{jlg}, matrix $\mathbb{S}$ is shown to be negative semi-definite which allows us to conclude that $-\mathbb{T}_0$ is of the same sign \tcr{as what???} using \eqt{eq:new_quad_form}. Then, knowing the sign of the two residuals $\mathbb{T}_0$ and $\mathbb{T}_1$, we conclude that:
