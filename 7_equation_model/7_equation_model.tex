@@ -714,7 +714,7 @@ This particular choice of viscous regularization is analogous to the parabolic r
     
 \item{Compatibility of the viscous regularization proposed in \eqt{eq:visc-reg-7-equ-sect4} with the generalized entropies identified in Harten et al. \cite{Harten} is demonstrated in \app{app:harden}. } 
 
-\tcb{ \item{We could add a paragraph explaining that the above viscous regularization can also be used for the five-equation model of Kapila with some very light modifications.}} \tcr{Have we added it?}
+\tcb{ \item{We could add a paragraph explaining that the above viscous regularization can also be used for the five-equation model of Kapila with some very light modifications.}} \tcr{Have we added it?} \tcb{Not yet but will work on it}
 \end{enumerate}
 %
 At this point in the paper, we have derived a viscous regularization for the Seven-Equation two-phase flow Model that ensures positivity of the entropy residual, uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$, and is consistent with the viscous regularization derived for Euler equations \cite{jlg, Marco_paper_low_mach} in the limit $\alpha_k \to 1$. The viscous regularization involves a set of three viscosity coefficients for each phase, $\mu_k$, $\kappa_k$ and $\beta_k$, that are assumed positive. Definition of the viscosity coefficients should be devised from the scaled SEM in order to ensure well-scaled dissipative terms for a wide range of Mach numbers (subsonic, transonic and supersonic flows) and is the topic of the next section.
@@ -994,7 +994,7 @@ of the continuity equation (\eqt{eq:asympt_equ2_cont}) to show that the material
 Therefore, we conclude that by setting the Reynolds and P\'eclet numbers to one, the incompressible fluid 
 results are retrieved in the low-Mach limit when employing the compressible seven-equation two-phase flow model 
 with viscous regularization and \tcr{without relaxation terms}. \\
-\tcr{is this needed since exchange terms are derived from rational thermodynamic which is automatically consistent with the entropy minimum principle. If you want to keep this, maybe the sentence should not end like this as the reader may have forgotten about how we dealt with the exchange terms ...} \tcr{\\ do you want to talk about that sentence?}
+\tcr{is this needed since exchange terms are derived from rational thermodynamic which is automatically consistent with the entropy minimum principle. If you want to keep this, maybe the sentence should not end like this as the reader may have forgotten about how we dealt with the exchange terms ...} \tcr{\\ do you want to talk about that sentence?} \tcb{I guess}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Scaling of $\Re_{k,\infty}$, $\Pe_{k,\infty}^\kappa$ and $\Pe_{k,\infty}^\beta$ for non-isentropic flows (case (b))}\label{eq:non_isent_flows}
@@ -1043,7 +1043,7 @@ M^2_{k,\infty} & \mbox{ in the shock region }
 &\Pe_{k,\infty}^\beta = 1 \ . \nonumber
 \end{align}
 %
-\tcr{in the equations just above, you had twice peclet kappa set to 1.}
+\tcr{in the equations just above, you had twice peclet kappa set to 1.} \tcb{you are right}
 \end{remark}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1235,13 +1235,13 @@ As in \sct{sec:visc-regu}, the left-hand side of \eqt{eq:ent-res-7-eqn-diss-term
 - \mathbb{T}_0 \leq \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k \left( c_{p,k}^{-1} \|\grad s_k\|^2 +  Q_k\right) \ .
 \end{equation}
 %
-The right-hand side of \eqt{eq:new_quad_form} is a quadratic form that was already defined in Appendix 5 of \cite{jlg} and can be recast in the matrix form $X^t_k \mathbb{S} X_k$ where $\mathbb{S}$ is a $2 \times 2$ matrix and the vector $X_k$ was previously defined in \sct{sec:visc-regu}. In \cite{jlg}, matrix $\mathbb{S}$ is shown to be negative semi-definite which allows us to conclude that $-\mathbb{T}_0$ is of the same sign \tcr{as what???} using \eqt{eq:new_quad_form}. Then, knowing the sign of the two residuals $\mathbb{T}_0$ and $\mathbb{T}_1$, we conclude that:
+The right-hand side of \eqt{eq:new_quad_form} is a quadratic form that was already defined in Appendix 5 of \cite{jlg} and can be recast in the matrix form $X^t_k \mathbb{S} X_k$ where $\mathbb{S}$ is a $2 \times 2$ matrix and the vector $X_k$ was previously defined in \sct{sec:visc-regu}. In \cite{jlg}, matrix $\mathbb{S}$ is shown to be negative semi-definite which allows us to conclude that $\mathbb{T}_0$ is unconditionally positive using \eqt{eq:new_quad_form}. Then, knowing the sign of the two residuals $\mathbb{T}_0$ and $\mathbb{T}_1$, we conclude that:
 %
 \begin{align}\label{eq:ent-res-7-eqn-diss-terms-app4}
 \partial_t \left( \alpha_k \rho_k A \mathscr{H}_k(s_k)\right) + \div \left( \alpha_k \rho_k \mbold u_k A \mathscr{H}_k(s_k) \right)  &- \nonumber\\
 \div \left[ \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) + \alpha_k A \kappa_k \mathscr{H}_k (s_k) \grad \rho_k  \right. & \left. + A \kappa_k \rho_k \mathscr{H}_k (s_k) \grad \alpha_k\right] \geq 0 \ .\nonumber 
 \end{align}
 %
-For there, we conclude that an entropy inequality is satisfied for all generalized entropies $\rho_k \mathscr{H}_k (s_k)$ when using the viscous regularization derived in \sct{sec:visc-regu} for the seven-equation two-phase model. Note that the above inequality holds for the total entropy of the system when summing over the phases. \tcr{what is the purpose of that last sentence?}
+For there, we conclude that an entropy inequality is satisfied for all generalized entropies $\rho_k \mathscr{H}_k (s_k)$ when using the viscous regularization derived in \sct{sec:visc-regu} for the seven-equation two-phase model. Note that the above inequality holds for the total entropy of the system when summing over the phases. \tcr{what is the purpose of that last sentence?} \tcb{I wanted to add something about the exchange terms. The source terms are determined from rational thermodynamic equations that requires to sum over the phases.}
 \end{appendices}
 \end{document}
