@@ -416,7 +416,7 @@ and regularize this system by adding dissipation terms (viscous fluxes) to each 
 %
 \begin{subequations}\label{eq:sev_equ-with-diss-terms}
 \begin{equation}\label{eq:sev_equ-with-diss-terms-vf}
-\partial_t \left( \alpha_k  A\right) + A \mbold u_{int} \cdot \grad \alpha_k = A \mu_P \left( P_k - P_j \right) + \div \mbold l_k
+\partial_t \left( \alpha_k  A\right) + \underline{\underline{A \mbold u_{int} \cdot \grad \alpha_k}} = \underline{\underline{A \mu_P \left( P_k - P_j \right)}} + \div \mbold l_k
 \end{equation}
 %
 \begin{equation}\label{eq:sev_equ-with-diss-terms-cont}
@@ -425,14 +425,14 @@ and regularize this system by adding dissipation terms (viscous fluxes) to each 
 %
 \begin{multline}\label{eq:sev_equ-with-diss-terms-mom}
 \partial_t \left( \alpha_k \rho_k \mbold u_k A \right) + \div \left[ \alpha_k A \left( \rho_k \mbold u_k \otimes \mbold u_k + P_k \mathbb{I} \right) \right] =\\
-\alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j - \mbold u_k \right) + \div \mathbb{g}_k
+\alpha_k P_k \grad A + \underline{\underline{P_{int} A \grad \alpha_k}} + \underline{\underline{A \lambda_u \left( \mbold u_j - \mbold u_k \right)}} + \div \mathbb{g}_k
 \end{multline}
 %
 \begin{multline}\label{eq:sev_equ-with-diss-terms-ener}
 \partial_t \left( \alpha_k \rho_k E_k A \right) + \div \left[ \alpha_k A \mbold u_k \left( \rho_k E_k + P_k \right) \right] = \\
-P_{int} A \mbold u_{int} \cdot \grad \alpha_k -
-\mu_P A  \bar{P}_{int} \left( P_k-P_j \right) + \\
-A \lambda_u \bar{\mbold u}_{int} \cdot \left( \mbold u_j - \mbold u_k \right)
+\underline{\underline{P_{int} A \mbold u_{int} \cdot \grad \alpha_k}} -
+\underline{\underline{\mu_P A  \bar{P}_{int} \left( P_k-P_j \right)}} + \\
+\underline{\underline{A \lambda_u \bar{\mbold u}_{int} \cdot \left( \mbold u_j - \mbold u_k \right)}}
 + \div \left( \mbold h_k + \mbold u \cdot \mathbb{g}_k \right)
 \end{multline}
 \end{subequations}
@@ -810,8 +810,7 @@ Note that the Ideal Gas equations of state can be recovered by letting $P_{k,\in
 %------------------------------------------------------------------------------------------------------
 %Developing a numerical method for fluid equations require to investigate the low-Mach asymptotic limit. In this particular limit, numerical methods developed for transonic and supersonic flows usually fail due to ill-scaled dissipative terms. A fix can be found by performing a low-Mach asymptotic limit to ensure well-scaled dissipative terms \cite{LowMach1, LowMach2, LowMach3}. Then, it is proposed to perform a low-Mach asymptotic limit to derive a definition for the phasic normalization parameters introduced in \sct{sec:visc-coeff-sem}. 
 We consider the case where the relaxation coefficients and the gradient of volume fraction $\grad \alpha_k$ are set to zero, that is, \tcr{any justification for doing this?} \tcb{you cannot do it with the relaxation terms and this is how it is done in the other papers} \tcr{Let's keep these comments and ask Ray}
-%Two limit $1$-D cases are considered: the relaxation coefficients are set (i) to very large values and (ii) to zero. In the later case, 
-the two phases do not interact. Thus, the seven-equation model degenerates to two sets of Euler equations with a pseudo cross-sectional area $\alpha_k A$. It is also devised from the volume fraction equation \eqt{eq:sev_equ-parab-vf} that the volume fraction $\alpha_k$ is time independent. 
+the two phases do not interact and the volume fraction of each phase remains constant over time (see \eqt{eq:sev_equ-parab-vf}). Thus, the seven-equation model degenerates to two sets of Euler equations with a pseudo cross-sectional area $\alpha_k A$. In the remaining of this section, it is also assumed that the volume fraction of each phase is non-zero.
 %In the former case, the infinite relaxation coefficients make the seven-equation two-phase model degenerates into the five-equation model of Kapila by ensuring pressure and velocity equilibrium. 
 %Two limit cases (a) and (b) will be considered to determine appropriate scaling for the entropy 
 %viscosity coefficients so that the dissipative terms remain well-scaled for: 
@@ -854,29 +853,6 @@ where  the subscript $\infty$ denote the far-field or stagnation quantities and 
 M_{k,\infty} = \frac{u_{k,\infty}}{c_{k,\infty}}.
 \end{equation}
 %
-%Because we consider that phases do not interact with each other, it is assumed that the interfacial pressure and velocity scale as the phasic pressure and velocity, respectively: $P_{int,\infty} = \rho_{k,\infty} c^2_{k,\infty}$ and $u_{int,\infty} = u_{k,\infty}$. 
-%Under these assumptions, the interfacial pressure and velocity are simply replaced by $P_k$ and $\mbold u_k$ in the seven-equation model. %Then, the system of equations with viscous regularization becomes:
-% 
-%\begin{subequations}\label{eq:sev_equ_case_one}
-%\begin{align}\label{eq:sev_equ-with-diss-terms-vf_one}
-%\partial_t \left( \alpha_k  A\right) + A \mbold u_k \cdot \div \alpha_k =  \div \left( A \beta_k \grad \alpha_k \right)
-%\end{align}
-%\begin{align}\label{eq:sev_equ-with-diss-terms-cont_one}
-%\partial_t \left( \alpha_k \rho_k A \right) + \div \left( \alpha_k \rho_k \mbold u_k A \right) = \div \left( A \alpha_k \kappa_k \grad \rho_k \right)  + \div \left( A \beta_k \rho_k \grad \alpha_k \right)
-%\end{align}
-%\begin{multline}\label{eq:sev_equ-with-diss-terms-mom_one}
-%\partial_t \left( \alpha_k \rho_k u_k A \right) + \div \left[ \alpha_k A \left( \rho_k  \mbold u_k \otimes \mbold u_k + P_k \right) \right] =\\
-%\alpha_k P_k \grad A + P_k A \grad \alpha_k + \div \left(A \mu_k \alpha_k  \rho_k \grad^s \mbold u_k \right) + \\
-%\div \left(A \kappa_k \alpha_k \mbold u_k \otimes \grad \rho_k \right) + \div \left( A \beta_k \rho_k \mbold u_k \otimes \grad \alpha_k \right)
-%\end{multline}
-%\begin{multline}\label{eq:sev_equ-with-diss-terms-ener_one}
-%\partial_t \left( \alpha_k \rho_k E_k A \right) + \div \left[ \alpha_k A \mbold u_k \left( \rho_k E_k + P_k \right) \right] = \\
-%P_k A \mbold u_k\cdot \grad \alpha_k + \div \left( A \kappa_k \alpha_k \grad \left( \rho_k e_k \right) \right) +
-%\div \left( A \kappa_k \alpha_k \frac{||\mbold u_k||^2}{2} \grad \rho_k \right) + \\ \div \left( A \mu_k \alpha_k \rho_k \mbold u_k : \grad^s \mbold u_k\right) +
-%\div \left(A \beta_k \rho_k e_k \grad \alpha_k\right)
-%\end{multline}
-%\end{subequations}
-%%
 With the scaling introduced in \eqt{eq:norm_param}, the scaled equations for phase $k$ with viscous regularization are as follows:
 %\tcb{The following set of equations is very painful to read. I guess we can improve the format but I cannot think of a better way of presenting the scaled equations, unless we include all of this in an appendix (I am not for it)}
 % 
@@ -892,7 +868,7 @@ With the scaling introduced in \eqt{eq:norm_param}, the scaled equations for pha
 \end{multline}
 %
 \begin{multline}\label{eq:sev_equ-with-diss-terms-mom_case_one_scaled}
-\partial_{t^*} \left( \alpha_k \rho_k u_k A \right)^* + \grad^* \cdot \left[ \alpha_k A \left( \rho_k \mbold u_k \otimes \mbold u_k\right)\right]^* + \frac{A \alpha_k^*}{M^2_{k,\infty}}\grad^* P_k^* = \\
+\partial_{t^*} \left( \alpha_k \rho_k u_k A \right)^* + \grad^* \cdot \left[ \alpha_k A \left( \rho_k \mbold u_k \otimes \mbold u_k\right)\right]^* + \frac{1}{M^2_{k,\infty}}\grad^* \left( A \alpha_k P_k^* \right) = \\
   \frac{1}{M^2_{k,\infty}} \alpha_k^* P^*_k \grad^* A^*  
 + \frac{1}{\Re_{k,\infty}}\grad^* \cdot \left( A \alpha_k \mu_k \rho_k \grad^s \mbold u_k \right)^* \\ 
 + \frac{1}{\Pe_{k,\infty}^\kappa} \grad^* \cdot\left( A \alpha_k \kappa_k \grad \rho_k \otimes \mbold u_k \right)^* 
@@ -904,7 +880,7 @@ With the scaling introduced in \eqt{eq:norm_param}, the scaled equations for pha
 \frac{1}{\Pe_{k,\infty}^\kappa} \grad^* \cdot \left( A \alpha_k \kappa_k \grad \left( \rho_k e_k \right) \right)^* 
 + \frac{M^2_{k,\infty}}{\Pe_{k,\infty}^\kappa} \grad^* \cdot \left( A\alpha_k \kappa_k \frac{||\mbold u_k||^2}{2} \grad \rho \right)^*  \\
 + \frac{M^2_{k,\infty}}{\Re_{k,\infty}} \grad^* \cdot \left( A \alpha_k \mu_k \rho_k \mbold u_k : \grad^s \mbold u_k\right)^* 
-+ \frac{1}{\Pe_{k,\infty}^\beta } \grad^*\cdot \left( \rho_k e_k \alpha_k A \beta_k \grad \alpha_k \right)^*
++ \frac{1}{\Pe_{k,\infty}^\beta } \grad^*\cdot \left( \rho_k e_k A \beta_k \grad \alpha_k \right)^*
 \end{multline}
 %
 \end{subequations}
@@ -939,19 +915,19 @@ P_k(\mbold r, t) = P_{k,0}(\mbold r, t) + P_{k,1}(\mbold r, t) M_{k,\infty} + P_
 By studying the resulting momentum equations for various powers of $M_\infty$, it is observed that the 
 leading- and first-order pressure terms, $P_{k,0}$ and $P_{k,1}$, are spatially constant if and only 
 if $\Re_{k,\infty} = \Pe_{k,\infty}^\kappa = \Pe_{k,\infty}^\beta = \mathcal{O}(1)$ (i.e., scale as 1). 
-In this case and assuming that $\alpha_k \neq 0$, we have
+In this case and remembering that $\grad \alpha_k = 0$ and $\alpha_k \neq 0$, we have
 %
 \begin{subequations}\label{eq:asympt_equ1}
 at order $M_{k,\infty}^{-2}$:
 \begin{equation}
 \label{eq:asympt_equ1_cont}
-\grad P_{k,0} = 0
+A \grad \left( \alpha_k P_k \right)_0 = 0 \Rightarrow \grad P_{k,0} = 0
 \end{equation}
 %
 and at order $M_{k,\infty}^{-1}$
 \begin{equation}
 \label{eq:asympt_equ1_mom}
-\grad P_{k,1} = 0 \, .
+A \grad \left( \alpha_k P_k \right)_1 = 0 \Rightarrow\grad P_{k,1} = 0 \, .
 \end{equation}
 \end{subequations}
 %
@@ -971,14 +947,14 @@ Using the scaling $\Re_{k,\infty} = \Pe_{k,\infty}^\kappa = \Pe_{k,\infty}^\beta
 %
 \begin{multline}
 \label{eq:asympt_equ2_mom}
-\partial_t (\alpha_k A \rho_k \mbold u_k)_0 + \div ( A \alpha_k\rho_k \mbold u_k \otimes \mbold u_k)_0 +A \alpha_k \grad P_{k,2} = \\
+\partial_t (\alpha_k A \rho_k \mbold u_k)_0 + \div ( A \alpha_k\rho_k \mbold u_k \otimes \mbold u_k)_0 +A \grad \left( \alpha_k P_k \right)_2 = \\
 \div \left[A \alpha_k \left( \mu_k \rho_k \grad^s \mbold u_k + \kappa_k \mbold u_k \otimes \grad \rho_k \right) \right]_0 + \div \left( A \beta_k \rho \mbold u \grad \alpha_k \right)_0
 \end{multline}
 %
 \begin{multline}
 \label{eq:asympt_equ2_ener}
-\partial_t(\alpha_k A  \rho_k E_k) +  \div \left(\alpha_k A \mbold u_k \rho_k E_k\right)_0 + \alpha_{k,0} \div \ \left( A \mbold u_k P_k \right)_0  = \\
- \div \left[A \alpha_k \kappa_k \grad\left(\rho_k e_k\right) \right] 
+\partial_t(\alpha_k A  \rho_k E_k) +  \div \left(\alpha_k A \mbold u_k \rho_k E_k\right)_0 +  \div \ \left( A \alpha_k \mbold u_k P_k \right)_0  = \\
+ \div \left[A \alpha_k \kappa_k \grad\left(\rho_k e_k\right) \right] _0 + \div \left[ A \rho_k e_k \beta_k \grad \alpha_k \right]_0
 \end{multline}
 %
 \end{subequations}
@@ -994,28 +970,28 @@ Using \eqt{eq:leading_order_sgeos}, the energy equation can be recast as a funct
 %
 \begin{multline}\label{eq:asympt_equ3_ener}
 A \alpha_{k,0} \left[ \partial_t  P_k  + \mbold u_k \cdot \grad  P_k \right]_0 + 
-(\gamma_k-1) \alpha_{k,0} \div \ \left[ A \mbold u_k P_k \right]_0 +\\ 
-\alpha_{k,0}  \left( P_{k,0} +  \gamma_k P_{k\infty} \right) \div  \left( \mbold u_k A\right )_0 = 
-\left[ \div (A \alpha_k \kappa_k \grad P_k)_0 + A \beta_{k,0} \grad P_{k,0} \cdot \grad \alpha_{k,0} \right]  \,.
+(\gamma_k-1) \div \ \left[ A \alpha_k \mbold u_k P_k \right]_0 +\\ 
+\left( P_{k,0} +  \gamma_k P_{k\infty} \right) \div  \left(\alpha_k A \mbold u_k \right )_0 = 
+\div (A \alpha_k \kappa_k \grad P_k)_0 + \div \left( A P_k \beta_k \grad \alpha_k \right)_0 \,.
 \end{multline}
 %
 From \eqt{eq:asympt_equ1_cont}, we infer that $P_0$ is spatially constant. Thus, \eqt{eq:asympt_equ3_ener} becomes
 %
 \begin{equation}\label{eq:div_free_energy}
-\frac{ A}{\gamma_k\left( P_{k,0} + P_{k,\infty} \right)} \frac{d P_{k,0}}{dt} = - \div \left( \mbold u_k A \right)_0 
+\frac{\alpha_{k,0}  A}{\gamma_k\left( P_{k,0} + P_{k,\infty} \right)} \frac{d P_{k,0}}{dt} = - \div \left( \alpha_k A \mbold u_k \right)_0 
 \end{equation}
 %
 and, at steady state, we have the divergence-free constraint on velocity
 %
 \begin{equation}
 % \gamma P_0 \div  \vec{u}_0 = 0 \Rightarrow \div  \vec{u}_0 = 0.
-\div \left( \mbold u_k A \right)_0  = 0 \, .
+\div \left( \alpha_k A \mbold u_k \right)_0  = 0 \, .
 \end{equation}
 %
-That is, the leading-order of the product of velocity and cross section is divergence-free, which reduces to the standard divergence-free velocity field for a constant area $A$, $\div \mbold u_{k,0}=0$. Finally, recall that \eqt{eq:div_free_energy} was written for the stiffened gas law; to retrieve standard result for the ideal gas law, simply set $P_{k,\infty}=0$. For the ideal gas law with a constant cross section, the previous result can be expressed as
+That is, the leading-order of the product of velocity and cross section is divergence-free, which reduces to the standard divergence-free velocity field for a constant area $A$ and volume fraction $\alpha_k$, $\div \mbold u_{k,0}=0$. Finally, recall that \eqt{eq:div_free_energy} was written for the stiffened gas law; to retrieve standard result for the ideal gas law, simply set $P_{k,\infty}=0$. For the ideal gas law with a constant cross section, the previous result can be expressed as
 %
 \begin{equation}
-\frac{1}{\gamma P_{k,0}} \frac{d P_{k,0}}{dt} = - \div\mbold u_{k,0} 
+\frac{\alpha_k}{\gamma P_{k,0}} \frac{d P_{k,0}}{dt} = - \div \left( \alpha_k \mbold u_k \right)_0
 \end{equation}
 %
 The same reasoning can be applied to the leading-order 
@@ -1036,7 +1012,7 @@ a step initial condition in the pressure will trigger a shock formation, indepen
 The non-dimensional form of the seven-equation model given in \eqt{eq:sev_equ_case_one_scaled} provides some insight on the 
 dominant terms as a function of the Mach number. This is particularly obvious in the momentum equation, \eqt{eq:sev_equ-with-diss-terms-mom_case_one_scaled}, 
 where the gradient of pressure is scaled by $1/M_{k,\infty}^2$. However, in the non-isentropic case, we no longer 
-have $\frac{\grad P_k}{M_{k,\infty}^2}=\grad P_{k,2}$ and therefore the pressure gradient term may need to be stabilized by 
+have $\frac{\grad \left( \alpha_k P_k \right)}{M_{k,\infty}^2}=\grad \left( \alpha_k P_k \right)_2$ and therefore the pressure gradient term may need to be stabilized by 
 some dissipative terms of the same scaling so as to prevent spurious oscillations from forming in the numerical solution technique. 
 By inspecting the dissipative terms present in the momentum equation, we note that imposing that one of dissipative terms 
 scales as $1/M_{k,\infty}^2$ will lead to a total of eight different options (a scaling of either 1 or $M^2_{k,\infty}$ for each number, 
