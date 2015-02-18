@@ -267,7 +267,7 @@ RELAP-7 \cite{Berry_Peterson_2014} uses the seven-equation two-phase flow model 
 & \mu_P \left( P_{gas} - P_{liq} \right) \\
 & 0 \\
 & \mu_P \left( P_{gas} - P_{liq} \right) \\
-& \mu_P \left( P_{gas} - P_{liq} \right) + \lambda_u \left( u_{liq} - u_{gas} \right) \\
+& \mu_P \bar{u}_{int} \left( P_{gas} - P_{liq} \right) + \lambda_u \bar{P}_{int} \left( u_{liq} - u_{gas} \right) \\
 \end{array}
 \right], \,
 \end{equation}
@@ -285,7 +285,7 @@ RELAP-7 \cite{Berry_Peterson_2014} uses the seven-equation two-phase flow model 
 \end{equation}
 \end{subequations}
 %
-The liquid volume fraction is denoted by  $\alpha_{liq}$ and the vapor volume fraction is computed from the algebraic relation $\alpha_{gas} = 1 - \alpha_{liq}$. Following \cite{SEM}, the pressure ($P_{int}$) and velocity ($u_{int}$) interfacial variables, and the relaxation coefficients, $\mu_P$ and $\lambda_u$, are functions of the liquid and vapor acoustic impedances denoted by $Z_k = \rho_k c_k$ with $k = \{ liq, \ vap \}$, and computed with the following expressions:
+The liquid volume fraction is denoted by  $\alpha_{liq}$ and the vapor volume fraction is computed from the algebraic relation $\alpha_{gas} = 1 - \alpha_{liq}$. Following \cite{SEM}, the pressure ($P_{int}$) and velocity ($u_{int}$) interfacial variables, their respective average value $\bar{P}_{int}$ and $\bar{u}_{int}$, and the relaxation coefficients, $\mu_P$ and $\lambda_u$, are functions of the liquid and vapor acoustic impedances denoted by $Z_k = \rho_k c_k$ with $k = \{ liq, \ vap \}$, and computed with the following expressions:
 %
 \begin{subequations}
 \label{eq:int_variables_def}
