@@ -374,7 +374,7 @@ Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates to th
 \section{A viscous regularization for the Seven-Equation two-phase flow Model}\label{sec:visc-regu}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-The objective of this section is to derive a viscous regularization for the SEM presented in \sct{sec:7-equ-model}. First, we present the methodology used, then derive the phasic entropy equation when accounting for the presence of the dissipative terms, finally employ the resulting phasic entropy equation to prove the entropy minimum principle.
+The objective of this section is to derive a viscous regularization for the SEM presented in \sct{sec:7-equ-model}. First, we present the methodology used, then derive the phasic entropy equation when accounting for the presence of the dissipative terms, and employ the resulting phasic entropy equation to prove the entropy minimum principle. Finally, the scaling of the dissipative terms is investigated in the limit where the seven-equation two-phase flow model degenerates into the five-equation two-phase flow model of Kapilla when considering large relaxation coefficients $\mu_P$ and $\lambda_u$ \cite{dellacherie}.
 %
 %---------------------------------------------------------------------------------
 \subsection{Methodology}
@@ -522,49 +522,8 @@ Using \eqt{eq:expr-zero}, \eqt{eq:ent-res-7-eqn-diss-terms} can be rearranged as
 which is the phasic entropy equation obtained when the viscous regularization terms have been included.
 %
 %---------------------------------------------------------------------------------
-\subsection{Entropy minimum principle}
+\subsection{Entropy minimum principle}\label{sct:end-min-pr}
 %---------------------------------------------------------------------------------
-%
-%We now investigate under which conditions on the dissipative fluxes $\mbold f_k$, $\mathbb{g}_k$ and $\mbold h_k$, the entropy minimum principle holds for the system of equations given in \eqt{eq:sev_equ-with-diss-terms}. First, the right-hand side of \eqt{eq:sev_equ-with-diss-terms} is recast as a sum of a quadratic term and other positive terms in \lem{lem:evm}. Then, the entropy minimum principle is shown to hold in \theo{the:evm}.
-%%
-%\begin{lemma}\label{lem:evm}
-%Setting
-%%
-%\begin{subequations}
-%\begin{align}
-%  \mbold f_k   &= \kappa_k \grad( \rho)_k +\rho_k \mbold  l_k
-%  \\
-%  \mathbb{g}_k -  \mbold f_k \otimes \mbold u_k &= \alpha_k \rho_k A \mu_k \mathbb{F}(\mbold u_k) 
-%  \\
-%  \mbold h_k + \tfrac{1}{2}\| \mbold u_k\|^2  \mbold f_k &= \kappa_k \grad(\rho e)_k + (\rho e)_k \mbold l_k,
-%\end{align}
-%\end{subequations}
-%%
-%the right-hand side of \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} can be recast as a function of a quadratic form $Q_k = \mathbf{X}^T_k \mathbb{\Sigma}_k \mathbf{X}_k$ and other terms as follows:
-%%
-%\begin{multline}
-%\alpha_k \rho_k A \frac{Ds_k}{Dt} =  \mbold f_k \cdot \grad s_k + \div \left( \alpha_k A \rho_k \kappa_k  \grad s_k \right)  \\
-%- \alpha_k \rho_k A \kappa_k Q_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mathbb{F}(\mbold u_k)  : \grad \mbold u_k
-%\end{multline}
-%%
-%\end{lemma}
-%%
-%\begin{proof}
-%
-%\end{proof}
-%%
-%\begin{theorem}{(Entropy Minimum Principle)}\label{the:evm}
-%Assume that the solution to the system of equations given in \eqt{eq:sev_equ-with-diss-terms} is smooth and that the initial conditions of the internal energy and the density are constant outside some compact set. Lastly, assume that \eqt{eq:ent-res-7-eqn-diss-terms3} holds, then the minimum entropy principle holds for the SEM,
-%%
-%\begin{equation}
-%\alpha_k \rho_k A \partial_t s_k(\mbold x_{min},t)) \geq 0 \Rightarrow \partial_t s_k(\mbold x_{min},t)) \geq 0 \nonumber
-%\end{equation}
-%%
-%\end{theorem}
-%%
-%\begin{proof}
-%
-%\end{proof}
 %
 Following the methodology applied in \cite{jlg, Marco_paper_low_mach}, the right-hand side of 
 \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} can be further simplified by defining the dissipative terms $\tilde{\mbold f}_k$ and $\tilde{\mbold h}_k$ and a function $\mathbb{F}(\mbold u_k)$ as a function of the dissipative terms $\mbold f_k$, $\mathbb{g}_k$, $\mbold h_k$ and $\mbold l_k$ as follows:
@@ -748,38 +707,63 @@ This particular choice of viscous regularization is analogous to the parabolic r
 }
     
 \item{Compatibility of the viscous regularization proposed in \eqt{eq:visc-reg-7-equ-sect4} with the generalized entropies identified in Harten et al. \cite{Harten} is demonstrated in \app{app:harden}. } 
-
-\tcb{ \item{We could add a paragraph explaining that the above viscous regularization can also be used for the five-equation model of Kapila with some very light modifications.}} \tcr{Have we added it?} \tcb{Not yet but will work on it}
+%\tcb{ \item{We could add a paragraph explaining that the above viscous regularization can also be used for the five-equation model of Kapila with some very light modifications.}} \tcr{Have we added it?} \tcb{Not yet but will work on it}
 \end{enumerate}
 %
 At this point in the paper, we have derived a viscous regularization for the Seven-Equation two-phase flow Model that ensures positivity of the entropy residual, uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$, and is consistent with the viscous regularization derived for Euler equations \cite{jlg, Marco_paper_low_mach} in the limit $\alpha_k \to 1$. The viscous regularization involves a set of three viscosity coefficients for each phase, $\mu_k$, $\kappa_k$ and $\beta_k$, that are assumed positive. Definition of the viscosity coefficients should be devised from the scaled SEM in order to ensure well-scaled dissipative terms for a wide range of Mach numbers (subsonic, transonic and supersonic flows) and is the topic of the next section.
-%%
-%\begin{remark}
-%Through the derivations of the viscous regularization, it was noted that another set of dissipative terms $\mbold f_k$ and $\mbold l_k$ would also ensures positivity of the entropy residual:
-%%
-%\begin{subequations}
-%\begin{align}\label{eq:def-l-k-wrong-sect4}
-%\mbold l_k =\beta_k T_k \left[ \frac{\rho_k}{P_k+\rho_k e_k} \grad \left( \frac{P_k}{\rho_k e_k} \right) - \frac{1}{P_k} \grad \rho_k \right]
-%\end{align}
-%\begin{align}
-%\mbold f_k = \kappa_k \grad \rho_k +  \frac{\rho^2_k (s_{\rho})_k}{\left( \rho s_{\rho} - e s_e \right)_k} \mbold l_k
-%\end{align}
-%\end{subequations}
-%%
-%However, the definition of $\mbold l_k$ proposed in \eqt{eq:def-l-k-wrong-sect4} was not considered as valid for the following reasons: positivity of the volume fraction cannot be achieved \tcr{can you give ME some details as of why in my office one day?} and the parabolic regularization is not recovered when all viscosity coefficients are set equal. \tcb{I probably told you that the with the above definition of $l_k$, the sign of the entropy residual associated to the volume fraction equation cannot be determined. }
-%\end{remark}
 %
+%---------------------------------------------------------------------------------
+\subsection{Scaling of the viscous regularization in the five-equation asymptotic limit of the seven-equation two-phase flow model}
+%---------------------------------------------------------------------------------
+%
+The Seven-Equation two-phase flow Model is known to degenerate into the five-equation two-phase flow model of Kapilla when performing a first-order Chapman-Enskog expansion (REF). The objective of this section is to investigate the behavior of the dissipative terms derived in \sct{sct:end-min-pr}, in the asymptotic limit. When performing a Chapman-Enskog expansion, the scale of the relaxation coefficients, $\mu_P$ and $\lambda_u$, is made explicit by using a small coefficient $\epsilon$ and each variable is expanded in powers of $\epsilon$ as follows:
+%
+\begin{equation}
+P=P_0+\epsilon P_1+\epsilon^2 P_2 + \dots
+\end{equation}
+%
+The dissipative terms derived in \sct{sct:end-min-pr} are not a function of the relaxation coefficients $\mu_p$ and $\lambda_u$ and thus, will have the same scaling as the advection flux. From the leading-order equations obtained with a Chepman-Enksdog expansion, the leading-order phasic pressure and velocity are proved equal such that $P_{k,0}=P_{j,0}=P$ and $\mbold u _{k,0} = \mbold u_{j,0} = \mbold u$. Using the previous result, the first-order system of equations yield the five-equation model of Kapilla recalled in \eqt{eq:liq-5-eqn}: 
+%
+\begin{subequations}\label{eq:liq-5-eqn}
+\begin{align}
+  % liquid volume fraction
+  \label{eqn:multi-d-5-eqn-liq-vol}
+  \frac{\partial \alpha_{k} A}{\partial t} + A\mbold u \cdot \grad \alpha_{k}
+  &= A K \div \mbold u + \div \left( \beta_k \grad \alpha_k \right) \,,
+\end{align}
+\begin{align}
+  % liquid mass conservation
+  \label{multi-d-5-equ-liq}
+  \frac{\partial \left( \alpha \rho \right)_{k} A}{\partial t}
+  + \div \left[ (\alpha \rho)_k \mbold u A\right]
+  &= -\Gammakj + \div \mbold f_k\,,
+\end{align}
+\begin{align}
+  % vapor mass conservation
+  \label{multi-d-5-equ-vap}
+  \frac{\partial \left( \alpha \rho \right)_{j} A}{\partial t}
+  + \div \left[ (\alpha \rho)_j \mbold u A\right]
+  &= \Gammakj + \div \mbold f_j \,,
+\end{align}
+\begin{align}
+  % liquid momentum
+  \frac{\partial \rho \mbold u A}{\partial t}
+  + \div \left[ A \left( \rho \mbold u \otimes \mbold u + P \mathbb{I} \right) \right]
+  = P \grad A + \sum_{i=k,j} \div \mathbb{g}_i\,,
+\end{align}
+\begin{align}
+  % liquid total energy
+  \frac{\partial \rho E A}{\partial t}
+  + \div \left[ \mbold u A \left( \rho E + P \right) \right]
+  = \sum_{i=k,j} \div \left( \mbold h_i + \mathbb{g}_i : \mbold u \right) \,,
+\end{align}
+\end{subequations}
+%
+where the $\rho u = \sum_{i=k,j} \alpha_i \rho_i u_i$ is the mixture momentum and $\rho E = \sum_{i=k,j} \alpha_i \rho_i E_i$ is the mixture energy. The mixture pressure is defined as $P= \sum_{i=k,j} \alpha_i P_i$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\section{An all-speed formulation of the Entropy Viscosity Method}\label{sec:low-Mach}
 \section{The scaled Seven-Equation two-phase flow Model with viscous regularization}\label{sec:low-Mach}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\begin{itemize}
-%\item non-dimensionalize the equations but use $P_\infty$ for the pressure instead of $(\rho c^2)_\infty$
-%\item introduce a new Pechlet number for $\beta$: its behavior should be the same as the Pechlet number for $\kappa$
-%\item two cases: zero and infinite relaxation coefficients
-%\item derive the normalization parameters for the isentropic and non-isentropic flows
-%\item discussion about the 
-%\end{itemize}
 %
 In the previous section, we have presented a viscous regularization for the seven-equation fluid model.  However,
 two-phase fluids may be found in various flow regimes, from extremely low-Mach subsonic situations to supersonic cases.
