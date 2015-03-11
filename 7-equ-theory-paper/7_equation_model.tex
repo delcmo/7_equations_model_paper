@@ -710,56 +710,62 @@ This particular choice of viscous regularization is analogous to the parabolic r
 %\tcb{ \item{We could add a paragraph explaining that the above viscous regularization can also be used for the five-equation model of Kapila with some very light modifications.}} \tcr{Have we added it?} \tcb{Not yet but will work on it}
 \end{enumerate}
 %
-At this point in the paper, we have derived a viscous regularization for the Seven-Equation two-phase flow Model that ensures positivity of the entropy residual, uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$, and is consistent with the viscous regularization derived for Euler equations \cite{jlg, Marco_paper_low_mach} in the limit $\alpha_k \to 1$. The viscous regularization involves a set of three viscosity coefficients for each phase, $\mu_k$, $\kappa_k$ and $\beta_k$, that are assumed positive. Definition of the viscosity coefficients should be devised from the scaled SEM in order to ensure well-scaled dissipative terms for a wide range of Mach numbers (subsonic, transonic and supersonic flows) and is the topic of the next section.
+At this point in the paper, we have derived a viscous regularization for the Seven-Equation two-phase flow Model that ensures positivity of the entropy residual, uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$, and is consistent with the viscous regularization derived for Euler equations \cite{jlg, Marco_paper_low_mach} in the limit $\alpha_k \to 1$. The viscous regularization involves a set of three viscosity coefficients for each phase, $\mu_k$, $\kappa_k$ and $\beta_k$, that are assumed positive. Definition of the viscosity coefficients should be devised from the scaled SEM in order to ensure well-scaled dissipative terms for a wide range of Mach numbers (subsonic, transonic and supersonic flows) and is the topic of \sct{sec:low-Mach}. Also, effect of the viscous regularization has to be investigated in the case where the SEM degenerates to the 5-equation model of Kapilla (REF) which is the purpose of next section.
 %
 %---------------------------------------------------------------------------------
-\subsection{Scaling of the viscous regularization in the five-equation asymptotic limit of the seven-equation two-phase flow model}
+\subsection{A Chapman-Enskog expansion of the regularized Seven-equation two-phase flow model}
 %---------------------------------------------------------------------------------
 %
-The Seven-Equation two-phase flow Model is known to degenerate into the five-equation two-phase flow model of Kapilla when performing a first-order Chapman-Enskog expansion (REF). The objective of this section is to investigate the behavior of the dissipative terms derived in \sct{sct:end-min-pr}, in the asymptotic limit. When performing a Chapman-Enskog expansion, the scale of the relaxation coefficients, $\mu_P$ and $\lambda_u$, is made explicit by using a small coefficient $\epsilon$ and each variable is expanded in powers of $\epsilon$ as follows:
+The five-equation two-phase flow model of Kapilla (REF) is obtained from the non-regularized SEM by performing a Chapman-Enskog expansion. The steps of the derivation are well detailed in the literature and can be found in \cite{dellacherie}. The objective of this section is to perform a Chapman-Enskog expansion of the \emph{regularized} SEM derived in \sct{sct:end-min-pr} and investigate the behavior of the dissipative terms: we want to make sure  that the dissipative terms remain well-scaled and can efficiently stabilize the resulting system of equations. Only the main results of the derivation will be given in this section and were obtained by following the same steps as in \cite{dellacherie}. First, the pressure and velocity relaxation coefficients are scaled by a small coefficient $\epsilon$ that describes the strength of the perturbation: $\mu_P \to \frac{\mu_P}{\epsilon}$ and $\lambda_u \to \frac{\lambda_u}{\epsilon}$. Then, each variable of interest is explicitly expanded in power of $\epsilon$ as shown in \eqt{eq:P-expansion-epsilon} and the leading and first-order equations are determined.
 %
-\begin{equation}
+\begin{equation}\label{eq:P-expansion-epsilon}
 P=P_0+\epsilon P_1+\epsilon^2 P_2 + \dots
 \end{equation}
 %
-The dissipative terms derived in \sct{sct:end-min-pr} are not a function of the relaxation coefficients $\mu_p$ and $\lambda_u$ and thus, will have the same scaling as the advection flux. From the leading-order equations obtained with a Chepman-Enksdog expansion, the leading-order phasic pressure and velocity are proved equal such that $P_{k,0}=P_{j,0}=P$ and $\mbold u _{k,0} = \mbold u_{j,0} = \mbold u$. Using the previous result, the first-order system of equations yield the five-equation model of Kapilla recalled in \eqt{eq:liq-5-eqn}: 
+The dissipative terms derived in \sct{sct:end-min-pr} are not a function of the relaxation coefficients $\mu_p$ and $\lambda_u$ and thus, will have the same scaling as the advection flux. From the leading-order momentum and energy equations, the leading-order phasic pressure and velocity are proved equal to each other such that $P_{k,0}=P_{j,0}=P_0$ and $\mbold u _{k,0} = \mbold u_{j,0} = \mbold u_0$. Using this previous result, the first-order system of equations yield the regularized five-equation model of Kapilla recalled in \eqt{eq:liq-5-eqn} where we defined $\rho u = \sum_{i=k,j} \alpha_i \rho_i u_i$ and $\rho E = \sum_{i=k,j} \alpha_i \rho_i E_i$ as the mixture momentum and energy, respectively.
 %
 \begin{subequations}\label{eq:liq-5-eqn}
 \begin{align}
   % liquid volume fraction
   \label{eqn:multi-d-5-eqn-liq-vol}
-  \frac{\partial \alpha_{k} A}{\partial t} + A\mbold u \cdot \grad \alpha_{k}
-  &= A K \div \mbold u + \div \left( \beta_k \grad \alpha_k \right) \,,
+  \frac{\partial \alpha_{k,0} A}{\partial t} + A\mbold u_0 \cdot \grad \alpha_{k,0}
+  &= A K \div \mbold u_0 + \div \left( \beta_k \grad \alpha_k \right)_0 \,,
 \end{align}
 \begin{align}
   % liquid mass conservation
   \label{multi-d-5-equ-liq}
-  \frac{\partial \left( \alpha \rho \right)_{k} A}{\partial t}
-  + \div \left[ (\alpha \rho)_k \mbold u A\right]
-  &= -\Gammakj + \div \mbold f_k\,,
+  \frac{\partial \left( \alpha \rho \right)_{k,0} A}{\partial t}
+  + \div \left[ (\alpha \rho)_{k,0} \mbold u_0 A\right]
+  &= \div \mbold f_{k,0}\,,
 \end{align}
 \begin{align}
   % vapor mass conservation
   \label{multi-d-5-equ-vap}
-  \frac{\partial \left( \alpha \rho \right)_{j} A}{\partial t}
-  + \div \left[ (\alpha \rho)_j \mbold u A\right]
-  &= \Gammakj + \div \mbold f_j \,,
+  \frac{\partial \left( \alpha \rho \right)_{j,0} A}{\partial t}
+  + \div \left[ (\alpha \rho)_{j,0} \mbold u_0 A\right]
+  &= \div \mbold f_{j,0} \,,
 \end{align}
 \begin{align}
   % liquid momentum
-  \frac{\partial \rho \mbold u A}{\partial t}
-  + \div \left[ A \left( \rho \mbold u \otimes \mbold u + P \mathbb{I} \right) \right]
-  = P \grad A + \sum_{i=k,j} \div \mathbb{g}_i\,,
+  \frac{ \partial \left( \rho \mbold u \right)_0 A}{\partial t}
+  + \div \left[ A \left( \rho \mbold u \otimes \mbold u + P \mathbb{I} \right)_0 \right]
+  = P_0 \grad A + \sum_{i=k,j} \div \mathbb{g}_{i,0}\,,
 \end{align}
 \begin{align}
   % liquid total energy
-  \frac{\partial \rho E A}{\partial t}
-  + \div \left[ \mbold u A \left( \rho E + P \right) \right]
-  = \sum_{i=k,j} \div \left( \mbold h_i + \mathbb{g}_i : \mbold u \right) \,,
+  \frac{\partial \left(\rho E\right)_0 A}{\partial t}
+  + \div \left[ \mbold u A \left( \rho E + P \right)_0 \right]
+  = \sum_{i=k,j} \div \left( \mbold h_{i,0} + \mathbb{g}_{i,0} : \mbold u_0 \right) \,,
 \end{align}
 \end{subequations}
 %
-where the $\rho u = \sum_{i=k,j} \alpha_i \rho_i u_i$ is the mixture momentum and $\rho E = \sum_{i=k,j} \alpha_i \rho_i E_i$ is the mixture energy. The mixture pressure is defined as $P= \sum_{i=k,j} \alpha_i P_i$.
+The mixture pressure is defined as $P= \sum_{i=k,j} \alpha_i P_i$ and is a function of the phasic pressures that are computed from the Stiffened gas equation of state. The notation $(fg)_0$ means that we only keep the $0^{th}$ order terms in the product $f g$. The function denoted by $K$ in \eqt{eqn:multi-d-5-eqn-liq-vol} is computed from \eqt{eq:K-fnct} and was derived from the Chapman-Enskog expansion. 
+%
+\begin{equation}\label{eq:K-fnct}
+K=
+\end{equation}
+%
+The main conclusion to draw from this study, is that the leading-order equations are not modified by the addition of dissipative terms to the equations: the phasic pressure and velocity remain equal to each other in first approximation. Also, from \eqt{eq:liq-5-eqn}, it is noted that the dissipative terms in the right hand side are well scaled and, thus, should be able to efficiently stabilize the numerical solution assuming that the viscosity coefficients are properly defined for a wide range of Mach numbers which is investigated next.  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\section{An all-speed formulation of the Entropy Viscosity Method}\label{sec:low-Mach}
 \section{The scaled Seven-Equation two-phase flow Model with viscous regularization}\label{sec:low-Mach}
