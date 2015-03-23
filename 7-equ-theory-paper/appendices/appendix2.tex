@@ -26,19 +26,19 @@ where $c_p \left( \rho, e \right) = T \partial_T s \left( \rho, e \right)$ is th
 
 We start from the entropy inequality verified by $s_k$, 
 %
-\begin{equation}\label{eq:ent-res-7-eqn-diss-terms-app}
+\begin{multline}\label{eq:ent-res-7-eqn-diss-terms-app}
 \alpha_k \rho_k A \frac{Ds_k}{Dt} =  \mbold f_k \cdot \grad s_k + \div \left( \alpha_k A \rho_k \kappa_k  \grad s_k \right)  
-- \alpha_k \rho_k A \kappa_k Q_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k.
-\end{equation}
+- \alpha_k \rho_k A \kappa_k Q_k \\ + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k.
+\end{multline}
 %
-%Recalling the definition of $f_k = \alpha_k A \kappa_k \grad \rho_k + A \rho_k \beta_k \grad \alpha_k $, 
 \eqt{eq:ent-res-7-eqn-diss-terms-app} is multiplied by $\mathscr{H}_k'(s_k)$ to yield:
 %
-\begin{align}\label{eq:ent-res-7-eqn-diss-terms-app2}
-\alpha_k \rho_k A \frac{D\mathscr{H}_k(s_k)}{Dt} &= \div \left( \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) \right) - \mathscr{H}_k''(s_k) \alpha_k A \kappa_k \rho_k \| \grad s_k \|^2 + \nonumber\\
-&\mathscr{H}_k'(s_k) \mbold f_k \cdot \grad s_k - \mathscr{H}_k'(s_k)\alpha_k \rho_k A \kappa_k Q_k + \nonumber \\
-& \mathscr{H}_k'(s_k)(s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k.
-\end{align}
+\begin{multline}
+\label{eq:ent-res-7-eqn-diss-terms-app2}
+\alpha_k \rho_k A \frac{D\mathscr{H}_k(s_k)}{Dt} = \div \left( \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) \right) - \mathscr{H}_k''(s_k) \alpha_k A \kappa_k \rho_k \| \grad s_k \|^2 + \\
+\mathscr{H}_k'(s_k) \mbold f_k \cdot \grad s_k - \mathscr{H}_k'(s_k)\alpha_k \rho_k A \kappa_k Q_k +  \\
+\mathscr{H}_k'(s_k)(s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k 
+\end{multline}
 %
 Let us now multiply the continuity equation of phase $k$ by $\mathscr{H}_k (s_k)$ and add the result to the above equation to obtain:
 %

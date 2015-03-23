@@ -30,15 +30,15 @@ This appendix provides the steps that lead to the derivation of the phasic entro
 \partial_t \left( \alpha_k \rho_k A \right) + \div \left( \alpha_k \rho_k \mbold u_k A \right) = 0 
 \end{align}
 %
-\begin{align}
-\partial_t \left( \alpha_k \rho_k \mbold u_k A \right) + \div \left[ \alpha_k A \left( \rho_k \mbold u_k \otimes \mbold u_k + P_k \mathbb{I} \right) \right] &= \nonumber \\
-\alpha_k P_k \grad A &+ P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j - \mbold u_k \right) 
-\end{align}
+\begin{multline}
+\partial_t \left( \alpha_k \rho_k \mbold u_k A \right) + \div \left[ \alpha_k A \left( \rho_k \mbold u_k \otimes \mbold u_k + P_k \mathbb{I} \right) \right] =\\
+\alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j - \mbold u_k \right) 
+\end{multline}
 %
-\begin{align}
-\partial_t \left( \alpha_k \rho_k E_k A \right) + \div \left[ \alpha_k A \mbold u_k \left( \rho_k E_k + P_k \right) \right] &= \nonumber \\
-P_{int} A \mbold u_{int} \cdot \grad \alpha_k &- A\mu_P \bar{P}_{int} \left( P_k-P_j \right) + \bar{\mbold u}_{int} A \lambda_u \left( \mbold u_j - \mbold u_k \right)
-\end{align}
+\begin{multline}
+\partial_t \left( \alpha_k \rho_k E_k A \right) + \div \left[ \alpha_k A \mbold u_k \left( \rho_k E_k + P_k \right) \right] = \\
+P_{int} A \mbold u_{int} \cdot \grad \alpha_k - A\mu_P \bar{P}_{int} \left( P_k-P_j \right) + \bar{\mbold u}_{int} A \lambda_u \left( \mbold u_j - \mbold u_k \right)
+\end{multline}
 \end{subequations}
 where $\rho_k$, $\mbold u_k$, $E_k$ and $P_k$ denote the density, velocity, specific total energy, and pressure of  phase $k$, respectively. $\mu_P$ and $\lambda_u$ and the pressure and velocity relaxation parameters, respectively. We recall that we assume that the cross section $A$ is only function of space: $\partial_t A = 0$ (a value of $A \neq 1$ is mostly of practical important for 1D nozzle problems). 
 Variables with subscript ${int}$ correspond to the interfacial variables; their definitions are given in \eqt{eq:sev_equ2-app}. 
@@ -69,10 +69,10 @@ The momentum and continuity equations are combined to yield an equation for the 
 \alpha_k \rho_k A \frac{D\mbold u_k}{Dt} + \grad \left( \alpha_k A P_k \right) = \alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j-\mbold u_k \right) \,.
 \end{equation}
 A kinetic energy equation is obtained by multiplying the previous result by $\mbold u_k$ to yield:
-\begin{equation}
+\begin{multline}
 \label{eq:kin1-app}
-\alpha_k \rho_k A \frac{D\left(\mbold u_k^2/2\right)}{Dt} + \mbold u_k \grad \left( \alpha_k A P_k \right) = \mbold u_k  \Big( \alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j-\mbold u_k \right) \Big) \,.
-\end{equation}
+\alpha_k \rho_k A \frac{D\left(\mbold u_k^2/2\right)}{Dt} + \mbold u_k \grad \left( \alpha_k A P_k \right) = \\ \mbold u_k  \Big( \alpha_k P_k \grad A + P_{int} A \grad \alpha_k + A \lambda_u \left( \mbold u_j-\mbold u_k \right) \Big) \,.
+\end{multline}
 %
 The internal energy equation is obtained by subtracting the above kinetic energy equation from the total energy equation:
 \begin{multline}\label{eq:internal1}
@@ -80,7 +80,6 @@ The internal energy equation is obtained by subtracting the above kinetic energy
  P_{int} A \left(\mbold u_{int}-\mbold u_k \right) \cdot \grad \alpha_k \\
  - \bar{P}_{int} A \mu_P \left(P_k-P_j \right) + A \lambda_u \left(\mbold u_j-\mbold u_k  \right) \cdot \left(\bar{\mbold u}_{int}-\mbold u_k \right) \,.
 \end{multline}
-
 
 In the next step, we assume the existence of a phasic entropy $s_k$ that is function of the density $\rho_k$ and the  internal energy $e_k$. Using the chain rule, 
 \begin{equation}
@@ -127,12 +126,12 @@ We now inspect term (b). Once again, we use the definitions of $P_{int}$ and $\m
 P_{int}-P_k &=& \frac{Z_k}{Z_k+Z_j} (P_j-P_k) - \frac{\grad \alpha_k}{\| \grad \alpha_k \|} \frac{Z_k Z_j}{Z_k+Z_j} (\mbold u_k-\mbold u_j), \nonumber 
 \end{eqnarray}
 Then, term (b) becomes:
-\begin{eqnarray}
+\begin{multline}
 \label{eq:ent5}
-\left[ P_{int} (\mbold u_{int}-\mbold u_k) + P_k (\mbold u_k-\mbold u_{int}) \right] \cdot \grad \alpha_k = (P_{int}-P_k)(\mbold u_{int}-\mbold u_k)\cdot \grad \alpha_k=  \nonumber\\ 
-\frac{Z_k}{\left( Z_k+Z_j \right)^2} \grad \alpha_k \cdot \left[ Z_j (\mbold u_j-\mbold u_k)(P_j-P_k)+\frac{\grad \alpha_k}{\| \grad \alpha_k \|} Z_j^2 (\mbold u_j-\mbold u_k)^2 \right. + \nonumber \\ 
+\left[ P_{int} (\mbold u_{int}-\mbold u_k) + P_k (\mbold u_k-\mbold u_{int}) \right] \cdot \grad \alpha_k = (P_{int}-P_k)(\mbold u_{int}-\mbold u_k)\cdot \grad \alpha_k=   \\ 
+\frac{Z_k}{\left( Z_k+Z_j \right)^2} \grad \alpha_k \cdot \left[ Z_j (\mbold u_j-\mbold u_k)(P_j-P_k)+\frac{\grad \alpha_k}{\| \grad \alpha_k \|} Z_j^2 (\mbold u_j-\mbold u_k)^2 \right. + \\ 
 \left. \frac{\grad \alpha_k}{\| \grad \alpha_k \|}(P_k-P_j)^2 +  \frac{\grad \alpha_k \cdot \grad \alpha_k}{\| \grad \alpha_k \|^2}(P_k-P_j)Z_j (\mbold u_k-\mbold u_j) \right] 
-\end{eqnarray}
+\end{multline}
 The above equation is factorized by $\|  \grad \alpha_k \|$ and then recast under a quadratic form using $\frac{\grad \alpha_k \cdot \grad \alpha_k}{\| \grad \alpha_k \|^2} = 1$. This yields:
 \begin{align}
 \label{eq:ent6}
