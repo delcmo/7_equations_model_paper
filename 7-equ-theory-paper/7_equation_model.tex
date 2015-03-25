@@ -1081,8 +1081,39 @@ M^2_{k,\infty} & \text{ in the shock region }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-We finish with a numerical example to illustrate the capabilities of the viscous regularization derived in this paper: the objective is to show that the viscosity regularization does not yield any undershoot and overshoots near the discontinuities. The first limit case consists of setting the relaxation coefficients $\mu_P$ and $\lambda_u$ to zero which is equivalent to solving Euler equations for each fluid. This case has been recently studied in \cite{jlg1, jlg2} using the same approach. In the other limit, the relaxation coefficients $\mu_P$ and $\lambda_u$ are set to large values and the SEM degenerates to the five-equation model of Kapila (see \sct{sec:chap-enskog}). To illustrate the later case, we consider two fluids denoted by the subscript $1$ and $2$ and described by the Ideal Gas equation of state, $P=(\gamma-1) \rho e$, with the following parameters $\gamma_1=3$ and $\gamma_2=1.4$. The numerical illustration consists of a 1-D shock tube separated by two chambers with a high pressure $(P_{left}=1\ MPa)$ on the left side and a low pressure $(P_{right}=0.1 \ MPa)$ on the right side. The temperature and volume fraction are uniform and set to $T=453 \ K$ and $\alpha = 0.5$, respectively. Both fluids are initially at rest. In order to test the viscous regularization, we have to define the phasic viscosity coefficients $\beta_k$, $\mu_k$ and $\kappa_k$ that were introduced in \eqt{eq:visc-reg-7-equ-sect4}. Following the work done in \cite{jlg1, jlg2, Marco_paper_low_mach}, we set $\mu_k = \kappa_k = 0.5 h \left( ||\mbold u_k|| + c_k \right)$ where $h$ is the grid size, and refer them to as first-order viscosity coefficients. The viscosity coefficient used in the dissipative term of the volume fraction equation is defined by analogous to Burger's equation \cite{jlg1} and set to $\beta_k = 0.5 h || \mbold u_{int} ||$ where $\mbold u_{int}$ is the interfacial velocity and also the eigenvalue of the volume fraction equation. With these definitions, the numerical solution is expected to not display any instabilities because of the over-dissipative nature of the viscosity coefficients. On the other hand, the discontinuities will be smeared. Numerical results are presented in ... at the final time $t=305 \ \mu s$ and were obtained using a Continuous Galerkine Finite Element method along with the implicit temporal integrator BDF2 \cite{bdf2} within the Moose framework \cite{Moose}.
+We finish with a numerical example to illustrate the capabilities of the viscous regularization derived in this paper: the objective is to show that the viscosity regularization does not yield any undershoot and overshoots near the discontinuities. The first limit case consists of setting the relaxation coefficients $\mu_P$ and $\lambda_u$ to zero which is equivalent to solving Euler equations for each fluid. This case has been recently studied in \cite{jlg1, jlg2} using the same approach. In the other limit, the relaxation coefficients $\mu_P$ and $\lambda_u$ are set to large values and the SEM degenerates to the five-equation model of Kapila (see \sct{sec:chap-enskog}). To illustrate the later case, we consider two fluids denoted by the subscripts $1$ and $2$ and described by the Ideal Gas equation of state, $P=(\gamma-1) \rho e$, with the following parameters $\gamma_1=3$ and $\gamma_2=1.4$. The numerical illustration consists of a 1-D shock tube separated by two chambers with a high pressure $(P_{left}=1\ MPa)$ on the left side and a low pressure $(P_{right}=0.1 \ MPa)$ on the right side. The density and volume fraction are uniform and set to $\rho_1=10 / kg \cdot m^{-3}$, $\rho_2=1 / kg \cdot m^{-3}$ and $\alpha = 0.5$, respectively. Both fluids are initially at rest. In order to test the viscous regularization, we have to define the phasic viscosity coefficients $\beta_k$, $\mu_k$ and $\kappa_k$ that were introduced in \eqt{eq:visc-reg-7-equ-sect4}. Following the work done in \cite{jlg1, jlg2, Marco_paper_low_mach}, we set $\mu_k = \kappa_k = 0.5 h \left( ||\mbold u_k|| + c_k \right)$ where $h$ is the grid size, and refer them to as first-order viscosity coefficients. The viscosity coefficient used in the dissipative term of the volume fraction equation is defined by analogous to Burger's equation \cite{jlg1} and set to $\beta_k = 0.5 h || \mbold u_{int} ||$ where $\mbold u_{int}$ is the interfacial velocity and also the eigenvalue of the volume fraction equation. With these definitions, the numerical solution is expected to not display any instabilities because of the over-dissipative nature of the viscosity coefficients. On the other hand, the discontinuities will be smeared. Numerical results are presented in \fig{fig:two-phase} at the final time $t=305 \ \mu s$ and were obtained using a Continuous Galerkine Finite Element method along with the implicit temporal integrator BDF2 \cite{bdf2} within the Moose framework \cite{Moose}.
 %
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_velocity_fo.png}
+                \caption{Velocity}
+                \label{fig:two-phase-vel}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_density_fo.png}
+                \caption{Density}
+                \label{fig:two-phase-density}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_pressure_fo.png}
+                \caption{Pressure}
+                \label{fig:two-phase-press}
+        \end{subfigure}        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_volume_fraction_fo.png}
+                \caption{Volume fraction}
+                \label{fig:two-phase-vf}
+        \end{subfigure}
+        \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$}\label{fig:two-phase}
+\end{figure}
+%
+As expected, the numerical solutions do not display any instability in the vicinity of the shock region. In \fig{fig:two-phase-density}, the contact wave is smeared because of the over-dissipative nature of the viscosity coefficients. This example shows that the viscous regularization developed in this paper can efficiently stabilize the numerical solution.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}\label{sec:conclusion}
