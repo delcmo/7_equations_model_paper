@@ -1205,56 +1205,51 @@ The aim is demonstrate that the viscosity regularization prevents undershoots an
 In this example, we set the relaxation coefficients $\mu_P$ and $\lambda_u$ to large values, and the pressures and velocities in each phase should become identical. 
 % In this case, the SEM degenerates to the five-equation model of Kapila (see \sct{sec:chap-enskog}). 
 We consider two fluids, denoted by the subscripts $1$ and $2$, and employ an idea gas law, $P_k=(\gamma_k-1) \rho_k e_k$, with the following parameters $\gamma_1=3$ and $\gamma_2=1.4$. 
-The numerical illustration consists of a 1-D shock tube \tcr{of length 1} separated by a membrane \tcr{placed at $x=0.5$}. The initial left/right values of the pressures are
- $(P_{left}=10^6)$ and $(P_{right}=10^5)$. The initial density and volume fraction are uniform and set to $\rho_1=10$, $\rho_2=1$ and $\alpha = 0.5$, respectively. Both fluids are initially at rest. 
-\tcr{it's a math paper. can't we use Pleft/right = 10 and 1 instead of super higher values?}\\
-%
+The numerical illustration consists of a 1-D shock tube of length 1 separated by a membrane placed at $x=0.5$. The initial left/right values of the pressures are
+ $(P_{left}=10)$ and $(P_{right}=1)$. The initial density and volume fraction are uniform and set to $\rho_1=10$, $\rho_2=1$ and $\alpha = 0.5$, respectively. Both fluids are initially at rest. 
+ 
 In order to test the proposed viscous regularization, we need to define the phasic viscosity coefficients $\beta_k$, $\mu_k$ and $\kappa_k$ that appear in \eqt{eq:visc-reg-7-equ-sect4}. 
-Following Guermond et al. (Section 2.2 in \cite{jlg}), we employ $\mu_k =  \kappa_k = \tfrac{1}{2} h \left( ||\mbold u_k|| + c_k \right)$ where $h$ is the grid size and $||\mbold u_k|| + c_k$ is the 
-largest eigenvalue of the phasic Euler equations. 
-For the viscosity coefficient to be used in the volume fraction equation, we proceed identically  and have $\beta_k = \tfrac{1}{2} h || \mbold u_{int} ||$ 
-where $\mbold u_{int}$ is the interfacial velocity and also the eigenvalue corresponding to the volume fraction equation. 
+Following Guermond et al. (Section 2.2 in \cite{jlg}), we employ $\mu_k =  \kappa_k = \beta_k = \tfrac{1}{2} h \left( ||\mbold u_k|| + c_k \right)$ where $h$ is the grid size and $||\mbold u_k|| + c_k$ is the 
+largest eigenvalue of the phase $k$. Under this assumption, the numerical scheme is equivalent to Lax-Friedrich scheme which is known to be over-dissipative.
+%For the viscosity coefficient to be used in the volume fraction equation, we proceed identically  and have $\beta_k = \tfrac{1}{2} h || \mbold u_{int} ||$ 
+%where $\mbold u_{int}$ is the interfacial velocity and also the eigenvalue corresponding to the volume fraction equation. 
 \tcr{well, to be completely true to Section 2.2. of Guermond, which is about explaining that the Lax Friedrich scheme boils doen to the first-order viscosity, 
 all first-order viscosity coefficients should be the same and the only speed to be used should the largest speed, either u+c or uint}.\\
-At $t=0$, the membrane is suddenly removed and the simulation is ran until $t=.0305\times 10^{-3}$; see \fig{fig:two-phase}.
-The viscous numerical solutions do not display any instability in the vicinity of the shock region ($x \approx 0.63$). In \fig{fig:two-phase-density}, the contact wave is smeared 
+At $t=0$, the membrane is suddenly removed and the simulation is ran until $t=1.8\times 10^{-1}$; see \fig{fig:two-phase}.
+The viscous numerical solutions do not display any instability in the vicinity of the shock region ($x \approx 0.73$). In \fig{fig:two-phase-density}, the contact wave is smeared 
 because of the over-dissipative nature of the viscosity coefficients. This example shows that the viscous regularization developed in this paper can efficiently stabilize the numerical solution.
 We can also observe that the phasic pressures and velocities are indeed identical for large values of relaxation parameters.
 \tcr{would it be possible to run this with no viscosity? Or ran it with no viscosity in the density equations, just to compare, as Guermond did?}\\
 This example demonstrates the ability of the proposed viscous regularization to stabilize the seven-equation two-phase flow model. The numerical solution does not display any instabilities. 
-%The chosen definitions for the viscosity coefficients 
-%because of the over-dissipative nature of the viscosity coefficients. On the other hand, the discontinuities will be smeared
-%but there are no undershoots or overshoots. 
-%Numerical results are presented inat the final time $t=305 \ \mu s$ and were obtained using a Continuous Galerkine Finite Element method along with the implicit temporal integrator BDF2 \cite{bdf2} within the Moose framework \cite{Moose}.
 %
 \begin{figure}[H]
         \centering
         \begin{subfigure}[b]{0.5\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_velocity_fo.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_velocity_fo_lf.png}
                 \caption{Velocity}
                 \label{fig:two-phase-vel}
         \end{subfigure}%
         \begin{subfigure}[b]{0.5\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_density_fo.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_density_fo_lf.png}
                 \caption{Density}
                 \label{fig:two-phase-density}
         \end{subfigure}
         
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_pressure_fo.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_pressure_fo_lf.png}
                 \caption{Pressure}
                 \label{fig:two-phase-press}
         \end{subfigure}        
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_volume_fraction_fo.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_volume_fraction_fo_lf.png}
                 \caption{Volume fraction}
                 \label{fig:two-phase-vf}
         \end{subfigure}
-        \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$}\label{fig:two-phase}
+        \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=0.18 \ s$.}\label{fig:two-phase}
 \end{figure}
 %
 We have also verified that if we set the relaxation coefficients $\mu_P$ and $\lambda_u$ to zero (which is equivalent to solving Euler equations for each fluid independently), we recover 
@@ -1283,8 +1278,6 @@ The ability of the proposed regularization to stabilize the SEM equations was nu
 artificial viscosity coefficients borrowed from the Lax-Friedrichs scheme.
 
 As future work, this two-phase flow viscous regularization should be tested with high-order, less-dissipative, artificial viscosity schemes, such as the entropy viscosity method (e.g., see \cite{jlg1} for single-phase supersonic flows and \cite{Marco_paper_low_mach} single-phase subsonic and transonic flows).
-
-%As future work, we recommend similar numerical tests for the seven-equation two-phase flow model in various Mach regimes. For instance, various regularization techniques have been used for two-phase flows: Lapidus schmes \cite{Lapidus_paper, Lapidus_book}, pressure-based schemes \cite{PBV_book}, etc.  We plan on testing the viscous regularization proposed here and on comparing it with existing methods. 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{mybibfile}
