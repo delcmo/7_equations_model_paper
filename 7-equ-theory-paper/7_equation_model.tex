@@ -1299,9 +1299,14 @@ Based on this results, adequate scaling of the viscosities can be obtained for a
 We have also shown that the regularized SEM equations yields a regularized version of the five-equation flow model of Kapila by means of a Chapman-Enskog expansion.
 
 The ability of the proposed regularization to stabilize the SEM equations was numerically demonstrated using a shock tube problem, with the definitions of the 
-artificial viscosity coefficients borrowed from the Lax-Friedrichs scheme.
+artificial viscosity coefficients borrowed from the Lax-Friedrichs scheme. We also analyzed the effect of removing stabilization from the volume fraction and the continuity equations.
 
-As future work, this two-phase flow viscous regularization should be tested with high-order, less-dissipative, artificial viscosity schemes, such as the entropy viscosity method (e.g., see \cite{jlg1} for single-phase supersonic flows and \cite{Marco_paper_low_mach} single-phase subsonic and transonic flows).
+As an extension of this work, the two-phase flow viscous regularization presented here should be utilized and tested with high-order, less dissipative, artificial viscosity schemes, 
+such as the entropy viscosity method (e.g., see \cite{jlg1} for single-phase supersonic flows and \cite{Marco_paper_low_mach} single-phase subsonic and transonic flows). 
+We also note that the proposed regularization can also be employed using definitions of viscosity coefficients traditionally used in two-phase flows, e.g., 
+the Lapidus viscosity \cite{Lapidus_paper, Lapidus_book} and pressure-based viscosity for two-phase flows \cite{PBV_book}. We intend on reporting on these findings in a subsequent
+publication. 
+
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{mybibfile}
