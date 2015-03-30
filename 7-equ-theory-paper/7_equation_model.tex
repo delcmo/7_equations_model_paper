@@ -1206,20 +1206,20 @@ In this example, we set the relaxation coefficients $\mu_P$ and $\lambda_u$ to l
 % In this case, the SEM degenerates to the five-equation model of Kapila (see \sct{sec:chap-enskog}). 
 We consider two fluids, denoted by the subscripts $1$ and $2$, and employ an idea gas law, $P_k=(\gamma_k-1) \rho_k e_k$, with the following parameters $\gamma_1=3$ and $\gamma_2=1.4$. 
 The numerical illustration consists of a 1-D shock tube of length 1 separated by a membrane placed at $x=0.5$. The initial left/right values of the pressures are
- $(P_{left}=10)$ and $(P_{right}=1)$. The initial density and volume fraction are uniform and set to $\rho_1=10$, $\rho_2=1$ and $\alpha = 0.5$, respectively. Both fluids are initially at rest. 
+ $(P_{k,left}=10)$ and $(P_{k,right}=1)$ (for $k=1,2$). The initial density and volume fraction are uniform and set to $\rho_1=10$, $\rho_2=1$ and $\alpha = 0.5$, respectively. Both fluids are initially at rest. 
  
 In order to test the proposed viscous regularization, we need to define the phasic viscosity coefficients $\beta_k$, $\mu_k$ and $\kappa_k$ that appear in \eqt{eq:visc-reg-7-equ-sect4}. 
 Following Guermond et al. (Section 2.2 in \cite{jlg}), we employ $\mu_k =  \kappa_k = \beta_k = \tfrac{1}{2} h \left( ||\mbold u_k|| + c_k \right)$ where $h$ is the grid size and $||\mbold u_k|| + c_k$ is the 
-largest eigenvalue of the phase $k$. Under this assumption, the numerical scheme is equivalent to Lax-Friedrich scheme which is known to be over-dissipative.
+largest for phase $k$. With this choice is viscosities, the numerical scheme is equivalent to a local Lax-Friedrichs scheme which is known to be over-dissipative.
 %For the viscosity coefficient to be used in the volume fraction equation, we proceed identically  and have $\beta_k = \tfrac{1}{2} h || \mbold u_{int} ||$ 
 %where $\mbold u_{int}$ is the interfacial velocity and also the eigenvalue corresponding to the volume fraction equation. 
-\tcr{well, to be completely true to Section 2.2. of Guermond, which is about explaining that the Lax Friedrich scheme boils doen to the first-order viscosity, 
-all first-order viscosity coefficients should be the same and the only speed to be used should the largest speed, either u+c or uint}.\\
+%\tcr{well, to be completely true to Section 2.2. of Guermond, which is about explaining that the Lax Friedrich scheme boils doen to the first-order viscosity, 
+%all first-order viscosity coefficients should be the same and the only speed to be used should the largest speed, either u+c or uint}.\\
 At $t=0$, the membrane is suddenly removed and the simulation is ran until $t=1.8\times 10^{-1}$; see \fig{fig:two-phase}.
-The viscous numerical solutions do not display any instability in the vicinity of the shock region ($x \approx 0.73$). In \fig{fig:two-phase-density}, the contact wave is smeared 
+The viscous numerical solutions do not display any instability in the vicinity of the shock region ($x \simeq 0.73$). In \fig{fig:two-phase-density}, the contact wave \tcr{($x \simeq 0.6$)} is smeared 
 because of the over-dissipative nature of the viscosity coefficients. This example shows that the viscous regularization developed in this paper can efficiently stabilize the numerical solution.
 We can also observe that the phasic pressures and velocities are indeed identical for large values of relaxation parameters.
-\tcr{would it be possible to run this with no viscosity? Or ran it with no viscosity in the density equations, just to compare, as Guermond did?}\\
+\tcr{can you give the relaxation values? Mathematicians want everywhere to be fully defined}\\
 This example demonstrates the ability of the proposed viscous regularization to stabilize the seven-equation two-phase flow model. The numerical solution does not display any instabilities. 
 %
 \begin{figure}[H]
@@ -1252,8 +1252,10 @@ This example demonstrates the ability of the proposed viscous regularization to 
         \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=0.18 \ s$.}\label{fig:two-phase}
 \end{figure}
 %
-We further investigate the influence of the viscosity coefficients onto the numerical simulations by running the same test as above for three different cases:
-(1) all viscosity coefficients are equal which corresponds to Lax-Friedrich scheme, (2) the definition of the viscosity coefficients $\mu_k$ and $\kappa_k$ are unchanged and $\beta_k$ is set to zero, and (3) the viscosity coefficients $\kappa_k$ and $\beta_k$ are set to zero and $\mu_k$ is unchanged. Numerical results of the density profiles are presented in \fig{fig:density}
+We further investigate the influence of the viscosity coefficients on the numerical solution by comparing several cases:
+(1) all viscosity coefficients are equal (Lax-Friedrichs scheme already shown in \fig{fig:two-phase}) \tcr{check}, 
+(2) the definitions for $\mu_k$ and $\kappa_k$ are unchanged but $\beta_k$ is set to zero \tcr{the figure shows no effect. smeone may conclude we do not need to stabilize the volume fraction. do you have a plot of another quantity where we see an effect?}, 
+and (3) the viscosity coefficients $\kappa_k$ and $\beta_k$ are set to zero while $\mu_k$ is unchanged (in doing so, no stabilization is present in the continuity equations). Density profiles are presented in \fig{fig:density}.
 %
 \begin{figure}[H]
         \centering
@@ -1272,9 +1274,9 @@ We further investigate the influence of the viscosity coefficients onto the nume
         \caption{Numerical solutions of the liquid and vapor densities with large relaxation coefficients and three different viscosity types at $t=0.18 \ s$.}\label{fig:density}
 \end{figure}
 %
-In case (1) and (2), the numerical solutions does not display any instability in the density profiles. Even when setting the volume fraction viscous coefficient $\beta_k$ to zero, the density profiles remains smooth. However, in case (2) the volume fraction profiles displayed spurious oscillations in the vicinity of the contact region (not shown here). In the third case, the phasic continuity equations are no longer regularized since $\kappa_k=0$ by assumption, leading to the formation of instabilities in the pre-contact region and the presence of an undershoot in the post-contact region. This result is consistent with the study performed by Guermond et al. in \cite{jlg} for Euler equations that compared numerical solutions obtained when using a viscous regularization involving a dissipative term in the continuity equation and the Navier-Stokes regularization.
+In cases (1) and (2), the numerical solutions do not display any instability in the density profiles. Even when setting the viscosity coefficient for the volume fraction to zero ($\beta_k=0$), the density profiles remain smooth. However, in case (2) the volume fraction profile displays spurious oscillations in the vicinity of the contact region (see \fig{fig:volume_fraction_case2}\tcr{why not add that figure as Fig. 3?}). In the third case, the continuity equations are no longer regularized since $\kappa_k=0$ in this case; this leads to the formation of instabilities in the pre-contact region and the presence of an undershoot in the post-contact region. This result is consistent with the study performed by Guermond et al. in \cite{jlg} for single-pgase Euler equations where they compared numerical solutions obtained when using a parabolic regularization (which includes a dissipative term in the continuity equation) and the Navier-Stokes regularization.
 
-We have also verified that if we set the relaxation coefficients $\mu_P$ and $\lambda_u$ to zero (which is equivalent to solving Euler equations for each fluid independently), we recover 
+We have also verified that if we set the relaxation coefficients $\mu_P$ and $\lambda_u$ to zero (which is equivalent to solving the Euler equations for each fluid independently), we recover 
 the single-phase Euler shock tube results recently published in \cite{jlg1, jlg2} using the same viscous stabilization. 
 
 %
