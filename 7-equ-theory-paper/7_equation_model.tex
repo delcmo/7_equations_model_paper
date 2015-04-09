@@ -1012,8 +1012,8 @@ the pressure and velocity interfacial variables will be specified for each case.
 M_{k,\infty} = \frac{u_{k,\infty}}{c_{k,\infty}}.
 \end{equation}
 %
-With the scaling introduced in \eqt{eq:norm_param}, the scaled equations for phase $k$ with viscous regularization are as follows:
-\tcr{Marco, need a volume fraction equation here also}
+With the scaling introduced in \eqt{eq:norm_param}, the scaled equations for phase $k$ with viscous regularization are as follows (the volume fraction equation is omitted since the volume fraction is assumed constant for each phase and there is not relaxation terms):
+\tcr{Marco, need a volume fraction equation here also} \tcb{done}
 %\tcb{The following set of equations is very painful to read. I guess we can improve the format but I cannot think of a better way of presenting the scaled equations, unless we include all of this in an appendix (I am not for it)}
 % 
 \begin{subequations}\label{eq:sev_equ_case_one_scaled}
@@ -1097,13 +1097,13 @@ A \grad \left( \alpha_k P_k \right)_1 = 0 \Longrightarrow \grad P_{k,1} = 0 \, .
 From \eqt{eq:asympt_equ1} we infer that the leading- and first-order pressure terms are spatially independent which ensures that the 
 pressure variations are of order Mach number squared, as expected in the low-Mach asymptotic limit.
 Using the scaling $\Re_{k,\infty} = \Pe_{k,\infty}^\kappa = \Pe_{k,\infty}^\beta = 1$, the second-order momentum equations 
-and the leading-order expressions for the volume fraction, continuity, and energy equations are:
+and the leading-order expressions for the continuity, momentum and energy equations are:
 \begin{subequations}
 \label{eq:asympt_equ2}
 %
-\begin{equation}\label{eq:asympt_equ2_vf}
-\partial_t \left( A \alpha_k \right)_0  + \mbold u_{k,0} A \cdot \grad \alpha_{k,0} = \div \left( A \beta_k \grad \alpha_k \right)_0
-\end{equation}
+%\begin{equation}\label{eq:asympt_equ2_vf}
+%\partial_t \left( A \alpha_k \right)_0  + \mbold u_{k,0} A \cdot \grad \alpha_{k,0} = \div \left( A \beta_k \grad \alpha_k \right)_0
+%\end{equation}
 %
 \begin{equation}
 \label{eq:asympt_equ2_cont}
