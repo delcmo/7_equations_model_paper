@@ -16,7 +16,7 @@
 %
 \section{Compatibility of the viscous regularization for the seven-equation two-phase model with the generalized Harten entropies}\label{app:harden}
 %
-We investigate in this appendix whether the viscous regularization of the seven-equation two-phase model derived in \sct{sec:visc-regu} is compatible with some or all generalized entropies identified in Harten et al. \cite{Harten}. Considering the single-phase Euler equations, Harten et al. \cite{Harten} demonstrated that a function $\rho \mathscr{H}(s)$ is called a generalized entropy and is strictly concave if $\mathscr{H}$ is twice differential and
+We investigate in this appendix whether the viscous regularization of the seven-equation two-phase model derived in \sct{sec:visc-regu} is compatible with some or all generalized entropies identified in Harten et al. \cite{Harten}. Considering the single-phase Euler equations, Harten et al. \cite{Harten} demonstrated that a function $\rho \mathscr{H}(s)$ is called a generalized entropy and is strictly concave if $\mathscr{H}$ is twice differentiable and
 %
 \begin{multline}\label{eq:generalized_ent}
 \mathscr{H}' (s)  \geq 0, \ \ \ \ \mathscr{H}'(s)c_p^{-1} - \mathscr{H}'' \geq 0, \ \forall \left( \rho, e \right) \in \mathbb{R}_+^2 \ ,
@@ -49,7 +49,8 @@ Let us now multiply the continuity equation of phase $k$ by $\mathscr{H}_k (s_k)
 \underbrace{ \mathscr{H}_k'(s_k)(s_e)_k  \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k}_{\mathbb{T}_1} & .
 \end{align}
 %
-As in \sct{sec:visc-regu}, the left-hand side of \eqt{eq:ent-res-7-eqn-diss-terms-app3} is split into two residuals denoted by $\mathbb{T}_0$ and $\mathbb{T}_1$ in order to study the sign of each of them. We start by studying the sign of $\mathbb{T}_1$ that is positive since it is assumed that $ \mathscr{H}_k'(s_k) \geq 0$. We now investigate the sign of $\mathbb{T}_0$. Using \eqt{eq:generalized_ent}, we have:
+As in \sct{sec:visc-regu}, the left-hand side of \eqt{eq:ent-res-7-eqn-diss-terms-app3} is split into two residuals denoted by $\mathbb{T}_0$ and $\mathbb{T}_1$ in order to study the sign of each of them.
+Obviously the sign of $\mathbb{T}_1$ is positive since it is assumed that $ \mathscr{H}_k'(s_k) \geq 0$.  To investigate the sign of $\mathbb{T}_0$, we use \eqt{eq:generalized_ent} to get:
 %
 \begin{equation}\label{eq:new_quad_form}
 - \mathbb{T}_0 \leq \mathscr{H}_k'(s_k) \alpha_k A \kappa_k \rho_k \left( c_{p,k}^{-1} \|\grad s_k\|^2 +  Q_k\right) \ .
@@ -62,6 +63,6 @@ The right-hand side of \eqt{eq:new_quad_form} is a quadratic form that was alrea
 \div \left[ \alpha_k A \rho_k \kappa_k \grad \mathscr{H}_k (s_k) + \alpha_k A \kappa_k \mathscr{H}_k (s_k) \grad \rho_k  \right. & \left. + A \kappa_k \rho_k \mathscr{H}_k (s_k) \grad \alpha_k\right] \geq 0 \ .\nonumber 
 \end{align}
 %
-For there, we conclude that an entropy inequality is satisfied for all generalized entropies $\rho_k \mathscr{H}_k (s_k)$ when using the viscous regularization derived in \sct{sec:visc-regu} for the seven-equation two-phase model. Note that the above inequality holds for the total entropy of the system as well, i.e., when summing over the phases (the source terms are determined from rational thermodynamics that requires summations over the phases).
+Subsequently, we conclude that an entropy inequality is satisfied for all generalized entropies $\rho_k \mathscr{H}_k (s_k)$ when using the viscous regularization derived in \sct{sec:visc-regu} for the seven-equation two-phase model. Note that the above inequality holds as well for the total entropy of the system (i.e. summation over the phasic entropy statements).
 %
 \pagebreak{}
