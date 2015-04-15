@@ -70,7 +70,7 @@
 %=================================================================================================
 
 %============================================================
-\date{11/11/2014}
+\date{\today}
 
 %\addtobeamertemplate{footline}{\hfill\insertframenumber/\inserttotalframenumber\hspace{2em}\null}
 
@@ -95,10 +95,12 @@
 \urldef{\ragusa}\url{jean.ragusa@tamu.edu}
 \urldef{\delchini}\url{delcmo@tamu.edu}
 \urldef{\berry}\url{ray.berry@inl.gov}
+\urldef{\andrs}\url{David.Andrs@inl.gov}
+\urldef{\martineau}\url{rcmartineau@gmail.com}
 
-\title{Extension of the entropy viscosity method to the low-Mach regime for the multi-dimensional Euler equations}
+\title{APPLICATION OF THE REACTOR SYSTEM CODE RELAP-7 TO SINGLE- AND TWO-PHASE FLOW WATER-HAMMER PROBLEMS}
 
-\author{Marc O. Delchini$^\star$, Jean C. Ragusa$^\star$, Ray Berry$^\ddagger$}
+\author{Marc O. Delchini$^\star$, Jean C. Ragusa$^\star$, Ray Berry$^\ddagger$, David Andrs$^\ddagger$ and Richard Martineau$^\ddagger$}
 \institute{
 $^\star$   Texas A\&M University, College Station, TX, USA\\
 $^\ddagger$ Idaho National Laboratory, Idaho Falls, ID, USA}
@@ -109,7 +111,7 @@ $^\ddagger$ Idaho National Laboratory, Idaho Falls, ID, USA}
 %
 \begin{frame}
 \titlepage
-\small{email:  {\delchini}, {\ragusa}, {\berry} }
+\small{email:  {\delchini}, {\ragusa}, {\berry}, {\andrs}, {\martineau} }
 \end{frame}
 %
 \begin{frame}
@@ -308,7 +310,7 @@ The denominator $|| s - \bar{s} ||_\infty$ is used for dimensionality purposes,
 
 \vspace{-1mm}
 \begin{block}{First-order viscosities $\mu_{max}$ and $\kappa_{max}$}
-\tcb{Upper bound} for the entropy viscosities  
+\tcb{Upper bound} for the entropy viscosities (local Lax-Friedrichs) 
 %
 \begin{equation}
 \label{eq:fo}
@@ -536,7 +538,7 @@ Similarly :  $\norm_{P,\infty}^{\mu} = \rho_\infty c_\infty^2 $.
 %********************************************************
 \begin{frame}{Bridging the gap from low-Mach to supersonic}
 
-\begin{block}{Answer from non-isentropic study with same approach}
+\begin{block}{Answer from non-isentropic study with same methodology}
 \begin{equation}
 \mu^K_e(\vec{r}_q,t)    = h_K^2 \frac{ | \resinew^K(\vec{r}_q,t) | }{ \rho || \vec{u} ||^2 }    \, , \text{ and } 
 \kappa^K_e(\vec{r}_q,t) = h_K^2 \frac{ | \resinew^K(\vec{r}_q,t) | }{ \rho c^2 } \, . \nonumber
@@ -572,9 +574,35 @@ However, we want to keep the \textcolor{red}{all-speed aspect of the flow solver
 \subsection{1-D Numerical results using Relap-7}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Single-phase water hammer}
-\begin{center}
-\movie[width=6cm,height=4cm,showcontrols=true,externalviewer]{\includegraphics[width=6cm,height=4cm]{engr.pdf}}{../../movies/water-hammer-test-pressure.avi}
-\end{center}
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{../../figures/paper/Plot_velocity_single_phase.png}
+                \caption{Velocity}
+                \label{fig:single-phase-vel}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{../../figures/paper/Plot_density_single_phase.png}
+                \caption{Density}
+                \label{fig:single-phase-density}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{../../figures/paper/Plot_pressure_single_phase.png}
+                \caption{Pressure}
+                \label{fig:single-phase-press}
+        \end{subfigure}        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{../../figures/paper/Plot_viscosity_single_phase.png}
+                \caption{Viscosity coefficients}
+                \label{fig:single-phase-visc}
+        \end{subfigure}
+        \caption{Numerical solutions of a water hammer at times $t=8.7 \times 10^{-4}, \, 6.8 \times 10^{-3} \text{ and } 10^{-3}$ s (the viscosity coefficients are only shown at time $t=8.7 \times 10^{-4}$ s).}\label{fig:single-phase}
+\end{figure}
 \end{frame}
 %************************************************
 %************************************************
@@ -594,7 +622,7 @@ However, we want to keep the \textcolor{red}{all-speed aspect of the flow solver
 \item Exchange terms between phases: relaxation terms. These terms were derived using \emph{rational thermodynamic} and are consistent with the entropy minimum principle.
 \item {\color{red}The system of equations is hyperbolic and has seven real waves}
 \item The SEM degenerates to single-phase Euler equations when one phase disappears
-\item The SEM degenerates into a 5-equation model when using infinite relaxation coefficients
+\item The SEM degenerates into a 5-equation model when using infinite relaxation coefficients $\rightarrow$ Chapman-Enskog expansion.
 
 \item \tcr{Numerical methods applied to the SEM : discontinuous schemes so far }
 \end{itemize}
@@ -642,7 +670,7 @@ P_{int} \vec{u}_{int} A \grad \alpha_k - {\color{red}\mu_P \bar{P}_{int} \left( 
 \begin{equation}
 \left\{
 \begin{array}{lcl}
-{\color{blue}\vec{l}_k} = A \beta_k \grad \alpha_k \\ %A {\color{magenta}\beta_k} \grad \alpha_k & & \\
+{\color{blue}\vec{l}_k} = A \beta_k \grad \alpha_k \\ 
 {\color{blue}\vec{f}_k} = \alpha_k A {\color{magenta}\kappa_k}  \grad \rho_k + \rho_k \vec{l}_k& & \\
 {\color{blue}\mathbb{g}_k} = \alpha_k A \rho_k {\color{magenta}\mu_k} \grad^s \vec{u}_k + \vec{u}_k \otimes \vec{f}_k & & \\
 {\color{blue}\vec{h}_k} = \alpha_k A {\color{magenta}\kappa_k} \grad(\rho_k e_k) - \frac{||\vec{u}_k||^2}{2} \vec{f}_k + \vec{u} \cdot \mathbb{g}_k + \rho_k e_k \vec{l}_k & &
@@ -663,10 +691,9 @@ $\mu_{k,e}(\vec{r},t)    = \frac{h^2 \max(\resinew_k, J_k)}{ \textcolor{red}{\no
 %
 \hspace{0.5cm} $\bullet$ $\resinew_k= \frac{DP_k}{Dt} - c_k^2 \frac{D\rho_k}{Dt}$ and $J_k = ||\vec{u_k} || \max \left( [[\ \grad P_k \cdot \vec{n}\ ]]  ,\ [[c_k^2 \grad \rho_k \cdot \vec{n} \ ]]\right)$ \\[3pt]
 %
-\hspace{0.5cm} $\bullet$ $\textcolor{red}{\norm_{k,P}^\mu} = \mathbb{G}(M_k) \rho_k || \vec{u}_k ||^2 + (1-\mathbb{G}(M_k)) \rho_k c_k^2$ \\ [4pt]
+\hspace{0.5cm} $\bullet$ $\textcolor{red}{\norm_{k,P}^\mu} = a_k(M_k) \rho_k || \vec{u}_k ||^2 + (1-a_k(M_k)) \rho_k c_k^2$ \\ [4pt]
 %
-\hspace{0.5cm} $\bullet$ $\lim_{M_k \to 0} \mathbb{G}(M_k) = 0$ and $\lim_{M_k \to + \infty} \mathbb{G}(M_k) = 1$
-%\hspace{0.5cm} $\bullet$ $\mathbb{G}(M_k) = \frac{\tanh (a(M_k-M_\infty)) + |\tanh (a(M_k-M_\infty))|}{2}$
+\hspace{0.5cm} $\bullet$ $\lim_{M_k \to 0} a_k(M_k) = 0$ and $\lim_{M_k \to + \infty} a_k(M_k) = 1$
 \end{block}
 %
 \begin{block}{\normalsize $\beta_k(\vec{r},t) = \min \Big (\beta_{k,\max}(\vec{r},t), \beta_{k,e} (\vec{r},t) \Big )$}
@@ -676,11 +703,11 @@ and $\beta_{k,e} = h^2 \frac{ R_{k,\alpha}}{|| \eta_k - \bar{\eta}_k ||_\infty}$
 \hspace{0.5cm} $\bullet$ $R_{k,\alpha} = \partial_t \eta_k + \vec{u}_{int}\cdot \grad \eta_k$ with $\eta_k = \frac{\alpha_k^2}{2}$ %and $J_{k,\alpha} = ||\vec{u}_{int} || \  [[\ \grad \alpha_k \cdot \vec{n}\ ]]$
 \end{block}
 \end{frame}
-%************************************************
-%************************************************
+%**************************************************************
+%**************************************************************
 \subsection{1-D numerical results using Relap-7}
-%************************************************
-%************************************************
+%**************************************************************
+%**************************************************************
 \begin{frame}{Two-phase flow water hammer}
 \begin{center}
 \movie[width=6cm,height=4cm,showcontrols=true,externalviewer]{\includegraphics[width=6cm,height=4cm]{engr.pdf}}{../../movies/water-hammer-test-pressure.avi}
@@ -693,16 +720,27 @@ and $\beta_{k,e} = h^2 \frac{ R_{k,\alpha}}{|| \eta_k - \bar{\eta}_k ||_\infty}$
 \end{center}
 \end{frame}
 %************************************************
-\begin{frame}
-
-\begin{block}{Conclusions}
-\ben
-\item Extended the entropy viscosity method to low-Mach flows
-\item Presented numerical results using a \emph{continuous} FEM spatial discretization and an implicit (BDF2) temporal integration
-\item Method is in RELAP-7, a MOOSE-based application of the INL
-\een
+\begin{frame}{Conclusions and future work}
+\begin{block}{Euler equations}
+\begin{itemize}
+\item removed the need to have an entropy function
+\item extended the EVM to low-Mach flows through a low-Mach asymptotic analysis 
+\item validated our approach with $1$-D water-hammer test.
+\item used as a numerical method in RELAP-7
+\end{itemize}
 \end{block}
-
+\begin{block}{The seven-equation two-phase flow model (SEM)}
+\begin{itemize}
+\item derived a viscous regularization for the SEM
+\item defined the viscosity coefficients using the same methodology as for single-phase flow equation
+\item our approach was validated by $1$-D results: water-hammer and hydrostatic tests.
+\item used as a numerical method in RELAP-7
+\end{itemize}
+\end{block}
+\begin{block}{MOOSE/RELAP-7}
+Fully  implicit temporal discretization with {\it continuous} FEM through MOOSE\\
+Used in the next-gen nuclear reactor safety code RELAP-7
+\end{block}
 \end{frame}
 %************************************************
 \end{document}
