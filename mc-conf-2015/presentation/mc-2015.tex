@@ -255,6 +255,7 @@ v_e^K(x_q) := h_K \frac{|R_e(x_q)|_K}{|s-\overline{s}|_\infty}
 \begin{frame} 
 \frametitle{Euler equations with viscous regularization}
 
+The dissipative terms (in red) are added to the inviscid Euler equations.
 
 \begin{block}{Euler equations with viscous regularization (final form)}
 \begin{subequations}
@@ -573,6 +574,17 @@ However, we want to keep the \textcolor{red}{all-speed aspect of the flow solver
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{1-D Numerical results using Relap-7}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{1-D numerical results}
+\begin{block}{Water-hammer test}
+\begin{itemize}
+\item Discretization of 1-D pipe: linear test function, BDF2, 500 cells.
+\item Uniform pressure $P= 7 / MPa$, uniform velocity $u=-12.5 \ m/s$ and uniform temperature $T=517 \ K$.
+\item Wall boundary conditions
+\item Numerical solution showed at time $t=8.7 \times 10^{-4}, \ 6.8 \times 10^{-3}$ and $10^{-2}$ s.
+\end{itemize}
+\end{block}
+\end{frame}
+%************************************************
 \begin{frame}{Single-phase water hammer}
 \begin{figure}[H]
         \centering
@@ -683,6 +695,7 @@ Note: the viscous flux ${\color{blue}\vec{l}_k}$ plays no part in the entropy mi
 \end{frame}
 %************************************************
 \begin{frame}{An all-Mach flow definition of the viscosity coefficients}
+Same definition as for Euler equations:
 \begin{block}{\normalsize $\mu_k(\vec{r},t)    = \min \Big (\mu_{k,\max}(\vec{r},t), \mu_{k,e} (\vec{r},t)    \Big)$, and $\kappa_k(\vec{r},t) = \min \Big (\mu_{k,\max}(\vec{r},t), \kappa_{k,e} (\vec{r},t) \Big )$} 
 \hspace{0.5cm} $\bullet$ $\ \kappa_{k,\max}(\vec{r},t)  = \mu_{k,\max} (\vec{r},t) = \frac{h}{2} \Big ( ||\vec{u}_k|| + c_k \Big )$.  \\ [3pt]
 %
@@ -696,6 +709,7 @@ $\mu_{k,e}(\vec{r},t)    = \frac{h^2 \max(\resinew_k, J_k)}{ \textcolor{red}{\no
 \hspace{0.5cm} $\bullet$ $\lim_{M_k \to 0} a_k(M_k) = 0$ and $\lim_{M_k \to + \infty} a_k(M_k) = 1$
 \end{block}
 %
+Same definition as for Burger's equation:
 \begin{block}{\normalsize $\beta_k(\vec{r},t) = \min \Big (\beta_{k,\max}(\vec{r},t), \beta_{k,e} (\vec{r},t) \Big )$}
 \hspace{0.5cm} $\bullet$ $\beta_{max} = \frac{h}{2} || \vec{u}_{int} ||$ 
 %and $\beta_{k,e} = h^2 \frac{\max( R_{k,\alpha}, J_{k,\alpha} )}{|| \eta_k - \bar{\eta}_k ||_\infty}$  \\ [3pt]
@@ -708,25 +722,25 @@ and $\beta_{k,e} = h^2 \frac{ R_{k,\alpha}}{|| \eta_k - \bar{\eta}_k ||_\infty}$
 \subsection{1-D numerical results using Relap-7}
 %**************************************************************
 %**************************************************************
-\begin{frame}{Two-phase flow water hammer}
+\begin{frame}{Two-phase flow 1-D water hammer}
 \begin{center}
 \movie[width=6cm,height=4cm,showcontrols=true,externalviewer]{\includegraphics[width=6cm,height=4cm]{engr.pdf}}{../../movies/water-hammer-test-pressure.avi}
 \end{center}
 \end{frame}
 %************************************************
-\begin{frame}{Hydrostatic test}
+\begin{frame}{1-D hydrostatic test}
 \begin{center}
 \movie[width=6cm,height=4cm,showcontrols=true,externalviewer]{\includegraphics[width=6cm,height=4cm]{engr.pdf}}{../../movies/hydrostatic-test-200-cells-Aintmax-1e2-coeff-1em2.avi}
 \end{center}
 \end{frame}
 %************************************************
+\section{Conclusions}
 \begin{frame}{Conclusions and future work}
 \begin{block}{Euler equations}
 \begin{itemize}
 \item removed the need to have an entropy function
 \item extended the EVM to low-Mach flows through a low-Mach asymptotic analysis 
 \item validated our approach with $1$-D water-hammer test.
-\item used as a numerical method in RELAP-7
 \end{itemize}
 \end{block}
 \begin{block}{The seven-equation two-phase flow model (SEM)}
@@ -734,13 +748,20 @@ and $\beta_{k,e} = h^2 \frac{ R_{k,\alpha}}{|| \eta_k - \bar{\eta}_k ||_\infty}$
 \item derived a viscous regularization for the SEM
 \item defined the viscosity coefficients using the same methodology as for single-phase flow equation
 \item our approach was validated by $1$-D results: water-hammer and hydrostatic tests.
-\item used as a numerical method in RELAP-7
 \end{itemize}
 \end{block}
 \begin{block}{MOOSE/RELAP-7}
 Fully  implicit temporal discretization with {\it continuous} FEM through MOOSE\\
 Used in the next-gen nuclear reactor safety code RELAP-7
 \end{block}
+\end{frame}
+%************************************************
+\begin{frame}
+\begin{center}
+Thank you for your attention. \\
+\bigskip
+Questions / Comments ?
+\end{center}
 \end{frame}
 %************************************************
 \end{document}
