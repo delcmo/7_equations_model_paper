@@ -196,50 +196,44 @@ $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively; they are defined in \e
 \end{align}
 \end{subequations}
 %
-%The interfacial specific total enthalpy of phase $k$, $H_{k,int}$, is defined as $H_{k,int} = h_{k,int} + 0.5 || \mbold u_{int} ||^2$, where $h_{k,int}$ is the phasic specific enthalpy evaluated at the interface conditions $(P_{int} \text{ and } T_{int} := T_{sat}(\bar{P}_{int}))$. 
-Following \cite{SEM}, the pressure and velocity relaxation coefficients, $\mu_P$  and $\lambda_u$ respectively, are function of the acoustic 
-impedance $Z_k = \rho_k c_k$ and the specific interfacial area $A_{int}$ as shown in \eqt{eq:relaxation_coeff}.
+Following \cite{SEM}, the pressure and the velocity relaxation coefficients, $\mu_P$  and $\lambda_u$ respectively, are function of the acoustic 
+impedance $Z_k = \rho_k c_k$ and the specific interfacial area $A_{int}$. The specific interfacial area (i.e., the interfacial surface area per unit
+volume of a two-phase mixture), $A_{int}$, is typically dependent upon flow regime conditions and can be provided as a correlation. In \cite{SEM}, $A_{int}$ is chosen to be the same for the velocity and the pressure relaxation coefficients and a function of the liquid volume fraction as follows:
+%
+\begin{equation}
+A_{int} = A_{int}^{max} \left[ 6.75 \left(1-\alpha_{liq} \right)^2 \alpha_{liq} \right] \ . \nonumber
+\end{equation}
+% 
+$A_{int}^{max}$ is referred to as the maximum special interfacial area and set to $5100$ $m^2 / m^3$. With this definition, the interfacial area is zero in the limits $\alpha_{k} = 0$ and $\alpha_{k} = 1$.
+In this paper, we assume that the maximum specific interfacial area can take different values between the velocity and pressure relaxation coefficients as shown in \eqt{eq:relaxation_coeff}:
 %
 \begin{subequations}
 \label{eq:relaxation_coeff}
 \begin{align}
   \label{E-R:86}
-  \mu_P &= \frac{A_{int}}{Z_{k}+Z_{j}}       \,,
-  \\
-  \label{E-R:85}
-  \lambda_u &= \frac{A_{int}}{2}  \frac{Z_{k} Z_{j}}{Z_{k}+Z_{j}} \,.
+  \mu_P = \frac{A_{int}^\mu}{Z_{k}+Z_{j}} 
+  \text{ and }
+%  \label{E-R:85}
+  \lambda_u = \frac{A_{int}^\lambda}{2}  \frac{Z_{k} Z_{j}}{Z_{k}+Z_{j}} \, ,
 \end{align}
 \end{subequations}
 %
-The specific interfacial area (i.e., the interfacial surface area per unit
-volume of a two-phase mixture), $A_{int}$, is typically dependent upon flow regime conditions and can be provided as a correlation. 
-In \cite{SEM}, $A_{int}$ is chosen to be a function of the liquid volume fraction:
+where
 %
 \begin{equation}\label{eq:Aint-sect4}
-A_{int} = A_{int}^{max} \left[ 6.75 \left(1-\alpha_{liq} \right)^2 \alpha_{liq} \right],
+A_{int}^i = A_{int}^{max,i} \left[ 6.75 \left(1-\alpha_{k} \right)^2 \alpha_{k} \right] , \ i \in \{ \mu, \ \lambda \} \ .
 \end{equation}
-% 
-with $A_{int}^{max} = 5100$ $m^2 / m^3$. With this definition, the interfacial area is zero in the limits $\alpha_{k} = 0$ and $\alpha_{k} = 1$. 
-%Lastly, $\Gammakj$ is the net mass transfer rate per unit interfacial area from phase $k$ to phase $j$ \tcr{not the opposite?} \tcb{done}. Its expression, given in \eqt{eq:mass_transfer}, is obtained by considering a vaporization/condensation process that is dominated by heat diffusion at the interface \cite{SEM, BerryMarco_2014}:
-%%
-%\begin{align} \label{eq:mass_transfer}
-%  \Gammakj = \frac{h_{T,  k} \left( T_{k} - T_{int} \right) + h_{T,  j} \left( T_{j} - T_{int} \right)}{L_v \left( T_{int} \right)} ,
-%\end{align}
-%%
-%where $L_v \left( T_{int} \right) = h_{j,  int} - h_{k,  int}$
-%represents the latent heat of vaporization.  The interface
-%temperature is determined by the saturation constraint
-%$T_{int}=T_{sat}(P)$ with the appropriate pressure $P=\bar{P}_{int}$
-%defined previously. The interfacial heat transfer coefficients for phases $k$ and $j$ are denoted by $h_{T,  k}$ and $h_{T,  j}$, respectively, and are computed from correlations \cite{SEM}. 
+%
+Such a choice allows us more freedom in the mechanical coupling between the two phases $k$ and $j$ and will be useful for some other tests presented in SECTION. Note that the phasic entropy inequality holds (REF). 
 
 The set of equations satisfied by phase $j$ are simply obtained by substituting $k$ by $j$ and $j$ by $k$ in \eqt{eq:liq-7-eqn-sect5}, keeping 
-the same definition of the interfacial variables and using \eqt{eq:exch-terms}. The equation for the volume fraction of phase $j$ is simply replaced by the algebraic relation
+the same definition of the interfacial variables and relaxation coefficients given in \eqt{eq:int_variables_def} and \eqt{eq:relaxation_coeff}, respectively. The equation for the volume fraction of phase $j$ is simply replaced by the algebraic relation
 %
 \begin{align}
  \alpha_{j}= 1 - \alpha_{k}, \nonumber
 \end{align}
 %
-which reduces the number of partial differential equations from eight to seven and yields the Seven-Equation two-phase flow Model (SEM). 
+which reduces the number of partial differential equations from eight to seven and yields the Seven-Equation two-phase flow Model (SEM). The next section is dedicated to the derivation of all-Mach phasic viscosity coefficients $\mu_k$, $\kappa_k$ and $\beta_k$ that are still undefined, and are the missing key for yielding a high-order well-scaled viscous-regularization.
 %
 %----------------------------------------------------------------------------------------------------------------------------------
 \subsection{All-Mach definition of the phasic viscosity coefficients}\label{sec:visc-def}
