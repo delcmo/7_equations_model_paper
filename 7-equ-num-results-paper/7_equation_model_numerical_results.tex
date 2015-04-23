@@ -106,7 +106,7 @@ blabla
 \section{The regularized seven-equation two-phase flow model with an all-Mach flow viscous regularization}\label{sec:7-equ-model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-In this section, the regularized seven-equation two-phase flow model derived in (REF) is recalled along with the closure relaxations used to compute the exchange terms in this paper. Then, the definitions of the phasic viscosity coefficients are derived from the low-Mach asymptotic study performed in (REF). 
+In this section, the regularized seven-equation two-phase flow model derived in (REF) is recalled along with the closure relations used to compute the relaxation terms in this paper. Then, the definitions of the phasic viscosity coefficients are derived from the low-Mach asymptotic study performed in (REF). 
 %
 %----------------------------------------------------------------------------------------------------------------------------------
 \subsection{The regularized seven-equation two-phase flow model}
@@ -256,13 +256,13 @@ which reduces the number of partial differential equations from eight to seven a
 %\kappa_k( \mbold r, t) = \min \left( \kappa_{e,k}( \mbold r, t), \kappa_{max,k} ( \mbold r, t) \right) ,\nonumber 
 %\end{align}
 %% 
-%where all of the variables are locally defined. We now define the first-order viscosity coefficients and will focus first on the phasic viscosity coefficients $\kappa_k$ and $\mu_k$ that are intimately linked to the mass, momentum and energy equations. These two viscosity coefficients are involved in dissipative terms that identical to the ones obtained for the single-phase Euler equations \cite{jlg, Marco_paper_low_mach} when seeing the term $\alpha_k A$ as a pseudo cross-section and assuming an uniform void fraction profile. Thus, it is chosen to define the corresponding first-order viscosity coefficients proportional to the local largest eigenvalue $|| \mbold u_k || + c_k$ as follows:
+%where all of the variables are locally defined. We now define the first-order viscosity coefficients and will focus first on the phasic viscosity coefficients $\kappa_k$ and $\mu_k$ that are intimately linked to the mass, momentum and energy equations. These two viscosity coefficients are involved in dissipative terms that identical to the ones obtained for the single-phase Euler equations \cite{jlg, Marco_paper_low_mach} when seeing the term $\alpha_k A$ as a pseudo cross-section and assuming an uniform volume fraction profile. Thus, it is chosen to define the corresponding first-order viscosity coefficients proportional to the local largest eigenvalue $|| \mbold u_k || + c_k$ as follows:
 %%
 %\begin{equation}\label{eq:def-visc-max-sem-sct4}
 %\kappa_{max,k}( \mbold r, t) = \mu_{max,k}( \mbold r, t) = \frac{h}{2} \left( || \mbold u_k||( \mbold r, t) + c_k( \mbold r, t) \right),
 %\end{equation}
 %%
-%where $h$ is the grid size (each phase is solved on the same mesh). It remains to define the first-order viscosity coefficient, $\beta_{max,k}$, used in the void fraction equation. Because the void fraction equation can be treated as a hyperbolic scalar equation with an unique eigenvalue $\mbold u_{int}$, the first-order viscosity coefficient is defined by analogy with Burger's equation \cite{jlg1, jlg2} as follows:
+%where $h$ is the grid size (each phase is solved on the same mesh). It remains to define the first-order viscosity coefficient, $\beta_{max,k}$, used in the volume fraction equation. Because the volume fraction equation can be treated as a hyperbolic scalar equation with an unique eigenvalue $\mbold u_{int}$, the first-order viscosity coefficient is defined by analogy with Burger's equation \cite{jlg1, jlg2} as follows:
 %%
 %%
 %\begin{equation}\label{eq:def-beta-max-sen-sect4}
@@ -293,13 +293,13 @@ which reduces the number of partial differential equations from eight to seven a
 %\end{equation}
 %\end{subequations}
 %%
-%It remains to define the entropy viscosity coefficient $\beta_{e,k}$. For the purpose of this paragraph, let us consider the scalar void fraction equation and assume that the interface velocity $\mbold u_{int}$ is given. Because it is a scalar hyperbolic equation, it is proposed to define the entropy viscosity coefficients on the same model as what is done for Burger's equation \cite{jlg1, jlg2}. Thus, the entropy viscosity viscosity coefficient $\beta_e$ is defined as a function of an entropy residual, $R_{k}^\alpha$, derived from the void fraction equation for phase $k$, and the jump of a function of the void fraction, $J_k^\alpha$, as shown in \eqt{eq:def-beta-sen-sect4}.
+%It remains to define the entropy viscosity coefficient $\beta_{e,k}$. For the purpose of this paragraph, let us consider the scalar volume fraction equation and assume that the interface velocity $\mbold u_{int}$ is given. Because it is a scalar hyperbolic equation, it is proposed to define the entropy viscosity coefficients on the same model as what is done for Burger's equation \cite{jlg1, jlg2}. Thus, the entropy viscosity viscosity coefficient $\beta_e$ is defined as a function of an entropy residual, $R_{k}^\alpha$, derived from the volume fraction equation for phase $k$, and the jump of a function of the volume fraction, $J_k^\alpha$, as shown in \eqt{eq:def-beta-sen-sect4}.
 %%
 %\begin{align}\label{eq:def-beta-sen-sect4}
 %\beta_{e,k}( \mbold r, t) = h^2 \frac{\max\left( | R_{k}^\alpha(\mbold r_q,t) |\,, || J_k^\alpha|| \right)}{\norm_{\alpha, k}^\beta} \,
 %\end{align}
 %%
-%We also introduce a normalization parameter, $\norm_{\alpha,k}^\beta$, whose expression will be further investigated in \sct{sec:low-Mach-sem}. To derive the entropy residual, $R_{\alpha,k}$, we consider the void fraction equation for phase $k$ with its viscous regularization and assume the existence of an entropy denoted by $\eta_k(\alpha_k)$ \cite{Leveque}:
+%We also introduce a normalization parameter, $\norm_{\alpha,k}^\beta$, whose expression will be further investigated in \sct{sec:low-Mach-sem}. To derive the entropy residual, $R_{\alpha,k}$, we consider the volume fraction equation for phase $k$ with its viscous regularization and assume the existence of an entropy denoted by $\eta_k(\alpha_k)$ \cite{Leveque}:
 %%
 %\begin{equation}\label{eq:vf-sem-sct4}
 %\partial_t \left(A \alpha_k \right) + A \mbold u_{int} \cdot \grad \alpha_k = \div \left( \beta_k A \grad \alpha_k \right)
@@ -311,7 +311,7 @@ which reduces the number of partial differential equations from eight to seven a
 %\underbrace{\partial_t \left(A \eta(\alpha_k) \right) + A \mbold u_{int} \cdot \grad \eta(\alpha_k)}_{R_{k}^\alpha} = \frac{\text{d} \eta (\alpha_k)}{\text{d} \alpha_k} \div \left( \beta_k A \grad \alpha_k \right)
 %\end{equation}
 %% 
-%The entropy residual, $R_{k}^\alpha$, is defined as the left hand side of \eqt{eq:vf-sem2-sct4} and is known to be peaked in the shock region and positive when assuming convexity of the entropy $\eta_k$ with respect to $\alpha_k$ \cite{Leveque}. Such a behavior is identical to the entropy residual $\resinew_k$ defined in \eqt{eq:ent_res-sem-sct4}, and will allow detection of the shock wave in the void fraction profile when used in the definition of the entropy viscosity coefficient $\beta_{e,k}$.
+%The entropy residual, $R_{k}^\alpha$, is defined as the left hand side of \eqt{eq:vf-sem2-sct4} and is known to be peaked in the shock region and positive when assuming convexity of the entropy $\eta_k$ with respect to $\alpha_k$ \cite{Leveque}. Such a behavior is identical to the entropy residual $\resinew_k$ defined in \eqt{eq:ent_res-sem-sct4}, and will allow detection of the shock wave in the volume fraction profile when used in the definition of the entropy viscosity coefficient $\beta_{e,k}$.
 %%Because \eqt{eq:vf-sem2-sct4} is identical to \eqt{eq:weak_sol8_sct1b}, it is concluded that $R_{\alpha,k} \geq 0$ when assuming $\eta$ convex with respect to $\alpha_k$, which justifies the definition of the entropy viscosity viscosity coefficient $\beta_{e,k}$ given in \eqt{eq:def-beta-sen-sect4} based on \eqt{sec:evm_hyp_sc_sct1b}. The entropy function is taken equal to $\eta(\alpha_k) = \frac{\alpha_k^2}{2}$ which is convex.
 %%
 %
@@ -434,19 +434,24 @@ where $\mathbf{U}_k=[(\alpha A )_k, \, (\alpha \rho A)_k,\, (\alpha \rho \mbold{
 %===================================================================================================
 \subsection{Spatial and Temporal Discretizations} \label{sec:spatial-disc}
 %===================================================================================================
+%
 The system of equations given in \eqt{eq:form} is discretized using a continuous Galerkin finite element 
 method and temporal integrators available through the MOOSE multiphysics framework \cite{Moose}.
+%
 %---------------------------------------------------------------------------------------------------
 \subsubsection{Continuous Finite Elements} 
 %---------------------------------------------------------------------------------------------------
+%
 In order to apply the continuous finite element method, \eqt{eq:form} is multiplied by a test function 
 $\mathbf W(\mbold{r})$, integrated by parts and each integral is decomposed into a sum of integrals over 
 each element $K$ of the discrete mesh $\Omega$. The following weak form is obtained:
+%
 \begin{multline}\label{eq:cfem}
 \sum_K \int_{K} \partial_t \mathbf U \, \mathbf W - \sum_K \int_{K} \mathbf F (\mathbf U) \cdot \grad \mathbf W + \int_{\partial \Omega} \mathbf F (\mathbf U) \cdot \mbold{n} \mathbf W - \sum_K \int_{K} \left( \mathbf N (\mathbf U) + \mathbf R (\mathbf U) \right) \mathbf W  \\
 + \sum_K \int_{K} D(\mathbf U) \grad \mathbf U \cdot \grad \mathbf W 
 - \int_{\partial \Omega} D(\mathbf U) \grad \mathbf U \cdot \mbold{n} \, \mathbf W = 0 \,.
 \end{multline}
+%
 The integrals over the elements $K$ are evaluated using a numerical quadrature. The MOOSE framework 
 provides a wide range of test functions and quadrature rules. Linear Lagrange polynomials are employed 
 as test functions in the results section. Second-order spatial convergence will be demonstrated for smooth solutions. 
@@ -454,6 +459,7 @@ as test functions in the results section. Second-order spatial convergence will 
 %---------------------------------------------------------------------------------------------------
 \subsubsection{Temporal integration} 
 %---------------------------------------------------------------------------------------------------
+%
 The MOOSE framework offers both first- and second-order explicit and implicit temporal integrators. 
 In all of the numerical examples presented in \sct{sec:results}, the temporal derivative  will be 
 evaluated using the second-order, backward difference temporal integrator BDF2 \cite{bdf2}. By considering three 
@@ -470,46 +476,43 @@ with
 \text{ and } \omega_2 = \frac{\Delta t^{n+1}}{\Delta t^n \left( \Delta t^{n+1} + \Delta t^n \right)} \nonumber
 \end{multline}
 where $\Delta t^{n} = t^n-t^{n-1}$ and $\Delta t^{n+1} = t^{n+1}-t^{n}$.
+%
 %---------------------------------------------------------------------------------------------------
 \subsection{Boundary conditions} \label{sec:bc}
 %---------------------------------------------------------------------------------------------------
-Boundary conditions for the seven-equation model are challenging because of the wave-dominated nature of the equations but also because of the non-conservative form of the void fraction equation. 
-%Unlike the continuity, momentum and energy equations of each phase, the flux of the void fraction equation cannot be integrated by part because it is not written in a conservative form. 
-The boundary condition for the void fraction equation (EQUATION) is treated independently of the other equations (continuity, momentum and energy for each phase) for two reasons: (i) it is a simple advection equation with the real eigenvalue $\mbold u_{int}$, and (ii), the hyperbolic flux, $\mbold u_{int} \cdot \grad \alpha_k$, is not integrated by part since not under a conservative form. The sign of the dot product between the eigenvalue and the outward normal to the boundary, $\mbold u_{int} \cdot \mbold n$, determines the nature of the boundary: negative for an inlet and positive for an outlet. For the later case, the physical information exits the computational domain and does not require any particular treatment. In the former case, the physical information enters the computational domain which requires to specify a value for the void fraction. Since there is no flux at the boundary coming from the integration by part of the hyperbolic flux, the boundary value is imposed by using a Dirichlet boundary condition in the void fraction equation.   
+%
+Boundary conditions for the seven-equation model are challenging because of the wave-dominated nature of the equations but also because of the non-conservative form of the volume fraction equation. 
+The boundary condition for the volume fraction equation, \eqt{eqn:multi-d-7-eqn-liq-vol}, is treated independently of the other equations (continuity, momentum and energy for each phase) for two reasons: (i) it is a simple advection equation with the real eigenvalue $\mbold u_{int}$, and (ii), the hyperbolic flux, $\mbold u_{int} \cdot \grad \alpha_k$, is not integrated by part since not under a conservative form. The sign of the dot product between the eigenvalue and the outward normal to the boundary, $\mbold u_{int} \cdot \mbold n$, determines the nature of the boundary: negative for an inlet and positive for an outlet. For the later case, the physical information exits the computational domain and does not require any particular treatment. In the former case, the physical information enters the computational domain which requires to specify a value for the volume fraction. Since there is no flux at the boundary coming from the integration by part of the hyperbolic flux, the boundary value is imposed by using a Dirichlet boundary condition in the volume fraction equation.   
 Our implementation of the boundary conditions for the continuity, momentum and energy equations, is inspired by the method described in \cite{SEM} and was adapted for a time implicit solver \cite{Marco_dissertation}. The boundary type is identified from the study of the sign of the eigenvalues that depends on the Mach number. The numerical results presented in \sct{sec:results} were all obtained by using subsonic stagnation and static pressure boundary conditions for the inlet and outlet, respectively. The boundary flux is computed from the supplied variables at the boundary and also by iterating on a given number of variables (depending on the sign of the eigenvalues) though the implicit solver to transmit information from inside the computational domain toward the boundary. 
-%After recasting the system of equation using the primitive variables, a characteristic decomposition is performed to compute the appropriate values of the pressure, density and velocity of each phase, used in the flux at the boundaries. 
-%\tcb{I will give more details in the future}
-%\tcr{say a bit more, give 1-2 sentences to describe how to impose subsonic/supersonic inlet/outlet BCs}. \tcb{Is it enough?}
-
-%For each numerical solution presented in \sct{sec:results}, the type of boundary conditions used 
-%will be specified and taken among the following: supersonic inlet, subsonic inlet (stagnation pressure boundary), 
-%subsonic outlet, and supersonic outlet. 
-%and subsonic inlet \tcr{???} (static pressure boundary). \\
 The artificial diffusion coefficient $\mbold D(\mathbf  U)$ is set to zero at the boundary of the computational 
 domain so that the boundary term 
 $\int_{\partial \Omega} \mbold D(\mathbf  U) \grad \mathbf  U \cdot \mbold{n} \, \mathbf W$ stemming from the 
 integration by parts of the artificial dissipative terms in \eqt{eq:cfem} is ignored.
+%
 %---------------------------------------------------------------------------------------------------
 \subsection{Solver} \label{sec:solver}
 %---------------------------------------------------------------------------------------------------
-A Jacobian-free-Newton-Krylov (JFNK) method is used to solve for the solution at the end of each time step. 
-An approximate Jacobian matrix of the discretized equations was derived and implemented. Obtaining the 
-matrix entries requires that the partial derivatives of pressure with respect to the conservative variables 
-be known (this is relatively simple for the stiffened and ideal gas equations of state but may be more 
-complex for general equations of state). The contributions of the artificial dissipative terms to the 
-Jacobian matrix are approximated by lagging the viscosity coefficients (computing them with the previous solution). 
-For instance, this is shown in \eqt{eq:jac_diss_term} for the dissipative terms present in the continuity equation:
-\begin{equation}
-\label{eq:jac_diss_term}
-\frac{\partial}{\partial \mathbf U} \left( \kappa \grad \rho \cdot \grad W \right) \simeq \kappa \div \frac{\partial \rho}{\partial \mathbf U} \grad W ,
-\end{equation}  
-where $\mathbf  U$ denotes any of the conservative variables and $W$ denotes the component of $\mathbf  W$ associated with the 
-continuity equation. In the above, we have neglected $\frac{\partial \kappa}{\partial \mathbf U}$.
+%
+A Jacobian-free-Newton-Krylov (JFNK) method is used to solve for the solution at the end of each time step. A numerical Jacobian matrix is computed by the method of Finite DIfference Preconditioner (FDP) and used a preconditioner.
+%Obtaining the 
+%matrix entries requires that the partial derivatives of pressure with respect to the conservative variables 
+%be known (this is relatively simple for the stiffened and ideal gas equations of state but may be more 
+%complex for general equations of state). The contributions of the artificial dissipative terms to the 
+%Jacobian matrix are approximated by lagging the viscosity coefficients (computing them with the previous solution). 
+%For instance, this is shown in \eqt{eq:jac_diss_term} for the dissipative terms present in the continuity equation:
+%\begin{equation}
+%\label{eq:jac_diss_term}
+%\frac{\partial}{\partial \mathbf U} \left( \kappa \grad \rho \cdot \grad W \right) \simeq \kappa \div \frac{\partial \rho}{\partial \mathbf U} \grad W ,
+%\end{equation}  
+%where $\mathbf  U$ denotes any of the conservative variables and $W$ denotes the component of $\mathbf  W$ associated with the 
+%continuity equation. In the above, we have neglected $\frac{\partial \kappa}{\partial \mathbf U}$.
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{$1$-D numerical results}\label{sec:results}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 \begin{itemize}
 % first part
 \item simple advection problem (SEVAN)
