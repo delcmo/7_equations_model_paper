@@ -67,7 +67,7 @@
 \begin{abstract}
 In this paper, a viscous regularization is derived for the nonequilibrium Seven-Equation two-phase flow Model. The regularization ensures positivity of the entropy 
 residual and uniqueness of the weak solution, is consistent with the viscous regularization for Euler equations when one phase disappears, does not depend on the spatial discretization scheme 
-chosen, and is compatible with the generalized Harten entropies. We also investigate the behavior of the viscous regularization when the Seven-Equation two-phase flow Model degenerates to the five-equation two-phase flow model of Kapila while performing a Chapman-Enskog expansion. Our theoretical approach is illustrated with numerical results from a 1-D shock tube.
+chosen, and is compatible with the generalized Harten entropies. We also investigate the behavior of the viscous regularization when the Seven-Equation two-phase flow Model degenerates to the five-equation two-phase flow model of Kapila while performing a Chapman-Enskog expansion. The low-Mach asymptotic limit is also investigated. Our theoretical approach is illustrated with numerical results of a 1-D shock tube.
 \end{abstract}
 %-------------------------
 %-------------------------
@@ -125,11 +125,9 @@ spatial approximations. For examples of prior applications of the technique to t
 (for finite volume, continuous Galerkin, and spectral FEM discretization) and to \cite{valentin} (for discontinuous Galerkin discretization). 
 
 The remainder of the paper is as follows. In \sct{sec:7-equ-model}, the Seven-Equation two-phase flow Model (SEM) is recalled along with its main 
-physical and mathematical properties. The viscous regularization is derived for the SEM in \sct{sec:visc-regu};  a Chapman-Enskog expansion of the 
-regularized seven-equation model is carried out to yield a regularized version of the five-equation of Kapila.
-A low-Mach aymptotic study for the regularized SEM is performed in \sct{sec:low-Mach}. 
-Finally, we conclude in \sct{sec:conclusion} where we outline possible definitions for artificial viscosity coefficients to be employed with the 
-viscous regularization derived in \sct{sec:visc-regu} and consistent with the low-Mach asymptotics of \sct{sec:low-Mach}.
+physical and mathematical properties. Then in \sct{sec:visc-regu}, a viscous regularization is derived for the SEM and a Chapman-Enskog expansion of the 
+regularized SEM is carried out to yield a regularized version of the five-equation two-phase flow model of Kapila. In \sct{sec:low-Mach}, a low-Mach asymptotic study for the regularized SEM is performed and possible definitions for artificial viscosity coefficients are outlines in order to ensure well-scaled dissipative terms. Our theoretical approach is illustrated in \sct{sec:num-ill} with numerical results for a 1-D two-phase shock tube. 
+Finally, we conclude the study in \sct{sec:conclusion}.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
