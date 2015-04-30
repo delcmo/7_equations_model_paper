@@ -68,15 +68,13 @@
 In this paper, a viscous regularization is derived for the non-equilibrium Seven-Equation two-phase flow Model (SEM). This regularization ensures positivity of the entropy 
 residual, uniqueness of the weak solution, is consistent with the viscous regularization for Euler equations when one phase disappears, does not depend on the spatial discretization scheme 
 chosen, and is compatible with the generalized Harten entropies. We also investigate the behavior of the proposed viscous regularization for two 
-\tcr{theoretical (I want to convey the idea that we do a theoretical analysis, but show no numerical results. not sure this is the best wording)} 
-limit-cases. First, a Chapman-Enskog expansion is performed for the regularized seven-equation two-phase flow model and we show that the five-equation flow 
-model of Kapila a viscous regularization is obtained. Second, a low-Mach asymptotic limit of the regularized seven-equation flow model is carried out, \tcr{yielding blabla}. 
-Our theoretical approach is illustrated with numerical results for 1-D shock tubes.
+theoretical limit-cases. \tcr{ (I want to convey the idea that we do a theoretical analysis, but show no numerical results. not sure this is the best wording)} First, a Chapman-Enskog expansion is performed for the regularized seven-equation two-phase flow model and we show that the five-equation flow 
+model of Kapila is recovered with a well-scaled viscous regularization. This limit-case is illustrated with numerical results for a 1-D shock tube. Second, a low-Mach asymptotic limit of the regularized seven-equation flow model is carried out, yielding an incompressible two-phase flow model. \tcr{yielding blabla} \tcb{done}
 \end{abstract}
 %-------------------------
 %-------------------------
 \begin{keyword}
-seven-equation model \sep two-phase flow model \sep viscous regularization \sep artificial viscosity method \sep five-equation model of Kapilla \sep low-Mach asymptotics 
+seven-equation model \sep two-phase flow model \sep viscous regularization \sep artificial viscosity method \sep five-equation model of Kapila \sep low-Mach asymptotics 
 \end{keyword}
 %-------------------------
 \end{frontmatter}
@@ -102,7 +100,7 @@ for single-phase flows, are employed \cite{Saurel_2001a, Saurel_2001b, Li_2004, 
 low-Mach asymptotic limit and deriving a consistent discretization scheme for the non-conservative terms \cite{Li_2004, Abgrall_2002}.
 
 In review of solutions to nonlinear, hyperbolic, initial boundary value problems, it is well known that, even with smooth initial data, the existence of a 
-globally smooth solution may not occur because of the nonlinearity of the flux functions and other nonlinear terms. The concept of a weak
+globally smooth solution may not occur because of the nonlinearity of the flux functions and other nonlinear terms.\tcb{this one is a pain} The concept of a weak
 solution is introduced to guarantee the existence of a global solution, however, the uniqueness of the solution(s) is lost because the problem may
 allow infinitely many weak solutions.  An additional condition, the``entropy condition,'' is usually imposed to select a
 unique solution, the ``entropy solution,'' among the infinitely many weak solutions. Although there are
@@ -125,7 +123,7 @@ entropies. In addition, we ensure that the regularization scales appropriately i
 in practical applications; the two-phase low-Mach asymptotic study determines conditions that need to be satisfied by the artificial dissipative 
 terms to yield a well-scaled regularization in the low-Mach case \cite{Marco_paper_low_mach}. 
 \tcr{nothing is said about the Chapman-Enskog study here, yet we ``advertize'' this in the abstract. It feels unbalanced...}
-
+We also investigate the behavior of the viscous regularization when the seven-equation two-phase flow model degenerates to the five-equation model of Kapila \cite{Kapila_2001} through a Chapman-Enskog expansion \cite{dellacherie, GuillardMurrone2003}. The objective is to show that the regularized seven-equation model yields a regularized five-equation model of Kapila.
 
 One of the key aspects of the viscous regularization derived here is that it is agnostic of the spatial discretization scheme, unlike approximate 
 Riemann solvers. Therefore, this viscous regularization may be employed to stabilize numerical schemes based on either continuous or discontinuous 
@@ -1165,6 +1163,10 @@ We also note that the proposed regularization can also be employed using definit
 the Lapidus viscosity \cite{Lapidus_paper, Lapidus_book} and pressure-based viscosity for two-phase flows \cite{PBV_book}. We intend on reporting on these findings in a subsequent
 publication. 
 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Acknowledgments} 
+The authors (M.D. and J.R.) would like to thank Bojan Popov and Jean-Luc Guermond for many fruitful discussions.  
+The research was carried out under the auspices of the Idaho National Laboratory for the US Department of Energy.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{mybibfile}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
