@@ -68,7 +68,7 @@
 In this paper, a viscous regularization is derived for the non-equilibrium Seven-Equation two-phase flow Model (SEM). This regularization ensures positivity of the entropy 
 residual, uniqueness of the weak solution, is consistent with the viscous regularization for Euler equations when one phase disappears, does not depend on the spatial discretization scheme 
 chosen, and is compatible with the generalized Harten entropies. We also investigate the behavior of the proposed viscous regularization for two 
-theoretical limit-cases. \tcr{ (I want to convey the idea that we do a theoretical analysis, but show no numerical results. not sure this is the best wording)} First, a Chapman-Enskog expansion is performed for the regularized seven-equation two-phase flow model and we show that the five-equation flow 
+theoretical limit-cases. \tcr{ (I want to convey the idea that we do a theoretical analysis, but show no numerical results. not sure this is the best wording)} \tcb{done} First, a Chapman-Enskog expansion is performed for the regularized seven-equation two-phase flow model and we show that the five-equation flow 
 model of Kapila is recovered with a well-scaled viscous regularization. This limit-case is illustrated with numerical results for a 1-D shock tube. Second, a low-Mach asymptotic limit of the regularized seven-equation flow model is carried out, yielding an incompressible two-phase flow model. \tcr{yielding blabla} \tcb{done}
 \end{abstract}
 %-------------------------
@@ -122,7 +122,7 @@ The proposed viscous regularization for the seven-equation model is consistent w
 entropies. In addition, we ensure that the regularization scales appropriately in the low-Mach regime as such situations are often encountered 
 in practical applications; the two-phase low-Mach asymptotic study determines conditions that need to be satisfied by the artificial dissipative 
 terms to yield a well-scaled regularization in the low-Mach case \cite{Marco_paper_low_mach}. 
-\tcr{nothing is said about the Chapman-Enskog study here, yet we ``advertize'' this in the abstract. It feels unbalanced...}
+\tcr{nothing is said about the Chapman-Enskog study here, yet we ``advertize'' this in the abstract. It feels unbalanced...} \tcb{done}
 We also investigate the behavior of the viscous regularization when the seven-equation two-phase flow model degenerates to the five-equation 
 model of Kapila \cite{Kapila_2001} through a Chapman-Enskog expansion \cite{dellacherie, GuillardMurrone2003}. The objective is to show 
 that the regularized seven-equation model yields a regularized five-equation model of Kapila.
@@ -247,7 +247,7 @@ denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int
 \end{subequations}
 %
 \tcr{is it correct that the averaged quantities work at the micro level? Just by looking at the name, I would have thought that average quantities
-work at the macro level.\\}
+work at the macro level.\\} \tcb{ I think Ray added this part but I would agree with you}
 The interfacial variables $P_{int}$ and $u_{int}$ control the phase dynamics at the macro level because they specify velocity transport
 and forces acting upon volume fraction gradients, while the interfacial variables $\bar{P}_{int}$ and $\bar{u}_{int}$, which specify 
 average transport velocity and pressure force, control the phase dynamics at the micro level.  Following \cite{SEM}, the pressure and 
