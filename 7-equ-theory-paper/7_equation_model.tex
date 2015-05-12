@@ -68,8 +68,8 @@
 In this paper, a viscous regularization is derived for the non-equilibrium Seven-Equation two-phase flow Model (SEM). This regularization ensures positivity of the entropy 
 residual, uniqueness of the weak solution, is consistent with the viscous regularization for Euler equations when one phase disappears, does not depend on the spatial discretization scheme 
 chosen, and is compatible with the generalized Harten entropies. We also investigate the behavior of the proposed viscous regularization for two 
-theoretical limit-cases. \tcr{ (I want to convey the idea that we do a theoretical analysis, but show no numerical results. not sure this is the best wording)} \tcb{done} First, a Chapman-Enskog expansion is performed for the regularized seven-equation two-phase flow model and we show that the five-equation flow 
-model of Kapila is recovered with a well-scaled viscous regularization. This limit-case is illustrated with numerical results for a 1-D shock tube. Second, a low-Mach asymptotic limit of the regularized seven-equation flow model is carried out, yielding an incompressible two-phase flow model. \tcr{yielding blabla} \tcb{done}
+theoretical limit-cases. First, a Chapman-Enskog expansion is performed for the regularized seven-equation two-phase flow model and we show that the five-equation flow 
+model of Kapila is recovered with a well-scaled viscous regularization. This limit-case is illustrated with numerical results for a 1-D shock tube. Second, a low-Mach asymptotic limit of the regularized seven-equation flow model is carried out, yielding an incompressible two-phase flow model with a properly scaled regularization in the low-Mach regime.
 \end{abstract}
 %-------------------------
 %-------------------------
@@ -100,14 +100,14 @@ for single-phase flows, are employed \cite{Saurel_2001a, Saurel_2001b, Li_2004, 
 low-Mach asymptotic limit and deriving a consistent discretization scheme for the non-conservative terms \cite{Li_2004, Abgrall_2002}.
 
 In review of solutions to nonlinear, hyperbolic, initial boundary value problems, it is well known that, even with smooth initial data, the existence of a 
-globally smooth solution may not occur because of the nonlinearity of the flux functions and other nonlinear terms.\tcb{this one is a pain} The concept of a weak
-solution is introduced to guarantee the existence of a global solution, however, the uniqueness of the solution(s) is lost because the problem may
+globally smooth solution may not occur because of the nonlinearity of the flux functions. The concept of a weak
+solution is introduced to guarantee the existence of a global solution; however, the uniqueness of the solution is lost because the problem may
 allow infinitely many weak solutions.  An additional condition, the``entropy condition,'' is usually imposed to select a
-unique solution, the ``entropy solution,'' among the infinitely many weak solutions. Although there are
-several different ways of defining the entropy condition, it is generally hoped that they are all equivalent in the sense that they select \tcr{the same entropy 
-solution}. \tcr{I need to check with Bojan at lunch} 
-For numerical schemes, the entropy condition and solution are sought through utilization of so-called conservative formulations of the 
-physically descriptive equations, along with the addition of an appropriately specified physical or artificial viscosity, either added directly to the governing 
+unique solution, the ``entropy solution.'' % among the infinitely many weak solutions. 
+Although there are several different ways of defining the entropy condition, it is generally hoped that they are all equivalent in the sense 
+that they select the same entropy solution (\tcr{this can be demonstrated for Burgers equations, see \cite{Evans1998}}).
+For numerical schemes, the entropy condition and solution are sought through the utilization of so-called conservative formulations of the 
+governing laws, along with the addition of an appropriately specified physical or artificial viscosity, either added directly to the governing 
 equations or implied by the discretization employed (truncation error).  That is, a regularization is selected, or built, which is consistent with the 
 entropy condition, thereby guaranteeing that the numerical computation captures the physically relevant solution.  
 %Of course if the 
@@ -122,15 +122,14 @@ The proposed viscous regularization for the seven-equation model is consistent w
 entropies. In addition, we ensure that the regularization scales appropriately in the low-Mach regime as such situations are often encountered 
 in practical applications; the two-phase low-Mach asymptotic study determines conditions that need to be satisfied by the artificial dissipative 
 terms to yield a well-scaled regularization in the low-Mach case \cite{Marco_paper_low_mach}. 
-\tcr{nothing is said about the Chapman-Enskog study here, yet we ``advertize'' this in the abstract. It feels unbalanced...} \tcb{done}
 We also investigate the behavior of the viscous regularization when the seven-equation two-phase flow model degenerates to the five-equation 
-model of Kapila \cite{Kapila_2001} through a Chapman-Enskog expansion \cite{dellacherie, GuillardMurrone2003}. The objective is to show 
+model of Kapila \cite{Kapila_2001} through a Chapman-Enskog expansion \cite{dellacherie, GuillardMurrone2003}. We show 
 that the regularized seven-equation model yields a regularized five-equation model of Kapila.
 
 One of the key aspects of the viscous regularization derived here is that it is agnostic of the spatial discretization scheme, unlike approximate 
 Riemann solvers. Therefore, this viscous regularization may be employed to stabilize numerical schemes based on either continuous or discontinuous 
 spatial approximations. For examples of prior applications of the technique to the single-phase Euler equations, we refer the reader to \cite{jlg, Marco_paper_low_mach} 
-(for finite volume, continuous Galerkin, and spectral FEM discretization) and to \cite{valentin} (for discontinuous Galerkin discretization). 
+(for finite volume, continuous Galerkin, and spectral FEM discretizations) and to \cite{valentin} (for discontinuous Galerkin discretizations). 
 
 The remainder of the paper is as follows. In \sct{sec:7-equ-model}, the Seven-Equation two-phase flow Model (SEM) is recalled along with its main 
 physical and mathematical properties. In \sct{sec:visc-regu}, a viscous regularization is derived for the SEM and a Chapman-Enskog expansion of the 
@@ -1130,13 +1129,14 @@ in the continuity equations). For each case, the density and volume fraction pro
 %
 \begin{figure}[H]
         \centering
-        \begin{subfigure}[b]{0.5\textwidth}
+        \begin{subfigure}[b]{0.95\textwidth}
                 \centering
                 \includegraphics[width=\textwidth]{../figures/paper/relaxation_vapor_density_multiple_visc.png}
                 \caption{Liquid density}
                 \label{fig:liq-density}
-        \end{subfigure}%
-        \begin{subfigure}[b]{0.5\textwidth}
+        \end{subfigure}
+				\\
+        \begin{subfigure}[b]{0.95\textwidth}
                 \centering
                 \includegraphics[width=\textwidth]{../figures/paper/relaxation_liquid_density_multiple_visc.png}
                 \caption{Vapor density}
@@ -1173,23 +1173,25 @@ the single-phase Euler shock tube results published in \cite{jlg1, jlg2, Marco_p
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 We have derived a viscous regularization for the hyperbolic Seven-Equation two-phase flow Model. The regularization ensures positivity of the entropy residual, 
-uniqueness of the numerical solution for concave physical phasic entropy functions $s_k$, and is consistent with the viscous regularization derived for Euler equations 
-when one of the phases disappears. 
+uniqueness of the numerical solution for concave physical phasic entropy functions $s_k$, and is consistent with the viscous regularization derived for 
+Euler equations when one of the phases disappears. 
 We have also demonstrated that the proposed viscous regularization is compatible with the generalized Harten entropies that were initially derived for Euler equations. 
 
-The viscous regularization for the SEM equations involves a set of two positive viscosity coefficients for each phase, $\mu_k$ and $\kappa_k$, and one for the volume fraction equation, $\beta_k$. 
-The scaling of these viscosities is related to the numerical Reynolds and P\'eclet numbers, $\Re_k$, $\Pe_k^\mu$ and $\Pe_k^\kappa$. Adequate scaling of these numbers has been devised for two 
-important cases: the low-Mach asymptotic limit and for non-isentropic flows. In the former case, we show that the incompressible equations are recovered when assuming that all of the non-dimensional 
-numbers scale as one. The study of the non-isentropic case case shows that the scaling of the non-dimensionalized numbers is Mach-number dependent to ensure well-scaled dissipative terms in the vicinity of the shock.
-Based on these results, adequate scaling of the viscosities can be obtained for all Mach numbers, as was the case for single-phase flows \cite{Marco_paper_low_mach}. 
-
+The viscous regularization for the SEM equations involves a set of two positive viscosity coefficients for each phase, $\mu_k$ and $\kappa_k$, and one for the volume 
+fraction equation, $\beta_k$. The scaling of these viscosities is related to the numerical Reynolds and P\'eclet numbers, $\Re_k$, $\Pe_k^\mu$ and $\Pe_k^\kappa$. 
+Adequate scaling of these numbers has been devised for two important cases: the low-Mach asymptotic limit and for non-isentropic flows. In the low-Mach regime, 
+we show that the incompressible equations are recovered when assuming that all of the non-dimensional numbers scale as one. The study of the non-isentropic case 
+shows that the scaling of the non-dimensionalized numbers is Mach-number dependent to ensure well-scaled dissipative terms in the vicinity of the shock.
+Based on these results, adequate scaling of the viscosities can be derived for all Mach numbers, as was the case for single-phase flows \cite{Marco_paper_low_mach}. 
+%
 We have also shown that the regularized SEM equations yields a regularized version of the five-equation flow model of Kapila by means of a Chapman-Enskog expansion.
 
 The ability of the proposed regularization to stabilize the SEM equations was numerically demonstrated using a shock tube problem, with the definitions of the 
-artificial viscosity coefficients borrowed from the local Lax-Friedrichs scheme. We also analyzed the effect of removing stabilization from the volume fraction and the continuity equations.
+artificial viscosity coefficients borrowed from the local Lax-Friedrichs scheme. We have also analyzed the effect of removing stabilization from the volume fraction 
+and the continuity equations.
 
 As an extension of this work, the two-phase flow viscous regularization presented here should be utilized and tested with high-order, less dissipative, artificial viscosity schemes, 
-such as the entropy viscosity method (e.g., see \cite{jlg1} for single-phase supersonic flows and \cite{Marco_paper_low_mach} single-phase subsonic and transonic flows). 
+such as the entropy viscosity method (e.g., see \cite{jlg1} for single-phase supersonic flows and \cite{Marco_paper_low_mach} for single-phase subsonic and transonic flows). 
 We also note that the proposed regularization can also be employed using definitions of viscosity coefficients traditionally used in two-phase flows, e.g., 
 the Lapidus viscosity \cite{Lapidus_paper, Lapidus_book} and pressure-based viscosity for two-phase flows \cite{PBV_book}. We intend on reporting on these findings in a subsequent
 publication. 
@@ -1197,7 +1199,7 @@ publication.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Acknowledgments} 
 The authors (M.D. and J.R.) would like to thank Bojan Popov and Jean-Luc Guermond for many fruitful discussions.  
-The research was carried out under the auspices of the Idaho National Laboratory for the US Department of Energy.
+The research was carried out under the auspices of the Idaho National Laboratory for the U.S. Department of Energy.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{mybibfile}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
