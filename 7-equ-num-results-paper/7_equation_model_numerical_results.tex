@@ -268,7 +268,7 @@ The inviscid Seven-Equation two-phase flow Model is a nonlinear hyperbolic syste
 globally smooth solution may not occur because of the nonlinearity of the flux functions. The concept of a weak
 solution is introduced to guarantee the existence of a global solution; however, the uniqueness of the solution is lost because the problem may
 allow infinitely many weak solutions.  An additional condition, the``entropy condition,'' is usually imposed to select a
-unique solution, the ``entropy solution.' This entropy condition was used in (REF) to derive a numerical method under the form of a viscous regularization that is consistent with the minimum entropy principle. The inviscid Seven-Equation two-phase flow Model along with the viscous regularization yields the regularized Seven-Equation two-phase flow Model that is recalled below in \eqt{eq:reg-7-eqn}. The reader is referred to (REF) for the detailed derivation of the viscous regularization.
+unique solution, the ``entropy solution.' This entropy condition was used in (REF) to derive a numerical method under the form of a viscous regularization that is consistent with the minimum entropy principle. The inviscid Seven-Equation two-phase flow Model along with the viscous regularization yields the regularized Seven-Equation two-phase flow Model that is recalled below in \eqt{eq:reg-7-eqn} (the viscous regularization is in the right-hand side). The reader is referred to (REF) for the detailed derivation of the viscous regularization.
 %
 \begin{subequations}\label{eq:reg-7-eqn}
 \begin{align}
@@ -338,7 +338,7 @@ where $\beta_k$, $\kappa_k$ and $\mu_k$ are phasic viscosity coefficients that a
 \item discuss the first-order viscosity coefficient for the volume fraction equation
 \end{itemize}
 %
-The remainder of this paper presents the latest theoretical and numerical results in the application of the Entropy Viscosity Method to the inviscid Seven-Equation two-phase flow Model. 
+The remainder of this paper presents new theoretical details (\sct{sec:visc-def}) for the application of the Entropy Viscosity Method to the inviscid Seven-Equation two-phase flow Model along with one dimensional numerical results (\sct{sec:results}) to valid our approach.
 
 In this section, the reader is guided through the derivation of the all-Mach phasic viscosity coefficients $\beta_k$, $\mu_k$ and $\kappa_k$, that relies on the low-Mach asymptotic study of the regularized SEM presented in REF. In the entropy viscosity method, each viscosity coefficient is function of an upper and a lower bound that are referred to as first-order viscosity coefficient and entropy viscosity coefficient (high-order coefficient) and are denoted by the subscript $max$ and $e$ in the remaining of this paper, respectively. 
 %
@@ -349,11 +349,11 @@ In this section, the reader is guided through the derivation of the all-Mach pha
 The first-order viscosity coefficient or low-order viscosity coefficient is chosen to prevent spurious oscillation from forming and only achieves first-order accuracy. In REF, we chose to set the phasic viscosity coefficients proportional to the local maximum eigenvalue of each phase as shown in \eqt{eq:visc-coeff-fo-def-1} which yields a viscosity similar to either Rusunov or local Lax-Fridrichs schemes.
 %
 \begin{equation}\label{eq:visc-coeff-fo-def-1}
-\beta^K_{k,max}(\mbold{r},t) = \mu^K_{k,max}(\mbold{r},t) = \kappa^K_{k,max}(\mbold{r},t) = \frac{h^K}{2} \left( || \mbold{u}_k || + c_k \right)
+\beta_{k,max}(\mbold{r},t) = \mu_{k,max}(\mbold{r},t) = \kappa_{k,max}(\mbold{r},t) = \frac{h}{2} \left( || \mbold{u}_k || + c_k \right)
 \end{equation}
 %
-where $h^K$ \tcr{I would drop the superscript $K$. You also omit it sometimes after, so maybe it's better not to put it in the first place}
-is a characteristic size of the cell $K$ and $|| \cdot ||$ denotes the Euclidean norm. Note that an example of definition for $h^K$ when considering a cell K of volume $|K|$ belonging to a mesh of dimension $dim$ is $h^K = |K|^\frac{1}{dim}$. With the above definition of the first-order viscosity coefficients, the numerical solution was shown to be stable in REF for the case of a 1-D Sod shock test. The volume fraction equation (\eqt{eqn:multi-d-7-eqn-liq-vol}), however, does not require that much dissipation since its eigenvalue is the local interfacial velocity $\mbold u_{int}$ \tcr{we can talk about this}. Thus, we choose to set the viscosity coefficient $\beta_{k,max}$ used in the volume fraction proportional to the local interfacial velocity and keep the same definition for the viscosity coefficients $\mu_{k,max}$ and $\kappa_{k,max}$ as follows:
+where $h$ \tcr{I would drop the superscript $K$. You also omit it sometimes after, so maybe it's better not to put it in the first place}
+is a cell characteristic size and $|| \cdot ||$ denotes the Euclidean norm. Note that an example of definition for $h$ when considering a cell K of volume $|K|$ belonging to a mesh of dimension $dim$ is $h = |K|^\frac{1}{dim}$. With the above definition of the first-order viscosity coefficients, the numerical solution was shown to be stable in REF for the case of a 1-D Sod shock test. The volume fraction equation (\eqt{eqn:multi-d-7-eqn-liq-vol}), however, does not require that much dissipation since its eigenvalue is the local interfacial velocity $\mbold u_{int}$ \tcr{we can talk about this}. Thus, we choose to set the viscosity coefficient $\beta_{k,max}$ used in the volume fraction equation proportional to the local interfacial velocity and keep the same definition for the viscosity coefficients $\mu_{k,max}$ and $\kappa_{k,max}$ as follows:
 %
 \begin{equation}\label{eq:visc-coeff-fo-def-2}
 \mu^K_{k,max}(\mbold{r},t) = \kappa^K_{k,max}(\mbold{r},t) = \frac{h^K}{2} \left( || \mbold{u}_k || + c_k \right) \text{ and } \beta^K_{k,max}(\mbold{r},t) = \frac{h^K}{2} || \mbold{u}_{int} ||
