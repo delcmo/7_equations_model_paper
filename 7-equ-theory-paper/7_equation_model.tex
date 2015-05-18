@@ -1081,8 +1081,11 @@ M^2_{k,\infty} & \text{ in the shock region }
 
 
 %
-We finish with a numerical example to illustrate the ability of the proposed viscous regularization to stabilize the SEM two-phase flow equations. 
-The aim is to demonstrate that the viscosity regularization prevents undershoots and overshoots near discontinuities. 
+We finish with a numerical example to illustrate the ability of the proposed viscous regularization (\eqt{eq:visc-reg-7-equ-sect4}) to stabilize the SEM two-phase flow equations (\eqt{eq:liq-7-eqn-sect5}) in two tests.
+The aim of the first numerical test, is to demonstrate that the viscosity regularization prevents undershoots and overshoots near discontinuities (\sct{sec:first-test}). The purpose of the second test is to illustrate the low-Mach asymptotic limit performed in \sct{sec:low-Mach} and highlighted effects of ill-scaled dissipative terms in the case of a low-Mach flow (\sct{sec:second-test}).
+%----------------------------------------------------------
+\subsection{A one dimensional shock tube test}\label{sec:first-test}
+%-----------------------------------------------------------
 In this example, we set the relaxation coefficients $\mu_P$ and $\lambda_u$ to large values; the pressures and velocities in each phase should become identical. 
 We consider two fluids, denoted by the subscripts $1$ and $2$, and employ the ideal gas law, $P_k=(\gamma_k-1) \rho_k e_k$, with the following parameters $\gamma_1=3$ and $\gamma_2=1.4$. 
 The numerical illustration consists of a 1-D shock tube of length 1 containing two-phase mixtures separated by a membrane placed at $x=0.5$. The initial left/right values of the pressures are
@@ -1171,10 +1174,14 @@ fraction profile in the post-contact region as shown in \fig{fig:density} and \f
 the study performed by Guermond et al. in \cite{jlg} for single-phase Euler equations where they compared numerical solutions obtained using 
 a parabolic regularization (which included a dissipative term in the continuity equation) and with numerical solutions obtained using a 
 Navier-Stokes regularization (no artificial viscosity terms int he continuity equation).
-
-We have also verified that if we set the relaxation coefficients $\mu_P$ and $\lambda_u$ to zero (which is equivalent to solving the 
-Euler equations for each fluid independently), we recover 
-the single-phase Euler shock tube results published in \cite{jlg1, jlg2, Marco_paper_low_mach} using the same viscous stabilization. 
+%
+%----------------------------------------------------------
+\subsection{A low-Mach flow test}\label{sec:second-test}
+%-----------------------------------------------------------
+%
+%We have also verified that if we set the relaxation coefficients $\mu_P$ and $\lambda_u$ to zero (which is equivalent to solving the 
+%Euler equations for each fluid independently), we recover 
+%the single-phase Euler shock tube results published in \cite{jlg1, jlg2, Marco_paper_low_mach} using the same viscous stabilization. 
 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
