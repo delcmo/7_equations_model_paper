@@ -118,7 +118,7 @@ entropy condition, thereby guaranteeing that the numerical computation captures 
 
 In this paper, we derive a viscous regularization for the non-equilibrium seven-equation two-phase flow model of \cite{SEM}. The foundation for this work 
 can be traced back to viscous regularizations for single-phase Euler and Navier-Stokes equations, notably \cite{jlg} and the references therein. 
-The proposed viscous regularization for the seven-equation model is consistent with the entropy minimum principle and Harten's generalized 
+The proposed viscous regularization for the seven-equation model is consistent with the minimum entropy principle and Harten's generalized 
 entropies. In addition, we ensure that the regularization scales appropriately in the low-Mach regime as such situations are often encountered 
 in practical applications; the two-phase low-Mach asymptotic study determines conditions that need to be satisfied by the artificial dissipative 
 terms to yield a well-scaled regularization in the low-Mach case \cite{Marco_paper_low_mach}. 
@@ -383,7 +383,7 @@ Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates to th
 %
 The objective of this section is to derive a viscous regularization for the SEM presented in \sct{sec:7-equ-model}. First, we present the methodology used, 
 then derive the phasic entropy equation when accounting for the presence of the dissipative terms, and employ the resulting phasic entropy equation to prove 
-the entropy minimum principle. Finally, the scaling of the dissipative terms is investigated in the limit where the seven-equation two-phase flow model 
+the minimum entropy principle. Finally, the scaling of the dissipative terms is investigated in the limit where the seven-equation two-phase flow model 
 degenerates to the five-equation two-phase flow model of Kapila \cite{Kapila_2001} when considering large relaxation coefficients $\mu_P$ and $\lambda_u$ \cite{dellacherie}.
 %
 %---------------------------------------------------------------------------------
@@ -397,9 +397,9 @@ show that the sign of the entropy production remains positive, ensuring uniquene
 of the addition of the dissipative terms, the entropy equation is modified and will contain additional terms of yet unknown sign. By carefully choosing 
 a definition for each of the dissipation terms, the sign of the entropy equation can be determined (and kept positive). Derivation of the viscous 
 regularization for the seven-equation model can be achieved by considering either the phasic entropy equation (\eqt{eq:ent-eqn-7-eqn-model}) or the 
-total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the latter case, the entropy minimum principle can be verified for the whole two-phase system 
+total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the latter case, the minimum entropy principle can be verified for the whole two-phase system 
 but may not ensure positivity of the entropy equation for each phase. However, positivity of the total entropy equation can also be achieved by requiring 
-that the entropy minimum principle holds for each phase. This stronger requirement will also ensure consistency with the single-phase Euler equations when 
+that the minimum entropy principle holds for each phase. This stronger requirement will also ensure consistency with the single-phase Euler equations when 
 one of the phases disappears in the limit $\alpha_k \to 0$. 
 %
 %---------------------------------------------------------------------------------
@@ -526,7 +526,7 @@ Using \eqt{eq:expr-zero}, \eqt{eq:ent-res-7-eqn-diss-terms} can be rearranged as
 which is the phasic entropy equation obtained when the viscous regularization terms are included.
 %
 %---------------------------------------------------------------------------------
-\subsection{Entropy minimum principle}\label{sct:end-min-pr}
+\subsection{minimum entropy principle}\label{sct:end-min-pr}
 %---------------------------------------------------------------------------------
 %
 Following the methodology employed in \cite{jlg, Marco_paper_low_mach}, the right-hand side of 
@@ -571,8 +571,8 @@ We now split the right-hand-side of \eqt{eq:ent-res-7-eqn-diss-terms2} into seve
 through $\mathcal{R}_3$ and we analyze the sign of each of them separately. 
 
 The term ${\mathcal{R}_3}$ is a function of the gradient of the entropy.  
-At the location of the entropy minimum, this gradient is zero; therefore, $\mathcal{R}_3$ 
-has no effect on the entropy minimum principle. It is important to note that the entropy minimum principle will be verified
+At the location of the minimum entropy, this gradient is zero; therefore, $\mathcal{R}_3$ 
+has no effect on the minimum entropy principle. It is important to note that the minimum entropy principle will be verified
 independently of the definition of the dissipation term $\mbold l_k$ used in the volume fraction
 equation, \eqt{eq:sev_equ-with-diss-terms-vf}. We will later provide a possible definition for $\mbold l_k$.
 
@@ -629,18 +629,18 @@ Q_k &=& \mathbf{X}^T_k \mathbb{\Sigma}_k \mathbf{X}_k \nonumber \\
 As with the single-phase Euler equations, one can demonstrate that $\mathbb{\Sigma}_k$ is a symmetric negative definite quadratic form 
 when $s_k$ is concave with respect to $e_k$ and $\rho_k^{-1}$  \cite{jlg, Marco_paper_low_mach}.
 
-\eqt{eq:ent-res-7-eqn-diss-terms3} is constructed to satisfy the entropy minimum principle for the SEM \emph{with} viscous regularization. 
+\eqt{eq:ent-res-7-eqn-diss-terms3} is constructed to satisfy the minimum entropy principle for the SEM \emph{with} viscous regularization. 
 At a location $\mbold x_{min}(t)$ where $s_k$ reaches its minimum value at time $t$, the gradient, $\grad s_k$, and Laplacian, $\Delta s_k$, 
 of the entropy are zero and positive at this particular location, respectively. %Furthermore, it is recalled that the viscosity coefficients $\mu_k$ and $\kappa_k$ are positive by definition. 
 Because the terms on the right-hand-side of \eqt{eq:ent-res-7-eqn-diss-terms3} have been shown to be either positive or null when 
-the entropy reaches its spatial minimum, the entropy minimum principle holds for each phase $k$.
+the entropy reaches its spatial minimum, the minimum entropy principle holds for each phase $k$.
 
-Recall that the above entropy minimum principle holds {\it independently} of the definition of the dissipative term $\mbold l_k$
+Recall that the above minimum entropy principle holds {\it independently} of the definition of the dissipative term $\mbold l_k$
 in the volume fraction equation. We now provide a possible expression for $\mbold l_k$.
 %
 Consider only the volume fraction equation, \eqt{eq:sev_equ-with-diss-terms-vf}. It is an hyperbolic equation
 whose eigenvalue (speed) is $\mbold u_{int}$. An entropy relation can be derived for that equation alone (by multiplying it by $\alpha_k$)
-and used to prove the entropy minimum principle by properly choosing the dissipative term.
+and used to prove the minimum entropy principle by properly choosing the dissipative term.
 Following
 the work of Guermond et al. for linear advection and Burgers' equations \cite{jlg1, jlg2}, it can be shown that a dissipative term ensuring 
 uniqueness of the weak solution for the volume fraction equation is of the form $\mbold l_k = \beta_k A \grad \alpha_k $, where $\beta_k$
