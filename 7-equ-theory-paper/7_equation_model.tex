@@ -69,7 +69,7 @@ In this paper, a viscous regularization is derived for the non-equilibrium Seven
 residual, uniqueness of the weak solution, is consistent with the viscous regularization for Euler equations when one phase disappears, does not depend on the spatial discretization scheme 
 chosen, and is compatible with the generalized Harten entropies. We also investigate the behavior of the proposed viscous regularization for two 
 theoretical limit-cases. First, a Chapman-Enskog expansion is performed for the regularized seven-equation two-phase flow model and we show that the five-equation flow 
-model of Kapila is recovered with a well-scaled viscous regularization. This limit-case is illustrated with numerical results for a 1-D shock tube. Second, a low-Mach asymptotic limit of the regularized seven-equation flow model is carried out, yielding an incompressible two-phase flow model with a properly scaled regularization in the low-Mach regime.
+model of Kapila is recovered with a well-scaled viscous regularization. Second, a low-Mach asymptotic limit of the regularized seven-equation flow model is carried out, yielding an incompressible two-phase flow model with a properly scaled regularization in the low-Mach regime. Both limit-cases are illustrated with one dimensional numerical results.
 \end{abstract}
 %-------------------------
 %-------------------------
@@ -135,8 +135,7 @@ The remainder of the paper is as follows. In \sct{sec:7-equ-model}, the Seven-Eq
 physical and mathematical properties. In \sct{sec:visc-regu}, a viscous regularization is derived for the SEM and a Chapman-Enskog expansion of the 
 regularized SEM is carried out to yield a regularized version of the five-equation two-phase flow model of Kapila. In \sct{sec:low-Mach}, a low-Mach 
 asymptotic study for the regularized SEM is performed and possible definitions for artificial viscosity coefficients are proposed in order to ensure 
-well-scaled dissipative terms over a wide range of Mach numbers. Our theoretical approach is illustrated in \sct{sec:num-ill} with numerical results 
-for a 1-D two-phase shock tube. 
+well-scaled dissipative terms over a wide range of Mach numbers. Our theoretical approach is illustrated in \sct{sec:num-ill} with one dimensional numerical results.
 Finally, we conclude in \sct{sec:conclusion}.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -919,7 +918,7 @@ In the low-Mach isentropic limit, the seven-equation model
 converges to an incompressible system of equations that is characterized, for each phase, by pressure fluctuations of order 
 $M^2_{k,\infty}$ and a divergence-free constraint on the velocity, $\div \left(\alpha_k A \mbold u_k \right) = 0$. When adding dissipative 
 terms as a viscous regularization of the flow equations, the main properties of the low-Mach asymptotic limit must be preserved.
-We begin by expanding each variable in powers of the Mach number. As an example, the expansion for the pressure is given by:
+We remind the reader that the $\grad \alpha_k$ is assumed zero for the purpose of the low-Mach asymptotic study, and begin by expanding each variable in powers of the Mach number. As an example, the expansion for the pressure is given by:
 %
 \begin{equation}
 \label{eq:expansion}
@@ -957,7 +956,7 @@ and the leading-order expressions for the continuity, momentum and energy equati
  \partial_t \left( \alpha_k A \rho_k\right)_0 + \div ( \alpha_k A \rho_k \mbold u_k )_0 = \div (\alpha_k A \kappa_k \grad \rho_k )_0 + \div \left( A \beta_k \grad \alpha_k \right)_0
 \end{equation}
 %
-\tcr{remind the reader of the beginning of section 4.1}
+\tcr{remind the reader of the beginning of section 4.1} \tcb{done}
 \begin{multline}
 \label{eq:asympt_equ2_mom}
 \partial_t (\alpha_k A \rho_k \mbold u_k)_0 + \div ( \alpha_k A \rho_k \mbold u_k \otimes \mbold u_k)_0 +A \grad \left( \alpha_k P_k \right)_2 = \\
@@ -1072,17 +1071,17 @@ M^2_{k,\infty} & \text{ in the shock region }
 \end{remark}
 %
 
-\tcr{recall what the model is: eq10+regular of eq.25}
+\tcr{recall what the model is: eq10+regular of eq.25}\tcb{you want to do it here and below as well}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Numerical illustrations}\label{sec:num-ill}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\tcr{which equations??? Eq. 10 + regularization defined in Eq. 25. when malbda and mu are large, then it is equivalent to the 5-eq model}
+\tcr{which equations??? Eq. 10 + regularization defined in Eq. 25. when malbda and mu are large, then it is equivalent to the 5-eq model} \tcb{done}
 
 
 %
 We finish with a numerical example to illustrate the ability of the proposed viscous regularization (\eqt{eq:visc-reg-7-equ-sect4}) to stabilize the SEM two-phase flow equations (\eqt{eq:liq-7-eqn-sect5}) in two tests.
-The aim of the first numerical test, is to demonstrate that the viscosity regularization prevents undershoots and overshoots near discontinuities (\sct{sec:first-test}). The purpose of the second test is to illustrate the low-Mach asymptotic limit performed in \sct{sec:low-Mach} and highlighted effects of ill-scaled dissipative terms in the case of a low-Mach flow (\sct{sec:second-test}).
+The aim of the first numerical test, is to demonstrate that the viscosity regularization prevents undershoots and overshoots near discontinuities (\sct{sec:first-test}). The purpose of the second test is to illustrate the low-Mach asymptotic limit performed in \sct{sec:low-Mach} and highlights effects of ill-scaled dissipative terms when simulating low-Mach flows (\sct{sec:second-test}).
 %----------------------------------------------------------
 \subsection{A one dimensional shock tube test}\label{sec:first-test}
 %-----------------------------------------------------------
@@ -1176,9 +1175,19 @@ a parabolic regularization (which included a dissipative term in the continuity 
 Navier-Stokes regularization (no artificial viscosity terms int he continuity equation).
 %
 %----------------------------------------------------------
-\subsection{A low-Mach flow test}\label{sec:second-test}
+\subsection{A one dimensional low-Mach flow test}\label{sec:second-test}
 %-----------------------------------------------------------
 %
+To illustrate the low-Mach asymptotic study presented in \sct{sec:low-Mach}, we propose to run the same simulation, as in \cite{Marco_paper_low_mach}, of a flow with two independent liquid and steam phases (i.e. the relaxation coefficients $\mu_P$ and $\lambda_u$ are set to zero and the volume fraction equation is not needed) through a 1-D converging-diverging nozzle. The variable area expression is given by $A(x) = 1 + \tfrac{1}{2} \cos(2 \pi x / L)$ with length $L=1m$. At the inlet, the stagnation pressure and temperature are set 
+to $P_0 = 1 MPa$ and $T_0 = 453 K$, respectively. At the outlet, only the static pressure is specified: $P_s = 0.5 MPa$. 
+Initially, the liquid is at rest, the temperature is uniform and equal to the stagnation temperature and the pressure 
+linearly decreases from the stagnation pressure inlet value to the static pressure outlet value. The volume fraction $\alpha_k$ is initially set to $0.5$ and remains constant until steady-state is reached.
+The stiffened gas equation of state is used to model the liquid water with the parameters provided in \cite{Marco_paper_low_mach}. This test is of interest for multiple reasons: (a) a steady state is reached, (b) 
+an analytical solution is available, (c) it 
+can be performed for liquid and steam phases, wherein the steam phase simulation presents a shock while 
+the liquid-phase simulation experiences a low-Mach flow. To illustrate the results of the low-Mach asymptotic study we consider two cases. In case (1), we run the test with the same phasic viscosity coefficients as in \sct{sec:first-test}: $\mu_k =  \kappa_k = \tfrac{h}{2} \left( ||\mbold u_k|| + c_k \right)$. Using the non-dimensional numbers defined in \eqt{eq:norm_param} along with the above definitions of the phasic viscosity coefficients, it is found that the phasic numerical Reynolds and P\'eclet numbers scale as the phasic Mach number: $\Re_k=\Pe_k^\mu=M_k$ (note that the P\'eclet numbers defined for the volume fraction equation is not defined since the volume fraction equation is not needed). Such a scaling will efficiently stabilize the steam phase that develops a steady-state shock and thus, becomes supersonic ($M_k \sim 1 $). For the liquid phase that reaches a low-Mach steady-state flow, however, the artificial dissipative terms will be ill-scaled and should not reach the correct steady-state solution. In case (2), we propose a fix to the ill-scaling effect observed in the liquid phase. From the low-Mach asymptotic study presented in \cite{Marco_paper_low_mach}, it is highlighted that the low-Mach asymptotic limit is recovered when the phasic numerical numbers scale as one. Thus, a simple fix to the ill-scaling of the dissipative terms will be to multiply the phasic viscosity coefficients by the phasic Mach number such as:  $\mu_k =  \kappa_k = M_k \tfrac{h}{2} \left( ||\mbold u_k|| + c_k \right)$. Note that in the supersonic case, the efficiency of the numerical method will be not altered since $M_k \sim 1$. 
+
+We now present the steady-state numerical solutions of two independent liquid and steam phases for the cases (1) and (2) described above, from FIG to FIG. 
 %We have also verified that if we set the relaxation coefficients $\mu_P$ and $\lambda_u$ to zero (which is equivalent to solving the 
 %Euler equations for each fluid independently), we recover 
 %the single-phase Euler shock tube results published in \cite{jlg1, jlg2, Marco_paper_low_mach} using the same viscous stabilization. 
