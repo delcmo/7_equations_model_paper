@@ -105,7 +105,7 @@ solution is introduced to guarantee the existence of a global solution; however,
 allow infinitely many weak solutions.  An additional condition, the``entropy condition,'' is usually imposed to select a
 unique solution, the ``entropy solution.'' % among the infinitely many weak solutions. 
 Although there are several different ways of defining the entropy condition, it is generally hoped that they are all equivalent in the sense 
-that they select the same entropy solution (\tcr{this can be demonstrated for Burgers equations, see \cite{Evans1998}}) \tcb{ok}.
+that they select the same entropy solution (this can be demonstrated for Burgers equations, see \cite{Evans1998}).
 For numerical schemes, the entropy condition and solution are sought through the utilization of so-called conservative formulations of the 
 governing laws, along with the addition of an appropriately specified physical or artificial viscosity, either added directly to the governing 
 equations or implied by the discretization employed (truncation error).  That is, a regularization is selected, or built, which is consistent with the 
@@ -119,7 +119,19 @@ entropy condition, thereby guaranteeing that the numerical computation captures 
 In this paper, we derive a viscous regularization for the non-equilibrium seven-equation two-phase flow model of \cite{SEM}. The foundation for this work 
 can be traced back to viscous regularizations for single-phase Euler and Navier-Stokes equations, notably \cite{jlg} and the references therein. 
 The proposed viscous regularization for the seven-equation model is consistent with the minimum entropy principle and Harten's generalized 
-entropies. In addition, we ensure that the regularization scales appropriately in the low-Mach regime as such situations are often encountered 
+entropies. 
+\tcr{The minimum entropy principle states that the entropy of a material particle in a flow field is constant along its pathline
+and only increases upon crossing a shock wave, viscous layer, or thermal conduction region.  Numerically computing 
+shockwave solutions without proper stabilization leads to non physical spurious oscillations. When viscosity is added locally in the vicinity 
+of the shockwave, one replaces the physical effect of the entropy production of the shockwave with the equivalent entropy increase of a viscous layer.  
+Ideally this will give the correct energy partitioning between kinetic and internal energy. However, if the viscous coefficient is not set appropriately 
+the resulting entropy production will not be equivalent to that of the true shock and the numerical scheme, if conservative, may even create a train of 
+oscillations in the solution, radiating away from the shock/viscous layer, and whose gradients will indeed attempt to produce an entropy production equivalent 
+to that of the shock jump. One needs to properly set the viscosity coefficient along with the jump conditions for the given mesh size in order 
+to produce a monotonic solution increase through the viscous layer with as little smearing as possible, but with entropy production matching that of the true shock.
+Tadmor \cite{tadmor_minimum_entropy_principle} gives an alternative statement (more useful for constructing numerical methods and proofs) of the minimum 
+entropy principle by transforming the Lagrangian statement above into that of an Eulerian reference frame. Further discussion may be found in Guermond and Popov \cite{jlg}.}
+In addition, we ensure that the regularization scales appropriately in the low-Mach regime as such situations are often encountered 
 in practical applications; the two-phase low-Mach asymptotic study determines conditions that need to be satisfied by the artificial dissipative 
 terms to yield a well-scaled regularization in the low-Mach case \cite{Marco_paper_low_mach}. 
 We also investigate the behavior of the viscous regularization when the seven-equation two-phase flow model degenerates to the five-equation 
@@ -481,7 +493,7 @@ from the phasic total energy equation to obtain the internal energy equation for
 \end{multline}
 %
 As stated earlier, the underlined terms in \eqt{eq:rho-7-eqn-model-sect4} and \eqt{eq:int-ener-7-eqn-model-sect4}, also present in the derivation of 
-the entropy equation for the SEM \emph{without} regularization, have been shown to yield \tcr{entropy-producing terms}, see \app{app:sev-equ-model-entropy}. 
+the entropy equation for the SEM \emph{without} regularization, have been shown to yield entropy-producing terms, see \app{app:sev-equ-model-entropy}. 
 Because the focus of this Section is the verification of the minimum entropy principle for the SEM model when viscous regularization is added, 
 we will omit the underlined terms for brevity in the remainder of the derivation. 
 %
@@ -813,8 +825,8 @@ In the previous section, we have presented a viscous regularization for the seve
 two-phase fluids may be found in various flow regimes, from extremely low-Mach subsonic situations to supersonic cases.
 In this section, we write the non-dimensionalized version of the SEM to carry out a low-Mach asymptotic analysis. In order to 
 recover the low-Mach incompressible equations, some requirements on the scaling of the viscous fluxes will be presented.  
-\tcr{We then propose an all-Mach scaling in order to obtain an appropriately bounded viscous regularization for many flow regimes
-(subsonic, transonic and supersonic flows).}
+We then propose an all-Mach scaling in order to obtain an appropriately bounded viscous regularization for many flow regimes
+(subsonic, transonic and supersonic flows).
 
 When employing artificial viscosity techniques, one needs to ensure that sufficient artificial viscosity is present in the shock 
 and discontinuity regions to prevent spurious oscillations from forming in the numerical solution while little to no dissipation 
@@ -922,7 +934,7 @@ In the low-Mach isentropic limit, the seven-equation model
 converges to an incompressible system of equations that is characterized, for each phase, by pressure fluctuations of order 
 $M^2_{k,\infty}$ and a divergence-free constraint on the velocity, $\div \left(\alpha_k A \mbold u_k \right) = 0$. When adding dissipative 
 terms as a viscous regularization of the flow equations, the main properties of the low-Mach asymptotic limit must be preserved.
-We remind the reader that the $\grad \alpha_k$ is assumed zero for the purpose of the low-Mach asymptotic study, and begin by expanding each variable in powers of the Mach number. As an example, the expansion for the pressure is given by:
+We remind the reader that the $\grad \alpha_k$ is assumed zero for the purpose of the low-Mach asymptotic study. We begin by expanding each variable in powers of the Mach number. As an example, the expansion for the pressure is given by:
 %
 \begin{equation}
 \label{eq:expansion}
@@ -976,7 +988,7 @@ and the leading-order expressions for the continuity and energy equations are:
 %
 where the notation $(fg)_0$ means that we only keep the 0$^{\text{th}}$-order terms in the product $fg$. 
 \tcr{Recall that \eqts{eq:asympt_equ2} are written with the assumptions of \sct{sec:scaled-SEM}, that is, 
-that the micro and macro scale interaction effects are neglected}. 
+that the micro and macro scale interaction effects are neglected}. \tcb{I added a comment at the beginning of this section} 
 The set of equations given in 
 \eqt{eq:asympt_equ2} is similar to the single-phase Euler equations with variable area when interpreting $\alpha_k A$ as a pseudo-area 
 \cite{Marco_paper_low_mach}. The leading-order of the Stiffened Gas Equation of State (\eqt{eq:SGEOS_bis}) is also given by 
@@ -1080,15 +1092,15 @@ M^2_{k,\infty} & \text{ in the shock region }
 \section{Numerical illustrations}\label{sec:num-ill}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \tcr{
-The seven-equation model for two-phase flow with viscous regularization is given 
+We recall that the seven-equation model for two-phase flow with viscous regularization is given 
 in \eqts{eq:sev_equ-with-diss-terms}, with definitions for the artificial viscous fluxes 
 from \eqts{eq:visc-reg-7-equ-sect4}. When the pressure and velocity relaxation parameters
 are large, \eqts{eq:sev_equ-with-diss-terms} are equivalent to the regularized five-equation model, 
 \eqts{eq:liq-5-eqn}, for which the phasic pressures and velocities are equal.
-}
+}\tcb{ok}
 
 %
-We finish with a numerical example to illustrate the ability of the proposed viscous regularization (\eqt{eq:visc-reg-7-equ-sect4}) to stabilize the SEM two-phase flow equations (\eqt{eq:liq-7-eqn-sect5}) in two tests.
+This section aims at illustrating the ability of the proposed viscous regularization (\eqt{eq:visc-reg-7-equ-sect4}) to stabilize the SEM two-phase flow equations (\eqt{eq:liq-7-eqn-sect5}) in two tests.
 The aim of the first numerical test, is to demonstrate that the viscosity regularization prevents undershoots and overshoots near discontinuities (\sct{sec:first-test}). The purpose of the second test is to illustrate the low-Mach asymptotic limit performed in \sct{sec:low-Mach} and highlights effects of ill-scaled dissipative terms when simulating low-Mach flows (\sct{sec:second-test}).
 %----------------------------------------------------------
 \subsection{A one dimensional shock tube test}\label{sec:first-test}
@@ -1186,20 +1198,83 @@ Navier-Stokes regularization (no artificial viscosity terms int he continuity eq
 \subsection{A one dimensional low-Mach flow test}\label{sec:second-test}
 %-----------------------------------------------------------
 %
-To illustrate the low-Mach asymptotic study presented in \sct{sec:low-Mach}, we propose to run the same simulation, as in \cite{Marco_paper_low_mach}, of a flow with two independent liquid and steam phases (i.e. the relaxation coefficients $\mu_P$ and $\lambda_u$ are set to zero and the volume fraction equation is not needed) through a 1-D converging-diverging nozzle. The variable area expression is given by $A(x) = 1 + \tfrac{1}{2} \cos(2 \pi x / L)$ with length $L=1m$. At the inlet, the stagnation pressure and temperature are set 
+To illustrate the low-Mach asymptotic study presented in \sct{sec:low-Mach}, we propose to run the same simulation, as in \cite{Marco_paper_low_mach}, of a flow with two independent liquid and steam phases (i.e. the relaxation coefficients $\mu_P$ and $\lambda_u$ are set to zero and the volume fraction equation is not needed) through a 1-D converging-diverging nozzle uniformly discretized with $100$ cells. The variable area expression is given by $A(x) = 1 + \tfrac{1}{2} \cos(2 \pi x / L)$ with length $L=1m$. At the inlet, the stagnation pressure and temperature are set 
 to $P_0 = 1 MPa$ and $T_0 = 453 K$, respectively. At the outlet, only the static pressure is specified: $P_s = 0.5 MPa$. 
 Initially, the liquid is at rest, the temperature is uniform and equal to the stagnation temperature and the pressure 
 linearly decreases from the stagnation pressure inlet value to the static pressure outlet value. The volume fraction $\alpha_k$ is initially set to $0.5$ and remains constant until steady-state is reached.
 The stiffened gas equation of state is used to model the liquid water with the parameters provided in \cite{Marco_paper_low_mach}. This test is of interest for multiple reasons: (a) a steady state is reached, (b) 
 an analytical solution is available, (c) it 
 can be performed for liquid and steam phases, wherein the steam phase simulation presents a shock while 
-the liquid-phase simulation experiences a low-Mach flow. To illustrate the results of the low-Mach asymptotic study we consider two cases. In case (1), we run the test with the same phasic viscosity coefficients as in \sct{sec:first-test}: $\mu_k =  \kappa_k = \tfrac{h}{2} \left( ||\mbold u_k|| + c_k \right)$. Using the non-dimensional numbers defined in \eqt{eq:norm_param} along with the above definitions of the phasic viscosity coefficients, it is found that the phasic numerical Reynolds and P\'eclet numbers scale as the phasic Mach number: $\Re_k=\Pe_k^\mu=M_k$ (note that the P\'eclet numbers defined for the volume fraction equation is not defined since the volume fraction equation is not needed). Such a scaling will efficiently stabilize the steam phase that develops a steady-state shock and thus, becomes supersonic ($M_k \sim 1 $). For the liquid phase that reaches a low-Mach steady-state flow, however, the artificial dissipative terms will be ill-scaled and should not reach the correct steady-state solution. In case (2), we propose a fix to the ill-scaling effect observed in the liquid phase. From the low-Mach asymptotic study presented in \cite{Marco_paper_low_mach}, it is highlighted that the low-Mach asymptotic limit is recovered when the phasic numerical numbers scale as one. Thus, a simple fix to the ill-scaling of the dissipative terms will be to multiply the phasic viscosity coefficients by the phasic Mach number such as:  $\mu_k =  \kappa_k = M_k \tfrac{h}{2} \left( ||\mbold u_k|| + c_k \right)$. Note that in the supersonic case, the efficiency of the numerical method will be not altered since $M_k \sim 1$. 
+the liquid-phase simulation experiences a low-Mach flow. To illustrate the results of the low-Mach asymptotic study we consider two cases. In case (1), we run the test with the same phasic viscosity coefficients as in \sct{sec:first-test}: $\mu_k =  \kappa_k = \tfrac{h}{2} \left( ||\mbold u_k|| + c_k \right)$. Using the non-dimensional numbers defined in \eqt{eq:norm_param} along with the above definitions of the phasic viscosity coefficients, it is found that the phasic numerical Reynolds and P\'eclet numbers scale as the phasic Mach number: $\Re_k=\Pe_k^\mu = M_k / (1+M_k)$ (note that the P\'eclet numbers defined for the volume fraction equation is not defined since the volume fraction equation is not needed). Such a scaling will efficiently stabilize the steam phase that develops a steady-state shock and thus, becomes supersonic ($M_k \sim 1 $). For the liquid phase that reaches a low-Mach steady-state flow, however, the artificial dissipative terms will be ill-scaled and should not reach the correct steady-state solution. In case (2), we propose a fix to the ill-scaling effect observed in the liquid phase. From the low-Mach asymptotic study presented in \cite{Marco_paper_low_mach}, it is highlighted that the low-Mach asymptotic limit is recovered when the phasic numerical numbers scale as one. Thus, a simple fix to the ill-scaling of the dissipative terms will be to multiply the phasic viscosity coefficients by the phasic Mach number such as:  $\mu_k =  \kappa_k = M_k \tfrac{h}{2} \left( ||\mbold u_k|| + c_k \right)$. Note that in the supersonic case, the efficiency of the numerical method will be not altered since $M_k \sim 1$. 
 
-We now present the steady-state numerical solutions of two independent liquid and steam phases for the cases (1) and (2) described above, from FIG to FIG. 
+The steady-state numerical solutions for the above cases (1) and (2) of two independent stream and liquid phases, are presented in \fig{fig:vap-phase} and \fig{fig:liq-phase}, respectively. 
+%
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/vapor_velocity_llf_and_exact_100.png}
+                \caption{Velocity}
+                \label{fig:vap-phase-vel}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/vapor_density_llf_and_exact_100.png}
+                \caption{Density}
+                \label{fig:vap-phase-density}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/vapor_pressure_llf_and_exact_100.png}
+                \caption{Pressure}
+                \label{fig:vap-phase-press}
+        \end{subfigure}        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/vapor_mach_llf_and_exact_100.png}
+                \caption{Mach number}
+                \label{fig:vap-phase-mach}
+        \end{subfigure}
+        \caption{Vapor numerical and exact solution at steady state.}\label{fig:vap-phase}
+\end{figure}
+%
+In \fig{fig:vap-phase}, the numerical solutions obtained for the steam phase in cases (1) and (2) are very chose as expected since the Mach number is close to one (see Mach plot in \fig{fig:vap-phase-mach}). The numerical and exact solutions perfectly match but in the vicinity of the shock where smoothing occurs due to the over-dissipative nature of the local Lax-Friedrichs scheme. 
+%
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/liquid_velocity_llf_and_exact_100.png}
+                \caption{Velocity}
+                \label{fig:liq-phase-vel}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/liquid_density_llf_and_exact_100.png}
+                \caption{Density}
+                \label{fig:liq-phase-density}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/liquid_pressure_llf_and_exact_100.png}
+                \caption{Pressure}
+                \label{fig:liq-phase-press}
+        \end{subfigure}        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/liquid_mach_llf_and_exact_100.png}
+                \caption{Mach number}
+                \label{fig:liq-phase-mach}
+        \end{subfigure}
+        \caption{Liquid numerical and exact solution at steady state.}\label{fig:liq-phase}
+\end{figure}
+%
+As shown in \fig{fig:liq-phase}, the effect of the fix is more visible on the numerical solution for the liquid phase. In case (1), the stead-state numerical solution does not match the exact solution and illustrates the ill-scaling of the dissipative terms for low-Mach flows (see Mach plot in  \fig{fig:liq-phase-mach}). When run with the fix that corresponds to case (2), i.e. the viscosity coefficients are multiplied by the local Mach number, the steady-state numerical solution converges to the exact solution as observed in \fig{fig:liq-phase}. The dissipative terms are no longer ill-scaled and the proper low-Mach asymptotic limit is recovered. 
 %We have also verified that if we set the relaxation coefficients $\mu_P$ and $\lambda_u$ to zero (which is equivalent to solving the 
 %Euler equations for each fluid independently), we recover 
 %the single-phase Euler shock tube results published in \cite{jlg1, jlg2, Marco_paper_low_mach} using the same viscous stabilization. 
-
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}\label{sec:conclusion}
@@ -1222,7 +1297,7 @@ We have also shown that the regularized SEM equations yields a regularized versi
 
 The ability of the proposed regularization to stabilize the SEM equations was numerically demonstrated using a shock tube problem, with the definitions of the 
 artificial viscosity coefficients borrowed from the local Lax-Friedrichs scheme. We have also analyzed the effect of removing stabilization from the volume fraction 
-and the continuity equations.
+and the continuity equations. The scaling effect of the viscous regularization onto the numerical solution in the low-Mach asymptotic limit was numerically illustrated using a $1$-D converging-diverging nozzle.
 
 As an extension of this work, the two-phase flow viscous regularization presented here should be utilized and tested with high-order, less dissipative, artificial viscosity schemes, 
 such as the entropy viscosity method (e.g., see \cite{jlg1} for single-phase supersonic flows and \cite{Marco_paper_low_mach} for single-phase subsonic and transonic flows). 
