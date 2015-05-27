@@ -853,7 +853,7 @@ Note that the ideal gas equations of state can be recovered by letting $P_{k,\in
 %------------------------------------------------------------------------------------------------------------------------------------------------------
 %------------------------------------------------------------------------------------------------------------------------------------------------------
 We consider the case where the relaxation coefficients, representing the micro scale or local phase interaction effects, 
-and the gradient of volume fraction $\grad \alpha_k$, representing the macro scale phase interaction effects, are eliminated (set to zero); that is, 
+and the gradient of volume fraction $\grad \alpha_k$, representing the macro scale phase interaction effects, are eliminated (i.e., set to zero); that is, 
 the two phases do not interact and the volume fraction of each phase remains constant over time (see \eqt{eq:sev_equ-parab-vf}). 
 Thus, the seven-equation model degenerates to two sets of Euler equations with a pseudo cross-sectional area $\alpha_k A$. In 
 the remainder of this section, we assume that the volume fraction of each phase is non-zero.
@@ -935,7 +935,8 @@ In the low-Mach isentropic limit, the seven-equation model
 converges to an incompressible system of equations that is characterized, for each phase, by pressure fluctuations of order 
 $M^2_{k,\infty}$ and a divergence-free constraint on the velocity, $\div \left(\alpha_k A \mbold u_k \right) = 0$. When adding dissipative 
 terms as a viscous regularization of the flow equations, the main properties of the low-Mach asymptotic limit must be preserved.
-\tcr{We remind the reader that $\grad \alpha_k$ is set to zero for the purpose of the low-Mach asymptotic study}. 
+\tcr{We remind the reader that the two phases are assumed not to interact in the low-Mach limit  and, therefore, that the volume fraction 
+of each phase remains constant}. 
 We begin by expanding each variable in powers of the Mach number. As an example, the expansion for the pressure is given by:
 %
 \begin{equation}
@@ -990,7 +991,7 @@ and the leading-order expressions for the continuity and energy equations are:
 %
 where the notation $(fg)_0$ means that we only keep the 0$^{\text{th}}$-order terms in the product $fg$. 
 \tcr{Recall that \eqts{eq:asympt_equ2} are written with the assumptions of \sct{sec:scaled-SEM}, that is, 
-that the micro and macro scale interaction effects are neglected}. \tcb{I added a comment at the beginning of this section} 
+that the micro and macro scale interaction effects are neglected}. % \tcb{I added a comment at the beginning of this section} 
 The set of equations given in 
 \eqt{eq:asympt_equ2} is similar to the single-phase Euler equations with variable area when interpreting $\alpha_k A$ as a pseudo-area 
 \cite{Marco_paper_low_mach}. The leading-order of the Stiffened Gas Equation of State (\eqt{eq:SGEOS_bis}) is also given by 
@@ -1099,7 +1100,7 @@ in \eqts{eq:sev_equ-with-diss-terms}, with definitions for the artificial viscou
 from \eqts{eq:visc-reg-7-equ-sect4}. When the pressure and velocity relaxation parameters
 are large, \eqts{eq:sev_equ-with-diss-terms} are equivalent to the regularized five-equation model, 
 \eqts{eq:liq-5-eqn}, for which the phasic pressures and velocities are equal.
-}\tcb{ok}
+}
 
 %
 We illustrate the ability of the proposed viscous regularization (\eqts{eq:visc-reg-7-equ-sect4}) to stabilize the 
