@@ -69,7 +69,8 @@ In this paper, a viscous regularization is derived for the non-equilibrium Seven
 residual, uniqueness of the weak solution, is consistent with the viscous regularization for Euler equations when one phase disappears, does not depend on the spatial discretization scheme 
 chosen, and is compatible with the generalized Harten entropies. We also investigate the behavior of the proposed viscous regularization for two 
 theoretical limit-cases. First, a Chapman-Enskog expansion is performed for the regularized seven-equation two-phase flow model and we show that the five-equation flow 
-model of Kapila is recovered with a well-scaled viscous regularization. Second, a low-Mach asymptotic limit of the regularized seven-equation flow model is carried out, yielding an incompressible two-phase flow model with a properly scaled regularization in the low-Mach regime. Both limit-cases are illustrated with one dimensional numerical results.
+model of Kapila is recovered with a well-scaled viscous regularization. Second, a low-Mach asymptotic limit of the regularized seven-equation flow model is carried out, 
+yielding an incompressible two-phase flow model with a properly scaled regularization in the low-Mach regime. Both limit-cases are illustrated with one-dimensional numerical results.
 \end{abstract}
 %-------------------------
 %-------------------------
@@ -147,7 +148,7 @@ The remainder of the paper is as follows. In \sct{sec:7-equ-model}, the Seven-Eq
 physical and mathematical properties. In \sct{sec:visc-regu}, a viscous regularization is derived for the SEM and a Chapman-Enskog expansion of the 
 regularized SEM is carried out to yield a regularized version of the five-equation two-phase flow model of Kapila. In \sct{sec:low-Mach}, a low-Mach 
 asymptotic study for the regularized SEM is performed and possible definitions for artificial viscosity coefficients are proposed in order to ensure 
-well-scaled dissipative terms over a wide range of Mach numbers. Our theoretical approach is illustrated in \sct{sec:num-ill} with one dimensional numerical results.
+well-scaled dissipative terms over a wide range of Mach numbers. Our theoretical approach is illustrated in \sct{sec:num-ill} with one-dimensional numerical results.
 Finally, we conclude in \sct{sec:conclusion}.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -445,8 +446,8 @@ and regularize this system by adding dissipation terms (viscous fluxes) to each 
 %
 where $\mbold f_k$, $\mathbb{g}_k$, $\mbold h_k$ and $\mbold l_k$ are phasic viscous terms, yet to be determined. 
 %
-The terms in \eqts{eq:sev_equ-with-diss-terms} are part of the SEM model, see the unregularized system of equations (\eqref{eq:liq-7-eqn-sect5_no_exchange}); these terms are entropy-producing and we refer the reader to \app{app:sev-equ-model-entropy} for a detailed derivation of the 
-entropy equation  \emph{without} viscous regularization. 
+The \tcr{terms underlined in \eqts{eq:sev_equ-with-diss-terms} are part of the inviscid SEM model}, see the unregularized system of equations (\eqref{eq:liq-7-eqn-sect5_no_exchange}); these terms are entropy-producing and we refer the reader to \app{app:sev-equ-model-entropy} for a detailed derivation of the 
+entropy equation \emph{without} viscous regularization present. 
 In this section, we deal with the \emph{regularized} system of equations for the SEM model and 
 the above underlined terms will later ignored in the derivation for brevity. 
 %
@@ -934,7 +935,8 @@ In the low-Mach isentropic limit, the seven-equation model
 converges to an incompressible system of equations that is characterized, for each phase, by pressure fluctuations of order 
 $M^2_{k,\infty}$ and a divergence-free constraint on the velocity, $\div \left(\alpha_k A \mbold u_k \right) = 0$. When adding dissipative 
 terms as a viscous regularization of the flow equations, the main properties of the low-Mach asymptotic limit must be preserved.
-We remind the reader that the $\grad \alpha_k$ is assumed zero for the purpose of the low-Mach asymptotic study. We begin by expanding each variable in powers of the Mach number. As an example, the expansion for the pressure is given by:
+\tcr{We remind the reader that $\grad \alpha_k$ is set to zero for the purpose of the low-Mach asymptotic study}. 
+We begin by expanding each variable in powers of the Mach number. As an example, the expansion for the pressure is given by:
 %
 \begin{equation}
 \label{eq:expansion}
@@ -1100,11 +1102,17 @@ are large, \eqts{eq:sev_equ-with-diss-terms} are equivalent to the regularized f
 }\tcb{ok}
 
 %
-This section aims at illustrating the ability of the proposed viscous regularization (\eqt{eq:visc-reg-7-equ-sect4}) to stabilize the SEM two-phase flow equations (\eqt{eq:liq-7-eqn-sect5}) in two tests.
-The aim of the first numerical test, is to demonstrate that the viscosity regularization prevents undershoots and overshoots near discontinuities (\sct{sec:first-test}). The purpose of the second test is to illustrate the low-Mach asymptotic limit performed in \sct{sec:low-Mach} and highlights effects of ill-scaled dissipative terms when simulating low-Mach flows (\sct{sec:second-test}).
+We illustrate the ability of the proposed viscous regularization (\eqts{eq:visc-reg-7-equ-sect4}) to stabilize the 
+SEM two-phase flow equations using two tests.
+The first test is a shock tube configuration where we demonstrate that the viscous regularization prevents undershoots and overshoots near discontinuities. 
+In the second test, a low-Mach flow is considered.
+% The purpose of the second test is to illustrate the low-Mach asymptotic limit performed in \sct{sec:low-Mach} and highlights 
+% effects of ill-scaled dissipative terms when simulating low-Mach flows (\sct{sec:second-test}).
+
 %----------------------------------------------------------
-\subsection{A one dimensional shock tube test}\label{sec:first-test}
+\subsection{Shock tube test}\label{sec:first-test}
 %-----------------------------------------------------------
+
 In this example, we set the relaxation coefficients $\mu_P$ and $\lambda_u$ to large values; the pressures and velocities in each phase should become identical. 
 We consider two fluids, denoted by the subscripts $1$ and $2$, and employ the ideal gas law, $P_k=(\gamma_k-1) \rho_k e_k$, with the following parameters $\gamma_1=3$ and $\gamma_2=1.4$. 
 The numerical illustration consists of a 1-D shock tube of length 1 containing two-phase mixtures separated by a membrane placed at $x=0.5$. The initial left/right values of the pressures are
@@ -1195,7 +1203,7 @@ a parabolic regularization (which included a dissipative term in the continuity 
 Navier-Stokes regularization (no artificial viscosity terms int he continuity equation).
 %
 %----------------------------------------------------------
-\subsection{A one dimensional low-Mach flow test}\label{sec:second-test}
+\subsection{A low-Mach flow test}\label{sec:second-test}
 %-----------------------------------------------------------
 %
 To illustrate the low-Mach asymptotic study presented in \sct{sec:low-Mach}, we propose to run the same simulation, as in \cite{Marco_paper_low_mach}, of a flow with two independent liquid and steam phases (i.e. the relaxation coefficients $\mu_P$ and $\lambda_u$ are set to zero and the volume fraction equation is not needed) through a 1-D converging-diverging nozzle uniformly discretized with $100$ cells. The variable area expression is given by $A(x) = 1 + \tfrac{1}{2} \cos(2 \pi x / L)$ with length $L=1m$. At the inlet, the stagnation pressure and temperature are set 
