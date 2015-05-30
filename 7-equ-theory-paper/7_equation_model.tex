@@ -446,7 +446,7 @@ and regularize this system by adding dissipation terms (viscous fluxes) to each 
 %
 where $\mbold f_k$, $\mathbb{g}_k$, $\mbold h_k$ and $\mbold l_k$ are phasic viscous terms, yet to be determined. 
 %
-The \tcr{terms underlined in \eqts{eq:sev_equ-with-diss-terms} are part of the inviscid SEM model}, see the unregularized system of equations (\eqref{eq:liq-7-eqn-sect5_no_exchange}); these terms are entropy-producing and we refer the reader to \app{app:sev-equ-model-entropy} for a detailed derivation of the 
+The \tcr{terms underlined in \eqts{eq:sev_equ-with-diss-terms} are part of the inviscid SEM model} \tcb{done}, see the unregularized system of equations (\eqref{eq:liq-7-eqn-sect5_no_exchange}); these terms are entropy-producing and we refer the reader to \app{app:sev-equ-model-entropy} for a detailed derivation of the 
 entropy equation \emph{without} viscous regularization present. 
 In this section, we deal with the \emph{regularized} system of equations for the SEM model and 
 the above underlined terms will later ignored in the derivation for brevity. 
@@ -837,7 +837,7 @@ coefficients and to recover the incompressible asymptotic equations \cite{LowMac
 derive the scaled SEM equations and investigate the scaling of the dissipative terms. 
 First, the scaled SEM are derived. Then, two limit cases will be considered to determine 
 appropriate scaling for the viscosity coefficients so that the dissipative terms remain well-scaled for: 
-(a) the isentropic low-Mach limit where the seven-equation model \tcr{degenerates\footnote{negative connotation!}} to an incompressible system of 
+(a) the isentropic low-Mach limit where the seven-equation model \tcr{degenerates\footnote{negative connotation!}} \tcb{I am not sure if we can say it in a different way} to an incompressible system of 
 equations and (b) the non-isentropic limit where shocks can occur. 
 Because each phase can experience different flow regimes, e.g., supersonic gas and subsonic liquid, we elect to keep distinct the three viscosity 
 coefficients for each phase, $\mu_k$, $\kappa_k$, and $\beta_k$. The study is performed for the seven-equation model using the Stiffened Gas 
@@ -936,7 +936,7 @@ converges to an incompressible system of equations that is characterized, for ea
 $M^2_{k}$ and a divergence-free constraint on the velocity, $\div \left(\alpha_k A \mbold u_k \right) = 0$. When adding dissipative 
 terms as a viscous regularization of the flow equations, the main properties of the low-Mach asymptotic limit must be preserved.
 \tcr{In the low-Mach limit, the two phases are assumed not to interact and, thus, the volume fraction 
-of each phase remains constant}. 
+of each phase remains constant}. \tcb{ok} 
 We begin by expanding each variable in powers of the Mach number. As an example, the expansion for the pressure is given by:
 %
 \begin{equation}
@@ -991,7 +991,7 @@ and the leading-order expressions for the continuity and energy equations are:
 %
 where the notation $(fg)_0$ means that we only keep the 0$^{\text{th}}$-order terms in the product $fg$. 
 \tcr{Recall that \eqts{eq:asympt_equ2} are written with the assumptions of \sct{sec:scaled-SEM}, that is, 
-that the micro and macro scale interaction effects are neglected}. % \tcb{I added a comment at the beginning of this section} 
+that the micro and macro scale interaction effects are neglected}. \tcb{ok}% \tcb{I added a comment at the beginning of this section} 
 The set of equations given in 
 \eqt{eq:asympt_equ2} is similar to the single-phase Euler equations with variable area when interpreting $\alpha_k A$ as a pseudo-area 
 \cite{Marco_paper_low_mach}. The leading-order of the Stiffened Gas Equation of State (\eqt{eq:SGEOS_bis}) is also given by 
@@ -1102,7 +1102,7 @@ from \eqts{eq:visc-reg-7-equ-sect4}.
 When the pressure and velocity relaxation parameters are large, \eqts{eq:sev_equ-with-diss-terms} 
 become equivalent to the regularized five-equation model given by \eqts{eq:liq-5-eqn} and for which 
 the phasic pressures and velocities are equal.
-}
+} \tcb{ok}
 
 %
 We illustrate the ability of the proposed viscous regularization to stabilize the 
@@ -1223,7 +1223,7 @@ At the outlet, only the static pressure is specified: $P_s = 0.5 MPa$.
 Initially, the two phases are at rest; their temperatures are uniform and equal to their stagnation temperatures;  their pressures 
 linearly decrease from the stagnation pressure inlet value to the static pressure outlet value. The volume fraction $\alpha_k$ is set to $0.5$.
 % and remains constant until steady-state is reached.
-The stiffened gas equation of state is used to model the liquid water \tcr{how about the vapor?} with the parameters provided in 
+The stiffened gas equation of state is used to model the liquid water and steam phases \tcr{how about the vapor?} \tcb{done} with the parameters provided in 
 \cite{Marco_paper_low_mach}. 
 %
 This test case is of interest for multiple reasons: (a) a steady state is reached, (b) 
@@ -1235,10 +1235,10 @@ To illustrate the results of the low-Mach asymptotic study we consider two cases
 %
 In case (i), we run the test with the same phasic viscosity 
 coefficients as in \sct{sec:first-test}: $\mu_k =  \kappa_k = \tfrac{h}{2} \left( ||\mbold u_k|| + c_k \right)$. Using the non-dimensional 
-numbers defined in \eqt{eq:norm_param} along with the above definitions of the phasic viscosity coefficients, it is found that the phasic 
-numerical Reynolds and P\'eclet numbers scale as the phasic Mach number: $\Re_k=\Pe_k^\mu = M_k / (1+M_k)$ (note that the P\'eclet numbers 
+numbers defined in \eqt{eq:norm_param} along with the above definitions of the phasic viscosity coefficients, it is found that the scaling of the phasic 
+numerical Reynolds and P\'eclet numbers is a function of the phasic Mach number as follows: $\Re_k=\Pe_k^\mu = M_k / (1+M_k)$ (note that the P\'eclet numbers 
 defined for the volume fraction equation is not defined since the volume fraction equation is not needed). Such a scaling will efficiently 
-stabilize the steam phase that develops a steady-state shock and thus, becomes supersonic ($M_k \sim 1 $). For the liquid phase that reaches 
+stabilize the steam phase flow that becomes supersonic and develops a steady-state shock ($M_k \sim 1 $). For the liquid phase that reaches 
 a low-Mach steady-state flow, however, the artificial dissipative terms will be ill-scaled and should not reach the correct steady-state 
 solution. 
 %
@@ -1248,7 +1248,7 @@ as one. Thus, a simple fix to the ill-scaling of the dissipative terms will be t
 Mach number such as:  $\mu_k =  \kappa_k = M_k \tfrac{h}{2} \left( ||\mbold u_k|| + c_k \right)$. Note that in the supersonic case, the 
 efficiency of the numerical method will be not altered since $M_k \sim 1$. 
 
-The steady-state numerical solutions for the above cases (i) and (ii) of two vapor and liquid phases, are presented in \fig{fig:vap-phase} and \fig{fig:liq-phase}, respectively. 
+The steady-state numerical solutions for water liquid and steam phases are presented in \fig{fig:vap-phase} and \fig{fig:liq-phase}, respectively, for the above cases (i) and (ii).
 %
 \begin{figure}[H]
         \centering
@@ -1312,8 +1312,8 @@ In \fig{fig:vap-phase}, the numerical solutions obtained for the steam phase in 
         \caption{Numerical and exact solution at steady state for the liquid phase.}\label{fig:liq-phase}
 \end{figure}
 %
-As shown in \fig{fig:liq-phase}, the effect of the fix is more visible on the numerical solution for the liquid phase. 
-In case (i), the stead-state numerical solution does not match the exact solution and illustrates the ill-scaling of the 
+The steady-state numerical solution of the liquid phase is shown in \fig{fig:liq-phase}.
+In case (i), the steady-state numerical solution does not match the exact solution and illustrates the ill-scaling effect of the 
 dissipative terms for low-Mach flows (see Mach plot in  \fig{fig:liq-phase-mach}). When run with the fix that corresponds 
 to case (ii), i.e. the viscosity coefficients are multiplied by the local Mach number, the steady-state numerical solution 
 converges to the exact solution as observed in \fig{fig:liq-phase}. The dissipative terms are no longer ill-scaled and the 
