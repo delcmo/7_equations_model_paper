@@ -120,9 +120,9 @@ important papers, e.g., Saurel's, by providing a 1-3 sentence resume of each of 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\tcr{I/you will add a short intro to re-emphasize that visc. reg. is present and what that means...\\}
+\tcr{I/you will add a short intro to re-emphasize that visc. reg. is present and what that means...\\} \tcb{done}
 
-In this section, the inviscid Seven-Equation two-phase flow Model employed in this paper is presented along with the closure relations used to compute the relaxation terms and interfacial variables (REF). Then, the viscous regularization derived in (REF) is recalled and definitions of the artificial dissipative fluxes are given. This section ends with the derivation of the phasic viscosity coefficients based on the study of the non-dimensional form of the regularized Seven-Equation two-phase flow Model that was performed in (REF). 
+In this section, the inviscid Seven-Equation two-phase flow Model employed in this paper is presented along with the closure relations used to compute the relaxation terms and interfacial variables (REF). Then, expression of the artificial dissipative fluxes used in the viscous regularization are recalled. The viscous regularization was derived in (REF) by using an entropy condition called ``the minimum entropy principle" which ensures both uniqueness of the numerical solution and convergence to the physical solution. This section ends with the derivation of the phasic viscosity coefficients based on the study of the non-dimensional form of the regularized Seven-Equation two-phase flow Model that was performed in (REF). In the remaining of the paper, the spatial and temporal dependencies in each variable are omitted for conciseness. All variables are assumed to be spatial and temporal dependent but when stated otherwise. 
 %
 %----------------------------------------------------------------------------------------------------------------------------------
 \subsection{The inviscid Seven-Equation two-phase flow Model}
@@ -172,7 +172,7 @@ we have $(\div \mathbb{g})_j = \partial_{x_i} g_{ij}$, $(\mathbb{g}\cdot \mbold{
 $\mathbb{g}:\mathbb{h} = g_{ij} h_{ij}$; summation is implied whenever an index is repeated. 
 The phasic pressure $P_k$ is computed from an equation of state that is assumed given as a function of the density $\rho_k$ and 
 the phasic internal energy $e_k = E_k - \tfrac{1}{2} u^2_k$. The cross section of the geometry is denoted by $A$ and is only 
-spatially dependent. $A$ is included for completeness of the presentation and is set to 1 in most applications; however, 
+spatially dependent. $A$ is included for completeness of the presentation, is set to 1 in most applications and is only spatial dependent; however, 
 nozzle flow problems can be solved using the one-dimensional version of the equations by setting $A$ to the cross-sectional area 
 of the nozzle. The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, 
 $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively; they are defined in \eqt{eq:int_variables_def}.
@@ -226,7 +226,7 @@ volume of a two-phase mixture), $A_{int}$, is typically dependent upon flow regi
 A_{int} = A_{int}^{max} \left[ 6.75 \left(1-\alpha_{liq} \right)^2 \alpha_{liq} \right] \ . \nonumber
 \end{equation}
 % 
-$A_{int}^{max}$ is referred to as the maximum special interfacial area and set to $5100$ $m^2 / m^3$. With this definition, the interfacial area is zero in the limits $\alpha_{k} = 0$ and $\alpha_{k} = 1$.
+$A_{int}^{max}$ is a constant referred to as the maximum special interfacial area and set to $5100$ $m^2 / m^3$. With this definition, the interfacial area is zero in the limits $\alpha_{k} = 0$ and $\alpha_{k} = 1$.
 In this paper, we assume that the maximum specific interfacial area can take different values between the velocity and pressure relaxation coefficients as shown in \eqt{eq:relaxation_coeff}:
 %
 \begin{subequations}
@@ -246,7 +246,7 @@ where
 A_{int}^i = A_{int}^{max,i} \left[ 6.75 \left(1-\alpha_{k} \right)^2 \alpha_{k} \right] , \ i \in \{ \mu, \ \lambda \} \ .
 \end{equation}
 %
-Such a choice allows us more freedom in the mechanical coupling between the two phases $k$ and $j$ and will be useful for some other tests presented in SECTION.
+Such a choice remains consistent with the entropy inequality (\eqt{eq:ent-eqn-7-eqn}) as previously stated. It also allows us more freedom in the mechanical coupling between the two phases $k$ and $j$ and will be useful for some other tests presented in \sct{sec:results}.
 
 The set of equations satisfied by phase $j$ are simply obtained by substituting $k$ by $j$ and $j$ by $k$ in \eqt{eq:7-eqn}, keeping 
 the same definition of the interfacial variables and relaxation coefficients given in \eqt{eq:int_variables_def} and \eqt{eq:relaxation_coeff}, respectively. The equation for the volume fraction of phase $j$ is simply replaced by the algebraic relation
@@ -452,7 +452,7 @@ M^2_{k,\infty} & \text{ in the shock region }
 &\Pe_{k,\infty}^\beta = 1 \ . \nonumber
 \end{align}
 \tcr{don't you want to stick with $ \Pe_{k,\infty}^\kappa = M^2_{k,\infty}$. it's easier. how can you differentiate between the 2 types. and do you do it in the code? a reviewer may ask.
-is it worth it?}
+is it worth it?} \tcb{it is actually fairly simple. We can talk about it.}
 %
 It remains to define the entropy viscosity coefficient $\beta_{e,k}$. For the purpose of this paragraph, let us consider the scalar volume fraction equation and assume that the interface velocity $\mbold u_{int}$ is given. Because it is a scalar hyperbolic equation, it is proposed to define the entropy viscosity coefficients on the same model as what is done for Burger's equation \cite{jlg1, jlg2}. Thus, the entropy viscosity viscosity coefficient $\beta_e$ is defined as a function of an entropy residual, $R_{k}^\alpha$, derived from the volume fraction equation for phase $k$, and the jump of a function of the volume fraction, $J_k^\alpha$, as shown in \eqt{eq:def-beta-sen-sect4}.
 %
@@ -758,13 +758,21 @@ A Jacobian-free Newton-Krylov (JFNK) method is used to solve for the solution at
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 In this section, we present 1-D numerical results of the Seven-Equation two-phase model solved with the viscous regularization recalled in \sct{sec:ref-sem}, and the all-Mach flow definitions of the phasic viscosity coefficients derived in \sct{sec:visc-def}. This section aims at assessing the capabilities of the Entropy Viscosity Method when solving various two-phase flows taken from the literature. The first set of 1-D numerical results are obtained with a Moose-based application called 'SEVEN-bandEd arMadillo' and consists of various shock tubes with liquid and gas phases. A volume fraction shock tube is first investigated. Next, a shock tube with two independent fluids is presented which is identical to solving each phase with the single phase Euler equations. Then, the same shock tube is considered but with infinite relaxation coefficients which is equivalent to solving the five-equation model of Kapilla (REF). Finally, a two-phase flow through a converging-diverging nozzle is considered. The second set of 1-D numerical results are obtained with Relap-7 (REF) and consists of tests such as a two-phase flow water hammer, a hydrostatic test and a steady-state for a Boiling Water Reactor (BWR). \\
-For each test, details regarding the equation of states, the mesh and the time step are provided. When an exact solution is available, a convergence study is performed in order to demonstrate the accuracy of the Entropy Viscosity Method.
+For each test, details regarding the equation of states, the mesh and the time step are provided. When an exact solution is available, a convergence study is performed in order to demonstrate the accuracy of the Entropy Viscosity Method. All numerical results presented in this section are run with the second-order temporal integrator BDF2 and linear test functions. The phases are described either by the Ideal gas equation of state (IGEOS) or the Stiffened Gas equation of state (SGEOS). A generic form for both equation of states is as follows:
+%
+\begin{equation}\label{eq:generic-form}
+P_k = (\gamma_k-1) \rho_k (e_k - q_k) - \gamma_k P_{k,\infty} \, ,
+\end{equation}
+%
+where the parameters $q_k$ and $P_{k,\infty}$ are phase-dependent. The IGEOS is retrieved from \eqt{eq:generic-form} by setting $q_k$ and $P_{k,\infty}$ to zero.
 %
 \subsection{1-D numerical results obtained with the Moose-based application 'SEVEN-bandEd armMadillo'}\label{sec:1d-results-sba}
 %
 %
 \subsubsection{A volume fraction shock tube}\label{sec:vf-advection-test}
 %
+We consider a 1-D straight pipe of length $L=1 \ m$ filled with two independent gas phases (the relaxation coefficients are set to zero), initially in mechanical equilibrium (same pressure and same velocity) and described by the Ideal Gas Equation of state with $\gamma_1 = 3$ and $\gamma_2 = 1.4$. The volume fraction variable is initialized with a step in the middle of the pipe. This test has a trivial solution which corresponds to the pure advection of the volume fraction profile and has two objectives. The first objective is to make sure that the artificial stabilization method is not responsible for the apparition of an artificial mixture zone. Also, since an exact solution is available to us, a convergence study is performed. The second objective consists of investigating the effect of the different definition of the first-order viscosity coefficient $\beta_{max}$ (see \eqt{eq:visc-coeff-fo-def-1} and \eqt{eq:visc-coeff-fo-def-2}) onto the numerical solution.
+The initial phasic pressure and velocity values are uniform and set to $0.1 \ MPa$ and $100 \ m/s$, respectively. With such values, the interfacial pressure and interfacial velocity remains constant and equal to their respective average interfacial values. The density of the phase $1$ and $2$ are set to $10$ and $1 \ kg/m^3$, respectively. One the left part of the tube the volume fraction of phase $1$ is $\alpha_1 = 0.9$ while on the right part of the tube is $\alpha_1=0.1$. The numerical solution is run with a CFL of one until the final time $t=1703 \ \mu s$ and is presented in FIGURES.
 %
 \subsubsection{Shock tube with two independent fluids}\label{sec:shock-tube-two-indep-fluids}
 %
