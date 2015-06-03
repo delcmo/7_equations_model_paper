@@ -449,7 +449,7 @@ and regularize this system by adding dissipation terms (viscous fluxes) to each 
 %
 where $\mbold f_k$, $\mathbb{g}_k$, $\mbold h_k$ and $\mbold l_k$ are phasic viscous terms, yet to be determined. 
 %
-The \tcr{terms underlined in \eqts{eq:sev_equ-with-diss-terms} are part of the inviscid SEM model}, see the unregularized system of equations (\eqref{eq:liq-7-eqn-sect5_no_exchange}); these terms are entropy-producing and we refer the reader to \app{app:sev-equ-model-entropy} for a detailed derivation of the 
+The \tcr{terms underlined in \eqts{eq:sev_equ-with-diss-terms} are part of the inviscid SEM model} \tcb{ok}, see the unregularized system of equations (\eqref{eq:liq-7-eqn-sect5_no_exchange}); these terms are entropy-producing and we refer the reader to \app{app:sev-equ-model-entropy} for a detailed derivation of the 
 entropy equation \emph{without} viscous regularization present. 
 In this section, we deal with the \emph{regularized} system of equations for the SEM model and 
 the above underlined terms will later ignored in the derivation for brevity. 
@@ -840,11 +840,11 @@ coefficients and to recover the incompressible asymptotic equations \cite{LowMac
 derive the scaled SEM equations and investigate the scaling of the dissipative terms. 
 First, the scaled SEM are derived. Then, two limit cases will be considered to determine 
 appropriate scaling for the viscosity coefficients so that the dissipative terms remain well-scaled for: 
-(a) the isentropic low-Mach limit where the seven-equation model \tcr{degenerates\footnote{negative connotation!}} to an incompressible system of 
+(a) the isentropic low-Mach limit where the seven-equation model \tcr{degenerates\footnote{negative connotation!}} \tcb{I have always heard Ray use this word. We should ask him.} to an incompressible system of 
 equations and (b) the non-isentropic limit where shocks can occur. 
 Because each phase can experience different flow regimes, e.g., supersonic gas and subsonic liquid, we elect to keep distinct the three viscosity 
 coefficients for each phase, $\mu_k$, $\kappa_k$, and $\beta_k$. The study is performed for the seven-equation model using the Stiffened Gas 
-Equations of State (SGEOS) given in \eqt{eq:SGEOS_bis}.
+Equations of State (SGEOS) \cite{SGEOS} given in \eqt{eq:SGEOS_bis}.
 %
 \begin{equation}\label{eq:SGEOS_bis}
 P_k = \left( \gamma_k-1 \right) \rho_k e_k - \gamma_k P_{k,\infty}
@@ -939,6 +939,7 @@ converges to an incompressible system of equations that is characterized, for ea
 $M^2_{k}$ and a divergence-free constraint on the velocity, $\div \left(\alpha_k A \mbold u_k \right) = 0$. When adding dissipative 
 terms as a viscous regularization of the flow equations, the main properties of the low-Mach asymptotic limit must be preserved.
 \tcr{In the low-Mach limit, the two phases are assumed not to interact and, thus, the volume fraction 
+of each phase remains constant}. \tcb{In the low-Mach limit and for the purpose of this section, the two phases are assumed not to interact and, thus, the volume fraction 
 of each phase remains constant}.
 We begin by expanding each variable in powers of the Mach number. As an example, the expansion for the pressure is given by:
 %
@@ -994,7 +995,7 @@ and the leading-order expressions for the continuity and energy equations are:
 %
 where the notation $(fg)_0$ means that we only keep the 0$^{\text{th}}$-order terms in the product $fg$. 
 \tcr{Recall that \eqts{eq:asympt_equ2} are written with the assumptions of \sct{sec:scaled-SEM}, that is, 
-that the micro and macro scale interaction effects are neglected}. 
+that the micro and macro scale interaction effects are neglected}. \tcb{ok}
 The set of equations given in 
 \eqt{eq:asympt_equ2} is similar to the single-phase Euler equations with variable area when interpreting $\alpha_k A$ as a pseudo-area 
 \cite{Marco_paper_low_mach}. The leading-order of the Stiffened Gas Equation of State (\eqt{eq:SGEOS_bis}) is also given by 
@@ -1105,7 +1106,7 @@ from \eqts{eq:visc-reg-7-equ-sect4}.
 When the pressure and velocity relaxation parameters are large, \eqts{eq:sev_equ-with-diss-terms} 
 become equivalent to the regularized five-equation model given by \eqts{eq:liq-5-eqn} and for which 
 the phasic pressures and velocities are equal.
-} 
+} \tcb{it is fine}
 
 %
 We illustrate the ability of the proposed viscous regularization to stabilize the 
@@ -1137,7 +1138,7 @@ We can also observe that the phasic pressures and velocities are indeed identica
 This example demonstrates the ability of the proposed viscous regularization to stabilize the seven-equation two-phase flow model.
 % The numerical solution does not display any instabilities. 
 %
-\tcr{I think the text in \underline{all} of the figures (legend+axis labels) is a bit too small for a journal}
+\tcr{I think the text in \underline{all} of the figures (legend+axis labels) is a bit too small for a journal} \tcb{I will issue new plots. We can still give the paper to Ray for review}
 \begin{figure}[H]
         \centering
         \begin{subfigure}[b]{0.5\textwidth}
@@ -1227,22 +1228,35 @@ At the outlet, only the static pressure is specified: $P_s = 0.5$ {\it MPa}.
 Initially, the two phases are at rest; their temperatures are uniform and equal to their stagnation temperatures;  their pressures 
 linearly decrease from the stagnation pressure inlet value to the static pressure outlet value. The volume fraction $\alpha_k$ is set to $0.5$.
 % and remains constant until steady-state is reached.
-The stiffened gas equation of state is used to model the liquid and vapor with the parameters provided in 
-\cite{Marco_paper_low_mach} \tcr{if i am not mistaken, we have 2 sets of parameters for the liquid in the low-mach paper, so the reader will have no idea 
-which set of parameters has been used here. why don't you copy table 2 from the low mach paper and remove the line that doesn't apply here}
+The stiffened gas equation of state is used to model the liquid and vapor with the parameters provided in \tbl{tbl:stff_gas_eos}.
+%
+\begin{table}[!htbp]
+\begin{center}
+\caption{ Stiffened Gas Equation of State parameters for steam and liquid water.}
+\label{tbl:stff_gas_eos}
+\begin{tabular}{|c|c|c|c|c|}
+ \hline
+\text{fluid}                           & $\gamma$ & $C_v$ $(J.kg^{-1}.K^{-1})$ & $P_\infty$ $(Pa)$ & $q$ $(J.kg^{-1})$ \\  \hline \hline
+liquid water & 2.35     & 1816                       & $10^9$            & $-1167\ 10^3$     \\  \hline
+steam        & 1.43     & 1040                       & 0                 & $ 2030\ 10^3$     \\  \hline
+\end{tabular}
+\end{center}
+\end{table}
+%
+\tcr{if i am not mistaken, we have 2 sets of parameters for the liquid in the low-mach paper, so the reader will have no idea 
+which set of parameters has been used here. why don't you copy table 2 from the low mach paper and remove the line that doesn't apply here} \tcb{done}
 %
 This test case is of interest for multiple reasons: (a) a steady state is reached, (b) 
-an analytical solution is available \tcr{add reference to analytical solution paper here}, (c) due to the different compressibilities between the phases,
+an analytical solution is available \cite{nozzle_exact} \tcr{add reference to analytical solution paper here} \tcb{done}, (c) due to the different compressibilities between the phases,
 the vapor phase will become supersonic and will develop a steady shock while the liquid phase will be low-Mach flow ($M_\text{liquid} \approx 10^{-2}$). 
 %
 We illustrate the low-Mach asymptotic study of \sct{sec:low-Mach} with two cases. 
-\tcr{I know beta is not needed here, but I prefer to leave it to avoid questions later. what do you think?\\}
+\tcr{I know beta is not needed here, but I prefer to leave it to avoid questions later. what do you think?\\} \tcb{I added a line below}
 %
 In case (1), the nozzle problem is run using the same phasic viscosity 
 coefficients that were used for the previous shock tube test case (\sct{sec:first-test}), i.e., 
-$\mu_k =  \kappa_k = \beta_k = \tfrac{h}{2} \left( ||\mbold u_k|| + c_k \right)$. Using these viscosity coefficients in the 
-the expressions for the non-dimensional numbers defined, \eqt{eq:norm_param} \tcr{wrong eq, should be 36}, along with the above definitions of the phasic viscosity coefficients, it is found that the scaling of the phasic 
-numerical Reynolds and P\'eclet numbers is a function of the phasic Mach number as follows: $\Re_k=\Pe_k^\kappa=\Pe_k^\beta = 2M_k / (1+M_k)$ 
+$\mu_k =  \kappa_k = \beta_k = \tfrac{h}{2} \left( ||\mbold u_k|| + c_k \right)$ \tcb{(note that the artificial viscosity flux function of the phasic viscosity coefficient $\beta_k$ is not active because the volume fraction remains constant)}. Using the non-dimensionalized variables defined in \eqt{eq:norm_param} \tcr{wrong eq, should be 36} \tcb{done}, along with the above definitions of the phasic viscosity coefficients, it is found that the scaling of the phasic 
+numerical Reynolds and P\'eclet numbers defined in \eqt{eq:ref_numb}, is a function of the phasic Mach number as follows: $\Re_k=\Pe_k^\kappa=\Pe_k^\beta = 2M_k / (1+M_k)$. 
 % (note that the P\'eclet numbers defined for the volume fraction equation is not defined since the volume fraction equation is not needed). 
 Such a scaling will efficiently stabilize the vapor flow that becomes supersonic in the nozzle ($M_k \sim 1 $). On the other hand, the liquid phase will reach 
 a low-Mach steady-state flow and the above definitions of the viscosity coefficients are ill-scaled because they lead to $\Re_k=\Pe_k^\kappa=\Pe_k^\beta \propto M_k$ 
@@ -1251,7 +1265,7 @@ the local Lax-Friedrichs viscosities are too large in the low-Mach regime). Henc
 should not be obtained for the liquid phase using these viscosity definitions. 
 %
 In case (2), we propose a fix to the ill-scaling effect observed in the liquid phase. In order to have the non-dimensionalized numbers scale as 1
-for low-Mach flows, we following definitions of the phasic viscosity is used:  $\mu_k =  \kappa_k = \beta_k = M_k \times \tfrac{h}{2} \left( ||\mbold u_k|| + c_k \right)$. 
+for low-Mach flows, the following definitions of the phasic viscosity is used:  $\mu_k =  \kappa_k = \beta_k = M_k \times \tfrac{h}{2} \left( ||\mbold u_k|| + c_k \right)$. 
 Now, in the low-Mach regime, $\Re_k$, $\Pe_k^\kappa$, and $=\Pe_k^\beta$ scale as 1. Note that in the supersonic case, the 
 viscous stabilization of the scheme is not altered since $M_k \simeq \mathcal{O}(1)$. 
 
