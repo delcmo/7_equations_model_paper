@@ -28,8 +28,8 @@
 \documentclass[preprint,10pt]{elsarticle}
 \journal{Springer Journal of Scientific Computing}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\input{inputs/def.tex}
 \input{inputs/packages.tex}
+\input{inputs/def.tex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \bibliographystyle{elsarticle-num}
@@ -41,7 +41,58 @@
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frontmatter}
+%-------------------------
+%-------------------------
+\title{Viscous Regularization for the Non-equilibrium Seven-Equation Two-Phase Flow Model}
+%-------------------------
+%-------------------------
+\author{Marc O. Delchini\fnref{label1}}
+\ead{delchinm@email.tamu.edu}
+%
+\author{Jean C. Ragusa\corref{cor1}\fnref{label1}}
+\ead{jean.ragusa@tamu.edu}
+%
+\author{Ray A. Berry\fnref{label2}}
+\ead{ray.berry@inl.gov}
+%
+\address[label1]{Department of Nuclear Engineering, Texas A\&M University, College Station, TX 77843, USA \fnref{label1}}
+%
+\address[label2]{Idaho National Laboratory, Idaho Falls, ID 83415, USA \fnref{label2}}
+%
+\cortext[cor1]{Corresponding author}
+%-------------------------
+%-------------------------
+%-------------------------
+\begin{abstract}
+\input{7_equation_model_abstract.tex}
+\end{abstract}
+%-------------------------
+%-------------------------
+\begin{keyword}
+seven-equation model \sep two-phase flow model \sep viscous regularization \sep artificial viscosity method \sep five-equation model of Kapila \sep low-Mach asymptotics 
+\end{keyword}
+%-------------------------
+\end{frontmatter}
+%
+\linenumbers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \input{7_equation_model_main_text.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Acknowledgments} 
+The authors (M.D. and J.R.) would like to thank Bojan Popov and Jean-Luc Guermond for many fruitful discussions.  
+This research was carried out under the auspices of the Idaho National Laboratory, a contractor of the U.S. Government under contract No. DEAC07-05ID14517.  Accordingly, the U.S. Government retains a non-exclusive, royalty-free license to publish or reproduce the published form of this contribution, or allow others to do so, for U.S. Government purposes.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliography{mybibfile}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{appendices/appendices}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
