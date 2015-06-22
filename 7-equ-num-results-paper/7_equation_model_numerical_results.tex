@@ -86,11 +86,12 @@ blabla
 %-------------------------
 \begin{keyword}
   two-phase flow model \sep 
-	% with variable area \sep 
-	entropy viscosity method \sep 
+	seven-equation model \sep
 	artificial viscosity \sep 
+	% with variable area \sep 
+	entropy-based viscosity stabilization\sep 
 	low-Mach regime \sep 
-	shock-capturing .
+	shock-capturing
 \end{keyword}
 %-------------------------
 \end{frontmatter}
@@ -120,23 +121,37 @@ for the source terms
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The regularized Seven-Equation two-phase flow Model with an all-Mach flow viscous regularization}\label{sec:7-equ-model}
+\section{The Seven-Equation Two-Phase Flow Model with an All-Mach Flow Viscous Regularization}\label{sec:7-equ-model}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \tcr{I/you will add a short intro to re-emphasize that visc. reg. is present and what that means...\\} \tcb{done}
 
-In this section, the inviscid Seven-Equation two-phase flow Model employed in this paper is presented along with the closure relations used to compute the 
-relaxation terms and 
-interfacial variables (REF). Then, expression of the artificial dissipative fluxes used in the viscous regularization are recalled. The viscous regularization was 
-derived in (REF) by 
-using an entropy condition called ``the minimum entropy principle" which ensures both uniqueness of the numerical solution and convergence to the physical 
-solution. This section 
-ends with the derivation of the phasic viscosity coefficients based on the study of the non-dimensional form of the regularized Seven-Equation two-phase flow 
-Model that was 
-performed in (REF). In the remaining of the paper, the spatial and temporal dependencies in each variable are omitted for conciseness. All variables are 
-assumed to be spatial 
-and temporal dependent but when stated otherwise. 
+%<<<<<<< HEAD
+%In this section, the inviscid Seven-Equation two-phase flow Model employed in this paper is presented along with the closure relations used to compute the 
+%relaxation terms and 
+%interfacial variables (REF). Then, expression of the artificial dissipative fluxes used in the viscous regularization are recalled. The viscous regularization was 
+%derived in (REF) by 
+%using an entropy condition called ``the minimum entropy principle" which ensures both uniqueness of the numerical solution and convergence to the physical 
+%solution. This section 
+%ends with the derivation of the phasic viscosity coefficients based on the study of the non-dimensional form of the regularized Seven-Equation two-phase flow 
+%Model that was 
+%performed in (REF). In the remaining of the paper, the spatial and temporal dependencies in each variable are omitted for conciseness. All variables are 
+%assumed to be spatial 
+%and temporal dependent but when stated otherwise. 
+%=======
+In this Section, we review the seven-equation two-phase flow model (REF) and present a viscous regularization, introduced by Delchini et al. in REF,
+that preserves the minimum entropy principle.  
+First, the inviscid Seven-Equation Model (SEM) is provided, along with its closure relations and the necessary notational definitions. 
+\tcr{\\here you have important info: closure relations used to compute the relaxation terms and interfacial variables (REF). I am not sure this goes in this small introduction. Here, we should just advertize the two upcoming subsections. However, that information should be written somewhere, either in the introduction if appropriate or int he subsection about the inviscid 7eq model\\}
+Then, the viscous regularization of the SEM is given where we recalled the definitions for the artificial dissipative fluxes.
+\tcr{\\ again, I would like to keep this mini introduction very short. Some of the info here is good but should it go here?\\
+ The viscous regularization was derived in (REF) by 
+using an entropy condition called ``the minimum entropy principle'' which ensures both uniqueness of the numerical solution and convergence to the physical solution. This section 
+ends with the derivation of the phasic viscosity coefficients based on the study of the non-dimensional form of the regularized Seven-Equation two-phase flow Model that was 
+performed in (REF).\\}
+
+In the remaining of the paper, each dependent variable is assumed to a function of both space and time, unless otherwise noted. These depedencies are implicit and omitted for conciseness. 
 %
 %----------------------------------------------------------------------------------------------------------------------------------
 \subsection{The inviscid Seven-Equation two-phase flow Model}
@@ -188,9 +203,11 @@ we have $(\div \mathbb{g})_j = \partial_{x_i} g_{ij}$, $(\mathbb{g}\cdot \mbold{
 $\mathbb{g}:\mathbb{h} = g_{ij} h_{ij}$; summation is implied whenever an index is repeated. 
 The phasic pressure $P_k$ is computed from an equation of state that is assumed given as a function of the density $\rho_k$ and 
 the phasic internal energy $e_k = E_k - \tfrac{1}{2} u^2_k$. The cross section of the geometry is denoted by $A$ and is only 
-spatially dependent. $A$ is included for completeness of the presentation, is set to 1 in most applications and is only spatial dependent; however, 
-nozzle flow problems can be solved using the one-dimensional version of the equations by setting $A$ to the cross-sectional area 
-of the nozzle. The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, 
+spatially dependent. $A$ is included here for completeness of the presentation and is usually set to 1 in most applications; however, 
+nozzle flow problems can be solved using the one-dimensional version of the equations by letting $A$ be the cross-sectional area 
+of the nozzle. 
+\tcr{here would be a good place to talk about the relaxation parameters. when they are mentioned later, I feel it's late\\}
+The interfacial pressure and velocity and their corresponding average values are denoted by $P_{int}$, $\mbold u_{int}$, 
 $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively; they are defined in \eqt{eq:int_variables_def}.
 %
 \begin{subequations}
@@ -208,12 +225,19 @@ $\bar{P}_{int}$ and $\bar{\mbold u}_{int}$, respectively; they are defined in \e
 \end{align}
 \end{subequations}
 %
-Using the definitions of the interfacial variables given in \eqt{eq:int_variables_def} and assuming a smooth solution, an entropy equation can be derived for 
-each phase $k$ of 
-system \eqt{eq:7-eqn} and the sign of the entropy material derivative can be proved positive. The entropy function for a phase $k$ is denoted by $s_k$ and is 
-a function of 
-density $\rho_k$ and internal energy $e_k$. The full derivation is given in (REF) and only the final result is recalled here. The entropy of phase $k$ satisfies 
-the following equation
+%<<<<<<< HEAD
+%Using the definitions of the interfacial variables given in \eqt{eq:int_variables_def} and assuming a smooth solution, an entropy equation can be derived for 
+%each phase $k$ of 
+%system \eqt{eq:7-eqn} and the sign of the entropy material derivative can be proved positive. The entropy function for a phase $k$ is denoted by $s_k$ and is 
+%a function of 
+%density $\rho_k$ and internal energy $e_k$. The full derivation is given in (REF) and only the final result is recalled here. The entropy of phase $k$ satisfies 
+%the following equation
+%=======
+Using the definitions of the interfacial variables given in \eqt{eq:int_variables_def} and assuming a smooth solution, an entropy equation can be 
+derived for each phase $k$ of system \eqt{eq:7-eqn} and the sign of the entropy material derivative can be proved positive. 
+The entropy function for a phase $k$ is denoted by $s_k$ and is a function of 
+density $\rho_k$ and internal energy $e_k$. The full derivation is given in (REF) and only the final result is recalled here. 
+The entropy of phase $k$ satisfies the following equation
 %
 \begin{align} \label{eq:ent-eqn-7-eqn}
 (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} &= \mu_P \frac{Z_k}{Z_k+Z_j} (P_j - P_k)^2 + \lambda_u \frac{Z_j}{Z_k+Z_j} (\mbold u_j -\mbold  u_k)^2 
@@ -245,18 +269,28 @@ real (as long as the equation of state yields a real-valued sound speed).
 
 Following \cite{SEM}, the pressure and the velocity relaxation coefficients, $\mu_P$  and $\lambda_u$ respectively, are function of the acoustic 
 impedance $Z_k = \rho_k c_k$ and the specific interfacial area $A_{int}$. The specific interfacial area (i.e., the interfacial surface area per unit
-volume of a two-phase mixture), $A_{int}$, is typically dependent upon flow regime conditions and can be provided as a correlation. In \cite{SEM}, $A_{int}$ is 
-chosen to 
-be the same for the velocity and the pressure relaxation coefficients and a function of the liquid volume fraction as follows:
+%<<<<<<< HEAD
+%volume of a two-phase mixture), $A_{int}$, is typically dependent upon flow regime conditions and can be provided as a correlation. In \cite{SEM}, $A_{int}$ is 
+%chosen to 
+%be the same for the velocity and the pressure relaxation coefficients and a function of the liquid volume fraction as follows:
+%=======
+volume of a two-phase mixture), $A_{int}$, is typically dependent upon flow regime conditions and can be provided as a correlation. For example,
+in \cite{SEM} $A_{int}$ is chosen to be the same for the velocity and the pressure relaxation coefficients and its expression is:
 %
 \begin{equation}\label{eq:Aint-def}
 A_{int} = A_{int}^{max} \left[ 6.75 \left(1-\alpha_{liq} \right)^2 \alpha_{liq} \right] \ . \nonumber
 \end{equation}
 % 
-$A_{int}^{max}$ is a constant referred to as the maximum special interfacial area and set to $5100$ $m^2 / m^3$. With this definition, the interfacial area is 
-zero in the limits $\alpha_{k} = 0$ and $\alpha_{k} = 1$.
-In this paper, we assume that the maximum specific interfacial area can take different values between the velocity and pressure relaxation coefficients as 
-shown in \eqt{eq:relaxation_coeff}:
+%<<<<<<< HEAD
+%$A_{int}^{max}$ is a constant referred to as the maximum special interfacial area and set to $5100$ $m^2 / m^3$. With this definition, the interfacial area is 
+%zero in the limits $\alpha_{k} = 0$ and $\alpha_{k} = 1$.
+%In this paper, we assume that the maximum specific interfacial area can take different values between the velocity and pressure relaxation coefficients as 
+%shown in \eqt{eq:relaxation_coeff}:
+%=======
+$A_{int}^{max}$ is a constant referred to as the maximum special interfacial area. % and set to $5100$ $m^2 / m^3$. 
+With such an expression, the interfacial area is zero in the limits $\alpha_{k} = 0$ and $\alpha_{k} = 1$.
+In this paper, we assume that the maximum specific interfacial area can take different values between the velocity and pressure relaxation 
+coefficients as shown in \eqt{eq:relaxation_coeff}:
 %
 \begin{subequations}
 \label{eq:relaxation_coeff}
@@ -275,9 +309,13 @@ where
 A_{int}^i = A_{int}^{max,i} \left[ 6.75 \left(1-\alpha_{k} \right)^2 \alpha_{k} \right] , \ i \in \{ \mu, \ \lambda \} \ .
 \end{equation}
 %
-Such a choice remains consistent with the entropy inequality (\eqt{eq:ent-eqn-7-eqn}) as previously stated. It also allows us more freedom in the mechanical 
-coupling between the two phases $k$ and 
-$j$ and will be useful for some other tests presented in \sct{sec:results}.
+%<<<<<<< HEAD
+%Such a choice remains consistent with the entropy inequality (\eqt{eq:ent-eqn-7-eqn}) as previously stated. It also allows us more freedom in the mechanical 
+%coupling between the two phases $k$ and 
+%$j$ and will be useful for some other tests presented in \sct{sec:results}.
+%=======
+Such a choice remains consistent with the entropy inequality (\eqt{eq:ent-eqn-7-eqn}) as previously stated. It also allows us more 
+freedom\tcr{flexibility?} in the mechanical coupling between the two phases $k$ and $j$ and will be employed for some of the test tests presented in \sct{sec:results}.
 
 The set of equations satisfied by phase $j$ are simply obtained by substituting $k$ by $j$ and $j$ by $k$ in \eqt{eq:7-eqn}, keeping 
 the same definition of the interfacial variables and relaxation coefficients given in \eqt{eq:int_variables_def} and \eqt{eq:relaxation_coeff}, respectively. The 
@@ -288,26 +326,31 @@ is simply replaced by the algebraic relation
  \alpha_{j}= 1 - \alpha_{k}, \nonumber
 \end{align}
 %
-which reduces the number of partial differential equations from eight to seven and yields the Seven-Equation two-phase flow Model (SEM).
-
-\tcr{I am tempted to only give the SEM without regularization first, define everything that pertains to the SEM, and then just add the viscous regularization
-so that we can quote the SEM independently of our previous work (the viscous regularization)}\tcb{I think you are right. I added one section dedicated to the 
-regularized SEM. In this section, I recall the entropy equation and the eigenvalues}
+which reduces the number of partial differential equations from eight to seven. % and yields the Seven-Equation two-phase flow Model (SEM).
 %
 %----------------------------------------------------------------------------------------------------------------------------------
-\subsection{The regularized Seven-Equation two-phase flow Model}\label{sec:ref-sem}
+\subsection{The Regularized Seven-Equation two-phase flow Model}\label{sec:ref-sem}
 %----------------------------------------------------------------------------------------------------------------------------------
 %
 Because the inviscid Seven-Equation two-phase flow Model is a nonlinear hyperbolic system of equations, the existence of a 
 globally smooth solution may not occur because of the nonlinearity of the flux functions, even with smooth initial data. Thus, the concept of a weak
 solution is introduced to guarantee the existence of a global solution. The uniqueness of the solution, however, is lost because the problem may
-allow infinitely many weak solutions. To ensure convergence of the numerical solution to an unique physical solution, an additional condition, the``entropy 
-condition'', is imposed. This entropy condition was used 
-in (REF) to derive a numerical method under the form of a viscous regularization that is consistent with the minimum entropy principle. The inviscid Seven-
-Equation two-phase flow Model along with the viscous 
-regularization yields the regularized Seven-Equation two-phase flow Model that is recalled below in \eqt{eq:reg-7-eqn} (the viscous regularization terms are 
-given in the right-hand side for clearness). The reader 
-is referred to (REF) for the detailed derivation of the viscous regularization terms.
+%<<<<<<< HEAD
+%allow infinitely many weak solutions. To ensure convergence of the numerical solution to an unique physical solution, an additional condition, the``entropy 
+%condition'', is imposed. This entropy condition was used 
+%in (REF) to derive a numerical method under the form of a viscous regularization that is consistent with the minimum entropy principle. The inviscid Seven-
+%Equation two-phase flow Model along with the viscous 
+%regularization yields the regularized Seven-Equation two-phase flow Model that is recalled below in \eqt{eq:reg-7-eqn} (the viscous regularization terms are 
+%given in the right-hand side for clearness). The reader 
+%is referred to (REF) for the detailed derivation of the viscous regularization terms.
+%=======
+allow infinitely many weak solutions. To ensure convergence of the numerical solution to an unique physical solution, an additional condition, 
+the``entropy condition'', is imposed. This entropy condition was used 
+in (REF) to derive a numerical method under the form of a viscous regularization that is consistent with the minimum entropy principle. 
+The inviscid Seven-Equation two-phase flow Model along with the viscous 
+regularization yields the regularized Seven-Equation two-phase flow Model that is recalled below in \eqt{eq:reg-7-eqn} 
+(the viscous regularization terms are placed on the right-hand side for clarity of presentation). The reader 
+is referred to (REF) for the detailed derivation of these dissipative terms.
 %
 \begin{subequations}\label{eq:reg-7-eqn}
 \begin{align}
@@ -343,8 +386,7 @@ is referred to (REF) for the detailed derivation of the viscous regularization t
 \end{multline}
 \end{subequations}
 %
-where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the volume fraction, density,  velocity vector, and total specific 
-energy of phase $k$, respectively. The dissipative terms $\mbold l_k$, $\mbold l_k$, $\mathbb{g}_k$ and $\mbold h_k$ were derived in (REF) and 
+The dissipative terms $\mbold l_k$, $\mbold f_k$, $\mathbb{g}_k$ and $\mbold h_k$ were derived in (REF) and their expressions
 are as follows: 
 %
 \begin{subequations}\label{eq:visc-reg-7-equ}
@@ -362,7 +404,12 @@ are as follows:
 \end{align}
 \end{subequations}
 %
-where $\beta_k$, $\kappa_k$ and $\mu_k$ are phasic viscosity coefficients that are positive by definition and will be defined in \sct{sec:visc-def}.
+where $\beta_k$, $\kappa_k$ and $\mu_k$ are positive phasic viscosity coefficients. 
+
+\tcr{here, we should say something about the fact that we proved it worked with LLF but LLF was over dissipative. here, we want a higher-order artificial
+viscosity technique, thus EVM.\\ We should also introduce what we mean by first-order viscosity and higher-order viscosity, since we employ that 
+terminology afterward}
+%  that are positive by definition and will be defined in \sct{sec:visc-def}.
 %
 %----------------------------------------------------------------------------------------------------------------------------------
 \subsection{All-Mach definition of the phasic viscosity coefficients}\label{sec:visc-def}
@@ -401,11 +448,16 @@ coefficients proportional to the local maximum eigenvalue of each phase as shown
 \beta_{k,max}(\mbold{r},t) = \mu_{k,max}(\mbold{r},t) = \kappa_{k,max}(\mbold{r},t) = \frac{h}{2} \left( || \mbold{u}_k || + c_k \right)
 \end{equation}
 %
-where $h$ \tcr{I would drop the superscript $K$. You also omit it sometimes after, so maybe it's better not to put it in the first place} \tcb{done}
-is a cell characteristic size and $|| \cdot ||$ denotes the Euclidean norm. Note that an example of definition for $h$ when considering a cell K of volume $|K|$ 
-belonging to a mesh of dimension 
-$dim$ is $h = |K|^\frac{1}{dim}$. With the above definition of the first-order viscosity coefficients, the numerical solution was shown to be stable in REF for the 
-case of a 1-D Sod shock test. 
+%<<<<<<< HEAD
+%where $h$ \tcr{I would drop the superscript $K$. You also omit it sometimes after, so maybe it's better not to put it in the first place} \tcb{done}
+%is a cell characteristic size and $|| \cdot ||$ denotes the Euclidean norm. Note that an example of definition for $h$ when considering a cell K of volume $|K|$ 
+%belonging to a mesh of dimension 
+%$dim$ is $h = |K|^\frac{1}{dim}$. With the above definition of the first-order viscosity coefficients, the numerical solution was shown to be stable in REF for the 
+%case of a 1-D Sod shock test. 
+%=======
+where $h$ is a cell characteristic size and $|| \cdot ||$ denotes the Euclidean norm. Note that an example of definition for $h$ when considering a 
+cell $K$ of volume $|K|$ belonging to a mesh of dimension 
+$dim$ is $h = |K|^\frac{1}{dim}$. With the above definition of the first-order viscosity coefficients, the numerical solution was shown to be stable in REF for the case of a 1-D Sod shock test. 
 %
 \begin{remark}
 Because the eigenvalue of the volume fraction equation (\eqt{eqn:multi-d-7-eqn-liq-vol}) is the local interfacial velocity $\mbold u_{int}$,
@@ -466,7 +518,6 @@ pressure. We see here the advantage of
 using the new expression for the entropy residual $\resinew_k$ that offers more diversity in the choice of the normalization parameters: the pressure itself and 
 combination of the density, the sound speed and the norm of the velocity.
 %
-\tcr{I removed the $||$ around the jumps. By the way, the jumps are not defined} \tcb{done}
 \begin{subequations}\label{eq:visc-coeff-ho-1}
 \begin{equation}
 \mu_{k,e}(\mbold r,t)    = h^2 \frac{\max\left( | \resi_k(\mbold r_q,t) |\,,  J_k  \right)}{\norm_{P,k}^\mu},
@@ -606,11 +657,17 @@ Viscosity Method, the
 viscosity coefficients are defined by taking the minimum between the first and high-order viscosity coefficients as shown in \eqt{eq:def-visc-sem}. The 
 approach is similar to what is done for the Flux-Corrected-Transport technique.
 %
-\begin{align}\label{eq:def-visc-sem}
-\beta_k( \mbold r, t) = \min \left( \beta_{k,e}( \mbold r, t), \beta_{k,max} ( \mbold r, t) \right), \nonumber \\
-\mu_k( \mbold r, t) = \min \left( \mu_{k,e}( \mbold r, t), \mu_{k,max} ( \mbold r, t) \right),  \\
-\kappa_k( \mbold r, t) = \min \left( \kappa_{k,e}( \mbold r, t), \kappa_{k,max} ( \mbold r, t) \right) ,\nonumber 
-\end{align}
+\begin{subequations}\label{eq:def-visc-sem}
+\begin{equation}
+\beta_k( \mbold r, t)  = \min \left( \beta_{k,e}( \mbold r, t) , \beta_{k,max} ( \mbold r, t)  \right), 
+\end{equation}
+\begin{equation}
+\mu_k( \mbold r, t)    = \min \left( \mu_{k,e}( \mbold r, t)   , \mu_{k,max} ( \mbold r, t)    \right), 
+\end{equation}
+\begin{equation}
+\kappa_k( \mbold r, t) = \min \left( \kappa_{k,e}( \mbold r, t), \kappa_{k,max} ( \mbold r, t) \right).
+\end{equation}
+\end{subequations}
 %
 The above definition of the phasic viscosity coefficients take advantage of the properties of the entropy residual that is peaked in the vicinity of the shock: in 
 the shock region the 
