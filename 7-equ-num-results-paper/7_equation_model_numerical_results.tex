@@ -822,6 +822,60 @@ same pressure and velocity. The volume fraction will not remain uniform but is e
 this test, an exact solution is not available but the reader can refer to \cite{Saurel_2007} for a comparison. An uniform mesh of 500 cells is used. The code is 
 run until $t_{final} = 305$ $\mu s$ with a $CFL$ of one. The numerical solutions are presented in.
 %
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_density.png}
+                \caption{Velocity}
+                \label{fig:inf-rel-vel}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_pressure.png}
+                \caption{Density}
+                \label{fig:inf-rel-density}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_velocity.png}
+                \caption{Pressure}
+                \label{fig:inf-rel-press}
+        \end{subfigure}        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_volume_fraction.png}
+                \caption{Volume fraction}
+                \label{fig:inf-rel-vf}
+        \end{subfigure}
+        \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:inf-rel-variables}
+\end{figure}
+%
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_phase_1_viscosity_kappa_mu.png}
+                \caption{Viscosity coefficients for phase 1.}
+                \label{fig:inf-rel-visc-coeff-phase-1}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_phase_2_viscosity_kappa_mu.png}
+                \caption{Viscosity coefficients for phase 2}
+                \label{fig:inf-rel-visc-coeff-phase-2}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_phase_1_beta.png}
+                \caption{Viscosity coefficients for the volume fraction equation of phase 1.}
+                \label{fig:inf-rel-beta}
+        \end{subfigure}        
+        \caption{Viscosity coefficients profiles for a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:inf-rel-visc-coeff}
+\end{figure}
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Two independent fluids in a 1-D converging-diverging nozzle}\label{sec:nozzle-two-indep-fluids}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
