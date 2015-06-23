@@ -854,6 +854,36 @@ m^3$, respectively. One the left part of the tube the volume fraction of phase $
 such initial conditions and such settings, each equation of the SEM devolves into the volume fraction equation with proper artificial viscosity term. The 
 numerical solution is run with a CFL of one until the final time $t=1703 \ \mu s$ and is presented in FIGURES.
 %
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_density.png}
+                \caption{Velocity}
+                \label{fig:adv-vf-vel}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_pressure.png}
+                \caption{Density}
+                \label{fig:adv-vf-density}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_velocity.png}
+                \caption{Pressure}
+                \label{fig:adv-vf-press}
+        \end{subfigure}        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/advection-vol-fraction.eps}
+                \caption{Volume fraction}
+                \label{fig:adv-vf-vf}
+        \end{subfigure}
+        \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=0.25 \ s$.}\label{fig:adv-vf-variables}
+\end{figure}
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Shock tube with two independent fluids}\label{sec:shock-tube-two-indep-fluids}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
