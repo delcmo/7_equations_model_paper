@@ -864,14 +864,14 @@ numerical solution is run with a CFL of one until the final time $t=1703 \ \mu s
         \end{subfigure}%
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_pressure.png}
+                \includegraphics[width=\textwidth]{figures/liquid_pressure.eps}
                 \caption{Density}
                 \label{fig:adv-vf-density}
         \end{subfigure}
         
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_velocity.png}
+                \includegraphics[width=\textwidth]{figures/liquid_velocity.eps}
                 \caption{Pressure}
                 \label{fig:adv-vf-press}
         \end{subfigure}        
@@ -882,6 +882,30 @@ numerical solution is run with a CFL of one until the final time $t=1703 \ \mu s
                 \label{fig:adv-vf-vf}
         \end{subfigure}
         \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=0.25 \ s$.}\label{fig:adv-vf-variables}
+\end{figure}
+%
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/liquid_viscosity.eps}
+                \caption{Viscosity coefficients for phase 1.}
+                \label{fig:adv-vf-1}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/liquid_viscosity.eps}
+                \caption{Viscosity coefficients for phase 2}
+                \label{fig:adv-vf-2}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/liquid_beta.eps}
+                \caption{Viscosity coefficients for the volume fraction equation of phase 1.}
+                \label{fig:adv-vf-beta}
+        \end{subfigure}        
+        \caption{Viscosity coefficients profiles for a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{adv-vf-visc}
 \end{figure}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
