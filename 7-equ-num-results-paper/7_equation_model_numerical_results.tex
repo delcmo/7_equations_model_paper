@@ -921,6 +921,60 @@ fluids will behave independently to each other and the volume fraction is expect
 each fluid which simply corresponds to the single-phase exact solution obtained from a Riemann solver. The geometry is discretized with an uniform mesh of 
 500 cells and run with a $CFL$ of one until $t_{final} = 305$ $\mu s$.
 %
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/two_phases_velocity.eps}
+                \caption{Velocity}
+                \label{fig:indp-phase-vel}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/two_phases_density.eps}
+                \caption{Density}
+                \label{fig:indp-phase-density}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/two_phases_pressure.eps}
+                \caption{Pressure}
+                \label{fig:indp-phasel-press}
+        \end{subfigure}        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/two_phases_volume_fraction.eps}
+                \caption{Volume fraction}
+                \label{fig:indp-phase-vf}
+        \end{subfigure}
+        \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:indp-phase-variables}
+\end{figure}
+%
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/two_phases_vapor_viscosity_kappa_mu.eps}
+                \caption{Viscosity coefficients for phase 1.}
+                \label{fig:indp-phase-1}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/two_phases_vapor_viscosity_kappa_mu.eps}
+                \caption{Viscosity coefficients for phase 2}
+                \label{fig:indp--phase-2}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/two_phases_liquid_beta.eps}
+                \caption{Viscosity coefficients for the volume fraction equation of phase 1.}
+                \label{fig:indp-phase-beta}
+        \end{subfigure}        
+        \caption{Viscosity coefficients profiles for a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:indp-phase-visc-coeff}
+\end{figure}
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Shock tube of two fluids with infinite relaxation coefficients}\label{sec:shock-tube-infinite-rel-coeff}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -980,7 +1034,7 @@ run until $t_{final} = 305$ $\mu s$ with a CFL of one. The numerical solutions (
         
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/relaxation_phase_1_beta.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_phase_1_beta.eps}
                 \caption{Viscosity coefficients for the volume fraction equation of phase 1.}
                 \label{fig:inf-rel-beta}
         \end{subfigure}        
@@ -1016,9 +1070,119 @@ computed from the boundary conditions by assuming the two fluids at rest and lin
 values. The geometry is discretized with an uniform mesh of 100 cells and run until steady state. The pressure and velocity relaxation coefficients are 
 computed from EQUATION and EQUATION and the use of EQUATION for different values of $A_{int,max}$ that will be specified. 
 %
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/nozzle-indep-phase_two_phases_velocity.eps}
+                \caption{Velocity}
+                \label{fig:nozzle-indep-vel}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/nozzle-indep-phase_two_phases_temperature.eps}
+                \caption{Density}
+                \label{fig:nozzle-indep-density}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/nozzle-indep-phase_two_phases_pressure.eps}
+                \caption{Pressure}
+                \label{fig:nozzle-indep-press}
+        \end{subfigure}        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/nozzle-indep-phase_two_phases_volume_fraction.eps}
+                \caption{Volume fraction}
+                \label{fig:nozzle-indep-vf}
+        \end{subfigure}
+        \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:nozzle-indep-variables}
+\end{figure}
+%
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/nozzle-indep-phase_liquid_viscosity_kappa_mu.eps}
+                \caption{Viscosity coefficients for phase 1.}
+                \label{fig:nozzle-indep-visc-coeff-phase-1}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/nozzle-indep-phase_vapor_viscosity_kappa_mu.eps}
+                \caption{Viscosity coefficients for phase 2}
+                \label{fig:nozzle-indep-visc-coeff-phase-2}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/nozzle-indep-phase_liquid_beta.eps}
+                \caption{Viscosity coefficients for the volume fraction equation of phase 1.}
+                \label{fig:nozzle-indep-beta}
+        \end{subfigure}        
+        \caption{Viscosity coefficients profiles for a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:nozzle-indep-visc-coeff}
+\end{figure}
+%
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Fluids in a 1-D converging-diverging nozzle with infinite relaxation terms}\label{sec:nozzle-infinite-rel-coeff}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/nozzle-aint-1e4_two_phases_velocity.eps}
+                \caption{Velocity}
+                \label{fig:nozzle-aint-1e4-vel}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/nozzle-aint-1e4_two_phases_temperature.eps}
+                \caption{Density}
+                \label{fig:nozzle-aint-1e4-density}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/nozzle-aint-1e4_two_phases_pressure.eps}
+                \caption{Pressure}
+                \label{fig:nozzle-aint-1e4-press}
+        \end{subfigure}        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/nozzle-aint-1e4_two_phases_volume_fraction.eps}
+                \caption{Volume fraction}
+                \label{fig:nozzle-aint-1e4-vf}
+        \end{subfigure}
+        \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:nozzle-aint-1e4-variables}
+\end{figure}
+%
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/nozzle-aint-1e4_liquid_viscosity_kappa_mu.eps}
+                \caption{Viscosity coefficients for phase 1.}
+                \label{fig:nozzle-aint-1e4-visc-coeff-phase-1}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/nozzle-aint-1e4_vapor_viscosity_kappa_mu.eps}
+                \caption{Viscosity coefficients for phase 2}
+                \label{fig:nozzle-aint-1e4-visc-coeff-phase-2}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/nozzle-aint-1e4_liquid_beta.eps}
+                \caption{Viscosity coefficients for the volume fraction equation of phase 1.}
+                \label{fig:nozzle-aint-1e4-beta}
+        \end{subfigure}        
+        \caption{Viscosity coefficients profiles for a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:nozzle-aint-1e4-visc-coeff}
+\end{figure}
 %
 %
 \subsection{1-D numerical results obtained with Relap-7}\label{sec:1d-results-relap-7}
@@ -1028,6 +1192,61 @@ computed from EQUATION and EQUATION and the use of EQUATION for different values
 %
 %
 \subsubsection{A hydrostatic test}\label{sec:}
+%
+%
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/hydrostatic-_two_phases_velocity.eps}
+                \caption{Velocity}
+                \label{fig:hydrostatic--vel}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/hydrostatic-_two_phases_temperature.eps}
+                \caption{Density}
+                \label{fig:hydrostatic--density}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/hydrostatic-_two_phases_pressure.eps}
+                \caption{Pressure}
+                \label{fig:hydrostatic--press}
+        \end{subfigure}        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/hydrostatic-_two_phases_volume_fraction.eps}
+                \caption{Volume fraction}
+                \label{fig:hydrostatic--vf}
+        \end{subfigure}
+        \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:hydrostatic--variables}
+\end{figure}
+%
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/hydrostatic-_liquid_viscosity_kappa_mu.eps}
+                \caption{Viscosity coefficients for phase 1.}
+                \label{fig:hydrostatic--visc-coeff-phase-1}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/hydrostatic-_vapor_viscosity_kappa_mu.eps}
+                \caption{Viscosity coefficients for phase 2}
+                \label{fig:hydrostatic--visc-coeff-phase-2}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/hydrostatic-_liquid_beta.eps}
+                \caption{Viscosity coefficients for the volume fraction equation of phase 1.}
+                \label{fig:hydrostatic--beta}
+        \end{subfigure}        
+        \caption{Viscosity coefficients profiles for a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:hydrostatic--visc-coeff}
+\end{figure}
 %
 %
 \subsection{Steady-state numerical solution of a Water Boiling Reactor (BWR)}\label{sec:bwr}
