@@ -171,6 +171,12 @@ asymptotic study for the regularized SEM is performed and possible definitions f
 well-scaled dissipative terms over a wide range of Mach numbers. Our theoretical approach is illustrated in SECTION with one-dimensional numerical results.
 Finally, we conclude in SECTION.
 %
+Compressible two-phase flows are found in numerous industrial applications and are an ongoing area of research in modeling and simulation over many years. A variety of models with different levels of complexity has been developed such as: five-equation model \cite{Kapila_2001}, six-equation model \cite{Toumi_1996}, and more recently the seven-equation model \cite{SEM}. These models are all obtained by integrating the single-phase flow balance equations weighed by a characteristic or indicator function for each phase. The resulting system of equations contains non-conservative terms that describe the interaction between phases but also an equation for the volume fraction. Once a system of equations describing the physics is derived, the next challenging step is to develop a robust and accurate discretization to obtain a numerical solution. Assuming that the system of equations is hyperbolic under some conditions, a Riemann solver could be used but is often ruled out because of the complexity due to the number of equations involved. Furthermore, careless approximation for the treatment of the non-conservative terms can lead to failure in computing the numerical solution \cite{Abgrall_2002}. An alternative is to use an approximate Riemann solver, a well-established approach for single-phase flows, while deriving a consistent discretization scheme for the non-conservative terms. 
+
+This methodology was applied to the seven-equation model (SEM) introduced by Berry et al. in \cite{SEM}. This model is known to be unconditionally hyperbolic which is highly desirable when working with approximate Riemann solvers and can treat a wide range of applications. Its particularity comes from the pressure and velocity relaxation terms in the volume fraction, momentum and energy equations that can bring the two phases in equilibrium when using large values of the relaxation parameters. In other words, the seven-equation model can degenerate into the six- and five-equation models. Alike for the other two-phase flow models, solving for the seven-equation model requires a numerical solver and significant effort was dedicated to this task for spatially discontinuous schemes. Because each phase is assumed to obey the Euler equations, most of the numerical solvers are adapted from the single-phase approximate Riemann solvers. For example, Saurel et al. \cite{Saurel_2001a, Saurel_2001b} employed a HLL-type scheme to solve for the SEM but noted that excessive dissipation was added to the contact discontinuity. A more advanced HLLC-type scheme was developed in \cite{Li_2004} but only for the subsonic case and then extended to supersonic flows in \cite{Zein_2010}. More recently, Ambroso et al. \cite{Ambroso_2012} proposed an approximate Riemann solver accounting for source terms such as gravity and drag forces, but with no interphase mass transfer.
+
+We propose to investigate how the EVM applies to the seven-equation model when discretized with a CFEM. First, the multi-D seven-equation model is recalled and detailed in SECTION and particular attention is given to the entropy equation. Then, the dissipative terms are derived using the entropy inequality, in SECTION, on the same principle of what was done in REF for the multi-D Euler equations. In SECTION, a low-Mach asymptotic limit is performed in order to derive a definition for the viscosity coefficients consistent with the incompressible limit results. Lastly, 1-D numerical results are presented in SECTION.
+%
 \begin{itemize}
 \item a few lines about the need for accurately resolving two-phase flows \tcr{borrow some for the previous 2 papers, but also we need a strong emphasis on 
 2-phase flows}
@@ -824,14 +830,14 @@ method of Finite Difference Preconditioner (FDP) and used as a preconditioner.
 %
 In this section, we present 1-D numerical results of the Seven-Equation two-phase model solved with the viscous regularization given in \eqt{eq:reg-7-eqn} of \sct{sec:ref-sem}, 
 and the all-Mach flow definitions of the phasic viscosity coefficients defined in \eqt{eq:def-visc-sem} of \sct{sec:visc-def}. This section aims at assessing the capabilities of the Entropy 
-Viscosity Method when solving various two-phase flows taken from the literature. The first set of 1-D numerical results are obtained with a Moose-based 
+Viscosity Method when solving various two-phase flow tests taken from the literature. The first set of 1-D numerical results are obtained from a Moose-based 
 application called 'SEVEN-bandEd arMadillo' and consists of various shock tubes with liquid and gas phases. A volume fraction shock tube is first 
 investigated. Next, a shock tube with two independent fluids is presented which is identical to solving each phase with the single phase Euler equations. 
 Then, the same shock tube is considered but with infinite relaxation coefficients which is equivalent to solving the five-equation model of Kapilla (\cite{Kapila_2001}). 
-Finally, a two-phase flow through a converging-diverging nozzle is considered. The second set of 1-D numerical results are obtained with Relap-7 (\cite{Berry_2014}) 
+Finally, two-phase flow tests through a converging-diverging nozzle are considered. The second set of 1-D numerical results are obtained with Relap-7 (\cite{Berry_2014}) 
 and consists of tests such as a two-phase flow water hammer, a hydrostatic test and a steady-state for a Boiling Water Reactor (BWR). \\
 For each test, details regarding the equation of states, the mesh and the time step are provided. When an exact solution is available, a convergence study 
-is performed in order to demonstrate the accuracy of the Entropy Viscosity Method using L$1$ and L$2$ norms of the error between the exact and numerical solutions. The convergence rates are computed using the following relation 
+is performed using L$1$ and L$2$ norms of the error between the exact and numerical solutions in order to demonstrate the accuracy of the Entropy Viscosity Method. The convergence rates are computed using the following relation 
 \begin{equation}
 \label{eq:conv_rates}
 \text{rate}_h = \ln \left( \frac{\| U_{2h}-U_{\text{exact}} \|}{\| U_{h}-U_{\text{exact}}\| } \right) / \ln 2
@@ -853,7 +859,7 @@ zero.
 \subsection{1-D numerical results obtained with the Moose-based application 'SEVEN-bandEd armMadillo'}\label{sec:1d-results-sba}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-The numerical results presented in this section were obtained with a Moose-based application using an uniform mesh with the objective of demonstrating the basic features of the EVM.
+The numerical results presented in this section were obtained with a Moose-based application with the objective of demonstrating the basic features of the EVM.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{A volume fraction shock tube}\label{sec:vf-advection-test}
@@ -867,7 +873,7 @@ interfacial velocity remains constant and equal to their respective average inte
 profile. By performing such a test, we want to make sure that the artificial stabilization method is not responsible for the apparition of an artificial 
 mixture zone in the pressure, velocity and density profiles. Also, since an exact solution is available to us, a convergence study is performed. 
 Note that with such initial conditions and such settings, each equation of the SEM devolves into the volume fraction equation with proper artificial viscosity term. The 
-numerical solution is run with a CFL of one until the final time $t=1703 \ \mu s$ and is presented in \fig{fig:adv-vf-variables} and \fig{adv-vf-visc}.
+numerical solution is run with a CFL of one until the final time $t=1703 \ \mu s$, an uniform mesh discretized with $200$ cells and is presented in \fig{fig:adv-vf-variables}. The corresponding viscosity coefficients are given in \fig{adv-vf-visc}.
 %
 \begin{figure}[H]
         \centering
@@ -899,7 +905,7 @@ numerical solution is run with a CFL of one until the final time $t=1703 \ \mu s
         \caption{Numerical solution of a 1-D advection of the volume fraction at $t=1703 \ \mu s$.}\label{fig:adv-vf-variables}
 \end{figure}
 %
-The stabilization numerical method preserves the uniform pressure (\fig{fig:adv-vf-press}) and velocity (\fig{fig:adv-vf-vel}) flow conditions while correctly resolving the discontinuity in the volume fraction profile as shown in \fig{fig:adv-vf-vf}.
+As seen in \fig{fig:adv-vf-variables}, the stabilization numerical method preserves the uniform pressure (\fig{fig:adv-vf-press}), velocity (\fig{fig:adv-vf-vel}) and density (\fig{fig:adv-vf-density}) flow conditions. The discontinuity in the volume fraction profile shown in \fig{fig:adv-vf-vf} is well resolved and does not display any oscillations.
 %
 \begin{figure}[H]
         \centering
@@ -925,7 +931,7 @@ The stabilization numerical method preserves the uniform pressure (\fig{fig:adv-
         \caption{Viscosity coefficients profiles for a 1-D advection of the volume fraction at $t=1703 \ \mu s$.}\label{adv-vf-visc}
 \end{figure}
 %
-The viscosity coefficients $\mu_k$ and $\kappa_k$ are equal to zero for both phases as shown in \fig{fig:adv-vf-1} and \fig{fig:adv-vf-2}, since the flow conditions are uniform. However, the viscosity coefficient $\beta_k$ is peaked in the discontinuity region as expected (\fig{fig:adv-vf-beta}). This test clearly shows that the stabilization method does not induce any artificial waves due to the smearing of the discontinuity in the volume fraction profile. 
+The phasic viscosity coefficients $\mu_k$ and $\kappa_k$ are equal to zero for both phases as shown in \fig{fig:adv-vf-1} and \fig{fig:adv-vf-2}, since the phasic flow conditions (pressure, density and velocity) are uniform. However, the viscosity coefficient $\beta_k$ is peaked in the discontinuity region as expected (\fig{fig:adv-vf-beta}). This test clearly shows that the stabilization method does not induce any artificial waves in the pressure, velocity and density profiles due to the smearing of the discontinuity in the volume fraction profile. 
 
 We also performed a convergence study by computing the L$_1$ and L$_2$ norms of the error between the numerical and the exact solutions for the volume fraction variable only. The exact solution was obtained from a Riemann solver. Following REFS, the convergence rate for the L$_1$ and L$_2$ norms are known to be $\frac{p+0.5}{p+1}$ and $0.5\frac{p+0.5}{p+1}$, respectively, where $p$ is the polynomial order of the test function used. Because we are using linear polynomial test functions, $p=1$, the corresponding theoretical convergence rates for the L$_1$ and L$_2$ norms are $0.75$ and $0.37$, respectively. 
 %
@@ -946,7 +952,7 @@ cells  & $L1$ norm  & $L1$ rate   & $L2$ norm & $L2$ rate  \\ \hline
 \end{center}
 \end{table}
 %
-The theoretical convergence rates match the convergence rates computed from the numerical solutions as shown in \tbl{tbl:conv_rate_norm}, which proves correct behavior of the numerical method in this particular test.
+The theoretical convergence rates match the convergence rates computed from the numerical solutions as shown in \tbl{tbl:conv_rate_norm}, which proves correct behavior of the EVM n this particular test.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Shock tube with two independent fluids}\label{sec:shock-tube-two-indep-fluids}
@@ -959,7 +965,7 @@ $MPa$) in the right side. Both fluids are initially at rest. The volume fraction
 fluids. Dirichlet boundary conditions are used. Since the velocity and pressure relaxation coefficients $\mu_P$ and $\lambda_u$ are set to zero, the two 
 fluids will behave independently to each other and the volume fraction is expected to remain uniform during the simulation. An exact solution is available for 
 each fluid which simply corresponds to the single-phase exact solution obtained from a Riemann solver. Note that the same numerical results could be obtained by solving the $1$-D Euler equations for each phase. The geometry is discretized with an uniform mesh of 
-500 cells and run with a CFL of one until $t_{final} = 305$ $\mu s$. The numerical solutions of the density, velocity, pressure and volume fraction are given in \fig{fig:indp-phase-variables}. Profiles of the phasic viscosity coefficients $\mu_k$, $\kappa_k$ and $\beta_k$ are given in \fig{fig:indp-phase-visc-coeff}.
+500 cells and run with a CFL of one until the final time $t = 305$ $\mu s$. The numerical solutions of the density, velocity, pressure and volume fraction are given in \fig{fig:indp-phase-variables}. Profiles of the phasic viscosity coefficients $\mu_k$, $\kappa_k$ and $\beta_k$ are given in \fig{fig:indp-phase-visc-coeff}.
 %
 \begin{figure}[H]
         \centering
@@ -991,7 +997,7 @@ each fluid which simply corresponds to the single-phase exact solution obtained 
         \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:indp-phase-variables}
 \end{figure}
 %
-The velocity, density and pressure profiles given in \fig{fig:indp-phase-vel}, \fig{fig:indp-phase-density} and \fig{fig:indp-phase-press}, respectively, show good agreement with the exact solutions for both phases and also do not display any oscillations in the vicinity of the shock. The fluid $2$ is lighter and thus experiences stronger variations: its velocity is larger and the shock moves faster. The volume fraction remains constant during the transient and is not altered by any mixture wave.
+The velocity, density and pressure profiles given in \fig{fig:indp-phase-vel}, \fig{fig:indp-phase-density} and \fig{fig:indp-phase-press}, respectively, show good agreement with the exact solutions for both phases and also do not display any oscillations in the vicinity of the shock. The fluid $2$ is lighter and thus experiences stronger variations: its velocity is larger and the shock moves faster. The volume fraction remains constant during the transient and its profile is not altered by any mixture wave as shown in \fig{fig:indp-phase-vf}.
 %
 \begin{figure}[H]
         \centering
@@ -1017,7 +1023,7 @@ The velocity, density and pressure profiles given in \fig{fig:indp-phase-vel}, \
         \caption{Viscosity coefficients profiles for a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:indp-phase-visc-coeff}
 \end{figure}
 %
-The viscosity coefficients shown in \fig{fig:indp-phase-1} and \fig{fig:indp-phase-2} for both phases have similar profiles: they are peaked in the shock regions and also display a bump in the contact wave that is generated by the jump of the gradient of density (see \eqt{eq:jump-p-rho}). The viscosity coefficient $\beta_k$ computed from \eqt{eq:def-visc-sem} and used in the volume fraction equation is zero (\fig{fig:indp-phase-beta}) as expected since the volume fraction profile is uniform. 
+The viscosity coefficients shown in \fig{fig:indp-phase-1} and \fig{fig:indp-phase-2} for both phases have similar profiles: they are peaked in the shock regions and also display a bump in the contact wave that is generated by the jump of the gradient of density (see \eqt{eq:jump-p-rho}). The viscosity coefficient $\beta_k$ computed from \eqt{eq:def-visc-sem} and used in the volume fraction equation is zero (\fig{fig:indp-phase-beta}) as expected since the volume fraction profile remains uniform. 
 To demonstrate convergence of the numerical solution to the exact solution, a sequence of finer spatial meshes is employed. Because 
 of the presence of a shock, second-order accuracy is not expected and the convergence rate of a numerical solution 
 should be 1 and $1/2$ when measured in the L$_1$ and L$_2$ norms, respectively \cite{banks-jeffrey, majda-andrew}. 
@@ -1230,7 +1236,7 @@ The pressure and velocity relaxation coefficients are no longer set to zero but 
 relaxation terms dominant in the momentum and energy equations of each phase (see \eqt{eq:multi-7-eqn-mom} and \eqt{eq:multi-7-eqn-energy}). Thus, the two fluids will exhibit the 
 same pressure and velocity. The volume fraction will not remain uniform but is expected to vary due to the pressure relaxation source term (\eqt{eqn:multi-d-7-eqn-liq-vol}). For 
 this test, an exact solution is not available but the reader can refer to \cite{Saurel_2007} for a comparison. An uniform mesh of 500 cells is used. The code is 
-run until $t_{final} = 305$ $\mu s$ with a CFL of one. The numerical solutions (pressure, velocity, density and volume fraction) of the phases $1$ and $2$ are presented in \fig{fig:inf-rel-variables} along with the viscosity coefficient profiles in \fig{fig:inf-rel-visc-coeff} for each phase. Dirichlet boundary conditions are once again used.
+run until $t = 305$ $\mu s$ with a CFL of one. The numerical solutions (pressure, velocity, density and volume fraction) of the phases $1$ and $2$ are presented in \fig{fig:inf-rel-variables} along with the viscosity coefficient profiles in \fig{fig:inf-rel-visc-coeff} for each phase. Dirichlet boundary conditions are once again used.
 %
 \begin{figure}[H]
         \centering
@@ -1288,7 +1294,8 @@ As expected, the two fluids have the same pressure and velocity profiles as show
         \caption{Viscosity coefficients profiles for a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:inf-rel-visc-coeff}
 \end{figure}
 %
-The variations of the phasic viscosity coefficients are consistent with the position of the shock and contact discontinuity previously observed in \fig{fig:inf-rel-variables}. The phasic viscosity coefficients are peaked in the vicinity of the shock and saturate to the first-order viscosity coefficients. A small peak is also observed in the contact discontinuity.
+The variations of the phasic viscosity coefficients are consistent with the position of the shock and contact discontinuity previously observed in \fig{fig:inf-rel-variables}. The phasic viscosity coefficients are peaked in the vicinity of the shock and saturate to the first-order viscosity coefficients. A small peak is also observed in the contact discontinuity.\\
+\tcb{I want to add an exact solution to the plots obtained from Ray's code. I think if Ray's solution is fine enough, we can probably do a convergence test.}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Two independent fluids in a 1-D converging-diverging nozzle}\label{sec:nozzle-two-indep-fluids}
@@ -1340,7 +1347,7 @@ The geometry is discretized with an uniform mesh of 200 cells and run until stea
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
                 \includegraphics[width=\textwidth]{figures/nozzle-indep-phase_two_phases_temperature.eps}
-                \caption{Density}
+                \caption{Temperature}
                 \label{fig:nozzle-indep-density}
         \end{subfigure}
         \begin{subfigure}[b]{0.495\textwidth}
@@ -1352,7 +1359,7 @@ The geometry is discretized with an uniform mesh of 200 cells and run until stea
         \caption{Numerical steady-state solution of two independent flows in a $1$-D converging-diverging nozzle at steady state.}\label{fig:nozzle-indep-variables}
 \end{figure}
 %
-As seen in \fig{fig:nozzle-indep-variables}, the numerical solution perfectly matches the exact solution at steady-state. The steady-state solution of the vapor phase exhibits a shock around $x=0.8 \ m$ and matches the exact solution. Once again, the volume fraction remains constant as expected since the relaxation terms are set to zero. 
+As seen in \fig{fig:nozzle-indep-variables}, the numerical solutions perfectly match the exact solution at steady-state. The steady-state solution of the vapor phase exhibits a shock around $x=0.8 \ m$ and matches the exact solution. Once again, the volume fraction remains constant as expected since the relaxation terms are set to zero. 
 %
 \begin{figure}[H]
         \centering
@@ -1404,7 +1411,7 @@ the pressure and velocity relaxation coefficients are computed from \eqt{eq:Aint
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
                 \includegraphics[width=\textwidth]{figures/nozzle-aint-1e4_two_phases_temperature.eps}
-                \caption{Density}
+                \caption{Temperature}
                 \label{fig:nozzle-aint-1e4-density}
         \end{subfigure}
         
@@ -1420,7 +1427,7 @@ the pressure and velocity relaxation coefficients are computed from \eqt{eq:Aint
                 \caption{Volume fraction}
                 \label{fig:nozzle-aint-1e4-vf}
         \end{subfigure}
-        \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:nozzle-aint-1e4-variables}
+        \caption{Numerical steady-state solution of a two-phase flow in a $1$-D converging-diverging nozzle with infinite relaxation coefficients.}\label{fig:nozzle-aint-1e4-variables}
 \end{figure}
 %
 Because of the velocity relaxation source terms, velocity equilibrium holds between the liquid and vapor phases. 
@@ -1452,11 +1459,22 @@ The pressure profile is given in \fig{fig:nozzle-aint-1e4-press}. The static pre
 %
 The phasic viscosity coefficients $\mu_k$ and $\kappa_k$ are peaked in the vicinity of the sharp variation around $x=0.8 \ m$. Lastly, the viscosity coefficient $\beta_k$ follows the variations of the volume fraction for both phases. It is interesting to note that the fast vapor flow yields strong variations in the divergent part of the nozzle. Overall, the viscosity coefficients are large enough to prevent the formation of any numerical instability without altering the physical solution.
 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{1-D numerical results obtained with Relap-7}\label{sec:1d-results-relap-7}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+We now present results of typical engineering problems obtained with the system code RELAP-7 \cite{Berry_2014} with the objective of testing adequacy of the Entropy Viscosity Method when computing typical reactor flows: a hydrostatic test, a two-phase flow water-hammer and a Boiling Water Reactor (BWR). 
+%The numerical results were obtained with the system code RELAP-7 that implements the single- and two-phase flow models described in \sct{sct:model} using the spatial and temporal discretization techniques \sct{sec:spatial-disc} (BDF2 and linear test functions).
 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{A two-phase flow water hammer test}\label{sec:water-hammer}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+A water-hammer situation is encountered in light water reactors whenever a valve closes rapidly and obstructs the flow in a pipe. In the numerical results presented in this section, each fluid is described by the Stiffened Gas equation of state with parameters taken from \tbl{tbl:stff_gas_eos-sect4} for the liquid and gas phases. 
+A water hammer consists of a liquid phase flowing in a straight 1-D pipe of length $L=10 \ m$ with initial uniform pressure ($P = 7$ MPa), velocity ($u = -12$ $m/s$) and temperature ($T = 453$ K). At $t=0$ s, the two extremities of the 1-D pipe are closed by solid walls which causes shock and rarefaction waves to appear at the left and right extremities, respectively. The two waves initially propagate towards the middle of the pipe and are reflected on the opposite wall after crossing each other near the middle of the pipe.
+The liquid and vapor phases have the same initial conditions and the liquid volume fraction is initially set to $0.5$. The two phases are in interaction through the pressure and velocity relaxation terms that are functions of the relaxation coefficients, $\mu_P$ and $\lambda_u$, computed with $A_{int} = 10^3$ $m^{-1}$ so that the two phases achieve pressure and velocity equilibrium at all times.
+The computational domain is discretized with an uniform mesh of $500$ cells and the numerical solution is run until $t = 0.5$ s with a CFL number of $1.$ for both tests. Information regarding the initial conditions will be given later in this section. 
+For each test case, the velocity, density and pressure profiles are provided at different times of the simulation. Plots of the velocity, the density, the pressure are given in \fig{fig:water-hammer-var}. The corresponding phasic viscosity coefficients are shown in \fig{fig:water-hammer-visc}.
 %
 \begin{figure}[H]
         \centering
@@ -1488,6 +1506,9 @@ The phasic viscosity coefficients $\mu_k$ and $\kappa_k$ are peaked in the vicin
         \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:water-hammer-var}
 \end{figure}
 %
+\fig{fig:water-hammer-var} show that the numerical solution of the liquid and gas phases do not display any oscillations or instabilities. 
+As expected, the two fluids have the same pressure and velocity profiles as shown in FIGURES, respectively. The shocks coming from the left and right walls are initially well resolved and do not display any instability. The density of the liquid and gas phases have different values but experience similar variations. It is also noted that the accuracy of the shock wave decreases over time: the numerical dissipation comes from the temporal integrator (time step size) and the spatial discretize element size. The accuracy of the numerical solution could be improved over time by using a finer grid with smaller time steps or a higher-order temporal integrator.
+%
 \begin{figure}[H]
         \centering
         \begin{subfigure}[b]{0.495\textwidth}
@@ -1512,8 +1533,11 @@ The phasic viscosity coefficients $\mu_k$ and $\kappa_k$ are peaked in the vicin
         \caption{Viscosity coefficients profiles for a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:water-hammer-visc}
 \end{figure}
 %
+The viscosity coefficients are plotted at time $t = 8.7 \times 10^{-3}$ s and display two peaks that match the shock positions.
 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{A hydrostatic test}\label{sec:}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %
 \begin{figure}[H]
@@ -1571,7 +1595,9 @@ The phasic viscosity coefficients $\mu_k$ and $\kappa_k$ are peaked in the vicin
 \end{figure}
 %
 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Steady-state numerical solution of a Water Boiling Reactor (BWR)}\label{sec:bwr}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
