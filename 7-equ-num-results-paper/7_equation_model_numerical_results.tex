@@ -80,7 +80,12 @@
 %-------------------------
 %-------------------------
 \begin{abstract}
-blabla
+We apply the entropy viscosity method to the two-phase flow Seven-Equation Model ,that is a viscous regularization technique for hyperbolic 
+conservation laws. By means of a low-Mach asymptotic study that was perforned in \cite{Marco_paper_sem}, expressions for the entropy viscosity coefficients are derived.
+These definitions are valid for a wide range of Mach numbers, from subsonic flows (with very low Mach numbers) to 
+supersonic flows and allow to solve for variable area flow problems.
+%
+The effectiveness of the method is demonstrated with a first set of 1-D benchmark tests obtained with an in-house Moose-based applications: volume fraction shock tube, various two-phase flow shock tubes and two-phase flow in a converging-diverging nozzle. A second set of $1$-D test was also obtained with the system code RELAP-7 including hydrostatic pressure, water-hammer and Boiling-Water Reactor (BWR). Convergence studies are performed for solutions with shocks present. 
 \end{abstract}
 %-------------------------
 %-------------------------
@@ -1598,29 +1603,54 @@ The viscosity coefficients are plotted at time $t = 8.7 \times 10^{-3}$ s and di
 \section{Conclusions and future work}\label{sec:conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-We have derived a viscous regularization for the hyperbolic Seven-Equation two-phase flow Model. The regularization ensures positivity of the entropy residual, 
-uniqueness of the numerical solution for concave physical phasic entropy functions $s_k$, and is consistent with the viscous regularization derived for 
-Euler equations when one of the phases disappears. 
-We have also demonstrated that the proposed viscous regularization is compatible with the generalized Harten entropies that were initially derived for Euler equations. 
-
-The viscous regularization for the SEM equations involves a set of two positive viscosity coefficients for each phase, $\mu_k$ and $\kappa_k$, and one for the volume 
-fraction equation, $\beta_k$. The scaling of these viscosities is related to the numerical Reynolds and P\'eclet numbers, $\Re_k$, $\Pe_k^\mu$, and $\Pe_k^\kappa$. 
-Adequate scaling of these numbers has been devised for two important limit-cases: the low-Mach asymptotic limit and for non-isentropic flows. In the low-Mach regime, 
-we show that the incompressible equations are recovered when assuming that all of the non-dimensional numbers scale as one. The study of the non-isentropic case 
-shows that the scaling of the non-dimensionalized numbers is Mach-number dependent to ensure well-scaled dissipative terms in the vicinity of the shock.
-Based on these results, adequate scaling of the viscosities can be derived for all Mach numbers, as was the case for single-phase flows \cite{Marco_paper_low_mach}. 
 %
-We have also shown that the regularized SEM equations yields a regularized version of the five-equation flow model of Kapila by means of a Chapman-Enskog expansion.
+%We have derived a viscous regularization for the hyperbolic Seven-Equation two-phase flow Model. The regularization ensures positivity of the entropy residual, 
+%uniqueness of the numerical solution for concave physical phasic entropy functions $s_k$, and is consistent with the viscous regularization derived for 
+%Euler equations when one of the phases disappears. 
+%We have also demonstrated that the proposed viscous regularization is compatible with the generalized Harten entropies that were initially derived for Euler equations. 
+%
+%The viscous regularization for the SEM equations involves a set of two positive viscosity coefficients for each phase, $\mu_k$ and $\kappa_k$, and one for the volume 
+%fraction equation, $\beta_k$. The scaling of these viscosities is related to the numerical Reynolds and P\'eclet numbers, $\Re_k$, $\Pe_k^\mu$, and $\Pe_k^\kappa$. 
+%Adequate scaling of these numbers has been devised for two important limit-cases: the low-Mach asymptotic limit and for non-isentropic flows. In the low-Mach regime, 
+%we show that the incompressible equations are recovered when assuming that all of the non-dimensional numbers scale as one. The study of the non-isentropic case 
+%shows that the scaling of the non-dimensionalized numbers is Mach-number dependent to ensure well-scaled dissipative terms in the vicinity of the shock.
+%Based on these results, adequate scaling of the viscosities can be derived for all Mach numbers, as was the case for single-phase flows \cite{Marco_paper_low_mach}. 
+%%
+%We have also shown that the regularized SEM equations yields a regularized version of the five-equation flow model of Kapila by means of a Chapman-Enskog expansion.
+%
+%The ability of the proposed regularization to stabilize the SEM equations was numerically demonstrated using a shock tube problem, with the definitions of the 
+%artificial viscosity coefficients borrowed from the local Lax-Friedrichs scheme. We have also analyzed the effect of removing stabilization from the volume fraction 
+%and the continuity equations. The scaling effect of the viscous regularization on the numerical solution in the low-Mach asymptotic limit was numerically illustrated using a 1-D converging-diverging nozzle.
+%
+%As an extension of this work, the two-phase flow viscous regularization presented here should be utilized and tested with high-order, less dissipative, artificial viscosities, 
+%such as the entropy viscosity (e.g., see \cite{jlg1} for single-phase supersonic flows and \cite{Marco_paper_low_mach} for single-phase subsonic and transonic flows). 
+%We also note that the proposed regularization can also be employed using definitions of viscosity coefficients traditionally used in single-phase flows, e.g., 
+%the Lapidus viscosity \cite{Lapidus_paper,Lapidus_book} and pressure-based viscosity, for two-phase flows \cite{PBV_book}. We intend on reporting on these findings in 
+%a subsequent publication.
+%
+A version of the entropy viscosity method that is valid for a wide range of Mach numbers has been derived 
+and presented for the inviscid two-phase flow Seven-Equation model.
+The definition of the viscosity coefficients
+is now consistent with the low-Mach asymptotic limit, does not require an analytical expression 
+for the entropy function, and is therefore applicable to a larger variety of flow regimes, from very 
+low-Mach flows to supersonic flows.
+The method can also be used with the two-phase flow Seven-Equation model with variable area to solve nozzle flow problems.
+It was demonstrated that the viscous regularization did not create any artificial waves when simulating independent two-phase flows.
+Convergence of the numerical solution to the exact solution was demonstrated by computing the convergence rates of the L$_1$ and L$_2$ norms 
+for $1$-D shock tube flows in straight pipes. The method was tested on various $1$-D tests obtained with Moose-based applications including a in-house code and the system code RELAP-7. The numerical method is capable of handling engineering tests such as hydrostatic pressure and water-hammer tests.
+%For smooth solutions, second-order 
+%convergence was verified; solutions with shocks converged with the expected theoretical rates of 1 (L$_1$-norm)
+%and 1/2 (L$_2$-norm).
 
-The ability of the proposed regularization to stabilize the SEM equations was numerically demonstrated using a shock tube problem, with the definitions of the 
-artificial viscosity coefficients borrowed from the local Lax-Friedrichs scheme. We have also analyzed the effect of removing stabilization from the volume fraction 
-and the continuity equations. The scaling effect of the viscous regularization on the numerical solution in the low-Mach asymptotic limit was numerically illustrated using a 1-D converging-diverging nozzle.
+%The effectiveness of the method was also demonstrated in 2-D using a series of benchmark problems
+%for both subsonic and supersonic flows in various geometries, with Mach numbers ranging from $10^{-7}$ to 
+%2.5. For very low-Mach flows, we numerically verified that the steady-state pressure variations were proportional to 
+%the square of the Mach number, as expected in the incompressible limit. A convergence study was carried out for a
+%2D supersonic compression corner test case and rates of convergence of 1 (L$_1$-norm) and 1/2 (L$_2$-norm) were observed.
 
-As an extension of this work, the two-phase flow viscous regularization presented here should be utilized and tested with high-order, less dissipative, artificial viscosities, 
-such as the entropy viscosity (e.g., see \cite{jlg1} for single-phase supersonic flows and \cite{Marco_paper_low_mach} for single-phase subsonic and transonic flows). 
-We also note that the proposed regularization can also be employed using definitions of viscosity coefficients traditionally used in single-phase flows, e.g., 
-the Lapidus viscosity \cite{Lapidus_paper,Lapidus_book} and pressure-based viscosity, for two-phase flows \cite{PBV_book}. We intend on reporting on these findings in 
-a subsequent publication.
+In the future, we plan to further apply the entropy viscosity method 
+to the multi-dimensional Seven-Equation two-phase flow Model \cite{SEM}. 
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{mybibfile}
