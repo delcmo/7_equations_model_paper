@@ -597,22 +597,67 @@ low-Mach asymptotic limit when the numerical numbers have the scaling given in \
 \Re_{k,\infty} = \Pe_{k,\infty}^\kappa = \Pe_{k,\infty}^\beta =1 \ .
 \end{equation}
 %
-For non-isentropic flows, the scaling of the numerical numbers is given in \eqt{eq:non-isent-flow-num-nb} and is expected to efficiently stabilize shock waves 
+For non-isentropic flows i.e. with shocks, the scaling of the numerical numbers is given in \eqt{eq:non-isent-flow-num-nb} and is expected to efficiently stabilize shock waves 
 and discontinuities for any Mach numbers:
 %
 \begin{align}\label{eq:non-isent-flow-num-nb}
 &\Re_{k,\infty} = M_{k,\infty}^2 \,, \nonumber \\ 
 & \Pe_{k,\infty}^\kappa = 
-\begin{cases} 
-1              & \text{ in the contact region} \\
-M^2_{k,\infty} & \text{ in the shock region } 
-\end{cases} \,, \\ 
+%\begin{cases} 
+1 \\ %             & \text{ in the contact region} \\
+%M^2_{k,\infty} & \text{ in the shock region } 
+%\end{cases} \,, \\ 
 &\Pe_{k,\infty}^\beta = 1 \ . \nonumber
 \end{align}
 \tcr{don't you want to stick with $ \Pe_{k,\infty}^\kappa = M^2_{k,\infty}$. it's easier. how can you differentiate between the 2 types. and do you do it in the 
 code? a reviewer may ask.
 is it worth it?} \tcb{it is actually fairly simple. We can talk about it.}
+Following the methodology employed in \cite{Marco_paper_low_mach} and the conditions given in \eqt{eq:non-isent-flow-num-nb}, the defiintion of the phasic normalization parameters $\norm_{k,P}^\mu$ and $\norm_{k,P}^\kappa$ can be devised in the two limit cases, to yield:
 %
+\begin{equation}
+\label{eq:norm_relation_bis}
+\norm_{k,P,\infty}^{\kappa} = \Pe_\infty \rho_{k,\infty} c_{k,\infty}^2 = \rho_{k,\infty} c_{k,\infty}^2 \, .
+\end{equation}
+%
+and
+%
+\begin{equation}
+\label{eq:norm_ent2}
+\norm_{P,k}^\mu = \Re_{k,\infty} \rho_{k,\infty} c_{k,\infty}^2 =  \left\{
+\begin{array}{ll}
+ \rho_k \|\vec{u}_k \|^2       & \text{ for non-isentropic flows} \\
+ \rho c_k^2 = \norm_{k,P}^\kappa & \text{ for low-Mach flows}
+\end{array}
+\right. \,.
+\end{equation}
+%
+In order to have a stabilization method 
+valid for a wide range of Mach numbers, from very low-Mach to supersonic flows, these two scalings should 
+be combined in a unique definition. 
+%
+In \cite{Marco_paper_low_mach}, it was proposed a function to transition between these two states by employing a smoothed shifted Heaviside function
+defined as follows: % the shifted sigmoid function
+\begin{equation}
+\sigma(M_k) =
+\left\{
+\begin{array}{ll}
+0 & \text{if } M_k \le M_k^\text{thresh} - a_k, \\
+1 & \text{if } M_k \ge M_k^\text{thresh} + a_k, \\
+\tfrac{1}{2} \left( 1 + \tfrac{M_k-M_k^\text{thresh}}{a_k} + \tfrac{1}{\pi} \sin \left(\tfrac{\pi(M_k-M_k^\text{thresh})}{a_k}\right) \right) & \text{otherwise,}
+\end{array}
+\right.
+\end{equation}
+where $M^\text{thresh}$ is a threshold Mach number value beyond which the flow is no longer 
+considered to be low-Mach (we use $M_k^\text{thresh}=0.05$), $M_k$ is the local phasic Mach number, 
+and the scalar $a$ determines how rapidly the function $\sigma(M_k)$ changes in the vicinity of $M_k^\text{thresh}$ (e.g., $a = 0.005$). 
+It is easy to verify that the construction
+\begin{equation}
+\label{eq:norm_ent3}
+\norm_{k,P}^\mu = (1-\sigma(M_k)) \rho_k c_k^2  + \sigma(M_k)  \rho_k \|\vec{u}_k \|^2  
+\end{equation}
+satisfies the conditions given in \eqt{eq:non-isent-flow-num-nb}.
+%
+
 It remains to define the entropy viscosity coefficient $\beta_{e,k}$. For the purpose of this paragraph, let us consider the scalar volume fraction equation and 
 assume that the interface 
 velocity $\mbold u_{int}$ is given. Because it is a scalar hyperbolic equation, it is proposed to define the entropy viscosity coefficients on the same model as 
@@ -1535,9 +1580,10 @@ As expected, the two fluids have the same pressure and velocity profiles as show
 The viscosity coefficients are plotted at time $t = 8.7 \times 10^{-3}$ s and display two peaks that match the shock positions.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{A hydrostatic test}\label{sec:}
+\subsubsection{A hydrostatic pressure test}\label{sec:}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+We now consider a hydrostatic pressure test that consists in a $1$-D vertical straight pipe of length $L=1 \ m$ filled with a mixture of liquid water and steam. As the liquid to steam density ratio is about $1000$, the downward gravity force drives the liquid phase to the bottom of the pipe, and the steam phase to the top of the pipe. A steady-state solution is reached when all of the liquid and the steam phases are located at the bottom and the top of the pipe, respectively. The fluids are initially at rest and the phasic pressures and temperatures are uniform and equal to $P=7 \ MPa$ and $T=517 \ K$, respectively. The volume fraction is initially set to $0.5$. The $1$-D straight pipe is discretized with an uniform mesh of $100$ cells. At $t=0 \ s$, the gravity force is turned on and the code is run until steady state with an adaptive time stepping. Note that for the purpose of this test, the phasic gravity force ($F_k = \alpha_k \rho_k g$) and the gravity work ($W_{g,k}=F_k \cdot u_k$) are added to the phasic momentum and the energy equations of \eqt{eq:multi-7-eqn-mom} and \eqt{eq:multi-7-eqn-energy}, respectively, where $g=9.8 \ m / s^{-2}$. Numerical stead-state solutions are presented in \fig{fig:hydrostatic--variables} along with the viscosity coefficients profiles in \fig{fig:hydrostatic--visc-coeff}. Note that the exact steady-state solution consists of two fluids at rest with a volume fraction step going from one to zero and the steady-state phasic pressure gradient are proportional to the phasic the gravity forces: $\grad P_k = F_k$. 
 %
 \begin{figure}[H]
         \centering
