@@ -1477,16 +1477,16 @@ For each test case, the velocity, density and pressure profiles are provided at 
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
                 \includegraphics[width=\textwidth]{figures/water-hammer-pressure-liquid.eps}
-                \caption{Pressure}
+                \caption{Liquid pressure}
                 \label{fig:water-hammer-press-liq}
         \end{subfigure}        
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
                 \includegraphics[width=\textwidth]{figures/water-hammer-pressure-vapor.eps}
-                \caption{Volume fraction}
+                \caption{Vapor pressure}
                 \label{fig:water-hammer-press-vap}
         \end{subfigure}
-        \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:water-hammer-var}
+        \caption{Numerical solution of a two-phase flow water-hammer test at $t=0.00793$, $0.03$ and $0.1$ s.}\label{fig:water-hammer-var}
 \end{figure}
 %
 \fig{fig:water-hammer-var} show that the numerical solution of the liquid and gas phases do not display any oscillations or instabilities. 
@@ -1497,13 +1497,13 @@ As expected, the two fluids have the same pressure and velocity profiles as show
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
                 \includegraphics[width=\textwidth]{figures/water-hammer-viscosity-liquid.eps}
-                \caption{Viscosity coefficients for phase 1.}
+                \caption{Viscosity coefficients for liquid phase.}
                 \label{fig:water-hammer-visc-liq}
         \end{subfigure}%
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
                 \includegraphics[width=\textwidth]{figures/water-hammer-viscosity-vapor.eps}
-                \caption{Viscosity coefficients for phase 2}
+                \caption{Viscosity coefficients for vapor phase}
                 \label{fig:water-hammer-visc-vap}
         \end{subfigure}
         
@@ -1513,7 +1513,7 @@ As expected, the two fluids have the same pressure and velocity profiles as show
 %                \caption{Viscosity coefficients for the volume fraction equation of phase 1.}
 %                \label{fig:hydrostatic--beta}
 %        \end{subfigure}        
-        \caption{Viscosity coefficients profiles for a two-phase flow with large relaxation coefficients at $t=305 \ \mu s$.}\label{fig:water-hammer-visc}
+        \caption{Viscosity coefficients profiles for a two-phase flow water-hammer test at $t=0.00793$ s.}\label{fig:water-hammer-visc}
 \end{figure}
 %
 The viscosity coefficients are plotted at time $t = 8.7 \times 10^{-3}$ s and display two peaks that match the shock positions.
