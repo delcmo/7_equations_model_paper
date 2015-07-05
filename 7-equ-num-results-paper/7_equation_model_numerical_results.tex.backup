@@ -59,7 +59,7 @@
 %% \fntext[label3]{}
 %-------------------------
 %-------------------------
-\title{$1$-D numerical results of the Seven-Equation two-phase flow Model with the Entropy Viscosity Method.}
+\title{$1$-D numerical results of the Seven-Equation two-phase flow Model with the entropy viscosity method.}
 %-------------------------
 %-------------------------
 \author{Marc O. Delchini\fnref{label1}}
@@ -81,7 +81,7 @@
 %-------------------------
 \begin{abstract}
 We apply a viscous regularization technique for hyperbolic 
-conservation laws called the Entropy Viscosity Method to the two-phase flow Seven-Equation Model. By means of a low-Mach asymptotic study that was performed in \cite{Marco_paper_sem}, expressions for the entropy viscosity coefficients are derived.
+conservation laws called the entropy viscosity method to the two-phase flow Seven-Equation Model. By means of a low-Mach asymptotic study that was performed in \cite{Marco_paper_sem}, expressions for the entropy viscosity coefficients are derived.
 These definitions are valid for a wide range of Mach numbers, from subsonic flows (with very low Mach numbers) to 
 supersonic flows and allow to solve for variable area flow problems.
 %
@@ -187,8 +187,8 @@ important papers, e.g., Saurel's, by providing a 1-3 sentence resume of each of 
 \item discuss the different numerical solvers developed for the 7-equation two-phase flow model: HLL, HLLC, and approximated Riemann solvers accounting 
 for the source terms
 \item emphasize the fact that the above numerical solvers only works for discontinuous schemes
-\item then, introduce the Entropy Viscosity Method and details the organization of the paper 
-\item explain that the Entropy Viscosity Method requires two steps: first a viscous regularization (done in REF) and then definition of the viscosity coefficients 
+\item then, introduce the entropy viscosity method and details the organization of the paper 
+\item explain that the entropy viscosity method requires two steps: first a viscous regularization (done in REF) and then definition of the viscosity coefficients 
 (done in section ...). (IMPORTANT)
 \end{itemize}
 \tcr{\\ again, I would like to keep this mini introduction very short. Some of the info here is good but should it go here?\\
@@ -453,7 +453,7 @@ First, an all-Mach flow definition of the phasic viscosity coefficients is deriv
 
 In this section, the reader is guided through the derivation of the all-Mach phasic viscosity coefficients $\beta_k$, $\mu_k$ and $\kappa_k$, that relies on the 
 low-Mach asymptotic study of the regularized SEM 
-presented in \cite{Marco_paper_sem}. In the Entropy Viscosity Method, each viscosity coefficient is function of an upper and a lower bound that are referred to as first-order 
+presented in \cite{Marco_paper_sem}. In the entropy viscosity method, each viscosity coefficient is function of an upper and a lower bound that are referred to as first-order 
 viscosity coefficient and entropy viscosity coefficient (high-order coefficient) 
 and are denoted by the subscript $max$ and $e$ in the remaining of this paper, respectively. 
 %
@@ -501,7 +501,7 @@ We first choose to investigate the definitions of the high-order phasic viscosit
 approach as for the multi-dimensional Euler equations in 
 \cite{Marco_paper_low_mach}. Such a choice is justified by noticing that the regularized SEM of \eqt{eq:7-eqn} degenerates to the regularized multi-
 dimensional Euler equations studied in \cite{Marco_paper_low_mach} 
-when one phase disappears. In the Entropy Viscosity Method, the high-order viscosity coefficients are set proportional to the entropy residual given in 
+when one phase disappears. In the entropy viscosity method, the high-order viscosity coefficients are set proportional to the entropy residual given in 
 \eqt{eq:ent-res-sem}, that is known to be positive and peaked in the 
 shock region. It is also accounted for the jumps of quantities that will be determined further. The objective is to be able to track spatially and temporally any 
 shock and discontinuity forming in the computational domain. 
@@ -1491,7 +1491,7 @@ The computational domain is discretized with an uniform mesh of $200$ cells and 
 \end{figure}
 %
 \fig{fig:water-hammer-var} show that the numerical solution of the liquid and gas phases do not display any oscillations or instabilities. 
-As expected, the two fluids have the same pressure and velocity profiles as shown in \fig{fig:water-hammer-var}. The shocks coming from the left and right walls are initially well resolved and do not display any instability. In \fig{fig:water-hammer-density-liq} and \fig{fig:water-hammer-density-vap}, the density of the liquid and gas phases have different values but experience similar variations. It is also noted that the accuracy of the shock wave decreases over time: the numerical dissipation comes from the temporal integrator (time step size) and the spatial discretize element size. The accuracy of the numerical solution could be improved over time by using a finer grid with smaller time steps or a higher-order temporal integrator.
+As expected, the two fluids have the same pressure and velocity profiles as shown in \fig{fig:water-hammer-var}, respectively. The shocks coming from the left and right walls are initially well resolved and do not display any instability. In \fig{fig:water-hammer-density-liq} and \fig{fig:water-hammer-density-vap}, the density of the liquid and gas phases have different values but experience similar variations. It is also noted that the accuracy of the shock wave decreases over time: the numerical dissipation comes from the temporal integrator (time step size) and the spatial discretize element size. The accuracy of the numerical solution could be improved over time by using a finer grid with smaller time steps or a higher-order temporal integrator.
 %
 \begin{figure}[H]
         \centering
@@ -1520,10 +1520,10 @@ As expected, the two fluids have the same pressure and velocity profiles as show
 The viscosity coefficients are plotted at time $t = 8.7 \times 10^{-3}$ s and display two peaks that match the shock positions.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{A sedimentation test}\label{sec:}
+\subsubsection{A hydrostatic pressure test}\label{sec:}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-We now consider a sedimentation test that consists in a $1$-D vertical straight pipe of length $L=1 \ m$ (the top of the pipe is located at $x=0 \ m$) filled with a mixture of liquid water and steam. As the liquid to steam density ratio is about $1000$, the downward gravity force drives the liquid phase to the bottom of the pipe, and the steam phase to the top of the pipe. A steady-state solution is reached when all of the liquid and the steam phases are located at the bottom and the top of the pipe, respectively. The fluids are initially at rest and the phasic pressures and temperatures are uniform and equal to $P=7 \ MPa$ and $T=517 \ K$, respectively. The volume fraction is initially set to $0.5$. The $1$-D straight pipe is discretized with an uniform mesh of $100$ cells. At $t=0 \ s$, the gravity force is turned on and the code is run until steady state is reached with an adaptive time stepping. Note that for the purpose of this test, the phasic gravity force ($F_k = \alpha_k \rho_k g$) and the gravity work ($W_{g,k}=F_k \cdot u_k$) are added to the phasic momentum (\eqt{eq:multi-7-eqn-mom}) and the energy equations (\eqt{eq:multi-7-eqn-energy}), respectively, where $g=-9.8 \ m / s^{-2}$. Numerical steady-state solutions are presented in \fig{fig:hydrostatic--variables} along with the viscosity coefficients profiles in \fig{fig:hydrostatic--visc-coeff}. Note that the exact steady-state solution consists of two fluids at rest with a volume fraction step going from one to zero: the phasic steady-state pressure profiles are solution of the non-linear equation $\grad P_k = F_k$. 
+We now consider a hydrostatic pressure test that consists in a $1$-D vertical straight pipe of length $L=1 \ m$ (the top of the fluids is located at $x=0 \ m$) filled with a mixture of liquid water and steam. As the liquid to steam density ratio is about $1000$, the downward gravity force drives the liquid phase to the bottom of the pipe, and the steam phase to the top of the pipe. A steady-state solution is reached when all of the liquid and the steam phases are located at the bottom and the top of the pipe, respectively. The fluids are initially at rest and the phasic pressures and temperatures are uniform and equal to $P=7 \ MPa$ and $T=517 \ K$, respectively. The volume fraction is initially set to $0.5$. The $1$-D straight pipe is discretized with an uniform mesh of $100$ cells. At $t=0 \ s$, the gravity force is turned on and the code is run until steady state is reached with an adaptive time stepping. Note that for the purpose of this test, the phasic gravity force ($F_k = \alpha_k \rho_k g$) and the gravity work ($W_{g,k}=F_k \cdot u_k$) are added to the phasic momentum (\eqt{eq:multi-7-eqn-mom}) and the energy equations (\eqt{eq:multi-7-eqn-energy}), respectively, where $g=-9.8 \ m / s^{-2}$. Numerical steady-state solutions are presented in \fig{fig:hydrostatic--variables} along with the viscosity coefficients profiles in \fig{fig:hydrostatic--visc-coeff}. Note that the exact steady-state solution consists of two fluids at rest with a volume fraction step going from one to zero and the steady-state phasic pressure gradient are proportional to the phasic the gravity forces: $\grad P_k = F_k$. 
 %
 \begin{figure}[H]
         \centering
@@ -1552,10 +1552,10 @@ We now consider a sedimentation test that consists in a $1$-D vertical straight 
                 \caption{Volume fraction}
                 \label{fig:hydrostatic--vf}
         \end{subfigure}
-        \caption{Numerical steady-state solution of the sedimentation test.}\label{fig:hydrostatic--variables}
+        \caption{Numerical steady-state solution of the hydrostatic pressure test.}\label{fig:hydrostatic--variables}
 \end{figure}
 %
-The numerical steady-state solutions presented in \fig{fig:hydrostatic--variables} do not display any instability. The phasic volume fraction experiences a steady-state discontinuity at $x=0.5 \ m$ that corresponds to the phase separation between the liquid (in the top) and the steam (in the bottom). The phasic pressure variations shown in \fig{fig:hydrostatic--press} are consistent with the gravity force: the pressure decreases through the pipe in an almost linearly fashion as the phasic density variations are weak (the phasic temperature profiles are very small as shown in \fig{fig:hydrostatic--density}). The phasic velocity profiles display a peak around $x=0.5 \ m$ and is very small anywhere else : it was observed that the peak amplitudes decrease as approaching steady-state solution.
+The numerical steady-state solutions presented in \fig{fig:hydrostatic--variables} do not display any instability. The phasic volume fraction experiences a steady-state discontinuity at $x=0.5 \ m$ that corresponds to the phase separation between the liquid (in the top) and the steam (in the bottom). The phasic pressure variations shown in \fig{fig:hydrostatic--press} are consistent with the gravity force: the pressure decreases through the pipe in an almost linearly fashion as the phasic density variations are weak (the phasic temperature profiles are very small as shown in \fig{fig:hydrostatic--density}). The variation in the liquid pressure profile aThe phasic velocity profiles display a peak around $x=0.5 \ m$ and is very small anywhere else : it was observed that the peak amplitudes decrease as approaching steady-state solution.
 %
 \begin{figure}[H]
         \centering
@@ -1581,8 +1581,7 @@ The numerical steady-state solutions presented in \fig{fig:hydrostatic--variable
         \caption{Steady-state viscosity coefficients profiles for the hydrostatic pressure test.}\label{fig:hydrostatic--visc-coeff}
 \end{figure}
 %
-The phasic viscosity coefficients $\mu_k$ and $\kappa_k$ are very small compare to the first-order viscosity coefficients denoted by the subscript $max$: the entropy production is very small as the phasic pressure, velocity and temperature profiles are smooth as observed in \fig{fig:hydrostatic--variables}. The phasic viscosity coefficient for the volume fraction equation are shown in \fig{fig:hydrostatic--beta} and are peaked around $x=0.5 \ m$ at the location of the discontinuity seen in the volume fraction profile in \fig{fig:hydrostatic--vf}.
-\tcb{Do we need to add plots of the transient solution?}
+The phasic viscosity coefficients $\mu_k$ and $\kappa_k$ are very small compare to the first-order viscosity coefficients denoted by the subscript $max$: the entropy production is very small as the phasic pressure, velocity and temperature profiles are smooth as observed in \fig{fig:hydrostatic--variables}. The phasic viscosity coefficient for the volume fraction equation are shown in \fig{fig:hydrostatic--beta} and are peaked around $x=0.5 \ m$ at the location of the discontinuity seen in the volume fraction profile (\fig{fig:hydrostatic--vf}).
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Steady-state numerical solution of a Water Boiling Reactor (BWR)}\label{sec:bwr}
@@ -1618,16 +1617,16 @@ The phasic viscosity coefficients $\mu_k$ and $\kappa_k$ are very small compare 
 %the Lapidus viscosity \cite{Lapidus_paper,Lapidus_book} and pressure-based viscosity, for two-phase flows \cite{PBV_book}. We intend on reporting on these findings in 
 %a subsequent publication.
 %
-A version of the Entropy Viscosity Method that is valid for a wide range of Mach numbers has been derived 
+A version of the entropy viscosity method that is valid for a wide range of Mach numbers has been derived 
 and presented for the inviscid two-phase flow Seven-Equation model.
 The definition of the viscosity coefficients
-is consistent with the low-Mach asymptotic limit, does not require an analytical expression 
+is now consistent with the low-Mach asymptotic limit, does not require an analytical expression 
 for the entropy function, and is therefore applicable to a larger variety of flow regimes, from very 
 low-Mach flows to supersonic flows.
 The method can also be used with the two-phase flow Seven-Equation model with variable area to solve nozzle flow problems.
 It was demonstrated that the viscous regularization did not create any artificial waves when simulating independent two-phase flows.
 Convergence of the numerical solution to the exact solution was demonstrated by computing the convergence rates of the L$_1$ and L$_2$ norms 
-for $1$-D shock tube flows in straight pipes. The method was tested on various $1$-D tests obtained with Moose-based applications including a in-house code and the system code RELAP-7. The numerical method is capable of handling engineering tests such as seidmentation and water-hammer tests.
+for $1$-D shock tube flows in straight pipes. The method was tested on various $1$-D tests obtained with Moose-based applications including a in-house code and the system code RELAP-7. The numerical method is capable of handling engineering tests such as hydrostatic pressure and water-hammer tests.
 %For smooth solutions, second-order 
 %convergence was verified; solutions with shocks converged with the expected theoretical rates of 1 (L$_1$-norm)
 %and 1/2 (L$_2$-norm).
@@ -1638,7 +1637,7 @@ for $1$-D shock tube flows in straight pipes. The method was tested on various $
 %the square of the Mach number, as expected in the incompressible limit. A convergence study was carried out for a
 %2D supersonic compression corner test case and rates of convergence of 1 (L$_1$-norm) and 1/2 (L$_2$-norm) were observed.
 
-In the future, we plan to further apply the Entropy Viscosity Method 
+In the future, we plan to further apply the entropy viscosity method 
 to the multi-dimensional Seven-Equation two-phase flow Model \cite{SEM}. 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
