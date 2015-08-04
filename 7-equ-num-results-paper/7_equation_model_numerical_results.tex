@@ -59,7 +59,7 @@
 %% \fntext[label3]{}
 %-------------------------
 %-------------------------
-\title{$1$-D numerical results of the Seven-Equation two-phase flow Model with the Entropy Viscosity Method.}
+\title{Viscous regularization of the seven-equation two-phase flow model with numerical applications.}
 %-------------------------
 %-------------------------
 \author{Marc O. Delchini\fnref{label1}}
@@ -90,13 +90,12 @@ The effectiveness of the method is demonstrated with a first set of 1-D benchmar
 %-------------------------
 %-------------------------
 \begin{keyword}
-  two-phase flow model \sep 
+    two-phase flow model \sep 
 	seven-equation model \sep
-	artificial viscosity \sep 
-	% with variable area \sep 
+	artificial viscosity method \sep 
 	entropy-based viscosity stabilization\sep 
 	low-Mach regime \sep 
-	shock-capturing
+	shock-capturing scheme
 \end{keyword}
 %-------------------------
 \end{frontmatter}
@@ -108,10 +107,23 @@ return but when I look for differences on github, it is a pain to have very long
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}\label{sec:intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Compressible two-phase fluid flows are found in numerous industrial applications. Their numerical solution is an ongoing area of research 
-in modeling and simulation. 
-A variety of two-phase models, with different levels of mechanical and thermodynamical non-equilibrium, has been developed;
-in addition to the more traditional six-equation models \cite{Stadtke}, there are the five-equation model of Kapila \cite{Kapila_2001,GuillardMurrone2003,Saurel_2009} 
+Compressible two-phase fluid flows are found in numerous industrial applications (combustion devices,  heat transfer for boilers 
+--including coolant flow in nuclear reactors, etc.). 
+% Their numerical solution is an ongoing area of research in modeling and simulation. 
+A variety of two-phase models, with different levels of mechanical and thermodynamical non-equilibrium, has been developed. 
+Traditionally, a six-equation model with equal pressure between the two phases is employed to describe the conservation of mass, 
+momentum, and energy for two phases \cite{Stadtke}; this model is typically obtained by an averaging process (be it in time, space,
+or statistical \cite{BruceStewart1984363}). However, it is well-known that the six-equation model 
+suffers from some mathematical difficulty in the sense that the system of partial differential equations is ill-posed in the sense of Hadamard 
+(the Jacobian matrix of linearized equations presents a pair of complex eigenvalues). 
+A seven-equation two-phase model
+
+Other two-phase flow models have been derived
+based 
+
+
+
+, but other models multi-phase have been derived as well there are the five-equation model of Kapila \cite{Kapila_2001,GuillardMurrone2003,Saurel_2009} 
 and the fully non-equilibrium Seven-Equation Model (SEM) \cite{Berry_1985,BaerNunziato,Saurel_2001b,SEM}.  These models may be obtained
 by integrating the one-phase flow balance equations weighted by a characteristic or indicator function for each phase \cite{DrewPassman}.
 The resulting system of equations contains non-conservative terms and relaxation terms that 
