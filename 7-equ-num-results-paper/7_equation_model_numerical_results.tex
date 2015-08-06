@@ -112,16 +112,15 @@ return but when I look for differences on github, it is a pain to have very long
 Compressible two-phase fluid flows are found in numerous scientific and industrial applications (astrophysical plasmas, 
 combustion devices, heat transfer for boilers --including coolant flow in nuclear reactors, etc.). 
 % Their numerical solution is an ongoing area of research in modeling and simulation. 
-A variety of two-phase models, with different levels of mechanical and thermodynamical non-equilibrium, exists. 
+A variety of two-phase flow models, with different levels of mechanical and thermodynamical non-equilibrium, exists. 
 Traditionally, a six-equation model with equal pressure between the two phases is employed to describe the conservation of mass, 
 momentum, and energy for two phases \cite{Stadtke}; this model is typically obtained by an averaging process (be it in time, space,
 or statistical \cite{BruceStewart1984363}). However, it is well-known that the six-equation model 
 suffers from some mathematical difficulty in the sense that the system of partial differential equations is ill-posed in the sense of Hadamard 
 (the Jacobian matrix of linearized equations presents a pair of complex eigenvalues). 
-Unconditionally hyperbolic multiphase flow models have been derived by Stewart and Wendroff \cite{BruceStewart1984363}, Baer and
-Nunziato \cite{BaerNunziato}, Kapila \cite{Kapila_2001}, Berry et al. \cite{Berry_1985}, Saurel et al. \cite{Saurel_2001a,Saurel_2001b}, 
-among others. 
-These hyperbolic models employ an additional partial differential equation for the volume fraction, allowing for the rate at 
+However, other multiphase flow models that are unconditionally hyperbolic have been derived; see, for instance,Stewart and Wendroff \cite{BruceStewart1984363}, 
+Baer and Nunziato \cite{BaerNunziato}, Kapila \cite{Kapila_2001}, Berry et al. \cite{Berry_1985}, Saurel et al. \cite{Saurel_2001a,Saurel_2001b}, 
+among others. These hyperbolic models employ an additional partial differential equation for the volume fraction, allowing for the rate at 
 which pressure equilibrium is reached. 
 
 
