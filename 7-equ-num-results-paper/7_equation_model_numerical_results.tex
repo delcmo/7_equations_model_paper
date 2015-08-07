@@ -109,7 +109,8 @@ return but when I look for differences on github, it is a pain to have very long
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}\label{sec:intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Compressible two-phase fluid flows are found in numerous scientific and industrial applications (astrophysical plasmas, 
+
+Compressible two-phase fluid flows are found in numerous natural, scientific, and industrial applications (astrophysical plasmas, 
 combustion devices, heat transfer for boilers --including coolant flow in nuclear reactors, etc.). 
 % Their numerical solution is an ongoing area of research in modeling and simulation. 
 A variety of two-phase flow models, with different levels of mechanical and thermodynamical non-equilibrium, exists. 
@@ -119,98 +120,101 @@ or statistical \cite{BruceStewart1984363}). However, it is well-known that the s
 suffers from some mathematical difficulty in the sense that the system of partial differential equations is ill-posed in the sense of Hadamard 
 (the Jacobian matrix of linearized equations presents a pair of complex eigenvalues). 
 However, other multiphase flow models that are unconditionally hyperbolic have been derived; see, for instance,Stewart and Wendroff \cite{BruceStewart1984363}, 
-Baer and Nunziato \cite{BaerNunziato}, Kapila \cite{Kapila_2001}, Berry et al. \cite{Berry_1985}, Saurel et al. \cite{Saurel_2001a,Saurel_2001b}, 
-among others. These hyperbolic models employ an additional partial differential equation for the volume fraction, allowing for the rate at 
-which pressure equilibrium is reached. 
+Baer and Nunziato \cite{BaerNunziato}, Kapila \cite{Kapila_2001,Berry_NED2010}, Berry et al. \cite{Berry_1985}, Saurel et al. \cite{Saurel_2001a,Saurel_2001b}, 
+among others. Hyperbolicity is a highly desirable property to devise robust numerical solvers and to treat a wide range of flow conditions.
+These hyperbolic models employ an additional partial differential equation for the volume fraction, allowing for the rate at 
+which pressure equilibrium is reached.  They can be obtained by integrating the one-phase flow balance equations weighted by a characteristic 
+or indicator function for each phase \cite{DrewPassman}. The resulting system of equations also contains non-conservative terms and relaxation terms that 
+describe the interaction between phases. In this paper, we employ the full non-equilibrium Seven-Equation Model 
+(SEM) two-phase flow model described \cite{Berry_1985,BaerNunziato,Saurel_2001b,Berry_NED2010}.
+
+The numerical approximation of these unconditionally hyperbolic models is an ongoing area of research.
+In the SEM model, seven waves are present: two acoustic waves and one contact discontinuity per fluid and one volume fraction wave that propagates 
+at the average interfacial speed. This generates intricate wave patterns and leads to complex flux computations, ruling out the use of a Riemann solver. 
+An alternative is to use an approximate Riemann solver, a well-established approach for single-phase flows, while deriving a consistent discretization 
+scheme for the non-conservative terms \cite{Li_2004,Abgrall_2002}. 
+% approximation for the treatment of the non-conservative terms can lead to failure in computing the numerical solution \cite{Abgrall_2002}.
+This methodology was applied to the seven-equation model (SEM) introduced by Berry et al. in \cite{Berry_NED2010}. 
+\tcr{I do not know what to think about this sentence. Abgrall2002 is not even cited in that paper from Berry, so I am lost a bit. I thought the NED2010 paper
+was about DEM applied to SEM. DEM is not mentioned anywhere but I think it must be discussed)} 
+% 
+Because each phase in the SEM model obeys a single-phase Euler equation, various numerical techniques employed so far to discretize the SEM equations have been 
+based on spatially discontinuous schemes. Because each phase is assumed to obey the Euler equations, most of the numerical solvers are adapted from the single-phase approximate Riemann solvers. For example, Saurel et al. \cite{Saurel_2001a, Saurel_2001b} employed a HLL-type scheme to solve for the SEM but noted that excessive dissipation was added in the contact discontinuity. A more advanced HLLC-type scheme was developed in \cite{Li_2004} but only for the subsonic case; this was later extended to supersonic flows in \cite{Zein_2010}. More recently, Ambroso et al. \cite{Ambroso_2012} proposed an approximate Riemann solver accounting for source terms such as gravity and drag forces, but with no \tcr{interphase} mass transfer \tcr{between phases}. \tcr{(second option is better. check if this is what you meant, and not interfacial)} (\tcr{also, the last sentence implies that the previous work Saurel2001, Li2004, Zein2010, discretized the SEM with no source term and
+no mass transfer. whichever it is, we should find a way of adding the relevant information for clarity. Finally, would this be a better place to talk about DEM, that is, after the approximate Riemann solvers?}). 
 
 
-
-, but other models multi-phase have been derived as well there are the five-equation model of Kapila \cite{Kapila_2001,GuillardMurrone2003,Saurel_2009} 
-and the fully non-equilibrium Seven-Equation Model (SEM) \cite{Berry_1985,BaerNunziato,Saurel_2001b,SEM}.  These models may be obtained
-by integrating the one-phase flow balance equations weighted by a characteristic or indicator function for each phase \cite{DrewPassman}.
-The resulting system of equations contains non-conservative terms and relaxation terms that 
-describe the interaction between phases, supplemented by an equation for the volume fraction. 
-
-Once a system of equations describing the physics is derived, the next challenging step is to develop a robust and accurate discretization to obtain a numerical solution: because of the nonlinear hyperbolic nature of the above two-phase flow system of equations, it is well known that, even with smooth initial data, the existence of a 
-globally smooth solution may not occur. The concept of a weak
-solution is introduced to guarantee the existence of a global solution; however, the uniqueness of the solution is lost because the problem may
-allow infinitely many weak solutions.  An additional condition, the``entropy condition,'' is usually imposed to select a
-unique solution, the ``entropy solution.'' The minimum entropy principle states that the entropy of a fluid parcel is constant along its pathline
-and only increases upon crossing a shock wave, viscous layer, or thermal conduction region.  Numerically computing 
-shockwave solutions without proper stabilization leads to non physical spurious oscillations. When adding viscosity in the vicinity 
-of the shockwave, one replaces the physical effect of the entropy production of the shockwave with the equivalent entropy increase of a viscous layer.  
-% Ideally this will give the correct energy partitioning between kinetic and internal energy. 
-If the viscous coefficient is not set appropriately 
-the resulting entropy production will not be equivalent to that of the true shock and the numerical scheme %, if conservative, 
-may even create a train of 
-oscillations in the solution, radiating away from the shock/viscous layer, and whose gradients will indeed attempt to produce an entropy production equivalent 
-to that of the shock jump. One needs to properly set the viscosity coefficient along with the jump conditions for the given mesh size in order 
-to produce a monotonic solution increase through the viscous layer with as little smearing as possible, but with entropy production matching that of the true shock.
-Tadmor \cite{tadmor_minimum_entropy_principle} gives an alternative statement (more useful for constructing numerical methods and proofs) of the minimum 
-entropy principle by transforming the Lagrangian statement above into that of an Eulerian reference frame. Further discussion may be found in Guermond and Popov \cite{jlg}.
-Although there are several different ways of defining the entropy condition, it is generally hoped that they are all equivalent in the sense 
-that they select the same entropy solution (this can be demonstrated for Burgers equations, see \cite{Evans1998,Lellis_minimalentropy}).
-For numerical schemes, the entropy condition and solution are sought through the utilization of so-called conservative formulations of the 
-governing laws, along with the addition of an appropriately specified physical or artificial viscosity, either added directly to the governing 
-equations or implied by the discretization employed (truncation error).  That is, a regularization is selected, or built, which is consistent with the 
-entropy condition, thereby guaranteeing that the numerical computation captures the physically relevant solution.  
-
-As the SEM is a hyperbolic system of equation, a Riemann solver could be used but is often ruled out because of the complexity due to the number of equations involved. An alternative is to use an approximate Riemann solver, a well-established approach for single-phase flows, while deriving a consistent discretization scheme for the non-conservative terms \cite{Li_2004,Abgrall_2002}. 
-%The systems of two-phase flow equations are usually solved using discontinuous discretization schemes (finite volume and discontinuous 
-%Galerkin approaches). By assuming that the system of equations is hyperbolic, an exact Riemann solver could be used but is often ruled 
-%out because of its complexity due to the number of equations involved. 
-%ensuring the correct 
-%low-Mach asymptotic limit and .
-%The resulting system of equations contains non-conservative terms that describe the interaction between phases but also an equation for the volume fraction. 
-Careless approximation for the treatment of the non-conservative terms can lead to failure in computing the numerical solution \cite{Abgrall_2002}.
-This methodology was applied to the seven-equation model (SEM) introduced by Berry et al. in \cite{SEM}. This model is known to be unconditionally hyperbolic which is highly desirable when working with approximate Riemann solvers and can treat a wide range of applications. Its particularity comes from the pressure and velocity relaxation terms in the volume fraction, momentum and energy equations that can bring the two phases in equilibrium when using large values of the relaxation parameters. In other words, the seven-equation model can degenerate into the six- and five-equation models. 
+In this paper, we propose an alternative to approximate Riemann solvers in order to derive a robust discretization for the SEM. Our approach is 
+based on the well-known notion of artificial viscosity.  
+When adding viscosity in the vicinity of a shockwave, one replaces the physical effect of the entropy production in the shockwave with the equivalent entropy increase of a viscous layer (transformation of kinetic energy into internal energy).  
+If the viscosity is not large enough, the resulting entropy production will not be equivalent to that of the true shock and a numerical scheme 
+may create a train of oscillations in the solution, radiating away from the shock/viscous layer, and whose gradients will indeed attempt to produce 
+an entropy production equivalent to that of the shock jump (i.e., fluctuating kinetic energy in place of fluctuating molecular energy). 
+On the other hand, too much viscosity will dilute and smooth out the shock region. \tcr{I had to delete a lot of the text you copy-pasted from the other article;
+we cannot just have the same text. Even if the reviewers are different, once published, we look like lazy fools!}
+ % One needs to properly set the viscosity coefficient along with the jump conditions for the 
+% given mesh size in order to produce a monotonic solution increase through the viscous layer with as little smearing as possible, but with entropy production 
+% matching that of the true shock.
+%It is well established that, even with smooth initial data, the existence of a globally smooth solution may not occur for hyperbolic systems.
+%To guarantee the existence of a global solution, the concept of weak solution is then introduced. However, the uniqueness of the solution is lost 
+%because the problem may allow infinitely many weak solutions and an additional condition, the``entropy condition,'' 
+%is usually imposed to select a unique solution, the ``entropy solution.'' 
 %
-Alike for the other two-phase flow models, solving for the seven-equation model requires a numerical solver and significant effort was dedicated to this task for spatially discontinuous schemes. Because each phase is assumed to obey the Euler equations, most of the numerical solvers are adapted from the single-phase approximate Riemann solvers. For example, Saurel et al. \cite{Saurel_2001a, Saurel_2001b} employed a HLL-type scheme to solve for the SEM but noted that excessive dissipation was added to the contact discontinuity. A more advanced HLLC-type scheme was developed in \cite{Li_2004} but only for the subsonic case and then extended to supersonic flows in \cite{Zein_2010}. More recently, Ambroso et al. \cite{Ambroso_2012} proposed an approximate Riemann solver accounting for source terms such as gravity and drag forces, but with no interphase mass transfer.
-
-In this paper, we present an all-Mach flow numerical method for the non-equilibrium seven-equation two-phase flow model of \cite{SEM} by using the Entropy Viscosity Method (EVM) \cite{jlg, jlg2}. The method consists in adding dissipative terms to the system of equations under 
-consideration and in deriving an entropy equation for the {\it regularized} system. By adequately choosing these artificial viscous fluxes, one can 
-show that the sign of the entropy production remains positive, ensuring that the minimum entropy principle holds. The viscous fluxes are function of viscosity coefficients whom definitions determine the accuracy of the numerical method \cite{jlg}. The theoretical foundation for this work can be traced back to viscous regularizations for single-phase Euler and Navier-Stokes equations, notably \cite{jlg} and the references therein. Delchini et al. \cite{Marco_paper_sem} proposed a viscous regularization for the Seven-Equation Model that is consistent with the minimum entropy principle and Harten's generalized entropies and was shown to efficiently stabilize the numerical solution when defining the viscosity coefficients proportional to the local maximum eigenvalues as in the local Lax-Friedrichs (LLF) scheme. It was also shown that the numerical method would fail to yield the correct solution in the case of low-Mach flows: the numerical dissipative terms become 
-ill-scaled in the low-Mach regime and lead to the wrong numerical solution by changing the nature of the equations solved. This 
-behavior is well documented in the literature \cite{LowMach1, LowMach2, LowMach3, Marco_paper_sem}. Still in \cite{Marco_paper_sem}, conditions for yielding the correct asymptotic behavior were also proposed by mean of a low-mach asymptotic study. We now propose to define high-order viscosity coefficients for the SEM that will allow to solve for shocks but also ensure the correct low-Mach asymptotic limit, on the same model of what was previously achieved for the single-phase Euler equations \cite{Marco_paper_low_mach}.
 %
-%In the work presented here, we ensure that the proposed viscous regularization scales appropriately in the low-Mach regime, as such situations are often encountered 
-%in practical applications; a two-phase low-Mach asymptotic analysis is carried out to determine conditions that need to be satisfied by the artificial dissipative 
-%terms to yield a well-scaled regularization in the low-Mach case; see \cite{Marco_paper_low_mach} for the single-phase analog. 
-%We also investigate the behavior of the viscous regularization when the seven-equation two-phase flow model degenerates to the five-equation 
-%model of Kapila \cite{Kapila_2001} through a Chapman-Enskog expansion \cite{dellacherie,GuillardMurrone2003}. We show 
-%that the regularized seven-equation model yields a regularized five-equation model of Kapila.
+%The minimum entropy principle states that the entropy of a fluid parcel is constant 
+%along its pathline and only increases upon crossing a shock wave, viscous layer, or thermal conduction region.  Numerically computing 
+%shockwave solutions without proper stabilization leads to non physical spurious oscillations. 
+%Tadmor \cite{tadmor_minimum_entropy_principle} gives an alternative statement (more useful for constructing numerical methods and proofs) of the minimum 
+%entropy principle by transforming the Lagrangian statement above into that of an Eulerian reference frame. Further discussion may be found in Guermond and Popov \cite{jlg}.
+%Although there are several different ways of defining the entropy condition, it is generally hoped that they are all equivalent in the sense 
+%that they select the same entropy solution (this can be demonstrated for Burgers equations, see \cite{Evans1998,Lellis_minimalentropy}).
+%For numerical schemes, the entropy condition and solution are sought through the utilization of so-called conservative formulations of the 
+%governing laws, along with the addition of an appropriately specified physical or artificial viscosity, either added directly to the governing 
+%equations or implied by the discretization employed (truncation error).  That is, a regularization is selected, or built, which is consistent with the 
+%entropy condition, thereby guaranteeing that the numerical computation captures the physically relevant solution.  %
+Employing an artificial viscosity requires the addition of viscous fluxes in the governing laws; this can be achieved, for example, by analogy with 
+the viscous terms in Navier-Stokes equations \cite{references that JLG used in his JCP2011 paper} or by employing a parabolic regularization \cite{qqq}. 
+However, these approaches are far from optimal:
+the Navier-Stokes regularization was shown to violate the minimum-entropy principle while the parabolic regularization is a special case of a more general
+minimum-entropy-satisfying viscous regularization \cite{guermond popov siam paper}; furthermore, Delchini et al. \cite{Marco_paper_low_mach, make sure the bibtex reference has been updated} 
+showed, in the case of single-phase flows, that a parabolic regularization was not appropriate for an all-speed solver (i.e., across a wide range of Mach numbers).
+%
+Following the single-phase work by Guermond et al. 
+\cite{jlg, jlg2, please change the name of these citations. I prefer to have longer names and have a clue to which paper we are referring to, such as GuermondJCP2011, GuermondCRA comptes rendus academiques, GuermondSIAM2014, ....}, 
+Delchini et al. \cite{Marco_paper_sem} recently proposed a viscous regularization for the Seven-Equation Model that is consistent with the minimum entropy principle and Harten's generalized entropies. In their numerical application, the viscosity coefficients were chosen proportional to the local maximum eigenvalues (akin to a local Lax-Friedrichs, LLF, scheme), which is well-known to be over-dissipative and first-order in space. In addition, the LLF viscosity coefficients are known to
+lead to ill-scaled viscous terms in the low-Mach regime and an ad-hoc low-Mach fix had to be employed to obtain the correct solution for low-Mach flows (this 
+behavior is well documented in the literature; see \cite{LowMach1, LowMach2, LowMach3}). By means of a low-Mach asymptotic analysis, the correct
+viscosity scaling for the seven-equation two-phase flows for all speeds were derived in \cite{Marco_paper_sem}.
 
-%One of the key aspects of the viscous regularization derived here is that it is agnostic of the spatial discretization scheme, unlike approximate 
-%Riemann solvers. Therefore, this viscous regularization may be employed to stabilize numerical schemes based on either continuous or discontinuous 
-%spatial approximations. For examples of prior applications of the technique to the single-phase Euler equations, we refer the reader to \cite{jlg,Marco_paper_low_mach} 
-%(for finite volume, continuous Galerkin, and spectral FEM discretizations) and to \cite{valentin} (for discontinuous Galerkin discretizations). 
-
+Here, we present an all-Mach flow numerical method for the non-equilibrium seven-equation two-phase flow model where we derive and define high-order viscosity coefficients that will enable shock capture (without the excessive dissipation of the LLF viscosity) while ensuring a correct low-Mach asymptotic limit. The 
+proposed definitions of the viscosity coefficients are based on the local entropy production as developed previously in the entropy viscosity Method for
+single-phase flows \cite{jlg, jlg2}. 
+The method relies on two key ingredients: 
+\ben
+\item  an adequate viscous regularization that ensures that the entropy production remains positive, thus that the minimum entropy principle holds 
+(see \cite{tadmor_minimum_entropy_principle} for additional discussions regarding the minimum entropy principle, \cite{GuermondSIAM2014}
+for such a viscous regularization for single-phase flows, and \cite{Marco_paper_sem} for the two-phase flow version applicable to the SEM)
+\item a definition of viscosity coefficients that is well-behaved over a wide range of Mach numbers and does not excessively dissipate sharp solution profiles. 
+\een
+This latter point is the crux of this paper.
+%The theoretical foundation for this work can be traced back to viscous regularization for single-phase Euler and Navier-Stokes equations, notably \cite{jlg} and the references therein. 
+%
+%Delchini et al. \cite{Marco_paper_sem} proposed a viscous regularization for the Seven-Equation Model that is consistent with the minimum entropy principle and Harten's generalized entropies and was shown to efficiently stabilize the numerical solution when defining the viscosity coefficients proportional to the local maximum eigenvalues as in the local Lax-Friedrichs (LLF) scheme. It was also shown that the numerical method would fail to yield the correct solution in the case of low-Mach flows: the numerical dissipative terms become 
+%ill-scaled in the low-Mach regime and lead to the wrong numerical solution by changing the nature of the equations solved. This 
+%behavior is well documented in the literature \cite{LowMach1, LowMach2, LowMach3, Marco_paper_sem}. Still in \cite{Marco_paper_sem}, conditions for yielding the correct asymptotic behavior were also proposed by mean of a low-mach asymptotic study. We now propose to define high-order viscosity coefficients for the SEM that will allow to solve for shocks but also ensure the correct low-Mach asymptotic limit, on the same model of what was previously achieved for the single-phase Euler equations \cite{Marco_paper_low_mach}.
+%
+%
 The remainder of the paper is as follows. In \sct{sec:7-equ-model}, the Seven-Equation two-phase flow Model (SEM) is recalled along with its main 
-physical and mathematical properties, and the viscous regularization derived in \cite{Marco_paper_sem}. Then, all-Mach flow viscosity coefficients are derived by following the same methodology as in \cite{Marco_paper_low_mach}. In \sct{sec:disc}, the temporal and spatial discretization methods are presented. Our theoretical approach is illustrated in \sct{sec:results} with one-dimensional numerical results that were obtained with Moose-based applications: an in-house code called SEVEN-banded arMadillo and the system code RELAP-7 \cite{Berry_2014}.
+physical and mathematical properties, and the viscous regularization derived in \cite{Marco_paper_sem}. Then, all-Mach flow viscosity coefficients are derived by following the same methodology as in \cite{Marco_paper_low_mach}. In \sct{sec:disc}, the temporal and spatial discretization methods are presented. Our theoretical approach is illustrated in \sct{sec:results} with one-dimensional numerical results. The technique has been implemented in the nuclear reactor safety system 
+code RELAP-7 \cite{Berry_2014} and some of the numerical illustrations were generated with RELAP-7.
 Finally, we conclude in \sct{sec:conclusion}.
 %
-%We propose to investigate how the EVM applies to the seven-equation model when discretized with a CFEM. First, the multi-D seven-equation model is recalled and detailed in SECTION and particular attention is given to the entropy equation. Then, the dissipative terms are derived using the entropy inequality, in SECTION, on the same principle of what was done in REF for the multi-D Euler equations. In SECTION, a low-Mach asymptotic limit is performed in order to derive a definition for the viscosity coefficients consistent with the incompressible limit results. Lastly, 1-D numerical results are presented in SECTION.
-%
-\begin{itemize}
-\item a few lines about the need for accurately resolving two-phase flows \tcr{borrow some for the previous 2 papers, but also we need a strong emphasis on 
-2-phase flows}
-\item background on the different two-phase flow models: 5-, 6- and 7-equation two-phase flow models \tcr{this is really important, we need to show we have 
-read some of the 
-important papers, e.g., Saurel's, by providing a 1-3 sentence resume of each of the important papers we quote.}
-\item then, focus on the different types of 7-equation two-phase flow models: they mostly differ because of the closure relaxations used
-\item discuss the different numerical solvers developed for the 7-equation two-phase flow model: HLL, HLLC, and approximated Riemann solvers accounting 
-for the source terms
-\item emphasize the fact that the above numerical solvers only works for discontinuous schemes
-\item then, introduce the Entropy Viscosity Method and details the organization of the paper 
-\item explain that the Entropy Viscosity Method requires two steps: first a viscous regularization (done in REF) and then definition of the viscosity coefficients 
-(done in section ...). (IMPORTANT)
-\end{itemize}
-\tcr{\\ again, I would like to keep this mini introduction very short. Some of the info here is good but should it go here?\\
- The viscous regularization was derived in \cite{Marco_paper_sem} by 
-using an entropy condition called ``the minimum entropy principle'' which ensures both uniqueness of the numerical solution and convergence to the physical solution. This section 
-ends with the derivation of the phasic viscosity coefficients based on the study of the non-dimensional form of the regularized Seven-Equation two-phase flow Model that was 
-performed in \cite{Marco_paper_sem}.\\}
-\tcr{\\here you have important info: closure relations used to compute the relaxation terms and interfacial variables (REF). I am not sure this goes in this small introduction. Here, we should just advertize the two upcoming subsections. However, that information should be written somewhere, either in the introduction if appropriate or int he subsection about the inviscid 7eq model\\}
+
+%\tcr{\\ again, I would like to keep this mini introduction very short. Some of the info here is good but should it go here?\\
+ %The viscous regularization was derived in \cite{Marco_paper_sem} by 
+%using an entropy condition called ``the minimum entropy principle'' which ensures both uniqueness of the numerical solution and convergence to the physical solution. This section 
+%ends with the derivation of the phasic viscosity coefficients based on the study of the non-dimensional form of the regularized Seven-Equation two-phase flow Model that was 
+%performed in \cite{Marco_paper_sem}.\\}
+%\tcr{\\here you have important info: closure relations used to compute the relaxation terms and interfacial variables (REF). I am not sure this goes in this small introduction. Here, we should just advertize the two upcoming subsections. However, that information should be written somewhere, either in the introduction if appropriate or in the subsection about the inviscid 7eq model\\}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
