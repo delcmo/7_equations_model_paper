@@ -682,7 +682,7 @@ low-Mach asymptotic limit with well-scaled dissipative terms when the numerical 
 \Re_{k,\infty} = \Pe_{k,\infty}^\kappa = \Pe_{k,\infty}^\beta =1 \ .
 \end{equation}
 %
-In case (b), for non-isentropic flows i.e. with shocks, the scaling of the numerical numbers is given in \eqt{eq:non-isent-flow-num-nb} and is expected to efficiently 
+In case (b), for non-isentropic flows i.e. with shock waves, the scaling of the numerical numbers is given in \eqt{eq:non-isent-flow-num-nb} and is expected to efficiently 
 stabilize shock waves and discontinuities for any Mach numbers:
 %
 \begin{align}\label{eq:non-isent-flow-num-nb}
@@ -697,7 +697,7 @@ stabilize shock waves and discontinuities for any Mach numbers:
 \tcr{don't you want to stick with $ \Pe_{k,\infty}^\kappa = M^2_{k,\infty}$. it's easier. how can you differentiate between the 2 types. and do you do it in the 
 code? a reviewer may ask.
 is it worth it?} \tcb{it is actually fairly simple. We can talk about it.}
-Following the methodology employed in \cite{DelchiniCompFluid2014-euler} and the conditions given in \eqt{eq:non-isent-flow-num-nb}, the definition of the 
+Following the methodology employed in \cite{DelchiniCompFluid2014-euler} and the conditions given in \eqt{eq:isent-flow-num-nb} and \eqt{eq:non-isent-flow-num-nb}, the definition of the 
 phasic normalization parameters $\norm_{k,P}^\mu$ and $\norm_{k,P}^\kappa$ can be devised in the two limit cases, to yield:
 %
 \begin{equation}
@@ -964,6 +964,7 @@ This value is strongly imposed as a Dirichlet boundary condition.
 
 Our implementation of the boundary conditions for the continuity, momentum and energy equations, is inspired by the method described in \cite{Berry_NED2010} and was 
 adapted for a time implicit solver \cite{Marco_dissertation}. The number of physical information to be supplied to each boundary is based on the study of the characteristics, the eigenvalues and the Mach number. \\
+%The treatment of the boundary condition for the volume fraction equation is simpler as the volume fraction is simply advected at the interfacial velocity $\mbold{u}_{int}$: at an inlet boundary i.e. $\mbold{u}_{int} \cdot \mbold{n} \leq 0$, the boundary value of the volume fraction is supplied. At an outlet i.e. $\mbold{u}_{int} \cdot \mbold{n} \geq 0$, the physical information exits the computational domain and the boundary value of the volume fraction is not supplied but computed from the characteristic equation. \\
 \tcr{do you mean the number of physical information to be supplied to  is based on a study of the characteristics? if so, say it plainly} \tcb{done} \\
 The numerical results presented in \sct{sec:results} were all obtained by using boundary types from the following list: subsonic stagnation, static pressure and wall boundary conditions.
 \\ \tcr{why is outlet always static?}.\tcb{done} \\
@@ -1002,7 +1003,7 @@ Then, the same shock tube problem is considered but with infinite relaxation coe
 (\tcr{say why you do this? to compare with Saurel 20xx results from}) \tcb{done}. 
 Finally, two-phase flow tests through a converging-diverging nozzle are considered in \sct{sec:1d-results-nozzle}. 
 
-For the second set of numerical results, we implemented the entropy-viscosity method presented here in the nuclear reactor safety system code RELAP-7 \cite{Berry_2014}.
+For the second set of numerical results presented in \sct{sec:1d-results-relap-7}, we implemented the entropy-viscosity method presented here in the system code RELAP-7 \cite{Berry_2014} that is the next generation nuclear system safety analysis code being developed at the Idaho National Laboratory. RELAP-7 is a Moose-based application and employs state-of-the-art numerical method to ensure high-order accuracy of the numerical solutions using continuous Finite Element Method. The entropy-viscosity method is therefore a good candidate to stabilize the Seven-Equation Model that is used to simulate two-phase flows in Light-Water Nuclear Reactors. 
 \tcr{need to say a couple of nice things about relap7, what does it do, etc. I am sure you can grab a couple of introduction sentence from a note that ray wrote on relap7....} 
 These tests are prototypical of situations found in accident scenarios for nuclear reactors: first, a two-phase flow water hammer problem is simulated; then a hydrostatic test 
 where phases circulate in opposite directions is computed; finally, steady-state for a Boiling Water Reactor (BWR). 
@@ -1039,8 +1040,8 @@ The numerical results presented in this section were obtained with a Moose-based
 %
 We consider a 1-D straight pipe of length L $=1 \ m$ filled with two independent phases (the relaxation coefficients are set to zero), initially in mechanical 
 equilibrium (same pressure and same velocity) and described by the IGEOS with $\gamma_1 = 3$ and $\gamma_2 = 1.4$. The volume 
-fraction variable is initialized with a step located in the middle of the pipe: $\alpha_{right}=0.9$ and $\alpha_{left}=0.1$. The density of the phase $1$ and $2$ are set to $10$ and $1 \ kg/
-m^3$, respectively. \tcr{you use subscripts left/right and then 1/2. just use 1 and 2 all the time} \tcb{no I do not}
+fraction variable is initialized with a step located in the middle of the pipe: $\alpha_{1,right}=0.9$ and $\alpha_{1,left}=0.1$. The density of the phase $1$ and $2$ are set to $10$ and $1 \ kg/
+m^3$, respectively. \tcr{you use subscripts left/right and then 1/2. just use 1 and 2 all the time} \tcb{done}
 The initial phasic pressure and velocity values are uniform and set to $0.1$ {\it MPa} and $100 \ m/s$, respectively. We use Dirichlet boundary 
 conditions to impose the boundary values: the pipe is long enough to prevent the waves from reaching the boundaries. With such settings and using the definitions of 
 the interfacial variables given in \eqt{E-R:86}, the interfacial pressure and 
@@ -1790,16 +1791,19 @@ The phasic viscosity coefficients $\mu_k$ and $\kappa_k$ are very small compare 
 %the Lapidus viscosity \cite{Lapidus_paper,Lapidus_book} and pressure-based viscosity, for two-phase flows \cite{PBV_book}. We intend on reporting on these findings in 
 %a subsequent publication.
 %
-A version of the Entropy Viscosity Method that is valid for a wide range of Mach numbers has been derived 
-and presented for the inviscid two-phase flow Seven-Equation model.
-The definition of the viscosity coefficients
-is consistent with the low-Mach asymptotic limit, does not require an analytical expression 
-for the entropy function, and is therefore applicable to a larger variety of flow regimes, from very 
-low-Mach flows to supersonic flows.
-The method can also be used with the two-phase flow Seven-Equation model with variable area to solve nozzle flow problems.
-It was demonstrated that the viscous regularization did not create any artificial waves when simulating independent two-phase flows.
-Convergence of the numerical solution to the exact solution was demonstrated by computing the convergence rates of the L$_1$ and L$_2$ norms 
-for $1$-D shock tube flows in straight pipes. The method was tested on various $1$-D tests obtained with Moose-based applications including a in-house code and the system code RELAP-7. The numerical method is capable of handling engineering tests such as seidmentation and water-hammer tests.
+The Entropy Viscosity Method was extended to the compressible Seven-Equation Model with variable area and was designed to be valid for a 
+wide range of Mach numbers. The definition of the phasic viscosity coefficients were derived by considering the limit cases of low-Mach isentropic flows and non-isentropic flows that can develop shock waves. The numerical method is therefore applicable to a large variety of flow regime, from very low-Mach flows to supersonic flows. The definitions of the phasic viscosity coefficients are also consistent with the single-phase viscosity coefficients derived in \cite{DelchiniCompFluid2014-euler} when the Seven-Equation Model devolves to the single-phase Euler equations.
+
+The effectiveness of the numerical method was demonstrated in 1-D with an in-house Moose based application and the system code RELAP-7 developed by the Idaho National Laboratory. Using the in-house Moose-based application, the method was first tested on various shock tubes for independent and fully coupled two-phase flows. For tests with shocks and when an exact solution was available, the rate of convergences of the $L_1$ and $L_2$ norms were computed and found equal to 1 and $1/2$, respectively, which demonstrates convergence of the numerical solution to the exact solution.
+
+Using the Entropy Viscosity Method, more advanced tests were also performed with the system code RELAP-7 including sedimentation flow, two-phase water hammer and two-phase flow of a Boiling Water Reactor. In each test, the phasic viscosity coefficients behaved as expected and efficiently stabilized the numerical solution. 
+
+In the future, we plan to test the Entropy Viscosity Method with the multi-dimensional compressible Seven-Equation Model. Note that the definitions of the phasic viscosity coefficients remain unchanged. It will, however, require a preconditioner to ensure quick convergence of the solver as an implicit temporal integrator is used. 
+%does not require an analytical expression and is therefore applicable to a larger variety of flow regimes, from very 
+%low-Mach flows to supersonic flows.
+%It was demonstrated that the viscous regularization did not create any artificial waves when simulating independent two-phase flows.
+%Convergence of the numerical solution to the exact solution was demonstrated by computing the convergence rates of the L$_1$ and L$_2$ norms 
+%for $1$-D shock tube flows in straight pipes. The method was tested on various $1$-D tests obtained with Moose-based applications including a in-house code and the system code RELAP-7. The numerical method is capable of handling engineering tests such as seidmentation and water-hammer tests.
 %For smooth solutions, second-order 
 %convergence was verified; solutions with shocks converged with the expected theoretical rates of 1 (L$_1$-norm)
 %and 1/2 (L$_2$-norm).
@@ -1810,8 +1814,8 @@ for $1$-D shock tube flows in straight pipes. The method was tested on various $
 %the square of the Mach number, as expected in the incompressible limit. A convergence study was carried out for a
 %2D supersonic compression corner test case and rates of convergence of 1 (L$_1$-norm) and 1/2 (L$_2$-norm) were observed.
 
-In the future, we plan to further apply the Entropy Viscosity Method 
-to the multi-dimensional Seven-Equation two-phase flow Model \cite{Berry_NED2010}. 
+%In the future, we plan to further apply the Entropy Viscosity Method 
+%to the multi-dimensional Seven-Equation two-phase flow Model \cite{Berry_NED2010}. 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
