@@ -82,17 +82,16 @@
 %-------------------------
 %-------------------------
 \begin{abstract}
-We apply a viscous regularization technique for hyperbolic 
-conservation laws called the Entropy Viscosity Method to the two-phase flow Seven-Equation Model. By means of a low-Mach asymptotic study that was performed in \cite{Marco_paper_sem}, expressions for the entropy viscosity coefficients are derived.
-These definitions are valid for a wide range of Mach numbers, from subsonic flows (with very low Mach numbers) to 
-supersonic flows and allow to solve for variable area flow problems.
+We extend the Entropy Viscosity Method, a viscous regularization technique for hyperbolic 
+conservation laws, to the compressible Seven-Equation two-phase flow Model with variable area. Using the viscous regularization derived in \cite{Marco_paper_sem} and a low-Mach asymptotic study, expressions for the entropy viscosity coefficients are derived that are valid for a wide range of Mach numbers, from subsonic flows (with very low Mach numbers) to 
+supersonic flows and allow to solve for variable area flow problems as well.
 %
-The effectiveness of the method is demonstrated with a first set of 1-D benchmark tests obtained with an in-house Moose-based applications: volume fraction shock tube, various two-phase flow shock tubes and two-phase flow in a converging-diverging nozzle. A second set of $1$-D test was also obtained with the system code RELAP-7 including hydrostatic pressure, water-hammer and Boiling-Water Reactor (BWR). Convergence studies are performed for solutions with shocks present. 
+The effectiveness of the method is demonstrated with a first set of 1-D benchmark tests obtained with an in-house Moose-based applications: volume fraction shock tube, various independent and fully coupled two-phase flow shock tubes and two-phase flow in a converging-diverging nozzle. Convergence rates of the $L_1$ and $L_2$ norms are computed to demonstrate convergence of the numerical solution to the exact solution when available. A second set of $1$-D test was also obtained with the nuclear react analysis system code RELAP-7 including hydrostatic pressure, water-hammer and Boiling-Water Reactor (BWR).
 \end{abstract}
 %-------------------------
 %-------------------------
 \begin{keyword}
-    two-phase flow model \sep 
+        compressible two-phase flow model \sep 
 	seven-equation model \sep
 	artificial viscosity method \sep 
 	entropy-based viscosity stabilization\sep 
@@ -125,12 +124,12 @@ among others. Hyperbolicity is a highly desirable property to devise robust nume
 These hyperbolic models employ an additional partial differential equation for the volume fraction, allowing for the rate at 
 which pressure equilibrium is reached.  They can be obtained by integrating the one-phase flow balance equations weighted by a characteristic 
 or indicator function for each phase \cite{DrewPassman}. The resulting system of equations also contains non-conservative terms and relaxation terms that 
-describe the interaction between phases. In this paper, we employ the full non-equilibrium Seven-Equation Model 
-(SEM) two-phase flow model described in \cite{Berry_1985,BaerNunziato,Saurel_2001b,Berry_NED2010}.
+describe the interaction between phases. In this paper, we employ the full non-equilibrium Seven-Equation two-phase flow Model 
+(SEM) described in \cite{Berry_1985,BaerNunziato,Saurel_2001b,Berry_NED2010}.
 
 The numerical approximation of these unconditionally hyperbolic models is an ongoing area of research.
 In the SEM model, seven waves are present: two acoustic waves and one contact discontinuity per fluid and one volume fraction wave that propagates 
-at the average interfacial speed. This generates intricate wave patterns and leads to complex flux computations, ruling out the use of a Riemann solver. 
+at \tcb{an} average interfacial speed \tcb{I would say: an interfacial speed}. This generates intricate wave patterns and leads to complex flux computations, ruling out the use of a Riemann solver. 
 An alternative is to use an approximate Riemann solver, a well-established approach for single-phase flows, while deriving a consistent discretization 
 scheme for the non-conservative terms \cite{Li_2004,Abgrall_2002}. 
 % approximation for the treatment of the non-conservative terms can lead to failure in computing the numerical solution \cite{Abgrall_2002}.
@@ -150,7 +149,7 @@ If the viscosity is not large enough, the resulting entropy production will not 
 may create a train of oscillations in the solution, radiating away from the shock/viscous layer, and whose gradients will indeed attempt to produce 
 an entropy production equivalent to that of the shock jump (i.e., fluctuating kinetic energy in place of fluctuating molecular energy). 
 On the other hand, too much viscosity will dilute and smooth out the shock region. \tcr{I had to delete a lot of the text you copy-pasted from the other article;
-we cannot just have the same text. Even if the reviewers are different, once published, we look like lazy fools!}
+we cannot just have the same text. Even if the reviewers are different, once published, we look like lazy fools!} \tcb{ok}
  % One needs to properly set the viscosity coefficient along with the jump conditions for the 
 % given mesh size in order to produce a monotonic solution increase through the viscous layer with as little smearing as possible, but with entropy production 
 % matching that of the true shock.
@@ -205,9 +204,9 @@ This latter point is the crux of this paper.
 %
 The remainder of the paper is as follows. In \sct{sec:7-equ-model}, the Seven-Equation two-phase flow Model (SEM) is recalled along with its main 
 physical and mathematical properties, and the viscous regularization derived in \cite{Marco_paper_sem}. Then, all-Mach flow viscosity coefficients are derived 
-by following the same methodology as in \cite{DelchiniCompFluid2014-euler}. In \sct{sec:disc}, the temporal and spatial discretization methods are presented. 
-Our theoretical approach is illustrated in \sct{sec:results} with one-dimensional numerical results. The technique has been implemented in the nuclear 
-reactor safety system code RELAP-7 \cite{Berry_2014} and some of the numerical illustrations were generated with RELAP-7.
+in \sct{sec:visc-def} by following the same methodology as in \cite{DelchiniCompFluid2014-euler}. In \sct{sec:disc}, the temporal and spatial discretization methods are presented. 
+Our theoretical approach is first illustrated in \sct{sec:results} with one-dimensional numerical results obtained with a Moose-based in-house code. Then, the technique has been implemented in the nuclear 
+reactor safety system code RELAP-7 \cite{Berry_2014} and some of the numerical illustrations were generated with it.
 Finally, we conclude in \sct{sec:conclusion}.
 %
 
@@ -1004,7 +1003,7 @@ Then, the same shock tube problem is considered but with infinite relaxation coe
 Finally, two-phase flow tests through a converging-diverging nozzle are considered in \sct{sec:1d-results-nozzle}. 
 
 For the second set of numerical results presented in \sct{sec:1d-results-relap-7}, we implemented the entropy-viscosity method presented here in the system code RELAP-7 \cite{Berry_2014} that is the next generation nuclear system safety analysis code being developed at the Idaho National Laboratory. RELAP-7 is a Moose-based application and employs state-of-the-art numerical method to ensure high-order accuracy of the numerical solutions using continuous Finite Element Method. The entropy-viscosity method is therefore a good candidate to stabilize the Seven-Equation Model that is used to simulate two-phase flows in Light-Water Nuclear Reactors. 
-\tcr{need to say a couple of nice things about relap7, what does it do, etc. I am sure you can grab a couple of introduction sentence from a note that ray wrote on relap7....} 
+\tcr{need to say a couple of nice things about relap7, what does it do, etc. I am sure you can grab a couple of introduction sentence from a note that ray wrote on relap7....} \tcb{done}
 These tests are prototypical of situations found in accident scenarios for nuclear reactors: first, a two-phase flow water hammer problem is simulated; then a hydrostatic test 
 where phases circulate in opposite directions is computed; finally, steady-state for a Boiling Water Reactor (BWR). 
 
@@ -1142,7 +1141,7 @@ cells  & L$_1$ norm  & L$_1$ rate   & L$_2$ norm & L$_2$ rate  \\ \hline
 The theoretical convergence rates match the convergence rates computed from the numerical solutions as shown in \tbl{tbl:conv_rate_norm}, which denotes a  
 correct behavior of the EVM in this test.
 
-\tcr{so, where do you test for the 2 options for beta max???? as stated in a remark in the theory section???}
+\tcr{so, where do you test for the 2 options for beta max???? as stated in a remark in the theory section???} \tcb{I think I will just add a remark}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Shock tube with two independent fluids}\label{sec:shock-tube-two-indep-fluids}
@@ -1617,7 +1616,7 @@ The phasic viscosity coefficients $\mu_k$ and $\kappa_k$ are peaked in the vicin
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 We now present results of typical engineering problems obtained with the system code RELAP-7 \cite{Berry_2014} with the objective of testing capabilities of the Entropy Viscosity Method when computing typical reactor flows: a hydrostatic test, a two-phase flow water-hammer and a Boiling Water Reactor (BWR).
-\tcb{Shoudl we add a few lines about R-7?} \tcr{earlier, see my other remark}
+\tcb{Shoudl we add a few lines about R-7?} \tcr{earlier, see my other remark} \tcb{done}
 %The numerical results were obtained with the system code RELAP-7 that implements the single- and two-phase flow models described in \sct{sct:model} using the spatial and temporal discretization techniques \sct{sec:spatial-disc} (BDF2 and linear test functions).
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1751,21 +1750,21 @@ The numerical steady-state solutions presented in \fig{fig:hydrostatic--variable
 \end{figure}
 %
 The phasic viscosity coefficients $\mu_k$ and $\kappa_k$ are very small compare to the first-order viscosity coefficients denoted by the subscript $max$: the entropy production is very small as the phasic pressure, velocity and temperature profiles are smooth as observed in \fig{fig:hydrostatic--variables}. The phasic viscosity coefficient for the volume fraction equation are shown in \fig{fig:hydrostatic--beta} and are peaked around $x=0.5 \ m$ at the location of the discontinuity seen in the volume fraction profile in \fig{fig:hydrostatic--vf}.
-\tcb{Do we need to add plots of the transient solution?}  \tcr{do they look good????}
+\tcb{Do we need to add plots of the transient solution?}  \tcr{do they look good????}\tcb{I think they look ok}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Steady-state numerical solution of a Water Boiling Reactor (BWR)}\label{sec:bwr}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\tcr{status???}
-
+\tcr{status???} \tcb{still working on it}
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions and future work}\label{sec:conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\tcr{not read yet but looks too short}
+\tcr{not read yet but looks too short} \tcb{done}
 
 %We have derived a viscous regularization for the hyperbolic Seven-Equation two-phase flow Model. The regularization ensures positivity of the entropy residual, 
 %uniqueness of the numerical solution for concave physical phasic entropy functions $s_k$, and is consistent with the viscous regularization derived for 
