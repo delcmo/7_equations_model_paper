@@ -41,5 +41,5 @@ Plots
 *.pdf
 
 # allow for PDF files
-!.\7-equ-theory-paper\review\*.pdf
-!./7-equ-theory-paper/review/*.pdf
+!\7-equ-theory-paper\review\*.pdf
+!/7-equ-theory-paper/review/*.pdf
