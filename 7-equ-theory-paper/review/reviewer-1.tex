@@ -1,0 +1,224 @@
+\documentclass{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath,amssymb}
+% more math
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsbsy}
+%\usepackage{dtklogos}
+
+\usepackage{color}
+\newcommand{\mt}[1]{\marginpar{\small #1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% new commands
+\newcommand{\nc}{\newcommand}
+% operators
+\renewcommand{\div}{\vec{\nabla}\! \cdot \!}
+\newcommand{\grad}{\vec{\nabla}}
+% latex shortcuts
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bal}{\begin{align}}
+\newcommand{\eali}{\end{align}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+% DGFEM commands
+\newcommand{\jmp}[1]{[\![#1]\!]}                     % jump
+\newcommand{\mvl}[1]{\{\!\!\{#1\}\!\!\}}             % mean value
+\newcommand{\keff}{\ensuremath{k_{\textit{eff}}}\xspace}
+% shortcut for domain notation
+\newcommand{\D}{\mathcal{D}}
+% vector shortcuts
+\newcommand{\vo}{\vec{\Omega}}
+\newcommand{\vr}{\vec{r}}
+\newcommand{\vn}{\vec{n}}
+\newcommand{\vnk}{\vec{\mathbf{n}}}
+\newcommand{\vj}{\vec{J}}
+% extra space
+\newcommand{\qq}{\quad\quad}
+% common reference commands
+\newcommand{\eqt}[1]{Eq.~(\ref{#1})}                     % equation
+\newcommand{\fig}[1]{Fig.~\ref{#1}}                      % figure
+\newcommand{\tbl}[1]{Table~\ref{#1}}                     % table
+
+\newcommand{\ud}{\,\mathrm{d}}
+
+\newcommand{\tcr}[1]{\textcolor{red}{#1}}
+\newcommand{\tcb}[1]{\textcolor{blue}{#1}}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\bibliographystyle{elsarticle-num}
+\begin{center}
+{ \Large Answers to Reviewer \#1}
+\end{center}
+
+\bigskip
+
+\noindent Ms. Ref. No.: JOMP-D-15-00204\\
+Title: ``Viscous Regularization for the Non-equilibrium Seven-Equation Two-Phase Flow Model', \\
+{\it Springer Journal of Scientific Computing}\\
+
+\bigskip
+\bigskip
+
+{\color{blue}
+Viscous regularization of hyperbolic conservation laws is a meaningful approach to stabilize
+the numerical discretization of such problems. In the present manuscript the authors derive
+a viscous regularization for a two-phase model following previous work by Guermond and
+Popov for a single-phase 
+uid. The basic idea is to design regularization terms such that
+the entropy residuals (corresponding to the physical entropy and Harten's generalized
+entropies) are positive. For scalar problems in conservative form it can be proven that this
+ensures uniqueness of the weak solution. Therefore, positivity of the entropy residuals is
+considered a useful property also for systems.
+The subject can be considered very interesting and relevant. The presentation is clear
+and the analysis is sound. However, some issues are not properly addressed and the
+presentation of the numerical results needs to be improved before I can recommend this
+paper for publication.}
+
+\bigskip
+
+
+{\color{blue}
+1. The hyperbolic system (1) corresponding to the seven-equation two-phase ow model
+is not in conservative form because of the gradients $\nabla \alpha_k$ in (1a), (1c) and (1d).
+Therefore classical results from the theory of conservation laws cannot be directly
+applied to the present system. Based on the DLM theory [2] the classical definitions
+of a weak solution and the entropy solution, respectively, can be extended for quasi-
+conservative problems introducing a path, see [3, 4, 2]. Existence of a solution to
+a problem in non-conservative form has been investigated in [5]. In [6] existence of
+a solution to the Riemann problem has been verified. In particular, shock waves
+are influenced by the path since it enters the generalized Rankine-Hugoniot jump
+conditions, see [4]. Note that rarefaction waves and contact discontinuities are not
+affected by the choice of the path. It would be interesting for the reader to know
+what notion of weak solution and entropy solution is applied here.}
+
+\bigskip
+
+
+{\color{blue}
+2. In the abstract, see page 1, line 20, the authors claim that regularization ensures
+uniqueness of the weak solution. No evidence is given in the manuscript, i.e., neither
+a reference nor a proof, that justifies this statement. For scalar problems in 
+conservative form it is well-known that uniqueness is ensured if an entropy inequality
+holds for all entropy-entropy flux pairs. However, the problem at hand is not in
+conservative form. See also the first remark.}
+
+\bigskip
+
+
+{\color{blue}
+3. In (3) the authors give a particular choice for the interfacial pressure and velocity.
+It should be mentioned that other choices are considered in the literature for which
+the second law of thermodynamics can be verified, see e.g. [7].}
+
+\bigskip
+
+
+{\color{blue}
+4. On page 5, l. 34-37, it should be mentioned that hyperbolicity also requires a full
+set of linearly independent (left/right) eigenvectors. For the considered system this
+only holds true if the non-resonance condition is satisfied, see [1].
+}
+
+\bigskip
+
+
+{\color{blue}
+5. In view of my first remark it would be interesting to know whether the field associated
+to the eigenvalue $\lambda_{3+dim}$ in (6) is linearly degenerated. In this case the jump in $\alpha$
+corresponds to a contact discontinuity.
+}
+
+\bigskip
+
+
+{\color{blue}
+6. For the numerical computations in Section 5.2 the stiffened gas law (32) has to be
+modified to account for the heat of formation $q_k$.}
+
+\bigskip
+
+
+{\color{blue}
+7. For both computations presented in Section 5 the authors should provide more 
+information on the discretization, e.g., the type of scheme (FVM/DG, explicit/implicit)
+and its main ingredients. In particular, the discretization of the non-conservative
+terms in (1) is of interest. Furthermore, the spatial/temporal dicretization and the
+CFL number should be mentioned.}
+
+\bigskip
+
+
+{\color{blue}
+8. For both test cases it would be interesting to investigate grid convergence because the
+chosen regularization terms are grid-dependent and vanish with increasing resolution,
+i.e., stabilization by viscous regularization is successively reduced. In particular, the
+grid convergence study is recommended for the shock tube problem because the
+numerical results show a severe smearing for both the contact wave and the shock
+wave.}
+
+\bigskip
+
+
+{\color{blue}
+9. Since the authors only give the initial data for velocity, pressure and temperature,
+the authors should also provide a caloric equation of state to compute the density,
+i.e., $T_k$.}
+
+\bigskip
+
+
+{\color{blue}
+10. The authors verified positivity of the entropy residual. Therefore it would be 
+interesting to see whether the numerical scheme maintains this property. Therefore I
+would be interested to see plots of the numerical entropy residual to check whether
+it remains positive.}
+
+\bigskip
+
+
+{\color{blue}
+11. Besides the two computations presented here I would like to recommend further
+numerical tests exhibiting stronger variations in the volume fractions and the density, 
+e.g., a shock tube problem for a water-gas configuration with 
+$(\rho, u P, \alpha)_{water} = (1000kg.m^3, 0m/s, 10^5Pa, 0:99)$ and 
+$(\rho, u P, \alpha)_{gas}   = (0.2 kg.m^3, 0m/s, 2000Pa, 0:99)$,
+i.e., the initial states are almost ``pure'' states of either water or gas, with material
+parameters as given in [8].}
+
+\bigskip
+
+
+{\color{blue}
+12. In the conclusion, see page 23, line 41/42 the authors claim that the regularization
+ensures uniqueness of the numerical solution. Since the authors do not give a 
+uniqueness proof this statement seems to be too strong and should be rephrased. See also
+my first and second remark.}
+
+\bigskip
+
+
+{\color{blue}
+}
+
+\bigskip
+
+
+{\color{blue}
+}
+
+\bigskip
+
+
+\end{document}
+
