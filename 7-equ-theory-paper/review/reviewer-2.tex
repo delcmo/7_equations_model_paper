@@ -1,0 +1,159 @@
+\documentclass{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath,amssymb}
+% more math
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsbsy}
+%\usepackage{dtklogos}
+
+\usepackage{color}
+\newcommand{\mt}[1]{\marginpar{\small #1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% new commands
+\newcommand{\nc}{\newcommand}
+% operators
+\renewcommand{\div}{\vec{\nabla}\! \cdot \!}
+\newcommand{\grad}{\vec{\nabla}}
+% latex shortcuts
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bal}{\begin{align}}
+\newcommand{\eali}{\end{align}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\ben}{\begin{enumerate}}
+\newcommand{\een}{\end{enumerate}}
+% DGFEM commands
+\newcommand{\jmp}[1]{[\![#1]\!]}                     % jump
+\newcommand{\mvl}[1]{\{\!\!\{#1\}\!\!\}}             % mean value
+\newcommand{\keff}{\ensuremath{k_{\textit{eff}}}\xspace}
+% shortcut for domain notation
+\newcommand{\D}{\mathcal{D}}
+% vector shortcuts
+\newcommand{\vo}{\vec{\Omega}}
+\newcommand{\vr}{\vec{r}}
+\newcommand{\vn}{\vec{n}}
+\newcommand{\vnk}{\vec{\mathbf{n}}}
+\newcommand{\vj}{\vec{J}}
+% extra space
+\newcommand{\qq}{\quad\quad}
+% common reference commands
+\newcommand{\eqt}[1]{Eq.~(\ref{#1})}                     % equation
+\newcommand{\fig}[1]{Fig.~\ref{#1}}                      % figure
+\newcommand{\tbl}[1]{Table~\ref{#1}}                     % table
+
+\newcommand{\ud}{\,\mathrm{d}}
+
+\newcommand{\tcr}[1]{\textcolor{red}{#1}}
+\newcommand{\tcb}[1]{\textcolor{blue}{#1}}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\bibliographystyle{elsarticle-num}
+\begin{center}
+{ \Large Answers to Reviewer \#2}
+\end{center}
+
+\bigskip
+
+\noindent Ms. Ref. No.: JOMP-D-15-00204\\
+Title: ``Viscous Regularization for the Non-equilibrium Seven-Equation Two-Phase Flow Model', \\
+{\it Springer Journal of Scientific Computing}\\
+
+\bigskip
+\bigskip
+
+{\color{blue}
+After the recent work by Guermond and Popov where a general class of viscous
+regularizations of compressible Euler equations is investigated, the present work
+proposes an extension in the case of the non-equilibrium seven-equation two-
+phase flow model. To address such an issue, the authors introduce a general
+viscosity within the adopted model. Then, they derive the entropy evolution
+law, now perturbed by the additional viscosity. By adopting a relevant defini-
+tion of the additional viscosity terms, the authors claim that a minimum entropy
+principle is satisfied. This study is completed by a chapman-Enskog extension
+to get the associated five-equation model in the limit of infinite relaxation co-
+efficients. The analysis is achieved by considering the incompressible regime
+governed by low Mach number. The authors claim that the adopted viscosity
+regularization does not modify the required incompressible regime. Finally, nu-
+merical illustrations are displayed in order to attempt to illustrate the relevance
+of the viscosity regularizations.
+
+My opinion about this work is not good at all since this paper looks like a poor
+extension of the work by Guermond and Popov.}
+
+We disagree with your assessment. \tcr{add all the things we learn thanks to reviewer \#1; 
+add than extending to 2-phase flow is by far not a small extension because of everything
+reviewer \# 1}
+\bigskip
+
+
+
+
+{\color{blue}
+1. The main point of this work concerns the derivation of the minimum
+entropy principle. Here, the establishment of this property is not clear
+at all. I think that the proof is incomplete. For instance, Guermond
+and Popov need (and prove) the positiveness of the density. I think that
+the positiveness of partial density is here needed but no proof is given.
+Moreover, I am convinced that $\alpha_k \in [0, 1]$ is also necessary and must be
+proved. I urge the author to read carefully the paper by Guermond and
+Popov and reconsider the establishment of their results.}
+
+\tcr{we can cite Guermond for the phasic regularized continuity equation and show
+than $\alpha \rho$ is non-negative}. Then we can work on the alpha equations (both of them) to show
+that  $\alpha_k \in [0, 1]$. From this, we conclude that $\rho_k$ is non-negative.
+\bigskip
+
+
+{\color{blue}
+2. Several times, thew author speak about uniqueness of the numerical solution
+. I don’t understand the meaning of these words. Moreover, this
+paper does not contains numerical derivations. Page 7, the authors refer
+to Leveque (pages 27-28 in Numerical Methods for Conservation Laws),
+but these two pages in the leveque’s book coincides with the introduction
+of weak solutions and entropy inequalities. Nothing about uniqueness of
+the numerical solution.}
+
+\tcr{Using Leveque for everything is a mistake. We will correct this using
+piece of the answer we gave to reviewer \#1}
+\bigskip
+
+
+{\color{blue}
+3. The numerical schemes, used to get the numerical illustrations, are not
+specified. However, the derivation of a numerical scheme to approximate
+the weak solution of the model under consideration is a very difficult task.}
+
+\tcr{We will add this}
+\bigskip
+
+
+{\color{blue}
+4. The presentation of the entropy residual is absolutely not relevant. In
+section 3.2, I understand the opportunity to omit the underlined terms.
+However, the equation (15) turns out to be wrong. The authors have to
+introduce a specific notation to designate the entropy residual.}
+
+\tcr{This is where the reviewer really shows he doesn't get it}
+\bigskip
+
+
+{\color{blue}
+In addition, I think that these results are not suitable to be published in Journal
+of Scientific Computing. As a consequence, I do not recommend the publication
+of this work.}
+
+\tcr{Pure BS}
+\bigskip
+
+
+\end{document}
+

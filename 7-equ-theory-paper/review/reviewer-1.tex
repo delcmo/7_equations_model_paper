@@ -74,17 +74,18 @@ Title: ``Viscous Regularization for the Non-equilibrium Seven-Equation Two-Phase
 Viscous regularization of hyperbolic conservation laws is a meaningful approach to stabilize
 the numerical discretization of such problems. In the present manuscript the authors derive
 a viscous regularization for a two-phase model following previous work by Guermond and
-Popov for a single-phase 
-uid. The basic idea is to design regularization terms such that
+Popov for a single-phase fluid. The basic idea is to design regularization terms such that
 the entropy residuals (corresponding to the physical entropy and Harten's generalized
 entropies) are positive. For scalar problems in conservative form it can be proven that this
 ensures uniqueness of the weak solution. Therefore, positivity of the entropy residuals is
 considered a useful property also for systems.
+
 The subject can be considered very interesting and relevant. The presentation is clear
 and the analysis is sound. However, some issues are not properly addressed and the
 presentation of the numerical results needs to be improved before I can recommend this
 paper for publication.}
 
+Thank you for your very thorough review. 
 \bigskip
 
 
@@ -102,6 +103,11 @@ conditions, see [4]. Note that rarefaction waves and contact discontinuities are
 affected by the choice of the path. It would be interesting for the reader to know
 what notion of weak solution and entropy solution is applied here.}
 
+\tcr{Marco and I think we have a pretty good handle on this. It will include
+citing the proper references and the relevant theorems. We must remember to thank the reviewer
+for pointing this out to us. This was invaluable and improved the quality of the manuscript.
+We believe that the reviewer is actually giving us the answer to his question. In a very
+polite way, he is guiding us towards the answer.}
 \bigskip
 
 
@@ -113,6 +119,7 @@ conservative form it is well-known that uniqueness is ensured if an entropy ineq
 holds for all entropy-entropy flux pairs. However, the problem at hand is not in
 conservative form. See also the first remark.}
 
+\tcr{Here too we will need to cite the proper theorems from the list of references giving to us}
 \bigskip
 
 
@@ -121,6 +128,7 @@ conservative form. See also the first remark.}
 It should be mentioned that other choices are considered in the literature for which
 the second law of thermodynamics can be verified, see e.g. [7].}
 
+\tcr{Easy to do. We will add another choice as an aexmaple and cite [7]}
 \bigskip
 
 
@@ -130,6 +138,7 @@ set of linearly independent (left/right) eigenvectors. For the considered system
 only holds true if the non-resonance condition is satisfied, see [1].
 }
 
+\tcr{Another great remark. We will add this}
 \bigskip
 
 
@@ -139,6 +148,8 @@ to the eigenvalue $\lambda_{3+dim}$ in (6) is linearly degenerated. In this case
 corresponds to a contact discontinuity.
 }
 
+\tcr{We should verify this. We need to ask Ray for the eigenvectors of the SEM if he has them and them check that
+we have a contact discontinuity}
 \bigskip
 
 
@@ -146,6 +157,7 @@ corresponds to a contact discontinuity.
 6. For the numerical computations in Section 5.2 the stiffened gas law (32) has to be
 modified to account for the heat of formation $q_k$.}
 
+Thank you for pointing out this. It was a typo. We fully agree with you.
 \bigskip
 
 
@@ -156,6 +168,9 @@ and its main ingredients. In particular, the discretization of the non-conservat
 terms in (1) is of interest. Furthermore, the spatial/temporal dicretization and the
 CFL number should be mentioned.}
 
+We had forgotten to give a short paragraph explaining our space/time discretization.
+Actually, it was present in a previous version and we removed it by mistake. It has 
+been added now.
 \bigskip
 
 
@@ -167,6 +182,7 @@ grid convergence study is recommended for the shock tube problem because the
 numerical results show a severe smearing for both the contact wave and the shock
 wave.}
 
+\tcr{Marco will run finer grid simulations for both problems}
 \bigskip
 
 
@@ -175,6 +191,7 @@ wave.}
 the authors should also provide a caloric equation of state to compute the density,
 i.e., $T_k$.}
 
+Thank you for pointing out this. It was a typo. We fully agree with you.
 \bigskip
 
 
@@ -184,6 +201,7 @@ interesting to see whether the numerical scheme maintains this property. Therefo
 would be interested to see plots of the numerical entropy residual to check whether
 it remains positive.}
 
+\tcr{Marco will re-run some cases and output that value. Make sure you do not output its absolute value}
 \bigskip
 
 
@@ -196,6 +214,7 @@ $(\rho, u P, \alpha)_{gas}   = (0.2 kg.m^3, 0m/s, 2000Pa, 0:99)$,
 i.e., the initial states are almost ``pure'' states of either water or gas, with material
 parameters as given in [8].}
 
+\tcr{Marco will run such a case}
 \bigskip
 
 
@@ -205,6 +224,7 @@ ensures uniqueness of the numerical solution. Since the authors do not give a
 uniqueness proof this statement seems to be too strong and should be rephrased. See also
 my first and second remark.}
 
+\tcr{This will be corrected once we answer the reviewer's remarks \#1+2.}
 \bigskip
 
 
