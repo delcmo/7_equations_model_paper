@@ -50,6 +50,7 @@
 
 \newcommand{\tcr}[1]{\textcolor{red}{#1}}
 \newcommand{\tcb}[1]{\textcolor{blue}{#1}}
+\newcommand{\tcg}[1]{\textcolor{green}{#1}}
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -68,6 +69,10 @@ Title: ``Viscous Regularization for the Non-equilibrium Seven-Equation Two-Phase
 {\it Springer Journal of Scientific Computing}\\
 
 \bigskip
+
+In {\color{blue}blue} are reviewer's comments, in black are our answers, in {\color{red}red} are Jean's comments,
+and in {\color{green}green} are Marco's comments.
+
 \bigskip
 
 {\color{blue}
@@ -90,7 +95,7 @@ My opinion about this work is not good at all since this paper looks like a poor
 extension of the work by Guermond and Popov.}
 
 We disagree with your assessment. \tcr{add all the things we learn thanks to reviewer \#1; 
-add than extending to 2-phase flow is by far not a small extension because of everything
+extending to 2-phase flow is by far not a small extension because of everything
 reviewer \# 1}
 \bigskip
 
@@ -108,8 +113,9 @@ proved. I urge the author to read carefully the paper by Guermond and
 Popov and reconsider the establishment of their results.}
 
 \tcr{we can cite Guermond for the phasic regularized continuity equation and show
-than $\alpha \rho$ is non-negative}. Then we can work on the alpha equations (both of them) to show
-that  $\alpha_k \in [0, 1]$. From this, we conclude that $\rho_k$ is non-negative.
+than $\alpha \rho$ is non-negative. Then we can work on the alpha equations (both of them) to show
+that  $\alpha_k \in [0, 1]$. From this, we conclude that $\rho_k$ is non-negative.} \tcg{Showing that $\alpha \rho$ is
+non-negative is trivial based on Guermond's work. Showing, however, that $\rho$ is non-negative seems trickier.}
 \bigskip
 
 
@@ -123,7 +129,8 @@ of weak solutions and entropy inequalities. Nothing about uniqueness of
 the numerical solution.}
 
 \tcr{Using Leveque for everything is a mistake. We will correct this using
-piece of the answer we gave to reviewer \#1}
+piece of the answer we gave to reviewer \#1} \tcg{Once again, 'entropy solution' and
+not 'uniqueness of the weak solution'.}
 \bigskip
 
 
@@ -142,7 +149,8 @@ section 3.2, I understand the opportunity to omit the underlined terms.
 However, the equation (15) turns out to be wrong. The authors have to
 introduce a specific notation to designate the entropy residual.}
 
-\tcr{This is where the reviewer really shows he doesn't get it}
+\tcr{This is where the reviewer really shows he doesn't get it} \tcg{We can still add 
+a specific notation for the entropy residual as he requested it.}
 \bigskip
 
 
