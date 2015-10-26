@@ -178,7 +178,9 @@ denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int
 %
 The interfacial variables $P_{int}$ and $u_{int}$ control the phase dynamics at the macro level because they specify velocity transport
 and forces acting upon volume fraction gradients, while the interfacial variables $\bar{P}_{int}$ and $\bar{u}_{int}$, which specify 
-average transport velocity and pressure force, control the phase dynamics at the micro level.  Following \cite{SEM}, the pressure and 
+average transport velocity and pressure force, control the phase dynamics at the micro level.  Note that the definitions of the interfacial variables $P_{int}$ and 
+$u_{int}$ are not unique and others choices can be found in \cite{Saleh_phd_thesis} for instance. The results presented in this paper apply to \eqt{eq:liq-7-eqn-sect5} with any definitions for the interfacial variables
+as long as the entropy inequality given in \eqt{eq:tot-ent-res-sct4} holds. Following \cite{SEM}, the pressure and 
 velocity relaxation coefficients, $\mu_P$  and $\lambda_u$ respectively, are function of the acoustic 
 impedance $Z_k = \rho_k c_k$ and the specific interfacial area $A_{int}$ as shown in \eqt{eq:relaxation_coeff}.
 %
@@ -228,8 +230,12 @@ at the interfacial velocity $\mbold u_{int}$. These waves (eigenvalues of the Ja
 \end{align}
 %
 where $\bar{\mbold n}$ is an unit vector pointing to a given direction. The eigenvalues given in \eqt{eq:eigenvalues} are unconditionally 
-real (as long as the equation of state yields a real-valued sound speed). Having real eigenvalues is an extremely valuable property for 
-the development of numerical methods since it is required of well-posed hyperbolic systems. 
+real (as long as the equation of state yields a real-valued sound speed) but not distinct. The seven-equation model admits a set of linearly
+independent eigenvectors under the \emph{non-resonance condition} $(u_k-u_{int})^2 \neq c_k^2$ for each phase $k$ (see proposition 2.1 in \cite{coquel_herard})
+which ensures hyperbolicity.
+Having real eigenvalues along with a set of linearly independent
+eigenvectors are extremely valuable property for 
+the development of numerical methods since it is required of well-posed hyperbolic systems.
 
 One may relax the Seven-Equation two-phase flow Model to
 the ill-posed classical six-equation model, where a single pressure 
@@ -1021,13 +1027,25 @@ When the pressure and velocity relaxation parameters are large, \eqts{eq:sev_equ
 become equivalent to the regularized five-equation model given by \eqts{eq:liq-5-eqn} and for which 
 the phasic pressures and velocities are equal.
 
-
 %
 We illustrate the ability of the proposed viscous regularization to stabilize the 
-seven-equation two-phase flow equations using two test cases.
+seven-equation two-phase flow equations using two test cases. The seven-equation model given in \eqt{eq:liq-7-eqn-sect5} is discretized
+using a \emph{continuous} Galerkin finite element method within the MOOSE multiphysics framework \cite{Moose}. The temporal derivatives are evaluated
+with the second-order accurate backward different temporal integrator BDF2 \cite{bdf2}. A Jacobian-free Newton Krylov (JFNK) method solves for the solution
+at the end of each time step. An approximate full Jacobian matrix is used as a preconditioner and is computed by finite difference 
+(this is one of the options available in MOOSE and is reasonably efficient for 1-D simulations).
+
 The first test is a shock tube configuration where we show that the viscous regularization prevents undershoots 
-and overshoots near shocks and discontinuities. 
-In the second test, a multi-Mach mixture flow case is considered.
+and overshoots near shocks and discontinuities. The second set of tests aims at illustrating the low-Mach asymptotic limit study performed in \sct{sec:low-Mach} by investigating the steady-state solution
+of a two-phase flow in a converging-diverging nozzle. In all tests, the phasic pressure is computed using the Stiffened Gas equation of state \cite{SGEOS}:
+%
+\begin{align}\label{eq:sgeos}
+P_k = (\gamma_k-1) \rho_k( e_k -q_k) -\gamma_k P_{\infty,k} \text{ and }
+\rho_k = \frac{P_k+\gamma_k P_{\infty,k}}{C_{v,k} (\gamma_k-1)T_k} \ ,
+\end{align}
+%
+where the parameters $\gamma_k$, $q_k$ and $P_{\infty,k}$ are fluid-dependent and will be specified for each test. Note that the Ideal gas law is recovered by setting 
+$q_k = P_{\infty,k}=0$ in \eqt{eq:sgeos}.
 % The purpose of the second test is to illustrate the low-Mach asymptotic limit performed in \sct{sec:low-Mach} and highlights 
 % effects of ill-scaled dissipative terms when simulating low-Mach flows (\sct{sec:second-test}).
 
@@ -1036,7 +1054,7 @@ In the second test, a multi-Mach mixture flow case is considered.
 %-----------------------------------------------------------
 
 In this example, we set the relaxation coefficients $\mu_P$ and $\lambda_u$ to large values; the pressures and velocities in each phase should become identical. 
-We consider two fluids, denoted by the subscripts $1$ and $2$, and employ the ideal gas law, $P_k=(\gamma_k-1) \rho_k e_k$, with the following parameters $\gamma_1=3$ and $\gamma_2=1.4$. 
+We consider two fluids, denoted by the subscripts $1$ and $2$, and employ the ideal gas law with the following parameters $\gamma_1=3$ and $\gamma_2=1.4$. 
 The numerical illustration consists of a 1-D shock tube of length 1 containing two-phase mixtures separated by a membrane placed at $x=0.5$. The initial left/right values of the pressures are
  $(P_{k,left}=10)$ and $(P_{k,right}=1)$ (for $k=1,2$). The initial density and volume fraction are uniform and set to $\rho_1=10$, $\rho_2=1$ and $\alpha = 0.5$, respectively. 
 Both fluids are initially at rest. The relaxation coefficients $\mu_P$ and $\lambda_u$ are computed from \eqt{E-R:86} and \eqt{E-R:85}, respectively, 
@@ -1133,15 +1151,14 @@ Navier-Stokes regularization (no artificial viscosity terms in the continuity eq
 %-----------------------------------------------------------
 %
 To illustrate the low-Mach asymptotic study presented in \sct{sec:low-Mach}, a 1-D converging-diverging nozzle problem is considered 
-for a flow where the relaxation coefficients $\mu_P$ and $\lambda_u$ are set to zero (independent phases).
+for a two-phase flow where the relaxation coefficients $\mu_P$ and $\lambda_u$ are set to zero (independent phases).
 %
 The variable area expression for the nozzle is given by $A(x) = 1 + \tfrac{1}{2} \cos(2 \pi x / L)$ with length $L=1\ m$. 
 At the inlet, the stagnation pressure and temperature are set to $P_0 = 1$ {\it MPa} and $T_0 = 453\ K$, respectively. 
 At the outlet, only the static pressure is specified: $P_s = 0.5$ {\it MPa}. 
 Initially, the two phases are at rest; their temperatures are uniform and equal to their stagnation temperatures;  their pressures 
 linearly decrease from the stagnation pressure inlet value to the static pressure outlet value. The volume fraction $\alpha_k$ is set to $0.5$.
-% and remains constant until steady-state is reached.
-The stiffened gas equation of state is used to model the liquid and vapor with the parameters provided in \tbl{tbl:stff_gas_eos}.
+The stiffened gas equation of state, \eqt{eq:sgeos}, is used to model the liquid and vapor with the parameters provided in \tbl{tbl:stff_gas_eos}.
 %
 \begin{table}[!htbp]
 \begin{center}
@@ -1149,7 +1166,7 @@ The stiffened gas equation of state is used to model the liquid and vapor with t
 \label{tbl:stff_gas_eos}
 \begin{tabular}{|c|c|c|c|c|}
  \hline
-\text{fluid}      & $\gamma$ & $C_v$ $(J.kg^{-1}.K^{-1})$ & $P_\infty$ $(Pa)$ & $q$ $(J.kg^{-1})$ \\  \hline \hline
+\text{fluid}      & $\gamma_k$ & $C_{v,k}$ $(J.kg^{-1}.K^{-1})$ & $P_{\infty,k}$ $(Pa)$ & $q_k$ $(J.kg^{-1})$ \\  \hline \hline
 liquid & 2.35     & 1816     & $10^9$                    & $-1167\ 10^3$                          \\  \hline
 vapor  & 1.43     & 1040     & 0                         & $ 2030\ 10^3$                          \\  \hline
 \end{tabular}
