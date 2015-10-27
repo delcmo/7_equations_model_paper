@@ -17,16 +17,35 @@ for single-phase flows, are employed \cite{Saurel_2001a,Saurel_2001b,Li_2004,Zei
 low-Mach asymptotic limit and deriving a consistent discretization scheme for the non-conservative terms \cite{Li_2004,Abgrall_2002}.
 
 In review of solutions to nonlinear, hyperbolic, initial boundary value problems, it is well known that, even with smooth initial data, the existence of a 
-globally smooth solution may not occur because of the nonlinearity of the flux functions. The concept of a weak
-solution is introduced to guarantee the existence of a global solution; however, the uniqueness of the solution is lost because the problem may
-allow infinitely many weak solutions.  An additional condition, the``entropy condition,'' is usually imposed to select a
-unique solution, the ``entropy solution.'' % among the infinitely many weak solutions. 
+globally smooth solution may not occur because of the nonlinearity of the flux functions. For hyperbolic conservative system of equations (HCSE), the concept of a weak
+solution was introduced by Lax \cite{Lax} to guarantee the existence of a global solution; however, the uniqueness of the solution is lost because the problem may
+allow infinitely many weak solutions.  An additional condition, the``entropy condition,'' is usually imposed to ensure convergence to an
+unique solution, the ``entropy solution''.
 Although there are several different ways of defining the entropy condition, it is generally hoped that they are all equivalent in the sense 
 that they select the same entropy solution (this can be demonstrated for Burgers equations, see \cite{Evans1998,Lellis_minimalentropy}).
 For numerical schemes, the entropy condition and solution are sought through the utilization of so-called conservative formulations of the 
 governing laws, along with the addition of an appropriately specified physical or artificial viscosity, either added directly to the governing 
 equations or implied by the discretization employed (truncation error).  That is, a regularization is selected, or built, which is consistent with the 
-entropy condition, thereby guaranteeing that the numerical computation captures the physically relevant solution.  
+entropy condition, thereby guaranteeing that the numerical computation captures the physically relevant solution. For hyperbolic non-conservative system of equations
+(HNCSE) alike the seven-equation model, the notions of weak and entropy solutions cannot be defined by the theory of Lax in the sense of distribution. Instead, the theory developed by Del Maso-Le Floch-Mariat (DLM)
+in \cite{dlm} must be used: the non-conservative products are defined as a bounded Borel 
+measure by introducing a Lipschitz family of path $\phi: [0,1] \times \mathbb{R}^n \times \mathbb{R}^n$ such that 
+$\phi(0, U_L, U_R) = U_L$ and $\phi(1, U_L, U_R) = U_R$. Generally speaking, the main idea is to specify the values of the 
+solution at points of discontinuity so that the non-conservative product admits a weak solution. In \cite{lefloch_1988,lefloch_1989}, 
+using the DLM theory, the notions of weak and entropy solutions are extended to HNCSE leading to the derivation of a generalized Rankine-Hugoniot (RH) jump condition
+that is path-dependent. Furthermore, the notions of shock, rarefaction and shocks waves were also extended to HNCSE in \cite{lefloch_liu_1993}. Also,
+it can be shown that the RH jump condition derived for HNCSE, allows to recover the RH jump condition initially developed for HCSE in \cite{Lax} which leads to
+the following observation: the case of conservative systems can be seen as a subset of non-
+conservative systems of equations. This remark is interesting in the case of the seven-equation model as it devolves to the single phase Euler equations
+when one phase disappears, which can be written under a conservative form.  
+Another approach that is of interest for this paper, consists in considering the 
+vanishing viscosity solution of a HNCSE by adding a parabolic viscous regularization function of a vanishing viscosity coefficient $\epsilon$.
+This approach was first studied by Bianchini et al. \cite{bianchini_bressan_2005} and 
+further generalized by Alouges et al. \cite{alouges_merlet_2004}. In their work, Bianchini et al. show that the solution to the 
+vanishing viscosity system is unique as $\epsilon \to 0$ (Theorem 1, page 229 in \cite{bianchini_bressan_2005}). Moreover, Le 
+Floch in \cite{lefloch_1988}, generalized the notion of entropy condition to non-conservative system of equations, in the space of 
+bounded functions of bounded variation, by introducing an entropy function and an associated entropy inequality in order to ensure convergence of the 
+numerical solution to the entropy weak solution.
 %Of course if the 
 %equations and/or methods employed are not conservative and intrinsically weak solutions are computed, it is essential to place an even greater 
 %burden of proof on the correctness of the solutions.  Even linear hyperbolic equation systems can be problematic for numerical discretization 
