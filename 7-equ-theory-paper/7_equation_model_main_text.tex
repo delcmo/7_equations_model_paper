@@ -1065,16 +1065,15 @@ P_k = (\gamma_k-1) \rho_k( e_k -q_k) -\gamma_k P_{\infty,k} \text{ and }
 %
 where the parameters $\gamma_k$, $q_k$ and $P_{\infty,k}$ are fluid-dependent and will be specified for each test. Note that the Ideal gas law is recovered by setting 
 $q_k = P_{\infty,k}=0$ in \eqt{eq:sgeos}.
-% The purpose of the second test is to illustrate the low-Mach asymptotic limit performed in \sct{sec:low-Mach} and highlights 
-% effects of ill-scaled dissipative terms when simulating low-Mach flows (\sct{sec:second-test}).
-
+%
 %----------------------------------------------------------
 \subsection{Shock tube test case}\label{sec:first-test}
 %-----------------------------------------------------------
-
+%
 In this example, we set the relaxation coefficients $\mu_P$ and $\lambda_u$ to large values; the pressures and velocities in each phase should become identical. 
 We consider two fluids, denoted by the subscripts $1$ and $2$, and employ the ideal gas law with the following parameters $\gamma_1=3$ and $\gamma_2=1.4$. 
-The numerical illustration consists of a 1-D shock tube of length 1 containing two-phase mixtures separated by a membrane placed at $x=0.5$. The initial left/right values of the pressures are
+The numerical illustration consists of a 1-D shock tube of length 1 meshed with 400 cells and containing two-phase mixtures separated by a membrane placed at $x=0.5$. 
+The initial left/right values of the pressures are
  $(P_{k,left}=10)$ and $(P_{k,right}=1)$ (for $k=1,2$). The initial density and volume fraction are uniform and set to $\rho_1=10$, $\rho_2=1$ and $\alpha = 0.5$, respectively. 
 Both fluids are initially at rest. The relaxation coefficients $\mu_P$ and $\lambda_u$ are computed from \eqt{E-R:86} and \eqt{E-R:85}, respectively, 
 along with \eqt{eq:Aint-sect4} and $A_{int}^{max}=4 \times 10^3\,m^{-1}$.
@@ -1087,61 +1086,87 @@ The viscous numerical solutions do not display any instability in the vicinity o
 because of the over-dissipative nature of the viscosity coefficients. This example shows that the viscous regularization developed in this paper can efficiently stabilize the numerical solution.
 We can also observe that the phasic pressures and velocities are indeed identical for large values of relaxation parameters.
 This example demonstrates the ability of the proposed viscous regularization to stabilize the seven-equation two-phase flow model.
-% The numerical solution does not display any instabilities. 
 %
 \begin{figure}[H]
         \centering
         \begin{subfigure}[b]{0.5\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{relaxation_two_phases_velocity_fo_lf.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_velocity_fo_lf.png}
                 \caption{Velocity}
                 \label{fig:two-phase-vel}
         \end{subfigure}%
         \begin{subfigure}[b]{0.5\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{relaxation_two_phases_density_fo_lf.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_density_fo_lf.png}
                 \caption{Density}
                 \label{fig:two-phase-density}
         \end{subfigure}
         
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{relaxation_two_phases_pressure_fo_lf.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_pressure_fo_lf.png}
                 \caption{Pressure}
                 \label{fig:two-phase-press}
         \end{subfigure}        
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{relaxation_two_phases_volume_fraction_fo_lf.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_volume_fraction_fo_lf.png}
                 \caption{Volume fraction}
                 \label{fig:two-phase-vf}
         \end{subfigure}
         \caption{Numerical solution of a two-phase flow with large relaxation coefficients at $t=0.18 \ s$.}\label{fig:two-phase}
 \end{figure}
 %
-%\tcr{could we change the legend in the plots so that it is more explicit. I'd say type 1 should be replaced with LLF, type 2 with LLF, $\beta_k=0$, type
-%3 with  LLF, $\beta_k=\kappa_k0$. Matlab takes latex style in its legend function\\}
+Because the numerical method is grid dependent, i.e. the phasic viscosity coefficients are set proportional to the grid size $h$, it is also interesting to investigate the behavior of the numerical solution as the mesh is refined specially in the
+vicinity of the contact (around $x=0.5$) and shock (around $x=0.7$) waves that display a severe smearing as shown in the density and the volume fraction profiles in \fig{fig:two-phase-density} and 
+\fig{fig:two-phase-vf}, respectively. Thus, we propose to run the same test as above on three different meshes, i.e. 200, 400 and 800 cells, and plot the resulting numerical solutions on a same figure
+for comparison. The numerical solutions of the phasic densities and the phasic volume fractions obtained on the three different meshes, are given in \fig{fig:density-mult-meshes} and \fig{fig:vf-mult-meshes}, respectively.
+%
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.95\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_density_multiple_meshes.eps}
+                \caption{Density.}
+                \label{fig:density-mult-meshes}
+        \end{subfigure}
+				\\
+        \begin{subfigure}[b]{0.95\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_vf_multiple_meshes.eps}
+                \caption{Volume fraction.}
+                \label{fig:vf-mult-meshes}
+        \end{subfigure}
+        \caption{Numerical solutions of the densities and volume fractions obtained using three different meshes (200, 400 and 800 cells) at $t=473 \ \mu s$.}\label{fig:density}
+\end{figure}
+%
+From the phasic density profiles in \fig{fig:density-mult-meshes}, it is observed that the contact and the shock waves are better resolved as the mesh is refined. In other words, 
+as the mesh is refined, the phasic viscosity coefficients vanish and the numerical solution seems to converge to a weak solution, at least formally. The same observations can be done for
+the phasic volume fraction profiles as shown in \fig{fig:vf-mult-meshes}, and was also observed for the other phasic variables, i.e. pressure and velocity (not shown).
+
 We further investigate the influence of the viscosity coefficients on the numerical solution by comparing several cases:
+%
 \begin{enumerate}
 \item all viscosity coefficients are equal, i.e., the local Lax-Friedrichs scheme already shown in \fig{fig:two-phase} (viscosity type 1), 
 \item the definitions for $\mu_k$ and $\kappa_k$ are unchanged but $\beta_k$ is set to zero (viscosity type 2). In doing so, we assess the effect 
 of the viscous stabilization in the volume fraction equation, and 
 \item the viscosity coefficients $\kappa_k$ and $\beta_k$ are set to zero while $\mu_k$ is unchanged (viscosity type 3). In doing so, no stabilization is present in the continuity equations. 
 \end{enumerate}
+%
 For each case, the density and volume fraction profiles are presented in \fig{fig:density} and \fig{fig:liq-vf}, respectively.
 %
 \begin{figure}[H]
         \centering
         \begin{subfigure}[b]{0.95\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{relaxation_vapor_density_multiple_visc.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_vapor_density_multiple_visc.png}
                 \caption{Liquid density}
                 \label{fig:liq-density}
         \end{subfigure}
 				\\
         \begin{subfigure}[b]{0.95\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{relaxation_liquid_density_multiple_visc.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_liquid_density_multiple_visc.png}
                 \caption{Vapor density}
                 \label{fig:vap-density}
         \end{subfigure}
@@ -1153,7 +1178,7 @@ in spurious oscillations in the volume fraction profile near the contact region 
 %
 \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{relaxation_liquid_vf_multiple_visc.png}
+        \includegraphics[width=\textwidth]{figures/relaxation_liquid_vf_multiple_visc.png}
         \caption{Liquid volume fraction obtained using three different viscosity types at $t=0.18 \ s$.}
         \label{fig:liq-vf}
 \end{figure}
@@ -1224,26 +1249,26 @@ for the above cases (1) and (2).
         \centering
         \begin{subfigure}[b]{0.5\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{vapor_velocity_llf_and_exact_100.png}
+                \includegraphics[width=\textwidth]{figures/vapor_velocity_llf_and_exact_100.png}
                 \caption{Velocity}
                 \label{fig:vap-phase-vel}
         \end{subfigure}%
         \begin{subfigure}[b]{0.5\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{vapor_density_llf_and_exact_100.png}
+                \includegraphics[width=\textwidth]{figures/vapor_density_llf_and_exact_100.png}
                 \caption{Density}
                 \label{fig:vap-phase-density}
         \end{subfigure}
         
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{vapor_pressure_llf_and_exact_100.png}
+                \includegraphics[width=\textwidth]{figures/vapor_pressure_llf_and_exact_100.png}
                 \caption{Pressure}
                 \label{fig:vap-phase-press}
         \end{subfigure}        
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{vapor_mach_llf_and_exact_100.png}
+                \includegraphics[width=\textwidth]{figures/vapor_mach_llf_and_exact_100.png}
                 \caption{Mach number}
                 \label{fig:vap-phase-mach}
         \end{subfigure}
@@ -1257,26 +1282,26 @@ In \fig{fig:vap-phase}, the numerical solutions obtained for the vapor phase in 
         \centering
         \begin{subfigure}[b]{0.5\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{liquid_velocity_llf_and_exact_100.png}
+                \includegraphics[width=\textwidth]{figures/liquid_velocity_llf_and_exact_100.png}
                 \caption{Velocity}
                 \label{fig:liq-phase-vel}
         \end{subfigure}%
         \begin{subfigure}[b]{0.5\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{liquid_density_llf_and_exact_100.png}
+                \includegraphics[width=\textwidth]{figures/liquid_density_llf_and_exact_100.png}
                 \caption{Density}
                 \label{fig:liq-phase-density}
         \end{subfigure}
         
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{liquid_pressure_llf_and_exact_100.png}
+                \includegraphics[width=\textwidth]{figures/liquid_pressure_llf_and_exact_100.png}
                 \caption{Pressure}
                 \label{fig:liq-phase-press}
         \end{subfigure}        
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{liquid_mach_llf_and_exact_100.png}
+                \includegraphics[width=\textwidth]{figures/liquid_mach_llf_and_exact_100.png}
                 \caption{Mach number}
                 \label{fig:liq-phase-mach}
         \end{subfigure}
