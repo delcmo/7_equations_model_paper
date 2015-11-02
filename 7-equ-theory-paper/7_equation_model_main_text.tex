@@ -252,8 +252,7 @@ where $\bar{\mbold n}$ is an unit vector pointing to a given direction. The eige
 real (as long as the equation of state yields a real-valued sound speed) but not distinct. The seven-equation model admits a set of linearly
 independent eigenvectors under the \emph{non-resonance condition} $(u_k-u_{int})^2 \neq c_k^2$ for each phase $k$ (see proposition 2.1 in \cite{coquel_herard})
 which ensures hyperbolicity.
-Having real eigenvalues along with a set of linearly independent
-eigenvectors are extremely valuable property for 
+Hyperbolicity is extremely valuable property for 
 the development of numerical methods since it is required of well-posed hyperbolic systems.
 
 One may relax the Seven-Equation two-phase flow Model to
@@ -321,14 +320,15 @@ The entropy of phase $k$ satisfies the following equation
 where $\frac{D(\cdot) }{Dt} = \partial_t (\cdot) + \mbold u_k \cdot \grad (\cdot)$ is the material derivative.
 The right-hand side of \eqt{eq:ent-eqn-7-eqn-model} is unconditionally positive or zero since all terms are squared. Furthermore, 
 the partial derivative of $s_k$ with respect to the internal energy $e_k$, denoted by $(s_e)_k$, is shown to be equal to the inverse of the temperature 
-of phase $k$, as in the case of the single phase Euler equations \cite{jlg,Marco_dissertation}.
+of phase $k$, as in the case of the single phase Euler equations \cite{jlg,Marco_dissertation}, and thus is positive.
 \eqt{eq:ent-eqn-7-eqn-model} is valid for both phases $\left\{k, j\right\}$, ensuring positivity of the total entropy equation obtained by summation over the phases:
 %
 \begin{equation}\label{eq:tot-ent-res-sct4}
 \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} = \sum_k (s_{e})_k^{-1} \alpha_k \rho_k A \left( \partial_t s_k + \mbold u_k \cdot \grad s_k \right) \geq 0  .
 \end{equation}
 %
-From a physical point of view, \eqt{eq:tot-ent-res-sct4} states that the total entropy of the system increases as a function of time. From a numerical perspective, 
+From a physical point of view, \eqt{eq:tot-ent-res-sct4} states that the total entropy of the system increases as a function of time as long as the product 
+$\alpha_k \rho_k$ remains positive. From a numerical perspective, 
 the pressure and velocity relaxation terms add dissipation to the system of equations (see \eqt{eq:ent-eqn-7-eqn-model}).
 
 Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates to the single-phase entropy equation obtained for the single-phase Euler equations \cite{SEM,Marco_dissertation}.
@@ -340,7 +340,7 @@ Note that when one phase disappears, \eqt{eq:tot-ent-res-sct4} degenerates to th
 The objective of this section is to derive a viscous regularization for the SEM presented in \sct{sec:7-equ-model}. First, we present the methodology used, 
 then derive the phasic entropy equation when accounting for the presence of the dissipative terms, and employ the resulting phasic entropy equation to prove 
 the minimum entropy principle. Finally, the scaling of the dissipative terms is investigated in the limit where the seven-equation two-phase flow model 
-degenerates to the five-equation two-phase flow model of Kapila \cite{Kapila_2001} when considering large relaxation coefficients $\mu_P$ and $\lambda_u$ \cite{dellacherie}.
+devolves to the five-equation two-phase flow model of Kapila \cite{Kapila_2001} when considering large relaxation coefficients $\mu_P$ and $\lambda_u$ \cite{dellacherie}.
 %
 %---------------------------------------------------------------------------------
 \subsection{Methodology}
@@ -349,8 +349,21 @@ degenerates to the five-equation two-phase flow model of Kapila \cite{Kapila_200
 We wish to obtain a viscous regularization for the Seven-Equation two-phase flow Model given in \eqts{eq:liq-7-eqn-sect5} using the same methodology 
 employed for the Euler equations \cite{jlg,Marco_paper_low_mach}. The method consists in adding dissipative terms to the system of equations under 
 consideration and in deriving an entropy equation for the {\it regularized} system. By adequately choosing these artificial viscous fluxes, one can 
-show that the sign of the entropy production remains positive, ensuring uniqueness of the numerical solution (pages 27-28 in \cite{Leveque}). Because 
-of the addition of the dissipative terms, the entropy equation is modified and will contain additional terms of yet unknown sign. By carefully choosing 
+show that the sign of the entropy equation remains positive, resulting in an \emph{entropy inequality} of the form $\frac{d s_k}{dt} \geq 0$. When considering 
+HCSE alike Euler equations, such an entropy inequality serves as an \emph{entropy condition} and ensures convergence of the numerical solution to
+the physical or entropy solution \cite{Lax}. For HNCSE, the theory developed by Lax \cite{Lax} is no longer applicable as explained in the introduction (\sct{sec:intro}).
+Instead the theory developed by DLM \cite{dlm} is used to generalize the notions of weak solutions by introducing a path \cite{dlm}. Furthermore, Bianchini et al. in \cite{bianchini_bressan_2005} extended the notion of vanishing viscosity solution to HNCSE (see Theorem 1. on page 229). This work was completed by 
+Le Floch in \cite{lefloch_1989} who linked the notion of vanishing viscosity solution and the DLM theory with the notion of path in Theorem 3.2 on page 14. 
+An entropy condition for HNCSE equivalent to Lax admissibility criterion, was later introduced in \cite{lefloch_1988}, still by Le Floch, and 
+examples of its application on gasdynamics and elastodynamics systems are given in Section 4 of the same publication. Generalization of the entropy
+condition to HNCSE is of interest for this work as it will allow us to derive a viscous regularization for the SEM given in \eqt{eq:liq-7-eqn-sect5}, 
+on the same model as in \cite{jlg,Marco_paper_low_mach}, that (i) is consistent with an entropy inequality and (ii) will ensure convergence of the numerical 
+solution to the physical or entropy solution. Furthermore, in \cite{dlm, bianchini_bressan_2005, lefloch_1989} it is emphasized that the theory developed 
+for HNCSE is also valid for HCSE under certain conditions: this remark is of importance since it means, from a theoretical point of view, 
+continuity of the viscous stabilization will be ensured as the SEM devolves to the conservative Euler equations. \tcb{I am not sure the wording "continuity of the 
+viscous stabilization" is the most meaningful}
+
+Because of the addition of the dissipative terms, the entropy equation is modified and will contain additional terms of yet unknown sign. By carefully choosing 
 a definition for each of the dissipation terms, the sign of the entropy equation can be determined (and kept positive). Derivation of the viscous 
 regularization for the seven-equation model can be achieved by considering either the phasic entropy equation (\eqt{eq:ent-eqn-7-eqn-model}) or the 
 total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the latter case, the minimum entropy principle can be verified for the whole two-phase system 
@@ -359,7 +372,7 @@ that the minimum entropy principle holds for each phase. This stronger requireme
 one of the phases disappears in the limit $\alpha_k \to 0$. 
 %
 %---------------------------------------------------------------------------------
-\subsection{Entropy equation of the SEM with viscous regularization}
+\subsection{Entropy equation of the SEM with viscous regularization}\label{sec:ent-equ-sem}
 %---------------------------------------------------------------------------------
 %
 We start with the system of equations given in \eqts{eq:liq-7-eqn-sect5_no_exchange}, where exchange terms have been omitted as explained in \sct{eq:sem-ent-wv},
@@ -481,9 +494,9 @@ Using \eqt{eq:expr-zero}, \eqt{eq:ent-res-7-eqn-diss-terms} can be rearranged as
 \end{multline}
 which is the phasic entropy equation obtained when the viscous regularization terms are included.
 %
-%---------------------------------------------------------------------------------
-\subsection{minimum entropy principle}\label{sct:end-min-pr}
-%---------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------------------------------------------
+\subsection{Positivity of the phasic density and the phasic volume fraction}\label{sct:positivity}
+%-----------------------------------------------------------------------------------------------------------------------------
 %
 Following the methodology employed in \cite{jlg,Marco_paper_low_mach}, the right-hand side of 
 \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} can be further simplified by defining the viscous fluxes $\tilde{\mbold f}_k$ and 
@@ -587,13 +600,15 @@ when $s_k$ is concave with respect to $e_k$ and $\rho_k^{-1}$  \cite{jlg,Marco_p
 
 \eqt{eq:ent-res-7-eqn-diss-terms3} is constructed to satisfy the minimum entropy principle for the SEM \emph{with} viscous regularization. 
 At a location $\mbold x_{min}(t)$ where $s_k$ reaches its minimum value at time $t$, the gradient, $\grad s_k$, and Laplacian, $\Delta s_k$, 
-of the entropy are zero and positive at this particular location, respectively. %Furthermore, it is recalled that the viscosity coefficients $\mu_k$ and $\kappa_k$ are positive by definition. 
-Because the terms on the right-hand-side of \eqt{eq:ent-res-7-eqn-diss-terms3} have been shown to be either positive or null when 
-the entropy reaches its spatial minimum, the minimum entropy principle holds for each phase $k$.
+of the entropy are zero and positive at this particular location, respectively. Because the terms on the right-hand-side of 
+\eqt{eq:ent-res-7-eqn-diss-terms3} have been shown to be either positive or null when 
+the entropy reaches its spatial minimum, it is concluded that $\alpha_k \rho_k \frac{D s_k}{Dt} \geq 0$. For the minimum entropy principle to 
+hold for each phase $k$, positivity of the product $\alpha_k \rho_k$ is required. To do so, we first consider the regularized volume fraction 
+equation since its viscous term $\mbold l_k$ is still undetermined, and the dissipation terms in the phasic continuity equation also 
+depends on $\mbold l_k$.
 
-Recall that the above minimum entropy principle holds {\it independently} of the definition of the dissipative term $\mbold l_k$
+Recall that the above inequality, i.e. $\alpha_k \rho_k \frac{D s_k}{Dt} \geq 0$, holds {\it independently} of the definition of the dissipative term $\mbold l_k$
 in the volume fraction equation. We now provide a possible expression for $\mbold l_k$.
-%
 Consider only the volume fraction equation, \eqt{eq:sev_equ-with-diss-terms-vf}. It is an hyperbolic equation
 whose eigenvalue (speed) is $\mbold u_{int}$. An entropy relation can be derived for that equation alone (by multiplying it by $\alpha_k$)
 and used to prove the minimum entropy principle by properly choosing the dissipative term.
@@ -601,8 +616,13 @@ Following
 the work of Guermond et al. for linear advection and Burgers' equations \cite{jlg1,jlg2}, it can be shown that a dissipative term ensuring 
 uniqueness of the weak solution for the volume fraction equation is of the form $\mbold l_k = \beta_k A \grad \alpha_k $, where $\beta_k$
 is a positive viscosity coefficient. The dissipative term is made proportional to the area $A$ for consistency with 
-the other definitions of the viscous terms.
-
+the other definitions of the viscous terms. Now that an expression for the dissipative term $\mbold l_k$ is known, it can be shown (i) the phasic
+volume fraction $\alpha_k$ is bounded within the interval $[0;1]$ and (ii), the product $\alpha_k \rho_k$ remains positive under certain conditions.
+%
+%---------------------------------------------------------------------------------
+\subsection{Miminimum entropy principle}\label{sct:end-min-pr}
+%---------------------------------------------------------------------------------
+%
 All of the dissipative terms are now defined and recalled here:
 %
 \begin{subequations}\label{eq:visc-reg-7-equ-sect4}
