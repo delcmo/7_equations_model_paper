@@ -215,14 +215,14 @@ impedance $Z_k = \rho_k c_k$ and the specific interfacial area $A_{int}$ as show
 \end{subequations}
 %
 The specific interfacial area (i.e., the interfacial surface area per unit
-volume of a two-phase mixture), $A_{int}$, is typically dependent upon flow regime conditions and can be provided as a correlation. 
+volume of a two-phase mixture), $A_{int}$, is typically dependent upon flow regime conditions, not unique, and can be provided as a correlation.
 In \cite{SEM}, $A_{int}$ is chosen to be a function of the liquid volume fraction:
 %
 \begin{equation}\label{eq:Aint-sect4}
 A_{int} = A_{int}^{max} \left[ 6.75 \left(1-\alpha_{liq} \right)^2 \alpha_{liq} \right],
 \end{equation}
 % 
-with $A_{int}^{max} = 5100$ $m^2 / m^3$. With this definition, the interfacial area is zero in the limits $\alpha_{k} = 0$ and $\alpha_{k} = 1$. 
+with $A_{int}^{max} = 5100$ $m^2 / m^3$. With this definition, the interfacial area is zero in the limits $\alpha_{k} = 0$ and $\alpha_{k} = 1$.
 
 The set of equations satisfied by phase $j$ are simply obtained by substituting $k$ by $j$ and $j$ by $k$ in \eqt{eq:liq-7-eqn-sect5}, keeping 
 the same definition of the interfacial variables and using \eqt{eq:exch-terms}. The equation for the volume fraction of phase $j$ is simply 
@@ -492,7 +492,12 @@ Using \eqt{eq:expr-zero}, \eqt{eq:ent-res-7-eqn-diss-terms} can be rearranged as
 + \left(s_e\right)_k \left( \mathbb{g}_k - \mbold f_k \otimes \mbold u_k \right) : \grad \mbold u_k 
 \,,
 \end{multline}
-which is the phasic entropy equation obtained when the viscous regularization terms are included.
+which is the phasic entropy equation obtained when the viscous regularization terms are included. In order to complete the proof of the minimum entropy
+principle, the phasic entropy residual $R_{e,k} = \frac{Ds_k}{Dt}$ needs to be proved positive which requires (i) positivity of the phasic product $\alpha_k \rho_k$
+that multiplies $R_e$ in \eqt{eq:ent-res-7-eqn-diss-terms_rearranged}, and (ii) positivity of the right-handside of \eqt{eq:ent-res-7-eqn-diss-terms_rearranged}.
+\sct{sct:positivity} is devoted to proving positivity of the right-handside of \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} by choosing an expression for the viscous
+fluxes, and to showing that the product $\alpha_k \rho_k$ remains positive under certain conditions to be detailed. Then, in \sct{sct:end-min-pr} the minimum entropy principle is
+proved by using results from \sct{sct:positivity}.
 %
 %----------------------------------------------------------------------------------------------------------------------------
 \subsection{Positivity of the phasic density and the phasic volume fraction}\label{sct:positivity}
@@ -612,12 +617,48 @@ in the volume fraction equation. We now provide a possible expression for $\mbol
 Consider only the volume fraction equation, \eqt{eq:sev_equ-with-diss-terms-vf}. It is an hyperbolic equation
 whose eigenvalue (speed) is $\mbold u_{int}$. An entropy relation can be derived for that equation alone (by multiplying it by $\alpha_k$)
 and used to prove the minimum entropy principle by properly choosing the dissipative term.
-Following
-the work of Guermond et al. for linear advection and Burgers' equations \cite{jlg1,jlg2}, it can be shown that a dissipative term ensuring 
-uniqueness of the weak solution for the volume fraction equation is of the form $\mbold l_k = \beta_k A \grad \alpha_k $, where $\beta_k$
+Following the work of Guermond et al. for linear advection and Burgers' equations \cite{jlg1,jlg2}, it can be shown that a dissipative term ensuring 
+selection of the entropy solution for the volume fraction equation is of the form $\mbold l_k = \beta_k A \grad \alpha_k $, where $\beta_k$
 is a positive viscosity coefficient. The dissipative term is made proportional to the area $A$ for consistency with 
 the other definitions of the viscous terms. Now that an expression for the dissipative term $\mbold l_k$ is known, it can be shown (i) the phasic
 volume fraction $\alpha_k$ is bounded within the interval $[0;1]$ and (ii), the product $\alpha_k \rho_k$ remains positive under certain conditions.
+The regularized volume fraction equation is now as follows:
+%
+\begin{equation}\label{eq:final-reg-vf-equ}
+\partial_t \left( \alpha_k A \right) + \mbold u_{int} A \grad \alpha_k= \div \left( A \beta_k \grad \alpha_k \right) \ .
+\end{equation}
+%
+Let us assume that the phasic volume fraction is initially bounded within the interval $[0;1]$ and that a maximum is reached at a given point $x_0 \in \mathcal{R}$
+such as $\grad \alpha_k = 0$ and $\Delta \alpha_k \leq 0$. At the point $x_0$ where the maximum is reached and recalling that the phasic viscosity coefficient
+$\beta_k$ is positive by definition, the regularized volume fraction equation becomes:
+%
+\begin{equation}\label{eq:final-reg-vf-equ-max}
+\partial_t \alpha_k = \beta_k \Delta \alpha_k \leq 0 \ ,
+\end{equation}
+%
+which means that the volume fraction locally decreases as a function of time and thus remains bounded from above. 
+Note that \eqt{eq:final-reg-vf-equ-max} was obtained from \eqt{eq:final-reg-vf-equ} 
+by extending its righthand-side and dividing out by the cross-section $A$. Now assuming that a minimum is reached in $x_0$, i.e. $\grad \alpha_k = 0$ and $\Delta \alpha_k \geq 0$,
+and using the same methodology as before, it can be shown that the volume fraction is bounded from below. As a result, with the above regularization, the volume fraction
+should remain bounded in time within the interval $[0;1]$.
+
+We now consider the regularized phasic continuity equation to prove that the quantity $\alpha_k \rho_k$ remains positive. Using the above definition of $\mbold l_k$, the regularized 
+continuity equation is as follows:
+%
+\begin{equation}\label{eq:reg-mass-equ-final}
+\partial_t \left( \alpha_k \rho_k A \right) + \div \left( \alpha_k \rho_k \mbold u_k A \right) = \div \left[ \kappa_k \alpha_k \grad \rho_k + \beta_k \rho_k \grad \alpha_k \right] \ .
+\end{equation}
+%
+In the particular case where $\beta_k = \kappa_k$, the dissipative terms in \eqt{eq:reg-mass-equ-final} become $\div \left[ \kappa_k \grad \left( \alpha_k \rho_k \right) \right]$ and the
+resulting equation is identical to the regularized continuity equation of the Euler equation derived in \cite{jlg} when defining $\bar{\rho}_k = \alpha_k \rho_k$:
+%
+\begin{equation}\label{eq:reg-euler-qu}
+\partial_t \left( \hat{\rho}_k A \right) + \div \left( \hat{\rho}_k \mbold u_k A \right) = \div \left( \kappa_k \grad \hat{\rho}_k \right) \ .
+\end{equation}
+%
+Following Lemma 3.1 of \cite{jlg} and using \eqt{eq:reg-euler-qu}, a nonnegative density principle can be proved for the quantity $\hat{\rho}_k$: this allows us to conclude that the quantity $\alpha_k \rho_k$ remains nonnegative under the assumption $\beta_k = \kappa_k$. Note that unlike in Lemma 3.2 of \cite{jlg}, the density $\hat{\rho}_k$  cannot be proved positive since the assumption $\hat{\rho}_k > 0$ does not apply.
+
+\tcb{In the case $\beta_k \neq \kappa_k$ the proof is not obvious}
 %
 %---------------------------------------------------------------------------------
 \subsection{Miminimum entropy principle}\label{sct:end-min-pr}
@@ -640,6 +681,10 @@ All of the dissipative terms are now defined and recalled here:
 \end{align}
 \end{subequations}
 %
+We also have proved in \sct{sct:positivity} that (i) the phasic volume fraction $\alpha_k$ remains bounded within a given interval, (ii) that the quantity $\alpha_k \rho_k$ is nonnegative, and (iii) that 
+the righthand-side of \eqt{eq:ent-res-7-eqn-diss-terms3} is entropy productive. As a result, it is devised that the phasic entropy residual remains nonnegative, i.e. $\mathcal{R}_{e,k} \geq 0$
+and that the minimum entropy principle holds for each phase and thus for the two-phase system as well.
+
 At this point, some remarks are in order:
 \begin{enumerate}
 \item {The definition of the dissipative term $\mbold l_k$ contains a new viscosity
@@ -690,12 +735,12 @@ in Harten et al. \cite{Harten} is demonstrated in \app{app:harden} of this paper
 \end{enumerate}
 %
 At this point, we have derived a viscous regularization for the Seven-Equation two-phase flow Model that ensures positivity of the 
-entropy residual, uniqueness of the numerical solution when assuming concavity of the phasic entropy $s_k$, and consistency with 
+entropy residual, convergence of the numerical solution to the entropy solution when assuming concavity of the phasic entropy $s_k$, and consistency with 
 the viscous regularization derived for Euler equations \cite{jlg,Marco_paper_low_mach} in the limit $\alpha_k \to 1$. The viscous 
 regularization involves a set of three positive viscosity coefficients for each phase, $\mu_k$, $\kappa_k$, and $\beta_k$. The definition 
 of the viscosity coefficients should be devised from the scaled SEM in order to ensure well-scaled dissipative terms for a wide range 
 of Mach numbers (subsonic, transonic and supersonic flows) and is the topic of \sct{sec:low-Mach}. But first, we investigate, in the 
-next paragraph, the effect of the viscous regularization in the case where the SEM is reduced to the five-equation model of 
+next paragraph, the effect of the viscous regularization in the case where the SEM devolves to the five-equation model of 
 Kapila \cite{Kapila_2001}.
 %
 %---------------------------------------------------------------------------------
@@ -1179,14 +1224,14 @@ For each case, the density and volume fraction profiles are presented in \fig{fi
         \centering
         \begin{subfigure}[b]{0.95\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/relaxation_vapor_density_multiple_visc.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_vapor_density_multiple_visc.eps}
                 \caption{Liquid density}
                 \label{fig:liq-density}
         \end{subfigure}
 				\\
         \begin{subfigure}[b]{0.95\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/relaxation_liquid_density_multiple_visc.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_liquid_density_multiple_visc.eps}
                 \caption{Vapor density}
                 \label{fig:vap-density}
         \end{subfigure}
@@ -1198,7 +1243,7 @@ in spurious oscillations in the volume fraction profile near the contact region 
 %
 \begin{figure}[H]
         \centering
-        \includegraphics[width=\textwidth]{figures/relaxation_liquid_vf_multiple_visc.png}
+        \includegraphics[width=\textwidth]{figures/relaxation_liquid_vf_multiple_visc.eps}
         \caption{Liquid volume fraction obtained using three different viscosity types at $t=0.18 \ s$.}
         \label{fig:liq-vf}
 \end{figure}
