@@ -661,9 +661,15 @@ Following Lemma 3.1 of \cite{jlg} and using \eqt{eq:reg-euler-qu}, a nonnegative
 \tcb{In the case $\beta_k \neq \kappa_k$ the proof is not obvious}
 %
 %---------------------------------------------------------------------------------
-\subsection{Miminimum entropy principle}\label{sct:end-min-pr}
+\subsection{Minimum entropy principle}\label{sct:end-min-pr}
 %---------------------------------------------------------------------------------
 %
+In this section, the minimum entropy residual is proved for each phase. We have proved in \sct{sct:positivity} that (i) the phasic volume fraction $\alpha_k$ 
+remains bounded within a given interval, 
+(ii) that the quantity $\alpha_k \rho_k$ is nonnegative, and (iii) that 
+the righthand-side of \eqt{eq:ent-res-7-eqn-diss-terms3} is entropy productive. As a result, it is devised that the phasic entropy residual remains nonnegative, i.e. $\mathcal{R}_{e,k} \geq 0$
+and that the minimum entropy principle holds for each phase and thus for the two-phase system as well.
+
 All of the dissipative terms are now defined and recalled here:
 %
 \begin{subequations}\label{eq:visc-reg-7-equ-sect4}
@@ -681,10 +687,6 @@ All of the dissipative terms are now defined and recalled here:
 \end{align}
 \end{subequations}
 %
-We also have proved in \sct{sct:positivity} that (i) the phasic volume fraction $\alpha_k$ remains bounded within a given interval, (ii) that the quantity $\alpha_k \rho_k$ is nonnegative, and (iii) that 
-the righthand-side of \eqt{eq:ent-res-7-eqn-diss-terms3} is entropy productive. As a result, it is devised that the phasic entropy residual remains nonnegative, i.e. $\mathcal{R}_{e,k} \geq 0$
-and that the minimum entropy principle holds for each phase and thus for the two-phase system as well.
-
 At this point, some remarks are in order:
 \begin{enumerate}
 \item {The definition of the dissipative term $\mbold l_k$ contains a new viscosity
@@ -1131,6 +1133,13 @@ P_k = (\gamma_k-1) \rho_k( e_k -q_k) -\gamma_k P_{\infty,k} \text{ and }
 where the parameters $\gamma_k$, $q_k$ and $P_{\infty,k}$ are fluid-dependent and will be specified for each test. Note that the Ideal gas law is recovered by setting 
 $q_k = P_{\infty,k}=0$ in \eqt{eq:sgeos}.
 %
+\begin{my_remark}
+The phasic entropy residual is proved to be nonnegative in \sct{sct:end-min-pr}. When numerically computed, however, it is observed that the phasic entropy residual $\mathcal{R}_{e,k}$,
+can experience negative variation in the vicinity of the shock as previously mentioned and observed in \cite{Guermond_Pasquetti}: this is due to the strong variations of the phasic entropy 
+residual in the shock regions. We refer the reader to Section 4 of \cite{Guermond_Pasquetti} for further discussions.
+\end{my_remark}
+\tcb{This is maybe not the best place to have this remark}
+%
 %----------------------------------------------------------
 \subsection{Shock tube test case}\label{sec:first-test}
 %-----------------------------------------------------------
@@ -1156,26 +1165,30 @@ This example demonstrates the ability of the proposed viscous regularization to 
         \centering
         \begin{subfigure}[b]{0.5\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_velocity_fo_lf.png}
+%                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_velocity_fo_lf.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_velocity.eps}                
                 \caption{Velocity}
                 \label{fig:two-phase-vel}
         \end{subfigure}%
         \begin{subfigure}[b]{0.5\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_density_fo_lf.png}
+%                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_density_fo_lf.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_density.eps}
                 \caption{Density}
                 \label{fig:two-phase-density}
         \end{subfigure}
         
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_pressure_fo_lf.png}
+%                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_pressure_fo_lf.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_pressure.eps}                
                 \caption{Pressure}
                 \label{fig:two-phase-press}
         \end{subfigure}        
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_volume_fraction_fo_lf.png}
+%                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_volume_fraction_fo_lf.png}
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_volume_fraction.eps}                
                 \caption{Volume fraction}
                 \label{fig:two-phase-vf}
         \end{subfigure}
