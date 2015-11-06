@@ -27,8 +27,8 @@ For numerical schemes, the entropy condition and solution are sought through the
 governing laws, along with the addition of an appropriately specified physical or artificial viscosity, either added directly to the governing 
 equations or implied by the discretization employed (truncation error).  That is, a regularization is selected, or built, which is consistent with the 
 entropy condition, thereby guaranteeing that the numerical computation captures the physically relevant solution. For hyperbolic non-conservative system of equations
-(HNCSE) alike the seven-equation model, the notions of weak and entropy solutions cannot be defined by the theory of Lax in the sense of distribution. Instead, the theory developed by Del Maso-Le Floch-Mariat (DLM)
-in \cite{dlm} must be used: the non-conservative products are defined as a bounded Borel 
+(HNCSE) alike the seven-equation model, the notions of weak and entropy solutions cannot be defined by the theory of Lax in the sense of distribution. Instead, the theory by Del Maso-Le Floch-Mariat (DLM)
+developed in \cite{dlm} must be used: the non-conservative products are defined as a bounded Borel 
 measure by introducing a Lipschitz family of path $\phi: [0,1] \times \mathbb{R}^n \times \mathbb{R}^n$ such that 
 $\phi(0, U_L, U_R) = U_L$ and $\phi(1, U_L, U_R) = U_R$. Generally speaking, the main idea is to specify the values of the 
 solution at points of discontinuity so that the non-conservative product admits a weak solution. In \cite{lefloch_1988,lefloch_1989}, 
@@ -52,8 +52,8 @@ numerical solution to the entropy weak solution.
 %schemes without proper regularization.  For example, the well-known central difference method generally produces oscillations for simple linear 
 %advection.
 
-In this paper, we derive a viscous regularization for the non-equilibrium seven-equation two-phase flow model of \cite{SEM}. The foundation for this work 
-can be traced back to viscous regularizations for single-phase Euler and Navier-Stokes equations, notably \cite{jlg} and the references therein. 
+In this paper, we derive a viscous regularization for the non-equilibrium seven-equation two-phase flow model of \cite{SEM} by using an entropy condition under the form of an inequality. 
+The foundation for this work can be traced back to viscous regularizations for single-phase Euler and Navier-Stokes equations, notably \cite{jlg} and the references therein. 
 The proposed viscous regularization for the seven-equation model is consistent with the minimum entropy principle and Harten's generalized 
 entropies. 
 The minimum entropy principle states that the entropy of a fluid parcel is constant along its pathline
@@ -70,10 +70,10 @@ to produce a monotonic solution increase through the viscous layer with as littl
 Tadmor \cite{tadmor_minimum_entropy_principle} gives an alternative statement (more useful for constructing numerical methods and proofs) of the minimum 
 entropy principle by transforming the Lagrangian statement above into that of an Eulerian reference frame. Further discussion may be found in Guermond and Popov \cite{jlg}.
 
-In the work presented here, we ensure that the proposed viscous regularization scales appropriately in the low-Mach regime, as such situations are often encountered 
+In the work presented here, we also ensure that the proposed viscous regularization scales appropriately in the low-Mach regime, as such situations are often encountered 
 in practical applications; a two-phase low-Mach asymptotic analysis is carried out to determine conditions that need to be satisfied by the artificial dissipative 
 terms to yield a well-scaled regularization in the low-Mach case; see \cite{Marco_paper_low_mach} for the single-phase analog. 
-We also investigate the behavior of the viscous regularization when the seven-equation two-phase flow model degenerates to the five-equation 
+We also investigate the behavior of the viscous regularization when the seven-equation two-phase flow model devolves to the five-equation 
 model of Kapila \cite{Kapila_2001} through a Chapman-Enskog expansion \cite{dellacherie,GuillardMurrone2003}. We show 
 that the regularized seven-equation model yields a regularized five-equation model of Kapila.
 
@@ -215,7 +215,7 @@ impedance $Z_k = \rho_k c_k$ and the specific interfacial area $A_{int}$ as show
 \end{subequations}
 %
 The specific interfacial area (i.e., the interfacial surface area per unit
-volume of a two-phase mixture), $A_{int}$, is typically dependent upon flow regime conditions, not unique, and can be provided as a correlation.
+volume of a two-phase mixture), $A_{int}$, is typically dependent upon flow regime conditions, is not unique, and can be provided as a correlation.
 In \cite{SEM}, $A_{int}$ is chosen to be a function of the liquid volume fraction:
 %
 \begin{equation}\label{eq:Aint-sect4}
@@ -613,8 +613,7 @@ equation since its viscous term $\mbold l_k$ is still undetermined, and the diss
 depends on $\mbold l_k$.
 
 Recall that the above inequality, i.e. $\alpha_k \rho_k \frac{D s_k}{Dt} \geq 0$, holds {\it independently} of the definition of the dissipative term $\mbold l_k$
-in the volume fraction equation. We now provide a possible expression for $\mbold l_k$.
-Consider only the volume fraction equation, \eqt{eq:sev_equ-with-diss-terms-vf}. It is an hyperbolic equation
+in the volume fraction equation. We now provide a possible expression for $\mbold l_k$. Consider only the volume fraction equation, \eqt{eq:sev_equ-with-diss-terms-vf}. It is an hyperbolic equation
 whose eigenvalue (speed) is $\mbold u_{int}$. An entropy relation can be derived for that equation alone (by multiplying it by $\alpha_k$)
 and used to prove the minimum entropy principle by properly choosing the dissipative term.
 Following the work of Guermond et al. for linear advection and Burgers' equations \cite{jlg1,jlg2}, it can be shown that a dissipative term ensuring 
@@ -628,8 +627,8 @@ The regularized volume fraction equation is now as follows:
 \partial_t \left( \alpha_k A \right) + \mbold u_{int} A \grad \alpha_k= \div \left( A \beta_k \grad \alpha_k \right) \ .
 \end{equation}
 %
-Let us assume that the phasic volume fraction is initially bounded within the interval $[0;1]$ and that a maximum is reached at a given point $x_0 \in \mathcal{R}$
-such as $\grad \alpha_k = 0$ and $\Delta \alpha_k \leq 0$. At the point $x_0$ where the maximum is reached and recalling that the phasic viscosity coefficient
+Let us assume that the 1-D phasic volume fraction is initially bounded within the interval $[0;1]$ and that a maximum is reached at a given point $x_0 \in \mathcal{R}$
+such as $ \partial_x \alpha_k = 0$ and $\partial_{xx} \alpha_k \leq 0$. At the point $x_0$ where the maximum is reached and recalling that the phasic viscosity coefficient
 $\beta_k$ is positive by definition, the regularized volume fraction equation becomes:
 %
 \begin{equation}\label{eq:final-reg-vf-equ-max}
@@ -638,10 +637,14 @@ $\beta_k$ is positive by definition, the regularized volume fraction equation be
 %
 which means that the volume fraction locally decreases as a function of time and thus remains bounded from above. 
 Note that \eqt{eq:final-reg-vf-equ-max} was obtained from \eqt{eq:final-reg-vf-equ} 
-by extending its righthand-side and dividing out by the cross-section $A$. Now assuming that a minimum is reached in $x_0$, i.e. $\grad \alpha_k = 0$ and $\Delta \alpha_k \geq 0$,
+by expending its righthand-side and dividing out by the cross-section $A$. Now assuming that a minimum is reached in $x_0$, i.e. $\partial_x \alpha_k = 0$ and $\partial_{xx} \alpha_k \geq 0$,
 and using the same methodology as before, it can be shown that the volume fraction is bounded from below. As a result, with the above regularization, the volume fraction
 should remain bounded in time within the interval $[0;1]$.
-
+%
+\begin{my_remark}
+Note that the viscous term in the phasic volume fraction equation is needed as illustrated in the following example. Consider a test case with initial uniform phasic pressure, velocity, temperature and an initial step volume fraction. Under such conditions and using the definitions given in \eqt{eq:int_variables_def}, the interfacial pressure and velocity are equal to the phasic pressure and velocity, respectively. Also, each equation of \eqt{eq:liq-7-eqn-sect5_no_exchange} now devolves to the regularized volume fraction equation \eqt{eq:final-reg-vf-equ}. Assuming that the phasic volume fraction equation is not stabilized by a viscous term, the test case with the above initial condition would result in a numerical solution with spurious oscillations in the vicinity of the step. 
+\end{my_remark}
+%
 We now consider the regularized phasic continuity equation to prove that the quantity $\alpha_k \rho_k$ remains positive. Using the above definition of $\mbold l_k$, the regularized 
 continuity equation is as follows:
 %
@@ -656,8 +659,12 @@ resulting equation is identical to the regularized continuity equation of the Eu
 \partial_t \left( \hat{\rho}_k A \right) + \div \left( \hat{\rho}_k \mbold u_k A \right) = \div \left( \kappa_k \grad \hat{\rho}_k \right) \ .
 \end{equation}
 %
-Following Lemma 3.1 of \cite{jlg} and using \eqt{eq:reg-euler-qu}, a nonnegative density principle can be proved for the quantity $\hat{\rho}_k$: this allows us to conclude that the quantity $\alpha_k \rho_k$ remains nonnegative under the assumption $\beta_k = \kappa_k$. Note that unlike in Lemma 3.2 of \cite{jlg}, the density $\hat{\rho}_k$  cannot be proved positive since the assumption $\hat{\rho}_k > 0$ does not apply.
-
+Following Lemma 3.1 of \cite{jlg} and using \eqt{eq:reg-euler-qu}, a nonnegative density principle can be proved for the quantity $\hat{\rho}_k$: this allows us to conclude that the quantity $\alpha_k \rho_k$ remains nonnegative under the assumption $\beta_k = \kappa_k$. Note that unlike in Lemma 3.2 of \cite{jlg}, the density $\hat{\rho}_k$  cannot be proved positive since the assumption $\hat{\rho}_k > 0$ does not apply: the phasic volume fraction $\alpha_k$ can be locally equal to zero.
+%
+\begin{my_remark}
+Note that the viscous term $\div \left[ \kappa_k \alpha_k \grad \rho_k + \beta_k \rho_k \grad \alpha_k \right]$ in the phasic continuity equation is required as it was previously illustrated in Subsection 2.3 of \cite{jlg} for the case of the single-phase Euler equations.
+\end{my_remark}
+%
 \tcb{In the case $\beta_k \neq \kappa_k$ the proof is not obvious}
 %
 %---------------------------------------------------------------------------------
@@ -1119,7 +1126,8 @@ seven-equation two-phase flow equations using two test cases. The seven-equation
 using a \emph{continuous} Galerkin finite element method within the MOOSE multiphysics framework \cite{Moose}. The temporal derivatives are evaluated
 with the second-order accurate backward different temporal integrator BDF2 \cite{bdf2}. A Jacobian-free Newton Krylov (JFNK) method solves for the solution
 at the end of each time step. An approximate full Jacobian matrix is used as a preconditioner and is computed by finite difference 
-(this is one of the options available in MOOSE and is reasonably efficient for 1-D simulations).
+(this is one of the options available in MOOSE and is reasonably efficient for 1-D simulations). \tcb{Shall we add something about the differences between discontinuous and continuous schemes:
+we do not need to compute the interfacial flux for example}
 
 The first test is a shock tube configuration where we show that the viscous regularization prevents undershoots 
 and overshoots near shocks and discontinuities. The second set of tests aims at illustrating the low-Mach asymptotic limit study performed in \sct{sec:low-Mach} by investigating the steady-state solution
@@ -1204,14 +1212,14 @@ for comparison. The numerical solutions of the phasic densities and the phasic v
         \centering
         \begin{subfigure}[b]{0.95\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_density_multiple_meshes.eps}
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_density_multi_mesh.eps}
                 \caption{Density.}
                 \label{fig:density-mult-meshes}
         \end{subfigure}
 				\\
         \begin{subfigure}[b]{0.95\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_vf_multiple_meshes.eps}
+                \includegraphics[width=\textwidth]{figures/relaxation_two_phases_volume_fraction_multi_mesh.eps}
                 \caption{Volume fraction.}
                 \label{fig:vf-mult-meshes}
         \end{subfigure}
@@ -1248,7 +1256,7 @@ For each case, the density and volume fraction profiles are presented in \fig{fi
                 \caption{Vapor density}
                 \label{fig:vap-density}
         \end{subfigure}
-        \caption{Numerical solutions of the liquid and vapor densities obtained using three different viscosity types at $t=0.18 \ s$.}\label{fig:density}
+        \caption{Numerical solutions of the liquid and vapor densities obtained using three different viscosity types at $t=473 \ \mu s$.}\label{fig:density}
 \end{figure}
 %
 In cases (1) and (2), the numerical solutions do not display any instability in the density profiles. However, setting $\beta_k=0$ in case (2) results 
@@ -1257,7 +1265,7 @@ in spurious oscillations in the volume fraction profile near the contact region 
 \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{figures/relaxation_liquid_vf_multiple_visc.eps}
-        \caption{Liquid volume fraction obtained using three different viscosity types at $t=0.18 \ s$.}
+        \caption{Liquid volume fraction obtained using three different viscosity types at $t=473 \ \mu s$.}
         \label{fig:liq-vf}
 \end{figure}
 %
