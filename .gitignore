@@ -41,5 +41,7 @@ Plots
 *.pdf
 
 # allow for PDF files
-!\7-equ-theory-paper\review\*.pdf
-!/7-equ-theory-paper/review/*.pdf
+!\7-equ-theory-paper\review\delchini_ragusa_berry.pdf
+!/7-equ-theory-paper/review/delchini_ragusa_berry.pdf
+!\7-equ-theory-paper\review\jsc_2015_2.pdf
+!/7-equ-theory-paper/review/jsc_2015_2.pdf
