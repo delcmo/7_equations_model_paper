@@ -108,6 +108,10 @@ conditions, see [4]. Note that rarefaction waves and contact discontinuities are
 affected by the choice of the path. It would be interesting for the reader to know
 what notion of weak solution and entropy solution is applied here.}
 
+The problem under consideration is indeed in a non-conservative form and we added a paragraph reviewing
+previous work dealing with weak solution and entropy condition for non-conservative system of equations in the introduction (see lines 21-67). We also modified
+the section entitled methodology accordingly (see lines 188-216).
+
 \tcr{Marco and I think we have a pretty good handle on this. It will include
 citing the proper references and the relevant theorems. We must remember to thank the reviewer
 for pointing this out to us. This was invaluable and improved the quality of the manuscript.
@@ -125,7 +129,8 @@ conservative form it is well-known that uniqueness is ensured if an entropy ineq
 holds for all entropy-entropy flux pairs. However, the problem at hand is not in
 conservative form. See also the first remark.}
 
-Our wording was incorrect: we meant that the viscous regularization 
+Our wording was incorrect and corrected it: we meant that the viscous regularization ensures convergence of the numerical solution to an entropy weak solution 
+and not uniqueness of the weak solution. See also our answer to your first remark.
 
 \tcr{Here too we will need to cite the proper theorems from the list of references giving to us.} \tcg{Also we should be more careful about the 
 wording and write 'entropy solution' instead of 'uniqueness of the weak solution'.}
@@ -139,7 +144,7 @@ the second law of thermodynamics can be verified, see e.g. [7].}
 
 The definitions of the interfacial pressure and velocity are not unique as you mentioned in your above comment. We added references with further
 examples of the interfacial variables. It is now emphasized in the paper that the theoretical results devised hold as long as the choice of the interfacial
-variables preserve the entropy inequality. 
+variables preserve the entropy inequality (see paragraph between equations (3d) and (4a)). 
 
 \tcr{Easy to do. We will add another choice as an example and cite [7].} \tcg{We should also emphasize that the
 results of the paper are independent of the choice of the definition for the interfacial variables as long as the entropy inequality is preserved.}
@@ -152,7 +157,7 @@ set of linearly independent (left/right) eigenvectors. For the considered system
 only holds true if the non-resonance condition is satisfied, see [1].
 }
 
-We fully agree with you and modified the text accordingly (lines LINES).
+We fully agree with you and modified the text accordingly (see lines 146-152).
 
 \tcr{Another great remark. We will add this}
 \bigskip
@@ -165,7 +170,7 @@ corresponds to a contact discontinuity.
 }
 
 \tcr{We should verify this. We need to ask Ray for the eigenvectors of the SEM if he has them and them check that
-we have a contact discontinuity}
+we have a contact discontinuity} \tcb{I have not added anything about that yet}
 \bigskip
 
 
@@ -186,7 +191,7 @@ CFL number should be mentioned.}
 
 We had forgotten to give a short paragraph explaining our space/time discretization.
 Actually, it was present in a previous version and we removed it by mistake. It has 
-been added now.
+been added now (see paragraph after line 521).
 \bigskip
 
 
@@ -198,8 +203,9 @@ grid convergence study is recommended for the shock tube problem because the
 numerical results show a severe smearing for both the contact wave and the shock
 wave.}
 
-We performed a grid convergence for the first test and plotted the numerical solutions of the phasic density and
-the phasic volume fraction for comparisons. It is then observed that the contact wave is better resolved as expected. 
+We performed a grid convergence for the first test and plotted the numerical solutions of the phasic density (figure 2a) and
+the phasic volume fraction (figure 2b) for comparisons. It is then observed that the contact and shock waves are better resolved as 
+the mesh is refined (see lines 572-576). 
 
 \tcr{Marco will run finer grid simulations for both problems} \tcg{ and plot all of the numerical solutions on a same
 figure in order to eyeball the increasing resolution effects.}
@@ -223,7 +229,7 @@ it remains positive.}
 
 Positivity of the entropy residual is indeed ensured for a theoretical point of view. When numerically evaluating, however,
 the entropy residual, negative values of the entropy residual are observed in the vicinity of the shock. This phenomenon
-has been previously discussed in REF. We added a paragraph explaining such behavior in lines LINES.
+has been previously discussed in [34]. We added a remark explaining such behavior in lines 386-391.
 
 \tcr{Marco will re-run some cases and output that value. Make sure you do not output its absolute value}
 \bigskip
@@ -249,7 +255,7 @@ ensures uniqueness of the numerical solution. Since the authors do not give a
 uniqueness proof this statement seems to be too strong and should be rephrased. See also
 my first and second remark.}
 
-We corrected this statement that is incorrect.
+We corrected this statement that is incorrect and rephrased it in lines 660-667.
 
 \tcr{This will be corrected once we answer the reviewer's remarks \#1+2.}
 \bigskip
