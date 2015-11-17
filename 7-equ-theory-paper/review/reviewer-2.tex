@@ -94,7 +94,11 @@ of the viscosity regularizations.
 My opinion about this work is not good at all since this paper looks like a poor
 extension of the work by Guermond and Popov.}
 
-We disagree with your assessment. \tcr{add all the things we learn thanks to reviewer \#1; 
+We disagree with your assessment. We have extended the work by Guermond and Popov to a non-conservative system of equations
+by using an entropy condition following the theory developed by Del Maso-Le Floch-Mariat (DLM) [18]. 
+Based on the DLM theory the classical definitions of a weak solution and the entropy solution, respectively, can be extended for quasi conservative problems introducing a path, see [18, 19, 20]. Existence of a solution to a problem in non-conservative form has been investigated in [21]. In particular, shock waves are influenced by the path since it enters the generalized Rankine-Hugoniot jump conditions, see [20]. Note that rarefaction waves and contact discontinuities are not affected by the choice of the path. Another approach that is of interest for this paper, consists in considering thevanishing viscosity solution of a hyperbolic non-conservative system of equations by adding a parabolic viscous regularization function of a vanishing viscosity coefficient $\epsilon$. This approach was first studied by Bianchini et al. [22] and further generalized by Alouges et al. [23].
+See lines 21-67 in the introduction and also lines 188-216 in the section 3.1 entitled methodology.
+\tcr{add all the things we learn thanks to reviewer \#1; 
 extending to 2-phase flow is by far not a small extension because of everything
 reviewer \# 1}
 \bigskip
@@ -112,6 +116,10 @@ Moreover, I am convinced that $\alpha_k \in [0, 1]$ is also necessary and must b
 proved. I urge the author to read carefully the paper by Guermond and
 Popov and reconsider the establishment of their results.}
 
+We did read the paper by Guermond and Popov. We agree with you that proof of the positiveness of the partial density was missing and we added it in lines 328-344.
+We also performed the same work for the volume fraction equation still in lines 328-344. In both cases, the viscous terms are required in order to prove positiveness of the
+partial density and to show that the volume fraction remains bounded within the interval [0,1].
+
 \tcr{we can cite Guermond for the phasic regularized continuity equation and show
 than $\alpha \rho$ is non-negative. Then we can work on the alpha equations (both of them) to show
 that  $\alpha_k \in [0, 1]$. From this, we conclude that $\rho_k$ is non-negative.} \tcg{Showing that $\alpha \rho$ is
@@ -128,6 +136,10 @@ but these two pages in the leveque’s book coincides with the introduction
 of weak solutions and entropy inequalities. Nothing about uniqueness of
 the numerical solution.}
 
+We meant 'convergence of the numerical solution to the weak entropy solution' and not 'uniqueness of the numerical solution'. We corrected it throughout the paper.
+We also removed the reference to Leveque's book that is not the most appropriate here as you noticed and replaced it with a more extensive paragraph in section 3.1 that refers to
+the DLM theory (see lines 188-216).
+
 \tcr{Using Leveque for everything is a mistake. We will correct this using
 piece of the answer we gave to reviewer \#1} \tcg{Once again, 'entropy solution' and
 not 'uniqueness of the weak solution'.}
@@ -139,6 +151,8 @@ not 'uniqueness of the weak solution'.}
 specified. However, the derivation of a numerical scheme to approximate
 the weak solution of the model under consideration is a very difficult task.}
 
+We had forgotten to give a short paragraph explaining our space/time discretization. Actually, it was present in a previous version and we removed it by mistake. It has been added now (see paragraph after line 521).
+
 \tcr{We will add this}
 \bigskip
 
@@ -148,6 +162,10 @@ the weak solution of the model under consideration is a very difficult task.}
 section 3.2, I understand the opportunity to omit the underlined terms.
 However, the equation (15) turns out to be wrong. The authors have to
 introduce a specific notation to designate the entropy residual.}
+
+We strongly disagree with you. The sign of the entropy equation, which is function of the entropy residual, is used as an entropy condition for non-conservative and conservative system of equations in order to ensure
+convergence of the numerical solution to a weak entropy solution [15, 19]. We double checked equation (15) and believe it is right. It is used in section 3.4 to show that the entropy residual remains positive with the proper
+viscous regularization. We added a specific notation to designate the entropy residual as you requested which improved the readiness of the paper (see line 252).  
 
 \tcr{This is where the reviewer really shows he doesn't get it} \tcg{We can still add 
 a specific notation for the entropy residual as he requested it.}
