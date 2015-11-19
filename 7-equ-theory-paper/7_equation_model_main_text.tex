@@ -357,7 +357,8 @@ consideration and in deriving an entropy equation for the {\it regularized} syst
 show that the sign of the entropy equation remains positive, resulting in an \emph{entropy inequality} of the form $\frac{d s_k}{dt} \geq 0$. When considering 
 HCSE alike Euler equations, such an entropy inequality serves as an \emph{entropy condition} and ensures convergence of the numerical solution to
 the physical or entropy solution \cite{Lax}. For HNCSE, the theory developed by Lax \cite{Lax} is no longer applicable as explained in the introduction (\sct{sec:intro}).
-Instead the theory developed by DLM \cite{dlm} is used to generalize the notions of weak solutions by introducing a path \cite{dlm}. Bianchini et al. in \cite{bianchini_bressan_2005} extended the notion of vanishing viscosity solution to HNCSE (see Theorem 1. on page 229). This work was completed by 
+Instead the theory developed by DLM \cite{dlm} is used to generalize the notions of weak solutions by introducing a path \cite{dlm}. Bianchini et al. 
+in \cite{bianchini_bressan_2005} extended the notion of vanishing viscosity solution to HNCSE (see Theorem 1. on page 229). This work was completed by 
 Le Floch in \cite{lefloch_1989} who linked the notion of vanishing viscosity solution and the DLM theory to the notion of path in Theorem 3.2 on page 14. 
 An entropy condition for HNCSE equivalent to Lax admissibility criterion, was later introduced in \cite{lefloch_1988}, still by Le Floch, and 
 examples of its application on gasdynamics and elastodynamics systems are given in Section 4 of the same publication. Generalization of the entropy
@@ -689,13 +690,17 @@ previously illustrated in Subsection 2.3 of \cite{jlg} for Euler equations.
 \subsection{Minimum entropy principle}\label{sct:end-min-pr}
 %---------------------------------------------------------------------------------
 %
-In this section, the minimum entropy residual is proved for each phase. We have proved in \sct{sct:positivity} that (i) the phasic volume fraction $\alpha_k$ 
-remains bounded within a given initial interval, 
-(ii) that the quantity $\alpha_k \rho_k$ is nonnegative, and (iii) that 
-the righthand-side of \eqt{eq:ent-res-7-eqn-diss-terms3} is entropy productive. As a result, it is devised that the phasic entropy residual remains nonnegative, i.e. $\mathcal{R}_{e,k} \geq 0$
+In this section, the minimum entropy residual is proved for each phase. 
+% We have proved in \sct{sct:positivity}
+In the previous section, we have shown  that 
+(i) the phasic volume fraction $\alpha_k$ remains bounded within a given initial interval 
+\tcr{ that sounds weird, if we start with alphak=0.5, your sentence implies we will always remain at alphak=0.5 ....}, 
+(ii)  the quantity $\alpha_k \rho_k$ is nonnegative, 
+and (iii) the right-hand side of \eqt{eq:ent-res-7-eqn-diss-terms3} leads to entropy production (that is, the right-hand side is positive). 
+As a result, the phasic entropy residual remains nonnegative, i.e. $\mathcal{R}_{e,k} \geq 0$
 and that the minimum entropy principle holds for each phase and thus for the two-phase flow system as well.
 
-At this point, some remarks are in order. All of the dissipative terms are now defined and recalled here:
+At this point, some remarks are in order. All of the dissipative terms have now been defined and are recalled here:
 %
 \begin{subequations}\label{eq:visc-reg-7-equ-sect4}
 \begin{align}
@@ -712,8 +717,10 @@ At this point, some remarks are in order. All of the dissipative terms are now d
 \end{align}
 \end{subequations}
 %
+\tcr{what's the problem with mathbb, I cannot see the letter g above. I looked before, it happened too. some conflicts in the latex package?}
+
 \begin{enumerate}
-\item {The definition of the dissipative term $\mbold l_k$ contains a new viscosity
+\item {The definition of the dissipative term $\mbold l_k$ contains a viscosity
     coefficient $\beta_k$ that is independent of
     the other viscosity coefficients, $\mu_k$ and $\kappa_k$. Its definition should
     account for the eigenvalue $\mbold u_{int}$ and  the entropy equation associated with the volume fraction equation.}
@@ -726,9 +733,9 @@ At this point, some remarks are in order. All of the dissipative terms are now d
     variables: pressure, temperature and density.}
 
 \item {All of the dissipative terms are chosen to be proportional to the void
-    fraction $\alpha_k$ and the cross-sectional area $A$, except for $\mbold l_k$ that is only proportional to $A$. 
-When one of the phases disappears, the dissipative terms
-    must go to zero for consistency. On the other hand, when $\alpha_k$ goes to one,
+    fraction $\alpha_k$ and the cross-sectional area $A$ (except for $\mbold l_k$ that is only proportional to $A$). 
+    Thus, when one of the phases disappears, the dissipative terms for that phase vanish, as expected 
+    for consistency. Similarly, when $\alpha_k$ goes to one,
     the \emph{regularized} single-phase Euler equations with variable area are recovered. % (hence the term $\alpha_k A$). 
 		}    
 
@@ -770,11 +777,11 @@ next paragraph, the effect of the viscous regularization in the case where the S
 Kapila \cite{Kapila_2001}.
 %
 \begin{my_remark}\label{rmq:ent_res_neg}
-The phasic entropy residual is proved to be nonnegative in \sct{sct:end-min-pr}. When numerically computed, however, it is observed that the phasic entropy residual $\mathcal{R}_{e,k}$,
-can experience negative variation in the vicinity of the shock as previously mentioned and observed in \cite{Guermond_Pasquetti}: this is due to the strong variations of the phasic entropy 
-residual in the shock regions. We refer the reader to Section 4 of \cite{Guermond_Pasquetti} for further discussions.
+The phasic entropy residual is proved to be nonnegative in \sct{sct:end-min-pr}. When numerically computed, however, one can observe that the phasic entropy residual $\mathcal{R}_{e,k}$,
+can experience negative variation in the vicinity of a shock, as previously noted  in \cite{Guermond_Pasquetti}: this is due to the strong variations of the phasic entropy 
+residual in the shock regions. \tcr{should we not add something like we are sampling an numerical approximation to the residual that tends to a Dirac distribtion} We refer the reader to Section 4 of \cite{Guermond_Pasquetti} for further discussions.
 \end{my_remark}
-\tcb{This is maybe not the best place to have this remark}
+\tcb{This is maybe not the best place to have this remark.} \tcr{Maybe in a place where we say that we use the abolute value of the residual rather than just the residual?}
 %
 %---------------------------------------------------------------------------------
 \subsection{A Chapman-Enskog expansion of the regularized Seven-equation two-phase flow model}\label{sec:chap-enskog}
