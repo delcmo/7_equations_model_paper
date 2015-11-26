@@ -7,16 +7,16 @@ in modeling and simulation.
 A variety of two-phase models, with different levels of mechanical and thermodynamical non-equilibrium, has been developed;
 in addition to the more traditional six-equation models \cite{Stadtke}, there are the five-equation model of Kapila \cite{Kapila_2001,GuillardMurrone2003,Saurel_2009} 
 and the fully non-equilibrium Seven-Equation Model (SEM) \cite{Berry_1985,BaerNunziato,Saurel_2001b,SEM}. These models may be obtained
-by integrating the one-phase flow balance equations weighted by a characteristic or indicator function for each phase \cite{DrewPassman}.
+by integrating the one-phase flow hyperbolic conservative system of equations (HCSE), i.e. Euler equations, weighted by a characteristic or indicator function for each phase \cite{DrewPassman}.
 The resulting system of equations contains non-conservative terms and relaxation terms that 
 describe the interaction between phases, supplemented by an equation for the volume fraction. 
-The systems of two-phase flow equations are usually solved using discontinuous discretization schemes (finite volume and discontinuous 
-Galerkin approaches). By assuming that the system of equations is hyperbolic, an exact Riemann solver could be used but is often ruled 
+The systems of two-phase flow equations are non-conservative system of equations and are usually solved using discontinuous discretization schemes (finite volume and discontinuous 
+Galerkin approaches). By assuming that the non-conservative system of equations is hyperbolic, an exact Riemann solver could be used but is often ruled 
 out because of its complexity due to the number of equations involved. Instead, approximate Riemann solvers, a well-established approach 
 for single-phase flows, are employed \cite{Saurel_2001a,Saurel_2001b,Li_2004,Zein_2010,Ambroso_2012},  while ensuring the correct 
 low-Mach asymptotic limit and deriving a consistent discretization scheme for the non-conservative terms \cite{Li_2004,Abgrall_2002}.
 
-\tcr{here we talk about HCSE and HNCSE but we never mention why we talk about this. Should we not introduce this first?}
+\tcr{here we talk about HCSE and HNCSE but we never mention why we talk about this. Should we not introduce this first?} \tcb{done}
 In review of solutions to nonlinear, hyperbolic, initial boundary value problems, it is well known that, even with smooth initial data, the existence of a 
 globally smooth solution may not occur because of the nonlinearity of the flux functions. For hyperbolic conservative systems of equations (HCSE), the concept of a weak
 solution was introduced by Lax \cite{Lax} to guarantee the existence of a global solution; however, uniqueness of the solution is lost because the problem may
@@ -29,27 +29,29 @@ governing laws, along with the addition of an appropriately specified physical o
 equations or implied by the discretization employed (truncation error).  That is, a regularization is selected, or built, which is consistent with the 
 entropy condition, thereby guaranteeing that the numerical computation captures the physically relevant solution. However, for hyperbolic non-conservative systems 
 of equations (HNCSE) such as the seven-equation model, the theory of Lax cannot be invoked to establish weak and entropy solutions in the sense of distributions. Instead, the work by Del Maso-Le Floch-Mariat (DLM) \cite{dlm} must be used: the non-conservative products are defined as a bounded Borel 
-measure by introducing a Lipschitz family of path $\phi: [0,1] \times \mathbb{R}^n \times \mathbb{R}^n$ such that 
-$\phi(0, U_L, U_R) = U_L$ and $\phi(1, U_L, U_R) = U_R$. 
+measure by introducing a Lipschitz family of path.
+%$\phi: [0,1] \times \mathbb{R}^n \times \mathbb{R}^n$ such that 
+%$\phi(0, U_L, U_R) = U_L$ and $\phi(1, U_L, U_R) = U_R$. 
 \tcr{this would be a bit incomprehensible for any reader. what are we trying to say? is it important to mention $U_L$ and $U_R$ here? if
-the math around the definition of the path needed? It sounds complicated without necessarily shining light on important information}
+the math around the definition of the path needed? It sounds complicated without necessarily shining light on important information} \tcb{done}
 Generally speaking, the main idea consists in specifying values for the solution at points of discontinuity so that the non-conservative products
 present in the governing laws are well-defined, hence allowing for the existence of a weak solution. For instance, the notion of weak and entropy solutions 
 are extended to HNCSE in \cite{lefloch_1988,lefloch_1989}, leading to the derivation of a generalized Rankine-Hugoniot (RH) jump condition
-that is path-dependent. Furthermore, the notion of shock, rarefaction and shocks waves \tcr{not balanced} has also been extended to HNCSE,
+that is path-dependent. Furthermore, the notion of rarefaction and shocks waves \tcr{not balanced} \tcb{done} has also been extended to HNCSE,
 see \cite{lefloch_liu_1993}. It can be shown that the classical Rankine-Hugoniot jump condition for conservative systems \cite{Lax} is recovered from the 
 its generalization to non-conservative systems. Hence, the case of conservative systems of equations can be seen as 
 a subset of non-conservative systems. 
 % For example, when one of the phases disappears, the seven-equation model, a HNCSE, devolves to the single-phase Euler equations, a HCSE.  
 
-Another approach \tcr{to do what? I guess: obtain a numerical solution to the SEM} that is of interest for this paper consists in considering the 
-vanishing viscosity solution obtained by adding a parabolic viscous regularization to the HNCSE.
+Another approach that is of interest for this paper to establish the existence of a weak solution of non-conservative terms,
+\tcr{to do what? I guess: obtain a numerical solution to the SEM} 
+consists in considering the vanishing viscosity solution obtained by adding a parabolic viscous regularization to the HNCSE.
 This approach was first studied by Bianchini et al. \cite{bianchini_bressan_2005} and 
 further generalized by Alouges et al. \cite{alouges_merlet_2004}. In their work, Bianchini et al. demonstrate that the solution to the 
 vanishing viscosity system is unique as the vanishing viscosity tends to zero (Theorem 1, page 229 in \cite{bianchini_bressan_2005}). Moreover, Le 
 Floch in \cite{lefloch_1988}, generalized the notion of entropy condition to non-conservative system of equations, in the space of 
 bounded functions of bounded variation, by introducing an entropy function and an associated entropy inequality in order to ensure convergence of the 
-numerical solution to the entropy weak solution \tcr{both weak and entropy?}.
+numerical solution to the entropy solution \tcr{both weak and entropy?} \tcb{done}.
 %Of course if the 
 %equations and/or methods employed are not conservative and intrinsically weak solutions are computed, it is essential to place an even greater 
 %burden of proof on the correctness of the solutions.  Even linear hyperbolic equation systems can be problematic for numerical discretization 
@@ -717,7 +719,7 @@ At this point, some remarks are in order. All of the dissipative terms have now 
 \end{align}
 \end{subequations}
 %
-\tcr{what's the problem with mathbb, I cannot see the letter g above. I looked before, it happened too. some conflicts in the latex package?}
+\tcr{what's the problem with mathbb, I cannot see the letter g above. I looked before, it happened too. some conflicts in the latex package?} \tcb{done}
 
 \begin{enumerate}
 \item {The definition of the dissipative term $\mbold l_k$ contains a viscosity
