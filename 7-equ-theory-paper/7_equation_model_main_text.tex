@@ -44,7 +44,7 @@ a subset of non-conservative systems.
 % For example, when one of the phases disappears, the seven-equation model, a HNCSE, devolves to the single-phase Euler equations, a HCSE.  
 
 Another approach that is of interest for this paper to establish the existence of a weak solution of non-conservative terms,
-\tcr{to do what? I guess: obtain a numerical solution to the SEM} 
+\tcr{to do what? I guess: obtain a numerical solution to the SEM} \tcb{done}
 consists in considering the vanishing viscosity solution obtained by adding a parabolic viscous regularization to the HNCSE.
 This approach was first studied by Bianchini et al. \cite{bianchini_bressan_2005} and 
 further generalized by Alouges et al. \cite{alouges_merlet_2004}. In their work, Bianchini et al. demonstrate that the solution to the 
@@ -368,8 +368,8 @@ condition to HNCSE is of interest for this work as it will allow us to derive a 
 on the same model as in \cite{jlg,Marco_paper_low_mach}, that (i) is consistent with an entropy inequality and (ii) will ensure convergence of the numerical 
 solution to the physical or entropy solution. Furthermore, in \cite{dlm,bianchini_bressan_2005,lefloch_1989} it is emphasized that the theory developed 
 for HNCSE is also valid for HCSE under certain conditions: this remark is of importance since it means, from a theoretical prospective, 
-continuity of the viscous stabilization will be ensured as the SEM devolves to the conservative Euler equations. \tcb{I am not sure the wording "continuity of the 
-viscous stabilization" is the most meaningful}
+consistency of the viscous stabilization will be ensured as the SEM devolves to the conservative Euler equations. \tcb{I am not sure the wording "continuity of the 
+viscous stabilization" is the most meaningful} \tcb{done}
 
 Because of the addition of the dissipative terms, the entropy equation is modified and will contain additional terms of yet unknown sign. By carefully choosing 
 a definition for each of the dissipation terms, the sign of the entropy equation can be determined (and kept positive). Derivation of the viscous 
@@ -508,10 +508,10 @@ fluxes. we also show that $\alpha_k \rho_k$ remains nonnegative under certain co
 proved by using results from \sct{sct:positivity}.
 %
 %----------------------------------------------------------------------------------------------------------------------------
-\subsection{Nonnegativity of the phasic density and the phasic volume fraction}\label{sct:positivity}
+\subsection{A definition of the viscous fluxes based on a entropy condition}
 %-----------------------------------------------------------------------------------------------------------------------------
 %
-\tcr{not sure about the title. This section is not only about  $\alpha_k \rho_k$  ...}
+\tcr{not sure about the title. This section is not only about  $\alpha_k \rho_k$  ...}\tcb{done}
 
 Following the methodology employed in \cite{jlg,Marco_paper_low_mach}, the right-hand side of 
 \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} can be further simplified by defining the viscous fluxes $\tilde{\mbold f}_k$ and 
@@ -621,7 +621,11 @@ the entropy reaches its spatial minimum, one concludes that $\alpha_k \rho_k \fr
 i.e., $\alpha_k \rho_k \frac{D s_k}{Dt} \geq 0$, holds {\it independently} of the definition of the dissipative term $\mbold l_k$
 in the volume fraction equation. For the minimum entropy principle to hold for each phase $k$, positivity of the product $\alpha_k \rho_k$ is also required. 
 To do so, we need to derive an expression for the dissipative term $\mbold l_k$ since it is present in the phasic continuity equation \eqt{eq:sev_equ-with-diss-terms-cont}.
-
+%
+%----------------------------------------------------------------------------------------------------------------------------
+\subsection{Nonnegativity of the phasic density and the phasic volume fraction}\label{sct:positivity}
+%-----------------------------------------------------------------------------------------------------------------------------
+%
 We now provide a possible expression for $\mbold l_k$ by considering the volume fraction equation, \eqt{eq:sev_equ-with-diss-terms-vf}, by itself. 
 It is an hyperbolic equation
 whose eigenvalue (speed) is $\mbold u_{int}$. An entropy relation can be derived for that equation alone (by multiplying it by $\alpha_k$).
@@ -695,8 +699,8 @@ previously illustrated in Subsection 2.3 of \cite{jlg} for Euler equations.
 In this section, the minimum entropy residual is proved for each phase. 
 % We have proved in \sct{sct:positivity}
 In the previous section, we have shown  that 
-(i) the phasic volume fraction $\alpha_k$ remains bounded within a given initial interval 
-\tcr{ that sounds weird, if we start with alphak=0.5, your sentence implies we will always remain at alphak=0.5 ....}, 
+(i) the phasic volume fraction $\alpha_k$ remains bounded within a given interval 
+\tcr{ that sounds weird, if we start with alphak=0.5, your sentence implies we will always remain at alphak=0.5 ....} \tcb{done}, 
 (ii)  the quantity $\alpha_k \rho_k$ is nonnegative, 
 and (iii) the right-hand side of \eqt{eq:ent-res-7-eqn-diss-terms3} leads to entropy production (that is, the right-hand side is positive). 
 As a result, the phasic entropy residual remains nonnegative, i.e. $\mathcal{R}_{e,k} \geq 0$
