@@ -1398,7 +1398,7 @@ Now, in the low-Mach regime, we have $\Re_k$, $\Pe_k^\kappa$, and $=\Pe_k^\beta$
 viscous stabilization of the scheme is not altered since $M_k \simeq \mathcal{O}(1)$. 
 
 The steady-state numerical solutions for liquid and vapor phases are presented in \fig{fig:vap-phase} and \fig{fig:liq-phase}, respectively, 
-for the above cases (1) and (2). \tcr{not true, the figures below do not show cases 1 and 2}
+for the above cases (1) and (2). \tcr{I was going to say ``not true, the figures below do not show cases 1 and 2'', because I can barely notice the light blue. Please you another color!}
 
 %
 \begin{figure}[H]
@@ -1428,11 +1428,11 @@ for the above cases (1) and (2). \tcr{not true, the figures below do not show ca
                 \caption{Mach number}
                 \label{fig:vap-phase-mach}
         \end{subfigure}
-        \caption{Numerical and analytical steady-state vapor-phase solutions for the divergent-convergent two-phase flow nozzle test case.}\label{fig:vap-phase}
+        \caption{Numerical and analytical steady-state vapor-phase solutions for the divergent-convergent two-phase flow nozzle problem.}\label{fig:vap-phase}
 \end{figure}
 %
 In \fig{fig:vap-phase}, the numerical solutions obtained for the vapor phase in cases (1) and (2) are almost identical, as expected, because the Mach number is of order 1
-(see Mach plot in \fig{fig:vap-phase-mach}). The numerical and exact solutions match  well except in the vicinity of the shock where smoothing occurs due to the over-dissipative nature of the local Lax-Friedrichs scheme. As the mesh is refined, it is observed (not shown) that the numerical solution converges to the exact solution, experiencing the same behavior as in \sct{sec:grid-conv-study}.
+(see Mach plot in \fig{fig:vap-phase-mach}). The numerical and exact solutions match  well, except in the vicinity of the shock where smoothing occurs due to the over-dissipative nature of the local Lax-Friedrichs viscosity. As the mesh is refined, it is observed (not shown) that the numerical solution converges to the exact solution. %, experiencing the same behavior as in \sct{sec:grid-conv-study}.
 %
 \begin{figure}[H]
         \centering
@@ -1461,37 +1461,42 @@ In \fig{fig:vap-phase}, the numerical solutions obtained for the vapor phase in 
                 \caption{Mach number}
                 \label{fig:liq-phase-mach}
         \end{subfigure}
-        \caption{Numerical and analytical steady-state liquid-phase solutions for the divergent-convergent two-phase flow nozzle test case.}\label{fig:liq-phase}
+        \caption{Numerical and analytical steady-state liquid-phase solutions for the divergent-convergent two-phase flow nozzle problem.}\label{fig:liq-phase}
 \end{figure}
 %
 The steady-state numerical solution of the liquid phase is shown in \fig{fig:liq-phase}.
-In case (1), the numerical solution does not match the exact solution; this illustrates the ill-scaling effect of the 
-dissipative terms for low-Mach flows (see Mach plot in  \fig{fig:liq-phase-mach}). The numerical solution obtained in case (2)
-(i.e., with properly scaled viscosity) converges to the exact solution and the proper low-Mach asymptotic limit is recovered. 
-Note that in this case, the numerical solution would not be really improved as the mesh in refined since the solution is smooth. 
+In case (1) (LLF viscosity without a low-Mach fix), the numerical solution does not match the exact solution; this illustrates the ill-scaling effect of the 
+dissipative terms for low-Mach flows (see Mach plot in  \fig{fig:liq-phase-mach}). The numerical solution obtained in case (2) (LLF viscosity with low-Mach fix,
+i.e., properly scaled LLF viscosity) converges to the exact solution and the correct low-Mach asymptotic limit is recovered. 
+%Note that in this case, the numerical solution would not be really improved as the mesh in refined since the solution is smooth. 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}\label{sec:conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-We have derived a viscous regularization for the hyperbolic Seven-Equation two-phase flow Model. The regularization ensures nonnegativity of the phasic entropy residual, 
-convergence of the numerical solution to an entropy solution for concave physical phasic entropy functions $s_k$, and is consistent with the viscous regularization derived for 
-Euler equations when one of the phases disappears. 
-We have also demonstrated that the proposed viscous regularization is compatible with the generalized Harten entropies that were initially derived for Euler equations. 
+We have derived a viscous regularization for the hyperbolic Seven-Equation two-phase flow Model. The regularization ensures nonnegativity of the phasic entropy residual 
+\tcr{this is only theoretical since we do not show numerical values; should we keep on emphasizing this?}, 
+convergence of the numerical solution to an entropy solution \tcr{for concave physical phasic entropy functions $s_k$ {\it is this needed in the conclusions, sounds heavy}}, 
+and is consistent with the viscous regularization derived for Euler equations when one of the phases disappears. 
+We have also demonstrated that the proposed viscous regularization is compatible with the generalized Harten entropies 
+that were initially derived for Euler equations. 
 
 The viscous regularization for the SEM equations involves a set of two positive viscosity coefficients for each phase, $\mu_k$ and $\kappa_k$, and one for the volume 
-fraction equation, $\beta_k$. The scaling of these viscosities is related to the numerical Reynolds and P\'eclet numbers, $\Re_k$, $\Pe_k^\mu$, and $\Pe_k^\kappa$. 
+fraction equation, $\beta_k$. Using non-dimensionalized equations, we have shown that the scaling of these viscosities is related to the numerical Reynolds 
+and P\'eclet numbers, $\Re_k$, $\Pe_k^\mu$, and $\Pe_k^\kappa$. 
 Adequate scaling of these numbers has been devised for two important limit-cases: the low-Mach asymptotic limit and for non-isentropic flows. In the low-Mach regime, 
-we show that the incompressible equations are recovered when assuming that all of the non-dimensional numbers scale as one. The study of the non-isentropic case 
+we show that the incompressible equations are recovered when all of the non-dimensional numbers scale as one. The study of the non-isentropic case 
 shows that the scaling of the non-dimensionalized numbers is Mach-number dependent to ensure well-scaled dissipative terms in the vicinity of the shock.
-Based on these results, adequate scaling of the viscosities can be derived for all Mach numbers, as was the case for single-phase flows \cite{Marco_paper_low_mach}. 
+Based on these results, a proper scaling of the viscosity coefficients can be derived for all Mach numbers, as was the case for single-phase flows (see \cite{Marco_paper_low_mach}). 
 %
 We have also shown that the regularized SEM equations yields a regularized version of the five-equation flow model of Kapila by means of a Chapman-Enskog expansion.
 
 The ability of the proposed regularization to stabilize the SEM equations was numerically demonstrated using a shock tube problem, with the definitions of the 
-artificial viscosity coefficients borrowed from the local Lax-Friedrichs scheme. We have also performed a grid-convergence and analyzed the effect of removing stabilization from the volume fraction 
-and the continuity equations. The scaling effect of the viscous regularization on the numerical solution in the low-Mach asymptotic limit was numerically illustrated using a 1-D converging-diverging nozzle.
+artificial viscosity coefficients borrowed from the local Lax-Friedrichs scheme. We have also performed a grid-convergence and analyzed the effect of removing 
+stabilization from the volume fraction and the continuity equations. The scaling effect of the viscous regularization on the numerical solution in the low-Mach 
+asymptotic limit was numerically illustrated using a 1-D converging-diverging nozzle. The proposed viscous regularization is agnostic of the spatial discretization
+scheme and all of our numerical examples employed a {\it continuous} finite element method.
 
 As an extension of this work, the two-phase flow viscous regularization presented here should be utilized and tested with high-order, less dissipative, artificial viscosities, 
 such as the entropy viscosity (e.g., see \cite{jlg_EVM_JCP2011} for single-phase supersonic flows and \cite{Marco_paper_low_mach} for single-phase subsonic and transonic flows). 
