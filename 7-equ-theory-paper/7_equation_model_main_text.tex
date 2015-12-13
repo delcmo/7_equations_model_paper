@@ -4,54 +4,56 @@
 %
 Compressible two-phase fluid flows are found in numerous industrial applications. Their numerical solution is an ongoing area of research 
 in modeling and simulation. 
-A variety of two-phase models, with different levels of mechanical and thermodynamical non-equilibrium, has been developed;
-in addition to the more traditional six-equation models \cite{Stadtke}, there are the five-equation model of Kapila \cite{Kapila_2001,GuillardMurrone2003,Saurel_2009} 
-and the fully non-equilibrium Seven-Equation Model (SEM) \cite{Berry_1985,BaerNunziato,Saurel_2001b,SEM}. These models may be obtained
-by integrating the one-phase flow hyperbolic conservative system of equations (HCSE), i.e. Euler equations, weighted by a characteristic or indicator function for each phase \cite{DrewPassman}.
-The resulting system of equations contains non-conservative terms and relaxation terms that 
-describe the interaction between phases, supplemented by an equation for the volume fraction. 
-The systems of two-phase flow equations are non-conservative system of equations and are usually solved using discontinuous discretization schemes (finite volume and discontinuous 
-Galerkin approaches). By assuming that the non-conservative system of equations is hyperbolic, an exact Riemann solver could be used but is often ruled 
-out because of its complexity due to the number of equations involved. Instead, approximate Riemann solvers, a well-established approach 
-for single-phase flows, are employed \cite{Saurel_2001a,Saurel_2001b,Li_2004,Zein_2010,Ambroso_2012},  while ensuring the correct 
-low-Mach asymptotic limit and deriving a consistent discretization scheme for the non-conservative terms \cite{Li_2004,Abgrall_2002}.
+A variety of two-phase models, with different levels of mechanical and thermodynamical non-equilibrium, has been developed, e.g., 
+the five-equation model of Kapila \cite{Kapila_2001,GuillardMurrone2003,Saurel_2009}, 
+the more traditional six-equation models \cite{Stadtke}, 
+and the fully non-equilibrium Seven-Equation Model (SEM) \cite{Berry_1985,BaerNunziato,Saurel_2001b,SEM}. 
+These models are obtained by integrating the one-phase flow Hyperbolic Conservative System of Equations (HCSE), 
+\tcr{are you sure these are HCSE that they start with? }
+i.e., Euler equations, weighted by a characteristic or indicator function for each phase \cite{DrewPassman}.
+The resulting system of two-phase flow equations contains non-conservative terms and relaxation terms that 
+describe the interaction between phases, and are supplemented by an equation for the volume fraction. 
+These systems of equations are described as Hyperbolic Non-Conservative System of Equations (HNCSE) 
+and are usually solved using discontinuous discretization schemes (e.g., finite volume and discontinuous 
+Galerkin approaches). By assuming that the non-conservative system of equations is hyperbolic, an exact Riemann solver 
+could be used but is often ruled out because of its complexity due to the number of equations involved. 
+Instead, approximate Riemann solvers, a well-established approach for single-phase flows, are employed, 
+see \cite{Saurel_2001a,Saurel_2001b,Li_2004,Zein_2010,Ambroso_2012}, while ensuring the correct 
+low-Mach limit and a consistent discretization for the non-conservative terms \cite{Li_2004,Abgrall_2002}.
 
-\tcr{here we talk about HCSE and HNCSE but we never mention why we talk about this. Should we not introduce this first?} \tcb{done}
-In review of solutions to nonlinear, hyperbolic, initial boundary value problems, it is well known that, even with smooth initial data, the existence of a 
-globally smooth solution may not occur because of the nonlinearity of the flux functions. For hyperbolic conservative systems of equations (HCSE), the concept of a weak
-solution was introduced by Lax \cite{Lax} to guarantee the existence of a global solution; however, uniqueness of the solution is lost because the problem may
-allow infinitely many weak solutions. Thus, an additional condition, the``entropy condition,'' is usually imposed to ensure convergence to a
-unique solution, the ``entropy solution''.
-Although there are several different ways of defining the entropy condition, it is generally hoped that they are all equivalent in the sense 
+In review of solutions to nonlinear, hyperbolic, initial boundary value problems, it is well known that, even with smooth initial data, 
+the existence of a globally smooth solution may not occur because of the nonlinearity of the flux functions. For hyperbolic conservative systems 
+of equations (HCSE), the concept of a weak solution was introduced by Lax to guarantee the existence of a global solution \cite{Lax}; 
+however, uniqueness of the solution is lost because the problem may allow infinitely many weak solutions. Thus, an additional condition, 
+the``entropy condition,'' is usually imposed to ensure convergence to a unique solution, the ``entropy solution''.
+Although there are several different ways to define the entropy condition, it is generally hoped that they are all equivalent in the sense 
 that they select the same entropy solution (this can be demonstrated for Burgers equations, see \cite{Evans1998,Lellis_minimalentropy}).
 For numerical schemes, the entropy condition and solution are sought through the utilization of so-called conservative formulations of the 
 governing laws, along with the addition of an appropriately specified physical or artificial viscosity, either added directly to the governing 
-equations or implied by the discretization employed (truncation error).  That is, a regularization is selected, or built, which is consistent with the 
-entropy condition, thereby guaranteeing that the numerical computation captures the physically relevant solution. However, for hyperbolic non-conservative systems 
-of equations (HNCSE) such as the seven-equation model, the theory of Lax cannot be invoked to establish weak and entropy solutions in the sense of distributions. Instead, the work by Del Maso-Le Floch-Mariat (DLM) \cite{dlm} must be used: the non-conservative products are defined as a bounded Borel 
-measure by introducing a Lipschitz family of path.
+equations or implied by the discretization employed (truncation error). That is, a regularization is selected, or built, which is consistent with the 
+entropy condition, thereby guaranteeing that the numerical computation captures the physically relevant solution. However, for hyperbolic 
+non-conservative systems of equations (HNCSE) such as the seven-equation two-phase flow model, the theory of Lax cannot be invoked to establish 
+weak and entropy solutions in the sense of distributions. Instead, the work by Del Maso-Le Floch-Mariat \cite{dlm} must be used
+whereby the non-conservative products are defined as a bounded Borel measure by introducing a Lipschitz family of paths.
 %$\phi: [0,1] \times \mathbb{R}^n \times \mathbb{R}^n$ such that 
 %$\phi(0, U_L, U_R) = U_L$ and $\phi(1, U_L, U_R) = U_R$. 
-\tcr{this would be a bit incomprehensible for any reader. what are we trying to say? is it important to mention $U_L$ and $U_R$ here? if
-the math around the definition of the path needed? It sounds complicated without necessarily shining light on important information} \tcb{done}
 Generally speaking, the main idea consists in specifying values for the solution at points of discontinuity so that the non-conservative products
 present in the governing laws are well-defined, hence allowing for the existence of a weak solution. For instance, the notion of weak and entropy solutions 
-are extended to HNCSE in \cite{lefloch_1988,lefloch_1989}, leading to the derivation of a generalized Rankine-Hugoniot (RH) jump condition
-that is path-dependent. Furthermore, the notion of rarefaction and shocks waves \tcr{not balanced} \tcb{done} has also been extended to HNCSE,
+are extended to HNCSE in \cite{lefloch_1988,lefloch_1989}, leading to the derivation of a generalized Rankine-Hugoniot jump condition
+that is path-dependent. Furthermore, the notion of rarefaction and shocks waves has also been extended to HNCSE,
 see \cite{lefloch_liu_1993}. It can be shown that the classical Rankine-Hugoniot jump condition for conservative systems \cite{Lax} is recovered from the 
 its generalization to non-conservative systems. Hence, the case of conservative systems of equations can be seen as 
 a subset of non-conservative systems. 
 % For example, when one of the phases disappears, the seven-equation model, a HNCSE, devolves to the single-phase Euler equations, a HCSE.  
 
-Another approach that is of interest for this paper to establish the existence of a weak solution of non-conservative terms,
-\tcr{to do what? I guess: obtain a numerical solution to the SEM} \tcb{done}
+Another approach, followed in this paper, to establish the existence of a weak solution of non-conservative terms,
 consists in considering the vanishing viscosity solution obtained by adding a parabolic viscous regularization to the HNCSE.
 This approach was first studied by Bianchini et al. \cite{bianchini_bressan_2005} and 
 further generalized by Alouges et al. \cite{alouges_merlet_2004}. In their work, Bianchini et al. demonstrate that the solution to the 
-vanishing viscosity system is unique as the vanishing viscosity tends to zero (Theorem 1, page 229 in \cite{bianchini_bressan_2005}). Moreover, Le 
-Floch in \cite{lefloch_1988}, generalized the notion of entropy condition to non-conservative system of equations, in the space of 
-bounded functions of bounded variation, by introducing an entropy function and an associated entropy inequality in order to ensure convergence of the 
-numerical solution to the entropy solution \tcr{both weak and entropy?} \tcb{done}.
+vanishing viscosity system is unique as the vanishing viscosity tends to zero (Theorem 1, page 229 in \cite{bianchini_bressan_2005}). 
+Moreover, Le Floch generalized the notion of entropy condition to non-conservative systems of equations in the space of 
+bounded functions of bounded variation  by introducing an entropy function and an associated entropy inequality to ensure convergence of the 
+numerical solution to the entropy solution \cite{lefloch_1988}.
 %Of course if the 
 %equations and/or methods employed are not conservative and intrinsically weak solutions are computed, it is essential to place an even greater 
 %burden of proof on the correctness of the solutions.  Even linear hyperbolic equation systems can be problematic for numerical discretization 
@@ -61,40 +63,45 @@ numerical solution to the entropy solution \tcr{both weak and entropy?} \tcb{don
 In this paper, we derive a viscous regularization for the non-equilibrium seven-equation two-phase flow model of \cite{SEM} by using an entropy condition under 
 the form of an inequality. 
 The foundation for this work can be traced back to viscous regularizations for single-phase Euler and Navier-Stokes equations, notably \cite{jlg} and the references therein. 
-The proposed viscous regularization for the seven-equation model is consistent with the minimum entropy principle and Harten's generalized 
-entropies. 
+The proposed viscous regularization for the seven-equation model is consistent with the minimum entropy principle and Harten's generalized entropies. 
 The minimum entropy principle states that the entropy of a fluid parcel is constant along its pathline
-and only increases upon crossing a shock wave, viscous layer, or thermal conduction region.  Numerically computing 
+and only increases upon crossing a shock wave, a viscous layer, or a thermal conduction region.  Numerically computing 
 shockwave solutions without proper stabilization leads to non physical spurious oscillations. When adding viscosity in the vicinity 
 of the shockwave, one replaces the physical effect of the entropy production of the shockwave with the equivalent entropy increase of a viscous layer.  
 % Ideally this will give the correct energy partitioning between kinetic and internal energy. 
 If the viscous coefficient is not set appropriately 
 the resulting entropy production will not be equivalent to that of the true shock and the numerical scheme %, if conservative, 
-may even create a train of 
-oscillations in the solution, radiating away from the shock/viscous layer, and whose gradients will indeed attempt to produce an entropy production equivalent 
-to that of the shock jump. One needs to properly set the viscosity coefficient along with the jump conditions for the given mesh size in order 
-to produce a monotonic solution increase through the viscous layer with as little smearing as possible, but with entropy production matching that of the true shock.
+may even create a train of oscillations in the solution, radiating away from the shock/viscous layer, and whose gradients will indeed 
+attempt to produce an entropy production equivalent to that of the shock jump. One needs to properly set the viscosity coefficient along with the 
+jump conditions for the given mesh size in order to produce a monotonic solution increase through the viscous layer with as little smearing as possible, 
+but with an entropy production matching that of the true shock.
 Tadmor \cite{tadmor_minimum_entropy_principle} gives an alternative statement (more useful for constructing numerical methods and proofs) of the minimum 
-entropy principle by transforming the Lagrangian statement above into that of an Eulerian reference frame. Further discussion may be found in Guermond and Popov \cite{jlg}.
+entropy principle by transforming the Lagrangian statement above into that of an Eulerian reference frame. Further discussion may also be found in 
+Guermond and Popov \cite{jlg}.
 
-In the work presented here, we also ensure that the proposed viscous regularization scales appropriately in the low-Mach regime, as such situations are often encountered 
-in practical applications; a two-phase low-Mach asymptotic analysis is carried out to determine conditions that need to be satisfied by the artificial dissipative 
-terms to yield a well-scaled regularization in the low-Mach case; see \cite{Marco_paper_low_mach} for the single-phase analog. 
-We also investigate the behavior of the viscous regularization when the seven-equation two-phase flow model devolves to the five-equation 
+In the work presented here, we also ensure that the proposed viscous regularization scales appropriately in two limits of both practical
+and theoretical importance: the multi-phase low-Mach regime and the multi-phase thermal equilibrium treated as a Chapman-Enskog expansion.
+\tcr{thermal is the definition of the C-E expansion, but later we call the kapila model the mechanical equil model, I am confused as of 
+it is mechanical or thermal equil then ...}
+%, as such situations are often encountered  in practical applications; 
+First, a two-phase low-Mach asymptotic analysis is carried out to determine the conditions that need to be satisfied by the artificial dissipative 
+terms in order to yield a well-scaled regularization in the low-Mach case; see \cite{Marco_paper_low_mach} for the single-phase analog. 
+Second, we investigate the behavior of the viscous regularization when the seven-equation two-phase flow model devolves to the five-equation 
 model of Kapila \cite{Kapila_2001} through a Chapman-Enskog expansion \cite{dellacherie,GuillardMurrone2003}. We show 
 that the regularized seven-equation model yields a regularized five-equation model of Kapila.
 
 One of the key aspects of the viscous regularization derived here is that it is agnostic of the spatial discretization scheme, unlike approximate 
 Riemann solvers. Therefore, this viscous regularization may be employed to stabilize numerical schemes based on either continuous or discontinuous 
-spatial approximations. For examples of prior applications of the technique to the single-phase Euler equations, we refer the reader to \cite{jlg,Marco_paper_low_mach} 
-(for finite volume, continuous Galerkin, and spectral FEM discretizations) and to \cite{valentin} (for discontinuous Galerkin discretizations). 
+spatial approximations. For examples of prior applications of the technique to the single-phase Euler equations, we refer the reader to 
+\cite{jlg,Marco_paper_low_mach} (for finite volume, continuous Galerkin, and spectral FEM discretizations) and to \cite{valentin} 
+(for discontinuous Galerkin discretizations). 
 
 The remainder of the paper is as follows. In \sct{sec:7-equ-model}, the Seven-Equation two-phase flow Model (SEM) is recalled along with its main 
 physical and mathematical properties. In \sct{sec:visc-regu}, a viscous regularization is derived for the SEM and a Chapman-Enskog expansion of the 
 regularized SEM is carried out to yield a regularized version of the five-equation two-phase flow model of Kapila. In \sct{sec:low-Mach}, a low-Mach 
 asymptotic study for the regularized SEM is performed and possible definitions for artificial viscosity coefficients are proposed in order to ensure 
-well-scaled dissipative terms over a wide range of Mach numbers. Our theoretical approach is illustrated in \sct{sec:num-ill} with one-dimensional numerical results.
-Finally, we conclude in \sct{sec:conclusion}.
+well-scaled dissipative terms over a wide range of Mach numbers. Our theoretical approach is illustrated in \sct{sec:num-ill} with one-dimensional 
+numerical results. Finally, we conclude in \sct{sec:conclusion}.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -111,8 +118,8 @@ In this section, we recall the seven-equation two-phase flow model and discuss s
 The Seven-Equation two-phase flow Model employed in this paper is obtained by assuming that each phase satisfies the single-phase Euler 
 equations (with phase-exchange terms) and by integrating the latter over a control volume after multiplication by a phasic characteristic 
 function. The detailed derivation of the governing equations for a phase $k$ in interaction with a phase $j$ can be found in \cite{SEM}. 
-In the SEM, each phase obeys a mass, a momentum and an energy balance equation, supplemented by an equation for the volume fraction as shown 
-in \eqts{eq:liq-7-eqn-sect5}.
+In the SEM, each phase obeys a mass, a momentum and an energy balance equation, supplemented by an equation for the volume fraction. The
+SEM equations are given in \eqts{eq:liq-7-eqn-sect5}.
 %
 \begin{subequations}\label{eq:liq-7-eqn-sect5}
 \begin{align}
@@ -150,8 +157,8 @@ in \eqts{eq:liq-7-eqn-sect5}.
 %
 where $\alpha_k$, $\rho_k$, $\mbold u_k$ and $E_k$ denote the volume fraction, the density, the velocity vector, and the total specific 
 energy of phase $k$, respectively. The volume fraction, mass, momentum, and energy exchange terms from phase $k$ to phase $j$ are denoted 
-by the symbols $S_{k \to j}$, $\Gammakj$, $\mbold M_{k \to j}$ and $E_{k \to j}$, respectively, are set consistently with the second law of 
-thermodynamics \cite{BaerNunziato,PassmanNunziato} and thus will only yield entropy producing terms. They also obey to the following 
+by the symbols $S_{k \to j}$, $\Gammakj$, $\mbold M_{k \to j}$ and $E_{k \to j}$, respectively, and are set consistently with the second 
+law of  thermodynamics \cite{BaerNunziato,PassmanNunziato}, thus only yielding entropy producing terms. They also obey to the following 
 closure relations:
 %
 \begin{subequations}\label{eq:exch-terms}
@@ -173,7 +180,7 @@ E_{1 \to 2} + E_{2 \to 1} = 0 \, .
 %
 \end{subequations}
 %
-We adopt a standard convention for vector and tensor operations: 
+We have adopted a standard convention for vector and tensor operations: 
 consider vector $\mbold{a}$ with entries $(a_i)_{i=1,\ldots,\texttt{dim}}$; $(\mbold{a} \otimes \mbold{b})_{ij}=a_i b_j$;
 $\div \mbold{a}= \partial_{x_j} a_j$; $(\grad \mbold{a})_{ij} = \partial_{x_i} a_j$; for order-2 tensors $\mathbb{g}$, 
 we have $(\div \mathbb{g})_j = \partial_{x_i} g_{ij}$, $(\mathbb{g}\cdot \mbold{a})_i = g_{ij}a_j$, 
@@ -204,11 +211,12 @@ denoted by $P_{int}$, $\mbold u_{int}$, $\bar{P}_{int}$ and $\bar{\mbold u}_{int
 %
 The interfacial variables $P_{int}$ and $u_{int}$ control the phase dynamics at the macro level because they specify velocity transport
 and forces acting upon volume fraction gradients, while the interfacial variables $\bar{P}_{int}$ and $\bar{u}_{int}$, which specify 
-average transport velocity and pressure force, control the phase dynamics at the micro level.  Note that the definitions of the interfacial variables $P_{int}$ and 
+average transport velocity and pressure force, control the phase dynamics at the micro level.  Note that the definitions of the interfacial 
+variables $P_{int}$ and 
 $u_{int}$ are not unique, see \cite{Saleh_phd_thesis} for instance. The results presented in this paper apply to \eqt{eq:liq-7-eqn-sect5},
 regardless of the definitions for the interfacial variables as long as the entropy inequality given in \eqt{eq:tot-ent-res-sct4} holds. 
-Following \cite{SEM}, the pressure and velocity relaxation coefficients, $\mu_P$  and $\lambda_u$ respectively, are function of the acoustic 
-impedance $Z_k = \rho_k c_k$ and the specific interfacial area $A_{int}$ as shown in \eqt{eq:relaxation_coeff}.
+Following \cite{SEM}, the pressure and velocity relaxation coefficients, $\mu_P$  and $\lambda_u$ respectively, are functions of the acoustic 
+impedances $Z_k = \rho_k c_k$ and the specific interfacial area $A_{int}$, as shown in \eqt{eq:relaxation_coeff}.
 %
 \begin{subequations}
 \label{eq:relaxation_coeff}
@@ -221,8 +229,8 @@ impedance $Z_k = \rho_k c_k$ and the specific interfacial area $A_{int}$ as show
 \end{align}
 \end{subequations}
 %
-The specific interfacial area (i.e., the interfacial surface area per unit
-volume of a two-phase mixture), $A_{int}$, is typically dependent upon flow regime conditions, is not unique, and can be provided as a correlation.
+The specific interfacial area (i.e., the interfacial surface area per unit volume of a two-phase mixture), $A_{int}$, is typically 
+dependent upon flow regime conditions, is not unique, and can be provided as a correlation.
 In \cite{SEM}, $A_{int}$ is chosen to be a function of the liquid volume fraction:
 %
 \begin{equation}\label{eq:Aint-sect4}
@@ -232,12 +240,12 @@ A_{int} = A_{int}^{max} \left[ 6.75 \left(1-\alpha_{liq} \right)^2 \alpha_{liq} 
 with $A_{int}^{max} = 5100$ $m^2 / m^3$. With this definition, the interfacial area is zero in the limits $\alpha_{k} = 0$ and $\alpha_{k} = 1$.
 
 The set of equations satisfied by phase $j$ are simply obtained by substituting $k$ by $j$ and $j$ by $k$ in \eqt{eq:liq-7-eqn-sect5}, keeping 
-the same definition of the interfacial variables and using \eqt{eq:exch-terms}. The equation for the volume fraction of phase $j$ is simply 
+the same definition of the interfacial variables and using \eqts{eq:exch-terms}. The equation for the volume fraction of phase $j$ is simply 
 replaced by the algebraic relation
 %
-\begin{align}
- \alpha_{j}= 1 - \alpha_{k}, \nonumber
-\end{align}
+\begin{equation}
+ \alpha_{j}= 1 - \alpha_{k}, 
+\end{equation}
 %
 which reduces the number of partial differential equations from eight to seven and yields the Seven-Equation two-phase flow Model (SEM). 
 %
@@ -256,10 +264,10 @@ at the interfacial velocity $\mbold u_{int}$. These waves (eigenvalues of the Ja
 \end{align}
 %
 where $\bar{\mbold n}$ is an unit vector pointing to a given direction. The eigenvalues given in \eqt{eq:eigenvalues} are unconditionally 
-real (as long as the equation of state yields a real-valued sound speed) but not necessarily distinct. However, the seven-equation model admits a set of linearly
-independent eigenvectors under the \emph{non-resonance condition} $(u_k-u_{int})^2 \neq c_k^2$ for each phase $k$ (see proposition 2.1 in \cite{coquel_herard}),
-thus ensuring hyperbolicity of the model.
-Hyperbolicity is extremely valuable property for the development of numerical methods since it is required of well-posed hyperbolic systems.
+real (as long as the equation of state yields a real-valued sound speed) but not necessarily distinct. However, the seven-equation model admits 
+a set of linearly independent eigenvectors under the \emph{non-resonance condition} $(u_k-u_{int})^2 \neq c_k^2$ for each phase $k$ 
+(see proposition 2.1 in \cite{coquel_herard}), thus ensuring hyperbolicity of the model.
+Hyperbolicity is an extremely valuable property for the development of numerical methods since it is required of well-posed hyperbolic systems.
 
 One may relax the Seven-Equation two-phase flow Model to
 the ill-posed classical six-equation model, where a single pressure 
@@ -276,9 +284,9 @@ If one lets both the pressure and the velocity relaxation parameters tend to inf
 Seven-Equation two-phase flow Model to the hyperbolic and well-posed 
 mechanical equilibrium five-equation model of Kapila \cite{Kapila_2001}.  
 
-Next, we investigate the sign of the phasic and total entropy equations \emph{without viscous regularization}. The total entropy equation is simply 
-obtained by summing over the phasic entropy equations. Because the exchange source terms are set consistently with the second 
-law of thermodynamics \cite{BaerNunziato,PassmanNunziato}, it is assumed that they will only yield entropy producing terms (i.e., positive 
+Next, we investigate the sign of the phasic and total entropy equations \emph{without viscous regularization present}. 
+The total entropy equation is simply obtained by summing over the phasic entropy equations. Because the exchange source terms are set consistently with the second 
+law of thermodynamics \cite{BaerNunziato,PassmanNunziato}, they only yield entropy producing terms (i.e., positive 
 terms in the right-hand side of the total entropy equation) and are omitted here. Thus, we consider hereafter the SEM model with only 
 pressure and velocity relaxation terms:
 \begin{subequations}\label{eq:liq-7-eqn-sect5_no_exchange}
@@ -314,8 +322,9 @@ pressure and velocity relaxation terms:
 An entropy equation can be derived for each phase $k$ of system \eqt{eq:liq-7-eqn-sect5_no_exchange}
 %
 and the sign of the entropy material derivative can be proved positive. The entropy function for a phase $k$ is denoted by $s_k$ and is a function of 
-density $\rho_k$ and internal energy $e_k$. The full derivation is given in \app{app:sev-equ-model-entropy} and only the final result is recalled here. 
-The entropy of phase $k$ satisfies the following equation
+the phasic density $\rho_k$ and phasic internal energy $e_k$. The full derivation is given in \app{app:sev-equ-model-entropy} and only the final 
+result is recalled here. 
+The entropy of phase $k$ satisfies the following equation:
 %
 \begin{align} \label{eq:ent-eqn-7-eqn-model}
 (s_{e})_k^{-1} \alpha_k \rho_k A \frac{Ds_k}{Dt} &= \mu_P \frac{Z_k}{Z_k+Z_j} (P_j - P_k)^2 + \lambda_u \frac{Z_j}{Z_k+Z_j} (\mbold u_j -\mbold  u_k)^2 \nonumber
@@ -354,37 +363,45 @@ devolves to the five-equation two-phase flow model of Kapila \cite{Kapila_2001} 
 %---------------------------------------------------------------------------------
 %
 We wish to obtain a viscous regularization for the Seven-Equation two-phase flow Model given in \eqts{eq:liq-7-eqn-sect5} using the same methodology 
-employed for the Euler equations \cite{jlg,Marco_paper_low_mach}. The method consists in adding dissipative terms to the system of equations under 
+employed for the (single-phase) Euler equations \cite{jlg,Marco_paper_low_mach}. The method consists in adding dissipative terms to the system of equations under 
 consideration and in deriving an entropy equation for the {\it regularized} system. By adequately choosing these artificial viscous fluxes, one can 
 show that the sign of the entropy equation remains positive, resulting in an \emph{entropy inequality} of the form $\frac{d s_k}{dt} \geq 0$. When considering 
-HCSE alike Euler equations, such an entropy inequality serves as an \emph{entropy condition} and ensures convergence of the numerical solution to
-the physical or entropy solution \cite{Lax}. For HNCSE, the theory developed by Lax \cite{Lax} is no longer applicable as explained in the introduction (\sct{sec:intro}).
-Instead the theory developed by DLM \cite{dlm} is used to generalize the notions of weak solutions by introducing a path \cite{dlm}. Bianchini et al. 
-in \cite{bianchini_bressan_2005} extended the notion of vanishing viscosity solution to HNCSE (see Theorem 1. on page 229). This work was completed by 
-Le Floch in \cite{lefloch_1989} who linked the notion of vanishing viscosity solution and the DLM theory to the notion of path in Theorem 3.2 on page 14. 
-An entropy condition for HNCSE equivalent to Lax admissibility criterion, was later introduced in \cite{lefloch_1988}, still by Le Floch, and 
-examples of its application on gasdynamics and elastodynamics systems are given in Section 4 of the same publication. Generalization of the entropy
-condition to HNCSE is of interest for this work as it will allow us to derive a viscous regularization for the SEM given in \eqt{eq:liq-7-eqn-sect5}, 
-on the same model as in \cite{jlg,Marco_paper_low_mach}, that (i) is consistent with an entropy inequality and (ii) will ensure convergence of the numerical 
-solution to the physical or entropy solution. Furthermore, in \cite{dlm,bianchini_bressan_2005,lefloch_1989} it is emphasized that the theory developed 
-for HNCSE is also valid for HCSE under certain conditions: this remark is of importance since it means, from a theoretical prospective, 
-consistency of the viscous stabilization will be ensured as the SEM devolves to the conservative Euler equations. \tcb{I am not sure the wording "continuity of the 
-viscous stabilization" is the most meaningful} \tcb{done}
+HCSE (such as Euler equations), such an entropy inequality serves as the \emph{entropy condition} and ensures convergence of the numerical solution to
+the physical or entropy solution \cite{Lax}. However, the theory developed by Lax for HCSE \cite{Lax} is not applicable for non-conservative systems (HNCSE), as reviewed in \sct{sec:intro}.
+Instead the theory developed by Del Maso-Le Floch-Mariat is used to generalize the notions of weak solutions by introducing a path 
+\tcr{a path of what, for what? sentence feels incomplete} \cite{dlm}. 
+Bianchini et al. extended the notion of vanishing viscosity solution to HNCSE (see Theorem 1. on page 229,  \cite{bianchini_bressan_2005}). 
+\tcr{If you look at the previous version of this paragraph, we had the work of bianchine (2005) complete by le floch in 1989, anachronism,
+which itself was later introduce by le floch in 1988, another anachronism. So, I am going to move things around and/or remove these temporal indications
+because they do not make sense. Check this carefully. If I changed some meaning, then we need to talk.}
+Le Floch linked the notion of vanishing viscosity solution and the DLM theory to the notion of path (Theorem 3.2 on page 14, \cite{lefloch_1989}). 
+\tcr{check that the references go with the theorems. I moved things around a bit}
+An entropy condition for HNCSE that is equivalent to Lax' admissibility criterion was introduced by Le Flcoh in \cite{lefloch_1988} and 
+examples of its application to gas dynamics and elastodynamics systems were provided in Section 4 of \cite{lefloch_1988}. 
+The generalization of the entropy condition to non-conservative systems (HNCSE) is of great importance for the seven-equation model,
+as it provides the theoretical foundations for a viscous regularization based on a minimum entropy principle. Namely, 
+we will be able to demonstration that our derived viscous regularization for the SEM model
+(i) is consistent with an entropy inequality and (ii) ensures convergence of the numerical solution to the physical or entropy solution. 
+Furthermore, in \cite{dlm,bianchini_bressan_2005,lefloch_1989} it is emphasized that the theory developed 
+for HNCSE is also valid for HCSE under certain conditions \tcr{like what? talk}: this remark is of importance since it will guarantee, from a 
+theoretical perspective, that the viscous stabilization for the two-phase flow model will consistently devolve to the single-phase viscous stabilization
+when the SEM (a HNCSE) devolves to the Euler equations (a HCSE). 
 
-Because of the addition of the dissipative terms, the entropy equation is modified and will contain additional terms of yet unknown sign. By carefully choosing 
-a definition for each of the dissipation terms, the sign of the entropy equation can be determined (and kept positive). Derivation of the viscous 
+Because of the addition of the dissipative terms, the entropy equation obtained in \eqt{eq:ent-eqn-7-eqn-model}
+will be altered and will contain additional terms of yet unknown sign. By carefully choosing 
+a definition for each of the dissipation terms, the sign of this new entropy equation can be determined (and kept positive). Derivation of the viscous 
 regularization for the seven-equation model can be achieved by considering either the phasic entropy equation (\eqt{eq:ent-eqn-7-eqn-model}) or the 
-total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the latter case, the minimum entropy principle can be verified for the whole two-phase system 
+total entropy equation (\eqt{eq:tot-ent-res-sct4}). In the latter case, the minimum entropy principle can be verified for the whole two-phase flow system 
 but may not ensure positivity of the entropy equation for each phase. However, positivity of the total entropy equation can also be achieved by requiring 
-that the minimum entropy principle holds for each phase. This stronger requirement will also ensure consistency with the single-phase Euler equations when 
-one of the phases disappears in the limit $\alpha_k \to 0$. 
+that the minimum entropy principle holds for each phase; this is the approach we have followed. This stronger requirement will also ensure consistency 
+with the single-phase Euler equations when one of the phases disappears in the limit $\alpha_k \to 0$ or $\alpha_k \to 1$. 
 %
 %---------------------------------------------------------------------------------
-\subsection{Entropy equation of the SEM with viscous regularization}\label{sec:ent-equ-sem}
+\subsection{Entropy equation for the SEM with viscous regularization}\label{sec:ent-equ-sem}
 %---------------------------------------------------------------------------------
 %
-We start with the system of equations given in \eqts{eq:liq-7-eqn-sect5_no_exchange}, where exchange terms have been omitted as explained in \sct{eq:sem-ent-wv},
-and regularize this system by adding dissipation terms (viscous fluxes) to each equation, yielding:
+We start with the system of equations given in \eqts{eq:liq-7-eqn-sect5_no_exchange}, where exchange terms have been omitted as explained in 
+\sct{eq:sem-ent-wv}, and regularize this system by adding dissipation terms (viscous fluxes) to each equation, yielding:
 %
 \begin{subequations}\label{eq:sev_equ-with-diss-terms}
 \begin{align}\label{eq:sev_equ-with-diss-terms-vf}
@@ -411,12 +428,13 @@ and regularize this system by adding dissipation terms (viscous fluxes) to each 
 %
 where $\mbold f_k$, $\mathbb{g}_k$, $\mbold h_k$ and $\mbold l_k$ are phasic viscous terms, yet to be determined. 
 %
-The terms underlined in \eqts{eq:sev_equ-with-diss-terms} are part of the inviscid SEM model, see the unregularized system of equations (\eqref{eq:liq-7-eqn-sect5_no_exchange}); these terms are entropy-producing and we refer the reader to \app{app:sev-equ-model-entropy} for a detailed derivation of the 
-entropy equation \emph{without} viscous regularization present. 
+The terms underlined in \eqts{eq:sev_equ-with-diss-terms} are part of the inviscid SEM model, see the unregularized system of equations 
+(\eqts{eq:liq-7-eqn-sect5_no_exchange}); these terms are entropy-producing and we refer the reader to \app{app:sev-equ-model-entropy} for a 
+detailed derivation of the  entropy equation \emph{without} viscous regularization present. 
 In this section, we deal with the \emph{regularized} system of equations for the SEM model and 
 the above underlined terms will later be ignored in the derivation for brevity. 
 %
-The next step consists in deriving the entropy equation for the phase $k$, in a similar manner to what was done in \app{app:sev-equ-model-entropy} but 
+The next step consists in deriving the entropy equation for the phase $k$, in a similar fashion as \app{app:sev-equ-model-entropy} but 
 with dissipative terms now present. The steps are as follows:
 %
 \begin{enumerate}
@@ -459,7 +477,7 @@ from the phasic total energy equation to obtain the internal energy equation for
 \end{multline}
 %
 As stated earlier, the underlined terms in \eqt{eq:rho-7-eqn-model-sect4} and \eqt{eq:int-ener-7-eqn-model-sect4}, also present in the derivation of 
-the entropy equation for the SEM \emph{without} regularization, have been shown to yield entropy-producing terms, see \app{app:sev-equ-model-entropy}. 
+the entropy equation for the SEM \emph{without} regularization, have been shown to yield entropy-producing terms (see \app{app:sev-equ-model-entropy}). 
 Because the focus of this Section is the verification of the minimum entropy principle for the SEM model when viscous regularization is added, 
 we will omit the underlined terms for brevity in the remainder of the derivation. 
 %
@@ -501,21 +519,19 @@ Using \eqt{eq:expr-zero}, \eqt{eq:ent-res-7-eqn-diss-terms} can be rearranged as
 \,,
 \end{multline}
 which is the phasic entropy equation obtained when the viscous regularization terms are included. In order to complete the proof of the minimum entropy
-principle, one needs to show that the phasic entropy residual $R_{e,k} := \frac{Ds_k}{Dt}$ is positive, which requires (i) positivity of the phasic product $\alpha_k \rho_k$
+principle, one needs to show that the phasic entropy residual $R_{e,k} := \frac{Ds_k}{Dt}$ is positive, which requires 
+(i) positivity of the phasic product  $\alpha_k \rho_k$
 and (ii) positivity of the right-handside of \eqt{eq:ent-res-7-eqn-diss-terms_rearranged}.
-\sct{sct:positivity} is devoted to proving positivity of the right-handside of \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} by choosing an adequate expression for the viscous
-fluxes. we also show that $\alpha_k \rho_k$ remains nonnegative under certain conditions. Then, in \sct{sct:end-min-pr}, the minimum entropy principle is
-proved by using results from \sct{sct:positivity}.
+\sct{sct:positivity} is devoted to proving positivity of the right-handside of \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} by choosing an adequate expression for the viscous fluxes. We also show that $\alpha_k \rho_k$ remains nonnegative under certain conditions. 
+Then, in \sct{sct:end-min-pr}, the minimum entropy principle is proved by using results from \sct{sct:positivity}.
 %
 %----------------------------------------------------------------------------------------------------------------------------
-\subsection{A definition of the viscous fluxes based on a entropy condition}
+\subsection{Definitions of the viscous fluxes based on the entropy condition}
 %-----------------------------------------------------------------------------------------------------------------------------
 %
-\tcr{not sure about the title. This section is not only about  $\alpha_k \rho_k$  ...}\tcb{done}
-
-Following the methodology employed in \cite{jlg,Marco_paper_low_mach}, the right-hand side of 
-\eqt{eq:ent-res-7-eqn-diss-terms_rearranged} can be further simplified by defining the viscous fluxes $\tilde{\mbold f}_k$ and 
-$\tilde{\mbold h}_k$ and a viscous tensor $\mathbb{F}(\mbold u_k)$ as a function of the dissipative terms $\mbold f_k$, $\mathbb{g}_k$, $\mbold h_k$ and $\mbold l_k$ as follows:
+The right-hand side of \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} can be further simplified by introducing the viscous fluxes $\tilde{\mbold f}_k$ and 
+$\tilde{\mbold h}_k$ and a viscous tensor $\mathbb{F}(\mbold u_k)$ as a function of $\mbold f_k$, 
+$\mathbb{g}_k$, $\mbold h_k$ and $\mbold l_k$ as follows:
 %
 \begin{subequations}\label{eq:def-diss-terms-sect4}
 \begin{align}
@@ -528,7 +544,7 @@ $\tilde{\mbold h}_k$ and a viscous tensor $\mathbb{F}(\mbold u_k)$ as a function
 \end{subequations}
 %
 where $\mu_k$ is a positive viscosity coefficient for phase $k$. The functional form of the dissipative terms given in 
-\eqts{eq:def-diss-terms-sect4} will be derived later in this section. Substituting the expressions of \eqt{eq:def-diss-terms-sect4} 
+\eqts{eq:def-diss-terms-sect4} are derived later in this section. Substituting the expressions of \eqt{eq:def-diss-terms-sect4} 
 into \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} yields:
 %
 \begin{multline}\label{eq:ent-res-7-eqn-diss-terms_rearranged2}
@@ -556,9 +572,10 @@ through $\mathcal{R}_3$ and we analyze the sign of each of them separately.
 
 The term ${\mathcal{R}_3}$ is a function of the gradient of the entropy.  
 At the location of the minimum entropy, this gradient is zero; therefore, $\mathcal{R}_3$ 
-has no effect on the minimum entropy principle. It is important to note that the minimum entropy principle will be verified
+has no effect on the minimum entropy principle. Thus, we observe that the minimum entropy principle will be verified
 independently of the definition of the dissipation term $\mbold l_k$ used in the volume fraction
-equation, \eqt{eq:sev_equ-with-diss-terms-vf}. We will later provide a possible definition for $\mbold l_k$.
+equation, \eqt{eq:sev_equ-with-diss-terms-vf}; this is a noteworthy difference with respect to the derivation of the 
+single-phase viscous regularization of \cite{jlg,Marco_paper_low_mach}. We will later provide a possible definition for $\mbold l_k$.
 
 Since $(s_e)_k:=T_k^{-1}$ is defined as the inverse of the temperature and is thus positive, the sign of $\mathcal{R}_2$ is 
 conditioned by the choice of the function $\mathbb{F}(\mbold u_k)$ so that its product with the tensor $\grad \mbold u_k$ is 
@@ -570,8 +587,8 @@ gradient of the velocity vector $\mbold u_k$ (rate of deformation),
 With such a choice, the viscous regularization is also rotationally invariant.
 
 We now focus on the term denoted by $\mathcal{R}_1$, which is identical to the right-hand side of the single phase entropy 
-equation for Euler equations (see \cite{jlg,Marco_paper_low_mach}). $\mathcal{R}_1$ is known to be positive when 
-(i) assuming concavity of the entropy function $s_k$ with respect to the internal energy $e_k$ and to the specific 
+equation for Euler equations (see \tcr{Equation~(abc)} in \cite{Marco_paper_low_mach}). $\mathcal{R}_1$ is known to be positive when 
+(i) assuming concavity of the entropy function $s_k$ with respect to the internal energy $e_k$ and the specific 
 volume $1 / \rho_k$ and (ii) when using the following definitions for the dissipative fluxes $\tilde{h}_k$ and $\tilde{f}_k$:
 %
 \begin{subequations} \label{eq:def_visc}
@@ -582,14 +599,14 @@ volume $1 / \rho_k$ and (ii) when using the following definitions for the dissip
 \end{subequations}
 %  
 where $\kappa_k$ is another positive viscosity coefficient. 
-
-Finally, using \eqts{eq:def_visc}, the term $\mathcal{R}_0$ can be recast as a function of the phasic entropy as follows: 
+%
+Finally, using \eqts{eq:def_visc}, the $\mathcal{R}_0$ can be recast as a function of the phasic entropy as follows: 
 %
 \begin{equation}
 \mathcal{R}_0 = \div \left( \alpha_k A \kappa_k \rho_k \grad s_k \right) \,.
 \end{equation}
 %
-The entropy residual equation can now be written in its final form:
+The entropy residual equation for phase $k$ can now be written in its final form:
 %
 \begin{multline}\label{eq:ent-res-7-eqn-diss-terms3}
 \alpha_k \rho_k A \frac{Ds_k}{Dt} =  \mbold f_k \cdot \grad s_k + \div \left( \alpha_k A \rho_k \kappa_k  \grad s_k \right)  \\
@@ -621,6 +638,9 @@ the entropy reaches its spatial minimum, one concludes that $\alpha_k \rho_k \fr
 i.e., $\alpha_k \rho_k \frac{D s_k}{Dt} \geq 0$, holds {\it independently} of the definition of the dissipative term $\mbold l_k$
 in the volume fraction equation. For the minimum entropy principle to hold for each phase $k$, positivity of the product $\alpha_k \rho_k$ is also required. 
 To do so, we need to derive an expression for the dissipative term $\mbold l_k$ since it is present in the phasic continuity equation \eqt{eq:sev_equ-with-diss-terms-cont}.
+\tcr{I do not understand the linkage between the last 3 sentences. The second to last sentence seems misplaced or the relationship between alpha rho and l
+is not yet known but the sentence assumes that the readers knows something about it, which is weird because that relationship is the purpose of
+the next section...}
 %
 %----------------------------------------------------------------------------------------------------------------------------
 \subsection{Nonnegativity of the phasic density and the phasic volume fraction}\label{sct:positivity}
@@ -634,36 +654,34 @@ Following the work of Guermond et al. for linear advection and Burgers' equation
 selection of the entropy solution for the volume fraction equation is of the form $\mbold l_k = \beta_k A \grad \alpha_k $, where $\beta_k$
 is a positive viscosity coefficient. The dissipative term is made proportional to the area $A$ for consistency with 
 the other definitions of the viscous terms. Now that an expression for the dissipative term $\mbold l_k$ is known, we can show that (i) the phasic
-volume fraction $\alpha_k$ is bounded within the interval $[0;1]$ and (ii) the product $\alpha_k \rho_k$ remains nonnegative under certain conditions.
+volume fraction $\alpha_k$ is bounded within the interval $[0,1]$ and (ii) the product $\alpha_k \rho_k$ remains nonnegative under certain conditions.
 The regularized volume fraction equation is as follows:
 %
 \begin{equation}\label{eq:final-reg-vf-equ}
 \partial_t \left( \alpha_k A \right) + \mbold u_{int} A \grad \alpha_k= \div \left( A \beta_k \grad \alpha_k \right) \ .
 \end{equation}
 %
-Let us assume that the 1-D 
-\tcr{do we have to use one 1D, can't we say  $ \partial_q \alpha_k = 0$ and $\partial_{qq} \alpha_k \leq 0$, fpr $q=x,y,z$?}
-phasic volume fraction is initially bounded within the interval $[0;1]$ and that a maximum is reached at a given point $x_0 \in \mathcal{R}$
-such as $ \partial_x \alpha_k = 0$ and $\partial_{xx} \alpha_k \leq 0$. At the point $x_0$ where the maximum is reached and recalling that the phasic viscosity coefficient
-$\beta_k$ is positive by definition, the regularized volume fraction equation becomes:
+Let us assume that phasic volume fraction is initially bounded within the interval $[0;1]$ and that a maximum is reached at a given point $\mbold r_0$
+such as $ \partial_d \alpha_k = 0$ and $\partial_{dd} \alpha_k \leq 0$ for $1\le d \le {\tt dim}$. \tcr{check} 
+At the point where the maximum is reached, the regularized volume fraction equation becomes:
 %
 \begin{equation}\label{eq:final-reg-vf-equ-max}
 \partial_t \alpha_k = \beta_k \Delta \alpha_k \leq 0 \ ,
 \end{equation}
 %
-which means that the volume fraction locally decreases as a function of time and thus remains bounded from above. 
+($\beta_k \ge 0$) which means that the volume fraction locally decreases as a function of time and thus remains bounded from above. 
 % Note that \eqt{eq:final-reg-vf-equ-max} was obtained from \eqt{eq:final-reg-vf-equ} 
 % by expending its righthand-side and dividing out by the cross-section $A$. 
-Similarly, if a minimum is reached in $x_0$ (i.e., $\partial_x \alpha_k = 0$ and $\partial_{xx} \alpha_k \geq 0$),
+Similarly, if a minimum is reached in $\mbold r_0$ (i.e., $\partial_d \alpha_k = 0$ and $\partial_{dd} \alpha_k \geq 0$),
 it can be shown that the volume fraction is also bounded from below. As a result, with the above regularization, the volume fraction
 should remain bounded in time within the given initial interval $[0;1]$.
 %
 \begin{my_remark}\label{rmq:rmq_vf_diss_term}
-Note that the viscous term in the phasic volume fraction equation is needed as illustrated in the following example. Consider a test case with uniform initial 
-phasic pressure, velocity, temperature and an initial step discontinuity in the volume fraction. Under such conditions and using the definitions given in \eqt{eq:int_variables_def}, 
+Note a viscous regularization of the phasic volume fraction equation is needed, as illustrated in the following example. Consider a 
+domain with uniform initial phasic pressure, velocity, temperature and an initial step discontinuity in the volume fraction. Under such conditions and using the definitions given in \eqt{eq:int_variables_def}, 
 the interfacial pressure and velocity are equal to the phasic pressure and velocity, respectively. Also, each equation of \eqt{eq:liq-7-eqn-sect5_no_exchange} now 
 devolves to the regularized volume fraction equation \eqt{eq:final-reg-vf-equ}. Assuming that the phasic volume fraction equation is not stabilized by a viscous term, 
-i.e., $\mbold l_k := \mbold 0$, the test case with the above initial condition would result in a numerical solution with spurious oscillations in the vicinity of the discontinuity. 
+i.e., if $\mbold l_k = \mbold 0$, then this example case with the above initial condition would result in a numerical solution with spurious oscillations in the vicinity of the discontinuity. 
 \end{my_remark}
 %
 Now that we have derived an expression for the dissipative term $\mbold l_k$, we consider the regularized phasic continuity equation to prove that the quantity 
@@ -673,24 +691,23 @@ $\alpha_k \rho_k$ remains nonnegative. Using the above definition of $\mbold l_k
 \partial_t \left( \alpha_k \rho_k A \right) + \div \left( \alpha_k \rho_k \mbold u_k A \right) = \div \left[ \kappa_k \alpha_k \grad \rho_k + \beta_k \rho_k \grad \alpha_k \right] \ .
 \end{equation}
 %
-In the particular case where $\beta_k = \kappa_k$, the dissipative terms in \eqt{eq:reg-mass-equ-final} become $\div \left[ \kappa_k \grad \left( \alpha_k \rho_k \right) \right]$ 
-and the resulting equation is identical to the regularized continuity equation of the Euler equation derived in \cite{jlg} when defining $\hat{\rho}_k = \alpha_k \rho_k$:
+In the particular case where $\beta_k = \kappa_k$, the dissipative terms in \eqt{eq:reg-mass-equ-final} become $\div \left( \kappa_k \grad \left( \alpha_k \rho_k \right) \right)$ 
+and the resulting continuity equation is identical to the regularized continuity equation for single-phase when letting $\hat{\rho}_k = \alpha_k \rho_k$:
 %
 \begin{equation}\label{eq:reg-euler-qu}
 \partial_t \left( \hat{\rho}_k A \right) + \div \left( \hat{\rho}_k \mbold u_k A \right) = \div \left( \kappa_k \grad \hat{\rho}_k \right) \ .
 \end{equation}
 %
-Following Lemma 3.1 of \cite{jlg} and using \eqt{eq:reg-euler-qu}, a nonnegative density principle can be proved for the quantity $\hat{\rho}_k$: this allows us to 
-conclude that the quantity $\alpha_k \rho_k$ remains nonnegative under the assumption $\beta_k = \kappa_k$. Note that unlike Lemma 3.2 of \cite{jlg}, the density 
-$\hat{\rho}_k$ cannot be proved strictly positive because the phasic volume fraction $\alpha_k$ can be locally equal to zero.
-\tcr{but do we care. if alpha=0, we are in the single-phase case, locally at least, and there we can used Guermond-Popov, and density is strictly positive, no?}
+Following Lemma 3.1 of \cite{jlg} and using \eqt{eq:reg-euler-qu}, a nonnegative density principle can be proved for the quantity 
+$\hat{\rho}_k$. Thus, we conclude that the quantity $\alpha_k \rho_k$ remains nonnegative under the assumption $\beta_k = \kappa_k$. 
+Note that unlike Lemma 3.2 of \cite{jlg}, the density 
+$\hat{\rho}_k$ cannot be shown to be strictly positive because the phasic volume fraction $\alpha_k$ may locally be equal to zero.
 %
-\begin{my_remark}\label{rmq:rmq_cont_diss_term}
-Note that the viscous term $\div \left[ \kappa_k \alpha_k \grad \rho_k + \beta_k \rho_k \grad \alpha_k \right]$ in the phasic continuity equation is required as 
-previously illustrated in Subsection 2.3 of \cite{jlg} for Euler equations.
-\end{my_remark}
-%
-\tcb{In the case $\beta_k \neq \kappa_k$ the proof is not obvious}
+%\begin{my_remark}\label{rmq:rmq_cont_diss_term}
+%Note that the viscous term $\div \left[ \kappa_k \alpha_k \grad \rho_k + \beta_k \rho_k \grad \alpha_k \right]$ in the phasic continuity equation is required as 
+%previously illustrated in Subsection 2.3 of \cite{jlg} for Euler equations.
+%\end{my_remark}
+%%
 %
 %---------------------------------------------------------------------------------
 \subsection{Minimum entropy principle}\label{sct:end-min-pr}
@@ -700,7 +717,6 @@ In this section, the minimum entropy residual is proved for each phase.
 % We have proved in \sct{sct:positivity}
 In the previous section, we have shown  that 
 (i) the phasic volume fraction $\alpha_k$ remains bounded within a given interval 
-\tcr{ that sounds weird, if we start with alphak=0.5, your sentence implies we will always remain at alphak=0.5 ....} \tcb{done}, 
 (ii)  the quantity $\alpha_k \rho_k$ is nonnegative, 
 and (iii) the right-hand side of \eqt{eq:ent-res-7-eqn-diss-terms3} leads to entropy production (that is, the right-hand side is positive). 
 As a result, the phasic entropy residual remains nonnegative, i.e. $\mathcal{R}_{e,k} \geq 0$
@@ -723,8 +739,6 @@ At this point, some remarks are in order. All of the dissipative terms have now 
 \end{align}
 \end{subequations}
 %
-\tcr{what's the problem with mathbb, I cannot see the letter g above. I looked before, it happened too. some conflicts in the latex package?} \tcb{done}
-
 \begin{enumerate}
 \item {The definition of the dissipative term $\mbold l_k$ contains a viscosity
     coefficient $\beta_k$ that is independent of
@@ -766,28 +780,27 @@ A \lambda_u \bar{\mbold u}_{int} \cdot \left( \mbold u_j - \mbold u_k \right)  \
 \end{multline} 
 \end{subequations}
 This particular choice of viscous regularization is analogous to the parabolic regularization for Euler equations \cite{Parabolic}. 
-Note that had we chosen $\mathbb{F}(\mbold u_k) = \grad \mbold u_k$, the viscous regularization would no longer be rotationally invariant.
+Note that if one chooses $\mathbb{F}(\mbold u_k) = \grad \mbold u_k$, the viscous regularization is no longer rotationally invariant.
 }
     
 \item{Compatibility of the viscous regularization proposed in \eqt{eq:visc-reg-7-equ-sect4} with the generalized entropies identified 
-in Harten et al. \cite{Harten} is demonstrated in \app{app:harden} of this paper. } 
+in Harten et al. \cite{Harten} is demonstrated in \app{app:harden}. } 
 \end{enumerate}
 %
 At this point, we have derived a viscous regularization for the Seven-Equation two-phase flow Model that ensures nonnegativity of the 
 entropy residual, convergence of the numerical solution to the entropy solution when assuming concavity of the phasic entropy $s_k$, and consistency with 
-the viscous regularization derived for Euler equations \cite{jlg,Marco_paper_low_mach} in the limit $\alpha_k \to 1$. The viscous 
+the viscous regularization derived for Euler equations \cite{jlg,Marco_paper_low_mach} in the limit $\alpha_k \to 0,1$. The viscous 
 regularization involves a set of three positive viscosity coefficients for each phase, $\mu_k$, $\kappa_k$, and $\beta_k$. The definition 
-of the viscosity coefficients should be devised from the scaled SEM in order to ensure well-scaled dissipative terms for a wide range 
+of these viscosity coefficients should be inferred from the scaled SEM in order to ensure well-scaled dissipative terms for a wide range 
 of Mach numbers (subsonic, transonic and supersonic flows) and is the topic of \sct{sec:low-Mach}. But first, we investigate, in the 
 next paragraph, the effect of the viscous regularization in the case where the SEM devolves to the five-equation model of 
 Kapila \cite{Kapila_2001}.
 %
 \begin{my_remark}\label{rmq:ent_res_neg}
-The phasic entropy residual is proved to be nonnegative in \sct{sct:end-min-pr}. When numerically computed, however, one can observe that the phasic entropy residual $\mathcal{R}_{e,k}$,
-can experience negative variation in the vicinity of a shock, as previously noted  in \cite{Guermond_Pasquetti}: this is due to the strong variations of the phasic entropy 
-residual in the shock regions. \tcr{should we not add something like we are sampling an numerical approximation to the residual that tends to a Dirac distribtion} We refer the reader to Section 4 of \cite{Guermond_Pasquetti} for further discussions.
+In \sct{sct:end-min-pr}, the phasic entropy residual has been shown to be nonnegative. However, when numerically computed, one can observe that the phasic entropy residual $\mathcal{R}_{e,k}$,
+exhibits some negative variation in the vicinity of a shock, as previously noted  in \cite{Guermond_Pasquetti}: this is due to the fact that the phasic entropy residual becomes a Dirac measure in the shock region and that this quantity iis numerically sampled (numerical
+artifacts due to mesh/quadrature). We refer the reader to Section 4 of \cite{Guermond_Pasquetti} for additional discussions. As a consequence, the abolute value of the entropy residual is used in computational results.
 \end{my_remark}
-\tcb{This is maybe not the best place to have this remark.} \tcr{Maybe in a place where we say that we use the abolute value of the residual rather than just the residual?}
 %
 %---------------------------------------------------------------------------------
 \subsection{A Chapman-Enskog expansion of the regularized Seven-equation two-phase flow model}\label{sec:chap-enskog}
@@ -796,10 +809,10 @@ residual in the shock regions. \tcr{should we not add something like we are samp
 The five-equation two-phase flow model of Kapila \cite{Kapila_2001} is obtained from the non-regularized SEM by 
 performing a Chapman-Enskog expansion. The steps of the derivation are well detailed in the literature and can 
 be found in \cite{dellacherie,GuillardMurrone2003}, for instance. The objective of this section is to perform a Chapman-Enskog 
-expansion of the \emph{regularized} SEM derived in \sct{sct:end-min-pr} and investigate the behavior of the 
+expansion of the \emph{regularized} SEM derived in \sct{sct:end-min-pr} and to investigate the behavior of the 
 dissipative terms: we wish to ensure that the dissipative terms remain well-scaled and can efficiently stabilize 
 the resulting system of equations. Only the main results of the derivation are given here and have been obtained 
-by following the same steps as in \cite{dellacherie,GuillardMurrone2003}. First, the pressure and velocity 
+following a procedure similar to \cite{dellacherie,GuillardMurrone2003}. First, the pressure and velocity 
 relaxation coefficients are scaled by a small coefficient $\epsilon$ that describes the strength of the 
 perturbation: $\mu_P \to \frac{\mu_P}{\epsilon}$ and $\lambda_u \to \frac{\lambda_u}{\epsilon}$. Then, 
 each variable is expanded in powers of $\epsilon$, as shown, for instance, in \eqt{eq:P-expansion-epsilon}.
@@ -812,7 +825,7 @@ These expansions are inserted in the SEM equations \eqts{eq:sev_equ-with-diss-te
 fluxes obtained in \eqts{eq:visc-reg-7-equ-sect4}, yielding a hierarchy of equations for each power of $\epsilon$.  
 %
 The dissipative terms derived in \sct{sct:end-min-pr} do not depend the relaxation coefficients $\mu_P$ and $\lambda_u$ and thus have 
-the same scaling as the inviscid fluxes. From the leading-order momentum and energy equations (terms in $\epsilon^{-1}$), 
+the same scaling as the inviscid fluxes. From the leading-order momentum and energy equations (terms in powers of $\epsilon^{-1}$), 
 we determine that the leading-order phasic pressures and velocities are equal in each phase:
 \be
 P_{k,0}=P_{j,0}=P_0 \quad \text{and} \quad \mbold u _{k,0} = \mbold u_{j,0} = \mbold u_0 \,. 
@@ -822,7 +835,7 @@ This also implies that
  P_{int,0} = \bar{P}_{int,0} = P_0 \quad \text{and} \quad \mbold u_{int,0} = \bar{\mbold u}_{int,0} = \mbold u_0 \,.
 \ee
 Using these results, the next-leading order equations (terms in $\epsilon^0$) yield the regularized five-equation model of Kapila, 
-which we recall in \eqt{eq:liq-5-eqn} where we have defined $\rho u = \sum_{i=k,j} \alpha_i \rho_i u_i$ and $\rho E = \sum_{i=k,j} \alpha_i \rho_i E_i$ 
+which we recall in \eqt{eq:liq-5-eqn} where we have defined $\rho \mbold u = \sum_{i=k,j} \alpha_i \rho_i \mbold u_i$ and $\rho E = \sum_{i=k,j} \alpha_i \rho_i E_i$ 
 as the mixture momentum and the mixture energy, respectively.
 %
 \begin{subequations}\label{eq:liq-5-eqn}
@@ -881,7 +894,7 @@ In the previous section, we have presented a viscous regularization for the seve
 two-phase fluids may be found in various flow regimes, from extremely low-Mach subsonic situations to supersonic cases.
 In this section, we write the non-dimensionalized version of the SEM to carry out a low-Mach asymptotic analysis. In order to 
 recover the low-Mach incompressible equations, some requirements on the scaling of the viscous fluxes will be presented.  
-We then propose an all-Mach scaling in order to obtain an appropriately bounded viscous regularization for many flow regimes
+We then propose an all-Mach scaling in order to obtain an appropriately scaled viscous regularization for many flow regimes
 (subsonic, transonic and supersonic flows).
 
 When employing artificial viscosity techniques, one needs to ensure that sufficient artificial viscosity is present in the shock 
@@ -902,7 +915,8 @@ Equations of State (SGEOS) \cite{SGEOS} given in \eqt{eq:SGEOS_bis}.
 P_k = \left( \gamma_k-1 \right) \rho_k e_k - \gamma_k P_{k,\infty}
 \end{equation}
 Note that the ideal gas equations of state can be recovered by letting $P_{k,\infty}=0$.
-%
+\tcr{did you update this. I thought a $q$ term was missing according to a reviewer...?!?}
+
 %------------------------------------------------------------------------------------------------------------------------------------------------------
 \subsection{Derivation of the non-dimensionalized seven-equation two-phase flow model}\label{sec:scaled-SEM}
 %------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1083,10 +1097,10 @@ velocity field for a constant area $A$ and volume fraction $\alpha_k$, i.e., $\d
 The same reasoning can be applied to the leading-order 
 of the continuity equation (\eqt{eq:asympt_equ2_cont}) to show that the material derivative of the density variable is stabilized with 
 appropriately scaled dissipative terms (the resulting regularization does not depend on the Mach number):
-\begin{multline}
+\begin{equation}
 \partial_t \left( \alpha_k A \rho\right)_0 + \div \left( \alpha_k A \rho_k \mbold u_k \right)_0 =
 \div \left[ \alpha_k A \kappa_k \grad \rho + A \beta_k \rho_k \grad \alpha_k \right]_0 \, .
-\end{multline}
+\end{equation}
 %
 Therefore, we conclude that, by setting the Reynolds and P\'eclet numbers to one, the proposed viscous regularization
 of the seven-equation two-phase flow model yields the correct incompressible limit in low-Mach situations.
@@ -1128,7 +1142,7 @@ regularization of the volume fraction and continuity equations unaffected becaus
 \begin{my_remark}
 In the above, the P\'eclet number $\Pe_{k,\infty}^\kappa$ was set to one to avoid adding an excessive amount of dissipation in contact waves
 (presence of a $1/\Pe_{k,\infty}^\kappa$ term in \eqt{eq:sev_equ-with-diss-terms-cont_case_one_scaled}). 
-However, if one can distinguish contact waves from shock/rarefaction waves (in a numerical scheme, for instance), then there is the possibility of 
+However, if one can distinguish contact waves from shock / rarefaction waves (in a numerical scheme, for instance), then there is the possibility of 
 having the local P\'eclet number $\Pe_{k,\infty}^\kappa$ set to one in contact waves and to $M^2_{k,\infty}$ in shock waves. 
 As such, this option would allow stabilizing shock waves ($\Pe_{k,\infty}^\kappa$ scales as $M^2_{k,\infty}$) and would not be over-dissipative in the 
 contact region ($\Pe_{k,\infty}^\kappa$ scales as 1):
