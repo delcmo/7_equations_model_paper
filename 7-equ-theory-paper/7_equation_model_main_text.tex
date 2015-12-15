@@ -1065,7 +1065,7 @@ The set of equations given in
 %
 \begin{equation}
 \label{eq:leading_order_sgeos}
- P_{k,0} = (\gamma_k - 1) \rho_{k,0} (E_{k,0}-q_k) - \gamma P_{k,\infty}  = (\gamma_k - 1) \rho_0 (e_{k,0}-q_k) - \gamma_k P_{k,\infty} \,.
+ P_{k,0} = (\gamma_k - 1) \rho_{k,0} (E_{k,0}-q_k) - \gamma P_{k,\infty}  = (\gamma_k - 1) \rho_{k,0} (e_{k,0}-q_k) - \gamma_k P_{k,\infty} \,.
 \end{equation}
 % 
 Using \eqt{eq:leading_order_sgeos}, the energy equation can be recast as a function of the leading-order pressure, $P_0$, as follows:
@@ -1208,7 +1208,7 @@ In this example, we set the relaxation coefficients $\mu_P$ and $\lambda_u$ to l
 We consider two fluids, denoted by the subscripts $1$ and $2$, and employ the ideal gas law with the following parameters $\gamma_1=3$ and $\gamma_2=1.4$. 
 The numerical illustration consists of a 1-D shock tube of length 1 meshed with 400 cells and containing two-phase mixtures separated by a membrane placed at $x=0.5$. 
 The initial left/right values of the pressures are
- $(P_{k,left}=10)$ and $(P_{k,right}=1)$ (for $k=1,2$). The initial density and volume fraction are uniform and set to $\rho_1=10$, $\rho_2=1$ and $\alpha = 0.5$, respectively. 
+ $(P_{k,left}=10^5)$ and $(P_{k,right}=10^4)$ (for $k=1,2$). The initial density and volume fraction are uniform and set to $\rho_1=10$, $\rho_2=1$ and $\alpha = 0.5$, respectively. 
 Both fluids are initially at rest. The relaxation coefficients $\mu_P$ and $\lambda_u$ are computed from \eqt{E-R:86} and \eqt{E-R:85}, respectively, 
 along with \eqt{eq:Aint-sect4} and $A_{int}^{max}=4 \times 10^3\,m^{-1}$. At $t=0$, the membrane is suddenly removed and the simulation is ran until $t=473 \ \mu s$ with a CFL of one. 
 In \sct{sec:lf-scheme}, numerical results are presented when defining the phasic viscosity coefficients proportional to the local maximum eigenvalues which we refer to as Lax-Friedrichs-like scheme. 
