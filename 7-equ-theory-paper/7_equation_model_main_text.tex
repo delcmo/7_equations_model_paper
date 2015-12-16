@@ -610,7 +610,7 @@ Finally, using \eqts{eq:def_visc}, the $\mathcal{R}_0$ can be recast as a functi
 The entropy residual equation for phase $k$ can now be written in its final form:
 %
 \begin{multline}\label{eq:ent-res-7-eqn-diss-terms3}
-\alpha_k \rho_k A \frac{Ds_k}{Dt} =  \mbold f_k \cdot \grad s_k + \div \left( \alpha_k A \rho_k \kappa_k  \grad s_k \right)  \\
+\alpha_k \rho_k A \frac{Ds_k}{Dt} -  \mbold f_k \cdot \grad s_k - \div \left( \alpha_k A \rho_k \kappa_k  \grad s_k \right) =  \\
 - \alpha_k \rho_k A \kappa_k Q_k + (s_e)_k \alpha_k A \rho_k \mu_k \grad^s \mbold u_k : \grad \mbold u_k,
 \end{multline}
 %
@@ -629,7 +629,20 @@ Q_k &=& \mathbf{X}^T_k \mathbb{\Sigma}_k \mathbf{X}_k \nonumber \\
 \end{eqnarray}
 %
 As with the single-phase Euler equations, one can demonstrate that $\mathbb{\Sigma}_k$ is a symmetric negative definite quadratic form 
-when $s_k$ is concave with respect to $e_k$ and $\rho_k^{-1}$  \cite{jlg_VR_SIAM_2004,Marco_paper_low_mach}.
+when $s_k$ is concave with respect to $e_k$ and $\rho_k^{-1}$  \cite{jlg_VR_SIAM_2004,Marco_paper_low_mach}. We have proved the following:
+
+\begin{lemma}\label{lmm:lemma-1}
+Assume the seven-equation model is regularized as shown in \eqt{eq:sev_equ-with-diss-terms} and that the corresponding entropy equation given in \eqt{eq:ent-res-7-eqn-diss-terms3} holds.
+The left-hand side of \eqt{eq:ent-res-7-eqn-diss-terms3} is non-negative if and only if the phasic entropy function $s_k$ is concave with respect to $e_k$ and $\rho_k^{-1}$ and, 
+\begin{align}
+& \mbold f_k   =  \kappa_k \grad \rho_k
+  \\
+&  \mathbb{g}_k = \alpha_k \rho_k A \mu_k \mathbb{F}(\mbold u_k) +  \mbold f_k \otimes \mbold u_k
+  \\
+&  \mbold h_k =   \kappa_K \grad (\rho e)_k + \tfrac{1}{2}\| \mbold u_k\|^2  \mbold f_k - (\rho e)_k \mbold l_k,
+\end{align}
+where $\kappa_k$ and $\mu_k$ are positive viscous coefficients.
+\end{lemma}
 
 \eqt{eq:ent-res-7-eqn-diss-terms3} is constructed to satisfy the minimum entropy principle for the SEM \emph{with} viscous regularization. 
 At a location $\mbold x_{min}(t)$ where $s_k$ reaches its minimum value at time $t$, the gradient, $\grad s_k$, and Laplacian, $\Delta s_k$, 
@@ -673,7 +686,16 @@ At the point where the maximum is reached, the regularized volume fraction equat
 % by expending its righthand-side and dividing out by the cross-section $A$. 
 Similarly, if a minimum is reached in $\mbold r_0$ (i.e., $\partial_d \alpha_k = 0$ and $\partial_{dd} \alpha_k \geq 0$),
 it can be shown that the volume fraction is also bounded from below. As a result, with the above regularization, the volume fraction
-should remain bounded in time within the given initial interval $[0;1]$.
+should remain bounded in time within the given initial interval $[0;1]$, which yields the following lemma:
+%
+\begin{lemma}\label{lmm:lemma-2}
+Assume the phasic volume fraction is regularized, \eqt{eq:final-reg-vf-equ}, by a viscous flux denoted by $\mbold l_k$. The phasic volume fraction converges to a weak solution 
+and is bounded if only if the viscous flux  $\mbold l_k$ is defined as 
+\begin{equation}
+\mbold l_k = \beta_k A \grad \alpha_k \ , \nonumber
+\end{equation}
+where $\beta_k$ is a positive viscous coefficient.
+\end{lemma}
 %
 \begin{my_remark}\label{rmq:rmq_vf_diss_term}
 Note a viscous regularization of the phasic volume fraction equation is needed, as illustrated in the following example. Consider a 
@@ -719,7 +741,17 @@ In the previous section, we have shown  that
 (ii)  the quantity $\alpha_k \rho_k$ is nonnegative, 
 and (iii) the right-hand side of \eqt{eq:ent-res-7-eqn-diss-terms3} leads to entropy production (that is, the right-hand side is positive). 
 As a result, the phasic entropy residual remains nonnegative, i.e. $\mathcal{R}_{e,k} \geq 0$
-and that the minimum entropy principle holds for each phase and thus for the two-phase flow system as well.
+and that the minimum entropy principle holds for each phase and thus for the two-phase flow system as well:
+%
+\begin{theorem}[Minimum entropy principle]
+Assume that \lem{lmm:lemma-1} and \lem{lmm:lemma-2} hold and that the product $\alpha_k \rho_k$ is non-negative. Assume that the solution
+of \eqt{eq:sev_equ-with-diss-terms} is smooth, then the minimum entropy principle holds,
+%
+\begin{align}
+s_k(\mbold x, t) \geq \text{inf } s_{k,0}(\mbold x) \text{ and } \sum_k s_k(\mbold x, t) \geq \sum_k \text{inf } s_{k,0}(\mbold x) \ . \nonumber
+\end{align}
+%
+\end{theorem}
 
 At this point, some remarks are in order. All of the dissipative terms have now been defined and are recalled here:
 %
@@ -1101,8 +1133,15 @@ appropriately scaled dissipative terms (the resulting regularization does not de
 \div \left[ \alpha_k A \kappa_k \grad \rho + A \beta_k \rho_k \grad \alpha_k \right]_0 \, .
 \end{equation}
 %
-Therefore, we conclude that, by setting the Reynolds and P\'eclet numbers to one, the proposed viscous regularization
-of the seven-equation two-phase flow model yields the correct incompressible limit in low-Mach situations.
+Therefore, we conclude with the following lemma:
+%
+\begin{lemma}[Low-Mach asymptotic limit]
+Assume the seven-equation model is regularized, \eqt{eq:liq-7-eqn-sect5_no_exchange}, with the viscous fluxes defined in \eqt{eq:visc-reg-7-equ-sect4}. 
+Then, the regularized seven-equation model yields the correct incompressible limit in low-Mach situations if only if the phasic numerical numbers $\Re_{k,\infty}$, $\Pr^\kappa_{k,\infty}$
+and $\Pr^\beta_{k,\infty}$ scale as one.
+\end{lemma}
+%that, by setting the Reynolds and P\'eclet numbers to one, the proposed viscous regularization
+%of the seven-equation two-phase flow model yields the correct incompressible limit in low-Mach situations.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Scaling of $\Re_{k,\infty}$, $\Pe_{k,\infty}^\kappa$ and $\Pe_{k,\infty}^\beta$ for non-isentropic flows (case (b))}\label{eq:non_isent_flows}
@@ -1137,6 +1176,15 @@ for the energy equation (\eqt{eq:sev_equ-with-diss-terms-ener_case_one_scaled}) 
 choice, option ($iii$), has the proper scaling: in this case, only the dissipation terms involving 
 $\gradd{s,*} \mbold u_k^*$ scale as $1/M_{k,\infty}^2$ because $\Re_{k,\infty} = M_{k,\infty}^2$, leaving the 
 regularization of the volume fraction and continuity equations unaffected because $\Pe_{k,\infty}^\beta = \Pe_{k,\infty}^\kappa =1$.
+%
+\begin{lemma}[Non-isentropic flows]
+Assume the seven-equation model is regularized, \eqt{eq:liq-7-eqn-sect5_no_exchange}, with the viscous fluxes defined in \eqt{eq:visc-reg-7-equ-sect4}. 
+Then, the regularized seven-equation model is efficiently stabilized in all Mach situations when experiencing non-isentropic flows if only if the phasic numerical numbers $\Re_{k,\infty}$, $\Pr^\kappa_{k,\infty}$
+and $\Pr^\beta_{k,\infty}$ scale as follows:
+\begin{align}
+\Re_{k,\infty} = M_{k,\infty}^2 \ , \Pe_{k,\infty}^\kappa = 1 \text{ and } \Pe_{k,\infty}^\beta = 1\
+ \end{align}
+\end{lemma}
 %
 \begin{my_remark}
 In the above, the P\'eclet number $\Pe_{k,\infty}^\kappa$ was set to one to avoid adding an excessive amount of dissipation in contact waves
