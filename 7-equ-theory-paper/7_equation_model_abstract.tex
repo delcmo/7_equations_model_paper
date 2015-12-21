@@ -1,18 +1,22 @@
 In this paper, a viscous regularization is derived for the non-equilibrium Seven-Equation two-phase flow Model (SEM). 
-This regularization is derived by the mean of an entropy condition, i.e. an entropy minimum principle, that selects a weak solution.
-%that selects the physical or entropy weak solution.
-\tcr{what is 'the' physical solution? is it unique? is there only one entropy solution? I think we should be careful about the wording here} \tcb{we discussed it} 
-\tcr{NEW PROPOSAL: that selects a weak solution that satisfies an entropy-minimum principle}\tcb{ I agree with it and modified it} 
-The viscous regularization also ensures nonnegativity of the entropy residual, \tcr{check} \tcb{done} \tcr{but we cannot prove this numerically because it is not smooth ...} \tcb{ but we are not saying that the entropy residual is numerically positive. Guermond proves it in his later paper because he has a maximum principle. I do not think we should modify it.}
-is consistent with the viscous regularization for Euler equations when one phase disappears, does not depend on the spatial discretization scheme chosen, 
+This regularization, based on an entropy condition, is an artificial viscosity stabilization technique
+that selects a weak solution satisfying an entropy-minimum principle.
+ %based on an entropy condition and and , i.e. an entropy minimum principle, that selects a weak solution.
+%%that selects the physical or entropy weak solution.
+%\tcr{NEW PROPOSAL: that selects a weak solution that satisfies an entropy-minimum principle}
+The viscous regularization ensures nonnegativity of the entropy residual,
+% \tcr{check} \tcb{done} \tcr{but we cannot prove this numerically because it is not smooth ...} \tcb{ but we are not saying that the entropy residual is numerically positive. Guermond proves it in his later paper because he has a maximum principle. I do not think we should modify it.}
+is consistent with the viscous regularization for Euler equations when one phase disappears, 
+does not depend on the spatial discretization scheme chosen, 
 and is compatible with the generalized Harten entropies. 
 %
-We also investigate the behavior of the proposed viscous regularization for two theoretical 
+We investigate the behavior of the proposed viscous regularization for two theoretical 
 \tcr{couldn't we say important instead? Maybe ask Ray to pick.} \tcb{We can ask Ray.} limit-cases. 
 First, a Chapman-Enskog expansion is performed for the regularized seven-equation two-phase flow model and 
 we show that the five-equation flow  model of Kapila is recovered with a well-scaled viscous regularization. 
 Second, a low-Mach asymptotic limit of the regularized seven-equation flow model is carried out whereby the 
 scaling of the non-dimensional numbers associated with the viscous terms is determined such that an 
 incompressible two-phase flow model, with a properly scaled regularization, is recovered. 
+%
 Both limit-cases are illustrated with one-dimensional numerical results, including two-phase flow shock tube tests 
-and two-phase flow steady-state solutions in converging-diverging nozzles.
+and steady-state two-phase flows in converging-diverging nozzles.
