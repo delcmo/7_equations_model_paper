@@ -55,9 +55,8 @@
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\bibliographystyle{../elsarticle-num}
 \begin{document}
-\bibliographystyle{elsarticle-num}
 \begin{center}
 { \Large Answers to Reviewer \#1}
 \end{center}
@@ -116,8 +115,9 @@ We have added a paragraph reviewing previous work dealing with weak solution and
 non-conservative system of equations in the introduction (see lines 12-56). We also modified
 the section entitled {\it Methodology} accordingly (see lines 193-228).
 
-We thank you for your insightful review. The following references have been added:
-\framebox{\framebox{Marco, can you add that?}}
+We thank you for your insightful review. The following references have been added: \cite{alouges_merlet_2004}, \cite{lefloch_1989},
+\cite{lefloch_1988}, \cite{dlm} and \cite{bianchini_bressan_2005}.
+\framebox{\framebox{Marco, can you add that?}} \tcb{done}
 
 \tcr{Marco and I think we have a pretty good handle on this. It will include
 citing the proper references and the relevant theorems. We must remember to thank the reviewer
@@ -180,7 +180,7 @@ corresponds to a contact discontinuity.
 \framebox{\framebox{still noting here ...}}
 
 \tcr{We should verify this. We need to ask Ray for the eigenvectors of the SEM if he has them and them check that
-we have a contact discontinuity} \tcb{I have not added anything about that yet}
+we have a contact discontinuity} \tcb{I have not added anything about that yet, but I believe it is done in a reference I have to find.}
 \bigskip
 
 
@@ -275,5 +275,5 @@ We corrected this statement that is incorrect and rephrased it in lines 701-708.
 \bigskip
 
 
-
+\bibliography{../mybibfile}
 \end{document}
