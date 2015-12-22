@@ -73,6 +73,9 @@ Title: ``Viscous Regularization for the Non-equilibrium Seven-Equation Two-Phase
 In {\color{blue}blue} are reviewer's comments, in black are our answers, in {\color{red}red} are Jean's comments,
 and in {\color{green}green} are Marco's comments.
 
+\fbox{\fbox{\parbox{0.9\textwidth}{\tcr{Line numbers: we will need to convert them the the Springer format before we resubmit. The current numbers 
+are obtained using another format!}}}}
+
 \bigskip
 
 {\color{blue}
@@ -108,9 +111,13 @@ conditions, see [4]. Note that rarefaction waves and contact discontinuities are
 affected by the choice of the path. It would be interesting for the reader to know
 what notion of weak solution and entropy solution is applied here.}
 
-The problem under consideration is indeed in a non-conservative form and we added a paragraph reviewing
-previous work dealing with weak solution and entropy condition for non-conservative system of equations in the introduction (see lines 21-67). We also modified
-the section entitled methodology accordingly (see lines 188-216).
+The problem under consideration is indeed a nonlinear hyperbolic system in non-conservative form. 
+We have added a paragraph reviewing previous work dealing with weak solution and entropy condition for 
+non-conservative system of equations in the introduction (see lines 12-56). We also modified
+the section entitled {\it Methodology} accordingly (see lines 193-228).
+
+We thank you for your insightful review. The following references have been added:
+\framebox{\framebox{Marco, can you add that?}}
 
 \tcr{Marco and I think we have a pretty good handle on this. It will include
 citing the proper references and the relevant theorems. We must remember to thank the reviewer
@@ -129,7 +136,8 @@ conservative form it is well-known that uniqueness is ensured if an entropy ineq
 holds for all entropy-entropy flux pairs. However, the problem at hand is not in
 conservative form. See also the first remark.}
 
-Our wording was incorrect and corrected it: we meant that the viscous regularization ensures convergence of the numerical solution to an entropy weak solution 
+Our wording was incorrect and we have corrected it: we meant to state that the viscous regularization 
+ensures convergence of the numerical solution to a weak (minimum-entropy satisfying) solution 
 and not uniqueness of the weak solution. See also our answer to your first remark.
 
 \tcr{Here too we will need to cite the proper theorems from the list of references giving to us.} \tcg{Also we should be more careful about the 
@@ -142,11 +150,12 @@ wording and write 'entropy solution' instead of 'uniqueness of the weak solution
 It should be mentioned that other choices are considered in the literature for which
 the second law of thermodynamics can be verified, see e.g. [7].}
 
-The definitions of the interfacial pressure and velocity are not unique as you mentioned in your above comment. We added references with further
-examples of the interfacial variables. It is now emphasized in the paper that the theoretical results devised hold as long as the choice of the interfacial
+The definitions of the interfacial pressure and velocity are not unique, as you rightfully mentioned. 
+We added References 8 and 30 with further examples of the interfacial variables. We now emphasize 
+that the theoretical results devised hold as long as the choice of the interfacial
 variables preserve the entropy inequality (see paragraph between equations (3d) and (4a)). 
 
-\tcr{Easy to do. We will add another choice as an example and cite [7].} \tcg{We should also emphasize that the
+\tcg{We should also emphasize that the
 results of the paper are independent of the choice of the definition for the interfacial variables as long as the entropy inequality is preserved.}
 \bigskip
 
@@ -157,7 +166,7 @@ set of linearly independent (left/right) eigenvectors. For the considered system
 only holds true if the non-resonance condition is satisfied, see [1].
 }
 
-We fully agree with you and modified the text accordingly (see lines 146-152).
+We fully agree with you and modified the text accordingly (see lines 151-158).
 
 \tcr{Another great remark. We will add this}
 \bigskip
@@ -168,6 +177,7 @@ We fully agree with you and modified the text accordingly (see lines 146-152).
 to the eigenvalue $\lambda_{3+dim}$ in (6) is linearly degenerated. In this case the jump in $\alpha$
 corresponds to a contact discontinuity.
 }
+\framebox{\framebox{still noting here ...}}
 
 \tcr{We should verify this. We need to ask Ray for the eigenvectors of the SEM if he has them and them check that
 we have a contact discontinuity} \tcb{I have not added anything about that yet}
@@ -178,7 +188,8 @@ we have a contact discontinuity} \tcb{I have not added anything about that yet}
 6. For the numerical computations in Section 5.2 the stiffened gas law (32) has to be
 modified to account for the heat of formation $q_k$.}
 
-Thank you for pointing out this. It was a typo. We fully agree with you.
+Thank you for pointing out this. It was a typo. We fully agree with you and have corrected it (the mistake
+also occurred at another location).
 \bigskip
 
 
@@ -190,8 +201,8 @@ terms in (1) is of interest. Furthermore, the spatial/temporal dicretization and
 CFL number should be mentioned.}
 
 We had forgotten to give a short paragraph explaining our space/time discretization.
-Actually, it was present in a previous version and we removed it by mistake. It has 
-been added now (see paragraph after line 521).
+Actually, it was present in a previous version of the manuscript and we removed it by mistake! 
+It has  been added now (see paragraph at the beginning of Section 5).
 \bigskip
 
 
@@ -202,6 +213,9 @@ i.e., stabilization by viscous regularization is successively reduced. In partic
 grid convergence study is recommended for the shock tube problem because the
 numerical results show a severe smearing for both the contact wave and the shock
 wave.}
+
+\framebox{\framebox{I hesitate a bit now that I re-read the comments. Are they asking for
+convergence order? We may not have run enough grid refinements yet}}
 
 We performed a grid convergence for the first test and plotted the numerical solutions of the phasic density (figure 2a) and
 the phasic volume fraction (figure 2b) for comparisons. It is then observed that the contact and shock waves are better resolved as 
@@ -217,7 +231,7 @@ figure in order to eyeball the increasing resolution effects.}
 the authors should also provide a caloric equation of state to compute the density,
 i.e., $T_k$.}
 
-Thank you for pointing out this. It was a typo. We fully agree with you.
+Thank you for pointing out this. We have added it.
 \bigskip
 
 
@@ -227,11 +241,11 @@ interesting to see whether the numerical scheme maintains this property. Therefo
 would be interested to see plots of the numerical entropy residual to check whether
 it remains positive.}
 
-Positivity of the entropy residual is indeed ensured for a theoretical point of view. When numerically evaluating, however,
-the entropy residual, negative values of the entropy residual are observed in the vicinity of the shock. This phenomenon
-has been previously discussed in [34]. We added a remark explaining such behavior in lines 386-391.
+Positivity of the entropy residual is indeed ensured for a theoretical point of view. 
+However, when numerically evaluating the entropy residual, negative values can be obtained in 
+the vicinity of the shock. This phenomenon has been previously discussed in [38]. 
+We added a remark explaining such a behavior in Remark-2, lines 399-406.
 
-\tcr{Marco will re-run some cases and output that value. Make sure you do not output its absolute value}
 \bigskip
 
 
@@ -255,22 +269,11 @@ ensures uniqueness of the numerical solution. Since the authors do not give a
 uniqueness proof this statement seems to be too strong and should be rephrased. See also
 my first and second remark.}
 
-We corrected this statement that is incorrect and rephrased it in lines 660-667.
+We corrected this statement that is incorrect and rephrased it in lines 701-708.
 
 \tcr{This will be corrected once we answer the reviewer's remarks \#1+2.}
 \bigskip
 
-
-{\color{blue}
-}
-
-\bigskip
-
-
-{\color{blue}
-}
-
-\bigskip
 
 
 \end{document}
