@@ -376,9 +376,11 @@ as it provides the theoretical foundations for a viscous regularization based on
 we will be able to demonstration that our derived viscous regularization for the SEM model
 (i) is consistent with an entropy inequality and (ii) ensures convergence of the numerical solution to the physical or entropy solution. 
 Furthermore, it is emphasized in \cite{dlm,bianchini_bressan_2005,lefloch_1989} that the theory developed 
-for HNCSE remains valid for HCSE \tcb{under the condition that the nonconservative form may be written under a conservative form}
-\tcr{can you point me to a page number in one of these articles to understand better? I read this as a HNCSE should be writable in a HCSE?
-Sounds weird}\tcb{see paragraph above equation 2.7 on page 5 of [20]}: this remark is of importance since it will guarantee, from a 
+for HNCSE remains valid for HCSE:
+%\tcb{under the condition that the nonconservative form may be written under a conservative form}
+%\tcr{can you point me to a page number in one of these articles to understand better? I read this as a HNCSE should be writable in a HCSE?
+%Sounds weird}\tcb{see paragraph above equation 2.7 on page 5 of [20]}: 
+this remark is of importance since it will guarantee, from a 
 theoretical perspective, that the viscous stabilization for the two-phase flow model will consistently devolve to the single-phase viscous stabilization
 when the SEM (a HNCSE) devolves to the Euler equations (a HCSE). 
 
@@ -645,7 +647,7 @@ of the entropy are zero and positive at this particular location, respectively. 
 \eqt{eq:ent-res-7-eqn-diss-terms3} have been shown to be either positive or zero when 
 the entropy reaches its spatial minimum, one concludes that $\alpha_k \rho_k \frac{D s_k}{Dt} \geq 0$. For the minimum entropy principle to hold for each phase $k$, i.e., $\frac{D s_k}{Dt}\geq 0$, positivity of the product $\alpha_k \rho_k$ is also required. To prove positivity of $\alpha_k \rho_k$, we need to derive an expression for the dissipative term $\mbold l_k$ since it is present in the phasic continuity equation \eqt{eq:sev_equ-with-diss-terms-cont}; this is described in the next paragraph. Note that 
 %when one has $\alpha_k \rho_k \geq 0$, then it is obvious to note that,
-at an entropy extremum, the inequality $\alpha_k \rho_k \frac{D s_k}{Dt} \geq 0$, holds {\it independently} of the definition of the dissipative term $\mbold l_k$ utilized in the volume fraction equation. \tcr{check my mods on that last sentence} \tcb{I modified it: $\alpha_k \rho_k \geq 0$ is not needed}
+at an entropy extremum, the inequality $\alpha_k \rho_k \frac{D s_k}{Dt} \geq 0$, holds {\it independently} of the definition of the dissipative term $\mbold l_k$ utilized in the volume fraction equation. 
 %
 %----------------------------------------------------------------------------------------------------------------------------
 \subsection{Nonnegativity of the phasic density and the phasic volume fraction}\label{sct:positivity}
@@ -1218,7 +1220,7 @@ to illustrate that the proposed viscous regularization is effective and agnostic
 and thus have opted for a less traditional discretization technique for HNCSE; note that when employing continuous finite
 elements, interfacial numerical fluxes need not be defined, which simplifies the implementation. Second, several open-source, 
 parallel, continuous finite element libraries are available (e.g., MOOSE \cite{moose} which was employed here),
-thus possibly enabling the dissemination of multi-phase flow simulations using such tools.} \tcb{ok}
+thus possibly enabling the dissemination of multi-phase flow simulations using such tools.} 
 For temporal discretization, we use BDF2 \cite{bdf2}, a second-order accurate backward differencing scheme. 
 A Jacobian-free Newton Krylov (JFNK) solver is employed to solve the nonlinear system of discrete equations 
 at the end of each time step. An approximate full Jacobian matrix is used as a preconditioner and is computed by finite difference 
