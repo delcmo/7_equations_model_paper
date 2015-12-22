@@ -628,15 +628,14 @@ As with the single-phase Euler equations, one can demonstrate that $\mathbb{\Sig
 when $s_k$ is concave with respect to $e_k$ and $\rho_k^{-1}$  \cite{jlg_VR_SIAM_2004,Marco_paper_low_mach}. We have proved the following:
 
 \begin{lemma}\label{lmm:lemma-1}
-\tcr{can you check these expressions ofr f, g, h. For example, the aread seems to be missing from f and g. Alpha is also missing. And f does not even depend on l. A lot of things are missing. This is very strange.} \tcb{Just fixed it. I got confused between $\tilde{h}$ and $h$}.
 When the seven-equation model is regularized as shown in \eqt{eq:sev_equ-with-diss-terms} and the corresponding entropy equation given in \eqt{eq:ent-res-7-eqn-diss-terms3} holds, then 
-the left-hand side of \eqt{eq:ent-res-7-eqn-diss-terms3} is non-negative if and only if the phasic entropy function $s_k$ is concave with respect to $e_k$ and $\rho_k^{-1}$ and the following expressions  
+the left-hand side of \eqt{eq:ent-res-7-eqn-diss-terms3} is non-negative if and only if (i) the phasic entropy function $s_k$ is concave with respect to $e_k$ and $\rho_k^{-1}$ and (ii) the following expressions for the viscous fluxes are employed: 
 \begin{align}
-& \mbold f_k   =  \kappa_k \grad \rho_k
+&  \mbold f_k &= \alpha_k A \kappa_k \grad \rho_k + \rho_k  \mbold l_k 
   \\
-&  \mathbb{g}_k = \alpha_k \rho_k A \mu_k \mathbb{F}(\mbold u_k) +  \mbold f_k \otimes \mbold u_k
+&  \mathbb{g}_k &= \alpha_k A \mu_k \rho_k \grad^s \mbold u_k + \mbold f_k \otimes \mbold u_k 
   \\
-&  \mbold h_k =   \alpha A \kappa_k \grad (\rho e)_k - \tfrac{1}{2}\| \mbold u_k\|^2  \mbold f_k + (\rho e)_k \mbold l_k,
+&  \mbold h_k =  \alpha_k A \kappa_k \grad \left( \rho e \right)_k  - \frac{\| \mbold u_k \|^2}{2} \mbold f_k + (\rho e)_k \mbold l_k 
 \end{align}
 where $\kappa_k$ and $\mu_k$ are positive viscous coefficients.
 \end{lemma}
