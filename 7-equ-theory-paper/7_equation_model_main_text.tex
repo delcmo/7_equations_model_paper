@@ -9,7 +9,6 @@ the five-equation model of Kapila \cite{Kapila_2001,GuillardMurrone2003,Saurel_2
 the more traditional six-equation models \cite{Stadtke}, 
 and the fully non-equilibrium Seven-Equation Model (SEM) \cite{Berry_1985,BaerNunziato,Saurel_2001b,SEM}. 
 These models are obtained by integrating the one-phase flow Hyperbolic Conservative System of Equations (HCSE), 
-\tcr{are you sure these are HCSE that they start with? } \tcb{This is one is done in DEM paper} \tcr{thus, I have added here the SEM reference. If you agree with the setence, we can delete this series of comments}
 i.e., Euler equations, weighted by a characteristic or indicator function for each phase \cite{DrewPassman,SEM}.
 The resulting system of two-phase flow equations contains non-conservative terms and relaxation terms that 
 describe the interaction between phases, and are supplemented by an equation for the volume fraction. 
@@ -80,11 +79,7 @@ entropy principle by transforming the Lagrangian statement above into that of an
 Guermond and Popov \cite{jlg_VR_SIAM_2004}.
 
 In the work presented here, we also ensure that the proposed viscous regularization scales appropriately in two limits of both practical
-and theoretical importance: the multi-phase low-Mach regime and the multi-phase \tcr{thermodynamical/mechanical} equilibrium treated as a Chapman-Enskog expansion.
-\tcr{thermal is the definition of the C-E expansion, but later we call the kapila model the mechanical equil model, I am confused as of 
-it is mechanical or thermal equil then ...} 
-\tcb{this is the first time I read the term thermal for Kapila. I would rather use Kapila as it is used in other papers. It is mechanical equilibrium}
-\tcr{I didn't say mechanical for kapila. I am talking about CE. I am browsing the web for a definition of what a CE expansion here. Let me add thermodynamical in red and we ask Ray}
+and theoretical importance: the multi-phase low-Mach regime and the multi-phase \tcr{thermodynamical?/mechanical?} equilibrium treated as a Chapman-Enskog expansion.
 %, as such situations are often encountered  in practical applications; 
 First, a two-phase low-Mach asymptotic analysis is carried out to determine the conditions that need to be satisfied by the artificial dissipative 
 terms in order to yield a well-scaled regularization in the low-Mach case; see \cite{Marco_paper_low_mach} for the single-phase analog. 
@@ -373,19 +368,17 @@ the physical or entropy solution \cite{Lax}. However, the theory developed by La
 Instead the theory developed by Del Maso-Le Floch-Mariat is used to generalize the notions of weak solutions by introducing a path 
 in order to define the non-conservative product at points of discontinuity \cite{dlm}. 
 Bianchini et al. extended the notion of vanishing viscosity solution to HNCSE (see Theorem 1. on page 229,  \cite{bianchini_bressan_2005}). 
-\tcr{If you look at the previous version of this paragraph, we had the work of bianchine (2005) complete by le floch in 1989, anachronism,
-which itself was later introduce by le floch in 1988, another anachronism. So, I am going to move things around and/or remove these temporal indications
-because they do not make sense. Check this carefully. If I changed some meaning, then we need to talk.}
 Le Floch linked the notion of vanishing viscosity solution and the DLM theory to the notion of path (Theorem 3.2 on page 14, \cite{lefloch_1989}). 
-\tcr{check that the references go with the theorems. I moved things around a bit}
 An entropy condition for HNCSE that is equivalent to Lax' admissibility criterion was introduced by Le Flcoh in \cite{lefloch_1988} and 
 examples of its application to gas dynamics and elastodynamics systems were provided in Section 4 of \cite{lefloch_1988}. 
 The generalization of the entropy condition to non-conservative systems (HNCSE) is of great importance for the seven-equation model,
 as it provides the theoretical foundations for a viscous regularization based on a minimum entropy principle. Namely, 
 we will be able to demonstration that our derived viscous regularization for the SEM model
 (i) is consistent with an entropy inequality and (ii) ensures convergence of the numerical solution to the physical or entropy solution. 
-Furthermore, in \cite{dlm,bianchini_bressan_2005,lefloch_1989} it is emphasized that the theory developed 
-for HNCSE is also valid for HCSE \tcb{under the condition that the nonconservative form may be written under a conservative form}\tcr{like what? talk}: this remark is of importance since it will guarantee, from a 
+Furthermore, it is emphasized in \cite{dlm,bianchini_bressan_2005,lefloch_1989} that the theory developed 
+for HNCSE remains valid for HCSE \tcb{under the condition that the nonconservative form may be written under a conservative form}
+\tcr{can you point me to a page number in one of these articles to understand better? I read this as a HNCSE should be writable in a HCSE?
+Sounds weird}: this remark is of importance since it will guarantee, from a 
 theoretical perspective, that the viscous stabilization for the two-phase flow model will consistently devolve to the single-phase viscous stabilization
 when the SEM (a HNCSE) devolves to the Euler equations (a HCSE). 
 
@@ -633,14 +626,15 @@ As with the single-phase Euler equations, one can demonstrate that $\mathbb{\Sig
 when $s_k$ is concave with respect to $e_k$ and $\rho_k^{-1}$  \cite{jlg_VR_SIAM_2004,Marco_paper_low_mach}. We have proved the following:
 
 \begin{lemma}\label{lmm:lemma-1}
-Assume the seven-equation model is regularized as shown in \eqt{eq:sev_equ-with-diss-terms} and that the corresponding entropy equation given in \eqt{eq:ent-res-7-eqn-diss-terms3} holds.
-The left-hand side of \eqt{eq:ent-res-7-eqn-diss-terms3} is non-negative if and only if the phasic entropy function $s_k$ is concave with respect to $e_k$ and $\rho_k^{-1}$ and, 
+\tcr{can you check these expressions ofr f, g, h. For example, the aread seems to be missing from f and g. Alpha is also missing. And f does not even depend on l. A lot of things are missing. This is very strange.}
+When the seven-equation model is regularized as shown in \eqt{eq:sev_equ-with-diss-terms} and the corresponding entropy equation given in \eqt{eq:ent-res-7-eqn-diss-terms3} holds, then 
+the left-hand side of \eqt{eq:ent-res-7-eqn-diss-terms3} is non-negative if and only if the phasic entropy function $s_k$ is concave with respect to $e_k$ and $\rho_k^{-1}$ and the following expressions  
 \begin{align}
 & \mbold f_k   =  \kappa_k \grad \rho_k
   \\
 &  \mathbb{g}_k = \alpha_k \rho_k A \mu_k \mathbb{F}(\mbold u_k) +  \mbold f_k \otimes \mbold u_k
   \\
-&  \mbold h_k =   \kappa_K \grad (\rho e)_k + \tfrac{1}{2}\| \mbold u_k\|^2  \mbold f_k - (\rho e)_k \mbold l_k,
+&  \mbold h_k =   \kappa_k \grad (\rho e)_k + \tfrac{1}{2}\| \mbold u_k\|^2  \mbold f_k - (\rho e)_k \mbold l_k,
 \end{align}
 where $\kappa_k$ and $\mu_k$ are positive viscous coefficients.
 \end{lemma}
@@ -649,9 +643,8 @@ where $\kappa_k$ and $\mu_k$ are positive viscous coefficients.
 At a location $\mbold x_{min}(t)$ where $s_k$ reaches its minimum value at time $t$, the gradient, $\grad s_k$, and Laplacian, $\Delta s_k$, 
 of the entropy are zero and positive at this particular location, respectively. Because the terms on the right-hand-side of 
 \eqt{eq:ent-res-7-eqn-diss-terms3} have been shown to be either positive or zero when 
-the entropy reaches its spatial minimum, one concludes that $\alpha_k \rho_k \frac{D s_k}{Dt} \geq 0$. For the minimum entropy principle to hold for each phase $k$, i.e., $\frac{D s_k}{Dt}\geq 0$, positivity of the product $\alpha_k \rho_k$ is also required. To prove positivity of $\alpha_k \rho_k$, we need to derive an expression for the dissipative term $\mbold l_k$ since it is present in the phasic continuity equation \eqt{eq:sev_equ-with-diss-terms-cont}. Note that the inequality $\alpha_k \rho_k \frac{D s_k}{Dt} \geq 0$, holds {\it independently} of the definition of the dissipative term $\mbold l_k$
-in the volume fraction equation.
-\tcr{Ok. I am less confused but still a bit. Here, we say that deriving $l$ is required for positivity of alpha rho and in the next sentence we say that  $\alpha_k \rho_k \frac{D s_k}{Dt} \geq 0$ is independent of $l$. There is still some ambiguity here}
+the entropy reaches its spatial minimum, one concludes that $\alpha_k \rho_k \frac{D s_k}{Dt} \geq 0$. For the minimum entropy principle to hold for each phase $k$, i.e., $\frac{D s_k}{Dt}\geq 0$, positivity of the product $\alpha_k \rho_k$ is also required. To prove positivity of $\alpha_k \rho_k$, we need to derive an expression for the dissipative term $\mbold l_k$ since it is present in the phasic continuity equation \eqt{eq:sev_equ-with-diss-terms-cont}; this is described in the next paragraph. Note that when one has $\alpha_k \rho_k geq 0$, then it is obvious to note that,
+at an entropy extremum, the inequality $\alpha_k \rho_k \frac{D s_k}{Dt} \geq 0$, holds {\it independently} of the definition of the dissipative term $\mbold l_k$ utilized in the volume fraction equation. \tcr{check my mods on that last sentence}
 %
 %----------------------------------------------------------------------------------------------------------------------------
 \subsection{Nonnegativity of the phasic density and the phasic volume fraction}\label{sct:positivity}
@@ -674,7 +667,6 @@ The regularized volume fraction equation is as follows:
 %
 Let us assume that phasic volume fraction is initially bounded within the interval $[0;1]$ and that a maximum is reached at a given point $\mbold r_0$
 such as $ \partial_d \alpha_k = 0$ and $\partial_{dd} \alpha_k \leq 0$ for $1\le d \le {\tt dim}$. 
-\tcr{check} \tcb{I think this is correct but I remember using the Hessian matrix in multi-D} \tcr{can you tell me more? Why the Hessian}
 At the point where the maximum is reached, the regularized volume fraction equation becomes:
 %
 \begin{equation}\label{eq:final-reg-vf-equ-max}
@@ -1232,7 +1224,7 @@ at the end of each time step. An approximate full Jacobian matrix is used as a p
 (this is one of the options available in MOOSE and is reasonably efficient for 1-D simulations). 
 
 We illustrate the ability of the proposed viscous regularization to stabilize the 
-seven-equation two-phase flow equations using two test cases. \tcb{It will be three after I add the third test}\tcr{Status update?}
+seven-equation two-phase flow equations using two test cases. \tcb{It will be three after I add the third test}\tcr{ok}
 The first test is a shock tube configuration where we show that the viscous regularization prevents undershoots 
 and overshoots near shocks and discontinuities. The second set of tests aims at illustrating the low-Mach asymptotic limit study performed in \sct{sec:low-Mach} by investigating the steady-state solution
 of a two-phase flow in a converging-diverging nozzle. In all tests, the phasic pressure is computed using the Stiffened Gas equation of state \cite{SGEOS}:
@@ -1519,9 +1511,9 @@ i.e., properly scaled LLF viscosity) converges to the exact solution and the cor
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-We have derived a viscous regularization for the hyperbolic Seven-Equation two-phase flow Model. The regularization ensures nonnegativity of the phasic entropy residual 
-\tcr{this is only theoretical since we do not show numerical values; should we keep on emphasizing this?}, \tcb{Well having positivity of the entropy residual is the heart of the method. I would keep it. We are not even using the entropy residual to compute the visc. coeff. in our numerical results. Also, when we compute the entropy residual, it is not always positive because we do not have a good way to accurately compute it.}
-convergence of the numerical solution to an entropy solution \tcr{for concave physical phasic entropy functions $s_k$ {\it is this needed in the conclusions, sounds heavy}} \tcb{we should add it if we want to be precise}, 
+We have derived a viscous regularization for the hyperbolic Seven-Equation two-phase flow Model. 
+The regularization ensures nonnegativity of the phasic entropy residual, 
+convergence of the numerical solution to an entropy solution for concave phasic entropy functions $s_k$,
 and is consistent with the viscous regularization derived for Euler equations when one of the phases disappears. 
 We have also demonstrated that the proposed viscous regularization is compatible with the generalized Harten entropies 
 that were initially derived for Euler equations. 
