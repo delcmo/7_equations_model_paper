@@ -39,6 +39,8 @@
 Plots
 *.txt
 *.pdf
+*-berry.tex
+*-berry.bib
 
 # allow for PDF files
 !\7-equ-theory-paper\review\delchini_ragusa_berry.pdf

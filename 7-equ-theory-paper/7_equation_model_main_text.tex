@@ -10,8 +10,8 @@ the more traditional six-equation models \cite{Stadtke},
 and the fully non-equilibrium Seven-Equation Model (SEM) \cite{Berry_1985,BaerNunziato,Saurel_2001b,SEM}. 
 These models are obtained by integrating the one-phase flow Hyperbolic Conservative System of Equations (HCSE), 
 i.e., Euler equations, weighted by a characteristic or indicator function for each phase \cite{DrewPassman,SEM}.
-The resulting system of two-phase flow equations contains non-conservative terms and relaxation terms that 
-describe the interaction between phases, and are supplemented by an equation for the volume fraction. 
+The resulting systems of two-phase flow equations contain non-conservative terms and relaxation terms that 
+describe the interactions between phases, and are supplemented by equations for the volume fraction. 
 These systems of equations are described as Hyperbolic Non-Conservative System of Equations (HNCSE) 
 and are usually solved using discontinuous discretization schemes (e.g., finite volume and discontinuous 
 Galerkin approaches). By assuming that the non-conservative system of equations is hyperbolic, an exact Riemann solver 
@@ -30,9 +30,11 @@ that they select the same entropy solution (this can be demonstrated for Burgers
 For numerical schemes, the entropy condition and solution are sought through the utilization of so-called conservative formulations of the 
 governing laws, along with the addition of an appropriately specified physical or artificial viscosity, either added directly to the governing 
 equations or implied by the discretization employed (truncation error). That is, a regularization is selected, or built, which is consistent with the 
-entropy condition, thereby guaranteeing that the numerical computation captures the physically relevant solution. However, for hyperbolic 
-non-conservative systems of equations (HNCSE) such as the seven-equation two-phase flow model, the theory of Lax cannot be invoked to establish 
-weak and entropy solutions in the sense of distributions. Instead, the work by Del Maso-Le Floch-Mariat \cite{dlm} must be used
+entropy condition, thereby guaranteeing that the numerical computation captures the physically relevant solution. However, 
+\tcr{except for the discrete equation method (DEM) for two-phase flows, \cite{SEM} and the references contained therein, which reverses the order of 
+model construction and solution so that only conservative equations are used,} for hyperbolic non-conservative systems of equations (HNCSE) such 
+as the seven-equation two-phase flow model, the theory of Lax cannot be invoked to establish weak and entropy solutions in the sense of distributions. 
+Instead, the work by Del Maso-Le Floch-Mariat \cite{dlm} must be used
 whereby the non-conservative products are defined as a bounded Borel measure by introducing a Lipschitz family of paths.
 %$\phi: [0,1] \times \mathbb{R}^n \times \mathbb{R}^n$ such that 
 %$\phi(0, U_L, U_R) = U_L$ and $\phi(1, U_L, U_R) = U_R$. 
@@ -42,7 +44,9 @@ are extended to HNCSE in \cite{lefloch_1988,lefloch_1989}, leading to the deriva
 that is path-dependent. Furthermore, the notion of rarefaction and shocks waves has also been extended to HNCSE,
 see \cite{lefloch_liu_1993}. It can be shown that the classical Rankine-Hugoniot jump condition for conservative systems \cite{Lax} is recovered from the 
 its generalization to non-conservative systems. Hence, the case of conservative systems of equations can be seen as 
-a subset of non-conservative systems. 
+a subset of non-conservative systems. \tcr{For the five-equation two-phase model of Kapila et al. \cite{Kapila_2001} the non-conservative nature 
+of the volume fraction evolution equation is treated in a novel manner in \cite{Berry_2009,Saurel_2009} with a construction of Riemann or 
+approximate Riemann solvers with an augmented system.}
 % For example, when one of the phases disappears, the seven-equation model, a HNCSE, devolves to the single-phase Euler equations, a HCSE.  
 
 Another approach, followed in this paper, to establish the existence of a weak solution of non-conservative terms,
@@ -79,7 +83,8 @@ entropy principle by transforming the Lagrangian statement above into that of an
 Guermond and Popov \cite{jlg_VR_SIAM_2004}.
 
 In the work presented here, we also ensure that the proposed viscous regularization scales appropriately in two limits of both practical
-and theoretical importance: the multi-phase low-Mach regime and the multi-phase \tcr{thermodynamical?/mechanical?} \tcb{This is for Ray to answer} equilibrium treated as a Chapman-Enskog expansion.
+and theoretical importance: the multi-phase low-Mach regime and the \tcr{reduced} multiphase \tcr{mechanical} equilibrium \tcr{model} 
+\tcr{(treated as a Chapman-Enskog type expansion)}.
 %, as such situations are often encountered  in practical applications; 
 First, a two-phase low-Mach asymptotic analysis is carried out to determine the conditions that need to be satisfied by the artificial dissipative 
 terms in order to yield a well-scaled regularization in the low-Mach case; see \cite{Marco_paper_low_mach} for the single-phase analog. 
@@ -210,7 +215,8 @@ The interfacial variables $P_{int}$ and $u_{int}$ control the phase dynamics at 
 and forces acting upon volume fraction gradients, while the interfacial variables $\bar{P}_{int}$ and $\bar{u}_{int}$, which specify 
 average transport velocity and pressure force, control the phase dynamics at the micro level.  Note that the definitions of the interfacial 
 variables $P_{int}$ and 
-$u_{int}$ are not unique, see \cite{Saleh_phd_thesis} for instance. The results presented in this paper apply to \eqt{eq:liq-7-eqn-sect5},
+$u_{int}$ are not unique, see \tcr{\cite{BaerNunziato, GallouetHerardSeguin, Berry_2005}} for instance. 
+The results presented in this paper apply to \eqt{eq:liq-7-eqn-sect5},
 regardless of the definitions for the interfacial variables as long as the entropy inequality given in \eqt{eq:tot-ent-res-sct4} holds. 
 Following \cite{SEM}, the pressure and velocity relaxation coefficients, $\mu_P$  and $\lambda_u$ respectively, are functions of the acoustic 
 impedances $Z_k = \rho_k c_k$ and the specific interfacial area $A_{int}$, as shown in \eqt{eq:relaxation_coeff}.
@@ -277,7 +283,7 @@ However, the six-equation model only relaxes the pressure parameter of the SEM a
 in an ill-posed system of equations that can present unstable numerical solutions
 with sufficiently fine spatial resolution \cite{SEM,Herrard_2005}. 
 %
-If one lets both the pressure and the velocity relaxation parameters tend to infinity, this further relaxes the
+If one lets both the pressure and the velocity relaxation parameters tend to infinity, this further relaxes, or reduces, the
 Seven-Equation two-phase flow Model to the hyperbolic and well-posed 
 mechanical equilibrium five-equation model of Kapila \cite{Kapila_2001}.  
 
@@ -353,7 +359,7 @@ Euler equations \cite{SEM,Marco_dissertation}.
 The objective of this section is to derive a viscous regularization for the SEM presented in \sct{sec:7-equ-model}. First, we present the methodology used, 
 then derive the phasic entropy equation when accounting for the presence of dissipative terms, and employ the resulting phasic entropy equation to prove 
 the minimum entropy principle. Finally, the scaling of the dissipative terms is investigated in the limit where the seven-equation two-phase flow model 
-devolves to the five-equation two-phase flow model of Kapila \cite{Kapila_2001} when considering large relaxation coefficients $\mu_P$ and $\lambda_u$ \cite{dellacherie}.
+devolves, or reduces, to the five-equation two-phase flow model of Kapila \cite{Kapila_2001} when considering large relaxation coefficients $\mu_P$ and $\lambda_u$ \cite{dellacherie}.
 %
 %---------------------------------------------------------------------------------
 \subsection{Methodology}
@@ -552,7 +558,8 @@ into \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} yields:
 + \rho_k \mbold l _k \cdot \grad s_k \,,
 \end{multline}
 %
-or, after integration by parts,
+% or, after integration by parts,
+or, after \tcr{using the chain rule to combine partial derivatives},
 %
 \begin{multline}\label{eq:ent-res-7-eqn-diss-terms2}
 \alpha_k \rho_k A \frac{Ds_k}{Dt} = 
@@ -629,13 +636,15 @@ when $s_k$ is concave with respect to $e_k$ and $\rho_k^{-1}$  \cite{jlg_VR_SIAM
 
 \begin{lemma}\label{lmm:lemma-1}
 When the seven-equation model is regularized as shown in \eqt{eq:sev_equ-with-diss-terms} and the corresponding entropy equation given in \eqt{eq:ent-res-7-eqn-diss-terms3} holds, then 
-the left-hand side of \eqt{eq:ent-res-7-eqn-diss-terms3} is non-negative if and only if (i) the phasic entropy function $s_k$ is concave with respect to $e_k$ and $\rho_k^{-1}$ and (ii) the following expressions for the viscous fluxes are employed: 
+the left-hand side of \eqt{eq:ent-res-7-eqn-diss-terms3} is non-negative if and only if 
+(i) the phasic entropy function $s_k$ is concave with respect to $e_k$ and $\rho_k^{-1}$ and 
+(ii) the following expressions for the viscous fluxes are employed:
 \begin{align}
 &  \mbold f_k &= \alpha_k A \kappa_k \grad \rho_k + \rho_k  \mbold l_k 
   \\
 &  \mathbb{g}_k &= \alpha_k A \mu_k \rho_k \grad^s \mbold u_k + \mbold f_k \otimes \mbold u_k 
   \\
-&  \mbold h_k =  \alpha_k A \kappa_k \grad \left( \rho e \right)_k  - \frac{\| \mbold u_k \|^2}{2} \mbold f_k + (\rho e)_k \mbold l_k 
+&  \mbold h_k &=  \alpha_k A \kappa_k \grad \left( \rho e \right)_k  - \frac{\| \mbold u_k \|^2}{2} \mbold f_k + (\rho e)_k \mbold l_k 
 \end{align}
 where $\kappa_k$ and $\mu_k$ are positive viscous coefficients.
 \end{lemma}
@@ -667,7 +676,7 @@ The regularized volume fraction equation is as follows:
 \partial_t \left( \alpha_k A \right) + \mbold u_{int} A \grad \alpha_k= \div \left( A \beta_k \grad \alpha_k \right) \ .
 \end{equation}
 %
-Let us assume that phasic volume fraction is initially bounded within the interval $[0;1]$ and that a maximum is reached at a given point $\mbold r_0$
+Let us assume that phasic volume fraction is initially bounded within the interval $[0, 1]$ and that a maximum is reached at a given point $\mbold r_0$
 such as $ \partial_d \alpha_k = 0$ and $\partial_{dd} \alpha_k \leq 0$ for $1\le d \le {\tt dim}$. 
 At the point where the maximum is reached, the regularized volume fraction equation becomes:
 %
@@ -680,7 +689,7 @@ At the point where the maximum is reached, the regularized volume fraction equat
 % by expending its righthand-side and dividing out by the cross-section $A$. 
 Similarly, if a minimum is reached in $\mbold r_0$ (i.e., $\partial_d \alpha_k = 0$ and $\partial_{dd} \alpha_k \geq 0$),
 it can be shown that the volume fraction is also bounded from below. As a result, with the above regularization, the volume fraction
-should remain bounded in time within the given initial interval $[0;1]$, which yields the following lemma:
+should remain bounded in time within the given initial interval $[0, 1]$, which yields the following lemma:
 %
 \begin{lemma}\label{lmm:lemma-2}
 Assume the phasic volume fraction is regularized, \eqt{eq:final-reg-vf-equ}, by a viscous flux denoted by $\mbold l_k$. The phasic volume fraction converges to a weak solution 
@@ -823,7 +832,7 @@ Kapila \cite{Kapila_2001}.
 %
 \begin{my_remark}\label{rmq:ent_res_neg}
 In \sct{sct:end-min-pr}, the phasic entropy residual has been shown to be nonnegative. However, when numerically computed, one can observe that the phasic entropy residual $\mathcal{R}_{e,k}$,
-exhibits some negative variation in the vicinity of a shock, as previously noted  in \cite{Guermond_Pasquetti}: this is due to the fact that the phasic entropy residual becomes a Dirac measure in the shock region and that this quantity iis numerically sampled (numerical
+exhibits some negative variation in the vicinity of a shock, as previously noted  in \cite{Guermond_Pasquetti}: this is due to the fact that the phasic entropy residual becomes a Dirac measure in the shock region and that this quantity is numerically sampled (numerical
 artifacts due to mesh/quadrature). We refer the reader to Section 4 of \cite{Guermond_Pasquetti} for additional discussions. As a consequence, the abolute value of the entropy residual is used in computational results.
 \end{my_remark}
 %
@@ -930,8 +939,12 @@ coefficients and to recover the incompressible asymptotic equations \cite{LowMac
 derive the scaled SEM equations and investigate the scaling of the dissipative terms. 
 First, the scaled SEM are derived. Then, two limit cases will be considered to determine 
 appropriate scaling for the viscosity coefficients so that the dissipative terms remain well-scaled for: 
-(a) the isentropic low-Mach limit where the seven-equation model devolves to an incompressible system of 
-equations and (b) the non-isentropic limit where shocks can occur. 
+\begin{enumerate}
+\item {(a) the isentropic low-Mach limit where the seven-equation model devolves to an incompressible system of 
+equations, and}
+\item {(b) the non-isentropic limit where shocks can occur.}
+\end{enumerate}
+%
 Because each phase can experience different flow regimes, e.g., supersonic gas and subsonic liquid, we elect to keep distinct the three viscosity 
 coefficients for each phase, $\mu_k$, $\kappa_k$, and $\beta_k$. The study is performed for the seven-equation model using the Stiffened Gas 
 Equations of State (SGEOS) \cite{SGEOS} given in \eqt{eq:SGEOS_bis}.
@@ -1305,7 +1318,7 @@ We observe that the phasic pressures and velocities are indeed identical for lar
 \subsubsection{A grid-convergence study}\label{sec:grid-conv-study}
  %------------------------------------------------------------
  %
-The proposed regularization is grid-dependent, i.e., the phasic viscosity coefficients are set proportional to the grid size $h$. Thus, it is of interest to investigate the behavior of the numerical solution as the mesh is refined. especially in the
+The proposed regularization is grid-dependent, i.e., the phasic viscosity coefficients are set proportional to the grid size $h$. Thus, it is of interest to investigate the behavior of the numerical solution as the mesh is refined, especially in the
 vicinity of the contact (around $x=0.6$) and shock (around $x=0.7$) waves where the use of a LLF viscosity led to excessive smearing as shown in the density and the volume fraction profiles in \fig{fig:two-phase-density} and 
 \fig{fig:two-phase-vf}, respectively. Thus, we propose to run the same test as before using three different mesh resolutions:
  200, 400 and 800 cells. The numerical solutions of the phasic densities and the phasic volume fractions obtained are displayed
