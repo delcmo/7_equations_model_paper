@@ -31,8 +31,8 @@ For numerical schemes, the entropy condition and solution are sought through the
 governing laws, along with the addition of an appropriately specified physical or artificial viscosity, either added directly to the governing 
 equations or implied by the discretization employed (truncation error). That is, a regularization is selected, or built, which is consistent with the 
 entropy condition, thereby guaranteeing that the numerical computation captures the physically relevant solution. However, 
-\tcr{except for the discrete equation method (DEM) for two-phase flows, \cite{SEM} and the references contained therein, which reverses the order of 
-model construction and solution so that only conservative equations are used,} for hyperbolic non-conservative systems of equations (HNCSE) such 
+except for the discrete equation method (DEM) for two-phase flows, \cite{SEM} and the references contained therein, which reverses the order of 
+model construction and solution so that only conservative equations are used, for hyperbolic non-conservative systems of equations (HNCSE) such 
 as the seven-equation two-phase flow model, the theory of Lax cannot be invoked to establish weak and entropy solutions in the sense of distributions. 
 Instead, the work by Del Maso-Le Floch-Mariat \cite{dlm} must be used
 whereby the non-conservative products are defined as a bounded Borel measure by introducing a Lipschitz family of paths.
@@ -44,9 +44,9 @@ are extended to HNCSE in \cite{lefloch_1988,lefloch_1989}, leading to the deriva
 that is path-dependent. Furthermore, the notion of rarefaction and shocks waves has also been extended to HNCSE,
 see \cite{lefloch_liu_1993}. It can be shown that the classical Rankine-Hugoniot jump condition for conservative systems \cite{Lax} is recovered from the 
 its generalization to non-conservative systems. Hence, the case of conservative systems of equations can be seen as 
-a subset of non-conservative systems. \tcr{For the five-equation two-phase model of Kapila et al. \cite{Kapila_2001} the non-conservative nature 
+a subset of non-conservative systems. For the five-equation two-phase model of Kapila et al. \cite{Kapila_2001} the non-conservative nature 
 of the volume fraction evolution equation is treated in a novel manner in \cite{Berry_2009,Saurel_2009} with a construction of Riemann or 
-approximate Riemann solvers with an augmented system.}
+approximate Riemann solvers with an augmented system.
 % For example, when one of the phases disappears, the seven-equation model, a HNCSE, devolves to the single-phase Euler equations, a HCSE.  
 
 Another approach, followed in this paper, to establish the existence of a weak solution of non-conservative terms,
@@ -83,8 +83,8 @@ entropy principle by transforming the Lagrangian statement above into that of an
 Guermond and Popov \cite{jlg_VR_SIAM_2004}.
 
 In the work presented here, we also ensure that the proposed viscous regularization scales appropriately in two limits of both practical
-and theoretical importance: the multi-phase low-Mach regime and the \tcr{reduced} multiphase \tcr{mechanical} equilibrium \tcr{model} 
-\tcr{(treated as a Chapman-Enskog type expansion)}.
+and theoretical importance: the multi-phase low-Mach regime and the reduced multiphase mechanical equilibrium model 
+(treated as a Chapman-Enskog type expansion).
 %, as such situations are often encountered  in practical applications; 
 First, a two-phase low-Mach asymptotic analysis is carried out to determine the conditions that need to be satisfied by the artificial dissipative 
 terms in order to yield a well-scaled regularization in the low-Mach case; see \cite{Marco_paper_low_mach} for the single-phase analog. 
@@ -215,7 +215,7 @@ The interfacial variables $P_{int}$ and $u_{int}$ control the phase dynamics at 
 and forces acting upon volume fraction gradients, while the interfacial variables $\bar{P}_{int}$ and $\bar{u}_{int}$, which specify 
 average transport velocity and pressure force, control the phase dynamics at the micro level.  Note that the definitions of the interfacial 
 variables $P_{int}$ and 
-$u_{int}$ are not unique, see \tcr{\cite{BaerNunziato, GallouetHerardSeguin, Berry_2005}} for instance. 
+$u_{int}$ are not unique, see \cite{BaerNunziato, GallouetHerardSeguin, Berry_2005}, for instance. 
 The results presented in this paper apply to \eqt{eq:liq-7-eqn-sect5},
 regardless of the definitions for the interfacial variables as long as the entropy inequality given in \eqt{eq:tot-ent-res-sct4} holds. 
 Following \cite{SEM}, the pressure and velocity relaxation coefficients, $\mu_P$  and $\lambda_u$ respectively, are functions of the acoustic 
@@ -559,7 +559,7 @@ into \eqt{eq:ent-res-7-eqn-diss-terms_rearranged} yields:
 \end{multline}
 %
 % or, after integration by parts,
-or, after \tcr{using the chain rule to combine partial derivatives},
+or, after using the chain rule to combine partial derivatives,
 %
 \begin{multline}\label{eq:ent-res-7-eqn-diss-terms2}
 \alpha_k \rho_k A \frac{Ds_k}{Dt} = 
@@ -1226,13 +1226,13 @@ the phasic pressures and velocities are equal.
 
 
 In our numerical simulations, the seven-equation model given is discretized using a \emph{continuous} Galerkin 
-finite element method. \tcr{This is in contrast with the typical discretizations schemes adopted for 
+finite element method. This is in contrast with the typical discretizations schemes adopted for 
 two-phase flow computations and HNCSE in general. The reasons are two-fold. First, we wish
 to illustrate that the proposed viscous regularization is effective and agnostic of the discretization scheme
 and thus have opted for a less traditional discretization technique for HNCSE; note that when employing continuous finite
 elements, interfacial numerical fluxes need not be defined, which simplifies the implementation. Second, several open-source, 
 parallel, continuous finite element libraries are available (e.g., MOOSE \cite{moose} which was employed here),
-thus possibly enabling the dissemination of multi-phase flow simulations using such tools.} 
+thus possibly enabling the dissemination of multi-phase flow simulations using such tools. 
 For temporal discretization, we use BDF2 \cite{bdf2}, a second-order accurate backward differencing scheme. 
 A Jacobian-free Newton Krylov (JFNK) solver is employed to solve the nonlinear system of discrete equations 
 at the end of each time step. An approximate full Jacobian matrix is used as a preconditioner and is computed by finite difference 
