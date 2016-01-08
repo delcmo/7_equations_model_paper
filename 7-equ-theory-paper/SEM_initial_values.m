@@ -23,19 +23,19 @@ rho_liquid = 1000;
 rho_vapor = 50;
 
 % trying to compute T liquid ...
-T_liquid   = (P1 + gamma_liquid*P_inf_liquid)/(cv_liquid*(gamma_liquid-1)*rho_liquid)
+T_liquid1   = (P1 + P_inf_liquid)/(cv_liquid*(gamma_liquid-1)*rho_liquid)
+T_liquid2   = (P2 + P_inf_liquid)/(cv_liquid*(gamma_liquid-1)*rho_liquid)
 
 T_liquid1 = 129.5672454; % in marco's input
-rho_liquid = (P1 + gamma_liquid*P_inf_liquid)/(cv_liquid*(gamma_liquid-1)*T_liquid1)
+rho_liquid = (P1 + P_inf_liquid)/(cv_liquid*(gamma_liquid-1)*T_liquid1)
 T_liquid2 = 97.19162996; % in marco's input
-rho_liquid = (P2 + gamma_liquid*P_inf_liquid)/(cv_liquid*(gamma_liquid-1)*T_liquid2)
+rho_liquid = (P2 + P_inf_liquid)/(cv_liquid*(gamma_liquid-1)*T_liquid2)
 
 % T vapor computed below give the same value as in the input in order to
 % have rho_vap=50
-T_vapor1   = (P1 + gamma_vapor*P_inf_vapor)/(cv_vapor*(gamma_vapor-1)*rho_vapor)
-T_vapor2   = (P2 + gamma_vapor*P_inf_vapor)/(cv_vapor*(gamma_vapor-1)*rho_vapor)
+T_vapor1   = (P1 + P_inf_vapor)/(cv_vapor*(gamma_vapor-1)*rho_vapor)
+T_vapor2   = (P2 + P_inf_vapor)/(cv_vapor*(gamma_vapor-1)*rho_vapor)
 
 
-Pinf_new = (P2*T_liquid1 - P1*T_liquid2)/(gamma_liquid*(T_liquid2-T_liquid1))/1e9
-gamPinf_new = (P2*T_liquid1 - P1*T_liquid2)/(T_liquid2-T_liquid1)
+
 
