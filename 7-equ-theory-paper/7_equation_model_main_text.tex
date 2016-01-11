@@ -1538,32 +1538,70 @@ We employ 1,000 mesh cells. The results are in \fig{fig:nearly_pure} at time $20
 
 \begin{figure}[H]
         \centering
-        \begin{subfigure}[b]{0.5\textwidth}
-                \centering
-                \includegraphics[width=\textwidth]{figures/pure_fluids_infinite_relaxation_two_phases_volume_fraction.eps}
-                \caption{Volume fractions}
-                \label{fig:nearly_pure_alpha}
-        \end{subfigure}%
-        \begin{subfigure}[b]{0.5\textwidth}
-                \centering
-                \includegraphics[width=\textwidth]{figures/pure_fluids_infinite_relaxation_two_phases_velocity.eps}
-                \caption{Velocities}
-                \label{fig:nearly_pure_velocity}
-        \end{subfigure}
-        
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/pure_fluids_infinite_relaxation_two_phases_pressure.eps}
+                \includegraphics[width=0.9\textwidth]{figures/Nearly_pure_alpha_1000cells.eps}
+                \caption{Volume fractions\\ \phantom{A}}
+                \label{fig:nearly_pure_alpha}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/Nearly_pure_velocity_1000cells.eps}
+                \caption{Velocities\\  \phantom{A}}
+                \label{fig:nearly_pure_velocity}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/Nearly_pure_pressure_1000cells.eps}
                 \caption{Pressures}
                 \label{fig:nearly_pure_press}
         \end{subfigure}        
         \begin{subfigure}[b]{0.495\textwidth}
                 \centering
-                \includegraphics[width=\textwidth]{figures/pure_fluids_infinite_relaxation_two_phases_density.eps}
+                \includegraphics[width=0.9\textwidth]{figures/Nearly_pure_density_1000cells.eps}
                 \caption{Densities}
                 \label{fig:nearly_pure_density}
         \end{subfigure}
-        \caption{Nearly pure problem.}\label{fig:nearly_pure}
+        \caption{Shock tube with nearly pure phases, 1000 cells.}\label{fig:nearly_pure}
+\end{figure}
+
+
+To show mesh convergence of the results, the same computation is now made on a mesh involving only
+200 cells. The results are shown in \fig{fig:nearly_pure_compare}.
+
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/Nearly_pure_alpha_compare.eps}
+                \caption{Volume fractions\\ \phantom{A}}
+                \label{fig:nearly_pure_alpha_compare}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/Nearly_pure_velocity_compare.eps}
+                \caption{Velocities\\ \phantom{A}}
+                \label{fig:nearly_pure_velocity_compare}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/Nearly_pure_pressure_compare.eps}
+                \caption{Pressures\\ \phantom{A}}
+                \label{fig:nearly_pure_press_compare}
+        \end{subfigure}        
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/Nearly_pure_density_liq_compare.eps}
+                \caption{Liquid density\\ \phantom{A}}
+                \label{fig:nearly_pure_density_liq_compare}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+                \centering
+                \includegraphics[width=0.9\textwidth]{figures/Nearly_pure_density_vap_compare.eps}
+                \caption{Vapor density}
+                \label{fig:nearly_pure_density_vap_compare}
+        \end{subfigure}
+        \caption{Shock tube with nearly pure phases, comparasison between 200 and 1000 cells.}\label{fig:nearly_pure_compare}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
