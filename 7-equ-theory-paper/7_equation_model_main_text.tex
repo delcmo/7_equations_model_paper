@@ -1521,6 +1521,51 @@ dissipative terms for low-Mach flows (see Mach plot in  \fig{fig:liq-phase-mach}
 i.e., properly scaled LLF viscosity) converges to the exact solution and the correct low-Mach asymptotic limit is recovered. 
 %Note that in this case, the numerical solution would not be really improved as the mesh in refined since the solution is smooth. 
 %
+
+%----------------------------------------------------------
+\subsection{Shock tube with nearly pure phases}\label{sec:third-test}
+%-----------------------------------------------------------
+%
+%
+Finally, we conclude with a liquid-gas shock tube where the two phase are initially in their nearly pure state 
+($\alpha_l = \varepsilon = 5\times 10^{-4}$ for $x<0.5$ and $\alpha_l = 1- \varepsilon $ for $x>0.5$). 
+The initial conditions are: $P_{\text{left}}=2\times 10^8$ Pa, $P_{\text{right}}=10^5$ Pa; 
+the densities are uniform, $\rho_l = 1000$ kg/m$^3$,  $\rho_v = 50$ kg/m$^3$.  We use the stiffened gas equation of state with the 
+following parameters: $\gamma_g=1.4$, $\gamma_l=4.4$, $P_{l,\infty}=6\times 10^8$ Pa, $P_{g,\infty}=0$ Pa , $q_g=q_l=0$ J/kg. The pressure
+and velocity relaxation coefficients, $\mu_P$ and $\lambda_u$ are large (we use $A_{int}^{max}=10^6$ in \eqt{eq:Aint-sect4}).
+We employ 1,000 mesh cells. The results are in \fig{fig:nearly_pure} at time $200\times 10 ^{-6}$ secs. 
+
+
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/pure_fluids_infinite_relaxation_two_phases_volume_fraction.eps}
+                \caption{Volume fractions}
+                \label{fig:nearly_pure_alpha}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/pure_fluids_infinite_relaxation_two_phases_velocity.eps}
+                \caption{Velocities}
+                \label{fig:nearly_pure_velocity}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/pure_fluids_infinite_relaxation_two_phases_pressure.eps}
+                \caption{Pressures}
+                \label{fig:nearly_pure_press}
+        \end{subfigure}        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/pure_fluids_infinite_relaxation_two_phases_density.eps}
+                \caption{Densities}
+                \label{fig:nearly_pure_density}
+        \end{subfigure}
+        \caption{Nearly pure problem.}\label{fig:nearly_pure}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}\label{sec:conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
