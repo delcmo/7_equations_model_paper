@@ -69,12 +69,11 @@ Title: ``Viscous Regularization for the Non-equilibrium Seven-Equation Two-Phase
 
 \bigskip
 
-In {\color{blue}blue} are reviewer's comments, in black are our answers, in {\color{red}red} are Jean's comments,
-and in {\color{green}green} are Marco's comments.
+%In {\color{blue}blue} are reviewer's comments, in black are our answers, in {\color{red}red} are Jean's comments,
+%and in {\color{green}green} are Marco's comments.
 
-\fbox{\fbox{\parbox{0.9\textwidth}{\tcr{Line numbers: we will need to convert them the the Springer format before we resubmit. The current numbers 
-are obtained using another format!}}}}
-
+%\fbox{\fbox{\parbox{0.9\textwidth}{\tcr{Line numbers: we will need to convert them the the Springer format before we resubmit. The current numbers are obtained using another format!}}}}
+%
 \bigskip
 
 {\color{blue}
@@ -112,19 +111,19 @@ what notion of weak solution and entropy solution is applied here.}
 
 The problem under consideration is indeed a nonlinear hyperbolic system in non-conservative form. 
 We have added a paragraph reviewing previous work dealing with weak solution and entropy condition for 
-non-conservative system of equations in the introduction (see lines 12-56). We also modified
-the section entitled {\it Methodology} accordingly (see lines 193-228).
+non-conservative system of equations in the introduction (see the second and third paragraphs of the introduction). We also modified
+the section 3.1 entitled {\it Methodology} accordingly.
 
 We thank you for your insightful review. The following references have been added: \cite{alouges_merlet_2004}, \cite{lefloch_1989},
 \cite{lefloch_1988}, \cite{dlm} and \cite{bianchini_bressan_2005}.
-\framebox{\framebox{Marco, can you add that?}} \tcb{done}
+(numbers refer to the list of references given below, in our reply letter).
 
-\tcr{Marco and I think we have a pretty good handle on this. It will include
-citing the proper references and the relevant theorems. We must remember to thank the reviewer
-for pointing this out to us. This was invaluable and improved the quality of the manuscript.
-We believe that the reviewer is actually giving us the answer to his question. In a very
-polite way, he is guiding us towards the answer.}
-\tcg{References [3] and the paper by S. Bianchini et al. entitled "Vanishing viscosity Solutions of Nonlinear Hyperbolic Systems" contain the theorems related to weak and entropy solutions when stabilizing non-conservative hyperbolic system of equations with a vanishing viscosity numerical method.}
+%\tcr{Marco and I think we have a pretty good handle on this. It will include
+%citing the proper references and the relevant theorems. We must remember to thank the reviewer
+%for pointing this out to us. This was invaluable and improved the quality of the manuscript.
+%We believe that the reviewer is actually giving us the answer to his question. In a very
+%polite way, he is guiding us towards the answer.}
+%\tcg{References [3] and the paper by S. Bianchini et al. entitled "Vanishing viscosity Solutions of Nonlinear Hyperbolic Systems" contain the theorems related to weak and entropy solutions when stabilizing non-conservative hyperbolic system of equations with a vanishing viscosity numerical method.}
 \bigskip
 
 
@@ -140,8 +139,8 @@ Our wording was incorrect and we have corrected it: we meant to state that the v
 ensures convergence of the numerical solution to a weak (minimum-entropy satisfying) solution 
 and not uniqueness of the weak solution. See also our answer to your first remark.
 
-\tcr{Here too we will need to cite the proper theorems from the list of references giving to us.} \tcg{Also we should be more careful about the 
-wording and write 'entropy solution' instead of 'uniqueness of the weak solution'.}
+%\tcr{Here too we will need to cite the proper theorems from the list of references giving to us.} \tcg{Also we should be more careful about the 
+%wording and write 'entropy solution' instead of 'uniqueness of the weak solution'.}
 \bigskip
 
 
@@ -153,10 +152,10 @@ the second law of thermodynamics can be verified, see e.g. [7].}
 The definitions of the interfacial pressure and velocity are not unique, as you rightfully mentioned. 
 We added References 8 and 30 with further examples of the interfacial variables. We now emphasize 
 that the theoretical results devised hold as long as the choice of the interfacial
-variables preserve the entropy inequality (see paragraph between equations (3d) and (4a)). 
-
-\tcg{We should also emphasize that the
-results of the paper are independent of the choice of the definition for the interfacial variables as long as the entropy inequality is preserved.}
+variables preserve the entropy inequality (see paragraph between Equations (3d) and (4a)). 
+%
+%\tcg{We should also emphasize that the
+%results of the paper are independent of the choice of the definition for the interfacial variables as long as the entropy inequality is preserved.}
 \bigskip
 
 
@@ -166,9 +165,9 @@ set of linearly independent (left/right) eigenvectors. For the considered system
 only holds true if the non-resonance condition is satisfied, see [1].
 }
 
-We fully agree with you and modified the text accordingly (see lines 151-158).
+We fully agree with you and modified the text accordingly (see text below Eq. (7)).
 
-\tcr{Another great remark. We will add this}
+%\tcr{Another great remark. We will add this}
 \bigskip
 
 
@@ -177,10 +176,15 @@ We fully agree with you and modified the text accordingly (see lines 151-158).
 to the eigenvalue $\lambda_{3+dim}$ in (6) is linearly degenerated. In this case the jump in $\alpha$
 corresponds to a contact discontinuity.
 }
-\framebox{\framebox{still noting here ...}}
 
-\tcr{We should verify this. We need to ask Ray for the eigenvectors of the SEM if he has them and them check that
-we have a contact discontinuity} \tcb{I have not added anything about that yet, but I believe it is done in a reference I have to find.}
+We have looked into this. In older publications dealing with the 7-equation model, reasonable estimates for the interfacial velocity (e.g., $u_{int} = \frac{\alpha_g \rho_g u_g + \alpha_l \rho_l u_l}{\alpha_g \rho_g + \alpha_l \rho_l}$) have led to a proof that the field associated with $\lambda_{3+dim}=u_{int}$ is indeed linear degenerate ($\nabla \lambda_{3+dim} \cdot r__{3+dim} = 0$); 
+see T. Gallouet and J-M Herard, ``Numerical modeling of two-phase flows under the two-fluid two-pressure approach'', {\it Math. Models and Meth. in Appl. Sci.}, Vol.14, No.5 (2004). 
+With the more recent definitions of the interfacial velocity (i.e., $u_{int} = \frac{Z_g u_g + Z_l u_l}{Z_g + Z_l}$, with $Z_k = \rho_k c_k$), our derivations were inconclusive 
+(although we think it is possible that this property still holds). 
+%\framebox{\framebox{still noting here ...}}
+%
+%\tcr{We should verify this. We need to ask Ray for the eigenvectors of the SEM if he has them and them check that
+%we have a contact discontinuity} \tcb{I have not added anything about that yet, but I believe it is done in a reference I have to find.}
 \bigskip
 
 
@@ -188,8 +192,7 @@ we have a contact discontinuity} \tcb{I have not added anything about that yet, 
 6. For the numerical computations in Section 5.2 the stiffened gas law (32) has to be
 modified to account for the heat of formation $q_k$.}
 
-Thank you for pointing out this. It was a typo. We fully agree with you and have corrected it (the mistake
-also occurred at another location).
+Thank you for pointing out this. It was a typo. We fully agree with you and have corrected it (the mistake also occurred at another location in the text).
 \bigskip
 
 
@@ -203,6 +206,8 @@ CFL number should be mentioned.}
 We had forgotten to give a short paragraph explaining our space/time discretization.
 Actually, it was present in a previous version of the manuscript and we removed it by mistake! 
 It has  been added now (see paragraph at the beginning of Section 5).
+All simulations are carried out using continuous finite elements.
+
 \bigskip
 
 
@@ -214,15 +219,15 @@ grid convergence study is recommended for the shock tube problem because the
 numerical results show a severe smearing for both the contact wave and the shock
 wave.}
 
-\framebox{\framebox{I hesitate a bit now that I re-read the comments. Are they asking for
-convergence order? We may not have run enough grid refinements yet}}
+%\framebox{\framebox{I hesitate a bit now that I re-read the comments. Are they asking for
+%convergence order? We may not have run enough grid refinements yet}}
 
-We performed a grid convergence for the first test and plotted the numerical solutions of the phasic density (figure 2a) and
-the phasic volume fraction (figure 2b) for comparisons. It is then observed that the contact and shock waves are better resolved as 
-the mesh is refined (see lines 572-576). 
+We performed a grid convergence for the first test and plotted the numerical solutions of the phasic density (Figure 2a) and
+the phasic volume fraction (Figure 2b) for comparisons. It is then observed that the contact and shock waves are better resolved as 
+the mesh is refined. 
 
-\tcr{Marco will run finer grid simulations for both problems} \tcg{ and plot all of the numerical solutions on a same
-figure in order to eyeball the increasing resolution effects.}
+%\tcr{Marco will run finer grid simulations for both problems} \tcg{ and plot all of the numerical solutions on a same
+%figure in order to eyeball the increasing resolution effects.}
 \bigskip
 
 
@@ -243,8 +248,8 @@ it remains positive.}
 
 Positivity of the entropy residual is indeed ensured for a theoretical point of view. 
 However, when numerically evaluating the entropy residual, negative values can be obtained in 
-the vicinity of the shock. This phenomenon has been previously discussed in [38]. 
-We added a remark explaining such a behavior in Remark-2, lines 399-406.
+the vicinity of the shock. This phenomenon has been previously discussed in [23]. 
+We added a remark explaining such a behavior in Remark-2, at the end of Section 3.5.
 
 \bigskip
 
@@ -253,13 +258,13 @@ We added a remark explaining such a behavior in Remark-2, lines 399-406.
 11. Besides the two computations presented here I would like to recommend further
 numerical tests exhibiting stronger variations in the volume fractions and the density, 
 e.g., a shock tube problem for a water-gas configuration with 
-$(\rho, u P, \alpha)_{water} = (1000kg.m^3, 0m/s, 10^5Pa, 0:99)$ and 
-$(\rho, u P, \alpha)_{gas}   = (0.2 kg.m^3, 0m/s, 2000Pa, 0:99)$,
+$(\rho, u P, \alpha)_{water} = (1000kg.m^3, 0m/s, 10^5Pa, 0.99)$ and 
+$(\rho, u P, \alpha)_{gas}   = (0.2 kg.m^3, 0m/s, 2000Pa, 0.99)$,
 i.e., the initial states are almost ``pure'' states of either water or gas, with material
 parameters as given in [8].}
 
-\tcr{Marco will run such a case.} \tcg{The reference given by the reviewer does not seem to be correct. But I think
-this test is very common.}
+We have run such a case, with nearly pure phases. We used an even smaller value for the volume fraction; instead of 0.01, as you suggested, we used 0.0005. 
+The results are provided using both 200 and 1000 mesh cells.
 \bigskip
 
 
@@ -269,9 +274,9 @@ ensures uniqueness of the numerical solution. Since the authors do not give a
 uniqueness proof this statement seems to be too strong and should be rephrased. See also
 my first and second remark.}
 
-We corrected this statement that is incorrect and rephrased it in lines 701-708.
+We corrected this statement that is incorrect and rephrased it.
 
-\tcr{This will be corrected once we answer the reviewer's remarks \#1+2.}
+%\tcr{This will be corrected once we answer the reviewer's remarks \#1+2.}
 \bigskip
 
 

@@ -6,10 +6,10 @@
 \newcommand{\tcg}[1]{\textcolor{green}{#1}}
 
 %%%%%% Letter Size Setup %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-       \addtolength{\textwidth}{2.5cm}     %% For longer or shorter text width
-       \addtolength{\topmargin}{-4.0cm}    %% For more or less top margin
-       \addtolength{\textheight}{8cm}    %% For longer or shorter textheight
-       \addtolength{\oddsidemargin}{-1.25cm} %% For odd side margin (twoside)
+       \addtolength{\textwidth}{2.cm}     %% For longer or shorter text width
+       \addtolength{\topmargin}{-3.0cm}    %% For more or less top margin
+       \addtolength{\textheight}{4cm}    %% For longer or shorter textheight
+       \addtolength{\oddsidemargin}{-1.cm} %% For odd side margin (twoside)
                                             %% or margin (oneside)
 
 \address{Dr. Jean Ragusa \\
@@ -24,7 +24,7 @@ Texas A\&M University, College Station, TX}
 
 \begin{document}
 
-\begin{letter}{Professor Chi Wang Shu, \\  Editor-in-Chief, Springer Journal of Scientific Computing,\\
+\begin{letter}{Professor Chi-Wang Shu, \\  Editor-in-Chief, Springer Journal of Scientific Computing,\\
 \textbf{Re: JOMP-D-15-00204}}
 
 
@@ -53,7 +53,16 @@ our full reply to this review in the file \tcr{{\tt reviewer-1.pdf}}.
 
 We firmly disagree with comments from Reviewer \#2 (received as file \tcr{{\tt delchini\_ragusa\_berry.pdf}})
 where they state that our work is {\it ``not good and is a poor extension of the work by Guermond and Popov''}.
-Our work is not a simple extension to the viscous regularization by Guermond and Popov for Euler equations. 
+%
+Our work is {\bf not} a simple extension to the viscous regularization by Guermond and Popov for Euler equations. 
+The seven-equation model is a two-pressure and two-velocity
+two-phase flow model of the Baer and Nunziato type. These models are strictly hyperbolic 
+non-conservative system of equations (HNCSE); hyperbolicity being an important property with respect to
+causality principle. However, this type of system involves many difficulties 
+for the derivation of numerical methods, often rendering the Riemann problem determination complex due 
+to the 7 waves presents (in 1D, more in multi-D).  {\bf We have provided an alternative 
+numerical method, based on an artificial viscosity principles,} and we believe this is a valuable alternative for the
+solution of such hyperbolic systems.
 As aptly pointed out by Reviewer \#1, the seven-equation two-phase flow model is an hyperbolic non-conservative 
 system of equations: classical results from the theory of conservation laws cannot be directly
 applied to the present system and one needs to invoke the Del Maso-Le Floch-Murat extensions of the 
@@ -61,10 +70,11 @@ classical definitions of a weak solution and the entropy solution. Existence of 
 a problem in non-conservative form also need additional tools. Another obvious demonstration that our
 work is not simple extension of the work by Guermond and Popov is the fact that the volume fraction equation
 also needs a  viscous stabilization term and we propose one such definition. 
-The improvement we make here also allows correct Mach number scaling for application to all-speed flows and
-the novel formulation allows easier extension to arbitrary equations of state.
-In addition, their remark \#4 regaridng the entropy residual is wrong. 
-We have not, however, dismissed their review as some of their observations were relevant and have revised
+%
+The improvement we make here also allows a correct Mach number scaling for applications to all-speed flows and
+the novel formulation allows for an easier extension to arbitrary equations of state.
+In addition, their remark \#4 regarding the entropy residual is wrong. 
+We have not, however, completely dismissed their review as some of their observations were relevant and have revised
 our manuscript accordingly. You can find our full reply to this review in the file \tcr{{\tt reviewer-2.pdf}}.
 
 We believe that we have adequately addressed all of the Reviewer's questions and hope that our paper will be found 
