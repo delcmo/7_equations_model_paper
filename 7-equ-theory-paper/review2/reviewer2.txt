@@ -1,0 +1,4 @@
+Reviewer #2: First of all, I thank the authors for their substantial revision which highlight their motivations. I am septic about the real interest of this viscous regularization, but I understand it is suitably designed to recover some important properties. Moreover, as underlined in the introduction, this viscosity is an essential tool to define the shock solutions. I am disappointed since shock solutions are simulated but not studied. I recall that the addition of relevant viscosity is not enough to guaranty the correct capture of the shock solutions. Indeed, the numerical viscosity may seriously perturbe the artificial viscosity. As a consequence, a very particular attention must be paid on the numerical scheme which is not done here. About such a difficulty the authors may read the papers :
+Abgrall, Karni, JCP, 2010
+Berthon, Coquel, Math. Comput., 2007
+In this sense, i don't understand why the simulations are relevant. I urge the authors to give some comments
