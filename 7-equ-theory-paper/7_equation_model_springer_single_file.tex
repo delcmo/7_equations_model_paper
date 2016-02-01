@@ -346,7 +346,8 @@ One of the key aspects of the viscous regularization derived here is that it is 
 Riemann solvers. Therefore, this viscous regularization may be employed to stabilize numerical schemes based on either continuous or discontinuous 
 spatial approximations. For examples of prior applications of the technique to the single-phase Euler equations, we refer the reader to 
 \cite{jlg_VR_SIAM_2004,Marco_paper_low_mach} (for finite volume, continuous Galerkin, and spectral FEM discretizations) and to \cite{valentin} 
-(for discontinuous Galerkin discretizations). 
+(for discontinuous Galerkin discretizations). \tcb{Even if the numerical method under interest can be employed with both continuous 
+and discontinuous schemes as mentioned above, our primary interest lies in continuous scheme, i.e. continuous finite element method.}
 
 The remainder of the paper is as follows. In \sct{sec:7-equ-model}, the Seven-Equation two-phase flow Model (SEM) is recalled along with its main 
 physical and mathematical properties. In \sct{sec:visc-regu}, a viscous regularization is derived for the SEM and a Chapman-Enskog expansion of the 
