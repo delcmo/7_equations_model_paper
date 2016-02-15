@@ -1,0 +1,784 @@
+1,392c1,390
+< @article{valentin,
+<   title   = "RELAP-7 Theory Manual",
+<   author  = "R A Berry and J W Peterson and H Zhang and R C Martineau and H Zhao and L Zou and D Andrs",
+<   journal = "Journal of Comput. Phys",
+<   volume  = "253",
+<   pages   = "479-490",
+<   year    = "2013",
+< }
+< @Techreport{Berry_Peterson_2014,
+<   author= "R A Berry and J W Peterson and H Zhang and R C Martineau and H Zhao and L Zou and D Andrs",
+<   title = "RELAP-7 Theory Manual",
+<   year = 2014,
+<   institution = "Idaho National Laboratory",
+<   number = "INL/EXT-14-31366(Revision-1)",
+<   address = "USA",
+< }
+< 
+< @conference{Berry_MC_2014,
+<   title   = "A logical progression of steps for implementation and testing of the 7-equation two-phase model into a computational framework",
+<   author  = "R A Berry",
+<   booktitle = "Proceedings of the Int. Conf. on Mathematical and Computational Methods Applied to Nuclear Science \& Engineering",
+<   year    = "2012",
+<   address = "Sun Valley, Idaho, USA",
+< }
+< 
+< @article{valentin,
+<   title   = "Implementation of the entropy viscosity method with the discontinuous Galerkin method",
+<   author  = "V Zingan and J L Guermond and J Morel and B Popov",
+<   journal = "Journal of Comput. Phys",
+<   volume  = "253",
+<   pages   = "479-490",
+<   year    = "2013",
+< }
+< 
+< @article{jlg,
+<   title   = "Viscous regularization of the Euler equations and entropy principles",
+<   author  = "J L Guermond and B Popov",
+<   journal = "SIAM J. Appl. Math",
+<   volume  = "74",
+<   pages   = "284-305",
+<   year    = "2014",
+<   }
+<   
+< @article{jlg1,
+<   title   = "Entropy viscosity method for nonlinear conservation laws",
+<   author  = "J L Guermond and R Pasquetti",
+<   journal = "Journal of Comput. Phys",
+<   volume  = "230",
+<   pages   = "4248-4267",
+<   year    = "2011",
+<   }
+< 
+< @article{jlg2,
+<   title   = "Entropy Viscosity Method for High-Order Approximations of Conservation Laws",
+<   author  = "J L Guermond and R Pasquetti",
+<   journal = "Lecture Notes in Computational Science and Engineering",
+<   volume  = "76",
+<   pages   = "411-418",
+<   year    = "2011",
+<   }
+< 
+< @conference{jlg3,
+<   title   = "Entropy-based nonlinear viscosity for Fourrier approximations of conservation laws",
+<   booktitle = "C.R. Math. Acad. Sci.",
+<   volume = "326",
+<   pages   = "801-806",
+<   year    = "2008",
+<   address = "Paris",
+<   author  = "J L Guermond and R Pasquetti",
+<   }
+< 
+< @book{Toro,
+<   author    = "E F Toro",
+<   title     = "Riemann Solvers and numerical methods for fluid dynamics",
+<   year      = "1999",
+<   publisher = "$2^{nd}$ Edition, Springer",
+<   }
+< 
+< @article{Moose,
+<   title   = "A parallel computational framework for coupled systems of nonlinear equations",
+<   author  = "D Gaston and C Newsman and G Hansen and D Lebrun-Grandie",
+<   journal = "Nucl. Eng. Design",
+<   volume  = "239",
+<   pages   = "1768-1778",
+<   year    = "2009",
+<   }
+< 
+< @article{JFNK,
+<   title   = "Jacobian-free Newton-Krylov methods: a survey of approaches and applications",
+<   author  = "D A Knoll and D E Keyes",
+<   journal = "Journal of Computational Physics",
+<   volume  = "193",
+<   pages   = "357-397",
+<   year    = "2004",
+<   }
+<   
+< @article{SEM,
+<   title   = "The discrete equation method (DEM) for fully compressible, two-phase flows in ducts of spatially varying cross-section",
+<   author  = "R A Berry and R Saurel and O LeMetayer",
+<   journal = "Nuclear Engineering and Design",
+<   volume  = "240",
+<   pages   = "3797-3818",
+<   year    = "2010",
+<   }
+< 
+< @article{Parabolic,
+<   title   = "On positivity preserving finite volume schemes for Euler equations",
+<   author  = "B Perthane and C W Shu",
+<   journal = "Numer. Math.",
+<   volume  = "73",
+<   pages   = "119-130",
+<   year    = "1996",
+<   }
+< 
+< @book{IGEOS,
+<   title   = "A to Z of Thermodynamics",
+<   author = "P Perrot",
+<   year      = "1998",
+<   publisher = "Oxford University Press",
+<   }
+< 
+< @article{SGEOS,
+<   title   = "Elaborating equation of state for a liquid and its vapor for two-phase flow models",
+<   author  = "O LeMetayer and J Massoni and R Saurel",
+<   journal = "International Journal of Thermal Science",
+<   volume  = "43",
+<   pages   = "265-276",
+<   year    = "2004",
+<   }
+< 
+< @article{Lapidus_paper,
+<   title   = "A detached shock calculation by second order finite differences",
+<   author  = "A Lapidus",
+<   journal = "J. Comput. Phys.",
+<   volume  = "2",
+<   pages   = "154-177",
+<   year    = "1967",
+<   }
+< 
+< @article{LMP,
+<   title   = "A simple extension to multidimensional problems of the artificial viscosity due to Lapidus",
+<   author  = "R Lohner and K Morgan and J Peraire",
+<   journal = "Commun. Numer. Methods Eng.",
+<   volume  = "1(14)",
+<   pages   = "141-147",
+<   year    = "1985",
+<   }
+< 
+< @book{Lapidus_book,
+<   title   = "Finite Element Methods for Flow Problems",
+<   author = "J Donea and A Huerta",
+<   year      = "2003",
+<   publisher = "Oxford University Press",
+<   }
+< 
+< @article{Roe,
+<   title   = "An All-Speed Roe-type scheme and its asymptotic analysis of low Mach number behavior",
+<   author  = "X-S Li and C-W Gu",
+<   journal = "Journal of Computational Physics",
+<   volume  = "227",
+<   pages   = "5144-5159",
+<   year    = "2008",
+<   }
+< 
+< @article{LowMach1,
+<   title   = "On the behavior of upwind schemes in the low Mach number limit",
+<   author  = "H Guillard and C Viozat",
+<   journal = "Computers \& Fluids",
+<   volume  = "28",
+<   pages   = "63-86",
+<   year    = "1999",
+<   }
+< 
+< @article{LowMach2,
+<   title   = "Preconditioned techniques in computational fluid dynamics",
+<   author  = "E Turkel",
+<   journal = "Annu. Rev. Fluid Mech.",
+<   volume  = "31",
+<   pages   = "385-416",
+<   year    = "1999",
+<   }
+< 
+< @article{LowMach3,
+<   title   = "The solution of the compressible Euler equations at low Mach numbers using a stabilized finite element algorithm",
+<   author  = "J S Wong D L and Darmofal and J Peraire",
+<   journal = "Comput. Methods Appl. Mech. Engrg.",
+<   volume  = "190",
+<   pages   = "5719-5737",
+<   year    = "2001",
+<   }
+< 
+< @article{Muller,
+<   title   = "Low-Mach number asymptotes of the Navier-Stokes equations",
+<   author  = "B Muller",
+<   journal = "Journal of Engineering Mathematics",
+<   volume  = "34",
+<   pages   = "97–109",
+<   year    = "1998",
+<   }  
+<   
+< @article{nozzle_exact,
+<   title   = "Liquid and liquid-gas flows at all speeds: Reference solutions and numerical schemes.",
+<   author  = "S LeMartelot and B Nkonga and R Saurel",
+<   journal = "Rsearch report",
+<   volume  = "7935",
+<   pages   = "97–109",
+<   year    = "2012",
+<   }
+< 
+< @book{convergence_book,
+<   title   = "Constructive Approximation",
+<   author = "R A DeVore and G G Lorentz",
+<   year      = "1991",
+<   publisher = "Springer-Verlag",
+<   }
+<   
+< @article{Kapila_2001,
+<   title   = "Two-phase modeling of deflagration-to-detonation transition in granular materials",
+<   author  = "A K Kapila and R Menikoff and J B Bdzil and S F Son and D S Stewart",
+<   journal = "Phys. Fluids",
+<   pages   = "3002-3024",
+<   issue = "13",
+<   year    = "2001",
+<   }
+<   
+< @article{Toumi_1996,
+<   title   = "An upwind numerical method for two-fluids two-phases flow models",
+<   author  = "I Toumi",
+<   journal = "Nucl. Sci. Eng.",
+<   pages   = "147-168",
+<   issue = "123",
+<   year    = "1996",
+<   }
+<   
+< @article{Abgrall_2002,
+<   title   = "How to prevent pressure oscillations in multicomponent flow calcuations: a quasi conservative appraoch",
+<   author  = "R Abgrall",
+<   journal = "J. Comput. Phys",
+<   pages   = "125-150",
+<   issue = "60",
+<   year    = "2002",
+<   }
+<   
+< @article{Saurel_2001a,
+<   title   = "A multiphase Godunov method for compressible multifluid and multiphase flows",
+<   author  = "R Saurel and R Abgrall",
+<   journal = "J. Comput Physics",
+<   pages   = "425-267",
+<   issue = "150",
+<   year    = "1999",
+<   }
+<   
+< @article{Saurel_2001b,
+<   title   = "A multiphase model for compressible flows with interfaces, shocks, detonation waves and cavitation",
+<   author  = "R Saurel and O Lemetayer",
+<   journal = "J. Comput Physics",
+<   pages   = "239-271",
+<   issue = "431",
+<   year    = "2001",
+<   }
+<   
+< @article{Li_2004,
+<   title   = "Difference scheme for two-phase flow",
+<   author  = "Q Li and H Feng and T Cai and C Hu",
+<   journal = "Appl Math Mech",
+<   pages   = "536",
+<   issue = "25",
+<   year    = "2004",
+<   }
+<   
+< @article{Zein_2010,
+<   title   = "Modeling phase transition for compressible two-phase flows applied to metastabe liquids",
+<   author  = "A Zein and M Hantke and G Warnecke",
+<   journal = "J. Comput Physics",
+<   pages   = "2964",
+<   issue = "98",
+<   year    = "2010",
+<   }
+<   
+< @article{Ambroso_2012,
+<   title   = "A Godunov-type method for the seven-equation model of compressible multiphase mixtures",
+<   author  = "A Ambroso and C Chalons and P-A Reviart",
+<   journal = "Comput. Fluids",
+<   pages   = "67-91",
+<   issue = "54",
+<   year    = "2012",
+<   }
+< 
+< @article{Saurel_2009,
+<    author = "R.~Saurel and F.~Petitpas and R.~A.~Berry",
+<    title = "Simple and efficient relaxation methods for interfaces separating compressible fluids, cavitating flows and shocks in multiphase mixtures",
+<    year = 2009,
+<    journal = "J. of Computational Physics",
+<    volume = 228,
+<    pages = "1678--1712",
+<    publisher = "Elsevier",
+< }
+< 
+< @article{Herrard_2005,
+<    author = "J.~M.~Herrard and O.~Hurisse",
+<    title = "A simple method to compute standard two-fluid models",
+<    journal = "Int. J. of Computational Fluid Dynamics",
+<    year = 2005,
+<    volume = 19,
+<    pages = "475--482",
+<    publisher = "Taylor & Francis",
+< }
+< 
+< @article{Harten,
+<   title   = "Convex entropies and hyperbolicity for general Euler equations",
+<   author  = "A Harten and L P  Franca and M Mallet",
+<   journal = "SIAM J Numer Anal",
+<   pages   = "2117-2127",
+<   issue = "35",
+<   volume = "6",
+<   year    = "1998",
+<   }
+<   
+< @Techreport{BerryMarco_2014,
+<   author= "R A Berry and M Delchini and J Ragusa",
+<   title = "RELAP-7 Numrerical Stabilization: Entropy Viscosity Method",
+<   year = 2014,
+<   institution = "Idaho National Laboratory",
+<   number = "INL/EXT-14-32352",
+<   address = "USA",
+< }
+< 
+< @Techreport{Relap-7,
+<   author= "R A Berry and M Delchini and J Ragusa",
+<   title = "Relap-7 numerical stabilization: Entropy Viscosity Method",
+<   year = 2014,
+<   institution = "Idaho National Laboratory",
+<   number = "INL/EXT-14-32352",
+<   address = "USA",
+< }
+< 
+< @Techreport{Marco_dissertation,
+<   author= "M Delchini",
+<   title = "Extension of the entropy viscosity method to multi-D Euler equations and the seven-equation two-phase model",
+<   year = 2014,
+<   institution = "Texas A\& M University",
+<   address = "USA",
+< }
+< 
+< @book{Leveque,
+< author    = "R Leveque",
+< title     = "Numerical Methods for Conservation Laws",
+< year      = "1990",
+< publisher = "Birkhäuser Basel",
+< address   = "Zurich, Switzerland"
+< }
+< 
+< @article{Marco_paper_low_mach,
+< author    = "M Delchini and J Ragusa and R A Berry",
+< title     = "Entropy-based viscous regularization for the multi-dimensional Euler equations in low-Mach and transonic flows",
+< journal   = "Computers \& Fluids",
+< year      = "2015",
+< volume    = "118",
+< pages     = "225-244",
+< }
+< 
+< @article{Marco_paper_7_equ,
+< author    = "M Delchini and J Ragusa and R A Berry",
+< title     = "Viscous regularization for the non-equilibrium seven-equation two-phase flow model",
+< journal   = "in review",
+< year      = "2016",
+< }
+< 
+< % BDF2 reference
+< @Book{bdf2,
+<   author = {U M Ascher and L R Petzold},
+<   title = {{Computer Methods for Ordinary Differential Equations and Differential-Algebraic Equations}},
+<   publisher = {SIAM},
+<   address = {Philadelphia, Ph},
+<   isbn = {0-89871-412-5},
+<   year = 1998
+< }
+< 
+< @book{PBV_book,
+<   title   = "Applied CFD Techniques: an Introduction Based on Finite Element Methods",
+<   author = "R Lohner",
+<   year      = "2003",
+<   publisher = "Wiley",
+<   address = "Oxford, England"
+<   }
+<   
+< @article{SUPG,
+<   title   = "Finite element formulations for convection dominated flows with particular emphasis on the compressible Euler equations",
+<   author  = "A F Emery",
+<   journal = "Proceedings of the AIAA 21st Aerospace Sciences Meeting AIAA Paper",
+<   pages   = "83--125",
+<   year    = "1983",
+---
+> @article{valentin,
+>   title   = "RELAP-7 Theory Manual",
+>   author  = "R A Berry and J W Peterson and H Zhang and R C Martineau and H Zhao and L Zou and D Andrs",
+>   journal = "Journal of Comput. Phys",
+>   volume  = "253",
+>   pages   = "479-490",
+>   year    = "2013",
+> }
+> @Techreport{Berry_Peterson_2014,
+>   author= "R A Berry and J W Peterson and H Zhang and R C Martineau and H Zhao and L Zou and D Andrs",
+>   title = "RELAP-7 Theory Manual",
+>   year = 2014,
+>   institution = "Idaho National Laboratory",
+>   number = "INL/EXT-14-31366",
+>   address = "USA",
+> }
+> 
+> @conference{Berry_MC_2014,
+>   title   = "A logical progression of steps for implementation and testing of the 7-equation two-phase model into a computational framework",
+>   author  = "R A Berry",
+>   booktitle = "Proceedings of the Int. Conf. on Mathematical and Computational Methods Applied to Nuclear Science \& Engineering",
+>   year    = "2012",
+>   address = "Sun Valley, Idaho, USA",
+> }
+> 
+> @article{valentin,
+>   title   = "Implementation of the entropy viscosity method with the discontinuous Galerkin method",
+>   author  = "V Zingan and J L Guermond and J Morel and B Popov",
+>   journal = "Journal of Comput. Phys",
+>   volume  = "253",
+>   pages   = "479-490",
+>   year    = "2013",
+> }
+> 
+> @article{jlg,
+>   title   = "Viscous regularization of the Euler equations and entropy principles",
+>   author  = "J L Guermond and B Popov",
+>   journal = "SIAM J. Appl. Math",
+>   volume = "74",
+>   pages = "284-305",
+>   year    = "2014",
+>   }
+>   
+> @article{jlg1,
+>   title   = "Entropy viscosity method for nonlinear conservation laws",
+>   author  = "J L Guermond and R Pasquetti",
+>   journal = "Journal of Comput. Phys",
+>   volume  = "230",
+>   pages   = "4248-4267",
+>   year    = "2011",
+>   }
+> 
+> @article{jlg2,
+>   title   = "Entropy Viscosity Method for High-Order Approximations of Conservation Laws",
+>   author  = "J L Guermond and R Pasquetti",
+>   journal = "Lecture Notes in Computational Science and Engineering",
+>   volume  = "76",
+>   pages   = "411-418",
+>   year    = "2011",
+>   }
+> 
+> @conference{jlg3,
+>   title   = "Entropy-based nonlinear viscosity for Fourrier approximations of conservation laws",
+>   booktitle = "C.R. Math. Acad. Sci.",
+>   volume = "326",
+>   pages   = "801-806",
+>   year    = "2008",
+>   address = "Paris",
+>   author  = "J L Guermond and R Pasquetti",
+>   }
+> 
+> @book{Toro,
+>   author    = "E F Toro",
+>   title     = "Riemann Solvers and numerical methods for fluid dynamics",
+>   year      = "1999",
+>   publisher = "$2^{nd}$ Edition, Springer",
+>   }
+> 
+> @article{Moose,
+>   title   = "A parallel computational framework for coupled systems of nonlinear equations",
+>   author  = "D Gaston and C Newsman and G Hansen and D Lebrun-Grandie",
+>   journal = "Nucl. Eng. Design",
+>   volume  = "239",
+>   pages   = "1768-1778",
+>   year    = "2009",
+>   }
+> 
+> @article{JFNK,
+>   title   = "Jacobian-free Newton-Krylov methods: a survey of approaches and applications",
+>   author  = "D A Knoll and D E Keyes",
+>   journal = "Journal of Computational Physics",
+>   volume  = "193",
+>   pages   = "357-397",
+>   year    = "2004",
+>   }
+>   
+> @article{SEM,
+>   title   = "The discrete equation method (DEM) for fully compressible, two-phase flows in ducts of spatially varying cross-section",
+>   author  = "R Berry and R Saurel and O LeMetayer",
+>   journal = "Nuclear Engineering and Design",
+>   volume  = "240",
+>   pages   = "3797-3818",
+>   year    = "2010",
+>   }
+> 
+> @article{Parabolic,
+>   title   = "On positivity preserving finite volume schemes for Euler equations",
+>   author  = "B Perthane and C W Shu",
+>   journal = "Numer. Math.",
+>   volume  = "73",
+>   pages   = "119-130",
+>   year    = "1996",
+>   }
+> 
+> @book{IGEOS,
+>   title   = "A to Z of Thermodynamics",
+>   author = "P Perrot",
+>   year      = "1998",
+>   publisher = "Oxford University Press",
+>   }
+> 
+> @article{SGEOS,
+>   title   = "Elaborating equation of state for a liquid and its vapor for two-phase flow models",
+>   author  = "O LeMetayer and J Massoni and R Saurel",
+>   journal = "International Journal of Thermal Science",
+>   volume  = "43",
+>   pages   = "265-276",
+>   year    = "2004",
+>   }
+> 
+> @article{Lapidus_paper,
+>   title   = "A detached shock calculation by second order finite differences",
+>   author  = "A Lapidus",
+>   journal = "J. Comput. Phys.",
+>   volume  = "2",
+>   pages   = "154-177",
+>   year    = "1967",
+>   }
+> 
+> @article{LMP,
+>   title   = "A simple extension to multidimensional problems of the artificial viscosity due to Lapidus",
+>   author  = "R Lohner and K Morgan and J Peraire",
+>   journal = "Commun. Numer. Methods Eng.",
+>   volume  = "1(14)",
+>   pages   = "141-147",
+>   year    = "1985",
+>   }
+> 
+> @book{Lapidus_book,
+>   title   = "Finite Element Methods for Flow Problems",
+>   author = "J Donea and A Huerta",
+>   year      = "2003",
+>   publisher = "Oxford University Press",
+>   }
+> 
+> @article{Roe,
+>   title   = "An All-Speed Roe-type scheme and its asymptotic analysis of low Mach number behavior",
+>   author  = "X-S Li and C-W Gu",
+>   journal = "Journal of Computational Physics",
+>   volume  = "227",
+>   pages   = "5144-5159",
+>   year    = "2008",
+>   }
+> 
+> @article{LowMach1,
+>   title   = "On the behavior of upwind schemes in the low Mach number limit",
+>   author  = "H Guillard and C Viozat",
+>   journal = "Computers \& Fluids",
+>   volume  = "28",
+>   pages   = "63-86",
+>   year    = "1999",
+>   }
+> 
+> @article{LowMach2,
+>   title   = "Preconditioned techniques in computational fluid dynamics",
+>   author  = "E Turkel",
+>   journal = "Annu. Rev. Fluid Mech.",
+>   volume  = "31",
+>   pages   = "385-416",
+>   year    = "1999",
+>   }
+> 
+> @article{LowMach3,
+>   title   = "The solution of the compressible Euler equations at low Mach numbers using a stabilized finite element algorithm",
+>   author  = "J S Wong D L and Darmofal and J Peraire",
+>   journal = "Comput. Methods Appl. Mech. Engrg.",
+>   volume  = "190",
+>   pages   = "5719-5737",
+>   year    = "2001",
+>   }
+> 
+> @article{Muller,
+>   title   = "Low-Mach number asymptotes of the Navier-Stokes equations",
+>   author  = "B Muller",
+>   journal = "Journal of Engineering Mathematics",
+>   volume  = "34",
+>   pages   = "97–109",
+>   year    = "1998",
+>   }  
+>   
+> @article{nozzle_exact,
+>   title   = "Liquid and liquid-gas flows at all speeds: Reference solutions and numerical schemes.",
+>   author  = "S LeMartelot and B Nkonga and R Saurel",
+>   journal = "Rsearch report",
+>   volume  = "7935",
+>   pages   = "97–109",
+>   year    = "2012",
+>   }
+> 
+> @book{convergence_book,
+>   title   = "Constructive Approximation",
+>   author = "R A DeVore and G G Lorentz",
+>   year      = "1991",
+>   publisher = "Springer-Verlag",
+>   }
+>   
+> @article{Kapila_2001,
+>   title   = "Two-phase modeling of deflagration-to-detonation transition in granular materials",
+>   author  = "A K Kapila and R Menikoff and J B Bdzil and S F Son and D S Stewart",
+>   journal = "Phys. Fluids",
+>   pages   = "3002-3024",
+>   issue = "13",
+>   year    = "2001",
+>   }
+>   
+> @article{Toumi_1996,
+>   title   = "An upwind numerical method for two-fluids two-phases flow models",
+>   author  = "I Toumi",
+>   journal = "Nucl. Sci. Eng.",
+>   pages   = "147-168",
+>   issue = "123",
+>   year    = "1996",
+>   }
+>   
+> @article{Abgrall_2002,
+>   title   = "How to prevent pressure oscillations in multicomponent flow calcuations: a quasi conservative appraoch",
+>   author  = "R Abgrall",
+>   journal = "J. Comput. Phys",
+>   pages   = "125-150",
+>   issue = "60",
+>   year    = "2002",
+>   }
+>   
+> @article{Saurel_2001a,
+>   title   = "A multiphase Godunov method for compressible multifluid and multiphase flows",
+>   author  = "R Saurel and R Abgrall",
+>   journal = "J. Comput Physics",
+>   pages   = "425-267",
+>   issue = "150",
+>   year    = "1999",
+>   }
+>   
+> @article{Saurel_2001b,
+>   title   = "A multiphase model for compressible flows with interfaces, shocks, detonation waves and cavitation",
+>   author  = "R Saurel and O Lemetayer",
+>   journal = "J. Comput Physics",
+>   pages   = "239-271",
+>   issue = "431",
+>   year    = "2001",
+>   }
+>   
+> @article{Li_2004,
+>   title   = "Difference scheme for two-phase flow",
+>   author  = "Q Li and H Feng and T Cai and C Hu",
+>   journal = "Appl Math Mech",
+>   pages   = "536",
+>   issue = "25",
+>   year    = "2004",
+>   }
+>   
+> @article{Zein_2010,
+>   title   = "Modeling phase transition for compressible two-phase flows applied to metastabe liquids",
+>   author  = "A Zein and M Hantke and G Warnecke",
+>   journal = "J. Comput Physics",
+>   pages   = "2964",
+>   issue = "98",
+>   year    = "2010",
+>   }
+>   
+> @article{Ambroso_2012,
+>   title   = "A Godunov-type method for the seven-equation model of compressible multiphase mixtures",
+>   author  = "A Ambroso and C Chalons and P-A Reviart",
+>   journal = "Comput. Fluids",
+>   pages   = "67-91",
+>   issue = "54",
+>   year    = "2012",
+>   }
+> 
+> @article{Saurel_2009,
+>    author = "R.~Saurel and F.~Petitpas and R.~A.~Berry",
+>    title = "Simple and efficient relaxation methods for interfaces separating compressible fluids, cavitating flows and shocks in multiphase mixtures",
+>    year = 2009,
+>    journal = "J. of Computational Physics",
+>    volume = 228,
+>    pages = "1678--1712",
+>    publisher = "Elsevier",
+> }
+> 
+> @article{Herrard_2005,
+>    author = "J.~M.~Herrard and O.~Hurisse",
+>    title = "A simple method to compute standard two-fluid models",
+>    journal = "Int. J. of Computational Fluid Dynamics",
+>    year = 2005,
+>    volume = 19,
+>    pages = "475--482",
+>    publisher = "Taylor & Francis",
+> }
+> 
+> @article{Harten,
+>   title   = "Convex entropies and hyperbolicity for general Euler equations",
+>   author  = "A Harten and L P  Franca and M Mallet",
+>   journal = "SIAM J Numer Anal",
+>   pages   = "2117-2127",
+>   issue = "35",
+>   volume = "6",
+>   year    = "1998",
+>   }
+>   
+> @Techreport{BerryMarco_2014,
+>   author= "R A Berry and M Delchini and J Ragusa",
+>   title = "RELAP-7 Numrerical Stabilization: Entropy Viscosity Method",
+>   year = 2014,
+>   institution = "Idaho National Laboratory",
+>   number = "INL/EXT-14-32352",
+>   address = "USA",
+> }
+> 
+> @Techreport{Relap-7,
+>   author= "R A Berry and M Delchini and J Ragusa",
+>   title = "Relap-7 numerical stabilization: Entropy Viscosity Method",
+>   year = 2014,
+>   institution = "Idaho National Laboratory",
+>   number = "INL/EXT-14-32352",
+>   address = "USA",
+> }
+> 
+> @Techreport{Marco_dissertation,
+>   author= "M Delchini",
+>   title = "Extension of the entropy viscosity method to multi-D Euler equations and the seven-equation two-phase model",
+>   year = 2014,
+>   institution = "Texas A\& M University",
+>   address = "USA",
+> }
+> 
+> @book{Leveque,
+> author    = "R Leveque",
+> title     = "Numerical Methods for Conservation Laws",
+> year      = "1990",
+> publisher = "Birkhäuser Basel",
+> address   = "Zurich, Switzerland"
+> }
+> 
+> @article{Marco_paper_low_mach,
+> author    = "M Delchini and J Ragusa and R Berry",
+> title     = "Entropy-based viscosity regularization for the multi-dimensional Euler equations in low-Mach and transonic flows",
+> journal   = "under review",
+> year      = "",
+> volume    = "",
+> }
+> 
+> @article{Marco_paper_7_equ,
+> author    = "M Delchini and J Ragusa and R Berry",
+> title     = "An all-Mach flow viscous regularization for the Seven-equation two-phase flow model",
+> journal   = "in preparation",
+> }
+> 
+> % BDF2 reference
+> @Book{bdf2,
+>   author = {U M Ascher and L R Petzold},
+>   title = {{Computer Methods for Ordinary Differential Equations and Differential-Algebraic Equations}},
+>   publisher = {SIAM},
+>   address = {Philadelphia, Ph},
+>   isbn = {0-89871-412-5},
+>   year = 1998
+> }
+> 
+> @book{PBV_book,
+>   title   = "Applied CFD Techniques: an Introduction Based on Finite Element Methods",
+>   author = "R Lohner",
+>   year      = "2003",
+>   publisher = "Wiley",
+>   address = "Oxford, England"
+>   }
+>   
+> @article{SUPG,
+>   title   = "Finite element formulations for convection dominated flows with particular emphasis on the compressible Euler equations",
+>   author  = "A F Emery",
+>   journal = "Proceedings of the AIAA 21st Aerospace Sciences Meeting AIAA Paper",
+>   pages   = "83--125",
+>   year    = "1983",

@@ -43,12 +43,17 @@
 \title{Application of the reactor system code RELAP-7 to single- and two-phase flow water-hammer problems}
 
 \author{Marc O. Delchini}
+\affil{
+  Reactor and Nuclear Systems Division \\
+  Oak Ridge National Laboratory \\
+  Oak Ridge, TN, 37831 \\
+  delchinimg@ornl.gov}
 \author{Jean C. Ragusa}
 \affil{
   Department of Nuclear Engineering \\
   Texas A\&M University \\
   College Station, TX 77843 \\
-  delchinm@tamu.edu; jean.ragusa@tamu.edu}
+  jean.ragusa@tamu.edu}
 
 \author{Ray A. Berry}
 \author{David Andrs}
@@ -66,9 +71,9 @@ The primary basis of the RELAP-7 \cite{Berry_Peterson_2014} governing theory inc
 It is well established that these hyperbolic conservation laws can develop shocks and discontinuities and thus, require a stabilization 
 numerical method. The all-Mach flow Entropy Viscosity Method is now employed in RELAP-7 as a stabilization numerical method for both 
 above flow models. The entropy viscosity technique is a viscous regularization technique: adequate dissipation terms (viscous fluxes) are 
-added to the governing laws while ensuring the entropy minimum principle still holds. Viscosity coefficients modulates the magnitude of the 
-added dissipation such that it is large in shock regions and vanishingly small elsewhere. The stabilization capabilities of the Entropy Viscosity 
-Method are demonstrated in the system code RELAP-7 by simulating a 1-D single and two-phase water-hammers. \\
+added to the governing laws while ensuring the entropy minimum principle still holds. Viscosity coefficients modulate the magnitude of the 
+added dissipations such that they are large in shock regions and vanishingly small elsewhere. The stabilization capabilities of the Entropy Viscosity 
+Method are demonstrated in the system code RELAP-7 by simulating 1-D single- and two-phase water-hammers. \\
 %
 \emph{Key Words}:  RELAP-7 ; numerical method ; entropy viscosity method ; low-Mach flow ; shocks ; single phase flow ; two-phase flow.
 \end{abstract}
@@ -89,11 +94,11 @@ happen as the consequence of valve closing or opening actions or of breaks in pi
 The RELAP-7 code \cite{Berry_Peterson_2014} is built using modern scientific software libraries (the Multi-Physics Object Oriented Simulation Environment MOOSE \cite{MOOSE}, 
 itself built upon PETSc and LibMesh, among others).  
 %
-The primary basis for RELAP-7's governing theory includes Euler single-phase equations \cite{Toro} and the 7-equation two-phase flow model of \cite{SEM, Berry_MC_2014}. 
+The primary basis for RELAP-7's governing theory includes single-phase Euler equations \cite{Toro} and the 7-equation two-phase flow model of \cite{SEM, Berry_MC_2014}. 
 This two-phase flow model is strictly hyperbolic, as opposed to the 6-equation model RELAP-5.  
 It is well established that hyperbolic conservation laws can develop shocks and discontinuities \cite{Leveque} and, therefore, require stabilization 
-of the discretized equations. Fot single-phase Euler equations, numerous numerical methods are available both for discontinuous and continuous discretization schemes 
-\cite{Toro, Lapidus_paper, LMP, Lapidus_book, Roe, SUPG}. Until recently, the 7-equation model was only discretized in space using discontinuous schemes with approximate 
+of the discretized equations. For single-phase Euler equations, numerous numerical methods are available both for discontinuous and continuous discretization schemes 
+\cite{Toro, Lapidus_paper, LMP, Lapidus_book, Roe, SUPG}. Until recently, the 7-equation model was primarily discretized in space using discontinuous schemes with approximate 
 Riemann solvers derived using well-established approaches for single-phase flows, while using an upwind-type flux for the non-conservative terms 
 \cite{Saurel_2001a, Saurel_2001b, Li_2004, Zein_2010, Ambroso_2012}. 
 %
@@ -103,8 +108,8 @@ the Entropy Viscosity Method \cite{jlg1, jlg2}.
  
 
 
-The entropy viscosity technique is a viscous regularization technique where adequate dissipation terms (viscous fluxes) are added to the governing laws while ensuring 
-that the entropy minimum principle holds. Viscosity coefficients modulates the magnitude of the added dissipation such that it is large in shock regions and vanishingly 
+The entropy viscosity technique is a viscous regularization technique wherein adequate dissipation terms (viscous fluxes) are added to the governing laws while ensuring 
+that the minimum entropy principle holds. Viscosity coefficients modulate the magnitude of the added dissipations such that they are large in shock regions and vanishingly 
 small elsewhere. The entropy viscosity coefficients are taken proportional to the entropy production while, at the same time, being bounded from above by a first-order 
 viscosity coefficient that reduces the spatial discretization to be similar to a first-order Godunov scheme (the latter being known to be overly dissipative but monotone 
 \cite{Toro}. Hence, entropy production in shocks will result in large viscosity coefficients and thus will avoid spurious oscillations. In order to solve for 
@@ -167,13 +172,13 @@ specific internal energy $e$ serves as a closure relation to compute the pressur
 \end{equation}
 \end{subequations}
 %
-where $E$ and $u$ are the specific total energy and the velocity of the fluid, respectively. The partial derivatives with respect to time and space are denoted by $\partial_t$ and $\partial_x$. The expressions for the dissipative terms, $f$, $g$, and $h$, were obtained by deriving the entropy residual and applying the entropy minimum principle \cite{jlg}:
+where $E$ and $u$ are the specific total energy and the velocity of the fluid, respectively. The partial derivatives with respect to time and space are denoted by $\partial_t$ and $\partial_x$. The expressions for the dissipative terms, $f$, $g$, and $h$, were obtained by deriving the entropy residual and applying the minimum entropy principle \cite{jlg}:
 %
 \begin{equation}
 f = \kappa \partial_x \rho , \ g = \mu \rho \partial_x u, \text{  and  } h = \kappa \partial_x \left( \rho e \right) \, . 
 \end{equation}
 %
-Definitions of the viscosity coefficients $\mu$ and $\kappa$, given later in \eqt{eq:single-visc-def}, were investigated in \cite{Marco_paper_low_mach} using a non-dimensionalization of Euler equations in order to retrieve well-scaled dissipative terms for any Mach number (so that adequate stabilization be provided in both supersonic and low-Mach flows). Each viscosity coefficient is computed from an upper bound denoted by the subscript $max$, and an entropy viscosity coefficient denoted by the subscript $e$. The upper-bound viscosity coefficient is defined proportional to the maximum eigenvalue of the hyperbolic system and is designed to be over-dissipative (\eqt{eq:visc-def-max}). The high-order viscosity coefficient is set proportional to the entropy residual, $R_e(x,t)$.
+Definitions of the viscosity coefficients $\mu$ and $\kappa$, given later in \eqt{eq:single-visc-def}, were investigated in \cite{Marco_paper_low_mach} using a non-dimensionalization of Euler equations in order to retrieve well-scaled dissipative terms for any Mach number (so that adequate stabilization is provided in both supersonic and low-Mach flows). Each viscosity coefficient is computed from an upper bound denoted by the subscript $max$, and an entropy viscosity coefficient denoted by the subscript $e$. The upper-bound viscosity coefficient is defined proportional to the maximum eigenvalue of the hyperbolic system and is designed to be over-dissipative (\eqt{eq:visc-def-max}). The high-order viscosity coefficient is set proportional to the entropy residual, $R_e(x,t)$.
 %, and a jump denoted by $J$. 
 The entropy residual is known to be peaked in the shock region \cite{Leveque} and thus can be used to detect and track shocks. As proposed in \cite{Marco_paper_low_mach} and recalled in \eqt{eq:ent-res}, the entropy residual is locally computed from the pressure, the density and the sound speed, $c$, as follows:
 %
@@ -221,7 +226,7 @@ where $h$ is the grid size. The normalization parameters $\norm_\mu$ and $\norm_
 \subsection{1-D Seven-Equation two-phase flow model with viscous regularization}\label{sec:two-phase-model}
 %------------------------------------------------------------------------------------------------------------------
 %
-RELAP-7 \cite{Berry_Peterson_2014} uses the seven-equation two-phase flow model \cite{SEM} to simulate the behavior of two-phase flows in light water reactors. In this model, each phase is treated as being compressible, exhibits independent thermodynamical and mechanical properties, and is described by its own equation of state, $P_k = eos_k(\rho_k,e_k)$, $k$ being the phase index. This system of equations is hyperbolic and has seven real eigenvalues. The 1-D Seven-equation model is recalled in \eqt{eq:sem-eq} for a liquid phase in interaction with a gas phase denoted by the subscript $liq$ and $gas$, respectively. Equations for the vapor phase can be devised from \eqt{eq:sem-eq} by simply substituting the subscript $_{liq}$ to $_{gas}$ and $_{gas}$ to $_{liq}$.
+RELAP-7 \cite{Berry_Peterson_2014} uses the seven-equation two-phase flow model \cite{SEM} to simulate the behavior of two-phase flows in light water reactors. In this model, each phase is treated as being compressible, exhibits independent thermodynamical and mechanical properties, and is described by its own equation of state, $P_k = eos_k(\rho_k,e_k)$, $k$ being the phase index. This system of equations is hyperbolic and has seven real eigenvalues. The 1-D 7-equation model is recalled in \eqt{eq:sem-eq} for a liquid phase in interaction with a gas phase denoted by the subscript $liq$ and $gas$, respectively. Equations for the vapor phase can be devised from \eqt{eq:sem-eq} by simply substituting the subscript $_{liq}$ to $_{gas}$ and $_{gas}$ to $_{liq}$.
 %
 %
 \begin{subequations}\label{eq:sem-eq}
@@ -306,7 +311,7 @@ The liquid volume fraction is denoted by  $\alpha_{liq}$ and the vapor volume fr
 \end{align}
 \end{subequations}
 %
-where the function $sgn(x)$ returns the sign of the variable $x$ and $A_{int}$ is the interfacial area that can be computed from a correlation, e.g. \cite{SEM}. All other variables were previously defined and interphase mass transfer has been neglected. As for for the single-phase Euler equations (\sct{sec:single-model}), the dissipative terms given in the vector $\mbold D\left( \mbold U_{liq} \right)$ were derived from the entropy minimum principle and have the following definitions:
+where the function $sgn(x)$ returns the sign of the variable $x$ and $A_{int}$ is the specific interfacial area that can be computed from a correlation, e.g. \cite{SEM}. All other variables were previously defined and interphase mass transfer has been neglected. As for for the single-phase Euler equations (\sct{sec:single-model}), the dissipative terms given in the vector $\mbold D\left( \mbold U_{liq} \right)$ were derived from the entropy minimum principle and have the following definitions:
 %
 \begin{multline}
 l_{liq} = \beta_{liq} \partial_x \alpha_{liq} , \, f_{liq}= ( \alpha \kappa )_{liq} \partial_x \rho_{liq} , \\ g_{liq} = ( \alpha \mu \rho )_{liq} \partial_x u_{liq} \, \text{ and } h_{liq} = ( \alpha \kappa )_{liq} \partial_x \left( \rho e \right)_{liq} \, . \nonumber
@@ -348,8 +353,8 @@ and overbar $(\bar{\cdot})$ denotes the domain-averaged value of any given quant
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 In this section, we briefly describe the spatial and temporal discretizations and the solution techniques 
-used to solve the system of equations presented in \sct{sec:single-model} and \sct{sec:two-phase-model}. The two systems of 
-equations can be recast under the following form for conciseness:
+used to solve the system of equations presented in \sct{sec:single-model} and \sct{sec:two-phase-model}. For conciseness, the two systems of 
+equations can be recast under the following form:
 \begin{equation}
 \label{eq:form}
 \partial_t \mathbf{U} + \div \mathbf{F} \left( \mathbf{U} \right) = \mathbf{R} \left( \mathbf{U} \right) + \mathbf{N} \left( \mathbf{U} \right) + \div \mathbf{D} (\mathbf{U}) \grad \mathbf{U}
@@ -422,7 +427,7 @@ An approximate Jacobian matrix of the discretized equations was derived and impl
 matrix entries requires that the partial derivatives of pressure with respect to the conservative variables 
 be known (this is relatively simple for the stiffened and ideal gas equations of state but may be more 
 complex for general equations of state). The contributions of the artificial dissipative terms to the 
-Jacobian matrix are approximated by lagging the viscosity coefficients (computing them with the previous solution). 
+Jacobian matrix are approximated by lagging the viscosity coefficients (computing them with the previous solution iterate). 
 For instance, this is shown in \eqt{eq:jac_diss_term} for the dissipative terms present in the continuity equation:
 \begin{equation}
 \label{eq:jac_diss_term}
@@ -446,7 +451,7 @@ For each test case, the velocity, density and pressure profiles are provided at 
 \subsection{Single-phase water-hammer} \label{sec:single-num-res}
 %---------------------------------------------------------------------------------------------------
 %
-A single-phase water hammer consists of a liquid phase flowing in a straight 1-D pipe of length $L=10 \ m$ with initial uniform pressure ($P = 7$ MPa), velocity ($u = -12$ $m/s$) and temperature ($T = 453$ K). At $t=0$ s, the two extremities of the 1-D pipe are closed by solid walls which causes shock and rarefaction waves to appear at the left and right extremities, respectively. The two waves initially propagate towards the middle of the pipe and are reflected on the opposite wall after crossing each other near the middle of the pipe. Numerical results of the velocity, density and pressure profiles are given in \fig{fig:single-phase-vel}, ~\ref{fig:single-phase-density} and ~\ref{fig:single-phase-press}, respectively.\, for three different times $t=8.7 \times 10^{-4}, \, 6.8 \times 10^{-3} \text{ and } 10^{-3}$ s. The viscosity coefficients are plotted in \fig{fig:single-phase-visc} at time $t = 8.7 \times 10^{-4}$ s only.
+A single-phase water hammer consists of a liquid phase flowing in a straight 1-D pipe of length $L=10 \ m$ with initial uniform pressure ($P = 7$ MPa), velocity ($u = -12$ $m/s$) and temperature ($T = 453$ K). At $t=0$ s, the two extremities of the 1-D pipe are closed by solid walls which causes sharp compression (shock) and sharp rarefaction waves to appear at the left and right extremities, respectively. The two waves initially propagate towards the middle of the pipe and are reflected on the opposite wall after crossing each other near the middle of the pipe. Numerical results of the velocity, density and pressure profiles are given in \fig{fig:single-phase-vel}, ~\ref{fig:single-phase-density} and ~\ref{fig:single-phase-press}, respectively.\, for three different times $t=8.7 \times 10^{-4}, \, 6.8 \times 10^{-3} \text{ and } 10^{-3}$ s. The viscosity coefficients are plotted in \fig{fig:single-phase-visc} at time $t = 8.7 \times 10^{-4}$ s only.
 %
 \begin{figure}[H]
         \centering
@@ -478,13 +483,13 @@ A single-phase water hammer consists of a liquid phase flowing in a straight 1-D
         \caption{Numerical solutions of a water hammer at times $t=8.7 \times 10^{-4}, \, 6.8 \times 10^{-3} \text{ and } 10^{-3}$ s (the viscosity coefficients are only shown at time $t=8.7 \times 10^{-4}$ s).}\label{fig:single-phase}
 \end{figure}
 %
-In \fig{fig:single-phase}, the numerical solution does not display any oscillations or any spurious instabilities due to the numerics. The viscosity coefficients $\kappa$ and $\mu$ only saturate to the first-order viscosity coefficients, $\kappa_{max}$, around $x=0.1$ m and $x=0.9$ m which match the positions of the shocks waves at $t=8.7 \times 10^{-4}$. It is also noted that the accuracy of the shock wave decreases over time: the numerical dissipation comes from the temporal integrator (time step size) and the spatial discretize element size. The accuracy of the numerical solution could be improved over time by using a finer grid with smaller time steps or a higher-order temporal integrator. In \fig{fig:single-phase-press}, the pressure temporary becomes negative as the liquid phase cannot vaporize in the model used. Such negative pressure variations are allowed by the Stiffened Gas equation of state.
+In \fig{fig:single-phase}, the numerical solution does not display any oscillations or any spurious instabilities due to the numerics. The viscosity coefficients $\kappa$ and $\mu$ only saturate to the first-order viscosity coefficients, $\kappa_{max}$, around $x=0.1$ m and $x=0.9$ m which match the positions of the wave fronts at $t=8.7 \times 10^{-4}$. It is also noted that the accuracy of the compression (shock) wave decreases over time: the numerical dissipation comes from the temporal integrator (time step size) and the spatial discretize element size. The accuracy of the numerical solution could be improved over time by using a finer grid with smaller time steps or a higher-order temporal integrator. In \fig{fig:single-phase-press}, the pressure temporarily becomes negative as the liquid phase cannot vaporize in the model used. Such negative pressure variations are allowed by the stiffened gas equation of state.
 %
 %---------------------------------------------------------------------------------------------------
 \subsection{Two-phase flow water-hammer} \label{sec:two-num-res}
 %---------------------------------------------------------------------------------------------------
 %
-The two-phase water hammer is identical to the single-phase water hammer described in \sct{sec:two-num-res}: the liquid and vapor phases have the same initial conditions and the liquid volume fraction is initially set to $0.5$. The two phases are in interaction through the pressure and velocity relaxation terms (see \eqt{eq:sem-eq}) that are functions of the relaxation coefficients, $\mu_P$ and $\lambda_u$, computed with $A_{int} = 10^3$ $m^{-1}$ so that the two phases achieve pressure and velocity equilibrium at all times. Plots of the velocity, the density, the pressure and the viscosity coefficients are given in \fig{fig:liquid-phase} and \ref{fig:vapor-phase} for the liquid and gas phases, respectively.
+The two-phase water hammer is identical to the single-phase water hammer described in \sct{sec:two-num-res}: the liquid and vapor phases have the same initial conditions and the liquid volume fraction is initially set to $0.5$. The two phases are interact through the pressure and velocity relaxation terms (see \eqt{eq:sem-eq}) that are functions of the relaxation coefficients, $\mu_P$ and $\lambda_u$, computed with $A_{int} = 10^3$ $m^{-1}$ so that the two phases nearly achieve pressure and velocity equilibrium at all times. Plots of the velocity, the density, the pressure and the viscosity coefficients are given in \fig{fig:liquid-phase} and \ref{fig:vapor-phase} for the liquid and gas phases, respectively.
 %
 \begin{figure}[H]
         \centering
@@ -548,7 +553,7 @@ The two-phase water hammer is identical to the single-phase water hammer describ
 \end{figure}
 %
 \fig{fig:liquid-phase} and ~\ref{fig:vapor-phase} show that the numerical solution of the liquid and gas phases do not display any oscillations or instabilities. 
-As expected, the two fluids have the same pressure and velocity profiles as shown in \fig{fig:vap-phase-press}, ~\ref{fig:liq-phase-press} and \fig{fig:vap-phase-vel}, ~\ref{fig:liq-phase-press}, respectively. The shocks coming from the left and right walls are initially well resolved and do not display any instability but lose stiffness over time for the same reason as detailed in \sct{sec:single-num-res}. The density of the liquid and gas phases have different values but experience similar variations. The viscosity coefficients are plotted at time $t = 8.7 \times 10^{-3}$ s and display two peaks that match the shock positions.
+As expected, the two fluids have the same pressure and velocity profiles as shown in \fig{fig:vap-phase-press}, ~\ref{fig:liq-phase-press} and \fig{fig:vap-phase-vel}, ~\ref{fig:liq-phase-vel}, respectively. The waves  coming from the left and right walls are initially well resolved and do not display any instability but lose sharpness over time for the same reason as detailed in \sct{sec:single-num-res}. The density of the liquid and gas phases have different values but experience similar variations. The viscosity coefficients are plotted at time $t = 8.7 \times 10^{-3}$ s and display two peaks that match the shock positions.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
