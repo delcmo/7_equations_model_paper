@@ -112,39 +112,34 @@ return but when I look for differences on github, it is a pain to have very long
 Compressible two-phase fluid flows are found in numerous natural, scientific, and industrial applications (astrophysical plasmas, 
 combustion devices, heat transfer for boilers --including coolant flow in nuclear reactors, etc.). 
 % Their numerical solution is an ongoing area of research in modeling and simulation. 
-A variety of two-phase flow models, with different levels of mechanical and thermodynamical non-equilibrium, exists. 
-Traditionally, a six-equation model with equal pressure between the two phases is employed to describe the conservation of mass, 
+A variety of two-phase flow models, with different levels of mechanical and thermodynamical non-equilibrium, exists \tcb{add citation: Stadtke 2006)}. 
+For simulation of two-phase flow in nuclear reactor, a six-equation model that allows velocity in-equilibrium but pressure equilibrium between the two phases is traditionally employed to describe the conservation of mass, 
 momentum, and energy for two phases \cite{Stadtke}; this model is typically obtained by an averaging process (be it in time, space,
 or statistical \cite{BruceStewart1984363}). However, it is well-known that the six-equation model 
 suffers from some mathematical difficulty in the sense that the system of partial differential equations is ill-posed in the sense of Hadamard 
-(the Jacobian matrix of linearized equations presents a pair of complex eigenvalues). 
-Other multiphase flow models that are unconditionally hyperbolic have been derived alike the five- and seven-equation models; see, for instance, Stewart and Wendroff \cite{BruceStewart1984363}, 
-Baer and Nunziato \cite{BaerNunziato}, Kapila \cite{Kapila_2001,Berry_NED2010}, Berry et al. \cite{Berry_1985}, Saurel et al. \cite{Saurel_2001a,Saurel_2001b}, 
-among others. Hyperbolicity is a highly desirable property to devise robust numerical solvers and to treat a wide range of flow conditions.
-These hyperbolic models employ an additional partial differential equation for the volume fraction, allowing for the rate at 
-which pressure equilibrium is reached.  They can be obtained by integrating the one-phase flow balance equations weighted by a characteristic 
-or indicator function for each phase \cite{DrewPassman}. The resulting system of equations also contains non-conservative terms and relaxation terms that 
-describe the interaction between phases. In this paper, we employ the full non-equilibrium Seven-Equation two-phase flow Model 
-(SEM) that was obtained by applying the Discrete Equation Method (DEM) as described by Abgrall et al. in \cite{AbgrallandSaurel2003}. A version of the SEM with variable area was also derived in \cite{Berry_NED2010}.
+(the Jacobian matrix of linearized equations can yield a pair of complex eigenvalues under certain flow conditions). 
+Other multiphase flow models that are unconditionally hyperbolic have been derived alike the five- (see for instance, Stewart and Wendroff \cite{BruceStewart1984363}, 
+Baer and Nunziato \cite{BaerNunziato}, Kapila \cite{Kapila_2001,Berry_NED2010}, Berry et al. \cite{Berry_1985}) and the seven-equation models (see for instance, Abgrall et al. \cite{AbgrallandSaurel2003} and Saurel et al. \cite{Saurel_2001a,Saurel_2001b}). These hyperbolic models employ an additional partial differential equation for the volume fraction, allowing for the rate at which pressure equilibrium are reached.  They can be obtained by integrating the one-phase flow balance equations weighted by a characteristic 
+or indicator function for each phase \cite{DrewPassman}. The resulting system of equations also contains non-conservative terms and relaxation terms that describe the interaction between phases.
+%Hyperbolicity is a highly desirable property to devise robust numerical solvers and to treat a wide range of flow conditions.
+In this paper, we employ the full non-equilibrium Seven-Equation two-phase flow Model 
+(SEM). The SEM was obtained by applying the homogenization method introduced by Abgrall et al. \cite{AbgrallandSaurel2003} and referred to as the Discrete Equation Method (DEM). This homogenization method yields a well-posed system of equations with clear acoustic properties and correctly approximates non-conservative terms. More importantly, it allows the use of approximate Riemann solvers. The DEM method was intensively tested for unsteady flows in 1-D straight and variable area pipes \cite{AbgrallandSaurel2003, Chinnayya2004, Berry_NED2010}.
+% A version of the SEM with variable area was also derived in \cite{Berry_NED2010}.
 
-The numerical approximation of these unconditionally hyperbolic models is an ongoing area of research.
-In the SEM model, seven waves are present: two acoustic waves and one contact discontinuity per fluid and one volume fraction wave that propagates 
-at an interfacial speed. This generates intricate wave patterns and leads to complex flux computations, ruling out the use of a Riemann solver. 
-An alternative is to use an approximate Riemann solver, a well-established approach for single-phase flows, while deriving a consistent discretization 
-scheme for the non-conservative terms \cite{Li_2004,Abgrall_2002}. 
+The numerical approximation of the unconditionally hyperbolic SEM is an ongoing area of research and remains a challenging task. In the SEM model, seven waves are present: two acoustic waves and one contact discontinuity per fluid and one volume fraction wave that propagates 
+at an interfacial speed. This generates intricate wave patterns and leads to complex flux computations, ruling out the use of a Riemann solver. An alternative is to use an approximate Riemann solver when considering a discontinuous scheme, a well-established approach for single-phase flows, along with a consistent discretization scheme for the non-conservative terms \cite{Li_2004,Abgrall_2002}. 
 % approximation for the treatment of the non-conservative terms can lead to failure in computing the numerical solution \cite{Abgrall_2002}.
 \tcr{I do not know what to think about this sentence. Abgrall2002 is not even cited in that paper from Berry, so I am lost a bit. I thought the NED2010 paper
-was about DEM applied to SEM. DEM is not mentioned anywhere but I think it must be discussed)} 
+was about DEM applied to SEM. DEM is not mentioned anywhere but I think it must be discussed)}\tcb{I modifed this. Abgrall2002 focuses on the non-conservative terms} 
 % 
 %Because each phase in the SEM model obeys a single-phase Euler equation, various numerical techniques employed so far to discretize the SEM equations have been 
 %based on spatially discontinuous schemes. 
-Because each phase is assumed to obey the Euler equations, most of the numerical solvers are adapted from the single-phase approximate Riemann solvers. For example, Saurel et al. \cite{Saurel_2001a, Saurel_2001b} employed a HLL-type scheme to solve for the SEM but noted that excessive dissipation was added in the contact discontinuity. A more advanced HLLC-type scheme was developed in \cite{Li_2004} but only for the subsonic case; this was later extended to supersonic flows in \cite{Zein_2010}. More recently, Ambroso et al. \cite{Ambroso_2012} proposed an approximate Riemann solver accounting for source terms such as gravity and drag forces, but with no mass transfer \tcr{between phases}. \tcr{(second option is better. check if this is what you meant, and not interfacial)} (\tcr{also, the last sentence implies that the previous work Saurel2001, Li2004, Zein2010, discretized the SEM with no source term and
+Because each phase is assumed to obey the Euler equations, most of the numerical solvers are adapted from the single-phase approximate Riemann solvers. For example, Saurel et al.\cite{Saurel_2001a, Saurel_2001b} employed a HLL-type scheme to solve for the SEM but noted that excessive dissipation was added in the contact discontinuity. A more advanced HLLC-type scheme was then developed in \cite{Li_2004} but only for the subsonic case; this was later extended to supersonic flows in \cite{Zein_2010}. More recently, Ambroso et al. \cite{Ambroso_2012} proposed an approximate Riemann solver accounting for source terms such as gravity and drag forces, but with no mass transfer \tcr{between phases}. \tcr{(second option is better. check if this is what you meant, and not interfacial)} (\tcr{also, the last sentence implies that the previous work Saurel2001, Li2004, Zein2010, discretized the SEM with no source term and
 no mass transfer. whichever it is, we should find a way of adding the relevant information for clarity. Finally, would this be a better place to talk about DEM, that is, after the approximate Riemann solvers?}). 
-Berry et al. in \cite{Berry_NED2010} employed HLLC-type schemes to solve for the Seven-Equation Model (SEM) with variable area but did not discuss the low-Mach asymptotic limit aspect.
+Berry et al. in \cite{Berry_NED2010} employed HLLC-type schemes to solve for the Seven-Equation Model (SEM) with variable area but did not discuss the low-Mach asymptotic limit aspect. \tcb{review this last paragraph}
 
-
-In this paper, we propose an alternative to approximate Riemann solvers in order to derive a robust discretization for the SEM. Our approach is 
-based on the well-known notion of artificial viscosity.  
+In this paper, we propose an alternative to the traditional approximate Riemann solvers that relies on the previous work by Delchini et al.\cite{Marco_paper_sem}. Our approach is 
+based on the well-known notion of artificial viscosity, is new to the best of our knowledge and, would allow to solve for the SEM using both continuous and discontinuous schemes. 
 When adding viscosity in the vicinity of a shockwave, one replaces the physical effect of the entropy production in the shockwave with the equivalent entropy increase of a viscous layer (transformation of kinetic energy into internal energy).  
 If the viscosity is not large enough, the resulting entropy production will not be equivalent to that of the true shock and a numerical scheme 
 may create a train of oscillations in the solution, radiating away from the shock/viscous layer, and whose gradients will indeed attempt to produce 
@@ -183,19 +178,20 @@ Following the single-phase work by Guermond et al.
 Delchini et al. \cite{Marco_paper_sem} recently proposed a viscous regularization for the Seven-Equation Model that is consistent with the minimum entropy principle and Harten's generalized entropies. In their numerical application, the viscosity coefficients were chosen proportional to the local maximum eigenvalues (akin to a local Lax-Friedrichs, LLF, scheme), which is well-known to be over-dissipative and first-order in space. In addition, the LLF viscosity coefficients are known to
 lead to ill-scaled viscous terms in the low-Mach regime and an ad-hoc low-Mach fix had to be employed to obtain the correct solution for low-Mach flows (this 
 behavior is well documented in the literature; see \cite{LowMach1, LowMach2, LowMach3}). By means of a low-Mach asymptotic analysis, the correct
-viscosity scaling for the seven-equation two-phase flows for all speeds were derived in \cite{Marco_paper_sem}.
+viscosity scaling for the Seven-Equation two-phase flows Model for all speeds were derived in \cite{Marco_paper_sem}.
 
-Here, we present an all-Mach flow numerical method for the non-equilibrium seven-equation two-phase flow model where we derive and define high-order viscosity coefficients that will enable shock capture (without the excessive dissipation of the LLF viscosity) while ensuring a correct low-Mach asymptotic limit. The 
-proposed definitions of the viscosity coefficients are based on the local entropy production as developed previously in the entropy viscosity Method for
-single-phase flows \cite{GuermondSIAM2014, GuermondCSE2011}. 
-The method relies on two key ingredients: 
+Here, we present an all-Mach flow numerical method for the non-equilibrium Seven-Equation two-phase flow Model  that relies on two key ingredients:
+%where we derive and define high-order viscosity coefficients that will enable shock capture (without the excessive dissipation of the LLF viscosity) while ensuring a correct low-Mach asymptotic limit. The 
+%proposed definitions of the viscosity coefficients are based on the local entropy production as developed previously in the entropy viscosity Method for
+%single-phase flows \cite{GuermondSIAM2014, GuermondCSE2011}. 
+%The method relies on two key ingredients: 
 \ben
 \item  an adequate viscous regularization that ensures that the entropy production remains positive, thus that the minimum entropy principle holds 
 (see \cite{tadmor_minimum_entropy_principle} for additional discussions regarding the minimum entropy principle, \cite{GuermondSIAM2014}
 for such a viscous regularization for single-phase flows, and \cite{Marco_paper_sem} for the two-phase flow version applicable to the SEM)
 \item a definition of viscosity coefficients that is well-behaved over a wide range of Mach numbers and does not excessively dissipate sharp solution profiles. 
 \een
-This latter point is the crux of this paper.
+This latter point is the crux of this paper that is organized as follows:
 %The theoretical foundation for this work can be traced back to viscous regularization for single-phase Euler and Navier-Stokes equations, notably \cite{GuermondSIAM2014} and the references therein. 
 %
 %Delchini et al. \cite{Marco_paper_sem} proposed a viscous regularization for the Seven-Equation Model that is consistent with the minimum entropy principle and Harten's generalized entropies and was shown to efficiently stabilize the numerical solution when defining the viscosity coefficients proportional to the local maximum eigenvalues as in the local Lax-Friedrichs (LLF) scheme. It was also shown that the numerical method would fail to yield the correct solution in the case of low-Mach flows: the numerical dissipative terms become 
@@ -203,11 +199,15 @@ This latter point is the crux of this paper.
 %behavior is well documented in the literature \cite{LowMach1, LowMach2, LowMach3, Marco_paper_sem}. Still in \cite{Marco_paper_sem}, conditions for yielding the correct asymptotic behavior were also proposed by mean of a low-mach asymptotic study. We now propose to define high-order viscosity coefficients for the SEM that will allow to solve for shocks but also ensure the correct low-Mach asymptotic limit, on the same model of what was previously achieved for the single-phase Euler equations \cite{DelchiniCompFluid2014-euler}.
 %
 %
-The remainder of the paper is as follows. In \sct{sec:7-equ-model}, the Seven-Equation two-phase flow Model (SEM) is recalled along with its main 
-physical and mathematical properties, and the viscous regularization derived in \cite{Marco_paper_sem}. Then, all-Mach flow viscosity coefficients are derived 
-in \sct{sec:visc-def} by following the same methodology as in \cite{DelchiniCompFluid2014-euler} which is the novelty presented in this paper. In \sct{sec:disc}, the temporal and spatial discretization methods are presented. 
-Our theoretical approach is first illustrated in \sct{sec:results} with one-dimensional numerical results obtained with a Moose-based in-house code. The technique has also been implemented in the nuclear 
-reactor safety system code RELAP-7 \cite{Berry_2014} and some of the numerical illustrations were generated with it.
+%The remainder of the paper is as follows. 
+In \sct{sec:7-equ-model}, the Seven-Equation two-phase flow Model (SEM) is recalled along with its main 
+physical and mathematical properties, and the viscous regularization derived in \cite{Marco_paper_sem} that will be used in the present paper. Then, \sct{sec:visc-def} focuses on the novelty presented in this paper, which is the derivation of all-Mach flow viscosity coefficients by following the same methodology as in \cite{DelchiniCompFluid2014-euler}.
+%all-Mach flow definition for the viscosity coefficients is derived 
+%in \sct{sec:visc-def} by following the same methodology as in \cite{DelchiniCompFluid2014-euler} which is the novelty presented in this paper. 
+In \sct{sec:disc}, the temporal and spatial discretization methods are presented. 
+Our theoretical approach is illustrated in \sct{sec:results} with one-dimensional numerical results obtained with a Moose-based in-house code and with the nuclear reactor safety system code RELAP-7 \cite{Berry_2014}. \tcb{I think we should only use numerical results from R-7} 
+%The technique has also been implemented in the nuclear 
+%reactor safety system code RELAP-7 \cite{Berry_2014} and some of the numerical illustrations were generated with it.
 Finally, we conclude in \sct{sec:conclusion}.
 %
 
