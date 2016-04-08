@@ -510,21 +510,21 @@ In the following, the reader is guided through the derivation of the all-Mach ph
 e.g., supersonic gas and subsonic liquid, it is elected to keep distinct the three viscosity coefficients for each phase.
 In the Entropy Viscosity Method, each viscosity coefficient is function of a first-order 
 viscosity coefficient and an entropy viscosity coefficient (high-order coefficient) 
-and are denoted by the subscript $max$ and $e$, respectively. The first-order viscosity coefficient is the local maximum amount of dissipation allowed that ensures smoothness of the numerical solution even in the vicinity of the shock. The objective is to know the amount of dissipation required in order to locally prevent the formation of spurious oscillations and have the correct entropy jump as discussed (see \sct{sec:visc-coeff-fo}). However, the first-order viscosity coefficient does not allow to recover the low-Mach asymptotic limit \cite{Marco_paper_sem}. On the other hand, the high-order viscosity coefficient is designed (i) to be peaked in shock waves and other discontinuities and thus, is used as a discontinuity tracker (see \sct{sec:visc-coeff-ho}), and (ii) to ensure well-scaled dissipative terms in the low-Mach asymptotic limit. Then, by combining the first- and high-order viscosity coefficients, appropriate amount of dissipation is added to the numerical solution in shocks and other discontinuities while ensuring high-order accuracy anywhere else and appropriate behavior in the low-Mach limit (see \sct{sec:visc-coeff}).
+and are denoted by the subscript $max$ and $e$, respectively. The first-order viscosity coefficient is the local maximum amount of dissipation allowed that ensures smoothness of the numerical solution even in the vicinity of the shock. The objective is to know the amount of dissipation required in order to locally prevent the formation of spurious oscillations and have the correct entropy jump as discussed (see \sct{sec:visc-coeff-fo}). However, the first-order viscosity coefficient does not allow to recover the low-Mach asymptotic limit \cite{Marco_paper_sem}. On the other hand, the high-order viscosity coefficient is designed (i) to be peaked in shock waves and other discontinuities and thus, is used as a discontinuity tracker (see \sct{sec:visc-coeff-ho}), and (ii) to ensure well-scaled dissipative terms in the low-Mach asymptotic limit. Then, by cleverly combining the first- and high-order viscosity coefficients, appropriate amount of dissipation is added to the numerical solution in shocks and other discontinuities while ensuring high-order accuracy anywhere else and appropriate behavior in the low-Mach limit (see \sct{sec:visc-coeff}).
 \\ \tcr{that's just about notation. maybe a reader would like to know why there is an upper bound.
 also, we never talked in terms of lower bound. where is this coming from???} \tcb{done}
 %Derivation of the definitions for the all-Mach flow viscosity coefficients relies on 
 %the low-Mach asymptotic study of the regularized SEM performed in \cite{Marco_paper_sem}. 
 %
 \begin{remark}
-The link to Flux Corrected Transport (FCT) (REF) is strong since the first- and high-order viscosity coefficients can be seen as low- and high-order methods, respectively. The difference with FCT mainly lies in the way the two viscosity coefficients methods are combined as it is discussed in \sct{sec:visc-coeff}.
+The link to Flux Corrected Transport (FCT) \cite{fct} is strong since the first- and high-order viscosity coefficients can be seen as low- and high-order methods, respectively. The difference with FCT mainly lies in the way the two viscosity coefficients methods are combined. % as it is discussed in \sct{sec:visc-coeff}.
 \end{remark}
 %
 %-------------------------------------------------------------------------------------------------------------------
 \subsection{Definition of the first-order viscosity coefficients}\label{sec:visc-coeff-fo}
 %-------------------------------------------------------------------------------------------------------------------
 %
-The first-order viscosity coefficient is chosen to be equivalent to a local Lax-Friedrichs scheme that is known to be over-
+The first-order viscosity coefficient is chosen to be equivalent to a local Lax-Friedrichs-type scheme that is known to be over-
 dissipative and thus, will prevent spurious oscillation from forming. In \cite{Marco_paper_sem}, we chose to set the phasic viscosity 
 coefficients proportional to the local maximum eigenvalue of each phase as shown in \eqt{eq:visc-coeff-fo-def-1} as follows:
 %
@@ -556,20 +556,21 @@ profile for the volume fraction will be illustrated in \sct{sec:results}.
 %-------------------------------------------------------------------------------------------------------------------
 %
 \tcg{I have review until here}
-In this paragraph, we derive the high-order viscosity coefficients denoted by the subscript $e$: $\beta_{k,e}$, $\mu_{k,e}$ and $\kappa_{k,e}$ and relies on the low-Mach asymptotic study of the regularized SEM 
-performed in \cite{Marco_paper_sem}. In the Entropy Viscosity Method (EVM), the high-order viscosity coefficients are set proportional to the local entropy 
-residual that measures the local entropy production. This entropy residual is known to be peaked in the vicinity of the shock wave \cite{Leveque}. 
-This approach has been successfully used to resolve shock waves for single-phase flows (see \cite{GuermondJCP2011, GuermondCSE2011, GuermondCRA2008,ZinganJCP2013,DelchiniCompFluid2014-euler}). 
+In this paragraph, we derive the high-order viscosity coefficients for each phase $k$, denoted by the subscript $e$: $\beta_{k,e}$, $\mu_{k,e}$ and $\kappa_{k,e}$. We rely on the low-Mach asymptotic study of the regularized SEM 
+performed in \cite{Marco_paper_sem},
+%In the Entropy Viscosity Method (EVM), the high-order viscosity coefficients are set proportional to the local entropy residual that measures the local entropy production. 
+%This entropy residual is known to be peaked in the vicinity of the shock wave \cite{Leveque}. 
+%This approach has been successfully used to resolve shock waves for single-phase flows (see \cite{GuermondJCP2011, GuermondCSE2011, GuermondCRA2008,ZinganJCP2013,DelchiniCompFluid2014-euler}). 
+and first derive expressions for the high-order phasic viscosity coefficients $\mu_{e,k}$ and $\kappa_{e,k}$ by following the same 
+approach used in \cite{DelchiniCompFluid2014-euler} for the single-phase Euler equations. Note that because the regularized SEM of \eqt{eq:7-eqn} 
+degenerates to the regularized Euler equations studied in \cite{DelchiniCompFluid2014-euler} when one phase disappears, it is expected to recover the same definition for the viscosity coefficients $\mu_{k,e}$ and $\kappa_{k,e}$ in that particular limit. The case of $\beta_{k,e}$ is handled later in this same section. 
 
-We first derive expressions for the high-order phasic viscosity coefficients $\mu_{e,k}$ and $\kappa_{e,k}$ by following the same 
-approach used in \cite{DelchiniCompFluid2014-euler} for the single-phase Euler equations. Such an approach is justified because the regularized SEM of \eqt{eq:7-eqn} 
-degenerates to the regularized Euler equations studied in \cite{DelchiniCompFluid2014-euler} when one phase disappears.
-By setting the high-order viscosity propoertional to the local entropy residual (as well as the inter-element jumps in the entropy flux as described later),
+By setting the high-order viscosity proportional to the local entropy residual (as well as the inter-element jumps in the entropy flux as described later),
 one is able to track spatially and temporally any shock and discontinuity forming in the computational domain. 
 In \cite{DelchiniCompFluid2014-euler}, we showed that recasting the entropy residual ($\resi(\mbold r,t)  := \matder{s}$) 
 as a function of pressure, velocity, density, and speed of 
 sound, allowed for an alternative expression of the entropy residual ($\resinew(\mbold r,t)$)
-that no longer required an analytical expression of the entropy $s_k$ and while still experiencing the same variations (in absolute value) 
+that no longer required an analytical expression of the entropy $s_k$, while still experiencing the same variations (in absolute value) 
 as the original entropy residual as shown in \eqt{eq:ent-res-sem},
 %
 \begin{equation}\label{eq:ent-res-sem}
@@ -588,11 +589,11 @@ for the phasic entropy viscosity coefficients $\mu_{k,e}$ and $\kappa_{k,e}$
 \mu_{k,e}    \propto \max\left( | \resinew_k(\mbold r_q,t) |\,,  J_k  \right) \quad \text{and} \quad
 \kappa_{k,e} \propto \max\left( | \resinew_k(\mbold r_q,t) |\,,  J_k  \right) 
 \ee
-where we also accounted for the jumps $J_k$ in the normal derivatives of pressure and density (multiplied by $c^2$): 
+where we also accounted for the jumps $J_k$ in the normal derivatives of the phasic pressure gradient and the phasic density gradient multiplied by the phasic sound speed $c^2_k$: 
 \begin{equation}\label{eq:jump-p-rho}
 J_k = \| \mbold{u}_k \| \max \left( J[P_k] \, ,  c^2_k  J[\rho_k] \right)\,.
 \end{equation}
-The operator $J[\cdot]$ will be defined in \sct{sec:spatial-disc} as its definition is discretization-dependent.
+The operator $J[\cdot]$ will be defined in \sct{sec:spatial-disc} as its definition is discretization-dependent. The jumps are included in the definition of the high-order viscosity coefficients to be able to detect discontinuities other than shocks. This approach was previously used \cite{DelchiniCompFluid2014-euler} in for the single-phase flow case.
 %
 \item A distinct normalization parameter is introduced for each phasic viscosity coefficient. This normalization parameter enables an all-speed
 solver by changing its definition based on the local Mach number as seen below:
@@ -614,7 +615,7 @@ pressure, which leads to the following normalization values such as $P_k$, $\rho
 \item The choice of normalization parameters $\norm_{P,k}^\mu$ and $\norm_{P,k}^\kappa$ are determined by performing a low-Mach asymptotic study of the 
 non-dimensional regularized SEM (\eqt{eq:reg-7-eqn}) by considering two cases: (a) the isentropic low-Mach limit where the 
 Seven-Equation Model devolves to an incompressible system of 
-equations and (b) the non-isentropic limit where shocks can occur \tcb{briefly recall the steps of other paper}. The non-dimensional regularized 
+equations and (b) the non-isentropic limit where shocks can occur. The non-dimensional regularized 
 equations of the SEM were derived in \cite{Marco_paper_sem} using the phasic non-dimensionalized variables defined in \eqt{eq:norm_param}:
 %
 \begin{multline}
@@ -684,9 +685,9 @@ the P\'eclet numbers ($\Pe_{k,\infty}^\kappa$ and $\Pe_{k,\infty}^\beta$) repres
 The numerical Reynolds and P\'eclet numbers are obviously related to the 
 viscosity coefficients $\mu_{k,\infty}$, $\kappa_{k,\infty}$ and $\beta_{k,\infty}$. Thus, once a scaling (in terms of powers of $M_{k,\infty}$) 
 is obtained for $\Re_{k,\infty}$, $\Pe_{k,\infty}^\kappa$, and $\Pe_{k,\infty}^\beta$ in the two limit cases (a) and (b) \tcr{where???} \tcb{done}, it will 
-impose a condition for the definition of the phasic viscosity coefficients $\mu_k$, $\kappa_k$, and $\beta_k$. 
+impose a condition for the definition of the phasic viscosity coefficients $\mu_k$, $\kappa_k$, and $\beta_k$. \tcb{up to here, I have only defined the normalization parameters for $\mu$ and $\kappa$ and already talk about normalization parameter for $\beta$. TO FIX}
 \end{enumerate} 
-The study of the non-dimensional regularized SEM in the cases (a) and (b) was performed in \cite{Marco_paper_sem}. We only recall here the scaling of the numerical numbers previously defined in \eqt{eq:ref_numb}, for the tow cases (a) and (b). For further details regarding the logic and the steps that lead to such scaling, the reader is referred to \cite{Marco_paper_sem}. \tcr{too late. it is conceivable that this section will need more work. we need this fix 
+The study of the non-dimensional regularized SEM in the cases (a) and (b) was performed in \cite{Marco_paper_sem}. We only recall here the scaling of the numerical numbers previously defined in \eqt{eq:ref_numb}, for the two cases (a) and (b). For further details regarding the logic and the steps that lead to such scaling, the reader is referred to \cite{Marco_paper_sem}. \tcr{too late. it is conceivable that this section will need more work. we need this fix 
 the logic quickly ... time is running out before the semester ....} \tcb{done}. 
 In case (a), that corresponds to the isentropic low-Mach limit, the regularized SEM was found to yield the correct 
 low-Mach asymptotic limit with well-scaled dissipative terms when the numerical numbers have the following scaling:
