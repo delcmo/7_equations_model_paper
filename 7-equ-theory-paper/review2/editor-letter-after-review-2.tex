@@ -41,7 +41,7 @@ Thank you for the second round of reviews for our manuscript titled,
 by M. Delchini, J. Ragusa, and R. Berry, submitted for publication in the {\it  Springer Journal of Scientific Computing}. 
 
 Our main interest lies
-in enabling two-phase flow simulations for the seven-equation (two-pressure, two-velocity) model using {\bf continuous}
+in enabling two-phase flow simulations for the seven-equation (two-pressure, two-velocity) model using \underline{{\bf continuous}}
 finite elements by employing an artificial viscosity technique based on entropy principles. To our knowledge, this has 
 not been done to-date.
 
@@ -55,36 +55,49 @@ Seven-Equation two-phase flow Model (SEM), notably (i) one full additional page 
 The additional bibliography included several articles (from Del Maso, Le Floch, Murat, Bianchini, Bressan, ...) 
 Reviewer \#1 also noted some incorrect wording of some statements, which we appropriately revised. A difficult shock 
 tube test case, with almost pure phases on each side of the membrane, was requested with a volume fraction of $0.01$. We
-performed and added such a simulation, with an even lower volume fraction of $5\times 10{-4}$. 
+performed and added such a simulation, with an even lower volume fraction of $5\times 10^{-4}$. 
 After our revision, Reviewer \#1 found that our revised manuscript was {\it significantly improved in quality}, appreciated our inclusion of
 theoretical background on HNCSE, among others the proof of non-negative phase density and phasic volume.  On their
 conclusions, they see our contribution as going beyond a simple extension of the work by Popov/Guermond for single-phase Euler equations and they {\bf strongly} recommend publication.
 
 Comments from Reviewer \#2 were received as file \tcr{{\tt delchini\_ragusa\_berry.pdf}}
-and as a email note from the Journal following our first revision. This second Reviewer is at odds with Reviewer \#1.
+and as a email note from the Journal following our first revision. Reviews from the second Reviewer are short and terse,
+and emphasize different topics between revisions.
 \begin{itemize}
 \item 
 In Reviewer \#2's first round of comments, 
 they stated that our work was ``not good and a poor extension of the work by Guermond and Popov'', which is in stark
 contrast with Reviewer \#1. In our reply, we explained why we disagreed with this assessment (please see our first reply for details). 
 \item We would like to point out that in their first review, they made an unsubstantiated  claim that our entropy equation for the 
-regularized seven-equation model was incorrect. It is not and we re-affirmed the correctness of our derivation in our reply to them. 
+regularized seven-equation model was incorrect. In fact, it is not and we have re-affirmed the correctness of our derivation in our reply to them. 
 \item In their second review, they thank us for our {\it substantial revision which highlight their motivations} but are now generally skeptical about the use of a artificial viscosity method. 
 \begin{enumerate}
-\item Regarding the reviewer questioning the real interest of {\it this} regularization: as explained 
+\item Regarding the reviewer questioning the real interest of this regularization: as explained 
 in the manuscript (and aptly highlighted by Reviewer \#2),  the goal is to define a regularization 
 that satisfies a minimum entropy principle. As such, one needs to verify that the chosen form of the viscous fluxes satisfies an entropy inequality. This goes back to their incorrect remark that our entropy inequality was wrong. 
-\item Regarding the reviewer's disappointment that shock solutions are simulated but not studied: we find this comment vague
-\item Regarding the reviewer's comments dealing with the interaction of viscosity and numerical schemes: the suggested reference (Abgrall, Karni) "de-conservatize" the Euler equations to solve them in non-conservative forms with finite volume methods. The secen-equation model contains non-conservative products but is inherently closer to 2 sets of Euler equations (in conservative form) coupled to an advection equation for the volume fraction. We do not think it is a fair and relevant comparison. 
+\item Regarding the reviewer's disappointment that shock solutions are simulated but not studied: our goal is to stabilize a numerical solution to the seven-equation model when discretized with continuous finite elements. A study of physical admissibility, uniqueness of Riemann solutions under phase transition, etc. is outside of the scope of our paper and maybe not a topic for a journal in scientific computing. 
+% We have had numerous discussions with our colleagues Profs. Popov and Guermond regarding the status of theoretical knowledge pertaining to hyperbolic systems of conservations laws.  
+\item Regarding the reviewer's comments dealing with the interaction of viscosity and numerical schemes: the suggested reference (Abgrall, Karni) ``de-conservatize'' the Euler equations to solve them in non-conservative forms with finite volume methods. The seven-equation model contains non-conser-vative products but is inherently closer to 2 sets of Euler equations (in conservative form) coupled to an advection equation for the volume fraction. We do not think it is a fair and relevant comparison with ``de-conservatized'' Euler equations. 
 \end{enumerate} 
 \end{itemize}
 %
-The second review from Reviewer \#2 is now moving on to objections not raised in their first review. 
-We find this to be quite an objectionable process. Our proposed technique 
+%The second review from Reviewer \#2 also contained some objections not raised in their initial review. 
+%We find this to be quite an objectionable process. 
+Our proposed technique 
 is based on a vanishing viscosity approach for the seven-equation two-phase flow model. 
-There certainly remain open theoretical questions, which will hopefully be addressed by mathematicians with time. However, we believe to have grounded our approach in, to our knowledge, the best available techniques (e.g., the theoretical 
+There certainly remain open theoretical questions, which will hopefully be addressed by mathematicians with time. However, we believe to have grounded our approach in the best available techniques (e.g., the theoretical 
 work of Bianchini/Bressan we cite in our paper regarding vanishing viscosity limits; the work by Popov/Guermond
-regarding the definition of an adequate viscous regularization). 
+regarding the definition of an adequate viscous regularization). Obtaining solutions of two-phase flows models using {\bf continuous } finite elements has the potential for some impact since many open-source finite element libraries
+are now available and have reached a certain level of maturity. Our goal was to show the feasibility of the approach with 
+\begin{enumerate}
+\item
+a derivation of stabilization terms for two-phase flow in the spirit of Popov \& Guermond for Euler equation (these stabilization terms can be easily added in the FEM setting)
+\item
+a study of the effect of the viscosity terms in each equation
+\item 
+a selection of numerical results (some of them taken from previous articles on the seven-equation model).
+\end{enumerate}
+ 
 
 %%%
 \bigskip
@@ -92,10 +105,14 @@ Even though Reviewer \#1 was
 satisfied with the revised manuscript and strongly recommended publication, our manuscript's status has been 
 determined to still require a major revision. We are still fervently
 conceived that our manuscript proposes a novel approach for solving two-phase flow problem using {\bf continuous}
-finite elements and strongly believe in the value of disseminating our findings/results. Are we facing an uphill
-struggle with a community at large solving conservative law equations using finite volume techniques and
-approximate Riemann solvers?
-We kindly request your advice on how to proceed. 
+finite elements and strongly believe in the value of disseminating our findings/results. 
+Based on both rounds of comments from Reviewer \#2, we do not think we (or any other researchers for that matter) 
+will ever be able to satisfy them: their comments are deeply rooted in the theoretical state of knowledge for HNCSE. 
+Are we facing an uphill struggle with a community at large solving conservative law equations using finite volume 
+techniques and approximate Riemann solvers? 
+
+We kindly request your advice and opinion regarding our manuscript. We hope that the thoroughness of Reviewer \#1 and their
+satisfaction with the current manuscript will outweigh the vague and generally negative opinion of Reviewer \#2.
 %\vspace{0.25cm}
 
 
