@@ -70,14 +70,29 @@ they stated that our work was ``not good and a poor extension of the work by Gue
 contrast with Reviewer \#1. In our reply, we explained why we disagreed with this assessment (please see our first reply for details). 
 \item We would like to point out that in their first review, they made an unsubstantiated  claim that our entropy equation for the 
 regularized seven-equation model was incorrect. In fact, it is not and we have re-affirmed the correctness of our derivation in our reply to them. 
-\item In their second review, they thank us for our {\it substantial revision which highlight their motivations} but are now generally skeptical about the use of a artificial viscosity method. 
+\item In their second review, they thank us for our {\it substantial revision which highlights their motivations} but are now generally ``septic'' (we believe they mean skeptical) about the use of an artificial viscosity method. 
 \begin{enumerate}
+\item We do not understand the concern or skepticism of this reviewer regarding a viscous regularization technique.
+Most modern solvers for hyperbolic equation systems now use Godunov methods employing
+Riemann or approximate Riemann solvers to capture the discontinuities, or shocks. However,
+both the methods of artificial viscosity (either explicitly included by the addition of
+dissipation terms or implicitly included through the inherent truncation error of the numerical
+scheme used) and Godunov methods are general shock capturing methods. The effect
+of {\bf either method is the introduction of an appropriate amount of entropy into the flow} 
+(e.g., J. K. Dukowicz, ``A general, non-iterative Riemann solver for Godunov’s method,'' JCP, {\bf 61}, 119--137, 1985).
+With the artificial viscosity methods, the entropy is added by the dissipation produced by
+the incorporated artificial viscosity. On the other hand, with Godunov methods, the entropy
+is primarily added implicitly by the presence of shock waves resulting from the Riemann
+problem. Actually, at least in those cases when it can be found explicitly, the shock Hugoniot
+curve (i.e., the shock pressure jump as a function of the shock velocity jump) closely
+resembles commonly used, early forms of explicitly added artificial shock viscosity 
+(e.g., M. L. Wilkins, ``Use of artificial viscosity in multi-dimensional fluid dynamic calculations,'' JCP, {\bf 36}, 281--303, 1980).\\
 \item Regarding the reviewer questioning the real interest of this regularization: as explained 
 in the manuscript (and aptly highlighted by Reviewer \#2),  the goal is to define a regularization 
 that satisfies a minimum entropy principle. As such, one needs to verify that the chosen form of the viscous fluxes satisfies an entropy inequality. This goes back to their incorrect remark that our entropy inequality was wrong. 
-\item Regarding the reviewer's disappointment that shock solutions are simulated but not studied: our goal is to stabilize a numerical solution to the seven-equation model when discretized with continuous finite elements. A study of physical admissibility, uniqueness of Riemann solutions under phase transition, etc. is outside of the scope of our paper and maybe not a topic for a journal in scientific computing. 
+\item Regarding the reviewer's disappointment that shock solutions are simulated but not studied: our goal is to stabilize a numerical solution to the seven-equation model when discretized with continuous finite elements. A study of physical admissibility, uniqueness of Riemann solutions under phase transition, etc. is outside of the scope of our paper and may not be a topic for a journal in scientific computing. 
 % We have had numerous discussions with our colleagues Profs. Popov and Guermond regarding the status of theoretical knowledge pertaining to hyperbolic systems of conservations laws.  
-\item Regarding the reviewer's comments dealing with the interaction of viscosity and numerical schemes: the suggested reference (Abgrall, Karni) ``de-conservatize'' the Euler equations to solve them in non-conservative forms with finite volume methods. The seven-equation model contains non-conser-vative products but is inherently closer to 2 sets of Euler equations (in conservative form) coupled to an advection equation for the volume fraction. We do not think it is a fair and relevant comparison with ``de-conservatized'' Euler equations. 
+\item Regarding the reviewer's comments dealing with the interaction of viscosity and numerical schemes: the suggested reference (Abgrall, Karni) ``de-conservatize'' the Euler equations to solve them in non-conservative forms with finite volume methods. The seven-equation model contains non-conser-vative products but is inherently closer to 2 sets of Euler equations (in conservative form) coupled to an advection equation for the volume fraction. We do not think it is a relevant comparison with ``de-conservatized'' Euler equations. 
 \end{enumerate} 
 \end{itemize}
 %
@@ -87,13 +102,13 @@ Our proposed technique
 is based on a vanishing viscosity approach for the seven-equation two-phase flow model. 
 There certainly remain open theoretical questions, which will hopefully be addressed by mathematicians with time. However, we believe to have grounded our approach in the best available techniques (e.g., the theoretical 
 work of Bianchini/Bressan we cite in our paper regarding vanishing viscosity limits; the work by Popov/Guermond
-regarding the definition of an adequate viscous regularization). Obtaining solutions of two-phase flows models using {\bf continuous } finite elements has the potential for some impact since many open-source finite element libraries
+regarding the definition of an adequate viscous regularization). Obtaining solutions of two-phase flows models using {\bf \underline{continuous} } finite elements has the potential for some impact since many open-source finite element libraries
 are now available and have reached a certain level of maturity. Our goal was to show the feasibility of the approach with 
 \begin{enumerate}
 \item
-a derivation of stabilization terms for two-phase flow in the spirit of Popov \& Guermond for Euler equation (these stabilization terms can be easily added in the FEM setting)
+a derivation of stabilization terms for two-phase flow in the spirit of Popov \& Guermond for Euler equation (these stabilization terms can be easily added in the FEM setting);
 \item
-a study of the effect of the viscosity terms in each equation
+a study of the effect of the viscosity terms in each equation;
 \item 
 a selection of numerical results (some of them taken from previous articles on the seven-equation model).
 \end{enumerate}
@@ -103,15 +118,16 @@ a selection of numerical results (some of them taken from previous articles on t
 \bigskip
 Even though Reviewer \#1 was
 satisfied with the revised manuscript and strongly recommended publication, our manuscript's status has been 
-determined to still require a major revision. We are still fervently
-conceived that our manuscript proposes a novel approach for solving two-phase flow problem using {\bf continuous}
+determined to still require a major revision. We are fervently
+convinced that our manuscript proposes a novel approach for solving two-phase flow problem using {\bf continuous}
 finite elements and strongly believe in the value of disseminating our findings/results. 
-Based on both rounds of comments from Reviewer \#2, we do not think we (or any other researchers for that matter) 
-will ever be able to satisfy them: their comments are deeply rooted in the theoretical state of knowledge for HNCSE. 
-Are we facing an uphill struggle with a community at large solving conservative law equations using finite volume 
-techniques and approximate Riemann solvers? 
+%Based on both rounds of comments from Reviewer \#2, we do not think we (and maybe any other researchers for that matter) 
+%will ever be able to satisfy them: their comments are deeply rooted in the theoretical state of knowledge for HNCSE. 
+%%Are we facing an uphill struggle with a community at large solving conservative law equations using finite volume 
+%%techniques and approximate Riemann solvers? 
 
-We kindly request your advice and opinion regarding our manuscript. We hope that the thoroughness of Reviewer \#1 and their
+We kindly ask that you intercede regarding Review \#2.
+We hope that the thoroughness of Reviewer \#1 and their
 satisfaction with the current manuscript will outweigh the vague and generally negative opinion of Reviewer \#2.
 %\vspace{0.25cm}
 
