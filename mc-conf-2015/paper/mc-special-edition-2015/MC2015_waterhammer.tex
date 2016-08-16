@@ -8,6 +8,12 @@
 \usepackage{booktabs}            % Publication quality tables
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{mathrsfs}
+% more math
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{amsbsy}
+\usepackage{mathbbol} 
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage[exponent-product=\cdot]{siunitx}
@@ -40,7 +46,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-\title{Application of the reactor system code RELAP-7 to single- and two-phase flow water-hammer problems}
+%\title{Application of the reactor system code RELAP-7 to single- and two-phase flow water-hammer problems}
+\title{Simulations of single and two-phase flow pressure waves using RELAP-7}
 
 \author{Marc O. Delchini}
 \affil{
@@ -73,7 +80,7 @@ numerical method. The all-Mach flow Entropy Viscosity Method is now employed in 
 above flow models. The entropy viscosity technique is a viscous regularization technique: adequate dissipation terms (viscous fluxes) are 
 added to the governing laws while ensuring the entropy minimum principle still holds. Viscosity coefficients modulate the magnitude of the 
 added dissipations such that they are large in shock regions and vanishingly small elsewhere. The stabilization capabilities of the Entropy Viscosity 
-Method are demonstrated in the system code RELAP-7 by simulating 1-D single- and two-phase water-hammers. \\
+Method are demonstrated in the system code RELAP-7 by simulating pressure-wave propagation phenomena with single- and two-phase flow conditions. \\
 %
 \emph{Key Words}:  RELAP-7 ; numerical method ; entropy viscosity method ; low-Mach flow ; shocks ; single phase flow ; two-phase flow.
 \end{abstract}
@@ -82,17 +89,19 @@ Method are demonstrated in the system code RELAP-7 by simulating 1-D single- and
 \section{Introduction}\label{sec:intro}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-Single- and two-phase flow water hammer problems are simulated using RELAP-7 (Reactor Excursion and Leak Analysis Program) \cite{Berry_Peterson_2014},
-the next-generation nuclear reactor system analysis code under development at Idaho National Laboratory (INL). 
-%
-Water hammer, or hydraulic shock, is a pressure surge or wave caused when a fluid in motion is forced to stop or change direction abruptly. 
-In nuclear power plants, water hammers commonly occur 
-in case of an inflow of sub-cooled water into pipes or other parts of the equipment, which are filled with steam or steam-water mixture; they also
-happen as the consequence of valve closing or opening actions or of breaks in pipes, with single phase or two-phase flow. 
-% when a valve closes suddenly at an end of a pipe system, and a pressure wave propagates in the pipe. 
+\begin{itemize}
+\item objective: test Relap-7 with pressure-waves phenomena.
+\item list of situations encountered in nuclear reactors that involve pressure wave phenomena (see Soloko. for details).
+\item bibliography: includes papers that deal with water-hammer tests and also with pressure-wave phenomena.
+\item 
+\end{itemize}
 
-The RELAP-7 code \cite{Berry_Peterson_2014} is built using modern scientific software libraries (the Multi-Physics Object Oriented Simulation Environment MOOSE \cite{MOOSE}, 
-itself built upon PETSc and LibMesh, among others).  
+Evaluation of pressure waves has been a field of interest for many years in nuclear reactors and currently relies on a variety of computer codes such as RELAP-5 (REF), TRACE to name a few. Pressure waves or also commonly called pressure shocks can occur in single and two-phase flows and are under extensive investigation as it is an important issue of nuclear safety for the design, construction and life extension of nuclear reactors. There are several examples of pressure wave propagating along the hydraulic nuclear systems. For example, the rapid intentional or accidental closing of a turbine valve causes pressure waves that can lead to cavitation and pipe failure if the pressure variations exceed the manufacturer specifications. Other pressure waves are caused by the rupture of a pressurized pipe: an expansion wave propagates in the pipe towards the reactor vessel and can cause severe damage and thus threaten the integrity of the nuclear reactor. 
+
+The objective of this work is to assess the current capabilities of the system code RELAP-7 (Reactor Excursion and Leak Analysis Program) \cite{Berry_Peterson_2014} to solve rapid pressure waves that can occur in nuclear reactors during transients and accident scenarios. RELAP-7 is the next-generation nuclear reactor system analysis code under development at Idaho National Laboratory (INL). It is built using modern scientific software libraries (the Multi-Physics Object Oriented Simulation Environment MOOSE \cite{MOOSE}, itself built upon PETSc and LibMesh, among others).
+
+%The RELAP-7 code \cite{Berry_Peterson_2014} is built using modern scientific software libraries (the Multi-Physics Object Oriented Simulation Environment MOOSE \cite{MOOSE}, 
+%itself built upon PETSc and LibMesh, among others).  
 %
 The primary basis for RELAP-7's governing theory includes single-phase Euler equations \cite{Toro} and the 7-equation two-phase flow model of \cite{SEM, Berry_MC_2014}. 
 This two-phase flow model is strictly hyperbolic, as opposed to the 6-equation model RELAP-5.  
@@ -104,11 +113,32 @@ Riemann solvers derived using well-established approaches for single-phase flows
 %
 In RELAP-7, the conservation laws are discretized using a \emph{continuous Galerkin finite element method} and the resulting discrete equations are stabilized using 
 the Entropy Viscosity Method \cite{jlg1, jlg2}.
+%One of the identified advantage of the seven-equation two-phase flow model over the six-equation model is its well-possesses that allows the use of high-order numerical method for better accuracy.
+%and implements the single phase Euler equations and the Seven-equation two-phase flow model that are both well-posed conservation laws. The all-Mach flow Entropy Viscosity Method is now implemented and employed in RELAP-7 as a stabilization numerical method for both above models and allow to solve for flows developing pressure waves while ensuring high-order accuracy for smooth flows.
+%
+%Single- and two-phase flow pressure wave problems are simulated using RELAP-7 (Reactor Excursion and Leak Analysis Program) \cite{Berry_Peterson_2014},. 
+%
+%Water hammer, or hydraulic shock, is a pressure surge or wave caused when a fluid in motion is forced to stop or change direction abruptly. 
+%In nuclear power plants, water hammers commonly occur 
+%in case of an inflow of sub-cooled water into pipes or other parts of the equipment, which are filled with steam or steam-water mixture; they also
+%happen as the consequence of valve closing or opening actions or of breaks in pipes, with single phase or two-phase flow. 
+% when a valve closes suddenly at an end of a pipe system, and a pressure wave propagates in the pipe. 
+
+%The RELAP-7 code \cite{Berry_Peterson_2014} is built using modern scientific software libraries (the Multi-Physics Object Oriented Simulation Environment MOOSE \cite{MOOSE}, 
+%itself built upon PETSc and LibMesh, among others).  
+%%
+%The primary basis for RELAP-7's governing theory includes single-phase Euler equations \cite{Toro} and the 7-equation two-phase flow model of \cite{SEM, Berry_MC_2014}. 
+%This two-phase flow model is strictly hyperbolic, as opposed to the 6-equation model RELAP-5.  
+%It is well established that hyperbolic conservation laws can develop shocks and discontinuities \cite{Leveque} and, therefore, require stabilization 
+%of the discretized equations. For single-phase Euler equations, numerous numerical methods are available both for discontinuous and continuous discretization schemes 
+%\cite{Toro, Lapidus_paper, LMP, Lapidus_book, Roe, SUPG}. Until recently, the 7-equation model was primarily discretized in space using discontinuous schemes with approximate 
+%Riemann solvers derived using well-established approaches for single-phase flows, while using an upwind-type flux for the non-conservative terms 
+%\cite{Saurel_2001a, Saurel_2001b, Li_2004, Zein_2010, Ambroso_2012}. 
+%%
+%In RELAP-7, the conservation laws are discretized using a \emph{continuous Galerkin finite element method} and the resulting discrete equations are stabilized using 
+%the Entropy Viscosity Method \cite{jlg1, jlg2}.
 %  that is independent of the type of spatial discretization (finite volume, continuous or discontinuous finite elements, ...) and thus may be applied ubiquitously.
- 
-
-
-The entropy viscosity technique is a viscous regularization technique wherein adequate dissipation terms (viscous fluxes) are added to the governing laws while ensuring 
+ The EVM is a viscous regularization technique wherein adequate dissipation terms (viscous fluxes) are added to the governing laws while ensuring 
 that the minimum entropy principle holds. Viscosity coefficients modulate the magnitude of the added dissipations such that they are large in shock regions and vanishingly 
 small elsewhere. The entropy viscosity coefficients are taken proportional to the entropy production while, at the same time, being bounded from above by a first-order 
 viscosity coefficient that reduces the spatial discretization to be similar to a first-order Godunov scheme (the latter being known to be overly dissipative but monotone 
@@ -119,8 +149,7 @@ were proposed to ensure well-scaled dissipative terms in the low-Mach asymptotic
 \cite{Marco_paper_7_equ, Marco_dissertation}. 
 
 In this paper, the single and two-phase flow models, regularized with the entropy viscosity method, are recalled along with the all-Mach flow definitions of the viscosity coefficients 
-in \sct{sct:model}. After providing the spatial and temporal discretization method in \sct{sec:disc}, numerical results of single and a two-phase water-hammer problems are 
-presented in \sct{sec:results}. 
+in \sct{sct:model}. After providing the spatial and temporal discretization method in \sct{sec:disc}, numerical results of single and a two-phase problems involving pressure waves taken from the published literature (REFS) are presented in \sct{sec:results}.
 
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -442,10 +471,181 @@ continuity equation. In the above, we have neglected $\frac{\partial \kappa}{\pa
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-We now present two sample results of a single- and a two-phase flow water-hammers in \sct{sec:single-num-res} and \sct{sec:two-num-res}, respectively, with the objective of testing adequacy of the Entropy Viscosity Method when computing typical reactor flows. The numerical results were obtained with the system code RELAP-7 that implements the single- and two-phase flow models described in \sct{sct:model} using the spatial and temporal discretization techniques \sct{sec:spatial-disc} (BDF2 and linear test functions).
+%\begin{itemize}
+%\item various tests: single and two phase flows with IGEOS and IAPWS957.
+%\item mesh sensitivity analyses for shock tubes.
+%\item pressure waves for a close pipe: two-phase flow model. 
+%\end{itemize}
+%
+We now present numerical results of tests involving pressure waves to assess the capabilities of the EVM implemented in the system code Relap-7 \cite{Berry_Peterson_2014}. Various single- and two-phase flow tests are studied in \sct{sec:1-phase-shock-tube} and \sct{sec:2-phase-shock-tube}, respectively, using the Ideal gas equation of state and the IAPWS tables. The tests presented in this section are taken from published literature.
+%
+%We now present results of pressure wave tests commonly known as Sod shock tubes for the single- and two-phase flow models in \sct{sec:single-num-res} and \sct{sec:two-num-res}, respectively, with the objective of testing adequacy of the Entropy Viscosity Method when computing typical reactor flows. These results are preliminary works for the simulation of single- and two-phase flow water hammers situations. The numerical results were obtained with the system code RELAP-7 that implements the single- and two-phase flow models described in \sct{sct:model} using the spatial and temporal discretization techniques \sct{sec:spatial-disc} (BDF2 and linear test functions).
+%
+%In the numerical results presented in this section, the fluid properties are computed either from the Stiffened Gas equation of state with parameters taken from \cite{SGEOS} for the liquid and gas phases, or from IAPWS (REF). For each test, information regarding the initial conditions and the running parameters will be provided along with relevant plots. 
 
-A water-hammer situation is encountered in light water reactors whenever a valve closes rapidly and obstructs the flow in a pipe. In the numerical results presented in this section, each fluid is described by the Stiffened Gas equation of state with parameters taken from \cite{SGEOS} for the liquid and gas phases. The computational domain is discretized with an uniform mesh of $500$ cells and the numerical solution is run until $t = 0.5$ s with a CFL number of $1.$ for both tests. Information regarding the initial conditions will be given later in this section. 
-For each test case, the velocity, density and pressure profiles are provided at different times of the simulation. Since the Entropy Viscosity Method is used, we also plot the viscosity coefficients, $\kappa$, $\mu$ and $\kappa_{max}$.
+%For each test case, the velocity, density and pressure profiles are provided at different times of the simulation. Since the Entropy Viscosity Method is used, we also plot the viscosity coefficients, $\kappa$, $\mu$ and $\kappa_{max}$.
+%
+%---------------------------------------------------------------------------------------------------
+\subsection{Single-phase test cases} \label{sec:1-phase-shock-tube}
+%---------------------------------------------------------------------------------------------------
+%
+Single-phase shock tubes are commonly used in the literature to assess the robustness of a numerical method. In this section, numerical results of shock tubes with air (\sct{sec:air-1-phase-shock-tube}), vapor (\sct{sec:vap-1-phase-shock-tube}) and liquid water (\sct{sec:liq-water-1-phase-shock-tube}) are presented when using the EVM as a stabilizing method in the system code RELAP-7. Simulation of a liquid water single-phase water hammer is also investigated in \sct{sec:liq-water-1-phase-hammer}. All numerical presented in this section are run with linear polynomials and BDF2.
+%
+%---------------------------------------------------------------------------------------------------
+\subsubsection{Ideal gas shock tube problem} \label{sec:air-1-phase-shock-tube}
+%---------------------------------------------------------------------------------------------------
+%
+The first test presented in this paper consists of an adiabatic 1-D pipe of length $L=10 \ m$ filled with air.  A diaphragm located at a midpoint separates a high pressure chamber ($P=2 \ MPa$) and low pressure chamber ($P=1 \ MPa$). The air properties are computed from the Ideal gas equation of state (IGEOS) with $\gamma=1.4$ and $R=287.058\ J/(kg \cdot K)$. Initially, the air is at rest and has the same temperature $T=297 \ K$ in the left and right chambers. At $t=0 \ s$, the diaphragm is removed and three waves are triggered: a shock wave, a contact wave and a rarefaction wave. This problem is a typical Riemann problem with an analytical solution and was simulated with the system codes RELAP-5 in \cite{Sokolowski-Koszela}. Numerical results of this test simulated with the system code RELAP-7 and employing the EVM are presented in \fig{fig:air-tube-plots}. The transient is run until $t=10^{-2} \ s$ with a Courant Friedrichs Lewy (CFL) condition of 0.1 for meshes of $100$, $200$, $400$ and $800$ cells.
+%
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/air-shock-tube-velocity-plot.eps}
+                \caption{Velocity}
+                \label{fig:air-tube-plots-vel}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/air-shock-tube-density-plot.eps}
+                \caption{Density}
+                \label{fig:air-tube-plots-dens}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/air-shock-tube-pressure-plot.eps}
+                \caption{Pressure}
+                \label{fig:air-tube-plots-press}
+        \end{subfigure}        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/air-shock-tube-temperature-plot.eps}
+                \caption{Temperature}
+                \label{fig:air-tube-plots-temp}
+        \end{subfigure}
+        \caption{Numerical solutions of an air shock tube at $t=10^{-2} \ s$ for mesh with $100$, $200$, $400$ and $800$ cells.}\label{fig:air-tube-plots}
+\end{figure}
+%
+The velocity, density, pressure and temperature profiles are shown in \fig{fig:air-tube-plots-vel} to \ref{fig:air-tube-plots-temp} for different mesh sizes. The contact ($x  \simeq 6 \ m$) and shock ($x  \simeq 9 \ m$) waves do not display any instabilities and are better resolved as the mesh is refined. To investigate the influence of the CFL condition on the numerical solution, the air shock tube test is run on mesh of $200$ cells with three different CFL conditions, $0.1$, $0.5$ and $1.0$. Numerical results of the density are presented in \fig{fig:air-tube-conv-plots-dens} and shown that a CFL condition ranging from $0.1$ to $1$ does not have significant effect on the numerical solution besides the presence of an overshoot in the shock area for CFL $=1.0$. The EVM adds the right amount of dissipation to the solution to stabilize it. In \fig{fig:air-tube-conv-plots-vel}, the air shock tube test is run with the EVM and the first-order viscosity (FOV) using a mesh of $200$ cells and a CFL condition of 0.1. The FOV is knonw to be over-dissipative whereas the EVM is designed to achieve high-order accuracy with smooth solutions and stabilize a shock wave without smoothing a contact wave. In \fig{fig:air-tube-conv-plots-vel}, the contact and the shock waves are better resolved when using the EVM; the solution obtained with the FOV over-dissipates both the contact and the shock waves.
+%
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{figures/air-shock-tube_out_displaced-200-cells-cfl-0-1-fo-pts0-density-plot.eps}
+            \caption{}
+            \label{fig:air-tube-conv-plots-vel}
+    \end{subfigure}%
+    \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{figures/air-shock-tube_out_displaced-200-cells-cfl-1-0-pts0-density-plot.eps}
+            \caption{}
+            \label{fig:air-tube-conv-plots-dens}
+    \end{subfigure}
+    \caption{Density profile of an air shock tube at $t=10^{-2} \ s$ for mesh with $200$ cells.}\label{fig:air-tube-conv-plots}
+\end{figure}    
+%
+%---------------------------------------------------------------------------------------------------
+\subsubsection{Vapor shock tube problem} \label{sec:vap-1-phase-shock-tube}
+%---------------------------------------------------------------------------------------------------
+%
+The second test consists of a single-phase vapor shock tube in a pipe of length $L=2 \ m$ and was proposed in \cite{waha-manual}. A diaphragm located at $x=1 \ m$ separates a high pressure chamber ($P=2 \ MPa$ and $T=486.5 \ K$) and a low pressure chamber ($P=1 \ MPa$ and $T=453.1 \ K$). The vapor properties are computed from the IAPWS table (REF). At $t=0 \ s$, the diaphragm is removed and the vapor initially at rest starts to evolve. The transient is run until $t=1.5 \cdot 10^{-3} \ s$ with a CFL of 0.1. Numerical results are presented in \fig{fig:vapor-tube-plots} for meshes of $100$, $200$, $400$ and $800$ cells.
+%
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/vapor-mesh-sensitivity-velocity-plot.eps}
+                \caption{Velocity}
+                \label{fig:vapor-tube-plots-vel}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/vapor-mesh-sensitivity-density-plot.eps}
+                \caption{Density}
+                \label{fig:vapor-tube-plots-dens}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/vapor-mesh-sensitivity-pressure-plot.eps}
+                \caption{Pressure}
+                \label{fig:vapor-tube-plots-press}
+        \end{subfigure}        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/vapor-mesh-sensitivity-temperature-plot.eps}
+                \caption{Temperature}
+                \label{fig:vapor-tube-plots-temp}
+        \end{subfigure}
+        \caption{Numerical solutions of a vapor shock tube at $t=1.5 \cdot 10^{-3} \ s$ for mesh with $100$, $200$, $400$ and $800$ cells.}\label{fig:vapor-tube-plots}
+\end{figure}
+%
+The velocity, density, pressure and temperature profiles are shown in \fig{fig:vapor-tube-plots-vel} to \ref{fig:vapor-tube-plots-temp}. Once again, the numerical solutions do not shown any significant undershoot and overshoot in the contact ($x \simeq 1.2 \ m$) and shock ($x \simeq 1.9 \ m$) regions. The mesh sensitivity of the numerical solution is the same as in \sct{sec:air-1-phase-shock-tube}, i.e. the shock and contact waves are better resolved when refining the mesh. The reader can refer to Section 2.2 of \cite{Sokolowski-Koszela} for results of the same vapor shock tube test run with RELAP-5. The main difference between RELAP-5 and RELAP-7 results lie in the velocity profile: the RELAP-5 velocity profile displays a peak in the post-shock region. The same sensitivity study to the CFL conditions and the numerical method (EVM vs FO) were performed and yielded the same results as in \sct{sec:air-1-phase-shock-tube}.
+%
+%---------------------------------------------------------------------------------------------------
+\subsubsection{Liquid water shock tube problem} \label{sec:liq-water-1-phase-shock-tube}
+%---------------------------------------------------------------------------------------------------
+%
+In this problem numerical solution of a water shock tube in a pipe of length L = 10 m is presented. The initial conditions consist of two chambers separated by a diaphragm. The left and right chambers are filled with high (P=10 MPa) and low (P=0.1 MPa) pressure water, respectively. The water is initially at rest and at the same temperature (T=300 K) in both chambers. The liquid properties are computed from the IAPWS table (REF). At t=0 s, the diaphragm is removed and the flow develops. The transient is run with a CFL condition of 0.1 until $t=1.64 \cdot 10^{-3} \ s$ for mesh with $100$, $200$, $400$ and $800$ cells. This test was previously performed with the system code RELAP-5 and the computer code DRAKO (REF) and presented in Section 2.3 of \cite{Sokolowski-Koszela}. Numerical solutions of the water shock tube test are presented in \fig{fig:liquid-tube-plots} at $t=1.64 \cdot 10^{-3} \ s$.
+%
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/liquid-mesh-sensitivity-velocity-plot.eps}
+                \caption{Velocity}
+                \label{fig:liquid-tube-plots-vel}
+        \end{subfigure}%
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/liquid-mesh-sensitivity-density-plot.eps}
+                \caption{Density}
+                \label{fig:liquid-tube-plots-dens}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/liquid-mesh-sensitivity-pressure-plot.eps}
+                \caption{Pressure}
+                \label{fig:liquid-tube-plots-press}
+        \end{subfigure}        
+        \begin{subfigure}[b]{0.495\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{figures/liquid-mesh-sensitivity-temperature-plot.eps}
+                \caption{Temperature}
+                \label{fig:liquid-tube-plots-temp}
+        \end{subfigure}
+        \caption{Numerical solutions of a liquid shock tube at $t=1.64 \cdot 10^{-3} \ s$ for mesh with $100$, $200$, $400$ and $800$ cells.}\label{fig:liquid-tube-plots}
+\end{figure}
+%
+The profiles of the velocity, the density, the temperature and the pressure do not show any instability in the shock ($x \simeq 7.5 \ m$) and contact ($x=\simeq5 \ m$) regions. The discontinuities are better resolved when refining the mesh and do not display significant under- or over-shoots. The numerical solutions presented in \fig{fig:liquid-tube-plots} compare well to the ones obtained with the system code RELAP-5 and the computer code DRAKO shown in \fig{fig:liquid-tube-plots}. This shock tube test shows the capabilities of the EVM to stabilize water pressure waves.
+%
+%---------------------------------------------------------------------------------------------------
+\subsubsection{ Liquid water single-phase water-hammer} \label{sec:liq-water-1-phase-hammer}
+%---------------------------------------------------------------------------------------------------
+%
+We now investigate a single-phase liquid water-hammer test, i.e. vapor is not generated during the simulation. This test was run with the system code CATHARE \cite{Serre-bestion} and results are presented in REF. The geometry consists of a vertical water tank connected to a horizontal pipe of length L = 36 m and diameter d = 19.05 mm. Initially, the pressure, the temperature and the velocity are uniform and set to P = 3 MPa, V = 0.2786 m/s and T = 488.75 K, respectively. At t = 0 s, a valve is closed at the right end of the pipe, causing a pressure wave to form and travel back and force in the pipe. This test is of interest since the amplitude of the initial over pressure, $\Delta P$ (the pressure simulated at the location of the valve right after it closes), and the period of the phenomenon, $T$, have analytical solutions (REFS): $\Delta P = \rho c V = 302633  \ Pa$ and $T = 4 L / c = 0.1125 \ s$ where c is the speed of sound and $\rho$ is the fluid density. These analytical values will be used to compare against the numerical data obtained with the system code RELAP-7. The single-phase liquid water-hammer test is run until t = 0.25 s with a CFL of 0.1. The water pressure is monitored at the valve position, i.e. x = 36 m, as a function of time and plotted in \fig{fig:liquid-tube-plots-temp}.
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{figures/liquid-water-hammer-pressure-vs-time.eps}
+        \caption{Water pressure as a function of time.}
+        \label{fig:liquid-tube-plots-temp}
+\end{figure}
+In \fig{fig:liquid-tube-plots-temp}, the water pressure initially increases to stabilize to a value close to 3.3 MPa. The pressure wave travels to the left end of the pipe, is reflected at x = 0 m and travels back to the valve located at x = 36 m. Once, the pressure wave reaches the valve location for the second time, a period is completed which is represented by a vertical dashed line at t = 0.1125 s in \fig{fig:liquid-tube-plots-temp} which is in agreement with the analytical value. During this period, the pressure varies between $P_{max} = 3.3 \ MPa$ and $P_{min} = 2.7 \ MPa$.
+%
+%---------------------------------------------------------------------------------------------------
+\subsection{Two-phase test cases} \label{sec:2-phase-shock-tube}
+%---------------------------------------------------------------------------------------------------
+%
+
+%
+%---------------------------------------------------------------------------------------------------
+\subsubsection{Two-phase shock tubes} \label{sec:2-phase-shock-tube}
+%---------------------------------------------------------------------------------------------------
+%
+
 %
 %---------------------------------------------------------------------------------------------------
 \subsection{Single-phase water-hammer} \label{sec:single-num-res}
