@@ -58,11 +58,11 @@
 % Header/footer for first page
 \fancypagestyle{plain}{
   \fancyhf{}
-  \lhead{\scriptsize{\emph{ANS MC2015 - Joint International Conference
-        on Mathematics and Computation (M\!\&\!C), Supercomputing in Nuclear
-        Applications (SNA) and the Monte Carlo (MC) Method} $\cdot$ Nashville,
-      Tennessee $\cdot$ April 19--23, 2015, on CD-ROM, American Nuclear
-      Society, LaGrange Park, IL (2015)}}
+%  \lhead{\scriptsize{\emph{ANS MC2015 - Joint International Conference
+%        on Mathematics and Computation (M\!\&\!C), Supercomputing in Nuclear
+%        Applications (SNA) and the Monte Carlo (MC) Method} $\cdot$ Nashville,
+%      Tennessee $\cdot$ April 19--23, 2015, on CD-ROM, American Nuclear
+%      Society, LaGrange Park, IL (2015)}}
   \lfoot{}
 }
 
