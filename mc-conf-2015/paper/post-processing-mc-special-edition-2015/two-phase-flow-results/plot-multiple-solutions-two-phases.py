@@ -9,7 +9,41 @@ from decimal import *
 #### import python modules ####
 
 #### define function ####
-def plot_solution(x_num, y_num_vapor, y_num_liquid, x_label, y_label_vap, y_label_liq, label, legend_plot):
+def plot_solution_one_phase(x_num, y_num, x_label, y_label, label, legend_plot):
+  marker_list = itertools.cycle(('x', '+', '.', '|', '2', '3', '4', 'o'))
+  color_list = itertools.cycle(['b', 'g', 'r', 'c', 'm', 'y', 'k'])
+  x_min, x_max, y_min, y_max = 1.e10, 0.0, 1.e10, 0.0
+  fig, ax1 = plt.subplots()
+  lgd1= []
+  for i in xrange(0, len(x_num)):
+    nb_cells = len(x_num[i])-1
+    color = color_list.next()
+    lx1 = ax1.plot(x_num[i], y_num[i], '-', marker=marker_list.next(), markevery=nb_cells/10+i, markersize=10, label=r'$%s$' % str(legend_plot[i]), linewidth=2.2, mfc="None", mew=1.2, c=color, markeredgecolor=color)
+    lgd1+=lx1
+    x_min = min(float(min(x_num[i])), x_min)
+    x_max = max(float(max(x_num[i])), x_max)
+    y_min = min(float(min(y_num[i])), y_min)
+    y_max = max(float(max(y_num[i])), y_max)
+
+  labs1 = [l.get_label() for l in lgd1]
+  ax1.legend(lgd1, labs1, loc='upper center', frameon=False, fontsize=20, ncol=1, bbox_to_anchor=(0.5, 1.+0.1*len(x_num)), borderaxespad=0.)
+  #  ax1.legend(lgd, labs, loc='upper center', frameon=False, fontsize=15, ncol=2, bbox_to_anchor=(0.5, 1.+0.07*len(x_num)),  mode="expand", borderaxespad=0.)
+#  location_leg = 'center right'
+#  ax1.legend(loc=location_leg, fontsize=15, frameon=False, ncol=len(x_num))
+#  ax2.legend(loc='best', fontsize=15, frameon=False)
+  ax1.set_xlabel('%s' % x_label, fontsize=25)
+  ax1.set_ylabel('%s' % y_label, fontsize=25)
+  ax1.set_xlim(float(x_min), float(x_max))
+  
+  if float(y_max) > 1e4:
+    print '    Use scientific notation for y-axis'
+    ax1.ticklabel_format(style='sci', axis='y', scilimits=(0,0))
+  fig_name=out_file+'-'+label+'-plot.eps'
+  fig.savefig(fig_name, bbox_inches='tight')
+  print 'Saving plot using Matplotlib:', fig_name
+  fig.clf()
+
+def plot_solution_two_phases(x_num, y_num_vapor, y_num_liquid, x_label, y_label_vap, y_label_liq, label, legend_plot):
   marker_list = itertools.cycle(('x', '+', '.', '|', '2', '3', '4', 'o'))
   color_list = itertools.cycle(['b', 'g', 'r', 'c', 'm', 'y', 'k'])
   x_min, x_max, y_min_vapor, y_max_vapor, y_min_liquid, y_max_liquid = 1.e10, 0.0, 1.e10, 0.0, 1.e10, 0.0
@@ -19,9 +53,9 @@ def plot_solution(x_num, y_num_vapor, y_num_liquid, x_label, y_label_vap, y_labe
   for i in xrange(0, len(x_num)):
     nb_cells = len(x_num[i])-1
     color = color_list.next()
-    lx1 = ax1.plot(x_num[i], y_num_vapor[i], '--', marker=marker_list.next(), markevery=nb_cells/10+i, markersize=10, label=r'$%s \ vapor$' % str(legend_plot[i]), linewidth=1, mfc="None", mew=1.2, c=color, markeredgecolor=color)
+    lx1 = ax1.plot(x_num[i], y_num_vapor[i], '--', marker=marker_list.next(), markevery=nb_cells/10+i, markersize=10, label=r'$%s \ vapor$' % str(legend_plot[i]), linewidth=2.2, mfc="None", mew=1.2, c=color, markeredgecolor=color)
     color = color_list.next()
-    lx2 = ax2.plot(x_num[i], y_num_liquid[i], '-', marker=marker_list.next(), markevery=nb_cells/10+i, markersize=10, label=r'$%s \ liquid$' % str(legend_plot[i]), linewidth=1, mfc="None", mew=1.2, c=color, markeredgecolor=color)
+    lx2 = ax2.plot(x_num[i], y_num_liquid[i], '-', marker=marker_list.next(), markevery=nb_cells/10+i, markersize=10, label=r'$%s \ liquid$' % str(legend_plot[i]), linewidth=2.2, mfc="None", mew=1.2, c=color, markeredgecolor=color)
     lgd1+=lx1
     lgd2+=lx2
     x_min = min(float(min(x_num[i])), x_min)
@@ -33,8 +67,8 @@ def plot_solution(x_num, y_num_vapor, y_num_liquid, x_label, y_label_vap, y_labe
 
   labs1 = [l.get_label() for l in lgd1]
   labs2 = [l.get_label() for l in lgd2]
-  ax1.legend(lgd1, labs1, loc='upper left', frameon=False, fontsize=15, ncol=1, bbox_to_anchor=(0.5, 1.+0.07*len(x_num)), borderaxespad=0.)
-  ax2.legend(lgd2, labs2, loc='upper right', frameon=False, fontsize=15, ncol=1, bbox_to_anchor=(0.5, 1.+0.07*len(x_num)), borderaxespad=0.)
+  ax1.legend(lgd1, labs1, loc='upper left', frameon=False, fontsize=20, ncol=1, bbox_to_anchor=(0.5, 1.+0.1*len(x_num)), borderaxespad=0.)
+  ax2.legend(lgd2, labs2, loc='upper right', frameon=False, fontsize=20, ncol=1, bbox_to_anchor=(0.5, 1.+0.1*len(x_num)), borderaxespad=0.)
 #  ax1.legend(lgd, labs, loc='upper center', frameon=False, fontsize=15, ncol=2, bbox_to_anchor=(0.5, 1.+0.07*len(x_num)),  mode="expand", borderaxespad=0.)
 #  location_leg = 'center right'
 #  ax1.legend(loc=location_leg, fontsize=15, frameon=False, ncol=len(x_num))
@@ -149,7 +183,7 @@ nb_cells = []
 #print x_offset, len(x_offset), x_offset[0], x_offset[1]
 
 pressure_vapor, pressure_liquid = [], []
-density_vapor, density_liquid = [], []
+density_vapor, density_liquid, density_mixture = [], [], []
 temperature_vapor, temperature_liquid = [], []
 velocity_vapor, velocity_liquid = [], []
 alpha_vapor, alpha_liquid = [], []
@@ -176,7 +210,7 @@ for file in file_list:
   print 'Name of the input file:', file
   # set/reset data
   pressure_vap_tmp, pressure_liq_tmp = [], []
-  density_vap_tmp, density_liq_tmp = [], []
+  density_vap_tmp, density_liq_tmp, density_mix_tmp = [], [], []
   temperature_vap_tmp, temperature_liq_tmp = [], []
   velocity_vap_tmp, velocity_liq_tmp = [], []
   alpha_vap_tmp, alpha_liq_tmp = [], []
@@ -198,6 +232,7 @@ for file in file_list:
     temperature_liq_tmp.append(row[var_index[7]])
     velocity_liq_tmp.append(row[var_index[8]])
     alpha_liq_tmp.append(row[var_index[9]])
+    density_mix_tmp.append(float(density_vap_tmp[-1])*float(alpha_vap_tmp[-1])+float(density_liq_tmp[-1])*float(alpha_liq_tmp[-1]))
     x_coord_tmp.append(row[var_index[10]])
 
   pressure_vapor.append(pressure_vap_tmp)
@@ -210,6 +245,7 @@ for file in file_list:
   temperature_liquid.append(temperature_liq_tmp)
   velocity_liquid.append(velocity_liq_tmp)
   alpha_liquid.append(alpha_liq_tmp)
+  density_mixture.append(density_mix_tmp)
   x_coord.append(x_coord_tmp)
   nb_cells.append(len(x_coord_tmp)-1)
   # legend 1
@@ -227,11 +263,17 @@ for file in file_list:
 #legend_plot.append(str(nb_cells[-1])+' \ cells \ cfl \ 0.5')
 #legend_plot.append(str(nb_cells[-1])+' \ cells \ cfl \ 1.0')
 
-plot_solution(x_coord, density_vapor, density_liquid, r'$x \ (m)$', r'$\rho_{vap} \ (kg/m^3)$', r'$\rho_{liq} \ (kg/m^3)$', 'density', legend_plot)
-plot_solution(x_coord, pressure_vapor, pressure_liquid, r'$x \ (m)$', r'$P_{vap} \ (Pa)$', r'$P_{liq} \ (Pa)$', 'pressure', legend_plot)
-plot_solution(x_coord, velocity_vapor, velocity_liquid, r'$x \ (m)$', r'$u_{vap} \ (m/s)$', r'$u_{liq} \ (m/s)$', 'velocity', legend_plot)
-plot_solution(x_coord, temperature_vapor, temperature_liquid, r'$x \ (m)$', r'$T_{vap} \ (K)$', r'$T_{liq} \ (K)$', 'temperature', legend_plot)
-plot_solution(x_coord, alpha_vapor, alpha_liquid, r'$x \ (m)$', r'$\alpha_{vap}$', r'$\alpha_{liq}$', 'vf', legend_plot)
+#legend_plot.append(str(nb_cells[-1])+' \ cells \ set \ (1)')
+#legend_plot.append(str(nb_cells[-1])+' \ cells \ set \ (1)')
+#legend_plot.append(str(nb_cells[-1])+' \ cells \ set \ (2)')
+#legend_plot.append(str(nb_cells[-1])+' \ cells \ set \ (2)')
+
+plot_solution_two_phases(x_coord, density_vapor, density_liquid, r'$x \ (m)$', r'$\rho_{vap} \ (kg/m^3)$', r'$\rho_{liq} \ (kg/m^3)$', 'density', legend_plot)
+plot_solution_two_phases(x_coord, pressure_vapor, pressure_liquid, r'$x \ (m)$', r'$P_{vap} \ (Pa)$', r'$P_{liq} \ (Pa)$', 'pressure', legend_plot)
+plot_solution_two_phases(x_coord, velocity_vapor, velocity_liquid, r'$x \ (m)$', r'$u_{vap} \ (m/s)$', r'$u_{liq} \ (m/s)$', 'velocity', legend_plot)
+plot_solution_two_phases(x_coord, temperature_vapor, temperature_liquid, r'$x \ (m)$', r'$T_{vap} \ (K)$', r'$T_{liq} \ (K)$', 'temperature', legend_plot)
+plot_solution_two_phases(x_coord, alpha_vapor, alpha_liquid, r'$x \ (m)$', r'$\alpha_{vap}$', r'$\alpha_{liq}$', 'vf', legend_plot)
+plot_solution_one_phase(x_coord, density_mixture, r'$x \ (m)$', r'$\rho_{mixture} \ (kg/m^3)$', 'density-mixture', legend_plot)
 
 #  plot_visc_coeff(x_coord, 'air-shock-tube-cells0.csv', var_index, nb_cells[-1])
 
