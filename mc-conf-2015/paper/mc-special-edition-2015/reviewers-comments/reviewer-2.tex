@@ -61,7 +61,7 @@
 \noindent Ref. No.: MS\# NSE16-46\\
 Title: ``Application of the reactor system code RELAP-7 to single- and two-phase flow water-hammer problems', \\
 {\it Nuclear Science and Engineering}\\
-New Title: ``Simulations of single and two-phase pressure waves with the RELAP-7 system code'.
+New Title: ``Simulations of single- and two-phase pressure waves with the RELAP-7 system code'.
 
 \bigskip
 \bigskip
@@ -77,20 +77,20 @@ We agree and changed the title to 'Simulations of single and two-phase pressure 
 This two-phase flow model is strictly hyperbolic, as opposed to the 6- equation model RELAP-5. It is well established that hyperbolic conservation laws can develop shocks and discontinuities [6] and, therefore, require stabilization of the discretized equations.
 It seems that one motivation of this 7-equation model is to better predict waterhammer and pressure wave propagation in reactor transient simulation. But several studies show good capabilities of RELAP 5 code to well predict waterhammer (I. Tiselj et al, 2000, 2003, Sokolowski et al., 2012, Kaliatka et al. 2005). In the same way the CATHARE code is also based on a 6 equation model - with the difference of being hyperbolic- and has shown also good capabilities. (P. Nika , G. Serre , 2005, Serre and Bestion, 2001) \\
 }
-We agree with you that the six-equation model can accurately simulate water hammers but it is only hyperbolic in some limits thanks to the addition of a virtual mass term or pressure correction term in the momentum and the energy equations. The seven-equation model has the advantage of having 7 real eigenvalues with a set of right eigenvectors. The objective of this paper is to show that some of the published results with RELAP-5 and WAHA system codes can be recovered with the RELAP-7 system code.
+We agree with you that the six-equation model can accurately simulate water hammers but it is only hyperbolic in some limits thanks to the addition of a virtual mass term or pressure correction term in the momentum and the energy equations. The seven-equation model has the advantage of having 7 real eigenvalues with a set of right eigenvectors. The objective of this paper is to show that previously published results obtained with RELAP-5 and WAHA system codes can be recovered with the RELAP-7 system code in its present state of development.
 \bigskip
 
 {\color{blue}
 3. You should mention previous work (see Ref below) and say what is your expected added value. \\
 }
-We added a paragraph in the introduction detailing previous works with the appropriate references (LINES). We also added a few words on the objective of this paper (see LINES).
+We added a paragraph in the introduction describing previous results and prior work, including  appropriate references (GIVE LINES). We also added a paragraph emphasizing the objective of our paper (see LINES).
 
 \bigskip
 
 {\color{blue}
 4. Why not using interfacial heat and mass transfer which play a major role in waterhammer? \\
 }
-You have a point. The interfacial heat and mass transfer terms are now included in the two-phase flow shock tube presented in Section 3.3.
+We agree. The interfacial heat and mass transfer terms are now included in the two-phase flow shock tube presented in Section 3.3.
 \bigskip
 
 {\color{blue}
@@ -108,7 +108,7 @@ Since we decided to remove the water hammer tests from the paper, the interfacia
 {\color{blue}
 7. You cannot conclude that: " This work contributes to the assessment of the stabilization techniques for reactor flow problems computed with RELAP-7". No reactor flow problem was computed. \\
 }
-We agree with you. We added new tests involving air, liquid water and steam, that we believe are more relevant to nuclear reactors since steam-water tables are used to compute the fluid properties. We also included a two-phase flow shock tube. All simulations presented in this paper were previously simulated with either RELAP-5 or WAHA system codes. 
+We agree with you. We added new tests involving air, liquid water and steam, that we believe are more relevant to nuclear reactors since steam-water tables are used to compute the fluid properties. We also included a two-phase flow shock tube. All examples presented in this paper are taken from open-literature papers on the RELAP-5 and WAHA system codes. 
 \bigskip
 
 {\color{blue}
@@ -123,6 +123,6 @@ We agree with you and modified the introduction by including some of the referen
 Then I would recommend to accept the paper only if a real waterhammer case (see Ref below) was simulated with RELAP-7. This requires a significant additional work.
 Otherwise this work as it is may be submitted to a mathematical or numerical review , not to NSE. \\
 }
-Thank you for the review of our paper and for providing us with interesting references and valuable comments. We hope that the modifications we made will convince you that this paper deserves to be published in NSE.
+Thank you for the review of our paper and for providing us with interesting references and valuable comments. At the current stage of development of RELAP-7, we think we are not yet ready to present a real waterhammer case. However, all test cases shown here have been previously employed in results published using the RELAP-5 and WAHA system codes. We hope that the modifications we made will convince you that this paper deserves to be published in NSE.
 \end{document}
 
