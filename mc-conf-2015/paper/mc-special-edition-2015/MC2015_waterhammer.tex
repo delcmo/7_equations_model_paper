@@ -313,10 +313,10 @@ P_{int} u_{int} \partial_x \alpha_{liq}  \\
 \begin{equation}
 \mbold R \left( \mbold U_{liq}, \, \mbold U_{gas} \right) = \left[ 
 \begin{array}{l}
- \mu_P \left( P_{gas} - P_{liq} \right) \\
- 0 \\
- \mu_P \left( P_{gas} - P_{liq} \right) \\
- \mu_P \bar{u}_{int} \left( P_{gas} - P_{liq} \right) + \lambda_u \bar{P}_{int} \left( u_{liq} - u_{gas} \right) - A_{int} h_{conv,liq} (T_{liq} - T_{int})\\
+ \mu_P \left( P_{gas} - P_{liq} \right) + \Gamma A_{int} / \rho_{int}\\
+ \Gamma A_{int} \\
+ \mu_P \left( P_{gas} - P_{liq} \right) + \Gamma A_{int} u_{int}\\
+ \mu_P \bar{u}_{int} \left( P_{gas} - P_{liq} \right) + \lambda_u \bar{P}_{int} \left( u_{liq} - u_{gas} \right) - A_{int} h_{conv,liq} (T_{liq} - T_{int}) + \Gamma A_{int} E_{int}\\
 \end{array}
 \right], \,
 \end{equation}
@@ -334,7 +334,7 @@ P_{int} u_{int} \partial_x \alpha_{liq}  \\
 \end{equation}
 \end{subequations}
 %
-The liquid volume fraction is denoted by  $\alpha_{liq}$ and the vapor volume fraction is computed from the algebraic relation $\alpha_{gas} = 1 - \alpha_{liq}$. Following \cite{SEM}, the pressure ($P_{int}$) and velocity ($u_{int}$) interfacial variables, their respective average value $\bar{P}_{int}$ and $\bar{u}_{int}$, and the relaxation coefficients, $\mu_P$ and $\lambda_u$, are functions of the liquid and vapor acoustic impedances denoted by $Z_k = \rho_k c_k$ with $k = \{ liq, \ vap \}$, and computed with the following expressions:
+The liquid volume fraction is denoted by  $\alpha_{liq}$ and the vapor volume fraction is computed from the algebraic relation $\alpha_{gas} = 1 - \alpha_{liq}$. The mass transfer between the liquid and vapor phases, $\Gamma$, the interfacial density, $\rho_{int}$ and the total energy $E_{int}$ are defined in Section 3.2.3 of \cite{Berry_Peterson_2014}. Following \cite{SEM}, the pressure ($P_{int}$) and velocity ($u_{int}$) interfacial variables, their respective average value $\bar{P}_{int}$ and $\bar{u}_{int}$, and the relaxation coefficients, $\mu_P$ and $\lambda_u$, are functions of the liquid and vapor acoustic impedances denoted by $Z_k = \rho_k c_k$ with $k = \{ liq, \ vap \}$, and computed with the following expressions:
 %
 \begin{subequations}
 \label{eq:int_variables_def}
@@ -707,7 +707,8 @@ The objective of this section is to assess the performance of the EVM when simul
 %\subsubsection{Two-phase shock tubes} \label{sec:2-phase-shock-tube}
 %%---------------------------------------------------------------------------------------------------
 %%
-We investigate the same two-phase flow shock tube as in \cite{Sokolowski-Koszela, waha-manual}. The geometry is made of a 1-D pipe of length $L = 100\ m$ discretized with an uniform mesh with wall boundary conditions applied to the left and right ends. The initial conditions consist of a left $(P, u, T, \alpha_{vap})_{left} = (15 \ MPa, 0. \ m/s, 615.3 \ K, 0.1)$ and a right $(P, u, T, \alpha_{vap})_{right} = (10 \ MPa, 0. \ m/s, 584.2 \ K, 0.5)$ chamber filled with a mixture of liquid water and vapor. The fluid properties are computed from the IAPWS95 Spline Based Table Lookup (see section 3.2.7 of \cite{Berry_Peterson_2014}). The interfacial area $A_{int}$ used to compute the relaxation parameters $\mu_P$, and $\lambda_u$ defined in \eqt{eq:int_variables_def} is set to $10^6 \ m^{-1}$ which ensures mechanical equilibrium. The interfacial heat transfer is turned on in this test and because of the very large interfacial area, thermal equilibrium is also achieved.
+We investigate the same two-phase flow shock tube as in \cite{Sokolowski-Koszela, waha-manual}. The geometry is made of a 1-D pipe of length $L = 100\ m$ discretized with an uniform mesh with wall boundary conditions applied to the left and right ends. The initial conditions consist of a left $(P, u, T, \alpha_{vap})_{left} = (15 \ MPa, 0. \ m/s, 615.3 \ K, 0.1)$ and a right $(P, u, T, \alpha_{vap})_{right} = (10 \ MPa, 0. \ m/s, 584.2 \ K, 0.5)$ chamber filled with a mixture of liquid water and vapor. The fluid properties are computed from the IAPWS95 Spline Based Table Lookup (see section 3.2.7 of \cite{Berry_Peterson_2014}). Friction forces are not accounted for in this test. The interfacial area $A_{int}$ used to compute the relaxation parameters $\mu_P$, and $\lambda_u$ defined in \eqt{eq:int_variables_def} is set to $10^6 \ m^{-1}$ which ensures mechanical equilibrium. 
+Because of the very large interfacial area and the mass transfer between the two phases, thermal equilibrium is also achieved.
 \tcr{what is $h_{int}$? it is not given in Eq.(6)} \tcb{done} Consequently, under the previous assumptions, the seven-equation model devolves to the homogeneous equilibrium mode (HEM) where the phasic pressures, velocities, and temperatures are equal. It will allow for comparison with the numerical solutions obtained with RELAP-5 \cite{Sokolowski-Koszela} and WAHA \cite{waha-manual} for the same two-phase shock tube as the two codes imply almost immediate mass, momentum and energy inter-phase transfer which causes the phasic velocities and temperatures to be nearly identical. 
 \tcr{is this correct that in RELAP-5 the phasic velocities are almost identical?} \tcb{ It is when the drag coefficients is set to a large value.}
 %Two sets of simulations are performed. First, the interfacial heat transfer coefficient $h_{int}$ is set to zero while the pressure $\mu_P$ and velocity $\lambda_u$ relaxation coefficients are computed from \eqt{eq:int_variables_def} with $A_{int}=10^6$ and thus large enough to ensure mechanical equilibrium between the two phases, i.e. the phasic velocities and pressures are equal. Under these assumptions, the seven-equation model devolves to the five-equation model of Kapila (REF). This set of simulations is referred to as (1) below. In the second set of simulations, denoted set (2), the interfacial heat transfer coefficient is no longer set to zero but to a value large enough to ensure thermodynamic equilibrium between the two phases, i.e. $T_{vap} = T_{liq}$. The pressure and velocity relaxation parameters are unchanged with respect to the first set of simulations making the seven-equation model devolves to the homogeneous equilibrium model (HEM) (REF). The reader can refer to results of the same test previously obtained with the WAHA code (Section 8.2.1 of \cite{waha-manual}) and with the RELAP-5 system code \cite{Sokolowski-Koszela} for comparison. 
