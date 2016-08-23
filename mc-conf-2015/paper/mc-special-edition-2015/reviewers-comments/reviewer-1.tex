@@ -61,21 +61,22 @@
 \noindent Ref. No.: MS\# NSE16-46\\
 Title: ``Application of the reactor system code RELAP-7 to single- and two-phase flow water-hammer problems', \\
 {\it Nuclear Science and Engineering}\\
+\tcr{put new title here}
 
 \bigskip
 \bigskip
 
 {\color{blue}
-1. Is the subject of interest to the readership of NSE?
-Yes. The paper constitutes detailed documentation of the explicit nu- merical dissipation routines of an important simulation tool for nuclear reactors. It also provides detailed descriptions of two relevant problems that readers might use for verification purposes. \\
+Is the subject of interest to the readership of NSE?
+Yes. The paper constitutes detailed documentation of the explicit numerical dissipation routines of an important simulation tool for nuclear reactors. It also provides detailed descriptions of two relevant problems that readers might use for verification purposes. \\
 }
 Thank you.
 
 \bigskip
 
 {\color{blue}
-2. Is this an original contribution?
-?Original? in the sense of not previously published is a question for some- one more familiar with the literature.
+Is this an original contribution?
+Original in the sense of not previously published is a question for some- one more familiar with the literature.
 The particular ideas of the entropy viscosity method are not original, but are clearly referenced to the original work of Guermond et al. and subsequent extensions to low Mach number flows by Delchini et al. This paper makes no significant addition to the entropy viscosity method, but provides new evidence for its utility. \\
 }
 
@@ -84,7 +85,7 @@ We agree with you. The objective of this paper is to show that the Entropy Visco
 \bigskip
 
 {\color{blue}
-3. Are title and abstract adequate to the content of the paper?
+Are title and abstract adequate to the content of the paper?
 The abstract was a little confusing to me. Except for the last sentence it is very general. I would suggest something like ?In this paper we review the entropy viscosity technique and describe its implementation? be added. \\
 }
 We modified the abstract and the title to account of your comments. 
@@ -92,13 +93,13 @@ We modified the abstract and the title to account of your comments.
 \bigskip
 
 {\color{blue}
-4. Does it give adequate credit to earlier work in the field? Yes. \\
+Does it give adequate credit to earlier work in the field? Yes. \\
 }
 Thank you. We also added references to previous papers in the introduction that presented pressure waves results simulated with various system codes such RELAP-5 and WAHA.
 \bigskip
 
 {\color{blue}
-5. Is it correct and complete?
+Is it correct and complete?
 There is an accurate and fairly complete account of the entropy viscosity technique. The original work (by Guermond, et al.) has certainly drawn attention in the CFD community.\\
 }
 Thank you.
@@ -106,40 +107,40 @@ Thank you.
 \bigskip
 
 {\color{blue}
-The two verification examples serve only to show that the method is im- plemented and is stable. It would make a very more useful and interesting paper if the examples: \\
+The two verification examples serve only to show that the method is implemented and is stable. It would make a very more useful and interesting paper if the examples: \\
 1) were compared with analytic theory (or very highly resolved) simulation; \\
 }
 We added new tests that we think better illustrate the capabilities of the Entropy Viscosity Method at stabilizing flows with pressure waves. These new tests were taken from the published literature and were run with the RELAP-5 and WAHA system codes and thus can be used as reference for comparison with our numerical results to the reader. We also include a mesh sensitivity analysis that show that the numerical solution is converging to a solution.
 \bigskip
 
 {\color{blue}
-2) were compared with the Godunov technique that it replaces to demon- strate how and why the new method is better; \\
+2) were compared with the Godunov technique that it replaces to demonstrate how and why the new method is better; \\
 }
 We did a comparison study for the air shock tube test on a mesh of 200 cells. The numerical solution was obtained by using the EVM and the FOV that is Godunov-like. Comparison between the FOV and the EVM is shown for the density profile in figure 2.a. We also performed the same type of study with the CFL number to see its effect on the numerical solution accuracy when it increases from 0.1 to 1. Results are plotted in figure 2.b.
 \bigskip
 
 {\color{blue}
-3) included convergence studies to show the technique is convergent and at what order.
+3)included convergence studies to show the technique is convergent and at what order.
 In particular, I am troubled by the statement: ?It is also noted that the accuracy of the compression (shock) wave decreases over time: the numerical dissipation comes from the temporal integrator (time step size) and the spatial discretize element size.? These are very generic statements with no foundation in the presented results and no explanation or remediation offered. I suggest the authors make these comments more specific and related to the material presented.
-}
+\\}
 We remove these statements and added a sensitivity analysis of the mesh and the CFL number. See our answer to 2 for further details.
 \bigskip
 
 {\color{blue}
-6. Is it clearly presented?
+Is it clearly presented?
 Yes, with the exceptions noted above in the abstract and section 4. \\
 }
 Thank you. We believe to have addressed your comments.
 \bigskip
 
-{\color{blue}
-7. Should it be published as a technical paper, technical note or computer code abstract??? \\}
-\tcr{I could agree with the reviewer.}
+%{\color{blue}
+%7. Should it be published as a technical paper, technical note or computer code abstract??? \\}
+%\tcr{I could agree with the reviewer.}
+%
+%\bigskip
 
-\bigskip
-
 {\color{blue}
-8. I recommend publication after revisions to the abstract and verification problems as suggested above in items \#3 and \#5. \\
+I recommend publication after revisions to the abstract and verification problems as suggested above in items \#3 and \#5. \\
 }
 Thank you for your review of our paper.
 \end{document}
