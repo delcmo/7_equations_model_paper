@@ -61,6 +61,7 @@
 \noindent Ref. No.: MS\# NSE16-46\\
 Title: ``Application of the reactor system code RELAP-7 to single- and two-phase flow water-hammer problems', \\
 {\it Nuclear Science and Engineering}\\
+New Title: ``Simulations of single and two-phase pressure waves with the RELAP-7 system code'.
 
 \bigskip
 \bigskip
@@ -68,7 +69,7 @@ Title: ``Application of the reactor system code RELAP-7 to single- and two-phase
 {\color{blue}
 1. The title "Application of the reactor system code RELAP-7 to single- and two-phase flow waterhammer Problems" is very misleading and should be changed since there is no simulation of two-phase waterhammer as it may occur in reactor transient. The fluid properties are not steam-water, there is not interphase heat and mass transfers although it is well known that they play a major role in pressure wave propagation
 \\}
-We agree and modified the title accordingly. We also added tests that include simulation of liquid water, air, and steam shock tubes in Section 3.2. 
+We agree and changed the title to 'Simulations of single and two-phase pressure waves with the RELAP-7 system code'. All of the single- and two-phase flow tests presented in Section 3 of the paper now use either the Stiffened gas equation of state or the steam-water tables for computing the fluid properties.
 \bigskip
 
 {\color{blue}
@@ -76,41 +77,44 @@ We agree and modified the title accordingly. We also added tests that include si
 This two-phase flow model is strictly hyperbolic, as opposed to the 6- equation model RELAP-5. It is well established that hyperbolic conservation laws can develop shocks and discontinuities [6] and, therefore, require stabilization of the discretized equations.
 It seems that one motivation of this 7-equation model is to better predict waterhammer and pressure wave propagation in reactor transient simulation. But several studies show good capabilities of RELAP 5 code to well predict waterhammer (I. Tiselj et al, 2000, 2003, Sokolowski et al., 2012, Kaliatka et al. 2005). In the same way the CATHARE code is also based on a 6 equation model - with the difference of being hyperbolic- and has shown also good capabilities. (P. Nika , G. Serre , 2005, Serre and Bestion, 2001) \\
 }
-We agree with you that the six-equation model can accurately simulate water hammers but it is only hyperbolic in some limits thanks to the addition of a pressure correction term in the momentum and the energy equations.
+We agree with you that the six-equation model can accurately simulate water hammers but it is only hyperbolic in some limits thanks to the addition of a virtual mass term or pressure correction term in the momentum and the energy equations. The seven-equation model has the advantage of having 7 real eigenvalues with a set of right eigenvectors. The objective of this paper is to show that some of the published results with RELAP-5 and WAHA system codes can be recovered with the RELAP-7 system code.
 \bigskip
 
 {\color{blue}
 3. You should mention previous work (see Ref below) and say what is your expected added value. \\
 }
+We added a paragraph in the introduction detailing previous works with the appropriate references (LINES). We also added a few words on the objective of this paper (see LINES).
+
+\bigskip
 
 {\color{blue}
 4. Why not using interfacial heat and mass transfer which play a major role in waterhammer? \\
 }
-
+You have a point. The interfacial heat and mass transfer terms are now included in the two-phase flow shock tube presented in Section 3.3.
 \bigskip
 
 {\color{blue}
 5. Why not using interfacial friction which play a major role in waterhammer? \\
 }
-
+Since we decided to remove the water hammer tests from the paper, the interfacial friction is not needed. Nevertheless, we agree with you that the interfacial friction term should be included when simulating water hammers.
 \bigskip
 
 {\color{blue}
 6. Why not using added mass force which is known to play an important role in pressure propagation? \\
 }
-
+\tcr{I do not know what he means by mass force}
 \bigskip
 
 {\color{blue}
 7. You cannot conclude that: " This work contributes to the assessment of the stabilization techniques for reactor flow problems computed with RELAP-7". No reactor flow problem was computed. \\
 }
-We agree with you. We added new tests involving air, liquid water and steam, and that are more relevant to nuclear reactors. 
+We agree with you. We added new tests involving air, liquid water and steam, that we believe are more relevant to nuclear reactors since steam-water tables are used to compute the fluid properties. We also included a two-phase flow shock tube. All simulations presented in this paper were previously simulated with either RELAP-5 or WAHA system codes. 
 \bigskip
 
 {\color{blue}
 The paper does not give adequate credit to earlier work in the field. \\
 }
-We modified the introduction by adding references of previous work (see lines 26 to 47).
+We agree with you and modified the introduction by including some of the references you suggested in the review (see lines 26 to 47).
 \tcr{make sure the lines numbers are correct once we are done modifying the manuscript}
 
 \bigskip
@@ -119,6 +123,6 @@ We modified the introduction by adding references of previous work (see lines 26
 Then I would recommend to accept the paper only if a real waterhammer case (see Ref below) was simulated with RELAP-7. This requires a significant additional work.
 Otherwise this work as it is may be submitted to a mathematical or numerical review , not to NSE. \\
 }
-Thank you for the review of our paper. We hope that the modifications we made in the paper will convince you that this paper deserves to be published in NSE.
+Thank you for the review of our paper and for providing us with interesting references and valuable comments. We hope that the modifications we made will convince you that this paper deserves to be published in NSE.
 \end{document}
 
