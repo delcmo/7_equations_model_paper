@@ -13,7 +13,8 @@ def plot_solution(x_num, y_num, x_label, y_label, label, legend_plot):
   marker_list = itertools.cycle(('x', '+', '.', 'o', '*'))
   x_min, x_max, y_min, y_max = 1.e10, 0.0, 1.e10, 0.0
   for i in xrange(0, len(x_num)):
-    plt.plot(x_num[i], y_num[i], '-', marker=marker_list.next(), markevery=30+10*i, markersize=10, label=r'$%s$' % str(legend_plot[i]), linewidth=2.2)
+    nb_cells = len(x_num[i])-1
+    plt.plot(x_num[i], y_num[i], '-', marker=marker_list.next(), markevery=nb_cells/(10+i), markersize=10, label=r'$%s$' % str(legend_plot[i]), linewidth=2.2)
     x_min = min(float(min(x_num[i])), x_min)
     x_max = max(float(max(x_num[i])), x_max)
     y_min = min(float(min(y_num[i])), y_min)
@@ -58,8 +59,23 @@ def plot_visc_coeff(x_num, file, var_index, nb_cells):
 #### define function ####
 
 # READ EXACT SOLUTION
-#file_exact_list = []
-#path_to_exact_files = 'test'
+var_index = [1,2,3,4,5]
+var_index[:] = [i -1 for i in var_index] # convert to python index
+file_exact_list = 'exact.csv'
+file_data=open(file_exact_list, 'r')
+# read remaining of the file and store data
+x_exact, pressure_exact, density_exact, velocity_exact, temperature_exact = [], [], [], [], []
+for line in file_data:
+  row = line.split(',')
+  x_exact.append(row[var_index[0]])
+  pressure_exact.append(row[var_index[1]])
+  density_exact.append(row[var_index[2]])
+  velocity_exact.append(row[var_index[3]])
+  temperature_exact.append(row[var_index[4]])
+file_data.close()
+x_left=x_exact[0]
+x_exact[:] = [float(x)-float(x_left) for x in x_exact]
+                           
 ## x-coordinates
 #file_exact_list.append('x_data.txt')
 #x_coord_exact = []
@@ -95,7 +111,7 @@ var_index[:] = [i -1 for i in var_index] # convert to python index
 
 file_list = []
 #file_list.append('air-shock-tube-pts.csv')
-for input in xrange(1, len(sys.argv)):
+for input in xrange(1, len(sys.argv)-1):
   file_list.append(sys.argv[input])
 nb_files = len(file_list)
 
@@ -137,12 +153,13 @@ legend_plot = []
 #print cells, cells[0], cells[1]
 #sys.exit()
 
+out_file = sys.argv[-1]
+
 # LOOP OVER FILES TO COMPUTE L2 and L1 norms
 for file in file_list:
   print '------------------------------'
   print 'Name of the input file:', file
   # set/reset data
-  out_file = file[:-4]
   pressure_tmp = []
   density_tmp = []
   temperature_tmp = []
@@ -170,14 +187,20 @@ for file in file_list:
   # legend 1
 #  legend_plot.append(str(nb_cells[-1])+' \ cells')
   # legend 2
-#  legend_plot.append(str(nb_cells[-1])+' \ cells')
+  legend_plot.append(str(nb_cells[-1])+' \ cells')
   print'Number of cells in file', file, ':', nb_cells[-1]
 
   file_data.close()
 
+pressure.append(pressure_exact)
+density.append(density_exact)
+temperature.append(temperature_exact)
+velocity.append(velocity_exact)
+x_coord.append(x_exact)
+legend_plot.append('exact')
 # legend FOV vs EVM
-legend_plot.append(str(nb_cells[-1])+' \ cells \ FOV')
-legend_plot.append(str(nb_cells[-1])+' \ cells \ EVM')
+#legend_plot.append(str(nb_cells[-1])+' \ cells \ FOV')
+#legend_plot.append(str(nb_cells[-1])+' \ cells \ EVM')
 
 ## legend FOV vs EVM
 #legend_plot.append(str(nb_cells[-1])+' \ cells \ cfl \ 0.1')
