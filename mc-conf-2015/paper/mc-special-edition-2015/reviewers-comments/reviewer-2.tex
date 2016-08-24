@@ -77,7 +77,7 @@ We agree and changed the title to 'Simulations of single and two-phase pressure 
 This two-phase flow model is strictly hyperbolic, as opposed to the 6- equation model RELAP-5. It is well established that hyperbolic conservation laws can develop shocks and discontinuities [6] and, therefore, require stabilization of the discretized equations.
 It seems that one motivation of this 7-equation model is to better predict waterhammer and pressure wave propagation in reactor transient simulation. But several studies show good capabilities of RELAP 5 code to well predict waterhammer (I. Tiselj et al, 2000, 2003, Sokolowski et al., 2012, Kaliatka et al. 2005). In the same way the CATHARE code is also based on a 6 equation model - with the difference of being hyperbolic- and has shown also good capabilities. (P. Nika , G. Serre , 2005, Serre and Bestion, 2001) \\
 }
-We agree with you that the six-equation model can accurately simulate water hammers but it is only hyperbolic in some limits thanks to the addition of a virtual mass term or pressure correction term in the momentum and the energy equations. The seven-equation model has the advantage of having 7 real eigenvalues with a set of right eigenvectors. The objective of this paper is to show that previously published results obtained with RELAP-5 and WAHA system codes can be recovered with the RELAP-7 system code in its present state of development.
+We agree with you that the six-equation model can accurately simulate waterhammers but it is only hyperbolic in some limits thanks to the addition of a virtual mass term or pressure correction term in the momentum and the energy equations. The seven-equation model has the advantage of having 7 real eigenvalues with a set of right eigenvectors. Characteristics can also be derived to implement boundary conditions. Another advantage of the seven-equation model is that it can devolve to the (ill-posed) six-equation model, the five-equation model of Kapila and the HEM. We addressed this in the introduction; see lines 60 to 72. The objective of this paper is to show that previously published results obtained with RELAP-5 and WAHA system codes can be recovered with the RELAP-7 system code in its present state of development.
 \bigskip
 
 {\color{blue}
@@ -90,19 +90,20 @@ We added a paragraph in the introduction describing previous results and prior w
 {\color{blue}
 4. Why not using interfacial heat and mass transfer which play a major role in waterhammer? \\
 }
-We agree. The interfacial heat and mass transfer terms are now included in the two-phase flow shock tube presented in Section 3.3.
+We agree. The interfacial heat and mass transfer terms are now included in the two-phase flow shock tube presented in Section 3.3. Thank you for bringing this to our attention.
 \bigskip
 
 {\color{blue}
 5. Why not using interfacial friction which play a major role in waterhammer? \\
 }
-Since we decided to remove the water hammer tests from the paper, the interfacial friction is not needed. Nevertheless, we agree with you that the interfacial friction term should be included when simulating water hammers.
+Since we decided to remove the waterhammer tests from the paper, the interfacial friction is not needed. Nevertheless, we agree with you that the interfacial friction term should be included when simulating waterhammers.
 \bigskip
 
 {\color{blue}
 6. Why not using added mass force which is known to play an important role in pressure propagation? \\
 }
-\tcr{I do not know what he means by mass force}
+We assume that by 'mass force' you mean virtual mass that is added to the six-equation model to make it hyperbolic in the low-Mach limit. In the present case, the seven-equation model does not require such a term since it is already hyperbolic by nature.
+%\tcr{I do not know what he means by mass force}
 \bigskip
 
 {\color{blue}
@@ -114,8 +115,8 @@ We agree with you. We added new tests involving air, liquid water and steam, tha
 {\color{blue}
 The paper does not give adequate credit to earlier work in the field. \\
 }
-We agree with you and modified the introduction by including some of the references you suggested in the review (see lines 26 to 47).
-\tcr{make sure the lines numbers are correct once we are done modifying the manuscript}
+We agree with you and modified the introduction by including some of the references you suggested in the review (see lines 24 to 45).
+%\tcr{make sure the lines numbers are correct once we are done modifying the manuscript}
 
 \bigskip
 
